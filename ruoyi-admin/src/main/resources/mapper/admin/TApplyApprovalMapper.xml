@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TApplyApprovalMapper">
+
+    <resultMap type="TApplyApproval" id="TApplyApprovalResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="content" column="content"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="auditorId" column="auditor_id"/>
+        <result property="state" column="state"/>
+        <result property="param" column="param"/>
+        <result property="fileUrl" column="file_url"/>
+    </resultMap>
+
+    <sql id="selectTApplyApprovalVo">
+        select aa.id,
+               aa.name,
+               aa.content,
+               aa.dept_id,
+               aa.user_id,
+               aa.auditor_id,
+               aa.state,
+               aa.param,
+               aa.file_url
+        from t_apply_approval aa
+    </sql>
+
+    <select id="selectTApplyApprovalList" parameterType="TApplyApproval" resultMap="TApplyApprovalResult">
+        select aa.id,
+        aa.name,
+        aa.content,
+        aa.dept_id,
+        aa.user_id,
+        aa.auditor_id,
+        aa.state, param,
+        CASE WHEN aa.state = '1' THEN aa.file_url
+        ELSE NULL END AS file_url
+        from t_apply_approval aa
+        where 1=1
+        <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
+        <if test="content != null  and content != ''">and content = #{content}</if>
+        <if test="deptId != null ">and dept_id = #{deptId}</if>
+        <if test="userId != null ">and user_id = #{userId}</if>
+        <if test="auditorId != null ">and auditor_id = #{auditorId}</if>
+        <if test="state != null  and state != ''">and state = #{state}</if>
+        <if test="param != null  and param != ''">and param = #{param}</if>
+        <if test="fileUrl != null  and fileUrl != ''">and file_url = #{fileUrl}</if>
+        <!-- 数据范围过滤 -->
+        ${params.dataScope}
+    </select>
+
+    <select id="selectTApplyApprovalById" parameterType="Long" resultMap="TApplyApprovalResult">
+        <include refid="selectTApplyApprovalVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTApplyApproval" parameterType="TApplyApproval" useGeneratedKeys="true" keyProperty="id">
+        insert into t_apply_approval
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="content != null">content,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="auditorId != null">auditor_id,</if>
+            <if test="state != null">state,</if>
+            <if test="param != null">param,</if>
+            <if test="fileUrl != null">file_url,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="content != null">#{content},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="auditorId != null">#{auditorId},</if>
+            <if test="state != null">#{state},</if>
+            <if test="param != null">#{param},</if>
+            <if test="fileUrl != null">#{fileUrl},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTApplyApproval" parameterType="TApplyApproval">
+        update t_apply_approval
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="auditorId != null">auditor_id = #{auditorId},</if>
+            <if test="state != null">state = #{state},</if>
+            <if test="param != null">param = #{param},</if>
+            <if test="fileUrl != null">file_url = #{fileUrl},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTApplyApprovalById" parameterType="Long">
+        delete
+        from t_apply_approval
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteTApplyApprovalByIds" parameterType="String">
+        delete from t_apply_approval where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

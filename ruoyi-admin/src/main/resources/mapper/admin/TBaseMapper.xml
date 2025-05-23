@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TBaseMapper">
+
+    <resultMap type="TBase" id="TBaseResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="code"    column="code"    />
+        <result property="abbr"    column="abbr"    />
+        <result property="position"    column="position"    />
+        <result property="area"    column="area"    />
+        <result property="haveLandArea"    column="have_land_area"    />
+        <result property="reportArea"    column="report_area"    />
+        <result property="elevationSystem"    column="elevation_system"    />
+        <result property="pipelineArrangementPrinciple"    column="pipeline_arrangement_principle"    />
+        <result property="view"    column="view"    />
+        <result property="origin"    column="origin"    />
+        <result property="offset"    column="offset"    />
+    </resultMap>
+
+    <sql id="selectTBaseVo">
+        select id, name, code, abbr, position, area, have_land_area, report_area,
+               elevation_system, pipeline_arrangement_principle,view,origin,"offset" from t_base
+    </sql>
+
+    <select id="selectTBaseList" parameterType="TBase" resultMap="TBaseResult">
+        <include refid="selectTBaseVo"/>
+        <where>
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="abbr != null  and abbr != ''"> and abbr = #{abbr}</if>
+            <if test="position != null  and position != ''"> and position = #{position}</if>
+            <if test="area != null "> and area = #{area}</if>
+            <if test="haveLandArea != null "> and have_land_area = #{haveLandArea}</if>
+            <if test="reportArea != null "> and report_area = #{reportArea}</if>
+            <if test="elevationSystem != null  and elevationSystem != ''"> and elevation_system = #{elevationSystem}</if>
+            <if test="pipelineArrangementPrinciple != null  and pipelineArrangementPrinciple != ''"> and pipeline_arrangement_principle = #{pipelineArrangementPrinciple}</if>
+        </where>
+    </select>
+
+    <select id="selectTBaseById" parameterType="Long" resultMap="TBaseResult">
+        <include refid="selectTBaseVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectTBaseListByBaseId" resultMap="TBaseResult">
+        <include refid="selectTBaseVo"/>
+        where id in
+        <foreach item="id" collection="baseId" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <insert id="insertTBase" parameterType="TBase">
+        insert into t_base
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null">name,</if>
+            <if test="code != null">code,</if>
+            <if test="abbr != null">abbr,</if>
+            <if test="position != null">position,</if>
+            <if test="area != null">area,</if>
+            <if test="haveLandArea != null">have_land_area,</if>
+            <if test="reportArea != null">report_area,</if>
+            <if test="elevationSystem != null">elevation_system,</if>
+            <if test="pipelineArrangementPrinciple != null">pipeline_arrangement_principle,</if>
+            <if test="view != null">view,</if>
+            <if test="origin != null">origin,</if>
+            <if test="offset != null">"offset",</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null">#{name},</if>
+            <if test="code != null">#{code},</if>
+            <if test="abbr != null">#{abbr},</if>
+            <if test="position != null">#{position},</if>
+            <if test="area != null">#{area},</if>
+            <if test="haveLandArea != null">#{haveLandArea},</if>
+            <if test="reportArea != null">#{reportArea},</if>
+            <if test="elevationSystem != null">#{elevationSystem},</if>
+            <if test="pipelineArrangementPrinciple != null">#{pipelineArrangementPrinciple},</if>
+            <if test="view != null">#{view},</if>
+            <if test="origin != null">#{origin},</if>
+            <if test="offset != null">#{offset},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTBase" parameterType="TBase">
+        update t_base
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null">name = #{name},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="abbr != null">abbr = #{abbr},</if>
+            <if test="position != null">position = #{position},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="haveLandArea != null">have_land_area = #{haveLandArea},</if>
+            <if test="reportArea != null">report_area = #{reportArea},</if>
+            <if test="elevationSystem != null">elevation_system = #{elevationSystem},</if>
+            <if test="pipelineArrangementPrinciple != null">pipeline_arrangement_principle = #{pipelineArrangementPrinciple},</if>
+            <if test="view != null">view = #{view},</if>
+            <if test="origin != null">origin = #{origin},</if>
+            <if test="offset != null">"offset" = #{offset},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTBaseById" parameterType="Long">
+        delete from t_base where id = #{id}
+    </delete>
+
+    <delete id="deleteTBaseByIds" parameterType="String">
+        delete from t_base where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

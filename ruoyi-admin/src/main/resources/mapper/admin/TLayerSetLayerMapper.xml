@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TLayerSetLayerMapper">
+    
+    <resultMap type="TLayerSetLayer" id="TLayerSetLayerResult">
+        <result property="layerSetId"    column="layer_set_id"    />
+
+        <result property="layerId"    column="layer_id"    />
+
+    </resultMap>
+
+    <sql id="selectTLayerSetLayerVo">
+        select lsl.layer_set_id,
+               lsl.layer_id
+        from t_layer_set_layer lsl
+    </sql>
+
+    <select id="selectTLayerSetLayerList" parameterType="TLayerSetLayer" resultMap="TLayerSetLayerResult">
+        <include refid="selectTLayerSetLayerVo"/>
+        where 1=1
+        <if test="layerSetId != null  and layerSetId != ''"> and lsl.layer_set_id = #{layerSetId}</if>
+        <if test="layerId != null  and layerId != ''"> and lsl.layer_id = #{layerId}</if>
+    </select>
+
+
+    
+    <select id="selectTLayerSetLayerByLayerSetId" parameterType="Long" resultMap="TLayerSetLayerResult">
+        <include refid="selectTLayerSetLayerVo"/>
+        where layer_set_id = #{layerSetId}
+    </select>
+
+
+
+
+    <insert id="insertTLayerSetLayer" parameterType="TLayerSetLayer">
+        insert into t_layer_set_layer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="layerSetId != null">layer_set_id,</if>
+
+            <if test="layerId != null">layer_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="layerSetId != null">#{layerSetId},</if>
+
+            <if test="layerId != null">#{layerId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTLayerSetLayer" parameterType="TLayerSetLayer">
+        update t_layer_set_layer
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="layerId != null">layer_id = #{layerId},</if>
+
+        </trim>
+        where layer_set_id = #{layerSetId}
+    </update>
+
+    <delete id="deleteTLayerSetLayerByLayerSetId" parameterType="Long">
+        delete from t_layer_set_layer where layer_set_id = #{layerSetId}
+    </delete>
+
+    <delete id="deleteTLayerSetLayerByLayerSetIds" parameterType="String">
+        delete from t_layer_set_layer where layer_set_id in 
+        <foreach item="layerSetId" collection="array" open="(" separator="," close=")">
+            #{layerSetId}
+        </foreach>
+    </delete>
+</mapper>

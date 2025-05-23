@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TElementClassificationMapper">
+    
+    <resultMap type="TElementClassification" id="TElementClassificationResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="pipelineCategorize"    column="pipeline_categorize"    />
+        <result property="code"    column="code"    />
+    </resultMap>
+
+    <sql id="selectTElementClassificationVo">
+        select ec.id,
+               ec.name,
+               ec.pipeline_categorize,
+               ec.code
+        from t_element_classification ec
+    </sql>
+
+    <select id="selectTElementClassificationList" parameterType="TElementClassification" resultMap="TElementClassificationResult">
+        <include refid="selectTElementClassificationVo"/>
+        where 1=1
+            <if test="name != null  and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="pipelineCategorize != null  and pipelineCategorize != ''"> and pipeline_categorize = #{pipelineCategorize}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <!-- 数据范围过滤 -->
+            ${params.dataScope}
+    </select>
+    
+    <select id="selectTElementClassificationById" parameterType="Long" resultMap="TElementClassificationResult">
+        <include refid="selectTElementClassificationVo"/>
+        where id = #{id}
+    </select>
+    <select id="selectTElementClassificationByIds" parameterType="Object" resultMap="TElementClassificationResult">
+        <include refid="selectTElementClassificationVo"/>
+        where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+    <insert id="insertTElementClassification" parameterType="TElementClassification" useGeneratedKeys="true" keyProperty="id">
+        insert into t_element_classification
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="pipelineCategorize != null">pipeline_categorize,</if>
+            <if test="code != null">code,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="pipelineCategorize != null">#{pipelineCategorize},</if>
+            <if test="code != null">#{code},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTElementClassification" parameterType="TElementClassification">
+        update t_element_classification
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="pipelineCategorize != null">pipeline_categorize = #{pipelineCategorize},</if>
+            <if test="code != null">code = #{code},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTElementClassificationById" parameterType="Long">
+        delete from t_element_classification where id = #{id}
+    </delete>
+
+    <delete id="deleteTElementClassificationByIds" parameterType="String">
+        delete from t_element_classification where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

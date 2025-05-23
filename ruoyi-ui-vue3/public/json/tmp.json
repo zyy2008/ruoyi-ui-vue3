@@ -1,0 +1,107 @@
+{
+  "displayFieldName" : "",
+  "fieldAliases" : {
+    "OBJECTID" : "OBJECTID",
+    "name" : "名称"
+  },
+  "geometryType" : "esriGeometryPoint",
+  "spatialReference" : {
+    "wkid" : 4326,
+    "latestWkid" : 4326
+  },
+  "fields" : [
+    {
+      "name" : "OBJECTID",
+      "type" : "esriFieldTypeOID",
+      "alias" : "OBJECTID"
+    },
+    {
+      "name" : "name",
+      "type" : "esriFieldTypeString",
+      "alias" : "名称",
+      "length" : 50
+    }
+  ],
+  "features" : [
+    {
+      "attributes" : {
+        "OBJECTID" : 3,
+        "name" : "11"
+      },
+      "geometry" : {
+        "x" : -148.95434752199998,
+        "y" : -13.985679673999982
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 4,
+        "name" : "22"
+      },
+      "geometry" : {
+        "x" : -42.473829549999948,
+        "y" : 8.6574511660000439
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 5,
+        "name" : "33"
+      },
+      "geometry" : {
+        "x" : -83.354742698999985,
+        "y" : -68.405033409999987
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 9,
+        "name" : null
+      },
+      "geometry" : {
+        "x" : -139.44715841699997,
+        "y" : -58.289688843999954
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 11,
+        "name" : null
+      },
+      "geometry" : {
+        "x" : 7.9142727050000303,
+        "y" : -49.969045177999931
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 12,
+        "name" : "222"
+      },
+      "geometry" : {
+        "x" : 16.470742899000072,
+        "y" : 32.468274593000046
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 13,
+        "name" : "111"
+      },
+      "geometry" : {
+        "x" : -128.98925040199998,
+        "y" : 59.892214191000051
+      }
+    },
+    {
+      "attributes" : {
+        "OBJECTID" : 14,
+        "name" : null
+      },
+      "geometry" : {
+        "x" : -99.516964176999977,
+        "y" : -17.643886455999962
+      }
+    }
+  ]
+}

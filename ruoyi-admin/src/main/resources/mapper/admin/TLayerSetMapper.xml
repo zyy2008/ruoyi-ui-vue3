@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TLayerSetMapper">
+
+    <resultMap type="com.ruoyi.admin.domain.TLayerSet" id="TLayerSetResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="layerId" column="layer_id"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="roleId" column="role_id"/>
+        <result property="isGroup" column="is_group"/>
+        <result property="pid" column="pid"/>
+        <result property="layerSetId" column="layer_set_id"/>
+        <result property="baseId" column="base_id"/>
+        <result property="baseName" column="baseName" />
+    </resultMap>
+    <resultMap type="com.ruoyi.admin.domain.vo.TLayerSetVo" id="TLayerSetVoResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="layerId" column="layer_id"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="roleId" column="role_id"/>
+        <result property="isGroup" column="is_group"/>
+        <result property="pid" column="pid"/>
+        <result property="layerSetId" column="layer_set_id"/>
+        <result property="baseId" column="base_id"/>
+        <result property="baseName" column="baseName" />
+    </resultMap>
+
+    <sql id="selectTLayerSetVo">
+        select ls.id,
+               ls.name,
+               ls.layer_id,
+               ls.dept_id,
+               ls.user_id,
+               ls.role_id,
+               ls.is_group,
+               ls.pid,
+               ls.layer_set_id,
+               ls.base_id,
+               b.name AS baseName
+               from t_layer_set ls
+               LEFT JOIN t_base b ON ls.base_id = b.id
+    </sql>
+
+    <select id="selectTLayerSetList" parameterType="TLayerSet" resultMap="TLayerSetResult">
+        <include refid="selectTLayerSetVo"/>
+        where 1=1
+        <if test="name != null  and name != ''">and name like concat('%', #{name}, '%')</if>
+        <if test="layerId != null  and layerId != ''">and layer_id = #{layerId}</if>
+        <if test="deptId != null ">and dept_id = #{deptId}</if>
+        <if test="userId != null ">and user_id = #{userId}</if>
+        <if test="roleId != null ">and role_id = #{roleId}</if>
+        <if test="isGroup != null ">and is_group = #{isGroup}</if>
+        <if test="pid != null ">and pid = #{pid}</if>
+        <if test="layerSetId != null ">and layer_set_id = #{layerSetId}</if>
+        <if test="baseIds != null  and baseIds != ''">
+            and base_id in
+            <foreach item="item" index="index" collection="baseIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="baseName != null and baseName != ''">and b.name like concat('%', #{baseName}, '%')</if>
+    </select>
+    <select id="selectTLayerSetListByBaseId" parameterType="Object" resultMap="TLayerSetResult">
+        <include refid="selectTLayerSetVo"/>
+        where base_id = #{baseId}
+    </select>
+    <select id="selectTLayerSetListByDeptId" parameterType="Object" resultMap="TLayerSetResult">
+        <include refid="selectTLayerSetVo"/>
+        where dept_id = #{deptId}
+    </select>
+    <select id="selectTLayerSetListByDeptIds" parameterType="Object" resultMap="TLayerSetResult">
+        <include refid="selectTLayerSetVo"/>
+        where dept_id in
+        <foreach item="item" index="index" collection="deptIds" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectTLayerSetVoList" parameterType="TLayerSet" resultMap="TLayerSetVoResult">
+        SELECT
+        ls.id,
+        ls.name,
+        STRING_AGG(DISTINCT ls.user_id::TEXT, ',') AS user_id,
+        STRING_AGG(DISTINCT ls.dept_id::TEXT, ',') AS dept_id,
+        ls.layer_id,
+        ls.role_id,
+        BOOL_OR(ls.is_group) AS is_group,
+        ls.pid,
+        ls.layer_set_id,
+        ls.base_id,
+        b.name AS baseName
+        FROM t_layer_set ls
+        LEFT JOIN t_base b ON ls.base_id = b.id
+        WHERE 1 = 1
+        <if test="name != null  and name != ''">and ls.name like concat('%', #{name}, '%')</if>
+        <if test="layerId != null and layerId != ''">and ls.layer_id = #{layerId}</if>
+        <if test="deptId != null ">and ls.dept_id = #{deptId}</if>
+        <if test="userId != null ">and ls.user_id = #{userId}</if>
+        <if test="roleId != null ">and ls.role_id = #{roleId}</if>
+        <if test="isGroup != null ">and ls.is_group = #{isGroup}</if>
+        <if test="pid != null ">and ls.pid = #{pid}</if>
+        <if test="baseId != null ">and ls.base_id = #{baseId}</if>
+        <if test="baseIds != null  and baseIds != ''">
+            and base_id in
+            <foreach item="item" index="index" collection="baseIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="deptIds != null and deptIds != ''">
+            and dept_id in
+            <foreach item="item" index="index" collection="deptIds" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        GROUP BY
+        ls.id,
+        ls.name,
+        ls.layer_id,
+        ls.role_id,
+        ls.pid,
+        ls.layer_set_id,
+        ls.base_id,
+        b.name;
+
+    </select>
+
+    <select id="selectTLayerSetById" parameterType="Long" resultMap="TLayerSetResult">
+        <include refid="selectTLayerSetVo"/>
+        where ls.id = #{id}
+    </select>
+
+    <insert id="insertTLayerSet" parameterType="TLayerSet" useGeneratedKeys="true" keyProperty="id">
+        insert into t_layer_set
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="name != null and name != ''">name,</if>
+            <if test="layerId != null">layer_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="roleId != null">role_id,</if>
+            <if test="isGroup != null">is_group,</if>
+            <if test="pid != null">pid,</if>
+            <if test="layerSetId != null">layer_set_id,</if>
+            <if test="baseId != null">base_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="layerId != null">#{layerId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="roleId != null">#{roleId},</if>
+            <if test="isGroup != null">#{isGroup},</if>
+            <if test="pid != null">#{pid},</if>
+            <if test="layerSetId != null">#{layerSetId},</if>
+            <if test="baseId != null">#{baseId},</if>
+        </trim>
+    </insert>
+
+
+    <update id="updateTLayerSet" parameterType="TLayerSet">
+        update t_layer_set
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="layerId != null">layer_id = #{layerId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="roleId != null">role_id = #{roleId},</if>
+            <if test="isGroup != null">is_group = #{isGroup},</if>
+            <if test="pid != null">pid = #{pid},</if>
+            <if test="baseId != null">base_id = #{baseId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTLayerSetById" parameterType="Long">
+        delete
+        from t_layer_set
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteTLayerSetByNameAndUserIdAndDeptId" parameterType="TLayerSet">
+        delete
+        from t_layer_set
+        where name = #{name}
+          and user_id = #{userId}
+          and dept_id = #{deptId}
+    </delete>
+    <delete id="deleteTLayerSetByLayerSetId" parameterType="Long">
+        delete
+        from t_layer_set
+        where layer_set_id = #{layerSetId}
+    </delete>
+
+    <delete id="deleteTLayerSetByIds" parameterType="String">
+        delete from t_layer_set where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <select id="ST_AsEWKT" resultType="java.lang.String" parameterType="java.lang.Double">
+        SELECT ST_AsEWKT(ST_Transform(ST_GeomFromText('POINT(${x} ${y})', ${t1}),  ${t2}));
+    </select>
+
+    <select id="getShortestPath" resultType="com.ruoyi.admin.domain.vo.ShortestPathVo"
+            parameterType="com.ruoyi.admin.domain.bo.ShortestPathBo">
+        SELECT seq,gid,name,costs,azimuth,ST_AsGeoJSON(geom) as geom
+        FROM wrk_fromatob(
+                #{startAxisX}::NUMERIC,
+                #{startAxisY}::NUMERIC,
+                #{endAxisX}::NUMERIC,
+                #{endAxisY}::NUMERIC
+            );
+    </select>
+</mapper>

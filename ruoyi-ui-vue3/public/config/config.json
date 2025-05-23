@@ -1,0 +1,197 @@
+﻿{
+  "map3d": {
+    "scene": {
+      "center": {
+        "lat": 33.15586,
+        "lng": 104.245416,
+        "alt": 8838702.3,
+        "heading": 0,
+        "pitch": -89.9
+      },
+      "scene3DOnly": false,
+      "shadows": false,
+      "removeDblClick": true,
+      "sceneMode": 3,
+      "showSun": true,
+      "showMoon": true,
+      "showSkyBox": true,
+      "showSkyAtmosphere": true,
+      "fog": true,
+      "fxaa": true,
+      "requestRenderMode": true,
+      "globe": {
+        "depthTestAgainstTerrain": false,
+        "baseColor": "#546a53",
+        "showGroundAtmosphere": true,
+        "enableLighting": false
+      },
+      "contextOptions": {
+        "requestWebgl1": false,
+        "webgl": {
+          "preserveDrawingBuffer": true
+        }
+      },
+      "cameraController": {
+        "zoomFactor": 3.0,
+        "minimumZoomDistance": 1,
+        "maximumZoomDistance": 50000000,
+        "enableRotate": true,
+        "enableTranslate": true,
+        "enableTilt": true,
+        "enableZoom": true,
+        "enableCollisionDetection": true,
+        "minimumCollisionTerrainHeight": 15000
+      }
+    },
+    "token": {
+      "bing": "AtkX3zhnRe5fyGuLU30uZw8r3sxdBDnpQly7KfFTCB2rGlDgXBG3yr-qEiQEicEc"
+    },
+    "control": {
+      "homeButton": true,
+      "baseLayerPicker": false,
+      "sceneModePicker": true,
+      "vrButton": false,
+      "fullscreenButton": true,
+      "navigationHelpButton": true,
+      "animation": false,
+      "timeline": false,
+      "infoBox": false,
+      "geocoder": false,
+      "selectionIndicator": false,
+      "showRenderLoopErrors": true,
+      "contextmenu": {
+        "hasDefault": true
+      },
+      "mouseDownView": true,
+      "zoom": {
+        "insertIndex": 1
+      },
+      "compass": {
+        "bottom": "toolbar",
+        "right": "5px"
+      },
+      "distanceLegend": {
+        "left": "100px",
+        "bottom": "2px"
+      },
+      "locationBar": {
+        "crs": "CGCS2000_GK_Zone_3",
+        "crsDecimal": 0,
+        "template": "<div>经度:{lng}</div> <div>纬度:{lat}</div> <div class='hide1000'>横{crsx}  纵{crsy}</div> <div>海拔：{alt}米</div> <div class='hide700'>层级：{level}</div><div>方向：{heading}°</div> <div>俯仰角：{pitch}°</div><div class='hide700'>视高：{cameraHeight}米</div>"
+      }
+    },
+    "templateValues": {
+      "dataServer": "//data.mars3d.cn",
+      "gltfServerUrl": "//data.mars3d.cn/gltf"
+    },
+    "terrain": {
+      "url": "//data.mars3d.cn/terrain",
+      "show": true,
+      "clip": true
+    },
+    "basemaps": [
+      {
+        "id": 10,
+        "name": "地图底图",
+        "type": "group"
+      },
+      {
+        "pid": 10,
+        "name": "高德影像",
+        "type": "group",
+        "icon": "img/basemaps/gaode_img.png",
+        "layers": [
+          {
+            "name": "底图",
+            "type": "gaode",
+            "layer": "img_d"
+          },
+          {
+            "name": "注记",
+            "type": "gaode",
+            "layer": "img_z"
+          }
+        ],
+        "show": true
+      },
+      {
+        "pid": 10,
+        "name": "暗色底图",
+        "icon": "//data.mars3d.cn/img/thumbnail/basemap/bd-c-dark.png",
+        "type": "gaode",
+        "layer": "vec",
+        "chinaCRS": "GCJ02",
+        "invertColor": true,
+        "filterColor": "#909090",
+        "brightness": 0.6,
+        "contrast": 1.8,
+        "gamma": 0.3,
+        "hue": 1,
+        "saturation": 0
+      },
+      {
+        "pid": 10,
+        "name": "交通流量图",
+        "type": "baidu",
+        "layer": "time",
+        "mapSplit": false
+      },
+      {
+        "pid": 10,
+        "type": "geojson",
+        "name": "国界线",
+        "url": "geojson/ChinaLine.geojson",
+        "show": true,
+        "flyTo": false,
+        "symbol": {
+          "type": "polylineC",
+          "styleOptions": {
+            "width": 1,
+            "color": "#ffffff"
+          }
+        }
+      },
+      {
+        "pid": 10,
+        "name": "行政区划",
+        "type": "tdt",
+        "layer": "xzqh",
+        "mapSplit": false
+      },
+      {
+        "pid": 10,
+        "name": "清徐离线影像",
+        "icon": "//data.mars3d.cn/img/thumbnail/basemap/google_img.png",
+        "type": "xyz",
+        "minimumLevel": 0,
+        "maximumLevel": 17,
+        "show": true,
+        "url": "http://127.0.0.1:9998/gisData/qx/{z}/{x}/{y}.png"
+      },
+      {
+        "pid": 10,
+        "type": "geojson",
+        "name": "园区监测井",
+        "url": "geojson/园区监测井坐标.geojson",
+        "show": true,
+        "flyTo": true,
+        "cluster":{
+          "enabled":true,
+          "pixelRange":20
+        },
+        "popup":"all",
+        "symbol": {
+          "type": "div",
+          "styleOptions": {
+            "html": "<div class='marsBlueGradientPnl'><div>监测井:{点位编号}</div></div>",
+            "offsetY": -60,
+            "horizontalOrigin": 0,
+            "verticalOrigin": 1,
+            "clampToGround": true
+          }
+        }
+      }
+    ],
+    "layers": []
+  }
+}

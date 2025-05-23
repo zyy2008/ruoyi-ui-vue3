@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.common.system.mapper.SysUserBaseMapper">
+    
+    <resultMap type="com.ruoyi.common.system.domain.SysUserBase" id="SysUserBaseResult">
+        <result property="userId"    column="user_id"    />
+        <result property="baseId"    column="base_id"    />
+    </resultMap>
+
+    <sql id="selectSysUserBaseVo">
+        select user_id, base_id from sys_user_base
+    </sql>
+
+    <select id="selectSysUserBaseList" parameterType="SysUserBase" resultMap="SysUserBaseResult">
+        <include refid="selectSysUserBaseVo"/>
+        <where>  
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="baseId != null "> and base_id = #{baseId}</if>
+        </where>
+    </select>
+    
+    <select id="selectSysUserBaseByUserId" parameterType="Long" resultMap="SysUserBaseResult">
+        <include refid="selectSysUserBaseVo"/>
+        where user_id = #{userId}
+    </select>
+
+    <insert id="insertSysUserBase" parameterType="SysUserBase">
+        insert into sys_user_base
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="baseId != null">base_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="baseId != null">#{baseId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateSysUserBase" parameterType="SysUserBase">
+        update sys_user_base
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="baseId != null">base_id = #{baseId},</if>
+        </trim>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="deleteSysUserBaseByUserId" parameterType="Long">
+        delete from sys_user_base where user_id = #{userId}
+    </delete>
+
+    <delete id="deleteSysUserBaseByUserIds" parameterType="String">
+        delete from sys_user_base where user_id in 
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+</mapper>

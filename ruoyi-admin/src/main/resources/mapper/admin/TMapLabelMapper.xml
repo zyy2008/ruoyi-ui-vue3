@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TMapLabelMapper">
+
+    <resultMap type="TMapLabel" id="TMapLabelResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="data" column="data"/>
+        <result property="dataType" column="data_type"/>
+        <result property="remark" column="remark"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="view" column="view"/>
+        <result property="layerSetId" column="layer_set_id"/>
+        <result property="mapLabelId" column="map_label_id"/>
+        <result property="baseId" column="base_id"/>
+        <result property="baseName" column="baseName" />
+    </resultMap>
+
+    <sql id="selectTMapLabelVo">
+        select ml.id,
+               ml.name,
+               ml.data,
+               ml.data_type,
+               ml.remark,
+               ml.dept_id,
+               ml.user_id,
+               ml.view,
+               ml.layer_set_id,
+               ml.map_label_id,
+               ml.base_id,
+               MAX(b.name) AS baseName
+        from t_map_label ml
+        LEFT JOIN t_base b ON ml.base_id = b.id
+    </sql>
+
+    <select id="selectTMapLabelList" parameterType="TMapLabel" resultMap="TMapLabelResult">
+        <include refid="selectTMapLabelVo"/>
+        where 1=1
+        <if test="name != null  and name != ''">and ml.name like concat('%', #{name}, '%')</if>
+        <if test="data != null  and data != ''">and ml.data = #{data}</if>
+        <if test="dataType != null  and dataType != ''">and ml.data_type = #{dataType}</if>
+        <if test="deptId != null  and deptId != ''">and ml.dept_id = #{deptId}</if>
+        <if test="userId != null  and userId != ''">and ml.user_id = #{userId}</if>
+        <if test="view != null  and view != ''">and ml.view = #{view}</if>
+        <if test="layerSetId != null  and layerSetId != ''">and ml.layer_set_id = #{layerSetId}</if>
+        <if test="mapLabelId != null  and mapLabelId != ''">and ml.map_label_id = #{mapLabelId}</if>
+        <!--<if test="baseId != null  and baseId != '' and 0 &lt; baseId.length">-->
+            <!--and ml.base_id in-->
+            <!--<foreach item="item" index="index" collection="baseIds" open="(" separator="," close=")">-->
+                <!--#{item}-->
+            <!--</foreach>-->
+        <!--</if>-->
+        <!--${params.dataScope}-->
+        GROUP BY ml.id
+    </select>
+    <select id="selectTMapLabelListByMapLabelId" parameterType="Long" resultMap="TMapLabelResult">
+        <include refid="selectTMapLabelVo"/>
+        where ml.map_label_id = #{id}
+        GROUP BY ml.id
+    </select>
+
+    <select id="selectTMapLabelById" parameterType="Long" resultMap="TMapLabelResult">
+        <include refid="selectTMapLabelVo"/>
+        where ml.id = #{id}
+        GROUP BY ml.id
+    </select>
+    <select id="selectBaseIdByUserId" parameterType="Long" resultType="Long">
+        SELECT DISTINCT base_id FROM t_map_label
+        where user_id = #{userId}
+    </select>
+
+    <insert id="insertTMapLabel" parameterType="TMapLabel" useGeneratedKeys="true" keyProperty="id">
+        insert into t_map_label
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="data != null">data,</if>
+            <if test="dataType != null">data_type,</if>
+            <if test="remark != null">remark,</if>
+            <if test="deptId != null  and deptId != ''">dept_id,</if>
+            <if test="userId != null  and userId != ''">user_id,</if>
+            <if test="view != null  and view != ''">view,</if>
+            <if test="layerSetId != null  and layerSetId != ''">layer_set_id,</if>
+            <if test="mapLabelId != null  and mapLabelId != ''">map_label_id,</if>
+            <if test="baseId != null  and baseId != ''">base_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="data != null">#{data},</if>
+            <if test="dataType != null">#{dataType},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="deptId != null  and deptId != ''">#{deptId},</if>
+            <if test="userId != null  and userId != ''">#{userId},</if>
+            <if test="view != null  and view != ''">#{view},</if>
+            <if test="layerSetId != null  and layerSetId != ''">#{layerSetId},</if>
+            <if test="mapLabelId != null  and mapLabelId != ''">#{mapLabelId},</if>
+            <if test="baseId != null  and baseId != ''">#{baseId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTMapLabel" parameterType="TMapLabel">
+        update t_map_label
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="data != null">data = #{data},</if>
+            <if test="dataType != null">data_type = #{dataType},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="deptId != null  and deptId != ''">dept_id = #{deptId},</if>
+            <if test="userId != null  and userId != ''">user_id=#{userId},</if>
+            <if test="view != null  and view != ''">view = #{view},</if>
+            <if test="layerSetId != null  and layerSetId != ''">layer_set_id = #{layerSetId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTMapLabelById" parameterType="Long">
+        delete
+        from t_map_label
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteTMapLabelByIds" parameterType="String">
+        delete from t_map_label where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteTMapLabelByNameAndUserIdAndDeptId" parameterType="TMapLabel">
+        delete from t_map_label
+        where map_label_id = #{mapLabelId}
+          and user_id = #{userId}
+          and dept_id = #{deptId}
+    </delete>
+
+    <delete id="deleteTLayerSetByMapLabelId" parameterType="Long">
+        delete from t_map_label
+        where map_label_id = #{mapLabelId}
+    </delete>
+
+</mapper>

@@ -1,0 +1,1909 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.366673,
+                    37.597766
+                ]
+            },
+            "properties": {
+                "序号": 1,
+                "点位编号": "J01"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.258966,
+                    37.572167
+                ]
+            },
+            "properties": {
+                "序号": 2,
+                "点位编号": "J02"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.25074,
+                    37.57618
+                ]
+            },
+            "properties": {
+                "序号": 3,
+                "点位编号": "J03"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.254846,
+                    37.566287
+                ]
+            },
+            "properties": {
+                "序号": 4,
+                "点位编号": "J04"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.252545,
+                    37.565696
+                ]
+            },
+            "properties": {
+                "序号": 5,
+                "点位编号": "J05"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.236787,
+                    37.562856
+                ]
+            },
+            "properties": {
+                "序号": 6,
+                "点位编号": "J06"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.235029,
+                    37.576606
+                ]
+            },
+            "properties": {
+                "序号": 7,
+                "点位编号": "J07"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.230173,
+                    37.573493
+                ]
+            },
+            "properties": {
+                "序号": 8,
+                "点位编号": "J08"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.351872,
+                    37.59221
+                ]
+            },
+            "properties": {
+                "序号": 9,
+                "点位编号": "J09"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.326608,
+                    37.585145
+                ]
+            },
+            "properties": {
+                "序号": 10,
+                "点位编号": "J10"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.333459,
+                    37.583907
+                ]
+            },
+            "properties": {
+                "序号": 11,
+                "点位编号": "J11"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.333468,
+                    37.583911
+                ]
+            },
+            "properties": {
+                "序号": 12,
+                "点位编号": "J11-1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.308741,
+                    37.58676
+                ]
+            },
+            "properties": {
+                "序号": 13,
+                "点位编号": "J12"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.308731,
+                    37.586753
+                ]
+            },
+            "properties": {
+                "序号": 14,
+                "点位编号": "J12-1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.306283,
+                    37.574145
+                ]
+            },
+            "properties": {
+                "序号": 15,
+                "点位编号": "J13"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.285492,
+                    37.57881
+                ]
+            },
+            "properties": {
+                "序号": 16,
+                "点位编号": "J14"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.280076,
+                    37.570988
+                ]
+            },
+            "properties": {
+                "序号": 17,
+                "点位编号": "J15"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.273486,
+                    37.569962
+                ]
+            },
+            "properties": {
+                "序号": 18,
+                "点位编号": "J16"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.261436,
+                    37.575637
+                ]
+            },
+            "properties": {
+                "序号": 19,
+                "点位编号": "J17"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.263187,
+                    37.568308
+                ]
+            },
+            "properties": {
+                "序号": 20,
+                "点位编号": "J18"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.274289,
+                    37.582961
+                ]
+            },
+            "properties": {
+                "序号": 21,
+                "点位编号": "J19"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.273301,
+                    37.577458
+                ]
+            },
+            "properties": {
+                "序号": 22,
+                "点位编号": "J20"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.261577,
+                    37.560056
+                ]
+            },
+            "properties": {
+                "序号": 23,
+                "点位编号": "J21"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.25715,
+                    37.562332
+                ]
+            },
+            "properties": {
+                "序号": 24,
+                "点位编号": "J22"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.259574,
+                    37.56727
+                ]
+            },
+            "properties": {
+                "序号": 25,
+                "点位编号": "J23"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.253421,
+                    37.563285
+                ]
+            },
+            "properties": {
+                "序号": 26,
+                "点位编号": "J24-1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.243068,
+                    37.57327
+                ]
+            },
+            "properties": {
+                "序号": 27,
+                "点位编号": "J25"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.243282,
+                    37.567618
+                ]
+            },
+            "properties": {
+                "序号": 28,
+                "点位编号": "J26-1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.301435,
+                    37.59101
+                ]
+            },
+            "properties": {
+                "序号": 29,
+                "点位编号": "J27"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.340119,
+                    37.580859
+                ]
+            },
+            "properties": {
+                "序号": 30,
+                "点位编号": "J28-1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.318142,
+                    37.557556
+                ]
+            },
+            "properties": {
+                "序号": 31,
+                "点位编号": "J29"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.284139,
+                    37.564822
+                ]
+            },
+            "properties": {
+                "序号": 32,
+                "点位编号": "J30"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.23274,
+                    37.565839
+                ]
+            },
+            "properties": {
+                "序号": 33,
+                "点位编号": "J31"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.372068,
+                    37.592735
+                ]
+            },
+            "properties": {
+                "序号": 34,
+                "点位编号": "J32"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.365619,
+                    37.605773
+                ]
+            },
+            "properties": {
+                "序号": 35,
+                "点位编号": "J33"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.376248,
+                    37.603522
+                ]
+            },
+            "properties": {
+                "序号": 36,
+                "点位编号": "J34"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.259129,
+                    37.583202
+                ]
+            },
+            "properties": {
+                "序号": 37,
+                "点位编号": "J35"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.24961,
+                    37.560139
+                ]
+            },
+            "properties": {
+                "序号": 38,
+                "点位编号": "J36"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.288561,
+                    37.55934
+                ]
+            },
+            "properties": {
+                "序号": 39,
+                "点位编号": "J37"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.321886,
+                    37.574098
+                ]
+            },
+            "properties": {
+                "序号": 40,
+                "点位编号": "J38"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.289376,
+                    37.589069
+                ]
+            },
+            "properties": {
+                "序号": 41,
+                "点位编号": "J39"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.284127,
+                    37.566857
+                ]
+            },
+            "properties": {
+                "序号": 42,
+                "点位编号": "J40"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.294231,
+                    37.571626
+                ]
+            },
+            "properties": {
+                "序号": 43,
+                "点位编号": "J41"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.318984,
+                    37.576846
+                ]
+            },
+            "properties": {
+                "序号": 44,
+                "点位编号": "J42"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.330088,
+                    37.589399
+                ]
+            },
+            "properties": {
+                "序号": 45,
+                "点位编号": "J43"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.276831,
+                    37.572374
+                ]
+            },
+            "properties": {
+                "序号": 46,
+                "点位编号": "J44"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.275508,
+                    37.566712
+                ]
+            },
+            "properties": {
+                "序号": 47,
+                "点位编号": "J45"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.26686,
+                    37.577355
+                ]
+            },
+            "properties": {
+                "序号": 48,
+                "点位编号": "J46"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.301293,
+                    37.567966
+                ]
+            },
+            "properties": {
+                "序号": 49,
+                "点位编号": "J47"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.245127,
+                    37.564155
+                ]
+            },
+            "properties": {
+                "序号": 50,
+                "点位编号": "J48"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.303358,
+                    37.585492
+                ]
+            },
+            "properties": {
+                "序号": 51,
+                "点位编号": "J49"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.264922,
+                    37.563151
+                ]
+            },
+            "properties": {
+                "序号": 52,
+                "点位编号": "J50"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.244804,
+                    37.56631
+                ]
+            },
+            "properties": {
+                "序号": 53,
+                "点位编号": "J51"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.253385,
+                    37.57067
+                ]
+            },
+            "properties": {
+                "序号": 54,
+                "点位编号": "J52"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.25396,
+                    37.57375
+                ]
+            },
+            "properties": {
+                "序号": 55,
+                "点位编号": "J53"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.255495,
+                    37.567564
+                ]
+            },
+            "properties": {
+                "序号": 56,
+                "点位编号": "J54"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.237891,
+                    37.567082
+                ]
+            },
+            "properties": {
+                "序号": 57,
+                "点位编号": "J55"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.246197,
+                    37.571389
+                ]
+            },
+            "properties": {
+                "序号": 58,
+                "点位编号": "J56"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.246079,
+                    37.571386
+                ]
+            },
+            "properties": {
+                "序号": 59,
+                "点位编号": "J56-1"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.317868,
+                    37.593947
+                ]
+            },
+            "properties": {
+                "序号": 60,
+                "点位编号": "J59"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.277957,
+                    37.587692
+                ]
+            },
+            "properties": {
+                "序号": 61,
+                "点位编号": "J60"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.237418,
+                    37.564771
+                ]
+            },
+            "properties": {
+                "序号": 62,
+                "点位编号": "J61"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.227025,
+                    37.569037
+                ]
+            },
+            "properties": {
+                "序号": 63,
+                "点位编号": "J62"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.283766,
+                    37.566429
+                ]
+            },
+            "properties": {
+                "序号": 64,
+                "点位编号": "J63"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.35232,
+                    37.584532
+                ]
+            },
+            "properties": {
+                "序号": 65,
+                "点位编号": "J64"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.338725,
+                    37.590472
+                ]
+            },
+            "properties": {
+                "序号": 66,
+                "点位编号": "J65"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.296398,
+                    37.573142
+                ]
+            },
+            "properties": {
+                "序号": 67,
+                "点位编号": "J66"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.285773,
+                    37.570624
+                ]
+            },
+            "properties": {
+                "序号": 68,
+                "点位编号": "J67"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.285067,
+                    37.584763
+                ]
+            },
+            "properties": {
+                "序号": 69,
+                "点位编号": "J68"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.26844,
+                    37.574124
+                ]
+            },
+            "properties": {
+                "序号": 70,
+                "点位编号": "J69"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.258544,
+                    37.562915
+                ]
+            },
+            "properties": {
+                "序号": 71,
+                "点位编号": "J70"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.242762,
+                    37.563265
+                ]
+            },
+            "properties": {
+                "序号": 72,
+                "点位编号": "J71"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.315731,
+                    37.582147
+                ]
+            },
+            "properties": {
+                "序号": 73,
+                "点位编号": "J72"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.275066,
+                    37.563639
+                ]
+            },
+            "properties": {
+                "序号": 74,
+                "点位编号": "J73"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.321856,
+                    37.568786
+                ]
+            },
+            "properties": {
+                "序号": 75,
+                "点位编号": "J74"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.308529,
+                    37.577602
+                ]
+            },
+            "properties": {
+                "序号": 76,
+                "点位编号": "J75"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.308732,
+                    37.581467
+                ]
+            },
+            "properties": {
+                "序号": 77,
+                "点位编号": "J76"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.305977,
+                    37.572477
+                ]
+            },
+            "properties": {
+                "序号": 78,
+                "点位编号": "J77"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.305939,
+                    37.583295
+                ]
+            },
+            "properties": {
+                "序号": 79,
+                "点位编号": "J78"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.31177,
+                    37.587089
+                ]
+            },
+            "properties": {
+                "序号": 80,
+                "点位编号": "J79"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.309234,
+                    37.585383
+                ]
+            },
+            "properties": {
+                "序号": 81,
+                "点位编号": "J80"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.301385,
+                    37.5674
+                ]
+            },
+            "properties": {
+                "序号": 82,
+                "点位编号": "J81"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.294898,
+                    37.583429
+                ]
+            },
+            "properties": {
+                "序号": 83,
+                "点位编号": "J82"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.288929,
+                    37.577929
+                ]
+            },
+            "properties": {
+                "序号": 84,
+                "点位编号": "J83"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.246609,
+                    37.570519
+                ]
+            },
+            "properties": {
+                "序号": 85,
+                "点位编号": "J84"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.337067,
+                    37.585779
+                ]
+            },
+            "properties": {
+                "序号": 86,
+                "点位编号": "J85"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.336201,
+                    37.585164
+                ]
+            },
+            "properties": {
+                "序号": 87,
+                "点位编号": "J86"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.308897,
+                    37.588391
+                ]
+            },
+            "properties": {
+                "序号": 88,
+                "点位编号": "J87"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.309564,
+                    37.584437
+                ]
+            },
+            "properties": {
+                "序号": 89,
+                "点位编号": "J88"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.309929,
+                    37.586906
+                ]
+            },
+            "properties": {
+                "序号": 90,
+                "点位编号": "J89"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.301806,
+                    37.589104
+                ]
+            },
+            "properties": {
+                "序号": 91,
+                "点位编号": "J90"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.278761,
+                    37.576151
+                ]
+            },
+            "properties": {
+                "序号": 92,
+                "点位编号": "J91"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.282809,
+                    37.573831
+                ]
+            },
+            "properties": {
+                "序号": 93,
+                "点位编号": "J92"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.282133,
+                    37.57235
+                ]
+            },
+            "properties": {
+                "序号": 94,
+                "点位编号": "J93"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.252806,
+                    37.568429
+                ]
+            },
+            "properties": {
+                "序号": 95,
+                "点位编号": "J94"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.25365,
+                    37.571877
+                ]
+            },
+            "properties": {
+                "序号": 96,
+                "点位编号": "J95"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.249678,
+                    37.574721
+                ]
+            },
+            "properties": {
+                "序号": 97,
+                "点位编号": "J96"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.25442,
+                    37.56259
+                ]
+            },
+            "properties": {
+                "序号": 98,
+                "点位编号": "J97"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.254413,
+                    37.564417
+                ]
+            },
+            "properties": {
+                "序号": 99,
+                "点位编号": "J98"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.263055,
+                    37.576149
+                ]
+            },
+            "properties": {
+                "序号": 100,
+                "点位编号": "J99"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.270416,
+                    37.579366
+                ]
+            },
+            "properties": {
+                "序号": 101,
+                "点位编号": "J100"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.266609,
+                    37.57932
+                ]
+            },
+            "properties": {
+                "序号": 102,
+                "点位编号": "J101"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.313953,
+                    37.583389
+                ]
+            },
+            "properties": {
+                "序号": 103,
+                "点位编号": "J102"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.279958,
+                    37.56771
+                ]
+            },
+            "properties": {
+                "序号": 104,
+                "点位编号": "J103"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.262553,
+                    37.560749
+                ]
+            },
+            "properties": {
+                "序号": 105,
+                "点位编号": "J104"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.256979,
+                    37.562674
+                ]
+            },
+            "properties": {
+                "序号": 106,
+                "点位编号": "J105"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.265196,
+                    37.562903
+                ]
+            },
+            "properties": {
+                "序号": 107,
+                "点位编号": "J106"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.309942,
+                    37.595447
+                ]
+            },
+            "properties": {
+                "序号": 108,
+                "点位编号": "J107"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.312043,
+                    37.602557
+                ]
+            },
+            "properties": {
+                "序号": 109,
+                "点位编号": "J108"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.240713,
+                    37.570372
+                ]
+            },
+            "properties": {
+                "序号": 110,
+                "点位编号": "J109"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.246157,
+                    37.574331
+                ]
+            },
+            "properties": {
+                "序号": 111,
+                "点位编号": "J110"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.250805,
+                    37.568325
+                ]
+            },
+            "properties": {
+                "序号": 112,
+                "点位编号": "J111"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.243598,
+                    37.563809
+                ]
+            },
+            "properties": {
+                "序号": 113,
+                "点位编号": "J112"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.242498,
+                    37.566201
+                ]
+            },
+            "properties": {
+                "序号": 114,
+                "点位编号": "J113"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.237384,
+                    37.571837
+                ]
+            },
+            "properties": {
+                "序号": 115,
+                "点位编号": "J114"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.240097,
+                    37.566202
+                ]
+            },
+            "properties": {
+                "序号": 116,
+                "点位编号": "J115"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.248692,
+                    37.560246
+                ]
+            },
+            "properties": {
+                "序号": 117,
+                "点位编号": "J116"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.251253,
+                    37.562699
+                ]
+            },
+            "properties": {
+                "序号": 118,
+                "点位编号": "J117"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.276783,
+                    37.567551
+                ]
+            },
+            "properties": {
+                "序号": 119,
+                "点位编号": "J118"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.247321,
+                    37.5775
+                ]
+            },
+            "properties": {
+                "序号": 120,
+                "点位编号": "J119"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.318924,
+                    37.559984
+                ]
+            },
+            "properties": {
+                "序号": 121,
+                "点位编号": "J120"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.325769,
+                    37.584117
+                ]
+            },
+            "properties": {
+                "序号": 122,
+                "点位编号": "J121"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.329844,
+                    37.588381
+                ]
+            },
+            "properties": {
+                "序号": 123,
+                "点位编号": "J122"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.351002,
+                    37.59574
+                ]
+            },
+            "properties": {
+                "序号": 124,
+                "点位编号": "J123"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.25607,
+                    37.583442
+                ]
+            },
+            "properties": {
+                "序号": 125,
+                "点位编号": "J124"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.262497,
+                    37.584587
+                ]
+            },
+            "properties": {
+                "序号": 126,
+                "点位编号": "J125"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.258886,
+                    37.581924
+                ]
+            },
+            "properties": {
+                "序号": 127,
+                "点位编号": "J126"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.245357,
+                    37.568538
+                ]
+            },
+            "properties": {
+                "序号": 128,
+                "点位编号": "J127"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.242486,
+                    37.570707
+                ]
+            },
+            "properties": {
+                "序号": 129,
+                "点位编号": "J128"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.234397,
+                    37.565399
+                ]
+            },
+            "properties": {
+                "序号": 130,
+                "点位编号": "J129"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.251845,
+                    37.573052
+                ]
+            },
+            "properties": {
+                "序号": 131,
+                "点位编号": "J130"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.2476,
+                    37.566217
+                ]
+            },
+            "properties": {
+                "序号": 132,
+                "点位编号": "J131"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.237066,
+                    37.569311
+                ]
+            },
+            "properties": {
+                "序号": 133,
+                "点位编号": "J132"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.320286,
+                    37.586908
+                ]
+            },
+            "properties": {
+                "序号": 134,
+                "点位编号": "J133"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.308657,
+                    37.589884
+                ]
+            },
+            "properties": {
+                "序号": 135,
+                "点位编号": "J134"
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    112.306406,
+                    37.587438
+                ]
+            },
+            "properties": {
+                "序号": 136,
+                "点位编号": "J135"
+            }
+        }
+    ]
+}

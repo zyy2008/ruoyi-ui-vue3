@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TElementClassificationNormMapper">
+
+    <resultMap type="com.ruoyi.admin.domain.TElementClassificationNorm" id="TElementClassificationNormResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="elmentName" column="elmentName"/>
+        <result property="code" column="code"/>
+        <result property="geometricFeatures" column="geometric_features"/>
+        <result property="attribute" column="attribute"/>
+        <result property="color" column="color"/>
+        <result property="rgb" column="rgb"/>
+        <result property="elmentId" column="elment_id"/>
+    </resultMap>
+    <resultMap type="com.ruoyi.admin.domain.vo.TElementClassificationNormVo" id="TElementClassificationVoResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="code" column="code"/>
+        <result property="geometricFeatures" column="geometric_features"/>
+        <result property="attribute" column="attribute"/>
+        <result property="color" column="color"/>
+        <result property="rgb" column="rgb"/>
+        <result property="elmentId" column="elment_id"/>
+    </resultMap>
+
+    <resultMap id="TElementClassificationNormTElementClassificationResult" type="TElementClassificationNorm"
+               extends="TElementClassificationNormResult">
+        <collection property="tElementClassificationList" ofType="TElementClassification" column="id"
+                    select="selectTElementClassificationList"/>
+    </resultMap>
+
+    <resultMap type="TElementClassification" id="TElementClassificationResult">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="pipelineCategorize" column="pipeline_categorize"/>
+        <result property="code" column="code"/>
+    </resultMap>
+
+    <sql id="selectTElementClassificationNormVo">
+        select ecn.id,ec.name as elmentName,
+        ecn.name,
+        ecn.code,
+        ecn.geometric_features,
+        ecn.attribute,
+        ecn.color,
+        ecn.rgb,
+        ecn.elment_id
+        from t_element_classification_norm ecn
+        left join t_element_classification ec on ecn.elment_id=ec.id
+    </sql>
+
+    <select id="selectTElementClassificationNormList" parameterType="TElementClassificationNorm"
+            resultMap="TElementClassificationNormResult">
+        <include refid="selectTElementClassificationNormVo"/>
+        where 1=1
+        <if test="name != null  and name != ''">and ecn.name like concat('%', #{name}, '%')</if>
+        <if test="code != null  and code != ''">and ecn.code = #{code}</if>
+        <if test="geometricFeatures != null  and geometricFeatures != ''">and ecn.geometric_features =
+            #{geometricFeatures}
+        </if>
+        <if test="attribute != null  and attribute != ''">and ecn.attribute = #{attribute}</if>
+        <if test="color != null  and color != ''">and ecn.color = #{color}</if>
+        <if test="rgb != null  and rgb != ''">and ecn.rgb = #{rgb}</if>
+        <if test="elmentId != null ">and ecn.elment_id = #{elmentId}</if>
+    </select>
+    <select id="selectTElementClassificationNormByIdList" parameterType="Object" resultMap="TElementClassificationNormResult">
+        <include refid="selectTElementClassificationNormVo"/>
+        where ecn.id in
+        <foreach item="item" index="index" collection="id" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectTElementClassificationNormByCodeList" parameterType="Object" resultMap="TElementClassificationNormResult">
+        <include refid="selectTElementClassificationNormVo"/>
+        where ecn.code in
+        <foreach item="item" index="index" collection="code" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </select>
+    <select id="selectTElementClassificationNormListVo" parameterType="TElementClassificationNorm"
+            resultMap="TElementClassificationVoResult">
+        <include refid="selectTElementClassificationNormVo"/>
+        where 1=1
+        <if test="name != null  and name != ''">and ecn.name like concat('%', #{name}, '%')</if>
+        <if test="code != null  and code != ''">and ecn.code = #{code}</if>
+        <if test="geometricFeatures != null  and geometricFeatures != ''">and ecn.geometric_features =
+            #{geometricFeatures}
+        </if>
+        <if test="attribute != null  and attribute != ''">and ecn.attribute = #{attribute}</if>
+        <if test="color != null  and color != ''">and ecn.color = #{color}</if>
+        <if test="rgb != null  and rgb != ''">and ecn.rgb = #{rgb}</if>
+        <if test="elmentId != null ">and ecn.elment_id = #{elmentId}</if>
+    </select>
+
+    <select id="selectTElementClassificationNormById" parameterType="Object"
+            resultMap="TElementClassificationNormTElementClassificationResult">
+        select id,
+               name,
+               code,
+               geometric_features,
+               attribute,
+               color,
+               rgb,
+               elment_id
+        from t_element_classification_norm
+        where id = #{id}
+    </select>
+
+    <select id="selectTElementClassificationList" resultType="TElementClassification"
+            resultMap="TElementClassificationResult">
+        select id, name, pipeline_categorize, code
+        from t_element_classification
+        where id = #{id}
+    </select>
+
+    <insert id="insertTElementClassificationNorm" parameterType="TElementClassificationNorm" useGeneratedKeys="true"
+            keyProperty="id">
+        insert into t_element_classification_norm
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">name,</if>
+            <if test="code != null">code,</if>
+            <if test="geometricFeatures != null">geometric_features,</if>
+            <if test="attribute != null">attribute,</if>
+            <if test="color != null">color,</if>
+            <if test="rgb != null">rgb,</if>
+            <if test="elmentId != null">elment_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="name != null and name != ''">#{name},</if>
+            <if test="code != null">#{code},</if>
+            <if test="geometricFeatures != null">#{geometricFeatures},</if>
+            <if test="attribute != null">#{attribute},</if>
+            <if test="color != null">#{color},</if>
+            <if test="rgb != null">#{rgb},</if>
+            <if test="elmentId != null">#{elmentId},</if>
+        </trim>
+    </insert>
+
+    <update id="updateTElementClassificationNorm" parameterType="TElementClassificationNorm">
+        update t_element_classification_norm
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="geometricFeatures != null">geometric_features = #{geometricFeatures},</if>
+            <if test="attribute != null">attribute = #{attribute},</if>
+            <if test="color != null">color = #{color},</if>
+            <if test="rgb != null">rgb = #{rgb},</if>
+            <if test="elmentId != null">elment_id = #{elmentId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTElementClassificationNormById" parameterType="Long">
+        delete
+        from t_element_classification_norm
+        where id = #{id}
+    </delete>
+
+    <delete id="deleteTElementClassificationNormByIds" parameterType="String">
+        delete from t_element_classification_norm where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteTElementClassificationByIds" parameterType="String">
+        delete from t_element_classification where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+    <delete id="deleteTElementClassificationById" parameterType="Long">
+        delete
+        from t_element_classification
+        where id = #{id}
+    </delete>
+
+    <insert id="batchTElementClassification">
+        insert into t_element_classification( id, name, pipeline_categorize, code) values
+        <foreach item="item" index="index" collection="list" separator=",">
+            ( #{item.id}, #{item.name}, #{item.pipelineCategorize}, #{item.code})
+        </foreach>
+    </insert>
+</mapper>

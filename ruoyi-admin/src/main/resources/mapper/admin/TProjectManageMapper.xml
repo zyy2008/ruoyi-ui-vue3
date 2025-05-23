@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TProjectManageMapper">
+    
+    <resultMap type="TProjectManage" id="TProjectManageResult">
+        <result property="id"    column="id"    />
+        <result property="projectName"    column="project_name"    />
+        <result property="engineeringCode"    column="engineering_code"    />
+        <result property="engineeringDate"    column="engineering_date"    />
+        <result property="designUnit"    column="design_unit"    />
+        <result property="designer"    column="designer"    />
+        <result property="designPhase"    column="design_phase"    />
+        <result property="userId"    column="user_id"    />
+        <result property="deptId"    column="dept_id"    />
+        <result property="remark"    column="remark"    />
+        <result property="fileUrl"    column="file_url"    />
+    </resultMap>
+
+    <sql id="selectTProjectManageVo">
+        select id, project_name, engineering_code, engineering_date, design_unit, designer, design_phase, user_id, dept_id, remark, file_url from t_project_manage
+    </sql>
+
+    <select id="selectTProjectManageList" parameterType="TProjectManage" resultMap="TProjectManageResult">
+        <include refid="selectTProjectManageVo"/>
+        <where>  
+            <if test="projectName != null  and projectName != ''"> and project_name like concat('%', #{projectName}, '%')</if>
+            <if test="engineeringCode != null  and engineeringCode != ''"> and engineering_code = #{engineeringCode}</if>
+            <if test="engineeringDate != null "> and engineering_date = #{engineeringDate}</if>
+            <if test="designUnit != null  and designUnit != ''"> and design_unit = #{designUnit}</if>
+            <if test="designer != null  and designer != ''"> and designer = #{designer}</if>
+            <if test="designPhase != null  and designPhase != ''"> and design_phase = #{designPhase}</if>
+            <if test="userId != null "> and user_id = #{userId}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="fileUrl != null  and fileUrl != ''"> and file_url = #{fileUrl}</if>
+        </where>
+    </select>
+    
+    <select id="selectTProjectManageById" parameterType="Long" resultMap="TProjectManageResult">
+        <include refid="selectTProjectManageVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTProjectManage" parameterType="TProjectManage">
+        insert into t_project_manage
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="projectName != null and projectName != ''">project_name,</if>
+            <if test="engineeringCode != null and engineeringCode != ''">engineering_code,</if>
+            <if test="engineeringDate != null">engineering_date,</if>
+            <if test="designUnit != null and designUnit != ''">design_unit,</if>
+            <if test="designer != null and designer != ''">designer,</if>
+            <if test="designPhase != null">design_phase,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="remark != null">remark,</if>
+            <if test="fileUrl != null and fileUrl != ''">file_url,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="projectName != null and projectName != ''">#{projectName},</if>
+            <if test="engineeringCode != null and engineeringCode != ''">#{engineeringCode},</if>
+            <if test="engineeringDate != null">#{engineeringDate},</if>
+            <if test="designUnit != null and designUnit != ''">#{designUnit},</if>
+            <if test="designer != null and designer != ''">#{designer},</if>
+            <if test="designPhase != null">#{designPhase},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="remark != null">#{remark},</if>
+            <if test="fileUrl != null and fileUrl != ''">#{fileUrl},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTProjectManage" parameterType="TProjectManage">
+        update t_project_manage
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="projectName != null and projectName != ''">project_name = #{projectName},</if>
+            <if test="engineeringCode != null and engineeringCode != ''">engineering_code = #{engineeringCode},</if>
+            <if test="engineeringDate != null">engineering_date = #{engineeringDate},</if>
+            <if test="designUnit != null and designUnit != ''">design_unit = #{designUnit},</if>
+            <if test="designer != null and designer != ''">designer = #{designer},</if>
+            <if test="designPhase != null">design_phase = #{designPhase},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="remark != null">remark = #{remark},</if>
+            <if test="fileUrl != null and fileUrl != ''">file_url = #{fileUrl},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTProjectManageById" parameterType="Long">
+        delete from t_project_manage where id = #{id}
+    </delete>
+
+    <delete id="deleteTProjectManageByIds" parameterType="String">
+        delete from t_project_manage where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

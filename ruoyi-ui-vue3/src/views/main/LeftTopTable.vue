@@ -76,7 +76,7 @@
       --el-table-bg-color: none;
       --el-table-text-color: white;
       --el-table-border-color: none;
-      /* --el-table-row-hover-bg-color: none */
+      --el-table-row-hover-bg-color: none
     }
 
     .el-table .el-table__header-wrapper th,

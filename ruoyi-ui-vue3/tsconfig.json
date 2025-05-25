@@ -20,7 +20,7 @@
     "esModuleInterop": true,
     "outDir": "dist",
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
-    "isolatedModules": false,
+    "isolatedModules": true,
     "types": ["vite/client", "element-plus/global", "node"],
     "baseUrl": ".",
     "paths": {

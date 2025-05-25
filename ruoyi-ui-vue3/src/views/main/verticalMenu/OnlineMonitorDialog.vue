@@ -155,7 +155,7 @@ echarts.use([
   LegendComponent,
   CanvasRenderer,
 ]);
-const visible = ref(true);
+const visible = ref(false);
 const realtimeTableRef = ref(null);
 const scrollInterval = ref(null);
 const selectedTypeWeek = ref("氟化物");

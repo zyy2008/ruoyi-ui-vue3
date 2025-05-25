@@ -1,181 +1,176 @@
 <template>
   <div class="head-div">
-    <div class="log-div">
+    <div class="header">
       <span class="main-text">清徐地下水在线监测软件平台</span>
-      <span class="sub-text">{{
-        layerStore()
-          .setTrees.map((b) => b.name)
-          .join(",")
-      }}</span>
     </div>
-    <div class="content-div">
-      <!-- <TopMenu /> -->
-      <div class="avatar-container">
-        <span>当前用户: {{ userStore.name }}</span>
-        <el-dropdown
-          @command="handleCommand"
-          class="right-menu-item hover-effect"
-          trigger="click"
-        >
-          <div class="avatar-wrapper">
-            <img :src="userStore.avatar" class="user-avatar" />
-            <el-icon><caret-bottom /></el-icon>
-          </div>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item command="logout">
-                <span>退出登录</span>
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
+  </div>
+  <div class="bottom">
+    <div class="bottomIn">
+      <div class="bottomInOt">
+        <img src="@/assets/static/1.png" />
+        <div class="text">
+          指挥调度
+        </div>
+      </div>
+      <div class="bottomInOt">
+        <img src="@/assets/static/2.png" />
+        <div class="text">
+          在线检测
+        </div>
+      </div>
+      <div class="bottomInOt">
+        <img src="@/assets/static/3.png" />
+        <div class="text">
+          企业信息
+        </div>
+      </div>
+      <div class="bottomInOt">
+        <img src="@/assets/static/4.png" />
+        <div class="text">
+          报警预报
+        </div>
       </div>
     </div>
   </div>
+  <LeftTable class="leftTable" />
 </template>
 
 <script setup>
-import TopMenu from "./TopMenu.vue";
-import { ElMessageBox } from "element-plus";
-import useAppStore from "@/store/modules/app";
-import useUserStore from "@/store/modules/user";
-import useSettingsStore from "@/store/modules/settings";
-import { useRouter } from "vue-router";
-const router = useRouter();
-import layerStore from "@/store/modules/layer";
+  import TopMenu from "./TopMenu.vue";
+  import { ElMessageBox } from "element-plus";
 
-const appStore = useAppStore();
-const userStore = useUserStore();
-const settingsStore = useSettingsStore();
+  import useAppStore from "@/store/modules/app";
+  import useUserStore from "@/store/modules/user";
+  import useSettingsStore from "@/store/modules/settings";
+  import { useRouter } from "vue-router";
+  import LeftTable from './LeftTopTable.vue';
+  const router = useRouter();
+  import layerStore from "@/store/modules/layer";
 
-const emits = defineEmits(["setLayout"]);
-function setLayout() {
-  emits("setLayout");
-}
+  const appStore = useAppStore();
+  const userStore = useUserStore();
+  const settingsStore = useSettingsStore();
 
-function logout() {
-  ElMessageBox.confirm("确定注销并退出系统吗？", "提示", {
-    confirmButtonText: "确定",
-    cancelButtonText: "取消",
-    type: "warning",
-  })
-    .then(() => {
-      userStore.logOut().then(() => {
-        location.href = "/index";
-      });
-    })
-    .catch(() => {});
-}
-
-function goSystem() {
-  router.push({ path: "/index" });
-}
-function handleCommand(command) {
-  switch (command) {
-    case "setLayout":
-      setLayout();
-      break;
-    case "goSystem":
-      goSystem();
-      break;
-
-    case "logout":
-      logout();
-      break;
-    default:
-      break;
+  const emits = defineEmits(["setLayout"]);
+  function setLayout() {
+    emits("setLayout");
   }
-}
+
+  function logout() {
+    ElMessageBox.confirm("确定注销并退出系统吗？", "提示", {
+      confirmButtonText: "确定",
+      cancelButtonText: "取消",
+      type: "warning",
+    })
+      .then(() => {
+        userStore.logOut().then(() => {
+          location.href = "/index";
+        });
+      })
+      .catch(() => { });
+  }
+
+  function goSystem() {
+    router.push({ path: "/index" });
+  }
+  function handleCommand(command) {
+    switch (command) {
+      case "setLayout":
+        setLayout();
+        break;
+      case "goSystem":
+        goSystem();
+        break;
+
+      case "logout":
+        logout();
+        break;
+      default:
+        break;
+    }
+  }
 </script>
 
 <style lang="scss" scoped>
-.head-div {
-  background: linear-gradient(
-    180deg,
-    #000000 0%,
-    rgba(0, 0, 0, 0.5) 52%,
-    rgba(0, 0, 0, 0) 100%
-  );
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100vw;
-  height: 50px;
-  // box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
-}
-.log-div {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 40px;
-  .main-text {
-    font-family: MiSans;
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 24px;
-    letter-spacing: 0em;
-    font-variation-settings: "opsz" auto;
-    font-feature-settings: "kern" on;
-    color: #ffffff;
-  }
-  .sub-text {
-    color: #ffffff;
-    font-size: 16px;
-    font-weight: 500;
-    margin: 0;
-  }
-}
+  .head-div {
+    background: linear-gradient(180deg,
+        #000000 0%,
+        rgba(0, 0, 0, 0.5) 52%,
+        rgba(0, 0, 0, 0) 100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100vw;
 
-.log-div img {
-  width: auto;
-  width: 36px;
-  border-radius: 4px;
-}
-.log-div span {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 0 16px;
-}
-.content-div {
-  display: flex;
-  align-items: center;
-}
-.avatar-container {
-  margin-right: 40px;
-  display: flex;
-  align-items: center;
-  > span {
-    font-family: MiSans;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0em;
-    font-variation-settings: "opsz" auto;
-    font-feature-settings: "kern" on;
-    color: #ffffff;
-    margin: 0 4px;
-  }
-  .avatar-wrapper {
-    margin-top: 5px;
-    position: relative;
-    .user-avatar {
-      cursor: pointer;
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-    }
+    .header {
+      width: 100%;
+      height: 77px;
+      line-height: 90px;
+      background: url('@/assets/static/title.png') no-repeat;
+      text-align: center;
 
-    i {
-      cursor: pointer;
-      position: absolute;
-      right: -20px;
-      top: 14px;
-      font-size: 16px;
-      color: #fff;
+      span {
+        font-size: 1.6vw;
+        font-weight: 700;
+        background: linear-gradient(75deg, #21f1c2, #66fdf1, #1ebcea);
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text
+      }
+
+      background-color: rgba(9, 21, 42, .8) !important;
     }
   }
-}
+
+  .bottom {
+    width: 100%;
+    height: 80px;
+    position: absolute;
+    bottom: 26px;
+    background: url('@/assets/static/bottom.png') no-repeat;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+
+    .bottomIn {
+      width: 700px;
+      height: 58px;
+      margin-top: 10px;
+      display: flex;
+      justify-content: space-between;
+
+      .bottomInOt {
+        width: 25%;
+        height: 100%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+      }
+
+      .text {
+        width: 108px;
+        height: 46px;
+        text-align: center;
+        line-height: 46px;
+        font-weight: 700;
+        font-size: 18px;
+        background: url('@/assets/static/textbg.png') no-repeat;
+      }
+
+    }
+  }
+
+  .leftTable {
+    width: 464px;
+    /* height: 285px; */
+    position: absolute;
+    left: 20px;
+    top: 100px;
+    z-index: 100;
+    background-color: rgba(9, 21, 42, .8)
+  }
 </style>

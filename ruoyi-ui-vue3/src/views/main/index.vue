@@ -3,7 +3,6 @@
     <div id="mars-main-view" class="map-div mars-main-view">
       <TopHead />
       <MarsMap :url="configUrl" map-key="WXYMAP" @onload="marsOnload" />
-
       <template v-if="mapLoaded">
         <template v-for="comp in widgets" :key="comp.key">
           <mars-widget
@@ -14,7 +13,7 @@
         </template>
       </template>
 
-      <VerticalMenu />
+      <!-- <VerticalMenu /> -->
     </div>
 
     <mars-dialog

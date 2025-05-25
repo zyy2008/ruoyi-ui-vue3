@@ -101,7 +101,7 @@ const loginRules = {
 const codeUrl = ref("");
 const loading = ref(false);
 // 验证码开关
-const captchaEnabled = ref(false);
+const captchaEnabled = ref(true);
 // 注册开关
 const register = ref(false);
 const redirect = ref(undefined);
@@ -119,8 +119,8 @@ function handleLogin() {
     if (valid) {
 
       
-      router.push({ path: "/main", query: {} });
-      return;
+      // router.push({ path: "/main", query: {} });
+      // return;
       
       loading.value = true;
       // 勾选了需要记住密码设置在 cookie 中设置记住用户名和密码
@@ -161,7 +161,6 @@ function handleLogin() {
 }
 
 function getCode() {
-  return;
   getCodeImg().then((res) => {
     captchaEnabled.value = res.captchaEnabled === undefined ? true : res.captchaEnabled;
     if (captchaEnabled.value) {

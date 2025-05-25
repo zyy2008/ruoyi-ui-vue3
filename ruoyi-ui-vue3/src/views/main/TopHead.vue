@@ -166,7 +166,7 @@
 
   .leftTable {
     width: 464px;
-    /* height: 285px; */
+    height: 705px;
     position: absolute;
     left: 20px;
     top: 100px;

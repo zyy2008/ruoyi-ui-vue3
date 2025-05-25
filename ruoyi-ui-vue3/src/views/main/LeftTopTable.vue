@@ -9,15 +9,15 @@
     <div>
       <el-table :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
         <el-table-column type="index" width="50" />
-        <el-table-column prop="date" label="名称" />
-        <el-table-column prop="name" label="PH" />
-        <el-table-column prop="address" label="温度" />
-        <el-table-column prop="date" label="水位" />
+        <el-table-column prop="date" label="名称"  width="60" />
+        <el-table-column prop="name" label="PH"width="60" />
+        <el-table-column prop="address" label="温度" width="60"/>
+        <el-table-column prop="date" label="水位" width="60"/>
         <el-table-column prop="name" label="电位" />
-        <el-table-column prop="address" label="溶解氧" />
-        <el-table-column prop="date" label="电导率" />
-        <el-table-column prop="name" label="氨氮" />
-        <el-table-column prop="address" label="位置" />
+        <el-table-column prop="address" label="溶解氧"width="70" />
+        <el-table-column prop="date" label="电导率"width="70" />
+        <el-table-column prop="name" label="氨氮" width="60"/>
+        <el-table-column prop="address" label="位置" width="60"/>
       </el-table>
     </div>
   </div>
@@ -27,22 +27,22 @@
 
   const tableData = [
     {
-      date: '2016-05-03',
+      date: '名称',
       name: 'Tom',
       address: 'Tom',
     },
     {
-      date: '2016-05-02',
+      date: '名称',
       name: 'Tom',
       address: 'Tom',
     },
     {
-      date: '2016-05-04',
+      date: '名称',
       name: 'Tom',
       address: 'Tom',
     },
     {
-      date: '2016-05-01',
+      date: '名称',
       name: 'Tom',
       address: 'Tom',
     },
@@ -51,7 +51,7 @@
 
 <style lang="scss" scoped>
   .table {
-    width: 464px;
+    width: 604px;
     padding: 10px;
     background: url('@/assets/static/left.png') no-repeat;
 

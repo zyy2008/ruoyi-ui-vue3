@@ -106,9 +106,9 @@ function goSystem() {
 <style lang="scss" scoped>
 .head-div {
   .avatar-container {
-    margin-right: 40px;
-    float: right;
-    margin-top: 24px;
+    right: 40px;
+    position: absolute;
+    top: 26px;
 
     .avatar-wrapper {
       margin-top: 5px;

@@ -1,13 +1,13 @@
 // @ts-ignore
 /* eslint-disable */
-import request from "@/utils/request";
+import request from "@/utils/http";
 
 /** 获取所有坐标系 POST /admin/gdal/getAllSpatialRefSystems */
 export async function postAdminGdalGetAllSpatialRefSystems(options?: {
   [key: string]: any;
 }) {
   return request<Record<string, any>>(
-    `api1/admin/gdal/getAllSpatialRefSystems`,
+    `/api1/admin/gdal/getAllSpatialRefSystems`,
     {
       method: "POST",
       ...(options || {}),
@@ -21,7 +21,7 @@ export async function postAdminGdalGetIntersectionExt(
   params: API.postAdminGdalGetIntersectionExtParams,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`api1/admin/gdal/getIntersectionExt`, {
+  return request<Record<string, any>>(`/api1/admin/gdal/getIntersectionExt`, {
     method: "POST",
     params: {
       ...params,

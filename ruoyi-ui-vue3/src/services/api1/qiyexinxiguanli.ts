@@ -1,13 +1,13 @@
 // @ts-ignore
 /* eslint-disable */
-import request from "@/utils/request";
+import request from "@/utils/http";
 
 /** 修改企业地块信息 PUT /admin/enterprise */
 export async function putAdminEnterprise(
   body: API.zaichanqiyedekuaixinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`api1/admin/enterprise`, {
+  return request<Record<string, any>>(`/api1/admin/enterprise`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postAdminEnterprise(
   body: API.zaichanqiyedekuaixinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`api1/admin/enterprise`, {
+  return request<Record<string, any>>(`/api1/admin/enterprise`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +40,7 @@ export async function getAdminEnterpriseId(
 ) {
   const { id: param0, ...queryParams } = params;
   return request<API.zaichanqiyedekuaixinxi>(
-    `api1/admin/enterprise/${param0}`,
+    `/api1/admin/enterprise/${param0}`,
     {
       method: "GET",
       params: { ...queryParams },
@@ -56,7 +56,7 @@ export async function deleteAdminEnterpriseId(
   options?: { [key: string]: any }
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`api1/admin/enterprise/${param0}`, {
+  return request<Record<string, any>>(`/api1/admin/enterprise/${param0}`, {
     method: "DELETE",
     params: { ...queryParams },
     ...(options || {}),
@@ -68,7 +68,7 @@ export async function deleteAdminEnterpriseBatch(
   body: number[],
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`api1/admin/enterprise/batch`, {
+  return request<Record<string, any>>(`/api1/admin/enterprise/batch`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -84,7 +84,7 @@ export async function getAdminEnterpriseList(
   params: API.getAdminEnterpriseListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`api1/admin/enterprise/list`, {
+  return request<API.TableDataInfo>(`/api1/admin/enterprise/list`, {
     method: "GET",
     params: {
       ...params,

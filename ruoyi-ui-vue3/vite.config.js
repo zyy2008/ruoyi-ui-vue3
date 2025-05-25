@@ -64,6 +64,12 @@ export default defineConfig(({ mode, command }) => {
           changeOrigin: true,
           rewrite: (p) => p.replace(/^\/dev-api/, ""),
         },
+        "/api1": {
+          target: "http://39.100.43.147:11004/",
+          // target: 'http://localhost:8080/',
+          changeOrigin: true,
+          rewrite: (p) => p.replace(/^\/api1/, ""),
+        },
       },
     },
     //fix:error:stdin>:7356:1: warning: "@charset" must be the first rule in the file

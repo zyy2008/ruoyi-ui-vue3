@@ -1,6 +1,7 @@
 import { defineComponent } from "vue";
 import ProTable from "@/components/ProTable/index.vue";
 import type { ProTableProps } from "@/components/ProTable/interface";
+import API from "@/services";
 
 const props: ProTableProps = {
   columns: [
@@ -21,6 +22,10 @@ const props: ProTableProps = {
       prop: "sex",
     },
   ],
+  requestApi: (val) => {
+    console.log(val);
+    return API.getAdminEnterpriseList({});
+  },
 };
 
 export default defineComponent({

@@ -1,6 +1,6 @@
 // @ts-ignore
 /* eslint-disable */
-import request from "@/utils/request";
+import request from "@/utils/http";
 
 /** 获取用户详细 GET /test/user/${param0} */
 export async function getTestUserUserId(
@@ -9,7 +9,7 @@ export async function getTestUserUserId(
   options?: { [key: string]: any }
 ) {
   const { userId: param0, ...queryParams } = params;
-  return request<API.RUserEntity>(`api1/test/user/${param0}`, {
+  return request<API.RUserEntity>(`/api1/test/user/${param0}`, {
     method: "GET",
     params: { ...queryParams },
     ...(options || {}),
@@ -23,7 +23,7 @@ export async function deleteTestUserUserId(
   options?: { [key: string]: any }
 ) {
   const { userId: param0, ...queryParams } = params;
-  return request<API.Rstring>(`api1/test/user/${param0}`, {
+  return request<API.Rstring>(`/api1/test/user/${param0}`, {
     method: "DELETE",
     params: { ...queryParams },
     ...(options || {}),
@@ -32,7 +32,7 @@ export async function deleteTestUserUserId(
 
 /** 获取用户列表 GET /test/user/list */
 export async function getTestUserList(options?: { [key: string]: any }) {
-  return request<API.RListUserEntity>(`api1/test/user/list`, {
+  return request<API.RListUserEntity>(`/api1/test/user/list`, {
     method: "GET",
     ...(options || {}),
   });
@@ -44,7 +44,7 @@ export async function postTestUserSave(
   params: API.postTestUserSaveParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.Rstring>(`api1/test/user/save`, {
+  return request<API.Rstring>(`/api1/test/user/save`, {
     method: "POST",
     params: {
       ...params,
@@ -58,7 +58,7 @@ export async function putTestUserUpdate(
   body: API.UserEntity,
   options?: { [key: string]: any }
 ) {
-  return request<API.Rstring>(`api1/test/user/update`, {
+  return request<API.Rstring>(`/api1/test/user/update`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",

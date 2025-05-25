@@ -21,7 +21,7 @@
     "outDir": "dist",
     "lib": ["esnext", "dom", "dom.iterable", "scripthost"],
     "isolatedModules": false,
-    "types": ["node"],
+    "types": ["vite/client", "element-plus/global", "node"],
     "baseUrl": ".",
     "paths": {
       "@mars/*": ["src/*"],
@@ -29,6 +29,6 @@
       "@/*": ["src/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue", "typings/*.d.ts"],
   "exclude": ["node_modules", "src/**/*.js", "dist"]
 }

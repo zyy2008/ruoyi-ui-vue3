@@ -1,6 +1,7 @@
 import { defineComponent } from "vue";
 import { ElCard, ElTabs, ElTabPane } from "element-plus";
 import ProTable from "@/components/ProTable/index.vue";
+import { Tab1 } from "./components";
 
 export default defineComponent({
   setup() {
@@ -9,7 +10,7 @@ export default defineComponent({
         <ElCard header="企业信息管理">
           <ElTabs type="border-card">
             <ElTabPane label="企业地块基本情况">
-              <ProTable />
+              <Tab1 />
             </ElTabPane>
             <ElTabPane label="企业污染源信息">
               <ProTable />

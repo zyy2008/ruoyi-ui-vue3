@@ -24,7 +24,9 @@
     "types": ["node"],
     "baseUrl": ".",
     "paths": {
-      "@mars/*": ["src/*"]
+      "@mars/*": ["src/*"],
+      "@": ["src"],
+      "@/*": ["src/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.vue"],

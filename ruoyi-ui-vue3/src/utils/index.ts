@@ -498,3 +498,6 @@ export function handleRowAccordingToProp(
   prop.split(".").forEach((item) => (row = row[item] ?? "--"));
   return row;
 }
+
+export const handleObject = (api: { [key in string]: any }) =>
+  Object.assign({}, ...Object.values(api));

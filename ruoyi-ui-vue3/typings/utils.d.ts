@@ -15,3 +15,9 @@ type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
 type GetOptional<T> = {
   [P in keyof T as T[P] extends Required<T>[P] ? never : P]: T[P];
 };
+
+declare type UnionToIntersection<T> = (
+  T extends any ? (a: T) => any : never
+) extends (args: infer R) => any
+  ? R
+  : never;

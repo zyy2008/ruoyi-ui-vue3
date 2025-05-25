@@ -361,3 +361,7 @@ defineExpose({
   enumMap,
 });
 </script>
+
+<style lang="scss" scoped>
+@import url(./index.module.scss);
+</style>

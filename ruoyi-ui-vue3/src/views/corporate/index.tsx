@@ -8,7 +8,7 @@ export default defineComponent({
     return () => (
       <div class="app-container">
         <ElCard header="企业信息管理">
-          <ElTabs type="border-card">
+          <ElTabs type="card">
             <ElTabPane label="企业地块基本情况">
               <Tab1 />
             </ElTabPane>
@@ -19,6 +19,18 @@ export default defineComponent({
               <ProTable />
             </ElTabPane>
             <ElTabPane label="敏感受体信息">
+              <ProTable />
+            </ElTabPane>
+            <ElTabPane label="土壤或地下水环境监测">
+              <ProTable />
+            </ElTabPane>
+            <ElTabPane label="关闭搬迁企业地块基本情况">
+              <ProTable />
+            </ElTabPane>
+            <ElTabPane label="关闭搬迁企业污染源信息调查">
+              <ProTable />
+            </ElTabPane>
+            <ElTabPane label="环境监测和调查评估信息">
               <ProTable />
             </ElTabPane>
           </ElTabs>

@@ -23,6 +23,7 @@ const useCrud = ({ content, apiAdd, ref }: IProps) => {
       {
         title,
         closeOnClickModal: false,
+        width: "1200px",
       },
       content
     )

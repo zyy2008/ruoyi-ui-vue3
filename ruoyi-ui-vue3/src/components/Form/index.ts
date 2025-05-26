@@ -6,6 +6,8 @@ import {
   FormLayout,
   DatePicker,
   InputNumber,
+  Select,
+  Radio,
 } from "@formily/element-plus";
 
 const schema = createSchemaField({
@@ -16,6 +18,8 @@ const schema = createSchemaField({
     FormLayout,
     DatePicker,
     InputNumber,
+    Select,
+    Radio,
   },
 });
 

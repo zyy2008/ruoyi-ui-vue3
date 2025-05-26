@@ -16,7 +16,7 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         <!-- 使用驼峰命名法转换字段 -->
 		<!-- <setting name="mapUnderscoreToCamelCase" value="true"/> -->
 	</settings>
-    <typeHandlers>
-        <typeHandler javaType="org.gdal.ogr.Geometry" handler="com.ruoyi.config.GeometryTypeHandler"/>
-    </typeHandlers>
+<!--    <typeHandlers>-->
+<!--        <typeHandler javaType="org.gdal.ogr.Geometry" handler="com.ruoyi.config.GeometryTypeHandler"/>-->
+<!--    </typeHandlers>-->
 </configuration>

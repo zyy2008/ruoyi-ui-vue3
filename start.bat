@@ -1,0 +1,1 @@
+java -jar -Xmx1024M -Xms256M C:/Users/lnn/Desktop/groundwater/ruoyi-admin.jar --server.port=888

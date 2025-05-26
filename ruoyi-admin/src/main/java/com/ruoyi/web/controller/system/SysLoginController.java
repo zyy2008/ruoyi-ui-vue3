@@ -25,7 +25,6 @@ import java.util.Set;
  *
  * @author ruoyi
  */
-@Api("用户信息管理")
 @RestController
 public class SysLoginController {
     @Autowired
@@ -43,7 +42,6 @@ public class SysLoginController {
      * @param loginBody 登录信息
      * @return 结果
      */
-    @ApiOperation("用户登录")
     @PostMapping("/login")
     public AjaxResult login(@RequestBody LoginBody loginBody) {
         AjaxResult ajax = AjaxResult.success();

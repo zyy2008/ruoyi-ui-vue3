@@ -6,9 +6,9 @@ spring:
         druid:
             # 主库数据源
             master:
-                url: jdbc:postgresql://10.168.11.31:11005/RuoYi?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
-                username: postgres_dky
-                password: q1w2e3r4t5
+                url: jdbc:postgresql://39.100.43.147:5432/RuoYi?useUnicode=true&characterEncoding=UTF-8&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+                username: postgres
+                password: DLexJpg
             # 从库数据源
             slave:
                 # 从数据源开关/默认关闭

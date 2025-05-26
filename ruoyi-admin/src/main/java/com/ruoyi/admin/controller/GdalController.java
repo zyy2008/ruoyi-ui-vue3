@@ -22,7 +22,6 @@ import java.util.List;
  * @author ruoyi
  * @date 2024-10-15
  */
-@Api("postgis信息管理")
 @RestController
 @RequestMapping("/admin/gdal")
 public class GdalController {
@@ -51,13 +50,11 @@ public class GdalController {
         if (null == bo || null == bo.getTagert()) return AjaxResult.error("参数异常");
         return tLayerService.getDxfByTarget(bo);
     }
-    @ApiOperation("获取所有坐标系")
     @PostMapping("/getAllSpatialRefSystems")
     public AjaxResult getAllSpatialRefSystems() {
         return tLayerService.getAllSpatialRefSystems();
     }
 
-    @ApiOperation("获取裁剪区域")
     @PostMapping("/getIntersectionExt")
     public AjaxResult getIntersectionExt( String tableName,
                                           String targetJson,

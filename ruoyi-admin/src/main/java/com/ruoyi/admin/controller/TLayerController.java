@@ -23,7 +23,6 @@ import java.util.List;
  * @author ruoyi
  * @date 2024-10-08
  */
-@Api("图层")
 @RestController
 @RequestMapping("/admin/layer")
 public class TLayerController extends BaseController {
@@ -33,7 +32,6 @@ public class TLayerController extends BaseController {
     /**
      * 查询图层列表
      */
-    @ApiOperation("查询图层列表")
     @PreAuthorize("@ss.hasPermi('admin:layer:list')")
     @GetMapping("/list")
     public AjaxResult list(TLayer tLayer) {

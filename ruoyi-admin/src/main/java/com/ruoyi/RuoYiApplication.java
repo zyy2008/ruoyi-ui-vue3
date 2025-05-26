@@ -15,5 +15,6 @@ public class RuoYiApplication {
         // System.setProperty("spring.devtools.restart.enabled", "false");
         SpringApplication.run(RuoYiApplication.class, args);
         System.out.println("启动成功");
+        System.out.println("API接口：http://ip:port/swagger-ui/index.html");
     }
 }

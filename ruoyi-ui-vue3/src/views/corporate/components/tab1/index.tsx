@@ -2,6 +2,8 @@ import { defineComponent } from "vue";
 import ProTable from "@/components/ProTable/index.vue";
 import type { ProTableProps } from "@/components/ProTable/interface";
 import API from "@/services";
+import { ElButton } from "element-plus";
+import { CirclePlus, Delete } from "@element-plus/icons-vue";
 
 const props: ProTableProps = {
   columns: [
@@ -23,7 +25,6 @@ const props: ProTableProps = {
     },
   ],
   requestApi: (val) => {
-    console.log(val);
     return API.getAdminEnterpriseList({});
   },
 };
@@ -33,7 +34,16 @@ export default defineComponent({
     return () => (
       <ProTable {...props}>
         {{
-          tableHeader: () => <div>123</div>,
+          tableHeader: () => (
+            <>
+              <ElButton icon={CirclePlus} type="primary">
+                新增
+              </ElButton>
+              <ElButton icon={Delete} type="danger">
+                批量删除
+              </ElButton>
+            </>
+          ),
         }}
       </ProTable>
     );

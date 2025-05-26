@@ -30,7 +30,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @author ruoyi
  * @date 2025-05-26
  */
-@Api(tags = "企业信息管理") // 推荐用 tags，比 value 更标准
+@Api(tags = "企业信息管理")
 @RestController
 @RequestMapping("/admin/enterprise")
 public class TEnterprisePlotsController extends BaseController {

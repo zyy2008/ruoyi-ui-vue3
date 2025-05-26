@@ -69,7 +69,7 @@
 // dropdown
 .el-dropdown-menu {
   a {
-    display: block
+    display: block;
   }
 }
 
@@ -91,6 +91,16 @@
   display: none;
 }
 
-.el-dropdown .el-dropdown-link{
+.el-dropdown .el-dropdown-link {
   color: var(--el-color-primary) !important;
+}
+
+.formily-element-plus-form-item-label label {
+  font-weight: initial;
+}
+
+.formily-element-plus-form-dialog {
+  .el-dialog__header {
+    color: #000;
+  }
 }

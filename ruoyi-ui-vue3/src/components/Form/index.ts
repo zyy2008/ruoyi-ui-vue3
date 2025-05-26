@@ -1,5 +1,12 @@
 import { createSchemaField } from "@formily/vue";
-import { FormItem, Input, FormGrid, FormLayout } from "@formily/element-plus";
+import {
+  FormItem,
+  Input,
+  FormGrid,
+  FormLayout,
+  DatePicker,
+  InputNumber,
+} from "@formily/element-plus";
 
 const schema = createSchemaField({
   components: {
@@ -7,6 +14,8 @@ const schema = createSchemaField({
     Input,
     FormGrid,
     FormLayout,
+    DatePicker,
+    InputNumber,
   },
 });
 

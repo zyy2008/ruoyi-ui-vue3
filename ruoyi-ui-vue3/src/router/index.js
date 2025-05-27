@@ -58,9 +58,9 @@ export const constantRoutes = [
     hidden: true,
   },
   {
-    path: "",
+    path: "/",
     component: Layout,
-    redirect: "/login",
+    redirect: "/main",
     children: [
       {
         path: "/index",
@@ -70,21 +70,21 @@ export const constantRoutes = [
       },
     ],
   },
-  {
-    path: "/detection",
-    component: Layout,
-    redirect: "noRedirect",
-    name: "Detection",
-    meta: { title: "监测数据管理", icon: "monitor" },
-    children: [
-      {
-        path: "index",
-        component: () => import("@/views/detection/index"),
-        name: "DetectionIndex",
-        meta: { title: "监测数据管理", icon: "monitor" },
-      },
-    ],
-  },
+  // {
+  //   path: "/detection",
+  //   component: Layout,
+  //   redirect: "noRedirect",
+  //   name: "Detection",
+  //   meta: { title: "监测数据管理", icon: "monitor" },
+  //   children: [
+  //     {
+  //       path: "index",
+  //       component: () => import("@/views/detection/index"),
+  //       name: "DetectionIndex",
+  //       meta: { title: "监测数据管理", icon: "monitor" },
+  //     },
+  //   ],
+  // },
   // {
   //   path: "/corporate",
   //   component: Layout,

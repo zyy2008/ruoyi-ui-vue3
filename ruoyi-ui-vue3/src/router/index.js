@@ -85,21 +85,21 @@ export const constantRoutes = [
       },
     ],
   },
-  {
-    path: "/corporate",
-    component: Layout,
-    redirect: "noRedirect",
-    name: "Corporate",
-    meta: { title: "企业信息管理", icon: "monitor" },
-    children: [
-      {
-        path: "index",
-        component: () => import("@/views/corporate"),
-        name: "CorporateIndex",
-        meta: { title: "企业信息管理", icon: "monitor" },
-      },
-    ],
-  },
+  // {
+  //   path: "/corporate",
+  //   component: Layout,
+  //   redirect: "noRedirect",
+  //   name: "Corporate",
+  //   meta: { title: "企业信息管理", icon: "monitor" },
+  //   children: [
+  //     {
+  //       path: "index",
+  //       component: () => import("@/views/corporate"),
+  //       name: "CorporateIndex",
+  //       meta: { title: "企业信息管理", icon: "monitor" },
+  //     },
+  //   ],
+  // },
   {
     path: "/user",
     component: Layout,

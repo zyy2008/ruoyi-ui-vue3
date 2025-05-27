@@ -24,12 +24,6 @@ export default defineComponent({
             <ElTabPane label="土壤或地下水环境监测">
               <ProTable />
             </ElTabPane>
-            <ElTabPane label="关闭搬迁企业地块基本情况">
-              <ProTable />
-            </ElTabPane>
-            <ElTabPane label="关闭搬迁企业污染源信息调查">
-              <ProTable />
-            </ElTabPane>
             <ElTabPane label="环境监测和调查评估信息">
               <ProTable />
             </ElTabPane>

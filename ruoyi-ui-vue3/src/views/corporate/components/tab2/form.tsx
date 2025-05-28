@@ -548,13 +548,6 @@ const props: ISchemaFieldProps = {
   },
 };
 
-// const actionProps = () => ({
-//   disabled: Boolean,
-//   form: { type: Object as PropType<Form<any>>, default: undefined },
-// });
-
-// type ActionProps = Partial<ExtractPropTypes<ReturnType<typeof actionProps>>>;
-
 export default defineComponent({
   setup() {
     const disabled = ref<boolean>();
@@ -569,9 +562,6 @@ export default defineComponent({
       }
     );
     const form = createForm();
-    autorun(() => {
-      disabled.value = form.disabled;
-    });
 
     return () => (
       <ElCard

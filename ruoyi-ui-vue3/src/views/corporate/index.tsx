@@ -20,11 +20,11 @@ export default defineComponent({
             <ElTabPane label="敏感受体信息">
               <Tab4 />
             </ElTabPane>
-            <ElTabPane label="环境监测和调查评估信息">
-              <Tab5 />
-            </ElTabPane>
             <ElTabPane label="土壤或地下水环境监测">
               <Tab5 />
+            </ElTabPane>
+            <ElTabPane label="环境监测和调查评估信息">
+              <Tab6 />
             </ElTabPane>
           </ElTabs>
         </ElCard>

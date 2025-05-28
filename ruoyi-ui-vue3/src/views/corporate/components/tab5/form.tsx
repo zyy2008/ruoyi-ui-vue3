@@ -1,6 +1,6 @@
 import { defineComponent, ExtractPropTypes, PropType, ref } from "vue";
 import Schema from "@/components/Form";
-import { ISchemaFieldProps, FormProvider } from "@formily/vue";
+import { ISchemaFieldProps, FormProvider, ISchema } from "@formily/vue";
 import { Field, createForm, onFormInit, Form } from "@formily/core";
 import { FormButtonGroup, Submit, Reset } from "@formily/element-plus";
 import userStore from "@/store/modules/user";
@@ -13,8 +13,8 @@ import { useRequest } from "vue-request";
 
 const { SchemaField } = Schema;
 
-const props: ISchemaFieldProps = {
-  schema: {
+export const handeSchema: (T?: ISchema["properties"]) => ISchema = (val) => {
+  return {
     type: "object",
     properties: {
       layout: {
@@ -449,6 +449,7 @@ const props: ISchemaFieldProps = {
                       },
                     },
                   },
+                  ...(val as any),
                 },
               },
             },
@@ -456,7 +457,11 @@ const props: ISchemaFieldProps = {
         },
       },
     },
-  },
+  };
+};
+
+const props: ISchemaFieldProps = {
+  schema: handeSchema(),
 };
 
 // const actionProps = () => ({

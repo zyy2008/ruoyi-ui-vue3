@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TSensitiveReceptorMapper">
+    
+    <resultMap type="TSensitiveReceptor" id="TSensitiveReceptorResult">
+        <result property="id"    column="id"    />
+        <result property="surroundingLandEast"    column="surrounding_land_east"    />
+        <result property="surroundingLandSouth"    column="surrounding_land_south"    />
+        <result property="surroundingLandWest"    column="surrounding_land_west"    />
+        <result property="surroundingLandNorth"    column="surrounding_land_north"    />
+        <result property="employeeCountCategory"    column="employee_count_category"    />
+        <result property="permanentPopulationCategory"    column="permanent_population_category"    />
+        <result property="sensitiveTargets"    column="sensitive_targets"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTSensitiveReceptorVo">
+        select id, surrounding_land_east, surrounding_land_south, surrounding_land_west, surrounding_land_north, employee_count_category, permanent_population_category, sensitive_targets, dept_id from t_sensitive_receptor
+    </sql>
+
+    <select id="selectTSensitiveReceptorList" parameterType="TSensitiveReceptor" resultMap="TSensitiveReceptorResult">
+        <include refid="selectTSensitiveReceptorVo"/>
+        <where>  
+            <if test="surroundingLandEast != null  and surroundingLandEast != ''"> and surrounding_land_east = #{surroundingLandEast}</if>
+            <if test="surroundingLandSouth != null  and surroundingLandSouth != ''"> and surrounding_land_south = #{surroundingLandSouth}</if>
+            <if test="surroundingLandWest != null  and surroundingLandWest != ''"> and surrounding_land_west = #{surroundingLandWest}</if>
+            <if test="surroundingLandNorth != null  and surroundingLandNorth != ''"> and surrounding_land_north = #{surroundingLandNorth}</if>
+            <if test="employeeCountCategory != null  and employeeCountCategory != ''"> and employee_count_category = #{employeeCountCategory}</if>
+            <if test="permanentPopulationCategory != null  and permanentPopulationCategory != ''"> and permanent_population_category = #{permanentPopulationCategory}</if>
+            <if test="sensitiveTargets != null  and sensitiveTargets != ''"> and sensitive_targets = #{sensitiveTargets}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTSensitiveReceptorById" parameterType="Long" resultMap="TSensitiveReceptorResult">
+        <include refid="selectTSensitiveReceptorVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTSensitiveReceptor" parameterType="TSensitiveReceptor" useGeneratedKeys="true" keyProperty="id">
+        insert into t_sensitive_receptor
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="surroundingLandEast != null">surrounding_land_east,</if>
+            <if test="surroundingLandSouth != null">surrounding_land_south,</if>
+            <if test="surroundingLandWest != null">surrounding_land_west,</if>
+            <if test="surroundingLandNorth != null">surrounding_land_north,</if>
+            <if test="employeeCountCategory != null and employeeCountCategory != ''">employee_count_category,</if>
+            <if test="permanentPopulationCategory != null and permanentPopulationCategory != ''">permanent_population_category,</if>
+            <if test="sensitiveTargets != null">sensitive_targets,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="surroundingLandEast != null">#{surroundingLandEast},</if>
+            <if test="surroundingLandSouth != null">#{surroundingLandSouth},</if>
+            <if test="surroundingLandWest != null">#{surroundingLandWest},</if>
+            <if test="surroundingLandNorth != null">#{surroundingLandNorth},</if>
+            <if test="employeeCountCategory != null and employeeCountCategory != ''">#{employeeCountCategory},</if>
+            <if test="permanentPopulationCategory != null and permanentPopulationCategory != ''">#{permanentPopulationCategory},</if>
+            <if test="sensitiveTargets != null">#{sensitiveTargets},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTSensitiveReceptor" parameterType="TSensitiveReceptor">
+        update t_sensitive_receptor
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="surroundingLandEast != null">surrounding_land_east = #{surroundingLandEast},</if>
+            <if test="surroundingLandSouth != null">surrounding_land_south = #{surroundingLandSouth},</if>
+            <if test="surroundingLandWest != null">surrounding_land_west = #{surroundingLandWest},</if>
+            <if test="surroundingLandNorth != null">surrounding_land_north = #{surroundingLandNorth},</if>
+            <if test="employeeCountCategory != null and employeeCountCategory != ''">employee_count_category = #{employeeCountCategory},</if>
+            <if test="permanentPopulationCategory != null and permanentPopulationCategory != ''">permanent_population_category = #{permanentPopulationCategory},</if>
+            <if test="sensitiveTargets != null">sensitive_targets = #{sensitiveTargets},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTSensitiveReceptorById" parameterType="Long">
+        delete from t_sensitive_receptor where id = #{id}
+    </delete>
+
+    <delete id="deleteTSensitiveReceptorByIds" parameterType="String">
+        delete from t_sensitive_receptor where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

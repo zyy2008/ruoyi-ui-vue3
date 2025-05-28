@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TMonitoringWellsMapper">
+    
+    <resultMap type="TMonitoringWells" id="TMonitoringWellsResult">
+        <result property="id"    column="id"    />
+        <result property="wellCode"    column="well_code"    />
+        <result property="location"    column="location"    />
+        <result property="pointType"    column="point_type"    />
+        <result property="completionDate"    column="completion_date"    />
+        <result property="waterBuriedDepth"    column="water_buried_depth"    />
+        <result property="wellElevation"    column="well_elevation"    />
+        <result property="wellDepth"    column="well_depth"    />
+        <result property="innerDiameter"    column="inner_diameter"    />
+        <result property="pipeMaterial"    column="pipe_material"    />
+        <result property="multiScreenPipe"    column="multi_screen_pipe"    />
+        <result property="screenDepthRange"    column="screen_depth_range"    />
+        <result property="groundwaterType"    column="groundwater_type"    />
+        <result property="burialCondition"    column="burial_condition"    />
+        <result property="waterMedium"    column="water_medium"    />
+        <result property="ownership"    column="ownership"    />
+        <result property="suitableForLongterm"    column="suitable_for_longterm"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="latitude"    column="latitude"    />
+        <result property="altitude"    column="altitude"    />
+        <result property="videoUrl"    column="video_url"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTMonitoringWellsVo">
+        select id, well_code, location, point_type, completion_date, water_buried_depth, well_elevation, well_depth, inner_diameter, pipe_material, multi_screen_pipe, screen_depth_range, groundwater_type, burial_condition, water_medium, ownership, suitable_for_longterm, longitude, latitude, altitude, video_url, dept_id from t_monitoring_wells
+    </sql>
+
+    <select id="selectTMonitoringWellsList" parameterType="TMonitoringWells" resultMap="TMonitoringWellsResult">
+        <include refid="selectTMonitoringWellsVo"/>
+        <where>  
+            <if test="wellCode != null  and wellCode != ''"> and well_code = #{wellCode}</if>
+            <if test="location != null  and location != ''"> and location = #{location}</if>
+            <if test="pointType != null  and pointType != ''"> and point_type = #{pointType}</if>
+            <if test="completionDate != null  and completionDate != ''"> and completion_date = #{completionDate}</if>
+            <if test="waterBuriedDepth != null  and waterBuriedDepth != ''"> and water_buried_depth = #{waterBuriedDepth}</if>
+            <if test="wellElevation != null  and wellElevation != ''"> and well_elevation = #{wellElevation}</if>
+            <if test="wellDepth != null  and wellDepth != ''"> and well_depth = #{wellDepth}</if>
+            <if test="innerDiameter != null  and innerDiameter != ''"> and inner_diameter = #{innerDiameter}</if>
+            <if test="pipeMaterial != null  and pipeMaterial != ''"> and pipe_material = #{pipeMaterial}</if>
+            <if test="multiScreenPipe != null  and multiScreenPipe != ''"> and multi_screen_pipe = #{multiScreenPipe}</if>
+            <if test="screenDepthRange != null  and screenDepthRange != ''"> and screen_depth_range = #{screenDepthRange}</if>
+            <if test="groundwaterType != null  and groundwaterType != ''"> and groundwater_type = #{groundwaterType}</if>
+            <if test="burialCondition != null  and burialCondition != ''"> and burial_condition = #{burialCondition}</if>
+            <if test="waterMedium != null  and waterMedium != ''"> and water_medium = #{waterMedium}</if>
+            <if test="ownership != null  and ownership != ''"> and ownership = #{ownership}</if>
+            <if test="suitableForLongterm != null  and suitableForLongterm != ''"> and suitable_for_longterm = #{suitableForLongterm}</if>
+            <if test="longitude != null  and longitude != ''"> and longitude = #{longitude}</if>
+            <if test="latitude != null  and latitude != ''"> and latitude = #{latitude}</if>
+            <if test="altitude != null  and altitude != ''"> and altitude = #{altitude}</if>
+            <if test="videoUrl != null  and videoUrl != ''"> and video_url = #{videoUrl}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTMonitoringWellsById" parameterType="Long" resultMap="TMonitoringWellsResult">
+        <include refid="selectTMonitoringWellsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTMonitoringWells" parameterType="TMonitoringWells" useGeneratedKeys="true" keyProperty="id">
+        insert into t_monitoring_wells
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="wellCode != null">well_code,</if>
+            <if test="location != null">location,</if>
+            <if test="pointType != null">point_type,</if>
+            <if test="completionDate != null">completion_date,</if>
+            <if test="waterBuriedDepth != null">water_buried_depth,</if>
+            <if test="wellElevation != null">well_elevation,</if>
+            <if test="wellDepth != null">well_depth,</if>
+            <if test="innerDiameter != null">inner_diameter,</if>
+            <if test="pipeMaterial != null">pipe_material,</if>
+            <if test="multiScreenPipe != null">multi_screen_pipe,</if>
+            <if test="screenDepthRange != null">screen_depth_range,</if>
+            <if test="groundwaterType != null">groundwater_type,</if>
+            <if test="burialCondition != null">burial_condition,</if>
+            <if test="waterMedium != null">water_medium,</if>
+            <if test="ownership != null">ownership,</if>
+            <if test="suitableForLongterm != null">suitable_for_longterm,</if>
+            <if test="longitude != null">longitude,</if>
+            <if test="latitude != null">latitude,</if>
+            <if test="altitude != null">altitude,</if>
+            <if test="videoUrl != null">video_url,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="wellCode != null">#{wellCode},</if>
+            <if test="location != null">#{location},</if>
+            <if test="pointType != null">#{pointType},</if>
+            <if test="completionDate != null">#{completionDate},</if>
+            <if test="waterBuriedDepth != null">#{waterBuriedDepth},</if>
+            <if test="wellElevation != null">#{wellElevation},</if>
+            <if test="wellDepth != null">#{wellDepth},</if>
+            <if test="innerDiameter != null">#{innerDiameter},</if>
+            <if test="pipeMaterial != null">#{pipeMaterial},</if>
+            <if test="multiScreenPipe != null">#{multiScreenPipe},</if>
+            <if test="screenDepthRange != null">#{screenDepthRange},</if>
+            <if test="groundwaterType != null">#{groundwaterType},</if>
+            <if test="burialCondition != null">#{burialCondition},</if>
+            <if test="waterMedium != null">#{waterMedium},</if>
+            <if test="ownership != null">#{ownership},</if>
+            <if test="suitableForLongterm != null">#{suitableForLongterm},</if>
+            <if test="longitude != null">#{longitude},</if>
+            <if test="latitude != null">#{latitude},</if>
+            <if test="altitude != null">#{altitude},</if>
+            <if test="videoUrl != null">#{videoUrl},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTMonitoringWells" parameterType="TMonitoringWells">
+        update t_monitoring_wells
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="wellCode != null">well_code = #{wellCode},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="pointType != null">point_type = #{pointType},</if>
+            <if test="completionDate != null">completion_date = #{completionDate},</if>
+            <if test="waterBuriedDepth != null">water_buried_depth = #{waterBuriedDepth},</if>
+            <if test="wellElevation != null">well_elevation = #{wellElevation},</if>
+            <if test="wellDepth != null">well_depth = #{wellDepth},</if>
+            <if test="innerDiameter != null">inner_diameter = #{innerDiameter},</if>
+            <if test="pipeMaterial != null">pipe_material = #{pipeMaterial},</if>
+            <if test="multiScreenPipe != null">multi_screen_pipe = #{multiScreenPipe},</if>
+            <if test="screenDepthRange != null">screen_depth_range = #{screenDepthRange},</if>
+            <if test="groundwaterType != null">groundwater_type = #{groundwaterType},</if>
+            <if test="burialCondition != null">burial_condition = #{burialCondition},</if>
+            <if test="waterMedium != null">water_medium = #{waterMedium},</if>
+            <if test="ownership != null">ownership = #{ownership},</if>
+            <if test="suitableForLongterm != null">suitable_for_longterm = #{suitableForLongterm},</if>
+            <if test="longitude != null">longitude = #{longitude},</if>
+            <if test="latitude != null">latitude = #{latitude},</if>
+            <if test="altitude != null">altitude = #{altitude},</if>
+            <if test="videoUrl != null">video_url = #{videoUrl},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTMonitoringWellsById" parameterType="Long">
+        delete from t_monitoring_wells where id = #{id}
+    </delete>
+
+    <delete id="deleteTMonitoringWellsByIds" parameterType="String">
+        delete from t_monitoring_wells where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

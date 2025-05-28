@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TGroundwaterMonitoringMapper">
+    
+    <resultMap type="TGroundwaterMonitoring" id="TGroundwaterMonitoringResult">
+        <result property="id"    column="id"    />
+        <result property="hasMonitoring"    column="has_monitoring"    />
+        <result property="surveyDate"    column="survey_date"    />
+        <result property="pollutantsExceed"    column="pollutants_exceed"    />
+        <result property="source"    column="source"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTGroundwaterMonitoringVo">
+        select id, has_monitoring, survey_date, pollutants_exceed, source, dept_id from t_groundwater_monitoring
+    </sql>
+
+    <select id="selectTGroundwaterMonitoringList" parameterType="TGroundwaterMonitoring" resultMap="TGroundwaterMonitoringResult">
+        <include refid="selectTGroundwaterMonitoringVo"/>
+        <where>  
+            <if test="hasMonitoring != null  and hasMonitoring != ''"> and has_monitoring = #{hasMonitoring}</if>
+            <if test="surveyDate != null "> and survey_date = #{surveyDate}</if>
+            <if test="pollutantsExceed != null  and pollutantsExceed != ''"> and pollutants_exceed = #{pollutantsExceed}</if>
+            <if test="source != null  and source != ''"> and source = #{source}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTGroundwaterMonitoringById" parameterType="Long" resultMap="TGroundwaterMonitoringResult">
+        <include refid="selectTGroundwaterMonitoringVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTGroundwaterMonitoring" parameterType="TGroundwaterMonitoring" useGeneratedKeys="true" keyProperty="id">
+        insert into t_groundwater_monitoring
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="hasMonitoring != null and hasMonitoring != ''">has_monitoring,</if>
+            <if test="surveyDate != null">survey_date,</if>
+            <if test="pollutantsExceed != null">pollutants_exceed,</if>
+            <if test="source != null">source,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="hasMonitoring != null and hasMonitoring != ''">#{hasMonitoring},</if>
+            <if test="surveyDate != null">#{surveyDate},</if>
+            <if test="pollutantsExceed != null">#{pollutantsExceed},</if>
+            <if test="source != null">#{source},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTGroundwaterMonitoring" parameterType="TGroundwaterMonitoring">
+        update t_groundwater_monitoring
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="hasMonitoring != null and hasMonitoring != ''">has_monitoring = #{hasMonitoring},</if>
+            <if test="surveyDate != null">survey_date = #{surveyDate},</if>
+            <if test="pollutantsExceed != null">pollutants_exceed = #{pollutantsExceed},</if>
+            <if test="source != null">source = #{source},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTGroundwaterMonitoringById" parameterType="Long">
+        delete from t_groundwater_monitoring where id = #{id}
+    </delete>
+
+    <delete id="deleteTGroundwaterMonitoringByIds" parameterType="String">
+        delete from t_groundwater_monitoring where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

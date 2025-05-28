@@ -2,12 +2,12 @@
 /* eslint-disable */
 import request from "@/utils/http";
 
-/** 修改企业信息 PUT /admin/enterprise */
-export async function putAdminEnterprise(
-  body: API.zaichanqiyedekuaixinxi,
+/** 修改企业污染源 PUT /admin/pollution */
+export async function putAdminPollution(
+  body: API.qiyewuranyuan,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/enterprise`, {
+  return request<Record<string, any>>(`/api1/admin/pollution`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -17,12 +17,12 @@ export async function putAdminEnterprise(
   });
 }
 
-/** 新增企业信息 POST /admin/enterprise */
-export async function postAdminEnterprise(
-  body: API.zaichanqiyedekuaixinxi,
+/** 新增企业污染源 POST /admin/pollution */
+export async function postAdminPollution(
+  body: API.qiyewuranyuan,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/enterprise`, {
+  return request<Record<string, any>>(`/api1/admin/pollution`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -32,41 +32,41 @@ export async function postAdminEnterprise(
   });
 }
 
-/** 删除企业信息 DELETE /admin/enterprise/${param0} */
-export async function deleteAdminEnterpriseIds(
+/** 删除企业污染源 DELETE /admin/pollution/${param0} */
+export async function deleteAdminPollutionIds(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.deleteAdminEnterpriseIdsParams,
+  params: API.deleteAdminPollutionIdsParams,
   options?: { [key: string]: any }
 ) {
   const { ids: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/enterprise/${param0}`, {
+  return request<Record<string, any>>(`/api1/admin/pollution/${param0}`, {
     method: "DELETE",
     params: { ...queryParams },
     ...(options || {}),
   });
 }
 
-/** 获取企业信息详细信息 GET /admin/enterprise/${param0} */
-export async function getAdminEnterpriseId(
+/** 获取企业污染源详细信息 GET /admin/pollution/${param0} */
+export async function getAdminPollutionId(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.getAdminEnterpriseIdParams,
+  params: API.getAdminPollutionIdParams,
   options?: { [key: string]: any }
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/enterprise/${param0}`, {
+  return request<Record<string, any>>(`/api1/admin/pollution/${param0}`, {
     method: "GET",
     params: { ...queryParams },
     ...(options || {}),
   });
 }
 
-/** 导出企业信息列表 POST /admin/enterprise/export */
-export async function postAdminEnterpriseExport(
+/** 导出企业污染源列表 POST /admin/pollution/export */
+export async function postAdminPollutionExport(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.postAdminEnterpriseExportParams,
+  params: API.postAdminPollutionExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/enterprise/export`, {
+  return request<any>(`/api1/admin/pollution/export`, {
     method: "POST",
     params: {
       ...params,
@@ -77,13 +77,13 @@ export async function postAdminEnterpriseExport(
   });
 }
 
-/** 查询企业信息列表 GET /admin/enterprise/list */
-export async function getAdminEnterpriseList(
+/** 查询企业污染源列表 GET /admin/pollution/list */
+export async function getAdminPollutionList(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.getAdminEnterpriseListParams,
+  params: API.getAdminPollutionListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/enterprise/list`, {
+  return request<API.TableDataInfo>(`/api1/admin/pollution/list`, {
     method: "GET",
     params: {
       ...params,

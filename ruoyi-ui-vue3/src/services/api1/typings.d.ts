@@ -1,12 +1,12 @@
 declare namespace API {
-  type deleteAdminEnterpriseIdParams = {
-    /** id */
-    id: number;
+  type deleteAdminEnterpriseIdsParams = {
+    /** ids */
+    ids: string;
   };
 
-  type deleteTestUserUserIdParams = {
-    /** 用户ID */
-    userId: number;
+  type deleteAdminPollutionIdsParams = {
+    /** ids */
+    ids: string;
   };
 
   type getAdminEnterpriseIdParams = {
@@ -17,17 +17,17 @@ declare namespace API {
   type getAdminEnterpriseListParams = {
     /** 单位所在地详细地址 */
     address?: string;
-    /** 地块实际使用面积（现场勾画得出） */
-    areaActual?: number;
-    /** 地块占地面积（以土地证为准） */
-    areaLandCert?: number;
-    /** 中心纬度（如：37°33ˊ50.04"） */
+    /** 地块实际使用面积 */
+    areaActual?: string;
+    /** 地块占地面积 */
+    areaLandCert?: string;
+    /** 中心纬度 */
     centerLatitude?: string;
-    /** 中心经度（如：112°15ˊ18.68"） */
+    /** 中心经度 */
     centerLongitude?: string;
     /** 统一社会信用代码 */
     companyCreditCode?: string;
-    /** 单位名称（企业名称） */
+    /** 单位名称 */
     companyName?: string;
     /** 联系人姓名 */
     contactName?: string;
@@ -37,34 +37,34 @@ declare namespace API {
     createTime?: string;
     /** 归属部门ID */
     deptId?: number;
-    /** 企业规模（大型、中型、小型、微型） */
+    /** 企业规模 */
     enterpriseScale?: string;
     /** 利用历史结束年份 */
     historyEndYear?: number;
-    /** 地块利用历史（如：工业用地、荒地等） */
+    /** 地块利用历史 */
     historyLandUse?: string;
     /** 利用历史起始年份 */
     historyStartYear?: number;
     /** 主键ID */
     id?: number;
-    /** 是否位于工业园区或集聚区（true=是，false=否） */
-    inIndustrialPark?: boolean;
-    /** 行业类别（如：化学试剂和助剂制造） */
+    /** 是否位于工业园区或集聚区 */
+    inIndustrialPark?: string;
+    /** 行业类别 */
     industryCategory?: string;
-    /** 行业代码（如：C2661） */
+    /** 行业代码 */
     industryCode?: string;
     /** 最新改扩建时间 */
     latestExpansionDate?: string;
     /** 法定代表人 */
     legalRepresentative?: string;
     params?: Record<string, any>;
-    /** 地块编码（格式：6位行政区+1位地块类型+2位行业大类+4位流水） */
+    /** 地块编码 */
     plotCode?: string;
     /** 地块名称 */
     plotName?: string;
-    /** 行政区划代码（如：140121） */
+    /** 行政区划代码 */
     regionCode?: string;
-    /** 登记注册类型（如：有限责任公司） */
+    /** 登记注册类型 */
     registrationType?: string;
     remark?: string;
     searchValue?: string;
@@ -74,119 +74,99 @@ declare namespace API {
     updateTime?: string;
   };
 
-  type getAdminLayerListParams = {
-    ancestors?: string;
-    baseId?: number;
-    baseIds?: number[];
-    baseName?: string;
-    children?: Record<string, any>[];
-    code?: string;
+  type getAdminPollutionIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminPollutionListParams = {
     createBy?: string;
     createTime?: string;
-    dataType?: string;
-    delFlag?: number;
+    /** 归属部门 */
     deptId?: number;
+    /** 废气排放单位 */
+    gasEmissionUnit?: string;
+    /** 是否存在废气治理设施 */
+    gasTreatmentExists?: string;
+    /** 主键ID */
     id?: number;
-    isShow?: boolean;
-    layerParam?: string;
-    name?: string;
-    orderNum?: number;
+    /** 是否为危化品 */
+    isHazardous?: string;
+    /** 生产线纬度 */
+    latitude?: string;
+    /** 是否存在泄漏 */
+    leakStatus?: string;
+    /** 生产线经度 */
+    longitude?: string;
+    /** 原料年均用量 */
+    materialAvgUsage?: string;
+    /** 原料名称 */
+    materialName?: string;
+    /** 原料单位 */
+    materialUnit?: string;
+    /** 原料使用年份范围 */
+    materialUseYearRange?: string;
     params?: Record<string, any>;
-    parentId?: number;
-    parentName?: string;
-    pid?: number;
+    /** 工艺描述 */
+    processDescription?: string;
+    /** 生产线名称 */
+    processLineName?: string;
+    /** 年均产量 */
+    productAvgOutput?: string;
+    /** 产品名称 */
+    productName?: string;
+    /** 产品单位 */
+    productUnit?: string;
+    /** 产品生产年份范围 */
+    productionYearRange?: string;
     remark?: string;
     searchValue?: string;
-    serverType?: string;
-    tableName?: string;
+    /** 投产时间 */
+    startupDate?: string;
+    /** 储存量 */
+    storageAmount?: string;
+    /** 储存区面积 */
+    storageArea?: string;
+    /** 储存区名称 */
+    storageAreaName?: string;
+    /** 储存区纬度 */
+    storageLatitude?: string;
+    /** 是否存在泄漏 */
+    storageLeakStatus?: string;
+    /** 储存区经度 */
+    storageLongitude?: string;
+    /** 备注信息 */
+    storageRemark?: string;
+    /** 储存开始时间 */
+    storageStartDate?: string;
+    /** 储存单位 */
+    storageUnit?: string;
+    /** 储存物料名称 */
+    storedMaterial?: string;
+    /** 储罐数量 */
+    tankCount?: number;
+    /** 废气排放总量 */
+    totalGasEmission?: string;
     updateBy?: string;
     updateTime?: string;
-    url?: string;
-    userId?: number;
+    /** 车间面积 */
+    workshopArea?: string;
   };
 
-  type getTestUserUserIdParams = {
-    /** 用户ID */
-    userId: number;
-  };
-
-  type LoginBody = {
-    code?: string;
-    password?: string;
-    username?: string;
-    uuid?: string;
-  };
-
-  type postAdminGdalGetIntersectionExtParams = {
-    /** tableName */
-    tableName?: string;
-    /** targetJson */
-    targetJson?: string;
-    /** srid */
-    srid?: number;
-  };
-
-  type postTestUserSaveParams = {
-    /** 用户手机 */
-    mobile?: string;
-    /** 用户密码 */
-    password?: string;
-    /** 用户id */
-    userId?: number;
-    /** 用户名称 */
-    username?: string;
-  };
-
-  type RListUserEntity = {
-    code?: number;
-    data?: UserEntity[];
-    msg?: string;
-  };
-
-  type Rstring = {
-    code?: number;
-    data?: string;
-    msg?: string;
-  };
-
-  type RUserEntity = {
-    code?: number;
-    data?: UserEntity;
-    msg?: string;
-  };
-
-  type TableDataInfo = {
-    code?: number;
-    msg?: string;
-    rows?: Record<string, any>[];
-    total?: number;
-  };
-
-  type UserEntity = {
-    /** 用户手机 */
-    mobile?: string;
-    /** 用户密码 */
-    password?: string;
-    /** 用户ID */
-    userId?: number;
-    /** 用户名称 */
-    username?: string;
-  };
-
-  type zaichanqiyedekuaixinxi = {
+  type postAdminEnterpriseExportParams = {
     /** 单位所在地详细地址 */
     address?: string;
-    /** 地块实际使用面积（现场勾画得出） */
-    areaActual?: number;
-    /** 地块占地面积（以土地证为准） */
-    areaLandCert?: number;
-    /** 中心纬度（如：37°33ˊ50.04"） */
+    /** 地块实际使用面积 */
+    areaActual?: string;
+    /** 地块占地面积 */
+    areaLandCert?: string;
+    /** 中心纬度 */
     centerLatitude?: string;
-    /** 中心经度（如：112°15ˊ18.68"） */
+    /** 中心经度 */
     centerLongitude?: string;
     /** 统一社会信用代码 */
     companyCreditCode?: string;
-    /** 单位名称（企业名称） */
+    /** 单位名称 */
     companyName?: string;
     /** 联系人姓名 */
     contactName?: string;
@@ -196,34 +176,248 @@ declare namespace API {
     createTime?: string;
     /** 归属部门ID */
     deptId?: number;
-    /** 企业规模（大型、中型、小型、微型） */
+    /** 企业规模 */
     enterpriseScale?: string;
     /** 利用历史结束年份 */
     historyEndYear?: number;
-    /** 地块利用历史（如：工业用地、荒地等） */
+    /** 地块利用历史 */
     historyLandUse?: string;
     /** 利用历史起始年份 */
     historyStartYear?: number;
     /** 主键ID */
     id?: number;
-    /** 是否位于工业园区或集聚区（true=是，false=否） */
-    inIndustrialPark?: boolean;
-    /** 行业类别（如：化学试剂和助剂制造） */
+    /** 是否位于工业园区或集聚区 */
+    inIndustrialPark?: string;
+    /** 行业类别 */
     industryCategory?: string;
-    /** 行业代码（如：C2661） */
+    /** 行业代码 */
     industryCode?: string;
     /** 最新改扩建时间 */
     latestExpansionDate?: string;
     /** 法定代表人 */
     legalRepresentative?: string;
     params?: Record<string, any>;
-    /** 地块编码（格式：6位行政区+1位地块类型+2位行业大类+4位流水） */
+    /** 地块编码 */
     plotCode?: string;
     /** 地块名称 */
     plotName?: string;
-    /** 行政区划代码（如：140121） */
+    /** 行政区划代码 */
     regionCode?: string;
-    /** 登记注册类型（如：有限责任公司） */
+    /** 登记注册类型 */
+    registrationType?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 开业时间 */
+    startDate?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type postAdminPollutionExportParams = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: number;
+    /** 废气排放单位 */
+    gasEmissionUnit?: string;
+    /** 是否存在废气治理设施 */
+    gasTreatmentExists?: string;
+    /** 主键ID */
+    id?: number;
+    /** 是否为危化品 */
+    isHazardous?: string;
+    /** 生产线纬度 */
+    latitude?: string;
+    /** 是否存在泄漏 */
+    leakStatus?: string;
+    /** 生产线经度 */
+    longitude?: string;
+    /** 原料年均用量 */
+    materialAvgUsage?: string;
+    /** 原料名称 */
+    materialName?: string;
+    /** 原料单位 */
+    materialUnit?: string;
+    /** 原料使用年份范围 */
+    materialUseYearRange?: string;
+    params?: Record<string, any>;
+    /** 工艺描述 */
+    processDescription?: string;
+    /** 生产线名称 */
+    processLineName?: string;
+    /** 年均产量 */
+    productAvgOutput?: string;
+    /** 产品名称 */
+    productName?: string;
+    /** 产品单位 */
+    productUnit?: string;
+    /** 产品生产年份范围 */
+    productionYearRange?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 投产时间 */
+    startupDate?: string;
+    /** 储存量 */
+    storageAmount?: string;
+    /** 储存区面积 */
+    storageArea?: string;
+    /** 储存区名称 */
+    storageAreaName?: string;
+    /** 储存区纬度 */
+    storageLatitude?: string;
+    /** 是否存在泄漏 */
+    storageLeakStatus?: string;
+    /** 储存区经度 */
+    storageLongitude?: string;
+    /** 备注信息 */
+    storageRemark?: string;
+    /** 储存开始时间 */
+    storageStartDate?: string;
+    /** 储存单位 */
+    storageUnit?: string;
+    /** 储存物料名称 */
+    storedMaterial?: string;
+    /** 储罐数量 */
+    tankCount?: number;
+    /** 废气排放总量 */
+    totalGasEmission?: string;
+    updateBy?: string;
+    updateTime?: string;
+    /** 车间面积 */
+    workshopArea?: string;
+  };
+
+  type qiyewuranyuan = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: number;
+    /** 废气排放单位 */
+    gasEmissionUnit?: string;
+    /** 是否存在废气治理设施 */
+    gasTreatmentExists?: string;
+    /** 主键ID */
+    id?: number;
+    /** 是否为危化品 */
+    isHazardous?: string;
+    /** 生产线纬度 */
+    latitude?: string;
+    /** 是否存在泄漏 */
+    leakStatus?: string;
+    /** 生产线经度 */
+    longitude?: string;
+    /** 原料年均用量 */
+    materialAvgUsage?: string;
+    /** 原料名称 */
+    materialName?: string;
+    /** 原料单位 */
+    materialUnit?: string;
+    /** 原料使用年份范围 */
+    materialUseYearRange?: string;
+    params?: Record<string, any>;
+    /** 工艺描述 */
+    processDescription?: string;
+    /** 生产线名称 */
+    processLineName?: string;
+    /** 年均产量 */
+    productAvgOutput?: string;
+    /** 产品名称 */
+    productName?: string;
+    /** 产品单位 */
+    productUnit?: string;
+    /** 产品生产年份范围 */
+    productionYearRange?: string;
+    remark?: string;
+    /** 投产时间 */
+    startupDate?: string;
+    /** 储存量 */
+    storageAmount?: string;
+    /** 储存区面积 */
+    storageArea?: string;
+    /** 储存区名称 */
+    storageAreaName?: string;
+    /** 储存区纬度 */
+    storageLatitude?: string;
+    /** 是否存在泄漏 */
+    storageLeakStatus?: string;
+    /** 储存区经度 */
+    storageLongitude?: string;
+    /** 备注信息 */
+    storageRemark?: string;
+    /** 储存开始时间 */
+    storageStartDate?: string;
+    /** 储存单位 */
+    storageUnit?: string;
+    /** 储存物料名称 */
+    storedMaterial?: string;
+    /** 储罐数量 */
+    tankCount?: number;
+    /** 废气排放总量 */
+    totalGasEmission?: string;
+    updateBy?: string;
+    updateTime?: string;
+    /** 车间面积 */
+    workshopArea?: string;
+  };
+
+  type TableDataInfo = {
+    code?: number;
+    msg?: string;
+    rows?: Record<string, any>[];
+    total?: number;
+  };
+
+  type zaichanqiyedekuaixinxi = {
+    /** 单位所在地详细地址 */
+    address?: string;
+    /** 地块实际使用面积 */
+    areaActual?: string;
+    /** 地块占地面积 */
+    areaLandCert?: string;
+    /** 中心纬度 */
+    centerLatitude?: string;
+    /** 中心经度 */
+    centerLongitude?: string;
+    /** 统一社会信用代码 */
+    companyCreditCode?: string;
+    /** 单位名称 */
+    companyName?: string;
+    /** 联系人姓名 */
+    contactName?: string;
+    /** 联系人电话 */
+    contactPhone?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门ID */
+    deptId?: number;
+    /** 企业规模 */
+    enterpriseScale?: string;
+    /** 利用历史结束年份 */
+    historyEndYear?: number;
+    /** 地块利用历史 */
+    historyLandUse?: string;
+    /** 利用历史起始年份 */
+    historyStartYear?: number;
+    /** 主键ID */
+    id?: number;
+    /** 是否位于工业园区或集聚区 */
+    inIndustrialPark?: string;
+    /** 行业类别 */
+    industryCategory?: string;
+    /** 行业代码 */
+    industryCode?: string;
+    /** 最新改扩建时间 */
+    latestExpansionDate?: string;
+    /** 法定代表人 */
+    legalRepresentative?: string;
+    params?: Record<string, any>;
+    /** 地块编码 */
+    plotCode?: string;
+    /** 地块名称 */
+    plotName?: string;
+    /** 行政区划代码 */
+    regionCode?: string;
+    /** 登记注册类型 */
     registrationType?: string;
     remark?: string;
     /** 开业时间 */

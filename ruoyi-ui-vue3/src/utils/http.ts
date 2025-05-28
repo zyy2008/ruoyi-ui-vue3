@@ -1,13 +1,20 @@
 import ajax from "./request";
-import type { AxiosPromise, AxiosRequestConfig } from "axios";
+import type { AxiosRequestConfig } from "axios";
 
-const request: <T>(
-  url: string,
-  config?: AxiosRequestConfig
-) => AxiosPromise<T> = (url, config) => {
-  return ajax(url, {
-    ...config,
-    baseURL: "",
+interface IRequest {
+  <T = any>(url: string, opts: AxiosRequestConfig): Promise<T>;
+}
+
+const request: IRequest = (url, opts: any = { method: "GET" }) => {
+  return new Promise((resolve, reject) => {
+    ajax(url, {
+      ...opts,
+      baseURL: "",
+    })
+      .then((res) => {
+        resolve(res as any);
+      })
+      .catch(reject);
   });
 };
 

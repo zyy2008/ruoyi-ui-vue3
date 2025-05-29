@@ -60,7 +60,7 @@ export const constantRoutes = [
   {
     path: "",
     component: Layout,
-    redirect: "/login",
+    redirect: "/main",
     children: [
       {
         path: "/index",

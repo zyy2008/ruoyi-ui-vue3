@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TSoilPathwayMapper">
+    
+    <resultMap type="TSoilPathway" id="TSoilPathwayResult">
+        <result property="id"    column="id"    />
+        <result property="seqNo"    column="seq_no"    />
+        <result property="soilType"    column="soil_type"    />
+        <result property="depthTopCm"    column="depth_top_cm"    />
+        <result property="thicknessCm"    column="thickness_cm"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTSoilPathwayVo">
+        select id, seq_no, soil_type, depth_top_cm, thickness_cm, dept_id from t_soil_pathway
+    </sql>
+
+    <select id="selectTSoilPathwayList" parameterType="TSoilPathway" resultMap="TSoilPathwayResult">
+        <include refid="selectTSoilPathwayVo"/>
+        <where>  
+            <if test="seqNo != null "> and seq_no = #{seqNo}</if>
+            <if test="soilType != null  and soilType != ''"> and soil_type = #{soilType}</if>
+            <if test="depthTopCm != null "> and depth_top_cm = #{depthTopCm}</if>
+            <if test="thicknessCm != null "> and thickness_cm = #{thicknessCm}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTSoilPathwayById" parameterType="Long" resultMap="TSoilPathwayResult">
+        <include refid="selectTSoilPathwayVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTSoilPathway" parameterType="TSoilPathway" useGeneratedKeys="true" keyProperty="id">
+        insert into t_soil_pathway
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="seqNo != null">seq_no,</if>
+            <if test="soilType != null and soilType != ''">soil_type,</if>
+            <if test="depthTopCm != null">depth_top_cm,</if>
+            <if test="thicknessCm != null">thickness_cm,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="seqNo != null">#{seqNo},</if>
+            <if test="soilType != null and soilType != ''">#{soilType},</if>
+            <if test="depthTopCm != null">#{depthTopCm},</if>
+            <if test="thicknessCm != null">#{thicknessCm},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTSoilPathway" parameterType="TSoilPathway">
+        update t_soil_pathway
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="seqNo != null">seq_no = #{seqNo},</if>
+            <if test="soilType != null and soilType != ''">soil_type = #{soilType},</if>
+            <if test="depthTopCm != null">depth_top_cm = #{depthTopCm},</if>
+            <if test="thicknessCm != null">thickness_cm = #{thicknessCm},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTSoilPathwayById" parameterType="Long">
+        delete from t_soil_pathway where id = #{id}
+    </delete>
+
+    <delete id="deleteTSoilPathwayByIds" parameterType="String">
+        delete from t_soil_pathway where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

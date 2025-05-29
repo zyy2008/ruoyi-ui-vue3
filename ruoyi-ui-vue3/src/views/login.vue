@@ -117,11 +117,9 @@ watch(
 function handleLogin() {
   proxy.$refs.loginRef.validate((valid) => {
     if (valid) {
-
-      
       // router.push({ path: "/main", query: {} });
       // return;
-      
+
       loading.value = true;
       // 勾选了需要记住密码设置在 cookie 中设置记住用户名和密码
       if (loginForm.value.rememberMe) {
@@ -146,8 +144,12 @@ function handleLogin() {
             }
             return acc;
           }, {});
+          if (loginForm.value.username === "test3") {
+            router.push({ path: "/corporate/tab1", query: otherQueryParams });
+          } else {
+            router.push({ path: "/main", query: otherQueryParams });
+          }
           //router.push({ path: redirect.value || "/main", query: otherQueryParams });
-          router.push({ path: "/main", query: otherQueryParams });
         })
         .catch(() => {
           loading.value = false;

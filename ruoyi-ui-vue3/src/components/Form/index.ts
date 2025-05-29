@@ -8,7 +8,12 @@ import {
   InputNumber,
   Select,
   Radio,
+  Checkbox,
+  Upload,
+  FormCollapse,
+  ArrayTable,
 } from "@formily/element-plus";
+import { ElCard } from "element-plus";
 
 const schema = createSchemaField({
   components: {
@@ -20,6 +25,11 @@ const schema = createSchemaField({
     InputNumber,
     Select,
     Radio,
+    Checkbox,
+    Upload,
+    Card: ElCard,
+    FormCollapse,
+    ArrayTable,
   },
 });
 

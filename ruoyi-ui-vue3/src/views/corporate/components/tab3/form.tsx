@@ -271,66 +271,68 @@ export default defineComponent({
     // });
 
     return () => (
-      <ElCard
-        v-loading={loading.value}
-        v-slots={{
-          header: () => (
-            <ElSpace>
-              <ElButton
-                icon={EditPen}
-                disabled={!disabled.value}
-                onClick={() => {
-                  form.disabled = false;
+      <div class="app-container">
+        <ElCard
+          v-loading={loading.value}
+          v-slots={{
+            header: () => (
+              <ElSpace>
+                <ElButton
+                  icon={EditPen}
+                  disabled={!disabled.value}
+                  onClick={() => {
+                    form.disabled = false;
+                  }}
+                  type="primary"
+                >
+                  编辑
+                </ElButton>
+              </ElSpace>
+            ),
+          }}
+        >
+          <FormProvider form={form}>
+            <SchemaField {...props} />
+            <FormButtonGroup
+              align="center"
+              style={{
+                margin: "10px",
+              }}
+            >
+              <Submit
+                disabled={disabled.value}
+                onSubmit={(val) => {
+                  const { id } = val;
+                  const api = id
+                    ? API.putAdminEnterprise
+                    : API.postAdminEnterprise;
+                  api({
+                    ...val,
+                    deptId,
+                  }).then((res) => {
+                    if (res.code === 200) {
+                      ElMessage.success("保存成功");
+                      runAsync();
+                    } else {
+                      ElMessage.success("保存失败");
+                    }
+                  });
                 }}
-                type="primary"
               >
-                编辑
+                提交
+              </Submit>
+              <ElButton
+                disabled={disabled.value}
+                onClick={() => {
+                  form.disabled = true;
+                }}
+              >
+                取消
               </ElButton>
-            </ElSpace>
-          ),
-        }}
-      >
-        <FormProvider form={form}>
-          <SchemaField {...props} />
-          <FormButtonGroup
-            align="center"
-            style={{
-              margin: "10px",
-            }}
-          >
-            <Submit
-              disabled={disabled.value}
-              onSubmit={(val) => {
-                const { id } = val;
-                const api = id
-                  ? API.putAdminEnterprise
-                  : API.postAdminEnterprise;
-                api({
-                  ...val,
-                  deptId,
-                }).then((res) => {
-                  if (res.code === 200) {
-                    ElMessage.success("保存成功");
-                    runAsync();
-                  } else {
-                    ElMessage.success("保存失败");
-                  }
-                });
-              }}
-            >
-              提交
-            </Submit>
-            <ElButton
-              disabled={disabled.value}
-              onClick={() => {
-                form.disabled = true;
-              }}
-            >
-              取消
-            </ElButton>
-          </FormButtonGroup>
-        </FormProvider>
-      </ElCard>
+            </FormButtonGroup>
+          </FormProvider>
+        </ElCard>
+      </div>
     );
   },
 });

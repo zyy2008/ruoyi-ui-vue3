@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TGroundwaterPathwayMapper">
+    
+    <resultMap type="TGroundwaterPathway" id="TGroundwaterPathwayResult">
+        <result property="id"    column="id"    />
+        <result property="waterDepthCategory"    column="water_depth_category"    />
+        <result property="permeabilityCategory"    column="permeability_category"    />
+        <result property="isKarstArea"    column="is_karst_area"    />
+        <result property="annualRainfallCategory"    column="annual_rainfall_category"    />
+        <result property="groundwaterUse"    column="groundwater_use"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTGroundwaterPathwayVo">
+        select id, water_depth_category, permeability_category, is_karst_area, annual_rainfall_category, groundwater_use, dept_id from t_groundwater_pathway
+    </sql>
+
+    <select id="selectTGroundwaterPathwayList" parameterType="TGroundwaterPathway" resultMap="TGroundwaterPathwayResult">
+        <include refid="selectTGroundwaterPathwayVo"/>
+        <where>  
+            <if test="waterDepthCategory != null  and waterDepthCategory != ''"> and water_depth_category = #{waterDepthCategory}</if>
+            <if test="permeabilityCategory != null  and permeabilityCategory != ''"> and permeability_category = #{permeabilityCategory}</if>
+            <if test="isKarstArea != null  and isKarstArea != ''"> and is_karst_area = #{isKarstArea}</if>
+            <if test="annualRainfallCategory != null  and annualRainfallCategory != ''"> and annual_rainfall_category = #{annualRainfallCategory}</if>
+            <if test="groundwaterUse != null  and groundwaterUse != ''"> and groundwater_use = #{groundwaterUse}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTGroundwaterPathwayById" parameterType="Long" resultMap="TGroundwaterPathwayResult">
+        <include refid="selectTGroundwaterPathwayVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTGroundwaterPathway" parameterType="TGroundwaterPathway" useGeneratedKeys="true" keyProperty="id">
+        insert into t_groundwater_pathway
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="waterDepthCategory != null and waterDepthCategory != ''">water_depth_category,</if>
+            <if test="permeabilityCategory != null and permeabilityCategory != ''">permeability_category,</if>
+            <if test="isKarstArea != null and isKarstArea != ''">is_karst_area,</if>
+            <if test="annualRainfallCategory != null and annualRainfallCategory != ''">annual_rainfall_category,</if>
+            <if test="groundwaterUse != null and groundwaterUse != ''">groundwater_use,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="waterDepthCategory != null and waterDepthCategory != ''">#{waterDepthCategory},</if>
+            <if test="permeabilityCategory != null and permeabilityCategory != ''">#{permeabilityCategory},</if>
+            <if test="isKarstArea != null and isKarstArea != ''">#{isKarstArea},</if>
+            <if test="annualRainfallCategory != null and annualRainfallCategory != ''">#{annualRainfallCategory},</if>
+            <if test="groundwaterUse != null and groundwaterUse != ''">#{groundwaterUse},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTGroundwaterPathway" parameterType="TGroundwaterPathway">
+        update t_groundwater_pathway
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="waterDepthCategory != null and waterDepthCategory != ''">water_depth_category = #{waterDepthCategory},</if>
+            <if test="permeabilityCategory != null and permeabilityCategory != ''">permeability_category = #{permeabilityCategory},</if>
+            <if test="isKarstArea != null and isKarstArea != ''">is_karst_area = #{isKarstArea},</if>
+            <if test="annualRainfallCategory != null and annualRainfallCategory != ''">annual_rainfall_category = #{annualRainfallCategory},</if>
+            <if test="groundwaterUse != null and groundwaterUse != ''">groundwater_use = #{groundwaterUse},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTGroundwaterPathwayById" parameterType="Long">
+        delete from t_groundwater_pathway where id = #{id}
+    </delete>
+
+    <delete id="deleteTGroundwaterPathwayByIds" parameterType="String">
+        delete from t_groundwater_pathway where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

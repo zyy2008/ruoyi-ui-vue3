@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TGroundwaterPollutantMapper">
+    
+    <resultMap type="TGroundwaterPollutant" id="TGroundwaterPollutantResult">
+        <result property="id"    column="id"    />
+        <result property="monitoringId"    column="monitoring_id"    />
+        <result property="pollutantName"    column="pollutant_name"    />
+        <result property="maxConcentrationMgl"    column="max_concentration_mgl"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTGroundwaterPollutantVo">
+        select id, monitoring_id, pollutant_name, max_concentration_mgl, dept_id from t_groundwater_pollutant
+    </sql>
+
+    <select id="selectTGroundwaterPollutantList" parameterType="TGroundwaterPollutant" resultMap="TGroundwaterPollutantResult">
+        <include refid="selectTGroundwaterPollutantVo"/>
+        <where>  
+            <if test="pollutantName != null  and pollutantName != ''"> and pollutant_name like concat('%', #{pollutantName}, '%')</if>
+            <if test="maxConcentrationMgl != null  and maxConcentrationMgl != ''"> and max_concentration_mgl = #{maxConcentrationMgl}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTGroundwaterPollutantById" parameterType="Long" resultMap="TGroundwaterPollutantResult">
+        <include refid="selectTGroundwaterPollutantVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTGroundwaterPollutant" parameterType="TGroundwaterPollutant" useGeneratedKeys="true" keyProperty="id">
+        insert into t_groundwater_pollutant
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="monitoringId != null">monitoring_id,</if>
+            <if test="pollutantName != null and pollutantName != ''">pollutant_name,</if>
+            <if test="maxConcentrationMgl != null">max_concentration_mgl,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="monitoringId != null">#{monitoringId},</if>
+            <if test="pollutantName != null and pollutantName != ''">#{pollutantName},</if>
+            <if test="maxConcentrationMgl != null">#{maxConcentrationMgl},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTGroundwaterPollutant" parameterType="TGroundwaterPollutant">
+        update t_groundwater_pollutant
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="monitoringId != null">monitoring_id = #{monitoringId},</if>
+            <if test="pollutantName != null and pollutantName != ''">pollutant_name = #{pollutantName},</if>
+            <if test="maxConcentrationMgl != null">max_concentration_mgl = #{maxConcentrationMgl},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTGroundwaterPollutantById" parameterType="Long">
+        delete from t_groundwater_pollutant where id = #{id}
+    </delete>
+
+    <delete id="deleteTGroundwaterPollutantByIds" parameterType="String">
+        delete from t_groundwater_pollutant where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

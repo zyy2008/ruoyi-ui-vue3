@@ -1,9 +1,12 @@
-import { defineComponent, provide } from "vue";
+import { defineComponent, provide, watchEffect } from "vue";
 import { observer } from "@formily/reactive-vue";
 import Schema from "@/components/Form";
 import { createForm } from "@formily/core";
 import { FormProvider, ISchemaFieldProps } from "@formily/vue";
-import { useRequest } from "vue-request"
+import { useRequest } from "vue-request";
+import API from "@/services";
+import userStore from "@/store/modules/user";
+import { Field } from "@formily/core";
 
 const props: ISchemaFieldProps = {
   schema: {
@@ -61,7 +64,15 @@ const props: ISchemaFieldProps = {
                     productionYear: {
                       type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "Input",
+                      "x-component": "DatePicker",
+                      "x-component-props": {
+                        type: "year",
+                      },
+                      "x-reactions": (field: Field) => {
+                        setTimeout(() => {
+                          field.setValue(`${field.value}`);
+                        }, 0);
+                      },
                     },
                   },
                 },
@@ -86,7 +97,7 @@ const props: ISchemaFieldProps = {
                     title: "年平均产量",
                   },
                   properties: {
-                    a1: {
+                    annualOutput: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
@@ -104,6 +115,7 @@ const props: ISchemaFieldProps = {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
+                      "x-editable": false,
                     },
                   },
                 },
@@ -113,11 +125,13 @@ const props: ISchemaFieldProps = {
                   "x-component-props": {
                     title: "添加时间",
                   },
+
                   properties: {
-                    createdBy: {
+                    createdAt: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
+                      "x-editable": false,
                     },
                   },
                 },
@@ -137,15 +151,11 @@ const props: ISchemaFieldProps = {
                       properties: {
                         remove: {
                           type: "void",
-                          "x-component": "PopconfirmDel",
+                          "x-component": "PopconfirmDel.Remove",
                         },
-                        moveDown: {
+                        save: {
                           type: "void",
-                          "x-component": "ArrayTable.MoveDown",
-                        },
-                        moveUp: {
-                          type: "void",
-                          "x-component": "ArrayTable.MoveUp",
+                          "x-component": "PopconfirmDel.Save",
                         },
                       },
                     },
@@ -171,9 +181,25 @@ export default observer(
   defineComponent({
     setup() {
       const form = createForm();
-      const {} = useRequest(()=>)
+      const { data, run } = useRequest(() =>
+        API.getAdminMainProductsList({
+          deptId: userStore().deptId,
+        })
+      );
+      watchEffect(() => {
+        if (data.value?.code === 200) {
+          form.reset().then(() => {
+            form.setValues({
+              array: data.value.rows ?? [],
+            });
+          });
+        }
+      });
       provide("form", {
-        a: "222",
+        run,
+        apiAdd: API.postAdminMainProducts,
+        apiEdit: API.putAdminMainProducts,
+        apiDel: API.deleteAdminMainProductsIds,
       });
       return () => (
         <FormProvider form={form}>

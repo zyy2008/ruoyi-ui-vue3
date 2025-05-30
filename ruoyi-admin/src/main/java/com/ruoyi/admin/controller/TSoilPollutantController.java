@@ -3,6 +3,8 @@ package com.ruoyi.admin.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,11 +25,12 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 土壤监测发现的超标污染物信息Controller
+ * 土壤监测超标污染物信息Controller
  *
  * @author ruoyi
  * @date 2025-05-28
  */
+@Api(tags = "土壤监测超标污染物信息")
 @RestController
 @RequestMapping("/admin/soilPollutant")
 public class TSoilPollutantController extends BaseController {
@@ -35,8 +38,9 @@ public class TSoilPollutantController extends BaseController {
     private ITSoilPollutantService tSoilPollutantService;
 
     /**
-     * 查询土壤监测发现的超标污染物信息列表
+     * 查询土壤监测超标污染物信息列表
      */
+    @ApiOperation("查询土壤监测超标污染物信息列表")
     @PreAuthorize("@ss.hasPermi('admin:pollutant:list')")
     @GetMapping("/list")
     public TableDataInfo list(TSoilPollutant tSoilPollutant) {
@@ -46,20 +50,22 @@ public class TSoilPollutantController extends BaseController {
     }
 
     /**
-     * 导出土壤监测发现的超标污染物信息列表
+     * 导出土壤监测超标污染物信息列表
      */
+    @ApiOperation("导出土壤监测超标污染物信息列表")
     @PreAuthorize("@ss.hasPermi('admin:pollutant:export')")
-    @Log(title = "土壤监测发现的超标污染物信息", businessType = BusinessType.EXPORT)
+    @Log(title = "土壤监测超标污染物信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TSoilPollutant tSoilPollutant) {
         List<TSoilPollutant> list = tSoilPollutantService.selectTSoilPollutantList(tSoilPollutant);
         ExcelUtil<TSoilPollutant> util = new ExcelUtil<TSoilPollutant>(TSoilPollutant.class);
-        util.exportExcel(response, list, "土壤监测发现的超标污染物信息数据");
+        util.exportExcel(response, list, "土壤监测超标污染物信息数据");
     }
 
     /**
-     * 获取土壤监测发现的超标污染物信息详细信息
+     * 获取土壤监测超标污染物信息详细信息
      */
+    @ApiOperation("获取土壤监测超标污染物信息详细信息")
     @PreAuthorize("@ss.hasPermi('admin:pollutant:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
@@ -67,30 +73,33 @@ public class TSoilPollutantController extends BaseController {
     }
 
     /**
-     * 新增土壤监测发现的超标污染物信息
+     * 新增土壤监测超标污染物信息
      */
+    @ApiOperation("新增土壤监测超标污染物信息")
     @PreAuthorize("@ss.hasPermi('admin:pollutant:add')")
-    @Log(title = "土壤监测发现的超标污染物信息", businessType = BusinessType.INSERT)
+    @Log(title = "土壤监测超标污染物信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TSoilPollutant tSoilPollutant) {
         return toAjax(tSoilPollutantService.insertTSoilPollutant(tSoilPollutant));
     }
 
     /**
-     * 修改土壤监测发现的超标污染物信息
+     * 修改土壤监测超标污染物信息
      */
+    @ApiOperation("修改土壤监测超标污染物信息")
     @PreAuthorize("@ss.hasPermi('admin:pollutant:edit')")
-    @Log(title = "土壤监测发现的超标污染物信息", businessType = BusinessType.UPDATE)
+    @Log(title = "土壤监测超标污染物信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TSoilPollutant tSoilPollutant) {
         return toAjax(tSoilPollutantService.updateTSoilPollutant(tSoilPollutant));
     }
 
     /**
-     * 删除土壤监测发现的超标污染物信息
+     * 删除土壤监测超标污染物信息
      */
+    @ApiOperation("删除土壤监测超标污染物信息")
     @PreAuthorize("@ss.hasPermi('admin:pollutant:remove')")
-    @Log(title = "土壤监测发现的超标污染物信息", businessType = BusinessType.DELETE)
+    @Log(title = "土壤监测超标污染物信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {
         return toAjax(tSoilPollutantService.deleteTSoilPollutantByIds(ids));

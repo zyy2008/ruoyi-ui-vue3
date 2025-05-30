@@ -25,12 +25,12 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 企业信息Controller
+ * 在产企业地块信息Controller
  *
  * @author ruoyi
  * @date 2025-05-26
  */
-@Api(tags = "企业信息管理")
+@Api(tags = "在产企业地块信息")
 @RestController
 @RequestMapping("/admin/enterprise")
 public class TEnterprisePlotsController extends BaseController {
@@ -38,9 +38,9 @@ public class TEnterprisePlotsController extends BaseController {
     private ITEnterprisePlotsService tEnterprisePlotsService;
 
     /**
-     * 查询企业信息列表
+     * 查询在产企业地块信息列表
      */
-    @ApiOperation("查询企业信息列表")
+    @ApiOperation("查询在产企业地块信息列表")
     @PreAuthorize("@ss.hasPermi('admin:enterprise:list')")
     @GetMapping("/list")
     public TableDataInfo list(TEnterprisePlots tEnterprisePlots) {
@@ -50,22 +50,22 @@ public class TEnterprisePlotsController extends BaseController {
     }
 
     /**
-     * 导出企业信息列表
+     * 导出在产企业地块信息列表
      */
-    @ApiOperation("导出企业信息列表")
+    @ApiOperation("导出在产企业地块信息列表")
     @PreAuthorize("@ss.hasPermi('admin:enterprise:export')")
-    @Log(title = "企业信息", businessType = BusinessType.EXPORT)
+    @Log(title = "在产企业地块信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TEnterprisePlots tEnterprisePlots) {
         List<TEnterprisePlots> list = tEnterprisePlotsService.selectTEnterprisePlotsList(tEnterprisePlots);
         ExcelUtil<TEnterprisePlots> util = new ExcelUtil<TEnterprisePlots>(TEnterprisePlots.class);
-        util.exportExcel(response, list, "企业信息数据");
+        util.exportExcel(response, list, "在产企业地块信息数据");
     }
 
     /**
-     * 获取企业信息详细信息
+     * 获取在产企业地块信息详细信息
      */
-    @ApiOperation("获取企业信息详细信息")
+    @ApiOperation("获取在产企业地块信息详细信息")
     @PreAuthorize("@ss.hasPermi('admin:enterprise:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
@@ -73,33 +73,33 @@ public class TEnterprisePlotsController extends BaseController {
     }
 
     /**
-     * 新增企业信息
+     * 新增在产企业地块信息
      */
-    @ApiOperation("新增企业信息")
+    @ApiOperation("新增在产企业地块信息")
     @PreAuthorize("@ss.hasPermi('admin:enterprise:add')")
-    @Log(title = "企业信息", businessType = BusinessType.INSERT)
+    @Log(title = "在产企业地块信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TEnterprisePlots tEnterprisePlots) {
         return toAjax(tEnterprisePlotsService.insertTEnterprisePlots(tEnterprisePlots));
     }
 
     /**
-     * 修改企业信息
+     * 修改在产企业地块信息
      */
-    @ApiOperation("修改企业信息")
+    @ApiOperation("修改在产企业地块信息")
     @PreAuthorize("@ss.hasPermi('admin:enterprise:edit')")
-    @Log(title = "企业信息", businessType = BusinessType.UPDATE)
+    @Log(title = "在产企业地块信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TEnterprisePlots tEnterprisePlots) {
         return toAjax(tEnterprisePlotsService.updateTEnterprisePlots(tEnterprisePlots));
     }
 
     /**
-     * 删除企业信息
+     * 删除在产企业地块信息
      */
-    @ApiOperation("删除企业信息")
+    @ApiOperation("删除在产企业地块信息")
     @PreAuthorize("@ss.hasPermi('admin:enterprise:remove')")
-    @Log(title = "企业信息", businessType = BusinessType.DELETE)
+    @Log(title = "在产企业地块信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {
         return toAjax(tEnterprisePlotsService.deleteTEnterprisePlotsByIds(ids));

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TWorkshopEnvironmentMapper">
+    
+    <resultMap type="TWorkshopEnvironment" id="TWorkshopEnvironmentResult">
+        <result property="id"    column="id"    />
+        <result property="workshopName"    column="workshop_name"    />
+        <result property="coordinate"    column="coordinate"    />
+        <result property="startDate"    column="start_date"    />
+        <result property="processDescription"    column="process_description"    />
+        <result property="leakage"    column="leakage"    />
+        <result property="leakImagePath"    column="leak_image_path"    />
+        <result property="createdBy"    column="created_by"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTWorkshopEnvironmentVo">
+        select id, workshop_name, coordinate, start_date, process_description, leakage, leak_image_path, created_by, created_at, dept_id from t_workshop_environment
+    </sql>
+
+    <select id="selectTWorkshopEnvironmentList" parameterType="TWorkshopEnvironment" resultMap="TWorkshopEnvironmentResult">
+        <include refid="selectTWorkshopEnvironmentVo"/>
+        <where>  
+            <if test="workshopName != null  and workshopName != ''"> and workshop_name like concat('%', #{workshopName}, '%')</if>
+            <if test="coordinate != null  and coordinate != ''"> and coordinate = #{coordinate}</if>
+            <if test="startDate != null "> and start_date = #{startDate}</if>
+            <if test="processDescription != null  and processDescription != ''"> and process_description = #{processDescription}</if>
+            <if test="leakage != null  and leakage != ''"> and leakage = #{leakage}</if>
+            <if test="leakImagePath != null  and leakImagePath != ''"> and leak_image_path = #{leakImagePath}</if>
+            <if test="createdBy != null  and createdBy != ''"> and created_by = #{createdBy}</if>
+            <if test="createdAt != null  and createdAt != ''"> and created_at = #{createdAt}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTWorkshopEnvironmentById" parameterType="Long" resultMap="TWorkshopEnvironmentResult">
+        <include refid="selectTWorkshopEnvironmentVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTWorkshopEnvironment" parameterType="TWorkshopEnvironment" useGeneratedKeys="true" keyProperty="id">
+        insert into t_workshop_environment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="workshopName != null and workshopName != ''">workshop_name,</if>
+            <if test="coordinate != null">coordinate,</if>
+            <if test="startDate != null">start_date,</if>
+            <if test="processDescription != null">process_description,</if>
+            <if test="leakage != null">leakage,</if>
+            <if test="leakImagePath != null">leak_image_path,</if>
+            <if test="createdBy != null">created_by,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="workshopName != null and workshopName != ''">#{workshopName},</if>
+            <if test="coordinate != null">#{coordinate},</if>
+            <if test="startDate != null">#{startDate},</if>
+            <if test="processDescription != null">#{processDescription},</if>
+            <if test="leakage != null">#{leakage},</if>
+            <if test="leakImagePath != null">#{leakImagePath},</if>
+            <if test="createdBy != null">#{createdBy},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTWorkshopEnvironment" parameterType="TWorkshopEnvironment">
+        update t_workshop_environment
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="workshopName != null and workshopName != ''">workshop_name = #{workshopName},</if>
+            <if test="coordinate != null">coordinate = #{coordinate},</if>
+            <if test="startDate != null">start_date = #{startDate},</if>
+            <if test="processDescription != null">process_description = #{processDescription},</if>
+            <if test="leakage != null">leakage = #{leakage},</if>
+            <if test="leakImagePath != null">leak_image_path = #{leakImagePath},</if>
+            <if test="createdBy != null">created_by = #{createdBy},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTWorkshopEnvironmentById" parameterType="Long">
+        delete from t_workshop_environment where id = #{id}
+    </delete>
+
+    <delete id="deleteTWorkshopEnvironmentByIds" parameterType="String">
+        delete from t_workshop_environment where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TRawMaterialsMapper">
+    
+    <resultMap type="TRawMaterials" id="TRawMaterialsResult">
+        <result property="id"    column="id"    />
+        <result property="materialName"    column="material_name"    />
+        <result property="usageYear"    column="usage_year"    />
+        <result property="unit"    column="unit"    />
+        <result property="annualUsage"    column="annual_usage"    />
+        <result property="dataSource"    column="data_source"    />
+        <result property="createdBy"    column="created_by"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTRawMaterialsVo">
+        select id, material_name, usage_year, unit, annual_usage, data_source, created_by, created_at, dept_id from t_raw_materials
+    </sql>
+
+    <select id="selectTRawMaterialsList" parameterType="TRawMaterials" resultMap="TRawMaterialsResult">
+        <include refid="selectTRawMaterialsVo"/>
+        <where>  
+            <if test="materialName != null  and materialName != ''"> and material_name like concat('%', #{materialName}, '%')</if>
+            <if test="usageYear != null "> and usage_year = #{usageYear}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="annualUsage != null  and annualUsage != ''"> and annual_usage = #{annualUsage}</if>
+            <if test="dataSource != null  and dataSource != ''"> and data_source = #{dataSource}</if>
+            <if test="createdBy != null  and createdBy != ''"> and created_by = #{createdBy}</if>
+            <if test="createdAt != null  and createdAt != ''"> and created_at = #{createdAt}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTRawMaterialsById" parameterType="Long" resultMap="TRawMaterialsResult">
+        <include refid="selectTRawMaterialsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTRawMaterials" parameterType="TRawMaterials" useGeneratedKeys="true" keyProperty="id">
+        insert into t_raw_materials
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="materialName != null and materialName != ''">material_name,</if>
+            <if test="usageYear != null">usage_year,</if>
+            <if test="unit != null">unit,</if>
+            <if test="annualUsage != null">annual_usage,</if>
+            <if test="dataSource != null">data_source,</if>
+            <if test="createdBy != null">created_by,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="materialName != null and materialName != ''">#{materialName},</if>
+            <if test="usageYear != null">#{usageYear},</if>
+            <if test="unit != null">#{unit},</if>
+            <if test="annualUsage != null">#{annualUsage},</if>
+            <if test="dataSource != null">#{dataSource},</if>
+            <if test="createdBy != null">#{createdBy},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTRawMaterials" parameterType="TRawMaterials">
+        update t_raw_materials
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="materialName != null and materialName != ''">material_name = #{materialName},</if>
+            <if test="usageYear != null">usage_year = #{usageYear},</if>
+            <if test="unit != null">unit = #{unit},</if>
+            <if test="annualUsage != null">annual_usage = #{annualUsage},</if>
+            <if test="dataSource != null">data_source = #{dataSource},</if>
+            <if test="createdBy != null">created_by = #{createdBy},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTRawMaterialsById" parameterType="Long">
+        delete from t_raw_materials where id = #{id}
+    </delete>
+
+    <delete id="deleteTRawMaterialsByIds" parameterType="String">
+        delete from t_raw_materials where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

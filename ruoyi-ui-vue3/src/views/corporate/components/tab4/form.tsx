@@ -1,4 +1,10 @@
-import { defineComponent, ExtractPropTypes, PropType, ref } from "vue";
+import {
+  defineComponent,
+  ExtractPropTypes,
+  PropType,
+  ref,
+  watchEffect,
+} from "vue";
 import Schema from "@/components/Form";
 import { ISchemaFieldProps, FormProvider } from "@formily/vue";
 import { Field, createForm, onFormInit, Form } from "@formily/core";
@@ -120,7 +126,7 @@ const props: ISchemaFieldProps = {
           permanentPopulationCategory: {
             type: "string",
             "x-decorator": "FormItem",
-            "x-component": "Checkbox.Group",
+            "x-component": "Radio.Group",
             enum: [
               {
                 label: ">5000",
@@ -155,153 +161,13 @@ const props: ISchemaFieldProps = {
             "x-decorator": "FormItem",
             "x-component": <CheckboxGroup />,
           },
-          // grid: {
-          //   type: "void",
-          //   "x-component": "FormGrid",
-          //   "x-component-props": {
-          //     minColumns: 4,
-          //     maxColumns: 4,
-          //   },
-          //   properties: {
-          //     div: {
-          //       type: "void",
-          //       "x-component": "div",
-          //       properties: {
-          //         a33: {
-          //           type: "string",
-          //           "x-decorator": "FormItem",
-          //           "x-component": "Checkbox.Group",
-          //           enum: [
-          //             {
-          //               label: "无敏感目标",
-          //               value: "1",
-          //             },
-          //           ],
-          //         },
-          //         a37: {
-          //           type: "string",
-          //           "x-decorator": "FormItem",
-          //           "x-component": "Checkbox.Group",
-          //           enum: [
-          //             {
-          //               label: "幼儿园",
-          //               value: "1",
-          //             },
-          //           ],
-          //         },
-          //         a38: {
-          //           type: "string",
-          //           "x-decorator": "FormItem",
-          //           "x-component": "Checkbox.Group",
-          //           enum: [
-          //             {
-          //               label: "学校",
-          //               value: "1",
-          //             },
-          //           ],
-          //         },
-          //       },
-          //     },
-          //     div1: {
-          //       type: "void",
-          //       "x-component": "div",
-          //       properties: {
-          //         a33: {
-          //           "x-decorator": "FormItem",
-          //         },
-          //         a37: {
-          //           type: "string",
-          //           "x-decorator": "FormItem",
-          //           "x-component": "Checkbox.Group",
-          //           enum: [
-          //             {
-          //               label: "<100m",
-          //               value: "1",
-          //             },
-          //           ],
-          //         },
-          //         a38: {
-          //           type: "string",
-          //           "x-decorator": "FormItem",
-          //           "x-component": "Checkbox.Group",
-          //           enum: [
-          //             {
-          //               label: "<100m",
-          //               value: "1",
-          //             },
-          //           ],
-          //         },
-          //       },
-          //     },
-          //     div2: {
-          //       type: "void",
-          //       "x-component": "div",
-          //       properties: {
-          //         a33: {
-          //           "x-decorator": "FormItem",
-          //         },
-          //         a37: {
-          //           type: "string",
-          //           "x-decorator": "FormItem",
-          //           "x-component": "Checkbox.Group",
-          //           enum: [
-          //             {
-          //               label: "100m<300m",
-          //               value: "1",
-          //             },
-          //           ],
-          //         },
-          //         a38: {
-          //           type: "string",
-          //           "x-decorator": "FormItem",
-          //           "x-component": "Checkbox.Group",
-          //           enum: [
-          //             {
-          //               label: "100m<300m",
-          //               value: "1",
-          //             },
-          //           ],
-          //         },
-          //       },
-          //     },
-          //     div3: {
-          //       type: "void",
-          //       "x-component": "div",
-          //       properties: {
-          //         a33: {
-          //           "x-decorator": "FormItem",
-          //         },
-          //         a37: {
-          //           type: "string",
-          //           "x-decorator": "FormItem",
-          //           "x-component": "Checkbox.Group",
-          //           enum: [
-          //             {
-          //               label: "300m<1000m",
-          //               value: "1",
-          //             },
-          //           ],
-          //         },
-          //         a38: {
-          //           type: "string",
-          //           "x-decorator": "FormItem",
-          //           "x-component": "Checkbox.Group",
-          //           enum: [
-          //             {
-          //               label: "300m<1000m",
-          //               value: "1",
-          //             },
-          //           ],
-          //         },
-          //       },
-          //     },
-          //   },
-          // },
         },
       },
     },
   },
 };
+
+const form = createForm();
 
 export default defineComponent({
   setup() {
@@ -311,7 +177,15 @@ export default defineComponent({
         deptId,
       })
     );
-    const form = createForm();
+
+    watchEffect(() => {
+      if (data.value?.code === 200) {
+        const [item] = data.value.rows;
+        form.reset().then(() => {
+          form.setValues(item);
+        });
+      }
+    });
 
     return () => (
       <div class="app-container">
@@ -320,7 +194,7 @@ export default defineComponent({
           <FormButtonGroup
             align="center"
             style={{
-              margin: "10px",
+              padding: "20px",
             }}
           >
             <ElButton

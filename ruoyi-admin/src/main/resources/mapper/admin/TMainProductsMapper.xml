@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TMainProductsMapper">
+    
+    <resultMap type="TMainProducts" id="TMainProductsResult">
+        <result property="id"    column="id"    />
+        <result property="productName"    column="product_name"    />
+        <result property="productionYear"    column="production_year"    />
+        <result property="unit"    column="unit"    />
+        <result property="annualOutput"    column="annual_output"    />
+        <result property="dataSource"    column="data_source"    />
+        <result property="createdBy"    column="created_by"    />
+        <result property="createdAt"    column="created_at"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTMainProductsVo">
+        select id, product_name, production_year, unit, annual_output, data_source, created_by, created_at, dept_id from t_main_products
+    </sql>
+
+    <select id="selectTMainProductsList" parameterType="TMainProducts" resultMap="TMainProductsResult">
+        <include refid="selectTMainProductsVo"/>
+        <where>  
+            <if test="productName != null  and productName != ''"> and product_name like concat('%', #{productName}, '%')</if>
+            <if test="productionYear != null "> and production_year = #{productionYear}</if>
+            <if test="unit != null  and unit != ''"> and unit = #{unit}</if>
+            <if test="annualOutput != null  and annualOutput != ''"> and annual_output = #{annualOutput}</if>
+            <if test="dataSource != null  and dataSource != ''"> and data_source = #{dataSource}</if>
+            <if test="createdBy != null  and createdBy != ''"> and created_by = #{createdBy}</if>
+            <if test="createdAt != null  and createdAt != ''"> and created_at = #{createdAt}</if>
+            <if test="deptId != null "> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTMainProductsById" parameterType="Long" resultMap="TMainProductsResult">
+        <include refid="selectTMainProductsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTMainProducts" parameterType="TMainProducts" useGeneratedKeys="true" keyProperty="id">
+        insert into t_main_products
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="productName != null and productName != ''">product_name,</if>
+            <if test="productionYear != null">production_year,</if>
+            <if test="unit != null">unit,</if>
+            <if test="annualOutput != null">annual_output,</if>
+            <if test="dataSource != null">data_source,</if>
+            <if test="createdBy != null">created_by,</if>
+            <if test="createdAt != null">created_at,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="productName != null and productName != ''">#{productName},</if>
+            <if test="productionYear != null">#{productionYear},</if>
+            <if test="unit != null">#{unit},</if>
+            <if test="annualOutput != null">#{annualOutput},</if>
+            <if test="dataSource != null">#{dataSource},</if>
+            <if test="createdBy != null">#{createdBy},</if>
+            <if test="createdAt != null">#{createdAt},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTMainProducts" parameterType="TMainProducts">
+        update t_main_products
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="productName != null and productName != ''">product_name = #{productName},</if>
+            <if test="productionYear != null">production_year = #{productionYear},</if>
+            <if test="unit != null">unit = #{unit},</if>
+            <if test="annualOutput != null">annual_output = #{annualOutput},</if>
+            <if test="dataSource != null">data_source = #{dataSource},</if>
+            <if test="createdBy != null">created_by = #{createdBy},</if>
+            <if test="createdAt != null">created_at = #{createdAt},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTMainProductsById" parameterType="Long">
+        delete from t_main_products where id = #{id}
+    </delete>
+
+    <delete id="deleteTMainProductsByIds" parameterType="String">
+        delete from t_main_products where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

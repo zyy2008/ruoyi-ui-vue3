@@ -151,6 +151,7 @@
       height: 77px;
       line-height: 90px;
       background: url("@/assets/static/title.png") no-repeat;
+      background-size: 100vw 10vh;
       text-align: center;
 
       span {
@@ -171,6 +172,7 @@
     position: absolute;
     bottom: 26px;
     background: url("@/assets/static/bottom.png") no-repeat;
+    background-size: 100vw 10vh; 
     z-index: 999;
     display: flex;
     justify-content: center;

@@ -10,6 +10,7 @@ import { CloseBold, EditPen } from "@element-plus/icons-vue";
 import { observer } from "@formily/reactive-vue";
 import { observable, autorun } from "@formily/reactive";
 import { useRequest } from "vue-request";
+import { MainProducts, RawMaterials, WorkshopEnvironment } from "./components";
 
 const { SchemaField } = Schema;
 
@@ -75,468 +76,212 @@ const props: ISchemaFieldProps = {
               listType: "picture-card",
             },
           },
-          a: {
-            "x-decorator": "FormItem",
-          },
-          b: {
+        },
+      },
+      collapse: {
+        type: "void",
+        "x-component": "FormCollapse",
+        properties: {
+          tab1: {
             type: "void",
-            "x-component": "FormGrid.GridColumn",
+            "x-component": "FormCollapse.Item",
             "x-component-props": {
-              gridSpan: 4,
+              title: "一、生产区",
             },
             properties: {
-              collapse: {
+              card: {
                 type: "void",
-                "x-component": "FormCollapse",
+                "x-component": <MainProducts />,
+              },
+              card1: {
+                type: "void",
+                "x-component": <RawMaterials />,
+              },
+              card2: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "三、主要中间产物",
+                },
                 properties: {
-                  tab1: {
-                    type: "void",
-                    "x-component": "FormCollapse.Item",
+                  a23: {
+                    type: "string",
+                    title: "主要中间产物名称",
+                    "x-decorator": "FormItem",
+                    "x-component": "Input.TextArea",
+                  },
+                },
+              },
+              card3: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "四、生产工艺",
+                },
+                properties: {
+                  a22: {
+                    type: "string",
+                    title: "主要生产工艺流程图",
+                    "x-decorator": "FormItem",
+                    "x-component": "Upload",
                     "x-component-props": {
-                      title: "一、生产区",
+                      listType: "picture-card",
                     },
-                    properties: {
-                      card: {
-                        type: "void",
-                        "x-component": "Card",
-                        "x-component-props": {
-                          header: "一、主要产品",
-                        },
-                        properties: {
-                          array1: {
-                            type: "array",
-                            "x-component": "ArrayTable",
-                            items: {
-                              type: "object",
-                              properties: {
-                                column1: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    width: 80,
-                                    title: "序号",
-                                    align: "center",
-                                  },
-                                  properties: {
-                                    index: {
-                                      type: "void",
-                                      "x-component": "ArrayTable.Index",
-                                    },
-                                  },
-                                },
-                                column2: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    title: "产品名称",
-                                  },
-                                  properties: {
-                                    a1: {
-                                      type: "string",
-                                      "x-decorator": "FormItem",
-                                      "x-component": "Input",
-                                    },
-                                  },
-                                },
-                                column3: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    title: "生产年代",
-                                  },
-                                  properties: {
-                                    a1: {
-                                      type: "string",
-                                      "x-decorator": "FormItem",
-                                      "x-component": "Input",
-                                    },
-                                  },
-                                },
-                                column4: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    title: "计量单位",
-                                  },
-                                  properties: {
-                                    a1: {
-                                      type: "string",
-                                      "x-decorator": "FormItem",
-                                      "x-component": "Input",
-                                    },
-                                  },
-                                },
-                                column5: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    title: "年平均产量",
-                                  },
-                                  properties: {
-                                    a1: {
-                                      type: "string",
-                                      "x-decorator": "FormItem",
-                                      "x-component": "Input",
-                                    },
-                                  },
-                                },
-                                column6: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    title: "添加人",
-                                  },
-                                  properties: {
-                                    a1: {
-                                      type: "string",
-                                      "x-decorator": "FormItem",
-                                      "x-component": "Input",
-                                    },
-                                  },
-                                },
-                                column7: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    title: "操作",
-                                    prop: "operations",
-                                    width: 300,
-                                    fixed: "right",
-                                  },
-                                  properties: {
-                                    item: {
-                                      type: "void",
-                                      "x-component": "FormItem",
-                                      properties: {
-                                        remove: {
-                                          type: "void",
-                                          "x-component": "ArrayTable.Remove",
-                                        },
-                                        moveDown: {
-                                          type: "void",
-                                          "x-component": "ArrayTable.MoveDown",
-                                        },
-                                        moveUp: {
-                                          type: "void",
-                                          "x-component": "ArrayTable.MoveUp",
-                                        },
-                                      },
-                                    },
-                                  },
-                                },
-                              },
-                            },
-                            properties: {
-                              add: {
-                                type: "void",
-                                "x-component": "ArrayTable.Addition",
-                                title: "添加条目",
-                              },
-                            },
-                          },
+                  },
+                  a23: {
+                    type: "string",
+                    title: "主要生产工艺描述",
+                    "x-decorator": "FormItem",
+                    "x-component": "Input.TextArea",
+                  },
+                },
+              },
+              card4: {
+                type: "void",
+                "x-component": <WorkshopEnvironment />,
+              },
+            },
+          },
+          tab2: {
+            type: "void",
+            "x-component": "FormCollapse.Item",
+            "x-component-props": {
+              title: "二、存储区",
+            },
+            properties: {
+              array2: {
+                type: "array",
+                "x-component": "ArrayTable",
+                items: {
+                  type: "object",
+                  properties: {
+                    column1: {
+                      type: "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        width: 80,
+                        title: "序号",
+                        align: "center",
+                      },
+                      properties: {
+                        index: {
+                          type: "void",
+                          "x-component": "ArrayTable.Index",
                         },
                       },
-                      card1: {
-                        type: "void",
-                        "x-component": "Card",
-                        "x-component-props": {
-                          header: "二、主要原辅材料",
-                        },
-                        properties: {
-                          array1: {
-                            type: "array",
-                            "x-component": "ArrayTable",
-                            items: {
-                              type: "object",
-                              properties: {
-                                column1: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    width: 80,
-                                    title: "序号",
-                                    align: "center",
-                                  },
-                                  properties: {
-                                    index: {
-                                      type: "void",
-                                      "x-component": "ArrayTable.Index",
-                                    },
-                                  },
-                                },
-                                column2: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    title: "原辅材料名称",
-                                  },
-                                  properties: {
-                                    a1: {
-                                      type: "string",
-                                      "x-decorator": "FormItem",
-                                      "x-component": "Input",
-                                    },
-                                  },
-                                },
-                                column3: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    title: "使用年代",
-                                  },
-                                  properties: {
-                                    a1: {
-                                      type: "string",
-                                      "x-decorator": "FormItem",
-                                      "x-component": "Input",
-                                    },
-                                  },
-                                },
-                                column4: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    title: "计量单位",
-                                  },
-                                  properties: {
-                                    a1: {
-                                      type: "string",
-                                      "x-decorator": "FormItem",
-                                      "x-component": "Input",
-                                    },
-                                  },
-                                },
-                                column5: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    title: "年平均产量",
-                                  },
-                                  properties: {
-                                    a1: {
-                                      type: "string",
-                                      "x-decorator": "FormItem",
-                                      "x-component": "Input",
-                                    },
-                                  },
-                                },
-                                column6: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    title: "添加人",
-                                  },
-                                  properties: {
-                                    a1: {
-                                      type: "string",
-                                      "x-decorator": "FormItem",
-                                      "x-component": "Input",
-                                    },
-                                  },
-                                },
-                                column7: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Column",
-                                  "x-component-props": {
-                                    title: "操作",
-                                    prop: "operations",
-                                    width: 300,
-                                    fixed: "right",
-                                  },
-                                  properties: {
-                                    item: {
-                                      type: "void",
-                                      "x-component": "FormItem",
-                                      properties: {
-                                        remove: {
-                                          type: "void",
-                                          "x-component": "ArrayTable.Remove",
-                                        },
-                                        moveDown: {
-                                          type: "void",
-                                          "x-component": "ArrayTable.MoveDown",
-                                        },
-                                        moveUp: {
-                                          type: "void",
-                                          "x-component": "ArrayTable.MoveUp",
-                                        },
-                                      },
-                                    },
-                                  },
-                                },
-                              },
-                            },
-                            properties: {
-                              add: {
-                                type: "void",
-                                "x-component": "ArrayTable.Addition",
-                                title: "添加条目",
-                              },
-                            },
-                          },
+                    },
+                    column2: {
+                      type: "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        width: 200,
+                        title: "产品名称",
+                      },
+                      properties: {
+                        a1: {
+                          type: "string",
+                          "x-decorator": "FormItem",
+                          "x-component": "Input",
                         },
                       },
-                      card2: {
-                        type: "void",
-                        "x-component": "Card",
-                        "x-component-props": {
-                          header: "三、主要中间产物",
+                    },
+                    column3: {
+                      type: "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        width: 200,
+                        title: "生产年代",
+                      },
+                      properties: {
+                        a1: {
+                          type: "string",
+                          "x-decorator": "FormItem",
+                          "x-component": "Input",
                         },
-                        properties: {
-                          a23: {
-                            type: "string",
-                            title: "主要中间产物名称",
-                            "x-decorator": "FormItem",
-                            "x-component": "Input.TextArea",
+                      },
+                    },
+                    column4: {
+                      type: "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        width: 200,
+                        title: "计量单位",
+                      },
+                      properties: {
+                        a1: {
+                          type: "string",
+                          "x-decorator": "FormItem",
+                          "x-component": "Input",
+                        },
+                      },
+                    },
+                    column5: {
+                      type: "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        width: 200,
+                        title: "年平均产量",
+                      },
+                      properties: {
+                        a1: {
+                          type: "string",
+                          "x-decorator": "FormItem",
+                          "x-component": "Input",
+                        },
+                      },
+                    },
+                    column6: {
+                      type: "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        width: 200,
+                        title: "添加人",
+                      },
+                      properties: {
+                        a1: {
+                          type: "string",
+                          "x-decorator": "FormItem",
+                          "x-component": "Input",
+                        },
+                      },
+                    },
+                    column7: {
+                      type: "void",
+                      "x-component": "ArrayTable.Column",
+                      "x-component-props": {
+                        title: "操作",
+                        prop: "operations",
+                        width: 200,
+                        fixed: "right",
+                      },
+                      properties: {
+                        item: {
+                          type: "void",
+                          "x-component": "FormItem",
+                          properties: {
+                            remove: {
+                              type: "void",
+                              "x-component": "ArrayTable.Remove",
+                            },
+                            moveDown: {
+                              type: "void",
+                              "x-component": "ArrayTable.MoveDown",
+                            },
+                            moveUp: {
+                              type: "void",
+                              "x-component": "ArrayTable.MoveUp",
+                            },
                           },
                         },
                       },
                     },
                   },
-                  tab2: {
+                },
+                properties: {
+                  add: {
                     type: "void",
-                    "x-component": "FormCollapse.Item",
-                    "x-component-props": {
-                      title: "二、存储区",
-                    },
-                    properties: {
-                      array2: {
-                        type: "array",
-                        "x-component": "ArrayTable",
-                        items: {
-                          type: "object",
-                          properties: {
-                            column1: {
-                              type: "void",
-                              "x-component": "ArrayTable.Column",
-                              "x-component-props": {
-                                width: 80,
-                                title: "序号",
-                                align: "center",
-                              },
-                              properties: {
-                                index: {
-                                  type: "void",
-                                  "x-component": "ArrayTable.Index",
-                                },
-                              },
-                            },
-                            column2: {
-                              type: "void",
-                              "x-component": "ArrayTable.Column",
-                              "x-component-props": {
-                                width: 200,
-                                title: "产品名称",
-                              },
-                              properties: {
-                                a1: {
-                                  type: "string",
-                                  "x-decorator": "FormItem",
-                                  "x-component": "Input",
-                                },
-                              },
-                            },
-                            column3: {
-                              type: "void",
-                              "x-component": "ArrayTable.Column",
-                              "x-component-props": {
-                                width: 200,
-                                title: "生产年代",
-                              },
-                              properties: {
-                                a1: {
-                                  type: "string",
-                                  "x-decorator": "FormItem",
-                                  "x-component": "Input",
-                                },
-                              },
-                            },
-                            column4: {
-                              type: "void",
-                              "x-component": "ArrayTable.Column",
-                              "x-component-props": {
-                                width: 200,
-                                title: "计量单位",
-                              },
-                              properties: {
-                                a1: {
-                                  type: "string",
-                                  "x-decorator": "FormItem",
-                                  "x-component": "Input",
-                                },
-                              },
-                            },
-                            column5: {
-                              type: "void",
-                              "x-component": "ArrayTable.Column",
-                              "x-component-props": {
-                                width: 200,
-                                title: "年平均产量",
-                              },
-                              properties: {
-                                a1: {
-                                  type: "string",
-                                  "x-decorator": "FormItem",
-                                  "x-component": "Input",
-                                },
-                              },
-                            },
-                            column6: {
-                              type: "void",
-                              "x-component": "ArrayTable.Column",
-                              "x-component-props": {
-                                width: 200,
-                                title: "添加人",
-                              },
-                              properties: {
-                                a1: {
-                                  type: "string",
-                                  "x-decorator": "FormItem",
-                                  "x-component": "Input",
-                                },
-                              },
-                            },
-                            column7: {
-                              type: "void",
-                              "x-component": "ArrayTable.Column",
-                              "x-component-props": {
-                                title: "操作",
-                                prop: "operations",
-                                width: 200,
-                                fixed: "right",
-                              },
-                              properties: {
-                                item: {
-                                  type: "void",
-                                  "x-component": "FormItem",
-                                  properties: {
-                                    remove: {
-                                      type: "void",
-                                      "x-component": "ArrayTable.Remove",
-                                    },
-                                    moveDown: {
-                                      type: "void",
-                                      "x-component": "ArrayTable.MoveDown",
-                                    },
-                                    moveUp: {
-                                      type: "void",
-                                      "x-component": "ArrayTable.MoveUp",
-                                    },
-                                  },
-                                },
-                              },
-                            },
-                          },
-                        },
-                        properties: {
-                          add: {
-                            type: "void",
-                            "x-component": "ArrayTable.Addition",
-                            title: "添加条目",
-                          },
-                        },
-                      },
-                    },
+                    "x-component": "ArrayTable.Addition",
+                    title: "添加条目",
                   },
                 },
               },
@@ -550,80 +295,50 @@ const props: ISchemaFieldProps = {
 
 export default defineComponent({
   setup() {
-    const disabled = ref<boolean>();
     const { deptId } = userStore();
-    const { runAsync, loading } = useRequest(
-      () =>
-        API.getAdminEnterpriseList({
-          deptId,
-        }),
-      {
-        manual: true,
-      }
-    );
+
     const form = createForm();
 
     return () => (
-      <ElCard
-        v-loading={loading.value}
-        v-slots={{
-          header: () => (
-            <ElSpace>
-              <ElButton
-                icon={EditPen}
-                disabled={!disabled.value}
-                onClick={() => {
-                  form.disabled = false;
-                }}
+      <div class="app-container">
+        <ElCard>
+          <FormProvider form={form}>
+            <SchemaField {...props} />
+            <FormButtonGroup
+              align="center"
+              style={{
+                margin: "10px",
+              }}
+            >
+              {/* <ElButton
                 type="primary"
+                loading={loading.value}
+                onClick={() => {
+                  form.submit().then((val: any) => {
+                    const { id } = val;
+                    const api = id
+                      ? API.putAdminEnterprise
+                      : API.postAdminEnterprise;
+                    api({
+                      ...val,
+                      deptId,
+                    }).then((res) => {
+                      if (res.code === 200) {
+                        ElMessage.success("保存成功");
+                        run();
+                      } else {
+                        ElMessage.success("保存失败");
+                      }
+                    });
+                  });
+                }}
               >
-                编辑
-              </ElButton>
-            </ElSpace>
-          ),
-        }}
-      >
-        <FormProvider form={form}>
-          <SchemaField {...props} />
-          <FormButtonGroup
-            align="center"
-            style={{
-              margin: "10px",
-            }}
-          >
-            <Submit
-              disabled={disabled.value}
-              onSubmit={(val) => {
-                const { id } = val;
-                const api = id
-                  ? API.putAdminEnterprise
-                  : API.postAdminEnterprise;
-                api({
-                  ...val,
-                  deptId,
-                }).then((res) => {
-                  if (res.code === 200) {
-                    ElMessage.success("保存成功");
-                    runAsync();
-                  } else {
-                    ElMessage.success("保存失败");
-                  }
-                });
-              }}
-            >
-              提交
-            </Submit>
-            <ElButton
-              disabled={disabled.value}
-              onClick={() => {
-                form.disabled = true;
-              }}
-            >
-              取消
-            </ElButton>
-          </FormButtonGroup>
-        </FormProvider>
-      </ElCard>
+                保存
+              </ElButton> */}
+            </FormButtonGroup>
+          </FormProvider>
+        </ElCard>
+      </div>
     );
   },
 });

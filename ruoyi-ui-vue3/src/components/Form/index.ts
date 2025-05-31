@@ -14,6 +14,7 @@ import {
   ArrayTable,
 } from "@formily/element-plus";
 import { ElCard } from "element-plus";
+import { PopconfirmDel } from "./components";
 
 const schema = createSchemaField({
   components: {
@@ -30,6 +31,7 @@ const schema = createSchemaField({
     Card: ElCard,
     FormCollapse,
     ArrayTable,
+    PopconfirmDel,
   },
 });
 

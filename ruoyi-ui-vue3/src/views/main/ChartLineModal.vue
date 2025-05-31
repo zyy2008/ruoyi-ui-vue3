@@ -1,44 +1,100 @@
 <template>
-  <div class="table">
-    <div class="title">
-      <img src="@/assets/static/subTitle.png" alt="">
-      <span>
-        J15
-      </span>
-      <el-radio-group v-model="radio1" class="radio">
-        <el-radio-button label="一周"></el-radio-button>
-        <el-radio-button label="一月"></el-radio-button>
-      </el-radio-group>
-      <el-button type="text" class="text" @click="openChartLine">更多</el-button>
-    </div>
-    <div id="echart"> </div>
-    <ChartLineModal ref="chartLine" />
-  </div>
+  <el-dialog v-model="dialogVisible" title="检测井" width="800"  destroy-on-close @open="openChartLine"> 
+    <el-date-picker v-model="timeValue" type="daterange" range-separator="至" start-placeholder="开始日期"
+      style="width: 400px;" end-placeholder="结束日期">
+    </el-date-picker>
+    <el-select v-model="selectValue" placeholder="请选择" style="width: 300px;float: right;" multiple>
+      <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+      </el-option>
+    </el-select>
+    <div id="echartLine"> </div>
+    <el-table :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
+      <el-table-column type="index" label="序号" width="55" />
+      <el-table-column prop="date" label="PH值" />
+      <el-table-column prop="name" label="温度" width="55" />
+      <el-table-column prop="address" label="水位" />
+      <el-table-column prop="name1" label="电位" />
+      <el-table-column prop="address1" label="溶解度" />
+    </el-table>
+  </el-dialog>
 
 </template>
 <script setup>
   import { onMounted, reactive, toRaw, ref, nextTick } from "vue";
   import * as echarts from "echarts";
-  import ChartLineModal from './ChartLineModal.vue'
-  const chartLine = ref()
-  const radio1 = ref('一周')
-  function openChartLine(){
-    chartLine.value.dialogVisible=true
-  }
-  nextTick(() => {
-    initEchart()
-  })
-  function initEchart() {
-    var chartDom = document.getElementById('echart');
+  console.log(123131);
+  
+  const timeValue = ref()
+  const selectValue = ref()
+  const dialogVisible = ref(false);
+  defineExpose({ dialogVisible })
+  const options = [{
+    value: '1',
+    label: 'PH'
+  }, {
+    value: '2',
+    label: '温度'
+  }, {
+    value: '3',
+    label: '水位'
+  }, {
+    value: '4',
+    label: '电位'
+  }, {
+    value: '5',
+    label: '溶解度'
+  }, {
+    value: '6',
+    label: '电导率'
+  }, {
+    value: '7',
+    label: '氨氮'
+  }]
+  
+  const tableData = [
+    {
+      date: '检测井1',
+      name: 'PH',
+      address: '6.7',
+      name1: '7',
+      address1: '105%',
+    },
+    {
+      date: '检测井2',
+      name: '温度',
+      address: '42',
+      name1: '30',
+      address1: '70%',
+    },
+    {
+      date: '检测井3',
+      name: '氨氮',
+      address: '1',
+      name1: '0.8',
+      address1: '80%',
+    },
+    {
+      date: '检测井4',
+      name: '水位',
+      address: '60',
+      name1: '80',
+      address1: '120%',
+    },  
+  ]
+  // nextTick(() => {
+  //   initEchart()
+  // })
+
+  function openChartLine() {
+    var chartDom = document.getElementById('echartLine');
     var myChart = echarts.init(chartDom);
     var option;
-
     var fontColor = '#30eee9';
     option = {
       grid: {
         left: '5%',
         right: '5%',
-        top: '5%',
+        top: '15%',
         bottom: '5%',
         containLabel: true
       },
@@ -47,7 +103,7 @@
         trigger: 'item'
       },
       legend: {
-        show: true,
+        show: false,
         x: 'center',
         y: '0',
         icon: 'stack',
@@ -344,61 +400,8 @@
 </script>
 
 <style lang="scss" scoped>
-  .table {
-    width: 604px;
-    padding: 10px;
-    background: url('@/assets/static/left.png') no-repeat;
-    background-color: rgba(9, 21, 42, 0.8);
-
-    .title {
-      height: 42px;
-      line-height: 42px;
-      display: flex;
-
-      span {
-        font-size: 18px;
-        display: inline-block;
-      }
-
-      .radio {
-        margin-left: 130px;
-      }
-
-      .text {
-        margin-left: 50px;
-        margin-top: 6px;
-      }
-    }
-
-    #echart {
-      width: 100%;
-      margin-top: 10px;
-      height: calc(100% - 42px);
-    }
-  }
-
-  :deep() .el-radio-button__original-radio:checked+.el-radio-button__inner {
-    background-color: rgba(9, 21, 42, 0.8);
-    border-color: rgba(9, 21, 42, 0.8);
-    ;
-  }
-
-  :deep() {
-    .el-dialog {
-      --el-dialog-bg-color: rgba(9, 21, 42, 0.8) !important;
-
-    }
-
-    .el-dialog__title {
-      color: white;
-    }
-
-    .el-input__wrapper {
-      background-color: transparent;
-    }
-
-    .el-select__wrapper {
-      background-color: transparent;
-    }
+  #echartLine {
+    width: 100%;
+    height: 300px;
   }
 </style>

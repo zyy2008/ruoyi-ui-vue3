@@ -2,12 +2,12 @@
 /* eslint-disable */
 import request from "@/utils/http";
 
-/** 修改企业信息 PUT /admin/enterprise */
-export async function putAdminEnterprise(
-  body: API.zaichanqiyedekuaixinxi,
+/** 修改主要产品信息 PUT /admin/mainProducts */
+export async function putAdminMainProducts(
+  body: API.zhuyaochanpinxinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/enterprise`, {
+  return request<Record<string, any>>(`/api1/admin/mainProducts`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -17,12 +17,12 @@ export async function putAdminEnterprise(
   });
 }
 
-/** 新增企业信息 POST /admin/enterprise */
-export async function postAdminEnterprise(
-  body: API.zaichanqiyedekuaixinxi,
+/** 新增主要产品信息 POST /admin/mainProducts */
+export async function postAdminMainProducts(
+  body: API.zhuyaochanpinxinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/enterprise`, {
+  return request<Record<string, any>>(`/api1/admin/mainProducts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -32,41 +32,41 @@ export async function postAdminEnterprise(
   });
 }
 
-/** 删除企业信息 DELETE /admin/enterprise/${param0} */
-export async function deleteAdminEnterpriseIds(
+/** 删除主要产品信息 DELETE /admin/mainProducts/${param0} */
+export async function deleteAdminMainProductsIds(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.deleteAdminEnterpriseIdsParams,
+  params: API.deleteAdminMainProductsIdsParams,
   options?: { [key: string]: any }
 ) {
   const { ids: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/enterprise/${param0}`, {
+  return request<Record<string, any>>(`/api1/admin/mainProducts/${param0}`, {
     method: "DELETE",
     params: { ...queryParams },
     ...(options || {}),
   });
 }
 
-/** 获取企业信息详细信息 GET /admin/enterprise/${param0} */
-export async function getAdminEnterpriseId(
+/** 获取主要产品信息详细信息 GET /admin/mainProducts/${param0} */
+export async function getAdminMainProductsId(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.getAdminEnterpriseIdParams,
+  params: API.getAdminMainProductsIdParams,
   options?: { [key: string]: any }
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/enterprise/${param0}`, {
+  return request<Record<string, any>>(`/api1/admin/mainProducts/${param0}`, {
     method: "GET",
     params: { ...queryParams },
     ...(options || {}),
   });
 }
 
-/** 导出企业信息列表 POST /admin/enterprise/export */
-export async function postAdminEnterpriseExport(
+/** 导出主要产品信息列表 POST /admin/mainProducts/export */
+export async function postAdminMainProductsExport(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.postAdminEnterpriseExportParams,
+  params: API.postAdminMainProductsExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/enterprise/export`, {
+  return request<any>(`/api1/admin/mainProducts/export`, {
     method: "POST",
     params: {
       ...params,
@@ -77,13 +77,13 @@ export async function postAdminEnterpriseExport(
   });
 }
 
-/** 查询企业信息列表 GET /admin/enterprise/list */
-export async function getAdminEnterpriseList(
+/** 查询主要产品信息列表 GET /admin/mainProducts/list */
+export async function getAdminMainProductsList(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.getAdminEnterpriseListParams,
+  params: API.getAdminMainProductsListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/enterprise/list`, {
+  return request<API.TableDataInfo>(`/api1/admin/mainProducts/list`, {
     method: "GET",
     params: {
       ...params,

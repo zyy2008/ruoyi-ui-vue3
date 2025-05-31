@@ -145,7 +145,7 @@ function handleLogin() {
             return acc;
           }, {});
           if (loginForm.value.username === "test3") {
-            router.push({ path: "/corporate/index", query: otherQueryParams });
+            router.push({ path: "/corporate/tab1", query: otherQueryParams });
           } else {
             router.push({ path: "/main", query: otherQueryParams });
           }

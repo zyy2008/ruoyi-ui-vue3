@@ -226,12 +226,7 @@ const props: ISchemaFieldProps = {
   }),
 };
 
-// const actionProps = () => ({
-//   disabled: Boolean,
-//   form: { type: Object as PropType<Form<any>>, default: undefined },
-// });
-
-// type ActionProps = Partial<ExtractPropTypes<ReturnType<typeof actionProps>>>;
+const form = createForm();
 
 export default defineComponent({
   setup() {
@@ -246,72 +241,15 @@ export default defineComponent({
         manual: true,
       }
     );
-    const form = createForm();
-    // autorun(() => {
-    //   disabled.value = form.disabled;
-    // });
 
     return () => (
-      <ElCard
-        v-loading={loading.value}
-        v-slots={{
-          header: () => (
-            <ElSpace>
-              <ElButton
-                icon={EditPen}
-                disabled={!disabled.value}
-                onClick={() => {
-                  form.disabled = false;
-                }}
-                type="primary"
-              >
-                编辑
-              </ElButton>
-            </ElSpace>
-          ),
-        }}
-      >
-        <FormProvider form={form}>
-          <SchemaField {...props} />
-          <FormButtonGroup
-            align="center"
-            style={{
-              margin: "10px",
-            }}
-          >
-            <Submit
-              disabled={disabled.value}
-              onSubmit={(val) => {
-                const { id } = val;
-                const api = id
-                  ? API.putAdminEnterprise
-                  : API.postAdminEnterprise;
-                api({
-                  ...val,
-                  deptId,
-                }).then((res) => {
-                  if (res.code === 200) {
-                    ElMessage.success("保存成功");
-                    runAsync();
-                  } else {
-                    ElMessage.success("保存失败");
-                  }
-                });
-              }}
-            >
-              提交
-            </Submit>
-            <ElButton
-              disabled={disabled.value}
-              onClick={() => {
-                form.disabled = true;
-              }}
-            >
-              取消
-            </ElButton>
-          </FormButtonGroup>
-        </FormProvider>
-      </ElCard>
+      <div class="app-container">
+        <ElCard>
+          <FormProvider form={form}>
+            <SchemaField {...props} />
+          </FormProvider>
+        </ElCard>
+      </div>
     );
   },
 });

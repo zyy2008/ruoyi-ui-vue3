@@ -1,4 +1,4 @@
-import { defineComponent, ExtractPropTypes, PropType, ref } from "vue";
+import { defineComponent, ExtractPropTypes, PropType, watchEffect } from "vue";
 import Schema from "@/components/Form";
 import { ISchemaFieldProps, FormProvider } from "@formily/vue";
 import { Field, createForm, onFormInit, Form } from "@formily/core";
@@ -139,15 +139,14 @@ const props: ISchemaFieldProps = {
           inIndustrialPark: {
             type: "string",
             title: "是否位于工业园区或集聚区",
-            "x-value": "0",
             enum: [
               {
                 label: "是",
-                value: "0",
+                value: true,
               },
               {
                 label: "否",
-                value: "1",
+                value: false,
               },
             ],
             "x-decorator": "FormItem",
@@ -234,105 +233,65 @@ const props: ISchemaFieldProps = {
   },
 };
 
-// const actionProps = () => ({
-//   disabled: Boolean,
-//   form: { type: Object as PropType<Form<any>>, default: undefined },
-// });
-
-// type ActionProps = Partial<ExtractPropTypes<ReturnType<typeof actionProps>>>;
+const form = createForm();
 
 export default defineComponent({
   setup() {
-    const disabled = ref<boolean>();
     const { deptId } = userStore();
-    const { runAsync, loading } = useRequest(
-      () =>
-        API.getAdminEnterpriseList({
-          deptId,
-        }),
-      {
-        manual: true,
-      }
+    const { run, loading, data } = useRequest(() =>
+      API.getAdminEnterpriseList({
+        deptId,
+      })
     );
-    const form = createForm({
-      effects: () => {
-        onFormInit((form) => {
-          form.disabled = true;
-          runAsync().then((res) => {
-            console.log(res);
-            if (res.code === 200 && res.rows?.length > 0) {
-              const [item] = res.rows;
-              form.setValues(item);
-            }
-          });
+    watchEffect(() => {
+      if (data.value?.code === 200) {
+        const [item] = data.value.rows;
+        form.reset().then(() => {
+          form.setValues(item);
         });
-      },
-    });
-    autorun(() => {
-      disabled.value = form.disabled;
+      }
     });
 
     return () => (
-      <ElCard
-        v-loading={loading.value}
-        v-slots={{
-          header: () => (
-            <ElSpace>
+      <div class="app-container">
+        <ElCard>
+          <FormProvider form={form}>
+            <SchemaField {...props} />
+            <FormButtonGroup
+              align="center"
+              style={{
+                margin: "10px",
+              }}
+            >
               <ElButton
-                icon={EditPen}
-                disabled={!disabled.value}
-                onClick={() => {
-                  form.disabled = false;
-                }}
                 type="primary"
+                loading={loading.value}
+                onClick={() => {
+                  form.submit().then((val: any) => {
+                    const { id } = val;
+                    const api = id
+                      ? API.putAdminEnterprise
+                      : API.postAdminEnterprise;
+                    api({
+                      ...val,
+                      deptId,
+                    }).then((res) => {
+                      if (res.code === 200) {
+                        ElMessage.success("保存成功");
+                        run();
+                      } else {
+                        ElMessage.success("保存失败");
+                      }
+                    });
+                  });
+                }}
               >
-                编辑
+                保存
               </ElButton>
-            </ElSpace>
-          ),
-        }}
-      >
-        <FormProvider form={form}>
-          <SchemaField {...props} />
-          <FormButtonGroup
-            align="center"
-            style={{
-              margin: "10px",
-            }}
-          >
-            <Submit
-              disabled={disabled.value}
-              onSubmit={(val) => {
-                const { id } = val;
-                const api = id
-                  ? API.putAdminEnterprise
-                  : API.postAdminEnterprise;
-                api({
-                  ...val,
-                  deptId,
-                }).then((res) => {
-                  if (res.code === 200) {
-                    ElMessage.success("保存成功");
-                    runAsync();
-                  } else {
-                    ElMessage.success("保存失败");
-                  }
-                });
-              }}
-            >
-              提交
-            </Submit>
-            <ElButton
-              disabled={disabled.value}
-              onClick={() => {
-                form.disabled = true;
-              }}
-            >
-              取消
-            </ElButton>
-          </FormButtonGroup>
-        </FormProvider>
-      </ElCard>
+            </FormButtonGroup>
+          </FormProvider>
+        </ElCard>
+      </div>
     );
   },
 });

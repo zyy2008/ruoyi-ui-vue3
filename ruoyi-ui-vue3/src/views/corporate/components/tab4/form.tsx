@@ -10,377 +10,344 @@ import { CloseBold, EditPen } from "@element-plus/icons-vue";
 import { observer } from "@formily/reactive-vue";
 import { observable, autorun } from "@formily/reactive";
 import { useRequest } from "vue-request";
+import { CheckboxGroup } from "./components";
 
 const { SchemaField } = Schema;
+
+const enumValue = ["工业", "住宅", "商业", "多村", "城镇", "农田"].map(
+  (label, index) => ({
+    label,
+    value: `${index}`,
+  })
+);
 
 const props: ISchemaFieldProps = {
   schema: {
     type: "object",
     properties: {
-      layout: {
+      card: {
         type: "void",
-        "x-decorator": "FormLayout",
-        "x-decorator-props": {
-          labelCol: 10,
-          wrapperCol: 14,
-        },
-        "x-component": "FormGrid",
+        "x-component": "Card",
         "x-component-props": {
-          minColumns: 3,
-          maxColumns: 3,
+          header:
+            "地块及周边用地类型(说明:按工业、住宅、商业、多村、城镇、农田填写)",
         },
         properties: {
-          b: {
+          layout: {
             type: "void",
-            "x-component": "FormGrid.GridColumn",
+            "x-decorator": "FormLayout",
+            "x-decorator-props": {
+              labelCol: 10,
+              wrapperCol: 14,
+            },
+            "x-component": "FormGrid",
             "x-component-props": {
-              gridSpan: 4,
+              minColumns: 3,
+              maxColumns: 3,
             },
             properties: {
-              card: {
-                type: "void",
-                "x-component": "Card",
-                "x-component-props": {
-                  header: "地块及周边用地类型",
-                },
-                properties: {
-                  a1: {
-                    type: "string",
-                    title: "东",
-                    "x-decorator": "FormItem",
-                    "x-component": "Select",
-                  },
-                  a2: {
-                    type: "string",
-                    title: "西",
-                    "x-decorator": "FormItem",
-                    "x-component": "Select",
-                  },
-                  a3: {
-                    type: "string",
-                    title: "南",
-                    "x-decorator": "FormItem",
-                    "x-component": "Select",
-                  },
-                  a4: {
-                    type: "string",
-                    title: "北",
-                    "x-decorator": "FormItem",
-                    "x-component": "Select",
-                  },
-                },
+              surroundingLandEast: {
+                type: "string",
+                title: "东",
+                enum: enumValue,
+                "x-decorator": "FormItem",
+                "x-component": "Select",
               },
-              card1: {
-                type: "void",
-                "x-component": "Card",
-                "x-component-props": {
-                  header: "地块内职工人数",
-                },
-                properties: {
-                  a5: {
-                    type: "string",
-                    "x-decorator": "FormItem",
-                    enum: [
-                      {
-                        label: ">5000",
-                        value: "1",
-                      },
-                      {
-                        label: "1000-5000",
-                        value: "2",
-                      },
-                      {
-                        label: "100-1000",
-                        value: "3",
-                      },
-                      {
-                        label: "<100",
-                        value: "4",
-                      },
-                    ],
-                    "x-component": "Checkbox.Group",
-                  },
-                },
+              surroundingLandWest: {
+                type: "string",
+                title: "西",
+                enum: enumValue,
+                "x-decorator": "FormItem",
+                "x-component": "Select",
               },
-              card2: {
-                type: "void",
-                "x-component": "Card",
-                "x-component-props": {
-                  header: "地块周边500m范围内常驻人口数量",
-                },
-                properties: {
-                  a5: {
-                    type: "string",
-                    "x-decorator": "FormItem",
-                    "x-component": "Checkbox.Group",
-                    enum: [
-                      {
-                        label: ">5000",
-                        value: "1",
-                      },
-                      {
-                        label: "1000-5000",
-                        value: "2",
-                      },
-                      {
-                        label: "100-1000",
-                        value: "3",
-                      },
-                      {
-                        label: "<100",
-                        value: "4",
-                      },
-                    ],
-                  },
-                },
+              surroundingLandSouth: {
+                type: "string",
+                title: "南",
+                enum: enumValue,
+                "x-decorator": "FormItem",
+                "x-component": "Select",
               },
-              card3: {
-                type: "void",
-                "x-component": "Card",
-                "x-component-props": {
-                  header:
-                    "地块周边1km范围内存在以下敏感目标到最近的重点区域距离（可多选）",
-                },
-                properties: {
-                  grid: {
-                    type: "void",
-                    "x-component": "FormGrid",
-                    "x-component-props": {
-                      minColumns: 4,
-                      maxColumns: 4,
-                    },
-                    properties: {
-                      div: {
-                        type: "void",
-                        "x-component": "div",
-                        properties: {
-                          a33: {
-                            type: "string",
-                            "x-decorator": "FormItem",
-                            "x-component": "Checkbox.Group",
-                            enum: [
-                              {
-                                label: "无敏感目标",
-                                value: "1",
-                              },
-                            ],
-                          },
-                          a37: {
-                            type: "string",
-                            "x-decorator": "FormItem",
-                            "x-component": "Checkbox.Group",
-                            enum: [
-                              {
-                                label: "幼儿园",
-                                value: "1",
-                              },
-                            ],
-                          },
-                          a38: {
-                            type: "string",
-                            "x-decorator": "FormItem",
-                            "x-component": "Checkbox.Group",
-                            enum: [
-                              {
-                                label: "学校",
-                                value: "1",
-                              },
-                            ],
-                          },
-                        },
-                      },
-                      div1: {
-                        type: "void",
-                        "x-component": "div",
-                        properties: {
-                          a33: {
-                            "x-decorator": "FormItem",
-                          },
-                          a37: {
-                            type: "string",
-                            "x-decorator": "FormItem",
-                            "x-component": "Checkbox.Group",
-                            enum: [
-                              {
-                                label: "<100m",
-                                value: "1",
-                              },
-                            ],
-                          },
-                          a38: {
-                            type: "string",
-                            "x-decorator": "FormItem",
-                            "x-component": "Checkbox.Group",
-                            enum: [
-                              {
-                                label: "<100m",
-                                value: "1",
-                              },
-                            ],
-                          },
-                        },
-                      },
-                      div2: {
-                        type: "void",
-                        "x-component": "div",
-                        properties: {
-                          a33: {
-                            "x-decorator": "FormItem",
-                          },
-                          a37: {
-                            type: "string",
-                            "x-decorator": "FormItem",
-                            "x-component": "Checkbox.Group",
-                            enum: [
-                              {
-                                label: "100m<300m",
-                                value: "1",
-                              },
-                            ],
-                          },
-                          a38: {
-                            type: "string",
-                            "x-decorator": "FormItem",
-                            "x-component": "Checkbox.Group",
-                            enum: [
-                              {
-                                label: "100m<300m",
-                                value: "1",
-                              },
-                            ],
-                          },
-                        },
-                      },
-                      div3: {
-                        type: "void",
-                        "x-component": "div",
-                        properties: {
-                          a33: {
-                            "x-decorator": "FormItem",
-                          },
-                          a37: {
-                            type: "string",
-                            "x-decorator": "FormItem",
-                            "x-component": "Checkbox.Group",
-                            enum: [
-                              {
-                                label: "300m<1000m",
-                                value: "1",
-                              },
-                            ],
-                          },
-                          a38: {
-                            type: "string",
-                            "x-decorator": "FormItem",
-                            "x-component": "Checkbox.Group",
-                            enum: [
-                              {
-                                label: "300m<1000m",
-                                value: "1",
-                              },
-                            ],
-                          },
-                        },
-                      },
-                    },
-                  },
-                },
+              surroundingLandNorth: {
+                type: "string",
+                title: "北",
+                enum: enumValue,
+                "x-decorator": "FormItem",
+                "x-component": "Select",
               },
             },
           },
+        },
+      },
+      card1: {
+        type: "void",
+        "x-component": "Card",
+        "x-component-props": {
+          header: "地块内职工人数",
+        },
+        properties: {
+          employeeCountCategory: {
+            type: "string",
+            "x-decorator": "FormItem",
+            enum: [
+              {
+                label: ">5000",
+                value: "0",
+              },
+              {
+                label: "1000-5000",
+                value: "1",
+              },
+              {
+                label: "100-1000",
+                value: "2",
+              },
+              {
+                label: "<100",
+                value: "3",
+              },
+            ],
+            "x-component": "Radio.Group",
+          },
+        },
+      },
+      card2: {
+        type: "void",
+        "x-component": "Card",
+        "x-component-props": {
+          header: "地块周边500m范围内常驻人口数量",
+        },
+        properties: {
+          permanentPopulationCategory: {
+            type: "string",
+            "x-decorator": "FormItem",
+            "x-component": "Checkbox.Group",
+            enum: [
+              {
+                label: ">5000",
+                value: "0",
+              },
+              {
+                label: "1000-5000",
+                value: "1",
+              },
+              {
+                label: "100-1000",
+                value: "2",
+              },
+              {
+                label: "<100",
+                value: "3",
+              },
+            ],
+          },
+        },
+      },
+      card3: {
+        type: "void",
+        "x-component": "Card",
+        "x-component-props": {
+          header:
+            "地块周边1km范围内存在以下敏感目标到最近的重点区域距离（可多选）",
+        },
+        properties: {
+          sensitiveTargets: {
+            type: "string",
+            "x-decorator": "FormItem",
+            "x-component": <CheckboxGroup />,
+          },
+          // grid: {
+          //   type: "void",
+          //   "x-component": "FormGrid",
+          //   "x-component-props": {
+          //     minColumns: 4,
+          //     maxColumns: 4,
+          //   },
+          //   properties: {
+          //     div: {
+          //       type: "void",
+          //       "x-component": "div",
+          //       properties: {
+          //         a33: {
+          //           type: "string",
+          //           "x-decorator": "FormItem",
+          //           "x-component": "Checkbox.Group",
+          //           enum: [
+          //             {
+          //               label: "无敏感目标",
+          //               value: "1",
+          //             },
+          //           ],
+          //         },
+          //         a37: {
+          //           type: "string",
+          //           "x-decorator": "FormItem",
+          //           "x-component": "Checkbox.Group",
+          //           enum: [
+          //             {
+          //               label: "幼儿园",
+          //               value: "1",
+          //             },
+          //           ],
+          //         },
+          //         a38: {
+          //           type: "string",
+          //           "x-decorator": "FormItem",
+          //           "x-component": "Checkbox.Group",
+          //           enum: [
+          //             {
+          //               label: "学校",
+          //               value: "1",
+          //             },
+          //           ],
+          //         },
+          //       },
+          //     },
+          //     div1: {
+          //       type: "void",
+          //       "x-component": "div",
+          //       properties: {
+          //         a33: {
+          //           "x-decorator": "FormItem",
+          //         },
+          //         a37: {
+          //           type: "string",
+          //           "x-decorator": "FormItem",
+          //           "x-component": "Checkbox.Group",
+          //           enum: [
+          //             {
+          //               label: "<100m",
+          //               value: "1",
+          //             },
+          //           ],
+          //         },
+          //         a38: {
+          //           type: "string",
+          //           "x-decorator": "FormItem",
+          //           "x-component": "Checkbox.Group",
+          //           enum: [
+          //             {
+          //               label: "<100m",
+          //               value: "1",
+          //             },
+          //           ],
+          //         },
+          //       },
+          //     },
+          //     div2: {
+          //       type: "void",
+          //       "x-component": "div",
+          //       properties: {
+          //         a33: {
+          //           "x-decorator": "FormItem",
+          //         },
+          //         a37: {
+          //           type: "string",
+          //           "x-decorator": "FormItem",
+          //           "x-component": "Checkbox.Group",
+          //           enum: [
+          //             {
+          //               label: "100m<300m",
+          //               value: "1",
+          //             },
+          //           ],
+          //         },
+          //         a38: {
+          //           type: "string",
+          //           "x-decorator": "FormItem",
+          //           "x-component": "Checkbox.Group",
+          //           enum: [
+          //             {
+          //               label: "100m<300m",
+          //               value: "1",
+          //             },
+          //           ],
+          //         },
+          //       },
+          //     },
+          //     div3: {
+          //       type: "void",
+          //       "x-component": "div",
+          //       properties: {
+          //         a33: {
+          //           "x-decorator": "FormItem",
+          //         },
+          //         a37: {
+          //           type: "string",
+          //           "x-decorator": "FormItem",
+          //           "x-component": "Checkbox.Group",
+          //           enum: [
+          //             {
+          //               label: "300m<1000m",
+          //               value: "1",
+          //             },
+          //           ],
+          //         },
+          //         a38: {
+          //           type: "string",
+          //           "x-decorator": "FormItem",
+          //           "x-component": "Checkbox.Group",
+          //           enum: [
+          //             {
+          //               label: "300m<1000m",
+          //               value: "1",
+          //             },
+          //           ],
+          //         },
+          //       },
+          //     },
+          //   },
+          // },
         },
       },
     },
   },
 };
 
-// const actionProps = () => ({
-//   disabled: Boolean,
-//   form: { type: Object as PropType<Form<any>>, default: undefined },
-// });
-
-// type ActionProps = Partial<ExtractPropTypes<ReturnType<typeof actionProps>>>;
-
 export default defineComponent({
   setup() {
-    const disabled = ref<boolean>();
     const { deptId } = userStore();
-    const { runAsync, loading } = useRequest(
-      () =>
-        API.getAdminEnterpriseList({
-          deptId,
-        }),
-      {
-        manual: true,
-      }
+    const { run, data, loading } = useRequest(() =>
+      API.getAdminReceptorList({
+        deptId,
+      })
     );
     const form = createForm();
-    // autorun(() => {
-    //   disabled.value = form.disabled;
-    // });
 
     return () => (
       <div class="app-container">
-        <ElCard
-          v-loading={loading.value}
-          v-slots={{
-            header: () => (
-              <ElSpace>
-                <ElButton
-                  icon={EditPen}
-                  disabled={!disabled.value}
-                  onClick={() => {
-                    form.disabled = false;
-                  }}
-                  type="primary"
-                >
-                  编辑
-                </ElButton>
-              </ElSpace>
-            ),
-          }}
-        >
-          <FormProvider form={form}>
-            <SchemaField {...props} />
-            <FormButtonGroup
-              align="center"
-              style={{
-                margin: "10px",
-              }}
-            >
-              <Submit
-                disabled={disabled.value}
-                onSubmit={(val) => {
+        <FormProvider form={form}>
+          <SchemaField {...props} />
+          <FormButtonGroup
+            align="center"
+            style={{
+              margin: "10px",
+            }}
+          >
+            <ElButton
+              loading={loading.value}
+              type="primary"
+              onClick={() => {
+                form.submit().then((val: any) => {
                   const { id } = val;
-                  const api = id
-                    ? API.putAdminEnterprise
-                    : API.postAdminEnterprise;
+                  const api = id ? API.putAdminReceptor : API.postAdminReceptor;
                   api({
                     ...val,
                     deptId,
                   }).then((res) => {
                     if (res.code === 200) {
                       ElMessage.success("保存成功");
-                      runAsync();
+                      run();
                     } else {
                       ElMessage.success("保存失败");
                     }
                   });
-                }}
-              >
-                提交
-              </Submit>
-              <ElButton
-                disabled={disabled.value}
-                onClick={() => {
-                  form.disabled = true;
-                }}
-              >
-                取消
-              </ElButton>
-            </FormButtonGroup>
-          </FormProvider>
-        </ElCard>
+                });
+              }}
+            >
+              提交
+            </ElButton>
+          </FormButtonGroup>
+        </FormProvider>
       </div>
     );
   },

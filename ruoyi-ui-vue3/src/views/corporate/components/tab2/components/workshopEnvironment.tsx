@@ -16,7 +16,7 @@ const props: ISchemaFieldProps = {
         type: "void",
         "x-component": "Card",
         "x-component-props": {
-          header: "一、主要产品",
+          header: "五、生产车间分布与环况",
         },
         properties: {
           array: {
@@ -44,11 +44,11 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "产品名称",
+                    title: "车间名称",
                     width: 200,
                   },
                   properties: {
-                    productName: {
+                    workshopName: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
@@ -59,22 +59,14 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "生产年代",
+                    title: "坐标位置",
                     width: 200,
                   },
                   properties: {
-                    productionYear: {
+                    coordinate: {
                       type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "DatePicker",
-                      "x-component-props": {
-                        type: "year",
-                      },
-                      "x-reactions": (field: Field) => {
-                        setTimeout(() => {
-                          field.setValue(`${field.value}`);
-                        }, 0);
-                      },
+                      "x-component": "Input",
                     },
                   },
                 },
@@ -82,14 +74,17 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "计量单位",
+                    title: "生产起始日期",
                     width: 200,
                   },
                   properties: {
-                    unit: {
+                    startDate: {
                       type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "Input",
+                      "x-component": "DatePicker",
+                      "x-component-props": {
+                        type: "date",
+                      },
                     },
                   },
                 },
@@ -97,14 +92,56 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "年平均产量",
+                    title: "生产工艺描述",
                     width: 200,
                   },
                   properties: {
-                    annualOutput: {
+                    processDescription: {
                       type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "Input",
+                      "x-component": "Input.TextArea",
+                    },
+                  },
+                },
+                column9: {
+                  type: "void",
+                  "x-component": "ArrayTable.Column",
+                  "x-component-props": {
+                    title: "滴漏现象",
+                    width: 200,
+                  },
+                  properties: {
+                    leakage: {
+                      type: "string",
+                      enum: [
+                        {
+                          label: "有",
+                          value: "0",
+                        },
+                        {
+                          label: "无",
+                          value: "1",
+                        },
+                      ],
+                      "x-decorator": "FormItem",
+                      "x-component": "Select",
+                    },
+                  },
+                },
+                column10: {
+                  type: "void",
+                  "x-component": "ArrayTable.Column",
+                  "x-component-props": {
+                    title: "漏点照片",
+                    width: 200,
+                  },
+                  properties: {
+                    leakImagePath: {
+                      type: "string",
+                      "x-component": "Upload",
+                      "x-component-props": {
+                        listType: "picture-card",
+                      },
                     },
                   },
                 },
@@ -188,7 +225,7 @@ export default observer(
     setup() {
       const form = createForm();
       const { data, run } = useRequest(() =>
-        API.getAdminMainProductsList({
+        API.getAdminWorkshopEnvironmentList({
           deptId: userStore().deptId,
         })
       );
@@ -203,9 +240,9 @@ export default observer(
       });
       provide("form", {
         run,
-        apiAdd: API.postAdminMainProducts,
-        apiEdit: API.putAdminMainProducts,
-        apiDel: API.deleteAdminMainProductsIds,
+        apiAdd: API.postAdminWorkshopEnvironment,
+        apiEdit: API.putAdminWorkshopEnvironment,
+        apiDel: API.deleteAdminWorkshopEnvironmentIds,
       });
       return () => (
         <FormProvider form={form}>

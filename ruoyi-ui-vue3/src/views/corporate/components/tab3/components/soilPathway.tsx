@@ -16,7 +16,7 @@ const props: ISchemaFieldProps = {
         type: "void",
         "x-component": "Card",
         "x-component-props": {
-          header: "一、主要产品",
+          header: "含水层以上士壤分层情况(自上而下)",
         },
         properties: {
           array: {
@@ -44,11 +44,11 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "产品名称",
+                    title: "土层性质",
                     width: 200,
                   },
                   properties: {
-                    productName: {
+                    soilType: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
@@ -59,22 +59,14 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "生产年代",
+                    title: "土层(上层)埋深(cm)",
                     width: 200,
                   },
                   properties: {
-                    productionYear: {
-                      type: "string",
+                    depthTopCm: {
+                      type: "number",
                       "x-decorator": "FormItem",
-                      "x-component": "DatePicker",
-                      "x-component-props": {
-                        type: "year",
-                      },
-                      "x-reactions": (field: Field) => {
-                        setTimeout(() => {
-                          field.setValue(`${field.value}`);
-                        }, 0);
-                      },
+                      "x-component": "InputNumber",
                     },
                   },
                 },
@@ -82,29 +74,14 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "计量单位",
+                    title: "土层厚度",
                     width: 200,
                   },
                   properties: {
-                    unit: {
-                      type: "string",
+                    thicknessCm: {
+                      type: "number",
                       "x-decorator": "FormItem",
-                      "x-component": "Input",
-                    },
-                  },
-                },
-                column5: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
-                    title: "年平均产量",
-                    width: 200,
-                  },
-                  properties: {
-                    annualOutput: {
-                      type: "string",
-                      "x-decorator": "FormItem",
-                      "x-component": "Input",
+                      "x-component": "InputNumber",
                     },
                   },
                 },
@@ -128,12 +105,12 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "添加时间",
+                    title: "创建时间",
                     width: 300,
                   },
 
                   properties: {
-                    createdAt: {
+                    createTime: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
@@ -188,7 +165,7 @@ export default observer(
     setup() {
       const form = createForm();
       const { data, run } = useRequest(() =>
-        API.getAdminMainProductsList({
+        API.getAdminSoilPathwayList({
           deptId: userStore().deptId,
         })
       );
@@ -203,9 +180,9 @@ export default observer(
       });
       provide("form", {
         run,
-        apiAdd: API.postAdminMainProducts,
-        apiEdit: API.putAdminMainProducts,
-        apiDel: API.deleteAdminMainProductsIds,
+        apiAdd: API.postAdminSoilPathway,
+        apiEdit: API.putAdminSoilPathway,
+        apiDel: API.deleteAdminSoilPathwayIds,
       });
       return () => (
         <FormProvider form={form}>

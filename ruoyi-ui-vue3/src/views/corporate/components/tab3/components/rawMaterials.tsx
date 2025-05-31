@@ -16,7 +16,7 @@ const props: ISchemaFieldProps = {
         type: "void",
         "x-component": "Card",
         "x-component-props": {
-          header: "一、主要产品",
+          header: "二、主要原辅材料",
         },
         properties: {
           array: {
@@ -44,11 +44,11 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "产品名称",
+                    title: "原辅材料名称",
                     width: 200,
                   },
                   properties: {
-                    productName: {
+                    materialName: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
@@ -59,11 +59,11 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "生产年代",
+                    title: "使用年代",
                     width: 200,
                   },
                   properties: {
-                    productionYear: {
+                    usageYear: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "DatePicker",
@@ -188,7 +188,7 @@ export default observer(
     setup() {
       const form = createForm();
       const { data, run } = useRequest(() =>
-        API.getAdminMainProductsList({
+        API.getAdminRawMaterialsList({
           deptId: userStore().deptId,
         })
       );
@@ -203,9 +203,9 @@ export default observer(
       });
       provide("form", {
         run,
-        apiAdd: API.postAdminMainProducts,
-        apiEdit: API.putAdminMainProducts,
-        apiDel: API.deleteAdminMainProductsIds,
+        apiAdd: API.postAdminRawMaterials,
+        apiEdit: API.putAdminRawMaterials,
+        apiDel: API.deleteAdminRawMaterialsIds,
       });
       return () => (
         <FormProvider form={form}>

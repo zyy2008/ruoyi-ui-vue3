@@ -169,7 +169,7 @@
             :show-overflow-tooltip="true"
           />
           <el-table-column
-            label="所属基地"
+            label="所属企业"
             align="center"
             key="baseName"
             prop="baseName"
@@ -317,13 +317,13 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item label="所属基地" prop="baseIds">
-              <el-select v-model="form.baseIds" multiple placeholder="请选择">
+            <el-form-item label="所属企业" prop="baseName">
+              <el-select v-model="form.baseName" placeholder="请选择" filterable>
                 <el-option
-                  v-for="item in baseOptions"
-                  :key="item.id"
-                  :label="item.label"
-                  :value="item.id"
+                  v-for="item in enterpriseOptions"
+                  :key="item.enterpriseName"
+                  :label="item.enterpriseName"
+                  :value="item.enterpriseName"
                 ></el-option>
               </el-select>
             </el-form-item>
@@ -505,6 +505,7 @@
 <script setup name="User">
 import { getToken } from "@/utils/auth";
 import { listBase } from "@/api/admin/base";
+import { listEnterprises } from "@/api/admin/enterprises";
 import {
   changeUserStatus,
   listUser,
@@ -538,6 +539,7 @@ const deptOptions = ref(undefined);
 const initPassword = ref(undefined);
 const postOptions = ref([]);
 const roleOptions = ref([]);
+const enterpriseOptions = ref([]);
 /*** 用户导入参数 */
 const upload = reactive({
   // 是否显示弹出层（用户导入）
@@ -587,9 +589,9 @@ const data = reactive({
     nickName: [
       { required: true, message: "用户昵称不能为空", trigger: "blur" },
     ],
-    baseIds: [
-      { required: true, message: "所属基地不能为空", trigger: "change" },
-    ],
+    // enterpriseIds: [
+    //   { required: true, message: "所属企业不能为空", trigger: "change" },
+    // ],
     password: [
       { required: true, message: "用户密码不能为空", trigger: "blur" },
       {
@@ -853,7 +855,7 @@ function handleUpdate(row) {
     roleOptions.value = response.roles;
     form.value.postIds = response.postIds;
     form.value.roleIds = response.roleIds;
-    form.value.baseIds = row.baseIds; //基地IDs
+    form.value.enterpriseIds = row.enterpriseIds; //企业IDs
     open.value = true;
     title.value = "修改用户";
     form.password = "";
@@ -880,22 +882,16 @@ function submitForm() {
     }
   });
 }
-function getBase() {
-  listBase({
+function getEnterprises() {
+  listEnterprises({
     pageNum: 1,
     pageSize: 100,
   }).then((response) => {
-    baseOptions.value = response.rows.map((item) => {
-      return {
-        id: item.id,
-        label: item.name,
-        children: null,
-      };
-    });
+    enterpriseOptions.value = response.rows;
   });
 }
 
-getBase();
+getEnterprises();
 getDeptTree();
 getList();
 </script>

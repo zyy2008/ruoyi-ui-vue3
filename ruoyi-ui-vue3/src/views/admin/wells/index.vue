@@ -1,10 +1,10 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="归属部门" prop="deptId">
+      <el-form-item label="编码" prop="wellCode">
         <el-input
-          v-model="queryParams.deptId"
-          placeholder="请输入归属部门"
+          v-model="queryParams.wellCode"
+          placeholder="请输入编码"
           clearable
           @keyup.enter="handleQuery"
         />
@@ -59,32 +59,19 @@
 
     <el-table v-loading="loading" :data="wellsList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="主键" align="center" prop="id" />
-      <el-table-column label="监测井编码" align="center" prop="wellCode" />
-      <el-table-column label="监测井所在位置" align="center" prop="location" />
-      <el-table-column label="监测点类型，如内部监测点、对照监测点" align="center" prop="pointType" />
-      <el-table-column label="成井时间" align="center" prop="completionDate" />
-      <el-table-column label="水位埋深，单位：米" align="center" prop="waterBuriedDepth" />
-      <el-table-column label="井口高程，单位：米" align="center" prop="wellElevation" />
-      <el-table-column label="成井深度，单位：米" align="center" prop="wellDepth" />
-      <el-table-column label="井口内径，单位：毫米" align="center" prop="innerDiameter" />
-      <el-table-column label="井管材质，如PVC、不锈钢" align="center" prop="pipeMaterial" />
-      <el-table-column label="是否为多段筛管结构" align="center" prop="multiScreenPipe" />
-      <el-table-column label="筛管上部与下部的埋深范围，单位：米" align="center" prop="screenDepthRange" />
-      <el-table-column label="地下水类型，如潜水、承压水" align="center" prop="groundwaterType" />
-      <el-table-column label="埋藏条件，如孔隙水、裂隙水" align="center" prop="burialCondition" />
-      <el-table-column label="含水介质" align="center" prop="waterMedium" />
-      <el-table-column label="监测井的权属单位" align="center" prop="ownership" />
-      <el-table-column label="是否符合长期监测井的标准" align="center" prop="suitableForLongterm" />
-      <el-table-column label="经度，WGS84坐标系" align="center" prop="longitude" />
-      <el-table-column label="纬度，WGS84坐标系" align="center" prop="latitude" />
-      <el-table-column label="高程，单位：米" align="center" prop="altitude" />
-      <el-table-column label="视频资料地址" align="center" prop="videoUrl" />
-      <el-table-column label="归属部门" align="center" prop="deptId" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="编码" align="center" prop="wellCode" />
+      <el-table-column label="位置" align="center" prop="location" />
+      <el-table-column label="类型" align="center" prop="pointType" />
+      <el-table-column label="水位埋深" align="center" prop="waterBuriedDepth" />
+      <el-table-column label="井口高程" align="center" prop="wellElevation" />
+      <el-table-column label="地下水类型" align="center" prop="groundwaterType" />
+      <el-table-column label="经度" align="center" prop="longitude" />
+      <el-table-column label="纬度" align="center" prop="latitude" />
+      <el-table-column label="操作" align="center" width="240" class-name="small-padding fixed-width">
         <template #default="scope">
+          <el-button link type="primary" icon="View" @click="handleDetail(scope.row)">详情</el-button>
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['admin:wells:edit']">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['admin:wells:remove']">删除</el-button>
+          <el-button link type="danger" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['admin:wells:remove']">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -98,43 +85,96 @@
     />
 
     <!-- 添加或修改园区初调监测井信息，记录每个监测井的基础属性与附加信息对话框 -->
-    <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="wellsRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="监测井编码" prop="wellCode">
-          <el-input v-model="form.wellCode" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="监测井所在位置" prop="location">
-          <el-input v-model="form.location" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="成井时间" prop="completionDate">
-          <el-input v-model="form.completionDate" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="井管材质，如PVC、不锈钢" prop="pipeMaterial">
-          <el-input v-model="form.pipeMaterial" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="筛管上部与下部的埋深范围，单位：米" prop="screenDepthRange">
-          <el-input v-model="form.screenDepthRange" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="埋藏条件，如孔隙水、裂隙水" prop="burialCondition">
-          <el-input v-model="form.burialCondition" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="含水介质" prop="waterMedium">
-          <el-input v-model="form.waterMedium" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="监测井的权属单位" prop="ownership">
-          <el-input v-model="form.ownership" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="视频资料地址" prop="videoUrl">
-          <el-input v-model="form.videoUrl" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="归属部门" prop="deptId">
-          <el-input v-model="form.deptId" placeholder="请输入归属部门" />
-        </el-form-item>
+    <el-dialog :title="title" v-model="open" width="800px" append-to-body>
+      <el-form ref="wellsRef" :model="form" :rules="rules" label-width="120px">
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <el-form-item label="监测井编码" prop="wellCode">
+              <el-input v-model="form.wellCode" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="监测井位置" prop="location">
+              <el-input v-model="form.location" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="成井时间" prop="completionDate">
+              <el-input v-model="form.completionDate" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="井管材质" prop="pipeMaterial">
+              <el-input v-model="form.pipeMaterial" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="埋深范围" prop="screenDepthRange">
+              <el-input v-model="form.screenDepthRange" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="埋藏条件" prop="burialCondition">
+              <el-input v-model="form.burialCondition" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="含水介质" prop="waterMedium">
+              <el-input v-model="form.waterMedium" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="权属单位" prop="ownership">
+              <el-input v-model="form.ownership" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="视频资料地址" prop="videoUrl">
+              <el-input v-model="form.videoUrl" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="归属部门" prop="deptId">
+              <el-input v-model="form.deptId" placeholder="请输入归属部门" />
+            </el-form-item>
+          </el-col>
+        </el-row>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
           <el-button type="primary" @click="submitForm">确 定</el-button>
           <el-button @click="cancel">取 消</el-button>
+        </div>
+      </template>
+    </el-dialog>
+
+    <!-- 详情对话框 -->
+    <el-dialog title="监测井详情" v-model="detailOpen" width="800px" append-to-body>
+      <el-descriptions :column="2" border>
+        <el-descriptions-item label="编码">{{ detailForm.wellCode }}</el-descriptions-item>
+        <el-descriptions-item label="位置">{{ detailForm.location }}</el-descriptions-item>
+        <el-descriptions-item label="类型">{{ detailForm.pointType }}</el-descriptions-item>
+        <el-descriptions-item label="时间">{{ detailForm.completionDate }}</el-descriptions-item>
+        <el-descriptions-item label="水位埋深">{{ detailForm.waterBuriedDepth }}</el-descriptions-item>
+        <el-descriptions-item label="井口高程">{{ detailForm.wellElevation }}</el-descriptions-item>
+        <el-descriptions-item label="成井深度">{{ detailForm.wellDepth }}</el-descriptions-item>
+        <el-descriptions-item label="井口内径">{{ detailForm.innerDiameter }}</el-descriptions-item>
+        <el-descriptions-item label="材质">{{ detailForm.pipeMaterial }}</el-descriptions-item>
+        <el-descriptions-item label="结构">{{ detailForm.multiScreenPipe }}</el-descriptions-item>
+        <el-descriptions-item label="埋深范围">{{ detailForm.screenDepthRange }}</el-descriptions-item>
+        <el-descriptions-item label="地下水类型">{{ detailForm.groundwaterType }}</el-descriptions-item>
+        <el-descriptions-item label="埋藏条件">{{ detailForm.burialCondition }}</el-descriptions-item>
+        <el-descriptions-item label="含水介质">{{ detailForm.waterMedium }}</el-descriptions-item>
+        <el-descriptions-item label="权属单位">{{ detailForm.ownership }}</el-descriptions-item>
+        <el-descriptions-item label="是否符合标准">{{ detailForm.suitableForLongterm }}</el-descriptions-item>
+        <el-descriptions-item label="经度">{{ detailForm.longitude }}</el-descriptions-item>
+        <el-descriptions-item label="纬度">{{ detailForm.latitude }}</el-descriptions-item>
+        <el-descriptions-item label="视频">{{ detailForm.videoUrl }}</el-descriptions-item>
+        <el-descriptions-item label="归属部门">{{ detailForm.deptId }}</el-descriptions-item>
+      </el-descriptions>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="detailOpen = false">关 闭</el-button>
         </div>
       </template>
     </el-dialog>
@@ -155,6 +195,8 @@ const single = ref(true);
 const multiple = ref(true);
 const total = ref(0);
 const title = ref("");
+const detailOpen = ref(false);
+const detailForm = ref({});
 
 const data = reactive({
   form: {},
@@ -308,6 +350,14 @@ function handleExport() {
   proxy.download('admin/wells/export', {
     ...queryParams.value
   }, `wells_${new Date().getTime()}.xlsx`)
+}
+
+/** 查看详情按钮操作 */
+function handleDetail(row) {
+  getWells(row.id).then(response => {
+    detailForm.value = response.data;
+    detailOpen.value = true;
+  });
 }
 
 getList();

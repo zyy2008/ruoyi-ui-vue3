@@ -62,7 +62,7 @@
       :tree-props="{ children: 'children', hasChildren: 'hasChildren' }"
     >
       <el-table-column prop="deptName" label="部门名称" width="260"></el-table-column>
-      <el-table-column prop="baseId" label="所属基地" width="260"></el-table-column>
+      <!-- <el-table-column prop="baseId" label="所属基地" width="260"></el-table-column> -->
       <el-table-column prop="orderNum" label="排序" width="200"></el-table-column>
       <el-table-column prop="status" label="状态" width="100">
         <template #default="scope">
@@ -109,7 +109,7 @@
     <el-dialog :title="title" v-model="open" width="600px" append-to-body>
       <el-form ref="deptRef" :model="form" :rules="rules" label-width="80px">
         <el-row>
-          <el-col :span="12" v-if="form.parentId !== 0">
+          <el-col :span="24" v-if="form.parentId !== 0">
             <el-form-item label="上级部门" prop="parentId">
               <el-tree-select
                 v-model="form.parentId"
@@ -121,7 +121,7 @@
               />
             </el-form-item>
           </el-col>
-          <el-col :span="12">
+          <!-- <el-col :span="12">
             <el-form-item label="归属基地" prop="baseId">
               <el-tree-select
                 v-model="form.baseId"
@@ -132,7 +132,7 @@
                 check-strictly
               />
             </el-form-item>
-          </el-col>
+          </el-col> -->
           <el-col :span="12">
             <el-form-item label="部门名称" prop="deptName">
               <el-input v-model="form.deptName" placeholder="请输入部门名称" />
@@ -219,7 +219,7 @@ const data = reactive({
     status: undefined,
   },
   rules: {
-    baseId: [{ required: true, message: "所属基地不能为空", trigger: "blur" }],
+    // baseId: [{ required: true, message: "所属基地不能为空", trigger: "blur" }],
     parentId: [{ required: true, message: "上级部门不能为空", trigger: "blur" }],
     deptName: [{ required: true, message: "部门名称不能为空", trigger: "blur" }],
     orderNum: [{ required: true, message: "显示排序不能为空", trigger: "blur" }],

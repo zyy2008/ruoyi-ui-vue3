@@ -176,14 +176,14 @@
         "show": true,
         "flyTo": true,
         "cluster":{
-          "enabled":true,
+          "enabled":false,
           "pixelRange":20
         },
         "popup":"all",
         "symbol": {
           "type": "div",
           "styleOptions": {
-            "html": "<div class='marsBlueGradientPnl'><div>监测井:{点位编号}</div></div>",
+            "html": "<div class='marsBlueGradientPnl'><div>{点位编号}</div></div>",
             "offsetY": -60,
             "horizontalOrigin": 0,
             "verticalOrigin": 1,

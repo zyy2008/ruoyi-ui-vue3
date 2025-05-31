@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="updateTime"   column="update_time"  />
         <result property="remark"       column="remark"       />
 		<result property="baseId"       column="base_id"      />
-		<result property="baseName"       column="baseName"      />
+		<result property="baseName"     column="base_name"      />
         <association property="dept"    javaType="SysDept"         resultMap="deptResult" />
         <collection  property="roles"   javaType="java.util.List"  resultMap="RoleResult" />
     </resultMap>
@@ -51,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<sql id="selectUserVo">
         select u.user_id, u.dept_id, u.user_name, u.nick_name, u.email, u.avatar, u.phonenumber, u.password, u.sex, u.status, u.del_flag, u.login_ip, u.login_date, u.create_by, u.create_time, u.remark, u.base_id,
         d.dept_id, d.parent_id, d.ancestors, d.dept_name, d.order_num, d.leader, d.status as dept_status,
-        r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status as role_status
+        r.role_id, r.role_name, r.role_key, r.role_sort, r.data_scope, r.status as role_status,u.base_name
         from sys_user u
 		    left join sys_dept d on u.dept_id = d.dept_id
 		    left join sys_user_role ur on u.user_id = ur.user_id
@@ -78,11 +78,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		u.base_id,
 		d.dept_name,
 		d.leader,
-		STRING_AGG(b.name, ', ' ORDER BY b.name ASC) AS baseName
+		u.base_name
 		FROM sys_user u
 		LEFT JOIN sys_dept d ON u.dept_id = d.dept_id
 		LEFT JOIN sys_user_base sub ON sub.user_id = u.user_id
-		LEFT JOIN t_base b ON b.id = sub.base_id
 		WHERE u.del_flag = '0'
 		<if test="userId != null and userId != 0">
 			AND u.user_id = #{userId}
@@ -219,6 +218,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null and status != ''">status,</if>
  			<if test="createBy != null and createBy != ''">create_by,</if>
  			<if test="remark != null and remark != ''">remark,</if>
+		    <if test="baseName != null">base_name = #{baseName},</if>
  			create_time
  		)values(
  			<if test="userId != null and userId != ''">#{userId},</if>
@@ -233,6 +233,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="status != null and status != ''">#{status},</if>
  			<if test="createBy != null and createBy != ''">#{createBy},</if>
  			<if test="remark != null and remark != ''">#{remark},</if>
+		    <if test="baseName != null">base_name = #{baseName},</if>
  			current_timestamp
  		)
 	</insert>
@@ -253,6 +254,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="loginDate != null">login_date = #{loginDate},</if>
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			<if test="remark != null">remark = #{remark},</if>
+			<if test="baseName != null">base_name = #{baseName},</if>
  			update_time = current_timestamp
  		</set>
  		where user_id = #{userId}

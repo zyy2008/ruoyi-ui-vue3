@@ -195,5 +195,5 @@ public class TEnterprisePlots extends BaseEntity {
      */
     @Excel(name = "归属部门ID")
     @ApiModelProperty("归属部门ID")
-    private Long deptId;
+    private String deptId;
 }

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TEnterprisesMapper">
+    
+    <resultMap type="TEnterprises" id="TEnterprisesResult">
+        <result property="enterpriseName"    column="enterprise_name"    />
+        <result property="industryCategory"    column="industry_category"    />
+        <result property="productionYears"    column="production_years"    />
+        <result property="status"    column="status"    />
+        <result property="reportingStatus"    column="reporting_status"    />
+        <result property="longitude"    column="longitude"    />
+        <result property="latitude"    column="latitude"    />
+        <result property="area"    column="area"    />
+        <result property="isKeyEnterprise"    column="is_key_enterprise"    />
+    </resultMap>
+
+    <sql id="selectTEnterprisesVo">
+        select enterprise_name, industry_category, production_years, status, reporting_status, longitude, latitude, area, is_key_enterprise from t_enterprises
+    </sql>
+
+    <select id="selectTEnterprisesList" parameterType="TEnterprises" resultMap="TEnterprisesResult">
+        <include refid="selectTEnterprisesVo"/>
+        <where>  
+            <if test="enterpriseName != null  and enterpriseName != ''"> and enterprise_name like concat('%', #{enterpriseName}, '%')</if>
+            <if test="industryCategory != null  and industryCategory != ''"> and industry_category = #{industryCategory}</if>
+            <if test="productionYears != null  and productionYears != ''"> and production_years = #{productionYears}</if>
+            <if test="status != null  and status != ''"> and status = #{status}</if>
+            <if test="reportingStatus != null  and reportingStatus != ''"> and reporting_status = #{reportingStatus}</if>
+            <if test="longitude != null  and longitude != ''"> and longitude = #{longitude}</if>
+            <if test="latitude != null  and latitude != ''"> and latitude = #{latitude}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="isKeyEnterprise != null  and isKeyEnterprise != ''"> and is_key_enterprise = #{isKeyEnterprise}</if>
+        </where>
+    </select>
+    
+    <select id="selectTEnterprisesByEnterpriseName" parameterType="String" resultMap="TEnterprisesResult">
+        <include refid="selectTEnterprisesVo"/>
+        where enterprise_name = #{enterpriseName}
+    </select>
+
+    <insert id="insertTEnterprises" parameterType="TEnterprises">
+        insert into t_enterprises
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="enterpriseName != null">enterprise_name,</if>
+            <if test="industryCategory != null">industry_category,</if>
+            <if test="productionYears != null">production_years,</if>
+            <if test="status != null">status,</if>
+            <if test="reportingStatus != null">reporting_status,</if>
+            <if test="longitude != null">longitude,</if>
+            <if test="latitude != null">latitude,</if>
+            <if test="area != null">area,</if>
+            <if test="isKeyEnterprise != null">is_key_enterprise,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="enterpriseName != null">#{enterpriseName},</if>
+            <if test="industryCategory != null">#{industryCategory},</if>
+            <if test="productionYears != null">#{productionYears},</if>
+            <if test="status != null">#{status},</if>
+            <if test="reportingStatus != null">#{reportingStatus},</if>
+            <if test="longitude != null">#{longitude},</if>
+            <if test="latitude != null">#{latitude},</if>
+            <if test="area != null">#{area},</if>
+            <if test="isKeyEnterprise != null">#{isKeyEnterprise},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTEnterprises" parameterType="TEnterprises">
+        update t_enterprises
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="industryCategory != null">industry_category = #{industryCategory},</if>
+            <if test="productionYears != null">production_years = #{productionYears},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="reportingStatus != null">reporting_status = #{reportingStatus},</if>
+            <if test="longitude != null">longitude = #{longitude},</if>
+            <if test="latitude != null">latitude = #{latitude},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="isKeyEnterprise != null">is_key_enterprise = #{isKeyEnterprise},</if>
+        </trim>
+        where enterprise_name = #{enterpriseName}
+    </update>
+
+    <delete id="deleteTEnterprisesByEnterpriseName" parameterType="String">
+        delete from t_enterprises where enterprise_name = #{enterpriseName}
+    </delete>
+
+    <delete id="deleteTEnterprisesByEnterpriseNames" parameterType="String">
+        delete from t_enterprises where enterprise_name in 
+        <foreach item="enterpriseName" collection="array" open="(" separator="," close=")">
+            #{enterpriseName}
+        </foreach>
+    </delete>
+</mapper>

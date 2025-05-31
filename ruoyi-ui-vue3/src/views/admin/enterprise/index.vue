@@ -1,6 +1,14 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
+      <el-form-item label="单位名称" prop="companyName">
+        <el-input
+          v-model="queryParams.companyName"
+          placeholder="请输入单位名称"
+          clearable
+          @keyup.enter="handleQuery"
+        />
+      </el-form-item>
       <el-form-item label="开业时间" prop="startDate">
         <el-date-picker clearable
           v-model="queryParams.startDate"
@@ -8,30 +16,6 @@
           value-format="YYYY-MM-DD"
           placeholder="请选择开业时间">
         </el-date-picker>
-      </el-form-item>
-      <el-form-item label="最新改扩建时间" prop="latestExpansionDate">
-        <el-date-picker clearable
-          v-model="queryParams.latestExpansionDate"
-          type="date"
-          value-format="YYYY-MM-DD"
-          placeholder="请选择最新改扩建时间">
-        </el-date-picker>
-      </el-form-item>
-      <el-form-item label="利用历史起始年份" prop="historyStartYear">
-        <el-input
-          v-model="queryParams.historyStartYear"
-          placeholder="请输入利用历史起始年份"
-          clearable
-          @keyup.enter="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="利用历史结束年份" prop="historyEndYear">
-        <el-input
-          v-model="queryParams.historyEndYear"
-          placeholder="请输入利用历史结束年份"
-          clearable
-          @keyup.enter="handleQuery"
-        />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
@@ -83,43 +67,22 @@
 
     <el-table v-loading="loading" :data="enterpriseList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="主键" align="center" prop="id" />
       <el-table-column label="地块编码" align="center" prop="plotCode" />
       <el-table-column label="地块名称" align="center" prop="plotName" />
       <el-table-column label="单位名称" align="center" prop="companyName" />
       <el-table-column label="统一社会信用代码" align="center" prop="companyCreditCode" />
       <el-table-column label="法定代表人" align="center" prop="legalRepresentative" />
-      <el-table-column label="单位所在地详细地址" align="center" prop="address" />
-      <el-table-column label="行政区划代码" align="center" prop="regionCode" />
-      <el-table-column label="中心经度" align="center" prop="centerLongitude" />
-      <el-table-column label="中心纬度" align="center" prop="centerLatitude" />
-      <el-table-column label="地块占地面积" align="center" prop="areaLandCert" />
-      <el-table-column label="地块实际使用面积" align="center" prop="areaActual" />
-      <el-table-column label="联系人姓名" align="center" prop="contactName" />
-      <el-table-column label="联系人电话" align="center" prop="contactPhone" />
       <el-table-column label="行业类别" align="center" prop="industryCategory" />
-      <el-table-column label="行业代码" align="center" prop="industryCode" />
-      <el-table-column label="登记注册类型" align="center" prop="registrationType" />
-      <el-table-column label="企业规模" align="center" prop="enterpriseScale" />
       <el-table-column label="开业时间" align="center" prop="startDate" width="180">
         <template #default="scope">
           <span>{{ parseTime(scope.row.startDate, '{y}-{m}-{d}') }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="最新改扩建时间" align="center" prop="latestExpansionDate" width="180">
+      <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="200">
         <template #default="scope">
-          <span>{{ parseTime(scope.row.latestExpansionDate, '{y}-{m}-{d}') }}</span>
-        </template>
-      </el-table-column>
-      <el-table-column label="是否位于工业园区或集聚区" align="center" prop="inIndustrialPark" />
-      <el-table-column label="地块利用历史" align="center" prop="historyLandUse" />
-      <el-table-column label="利用历史起始年份" align="center" prop="historyStartYear" />
-      <el-table-column label="利用历史结束年份" align="center" prop="historyEndYear" />
-      <el-table-column label="归属部门ID" align="center" prop="deptId" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template #default="scope">
+          <el-button link type="primary" icon="View" @click="handleDetail(scope.row)">详情</el-button>
           <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['admin:enterprise:edit']">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['admin:enterprise:remove']">删除</el-button>
+          <el-button link type="danger" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['admin:enterprise:remove']">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -133,50 +96,176 @@
     />
 
     <!-- 添加或修改企业信息对话框 -->
-    <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="enterpriseRef" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="地块名称" prop="plotName">
-          <el-input v-model="form.plotName" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="单位名称" prop="companyName">
-          <el-input v-model="form.companyName" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="单位所在地详细地址" prop="address">
-          <el-input v-model="form.address" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="行业类别" prop="industryCategory">
-          <el-input v-model="form.industryCategory" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="开业时间" prop="startDate">
-          <el-date-picker clearable
-            v-model="form.startDate"
-            type="date"
-            value-format="YYYY-MM-DD"
-            placeholder="请选择开业时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="最新改扩建时间" prop="latestExpansionDate">
-          <el-date-picker clearable
-            v-model="form.latestExpansionDate"
-            type="date"
-            value-format="YYYY-MM-DD"
-            placeholder="请选择最新改扩建时间">
-          </el-date-picker>
-        </el-form-item>
-        <el-form-item label="地块利用历史" prop="historyLandUse">
-          <el-input v-model="form.historyLandUse" type="textarea" placeholder="请输入内容" />
-        </el-form-item>
-        <el-form-item label="利用历史起始年份" prop="historyStartYear">
-          <el-input v-model="form.historyStartYear" placeholder="请输入利用历史起始年份" />
-        </el-form-item>
-        <el-form-item label="利用历史结束年份" prop="historyEndYear">
-          <el-input v-model="form.historyEndYear" placeholder="请输入利用历史结束年份" />
-        </el-form-item>
+    <el-dialog :title="title" v-model="open" width="1400px" append-to-body>
+      <el-form ref="enterpriseRef" :model="form" :rules="rules" label-width="180px">
+        <el-row :gutter="20">
+          <el-col :span="12">
+            <el-form-item label="地块编码" prop="plotCode">
+              <el-input v-model="form.plotCode" placeholder="请输入地块编码" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="地块名称" prop="plotName">
+              <el-input v-model="form.plotName" placeholder="请输入地块名称" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="单位名称" prop="companyName">
+              <el-input v-model="form.companyName" placeholder="请输入单位名称" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="统一社会信用代码" prop="companyCreditCode">
+              <el-input v-model="form.companyCreditCode" placeholder="请输入统一社会信用代码" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="法定代表人" prop="legalRepresentative">
+              <el-input v-model="form.legalRepresentative" placeholder="请输入法定代表人" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="地址" prop="address">
+              <el-input v-model="form.address" placeholder="请输入地址" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="行政区划代码" prop="regionCode">
+              <el-input v-model="form.regionCode" placeholder="请输入行政区划代码" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="中心经度" prop="centerLongitude">
+              <el-input v-model="form.centerLongitude" placeholder="请输入中心经度" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="中心纬度" prop="centerLatitude">
+              <el-input v-model="form.centerLatitude" placeholder="请输入中心纬度" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="地块占地面积" prop="areaLandCert">
+              <el-input v-model="form.areaLandCert" placeholder="请输入地块占地面积" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="地块实际使用面积" prop="areaActual">
+              <el-input v-model="form.areaActual" placeholder="请输入地块实际使用面积" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="联系人姓名" prop="contactName">
+              <el-input v-model="form.contactName" placeholder="请输入联系人姓名" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="联系人电话" prop="contactPhone">
+              <el-input v-model="form.contactPhone" placeholder="请输入联系人电话" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="行业类别" prop="industryCategory">
+              <el-input v-model="form.industryCategory" placeholder="请输入行业类别" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="行业代码" prop="industryCode">
+              <el-input v-model="form.industryCode" placeholder="请输入行业代码" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="登记注册类型" prop="registrationType">
+              <el-input v-model="form.registrationType" placeholder="请输入登记注册类型" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="企业规模" prop="enterpriseScale">
+              <el-input v-model="form.enterpriseScale" placeholder="请输入企业规模" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="开业时间" prop="startDate">
+              <el-date-picker clearable
+                v-model="form.startDate"
+                type="date"
+                value-format="YYYY-MM-DD"
+                placeholder="请选择开业时间"
+                style="width: 100%">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="最新改扩建时间" prop="latestExpansionDate">
+              <el-date-picker clearable
+                v-model="form.latestExpansionDate"
+                type="date"
+                value-format="YYYY-MM-DD"
+                placeholder="请选择最新改扩建时间"
+                style="width: 100%">
+              </el-date-picker>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="是否位于工业园区" prop="inIndustrialPark">
+              <el-input v-model="form.inIndustrialPark" placeholder="请输入是否位于工业园区" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="地块利用历史" prop="historyLandUse">
+              <el-input v-model="form.historyLandUse" placeholder="请输入地块利用历史" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="利用历史起始年份" prop="historyStartYear">
+              <el-input v-model="form.historyStartYear" placeholder="请输入利用历史起始年份" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="利用历史结束年份" prop="historyEndYear">
+              <el-input v-model="form.historyEndYear" placeholder="请输入利用历史结束年份" style="width: 100%" />
+            </el-form-item>
+          </el-col>
+        </el-row>
       </el-form>
       <template #footer>
         <div class="dialog-footer">
           <el-button type="primary" @click="submitForm">确 定</el-button>
           <el-button @click="cancel">取 消</el-button>
+        </div>
+      </template>
+    </el-dialog>
+
+    <!-- 企业详情对话框 -->
+    <el-dialog title="企业详情" v-model="detailOpen" width="800px" append-to-body>
+      <el-descriptions :column="2" border>
+        <el-descriptions-item label="地块编码">{{ detailData.plotCode }}</el-descriptions-item>
+        <el-descriptions-item label="地块名称">{{ detailData.plotName }}</el-descriptions-item>
+        <el-descriptions-item label="单位名称">{{ detailData.companyName }}</el-descriptions-item>
+        <el-descriptions-item label="统一社会信用代码">{{ detailData.companyCreditCode }}</el-descriptions-item>
+        <el-descriptions-item label="法定代表人">{{ detailData.legalRepresentative }}</el-descriptions-item>
+        <el-descriptions-item label="地址">{{ detailData.address }}</el-descriptions-item>
+        <el-descriptions-item label="行政区划代码">{{ detailData.regionCode }}</el-descriptions-item>
+        <el-descriptions-item label="中心经度">{{ detailData.centerLongitude }}</el-descriptions-item>
+        <el-descriptions-item label="中心纬度">{{ detailData.centerLatitude }}</el-descriptions-item>
+        <el-descriptions-item label="地块占地面积">{{ detailData.areaLandCert }}</el-descriptions-item>
+        <el-descriptions-item label="地块实际使用面积">{{ detailData.areaActual }}</el-descriptions-item>
+        <el-descriptions-item label="联系人姓名">{{ detailData.contactName }}</el-descriptions-item>
+        <el-descriptions-item label="联系人电话">{{ detailData.contactPhone }}</el-descriptions-item>
+        <el-descriptions-item label="行业类别">{{ detailData.industryCategory }}</el-descriptions-item>
+        <el-descriptions-item label="行业代码">{{ detailData.industryCode }}</el-descriptions-item>
+        <el-descriptions-item label="登记注册类型">{{ detailData.registrationType }}</el-descriptions-item>
+        <el-descriptions-item label="企业规模">{{ detailData.enterpriseScale }}</el-descriptions-item>
+        <el-descriptions-item label="开业时间">{{ parseTime(detailData.startDate, '{y}-{m}-{d}') }}</el-descriptions-item>
+        <el-descriptions-item label="最新改扩建时间">{{ parseTime(detailData.latestExpansionDate, '{y}-{m}-{d}') }}</el-descriptions-item>
+        <el-descriptions-item label="是否位于工业园区或集聚区">{{ detailData.inIndustrialPark }}</el-descriptions-item>
+        <el-descriptions-item label="地块利用历史">{{ detailData.historyLandUse }}</el-descriptions-item>
+        <el-descriptions-item label="利用历史起始年份">{{ detailData.historyStartYear }}</el-descriptions-item>
+        <el-descriptions-item label="利用历史结束年份">{{ detailData.historyEndYear }}</el-descriptions-item>
+      </el-descriptions>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button @click="detailOpen = false">关 闭</el-button>
         </div>
       </template>
     </el-dialog>
@@ -197,6 +286,8 @@ const single = ref(true);
 const multiple = ref(true);
 const total = ref(0);
 const title = ref("");
+const detailOpen = ref(false);
+const detailData = ref({});
 
 const data = reactive({
   form: {},
@@ -396,6 +487,14 @@ function handleExport() {
   proxy.download('admin/enterprise/export', {
     ...queryParams.value
   }, `enterprise_${new Date().getTime()}.xlsx`)
+}
+
+/** 查看详情按钮操作 */
+function handleDetail(row) {
+  getEnterprise(row.id).then(response => {
+    detailData.value = response.data;
+    detailOpen.value = true;
+  });
 }
 
 getList();

@@ -41,7 +41,7 @@ public class TWorkshopEnvironmentController extends BaseController {
      * 查询生产车间分布与环境情况列表
      */
     @ApiOperation("查询生产车间分布与环境情况列表")
-    @PreAuthorize("@ss.hasPermi('admin:workshopEnvironment:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:workshopEnvironment:list')")
     @GetMapping("/list")
     public TableDataInfo list(TWorkshopEnvironment tWorkshopEnvironment) {
         startPage();
@@ -53,7 +53,7 @@ public class TWorkshopEnvironmentController extends BaseController {
      * 导出生产车间分布与环境情况列表
      */
     @ApiOperation("导出生产车间分布与环境情况列表")
-    @PreAuthorize("@ss.hasPermi('admin:workshopEnvironment:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:workshopEnvironment:export')")
     @Log(title = "生产车间分布与环境情况", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TWorkshopEnvironment tWorkshopEnvironment) {
@@ -66,7 +66,7 @@ public class TWorkshopEnvironmentController extends BaseController {
      * 获取生产车间分布与环境情况详细信息
      */
     @ApiOperation("获取生产车间分布与环境情况详细信息")
-    @PreAuthorize("@ss.hasPermi('admin:workshopEnvironment:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:workshopEnvironment:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(tWorkshopEnvironmentService.selectTWorkshopEnvironmentById(id));
@@ -76,7 +76,7 @@ public class TWorkshopEnvironmentController extends BaseController {
      * 新增生产车间分布与环境情况
      */
     @ApiOperation("新增生产车间分布与环境情况")
-    @PreAuthorize("@ss.hasPermi('admin:workshopEnvironment:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:workshopEnvironment:add')")
     @Log(title = "生产车间分布与环境情况", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TWorkshopEnvironment tWorkshopEnvironment) {
@@ -87,7 +87,7 @@ public class TWorkshopEnvironmentController extends BaseController {
      * 修改生产车间分布与环境情况
      */
     @ApiOperation("修改生产车间分布与环境情况")
-    @PreAuthorize("@ss.hasPermi('admin:workshopEnvironment:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:workshopEnvironment:edit')")
     @Log(title = "生产车间分布与环境情况", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TWorkshopEnvironment tWorkshopEnvironment) {
@@ -98,7 +98,7 @@ public class TWorkshopEnvironmentController extends BaseController {
      * 删除生产车间分布与环境情况
      */
     @ApiOperation("删除生产车间分布与环境情况")
-    @PreAuthorize("@ss.hasPermi('admin:workshopEnvironment:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:workshopEnvironment:remove')")
     @Log(title = "生产车间分布与环境情况", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {

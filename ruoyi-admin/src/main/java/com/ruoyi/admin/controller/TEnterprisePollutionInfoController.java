@@ -41,7 +41,7 @@ public class TEnterprisePollutionInfoController extends BaseController {
      * 查询企业污染源列表
      */
     @ApiOperation("查询企业污染源列表")
-    @PreAuthorize("@ss.hasPermi('admin:pollution:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:pollution:list')")
     @GetMapping("/list")
     public TableDataInfo list(TEnterprisePollutionInfo tEnterprisePollutionInfo) {
         startPage();
@@ -53,7 +53,7 @@ public class TEnterprisePollutionInfoController extends BaseController {
      * 导出企业污染源列表
      */
     @ApiOperation("导出企业污染源列表")
-    @PreAuthorize("@ss.hasPermi('admin:pollution:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:pollution:export')")
     @Log(title = "企业污染源", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TEnterprisePollutionInfo tEnterprisePollutionInfo) {
@@ -66,7 +66,7 @@ public class TEnterprisePollutionInfoController extends BaseController {
      * 获取企业污染源详细信息
      */
     @ApiOperation("获取企业污染源详细信息")
-    @PreAuthorize("@ss.hasPermi('admin:pollution:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:pollution:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(tEnterprisePollutionInfoService.selectTEnterprisePollutionInfoById(id));
@@ -76,7 +76,7 @@ public class TEnterprisePollutionInfoController extends BaseController {
      * 新增企业污染源
      */
     @ApiOperation("新增企业污染源")
-    @PreAuthorize("@ss.hasPermi('admin:pollution:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:pollution:add')")
     @Log(title = "企业污染源", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TEnterprisePollutionInfo tEnterprisePollutionInfo) {
@@ -87,7 +87,7 @@ public class TEnterprisePollutionInfoController extends BaseController {
      * 修改企业污染源
      */
     @ApiOperation("修改企业污染源")
-    @PreAuthorize("@ss.hasPermi('admin:pollution:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:pollution:edit')")
     @Log(title = "企业污染源", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TEnterprisePollutionInfo tEnterprisePollutionInfo) {
@@ -98,7 +98,7 @@ public class TEnterprisePollutionInfoController extends BaseController {
      * 删除企业污染源
      */
     @ApiOperation("删除企业污染源")
-    @PreAuthorize("@ss.hasPermi('admin:pollution:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:pollution:remove')")
     @Log(title = "企业污染源", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {

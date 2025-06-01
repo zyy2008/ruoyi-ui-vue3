@@ -39,7 +39,7 @@ public class TMonitoringWellsController extends BaseController {
 
 
     @ApiOperation("查询园区所有监测井信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:wells:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:wells:list')")
     @GetMapping("/all")
     public TableDataInfo all(TMonitoringWells tMonitoringWells) {
         List<TMonitoringWells> list = tMonitoringWellsService.selectTMonitoringWellsList(tMonitoringWells);
@@ -50,7 +50,7 @@ public class TMonitoringWellsController extends BaseController {
      * 查询园区监测井信息列表
      */
     @ApiOperation("查询园区监测井信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:wells:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:wells:list')")
     @GetMapping("/list")
     public TableDataInfo list(TMonitoringWells tMonitoringWells) {
         startPage();
@@ -62,7 +62,7 @@ public class TMonitoringWellsController extends BaseController {
      * 导出园区监测井信息列表
      */
     @ApiOperation("导出园区监测井信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:wells:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:wells:export')")
     @Log(title = "园区监测井信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TMonitoringWells tMonitoringWells) {
@@ -75,7 +75,7 @@ public class TMonitoringWellsController extends BaseController {
      * 获取园区监测井信息详细信息
      */
     @ApiOperation("获取园区监测井信息详细信息")
-    @PreAuthorize("@ss.hasPermi('admin:wells:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:wells:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") String id) {
         return success(tMonitoringWellsService.selectTMonitoringWellsById(id));
@@ -85,7 +85,7 @@ public class TMonitoringWellsController extends BaseController {
      * 新增园区监测井信息
      */
     @ApiOperation("新增园区监测井信息")
-    @PreAuthorize("@ss.hasPermi('admin:wells:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:wells:add')")
     @Log(title = "园区监测井信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TMonitoringWells tMonitoringWells) {
@@ -96,7 +96,7 @@ public class TMonitoringWellsController extends BaseController {
      * 修改园区监测井信息
      */
     @ApiOperation("修改园区监测井信息")
-    @PreAuthorize("@ss.hasPermi('admin:wells:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:wells:edit')")
     @Log(title = "园区监测井信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TMonitoringWells tMonitoringWells) {
@@ -107,7 +107,7 @@ public class TMonitoringWellsController extends BaseController {
      * 删除园区监测井信息
      */
     @ApiOperation("删除园区监测井信息")
-    @PreAuthorize("@ss.hasPermi('admin:wells:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:wells:remove')")
     @Log(title = "园区监测井信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable String[] ids) {

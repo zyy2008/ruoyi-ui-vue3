@@ -41,7 +41,7 @@ public class TMainProductsController extends BaseController {
      * 查询主要产品信息列表
      */
     @ApiOperation("查询主要产品信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:mainProducts:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:mainProducts:list')")
     @GetMapping("/list")
     public TableDataInfo list(TMainProducts tMainProducts) {
         startPage();
@@ -53,7 +53,7 @@ public class TMainProductsController extends BaseController {
      * 导出主要产品信息列表
      */
     @ApiOperation("导出主要产品信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:mainProducts:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:mainProducts:export')")
     @Log(title = "主要产品信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TMainProducts tMainProducts) {
@@ -66,7 +66,7 @@ public class TMainProductsController extends BaseController {
      * 获取主要产品信息详细信息
      */
     @ApiOperation("获取主要产品信息详细信息")
-    @PreAuthorize("@ss.hasPermi('admin:mainProducts:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:mainProducts:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(tMainProductsService.selectTMainProductsById(id));
@@ -76,7 +76,7 @@ public class TMainProductsController extends BaseController {
      * 新增主要产品信息
      */
     @ApiOperation("新增主要产品信息")
-    @PreAuthorize("@ss.hasPermi('admin:mainProducts:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:mainProducts:add')")
     @Log(title = "主要产品信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TMainProducts tMainProducts) {
@@ -87,7 +87,7 @@ public class TMainProductsController extends BaseController {
      * 修改主要产品信息
      */
     @ApiOperation("修改主要产品信息")
-    @PreAuthorize("@ss.hasPermi('admin:mainProducts:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:mainProducts:edit')")
     @Log(title = "主要产品信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TMainProducts tMainProducts) {
@@ -98,7 +98,7 @@ public class TMainProductsController extends BaseController {
      * 删除主要产品信息
      */
     @ApiOperation("删除主要产品信息")
-    @PreAuthorize("@ss.hasPermi('admin:mainProducts:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:mainProducts:remove')")
     @Log(title = "主要产品信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {

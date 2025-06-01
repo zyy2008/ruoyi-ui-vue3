@@ -41,7 +41,7 @@ public class TEnterprisePlotsController extends BaseController {
      * 查询在产企业地块信息列表
      */
     @ApiOperation("查询在产企业地块信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:enterprise:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:enterprise:list')")
     @GetMapping("/list")
     public TableDataInfo list(TEnterprisePlots tEnterprisePlots) {
         startPage();
@@ -53,7 +53,7 @@ public class TEnterprisePlotsController extends BaseController {
      * 导出在产企业地块信息列表
      */
     @ApiOperation("导出在产企业地块信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:enterprise:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:enterprise:export')")
     @Log(title = "在产企业地块信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TEnterprisePlots tEnterprisePlots) {
@@ -66,7 +66,7 @@ public class TEnterprisePlotsController extends BaseController {
      * 获取在产企业地块信息详细信息
      */
     @ApiOperation("获取在产企业地块信息详细信息")
-    @PreAuthorize("@ss.hasPermi('admin:enterprise:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:enterprise:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(tEnterprisePlotsService.selectTEnterprisePlotsById(id));
@@ -76,7 +76,7 @@ public class TEnterprisePlotsController extends BaseController {
      * 新增在产企业地块信息
      */
     @ApiOperation("新增在产企业地块信息")
-    @PreAuthorize("@ss.hasPermi('admin:enterprise:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:enterprise:add')")
     @Log(title = "在产企业地块信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TEnterprisePlots tEnterprisePlots) {
@@ -87,7 +87,7 @@ public class TEnterprisePlotsController extends BaseController {
      * 修改在产企业地块信息
      */
     @ApiOperation("修改在产企业地块信息")
-    @PreAuthorize("@ss.hasPermi('admin:enterprise:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:enterprise:edit')")
     @Log(title = "在产企业地块信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TEnterprisePlots tEnterprisePlots) {
@@ -98,7 +98,7 @@ public class TEnterprisePlotsController extends BaseController {
      * 删除在产企业地块信息
      */
     @ApiOperation("删除在产企业地块信息")
-    @PreAuthorize("@ss.hasPermi('admin:enterprise:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:enterprise:remove')")
     @Log(title = "在产企业地块信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {

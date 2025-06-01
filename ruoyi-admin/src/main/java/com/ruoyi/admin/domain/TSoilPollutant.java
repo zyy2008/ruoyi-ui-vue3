@@ -28,27 +28,27 @@ public class TSoilPollutant extends BaseEntity {
     /**
      * 关联的土壤监测记录ID
      */
-    @ApiModelProperty("主键ID")
+    @ApiModelProperty("关联的土壤监测记录ID")
     private Long monitoringId;
 
     /**
      * 超标污染物名称
      */
     @Excel(name = "超标污染物名称")
-    @ApiModelProperty("主键ID")
+    @ApiModelProperty("超标污染物名称")
     private String pollutantName;
 
     /**
      * 最大浓度（mg/kg）
      */
     @Excel(name = "最大浓度", readConverterExp = "m=g/kg")
-    @ApiModelProperty("主键ID")
+    @ApiModelProperty("最大浓度")
     private String maxConcentrationMgkg;
 
     /**
      * 归属部门
      */
     @Excel(name = "归属部门")
-    @ApiModelProperty("主键ID")
-    private Long deptId;
+    @ApiModelProperty("归属部门")
+    private String deptId;
 }

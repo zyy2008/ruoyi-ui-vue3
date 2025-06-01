@@ -14,6 +14,7 @@ const useUserStore = defineStore("user", {
     baseIds: [],
     deptId: "",
     baseName: "",
+    enterpriseId: "",
   }),
   actions: {
     // 登录
@@ -40,6 +41,7 @@ const useUserStore = defineStore("user", {
         getInfo()
           .then(async (res) => {
             const user = res.user;
+            const enterprise = res?.enterprise;
             const avatar =
               user.avatar == "" || user.avatar == null
                 ? defAva
@@ -57,7 +59,8 @@ const useUserStore = defineStore("user", {
             this.deptId = user.deptId;
             this.name = user.userName;
             this.avatar = avatar;
-            this.baseName = user.baseName;
+            this.baseName = enterprise?.enterpriseName;
+            this.enterpriseId = enterprise?.id;
             this.baseIds = user.baseIds; //多个基地
             if (user.roles && user.roles.length > 0) {
               this.roleId = user.roles[0].roleId;

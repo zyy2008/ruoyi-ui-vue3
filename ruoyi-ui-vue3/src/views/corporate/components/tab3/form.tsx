@@ -56,7 +56,7 @@ const props: ISchemaFieldProps = {
 const form = createForm();
 export default defineComponent({
   setup() {
-    const { deptId } = userStore();
+    const { enterpriseId: deptId } = userStore();
 
     return () => (
       <div class="app-container">

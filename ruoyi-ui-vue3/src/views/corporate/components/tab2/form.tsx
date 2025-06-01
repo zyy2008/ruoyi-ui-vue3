@@ -295,7 +295,7 @@ const props: ISchemaFieldProps = {
 
 export default defineComponent({
   setup() {
-    const { deptId } = userStore();
+    const { enterpriseId: deptId } = userStore();
 
     const form = createForm();
 

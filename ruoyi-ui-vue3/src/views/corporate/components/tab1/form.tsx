@@ -237,7 +237,7 @@ const form = createForm();
 
 export default defineComponent({
   setup() {
-    const { deptId } = userStore();
+    const { enterpriseId: deptId } = userStore();
     const { run, loading, data } = useRequest(() =>
       API.getAdminEnterpriseList({
         deptId,

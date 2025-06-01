@@ -150,7 +150,7 @@ export default observer(
     setup() {
       const { data, run } = useRequest(() =>
         API.getAdminGroundwaterPollutantList({
-          deptId: userStore().deptId,
+          deptId: userStore().enterpriseId,
         })
       );
       watchEffect(() => {

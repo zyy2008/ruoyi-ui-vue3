@@ -190,6 +190,7 @@
         display: flex;
         justify-content: space-around;
         align-items: center;
+        cursor: pointer;
       }
 
       .text {
@@ -242,6 +243,10 @@
       --el-table-border-color: none;
       --el-table-row-hover-bg-color: none
     }
+
+    .el-table .el-table__row:hover {
+    cursor: pointer;
+}
 
     .el-table .el-table__header-wrapper th,
     .el-table .el-table__fixed-header-wrapper th {

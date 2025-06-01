@@ -78,10 +78,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		u.base_id,
 		d.dept_name,
 		d.leader,
-		u.base_name
+		e.enterprise_name as base_name
 		FROM sys_user u
 		LEFT JOIN sys_dept d ON u.dept_id = d.dept_id
 		LEFT JOIN sys_user_base sub ON sub.user_id = u.user_id
+		LEFT JOIN t_enterprises e on u.base_id = e.id
 		WHERE u.del_flag = '0'
 		<if test="userId != null and userId != 0">
 			AND u.user_id = #{userId}
@@ -127,7 +128,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		u.remark,
 		u.base_id,
 		d.dept_name,
-		d.leader
+		d.leader,
+		e.enterprise_name
 		ORDER BY u.user_id
 	</select>
     <select id="selectUserListByBaseId" parameterType="Object" resultMap="SysUserResult">
@@ -219,6 +221,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="createBy != null and createBy != ''">create_by,</if>
  			<if test="remark != null and remark != ''">remark,</if>
 		    <if test="baseName != null">base_name = #{baseName},</if>
+		    <if test="baseId != null">base_id = #{baseId},</if>
  			create_time
  		)values(
  			<if test="userId != null and userId != ''">#{userId},</if>
@@ -234,6 +237,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="createBy != null and createBy != ''">#{createBy},</if>
  			<if test="remark != null and remark != ''">#{remark},</if>
 		    <if test="baseName != null">base_name = #{baseName},</if>
+		    <if test="baseId != null">base_id = #{baseId},</if>
  			current_timestamp
  		)
 	</insert>
@@ -255,6 +259,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  			<if test="updateBy != null and updateBy != ''">update_by = #{updateBy},</if>
  			<if test="remark != null">remark = #{remark},</if>
 			<if test="baseName != null">base_name = #{baseName},</if>
+			<if test="baseId != null">base_id = #{baseId},</if>
  			update_time = current_timestamp
  		</set>
  		where user_id = #{userId}

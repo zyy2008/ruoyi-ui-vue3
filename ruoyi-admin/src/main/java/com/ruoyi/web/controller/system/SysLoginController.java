@@ -1,5 +1,7 @@
 package com.ruoyi.web.controller.system;
 
+import com.ruoyi.admin.domain.TEnterprises;
+import com.ruoyi.admin.service.ITEnterprisesService;
 import com.ruoyi.common.constant.Constants;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.core.domain.entity.SysMenu;
@@ -7,6 +9,7 @@ import com.ruoyi.common.core.domain.entity.SysUser;
 import com.ruoyi.common.core.domain.model.LoginBody;
 import com.ruoyi.common.system.service.ISysMenuService;
 import com.ruoyi.common.utils.SecurityUtils;
+import com.ruoyi.common.utils.StringUtils;
 import com.ruoyi.framework.web.service.SysLoginService;
 import com.ruoyi.framework.web.service.SysPermissionService;
 import io.swagger.annotations.Api;
@@ -35,6 +38,9 @@ public class SysLoginController {
 
     @Autowired
     private SysPermissionService permissionService;
+
+    @Autowired
+    private ITEnterprisesService itEnterprisesService;
 
     /**
      * 登录方法
@@ -68,6 +74,12 @@ public class SysLoginController {
         ajax.put("user", user);
         ajax.put("roles", roles);
         ajax.put("permissions", permissions);
+
+        String enterpriseId=user.getBaseId();
+        if (StringUtils.isNotNull(enterpriseId)){
+            TEnterprises enterprise=itEnterprisesService.selectTEnterprisesById(enterpriseId);
+            ajax.put("enterprise",enterprise);
+        }
         return ajax;
     }
 

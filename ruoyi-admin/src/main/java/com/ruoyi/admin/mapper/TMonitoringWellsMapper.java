@@ -17,7 +17,7 @@ public interface TMonitoringWellsMapper
      * @param id 园区初调监测井信息，记录每个监测井的基础属性与附加信息主键
      * @return 园区初调监测井信息，记录每个监测井的基础属性与附加信息
      */
-    public TMonitoringWells selectTMonitoringWellsById(Long id);
+    public TMonitoringWells selectTMonitoringWellsById(String id);
 
     /**
      * 查询园区初调监测井信息，记录每个监测井的基础属性与附加信息列表
@@ -49,7 +49,7 @@ public interface TMonitoringWellsMapper
      * @param id 园区初调监测井信息，记录每个监测井的基础属性与附加信息主键
      * @return 结果
      */
-    public int deleteTMonitoringWellsById(Long id);
+    public int deleteTMonitoringWellsById(String id);
 
     /**
      * 批量删除园区初调监测井信息，记录每个监测井的基础属性与附加信息
@@ -57,5 +57,5 @@ public interface TMonitoringWellsMapper
      * @param ids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteTMonitoringWellsByIds(Long[] ids);
+    public int deleteTMonitoringWellsByIds(String[] ids);
 }

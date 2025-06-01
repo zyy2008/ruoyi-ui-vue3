@@ -1,5 +1,7 @@
 package com.ruoyi.web.controller.system;
 
+import com.ruoyi.admin.domain.TEnterprises;
+import com.ruoyi.admin.service.ITEnterprisesService;
 import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
@@ -45,6 +47,8 @@ public class SysUserController extends BaseController {
 
     @Autowired
     private ISysPostService postService;
+
+
 
     /**
      * 获取用户列表

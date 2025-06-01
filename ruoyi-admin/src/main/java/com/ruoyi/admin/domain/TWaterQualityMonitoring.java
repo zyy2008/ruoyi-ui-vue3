@@ -1,24 +1,26 @@
 package com.ruoyi.admin.domain;
 
-import com.ruoyi.common.core.domain.BaseEntity;
-import com.ruoyi.common.annotation.Excel;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+import com.ruoyi.common.annotation.Excel;
+import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 【请填写功能名称】对象 t_water_quality_monitoring
- * 
+ * 监测数据管理对象 t_water_quality_monitoring
+ *
  * @author ruoyi
- * @date 2025-05-30
+ * @date 2025-06-01
  */
 public class TWaterQualityMonitoring extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
     /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private String pointId;
 
     /** $column.columnComment */
+    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private String sampleTime;
 
     /** $column.columnComment */
@@ -357,870 +359,883 @@ public class TWaterQualityMonitoring extends BaseEntity
     @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
     private String trichloropropane123;
 
-    public void setPointId(String pointId) 
+    /** $column.columnComment */
+    private String id;
+
+    public void setPointId(String pointId)
     {
         this.pointId = pointId;
     }
 
-    public String getPointId() 
+    public String getPointId()
     {
         return pointId;
     }
-    public void setSampleTime(String sampleTime) 
+    public void setSampleTime(String sampleTime)
     {
         this.sampleTime = sampleTime;
     }
 
-    public String getSampleTime() 
+    public String getSampleTime()
     {
         return sampleTime;
     }
-    public void setColor(String color) 
+    public void setColor(String color)
     {
         this.color = color;
     }
 
-    public String getColor() 
+    public String getColor()
     {
         return color;
     }
-    public void setOdorAndTaste(String odorAndTaste) 
+    public void setOdorAndTaste(String odorAndTaste)
     {
         this.odorAndTaste = odorAndTaste;
     }
 
-    public String getOdorAndTaste() 
+    public String getOdorAndTaste()
     {
         return odorAndTaste;
     }
-    public void setTurbidity(String turbidity) 
+    public void setTurbidity(String turbidity)
     {
         this.turbidity = turbidity;
     }
 
-    public String getTurbidity() 
+    public String getTurbidity()
     {
         return turbidity;
     }
-    public void setVisibleMatters(String visibleMatters) 
+    public void setVisibleMatters(String visibleMatters)
     {
         this.visibleMatters = visibleMatters;
     }
 
-    public String getVisibleMatters() 
+    public String getVisibleMatters()
     {
         return visibleMatters;
     }
-    public void setPh(String ph) 
+    public void setPh(String ph)
     {
         this.ph = ph;
     }
 
-    public String getPh() 
+    public String getPh()
     {
         return ph;
     }
-    public void setTotalHardness(String totalHardness) 
+    public void setTotalHardness(String totalHardness)
     {
         this.totalHardness = totalHardness;
     }
 
-    public String getTotalHardness() 
+    public String getTotalHardness()
     {
         return totalHardness;
     }
-    public void setTotalDissolvedSolids(String totalDissolvedSolids) 
+    public void setTotalDissolvedSolids(String totalDissolvedSolids)
     {
         this.totalDissolvedSolids = totalDissolvedSolids;
     }
 
-    public String getTotalDissolvedSolids() 
+    public String getTotalDissolvedSolids()
     {
         return totalDissolvedSolids;
     }
-    public void setSulfate(String sulfate) 
+    public void setSulfate(String sulfate)
     {
         this.sulfate = sulfate;
     }
 
-    public String getSulfate() 
+    public String getSulfate()
     {
         return sulfate;
     }
-    public void setChloride(String chloride) 
+    public void setChloride(String chloride)
     {
         this.chloride = chloride;
     }
 
-    public String getChloride() 
+    public String getChloride()
     {
         return chloride;
     }
-    public void setIron(String iron) 
+    public void setIron(String iron)
     {
         this.iron = iron;
     }
 
-    public String getIron() 
+    public String getIron()
     {
         return iron;
     }
-    public void setManganese(String manganese) 
+    public void setManganese(String manganese)
     {
         this.manganese = manganese;
     }
 
-    public String getManganese() 
+    public String getManganese()
     {
         return manganese;
     }
-    public void setAluminum(String aluminum) 
+    public void setAluminum(String aluminum)
     {
         this.aluminum = aluminum;
     }
 
-    public String getAluminum() 
+    public String getAluminum()
     {
         return aluminum;
     }
-    public void setAnionicSurfactant(String anionicSurfactant) 
+    public void setAnionicSurfactant(String anionicSurfactant)
     {
         this.anionicSurfactant = anionicSurfactant;
     }
 
-    public String getAnionicSurfactant() 
+    public String getAnionicSurfactant()
     {
         return anionicSurfactant;
     }
-    public void setOxygenConsumption(String oxygenConsumption) 
+    public void setOxygenConsumption(String oxygenConsumption)
     {
         this.oxygenConsumption = oxygenConsumption;
     }
 
-    public String getOxygenConsumption() 
+    public String getOxygenConsumption()
     {
         return oxygenConsumption;
     }
-    public void setSulfide(String sulfide) 
+    public void setSulfide(String sulfide)
     {
         this.sulfide = sulfide;
     }
 
-    public String getSulfide() 
+    public String getSulfide()
     {
         return sulfide;
     }
-    public void setSodium(String sodium) 
+    public void setSodium(String sodium)
     {
         this.sodium = sodium;
     }
 
-    public String getSodium() 
+    public String getSodium()
     {
         return sodium;
     }
-    public void setNitriteNitrogen(String nitriteNitrogen) 
+    public void setNitriteNitrogen(String nitriteNitrogen)
     {
         this.nitriteNitrogen = nitriteNitrogen;
     }
 
-    public String getNitriteNitrogen() 
+    public String getNitriteNitrogen()
     {
         return nitriteNitrogen;
     }
-    public void setNitrateNitrogen(String nitrateNitrogen) 
+    public void setNitrateNitrogen(String nitrateNitrogen)
     {
         this.nitrateNitrogen = nitrateNitrogen;
     }
 
-    public String getNitrateNitrogen() 
+    public String getNitrateNitrogen()
     {
         return nitrateNitrogen;
     }
-    public void setIodide(String iodide) 
+    public void setIodide(String iodide)
     {
         this.iodide = iodide;
     }
 
-    public String getIodide() 
+    public String getIodide()
     {
         return iodide;
     }
-    public void setSelenium(String selenium) 
+    public void setSelenium(String selenium)
     {
         this.selenium = selenium;
     }
 
-    public String getSelenium() 
+    public String getSelenium()
     {
         return selenium;
     }
-    public void setCopper(String copper) 
+    public void setCopper(String copper)
     {
         this.copper = copper;
     }
 
-    public String getCopper() 
+    public String getCopper()
     {
         return copper;
     }
-    public void setZinc(String zinc) 
+    public void setZinc(String zinc)
     {
         this.zinc = zinc;
     }
 
-    public String getZinc() 
+    public String getZinc()
     {
         return zinc;
     }
-    public void setVolatilePhenol(String volatilePhenol) 
+    public void setVolatilePhenol(String volatilePhenol)
     {
         this.volatilePhenol = volatilePhenol;
     }
 
-    public String getVolatilePhenol() 
+    public String getVolatilePhenol()
     {
         return volatilePhenol;
     }
-    public void setAmmoniaNitrogen(String ammoniaNitrogen) 
+    public void setAmmoniaNitrogen(String ammoniaNitrogen)
     {
         this.ammoniaNitrogen = ammoniaNitrogen;
     }
 
-    public String getAmmoniaNitrogen() 
+    public String getAmmoniaNitrogen()
     {
         return ammoniaNitrogen;
     }
-    public void setCyanide(String cyanide) 
+    public void setCyanide(String cyanide)
     {
         this.cyanide = cyanide;
     }
 
-    public String getCyanide() 
+    public String getCyanide()
     {
         return cyanide;
     }
-    public void setFluoride(String fluoride) 
+    public void setFluoride(String fluoride)
     {
         this.fluoride = fluoride;
     }
 
-    public String getFluoride() 
+    public String getFluoride()
     {
         return fluoride;
     }
-    public void setMercury(String mercury) 
+    public void setMercury(String mercury)
     {
         this.mercury = mercury;
     }
 
-    public String getMercury() 
+    public String getMercury()
     {
         return mercury;
     }
-    public void setArsenic(String arsenic) 
+    public void setArsenic(String arsenic)
     {
         this.arsenic = arsenic;
     }
 
-    public String getArsenic() 
+    public String getArsenic()
     {
         return arsenic;
     }
-    public void setCadmium(String cadmium) 
+    public void setCadmium(String cadmium)
     {
         this.cadmium = cadmium;
     }
 
-    public String getCadmium() 
+    public String getCadmium()
     {
         return cadmium;
     }
-    public void setChromiumVi(String chromiumVi) 
+    public void setChromiumVi(String chromiumVi)
     {
         this.chromiumVi = chromiumVi;
     }
 
-    public String getChromiumVi() 
+    public String getChromiumVi()
     {
         return chromiumVi;
     }
-    public void setLead(String lead) 
+    public void setLead(String lead)
     {
         this.lead = lead;
     }
 
-    public String getLead() 
+    public String getLead()
     {
         return lead;
     }
-    public void setChloroform(String chloroform) 
+    public void setChloroform(String chloroform)
     {
         this.chloroform = chloroform;
     }
 
-    public String getChloroform() 
+    public String getChloroform()
     {
         return chloroform;
     }
-    public void setCarbonTetrachloride(String carbonTetrachloride) 
+    public void setCarbonTetrachloride(String carbonTetrachloride)
     {
         this.carbonTetrachloride = carbonTetrachloride;
     }
 
-    public String getCarbonTetrachloride() 
+    public String getCarbonTetrachloride()
     {
         return carbonTetrachloride;
     }
-    public void setBenzene(String benzene) 
+    public void setBenzene(String benzene)
     {
         this.benzene = benzene;
     }
 
-    public String getBenzene() 
+    public String getBenzene()
     {
         return benzene;
     }
-    public void setToluene(String toluene) 
+    public void setToluene(String toluene)
     {
         this.toluene = toluene;
     }
 
-    public String getToluene() 
+    public String getToluene()
     {
         return toluene;
     }
-    public void setMolybdenum(String molybdenum) 
+    public void setMolybdenum(String molybdenum)
     {
         this.molybdenum = molybdenum;
     }
 
-    public String getMolybdenum() 
+    public String getMolybdenum()
     {
         return molybdenum;
     }
-    public void setVanadium(String vanadium) 
+    public void setVanadium(String vanadium)
     {
         this.vanadium = vanadium;
     }
 
-    public String getVanadium() 
+    public String getVanadium()
     {
         return vanadium;
     }
-    public void setCobalt(String cobalt) 
+    public void setCobalt(String cobalt)
     {
         this.cobalt = cobalt;
     }
 
-    public String getCobalt() 
+    public String getCobalt()
     {
         return cobalt;
     }
-    public void setNickel(String nickel) 
+    public void setNickel(String nickel)
     {
         this.nickel = nickel;
     }
 
-    public String getNickel() 
+    public String getNickel()
     {
         return nickel;
     }
-    public void setDichloromethane(String dichloromethane) 
+    public void setDichloromethane(String dichloromethane)
     {
         this.dichloromethane = dichloromethane;
     }
 
-    public String getDichloromethane() 
+    public String getDichloromethane()
     {
         return dichloromethane;
     }
-    public void setDichloroethane12(String dichloroethane12) 
+    public void setDichloroethane12(String dichloroethane12)
     {
         this.dichloroethane12 = dichloroethane12;
     }
 
-    public String getDichloroethane12() 
+    public String getDichloroethane12()
     {
         return dichloroethane12;
     }
-    public void setTrichloroethane111(String trichloroethane111) 
+    public void setTrichloroethane111(String trichloroethane111)
     {
         this.trichloroethane111 = trichloroethane111;
     }
 
-    public String getTrichloroethane111() 
+    public String getTrichloroethane111()
     {
         return trichloroethane111;
     }
-    public void setTrichloroethane112(String trichloroethane112) 
+    public void setTrichloroethane112(String trichloroethane112)
     {
         this.trichloroethane112 = trichloroethane112;
     }
 
-    public String getTrichloroethane112() 
+    public String getTrichloroethane112()
     {
         return trichloroethane112;
     }
-    public void setDichloropropane12(String dichloropropane12) 
+    public void setDichloropropane12(String dichloropropane12)
     {
         this.dichloropropane12 = dichloropropane12;
     }
 
-    public String getDichloropropane12() 
+    public String getDichloropropane12()
     {
         return dichloropropane12;
     }
-    public void setVinylChloride(String vinylChloride) 
+    public void setVinylChloride(String vinylChloride)
     {
         this.vinylChloride = vinylChloride;
     }
 
-    public String getVinylChloride() 
+    public String getVinylChloride()
     {
         return vinylChloride;
     }
-    public void setDichloroethylene11(String dichloroethylene11) 
+    public void setDichloroethylene11(String dichloroethylene11)
     {
         this.dichloroethylene11 = dichloroethylene11;
     }
 
-    public String getDichloroethylene11() 
+    public String getDichloroethylene11()
     {
         return dichloroethylene11;
     }
-    public void setTransDichloroethylene12(String transDichloroethylene12) 
+    public void setTransDichloroethylene12(String transDichloroethylene12)
     {
         this.transDichloroethylene12 = transDichloroethylene12;
     }
 
-    public String getTransDichloroethylene12() 
+    public String getTransDichloroethylene12()
     {
         return transDichloroethylene12;
     }
-    public void setCisDichloroethylene12(String cisDichloroethylene12) 
+    public void setCisDichloroethylene12(String cisDichloroethylene12)
     {
         this.cisDichloroethylene12 = cisDichloroethylene12;
     }
 
-    public String getCisDichloroethylene12() 
+    public String getCisDichloroethylene12()
     {
         return cisDichloroethylene12;
     }
-    public void setTrichloroethylene(String trichloroethylene) 
+    public void setTrichloroethylene(String trichloroethylene)
     {
         this.trichloroethylene = trichloroethylene;
     }
 
-    public String getTrichloroethylene() 
+    public String getTrichloroethylene()
     {
         return trichloroethylene;
     }
-    public void setTetrachloroethylene(String tetrachloroethylene) 
+    public void setTetrachloroethylene(String tetrachloroethylene)
     {
         this.tetrachloroethylene = tetrachloroethylene;
     }
 
-    public String getTetrachloroethylene() 
+    public String getTetrachloroethylene()
     {
         return tetrachloroethylene;
     }
-    public void setChlorobenzene(String chlorobenzene) 
+    public void setChlorobenzene(String chlorobenzene)
     {
         this.chlorobenzene = chlorobenzene;
     }
 
-    public String getChlorobenzene() 
+    public String getChlorobenzene()
     {
         return chlorobenzene;
     }
-    public void setDichlorobenzene12(String dichlorobenzene12) 
+    public void setDichlorobenzene12(String dichlorobenzene12)
     {
         this.dichlorobenzene12 = dichlorobenzene12;
     }
 
-    public String getDichlorobenzene12() 
+    public String getDichlorobenzene12()
     {
         return dichlorobenzene12;
     }
-    public void setDichlorobenzene14(String dichlorobenzene14) 
+    public void setDichlorobenzene14(String dichlorobenzene14)
     {
         this.dichlorobenzene14 = dichlorobenzene14;
     }
 
-    public String getDichlorobenzene14() 
+    public String getDichlorobenzene14()
     {
         return dichlorobenzene14;
     }
-    public void setEthylbenzene(String ethylbenzene) 
+    public void setEthylbenzene(String ethylbenzene)
     {
         this.ethylbenzene = ethylbenzene;
     }
 
-    public String getEthylbenzene() 
+    public String getEthylbenzene()
     {
         return ethylbenzene;
     }
-    public void setXyleneOrtho(String xyleneOrtho) 
+    public void setXyleneOrtho(String xyleneOrtho)
     {
         this.xyleneOrtho = xyleneOrtho;
     }
 
-    public String getXyleneOrtho() 
+    public String getXyleneOrtho()
     {
         return xyleneOrtho;
     }
-    public void setXyleneMetaPara(String xyleneMetaPara) 
+    public void setXyleneMetaPara(String xyleneMetaPara)
     {
         this.xyleneMetaPara = xyleneMetaPara;
     }
 
-    public String getXyleneMetaPara() 
+    public String getXyleneMetaPara()
     {
         return xyleneMetaPara;
     }
-    public void setStyrene(String styrene) 
+    public void setStyrene(String styrene)
     {
         this.styrene = styrene;
     }
 
-    public String getStyrene() 
+    public String getStyrene()
     {
         return styrene;
     }
-    public void setNitrobenzene(String nitrobenzene) 
+    public void setNitrobenzene(String nitrobenzene)
     {
         this.nitrobenzene = nitrobenzene;
     }
 
-    public String getNitrobenzene() 
+    public String getNitrobenzene()
     {
         return nitrobenzene;
     }
-    public void setNaphthalene(String naphthalene) 
+    public void setNaphthalene(String naphthalene)
     {
         this.naphthalene = naphthalene;
     }
 
-    public String getNaphthalene() 
+    public String getNaphthalene()
     {
         return naphthalene;
     }
-    public void setAnthracene(String anthracene) 
+    public void setAnthracene(String anthracene)
     {
         this.anthracene = anthracene;
     }
 
-    public String getAnthracene() 
+    public String getAnthracene()
     {
         return anthracene;
     }
-    public void setFluoranthene(String fluoranthene) 
+    public void setFluoranthene(String fluoranthene)
     {
         this.fluoranthene = fluoranthene;
     }
 
-    public String getFluoranthene() 
+    public String getFluoranthene()
     {
         return fluoranthene;
     }
-    public void setBenzoBFluoranthene(String benzoBFluoranthene) 
+    public void setBenzoBFluoranthene(String benzoBFluoranthene)
     {
         this.benzoBFluoranthene = benzoBFluoranthene;
     }
 
-    public String getBenzoBFluoranthene() 
+    public String getBenzoBFluoranthene()
     {
         return benzoBFluoranthene;
     }
-    public void setBenzoAPyrene(String benzoAPyrene) 
+    public void setBenzoAPyrene(String benzoAPyrene)
     {
         this.benzoAPyrene = benzoAPyrene;
     }
 
-    public String getBenzoAPyrene() 
+    public String getBenzoAPyrene()
     {
         return benzoAPyrene;
     }
-    public void setPetroleumHydrocarbonsC6C9(String petroleumHydrocarbonsC6C9) 
+    public void setPetroleumHydrocarbonsC6C9(String petroleumHydrocarbonsC6C9)
     {
         this.petroleumHydrocarbonsC6C9 = petroleumHydrocarbonsC6C9;
     }
 
-    public String getPetroleumHydrocarbonsC6C9() 
+    public String getPetroleumHydrocarbonsC6C9()
     {
         return petroleumHydrocarbonsC6C9;
     }
-    public void setPetroleumHydrocarbonsC10C40(String petroleumHydrocarbonsC10C40) 
+    public void setPetroleumHydrocarbonsC10C40(String petroleumHydrocarbonsC10C40)
     {
         this.petroleumHydrocarbonsC10C40 = petroleumHydrocarbonsC10C40;
     }
 
-    public String getPetroleumHydrocarbonsC10C40() 
+    public String getPetroleumHydrocarbonsC10C40()
     {
         return petroleumHydrocarbonsC10C40;
     }
-    public void setPhenol(String phenol) 
+    public void setPhenol(String phenol)
     {
         this.phenol = phenol;
     }
 
-    public String getPhenol() 
+    public String getPhenol()
     {
         return phenol;
     }
-    public void setChlorophenol2(String chlorophenol2) 
+    public void setChlorophenol2(String chlorophenol2)
     {
         this.chlorophenol2 = chlorophenol2;
     }
 
-    public String getChlorophenol2() 
+    public String getChlorophenol2()
     {
         return chlorophenol2;
     }
-    public void setAniline(String aniline) 
+    public void setAniline(String aniline)
     {
         this.aniline = aniline;
     }
 
-    public String getAniline() 
+    public String getAniline()
     {
         return aniline;
     }
-    public void setAcenaphthylene(String acenaphthylene) 
+    public void setAcenaphthylene(String acenaphthylene)
     {
         this.acenaphthylene = acenaphthylene;
     }
 
-    public String getAcenaphthylene() 
+    public String getAcenaphthylene()
     {
         return acenaphthylene;
     }
-    public void setAcenaphthene(String acenaphthene) 
+    public void setAcenaphthene(String acenaphthene)
     {
         this.acenaphthene = acenaphthene;
     }
 
-    public String getAcenaphthene() 
+    public String getAcenaphthene()
     {
         return acenaphthene;
     }
-    public void setFluorene(String fluorene) 
+    public void setFluorene(String fluorene)
     {
         this.fluorene = fluorene;
     }
 
-    public String getFluorene() 
+    public String getFluorene()
     {
         return fluorene;
     }
-    public void setPhenanthrene(String phenanthrene) 
+    public void setPhenanthrene(String phenanthrene)
     {
         this.phenanthrene = phenanthrene;
     }
 
-    public String getPhenanthrene() 
+    public String getPhenanthrene()
     {
         return phenanthrene;
     }
-    public void setPyrene(String pyrene) 
+    public void setPyrene(String pyrene)
     {
         this.pyrene = pyrene;
     }
 
-    public String getPyrene() 
+    public String getPyrene()
     {
         return pyrene;
     }
-    public void setBenzoAAnthracene(String benzoAAnthracene) 
+    public void setBenzoAAnthracene(String benzoAAnthracene)
     {
         this.benzoAAnthracene = benzoAAnthracene;
     }
 
-    public String getBenzoAAnthracene() 
+    public String getBenzoAAnthracene()
     {
         return benzoAAnthracene;
     }
-    public void setChrysene(String chrysene) 
+    public void setChrysene(String chrysene)
     {
         this.chrysene = chrysene;
     }
 
-    public String getChrysene() 
+    public String getChrysene()
     {
         return chrysene;
     }
-    public void setBenzoKFluoranthene(String benzoKFluoranthene) 
+    public void setBenzoKFluoranthene(String benzoKFluoranthene)
     {
         this.benzoKFluoranthene = benzoKFluoranthene;
     }
 
-    public String getBenzoKFluoranthene() 
+    public String getBenzoKFluoranthene()
     {
         return benzoKFluoranthene;
     }
-    public void setIndeno123CdPyrene(String indeno123CdPyrene) 
+    public void setIndeno123CdPyrene(String indeno123CdPyrene)
     {
         this.indeno123CdPyrene = indeno123CdPyrene;
     }
 
-    public String getIndeno123CdPyrene() 
+    public String getIndeno123CdPyrene()
     {
         return indeno123CdPyrene;
     }
-    public void setDibenzoAHAnthracene(String dibenzoAHAnthracene) 
+    public void setDibenzoAHAnthracene(String dibenzoAHAnthracene)
     {
         this.dibenzoAHAnthracene = dibenzoAHAnthracene;
     }
 
-    public String getDibenzoAHAnthracene() 
+    public String getDibenzoAHAnthracene()
     {
         return dibenzoAHAnthracene;
     }
-    public void setBenzoGHIPerylene(String benzoGHIPerylene) 
+    public void setBenzoGHIPerylene(String benzoGHIPerylene)
     {
         this.benzoGHIPerylene = benzoGHIPerylene;
     }
 
-    public String getBenzoGHIPerylene() 
+    public String getBenzoGHIPerylene()
     {
         return benzoGHIPerylene;
     }
-    public void setChloromethane(String chloromethane) 
+    public void setChloromethane(String chloromethane)
     {
         this.chloromethane = chloromethane;
     }
 
-    public String getChloromethane() 
+    public String getChloromethane()
     {
         return chloromethane;
     }
-    public void setDichloroethane11(String dichloroethane11) 
+    public void setDichloroethane11(String dichloroethane11)
     {
         this.dichloroethane11 = dichloroethane11;
     }
 
-    public String getDichloroethane11() 
+    public String getDichloroethane11()
     {
         return dichloroethane11;
     }
-    public void setTetrachloroethane1112(String tetrachloroethane1112) 
+    public void setTetrachloroethane1112(String tetrachloroethane1112)
     {
         this.tetrachloroethane1112 = tetrachloroethane1112;
     }
 
-    public String getTetrachloroethane1112() 
+    public String getTetrachloroethane1112()
     {
         return tetrachloroethane1112;
     }
-    public void setTetrachloroethane1122(String tetrachloroethane1122) 
+    public void setTetrachloroethane1122(String tetrachloroethane1122)
     {
         this.tetrachloroethane1122 = tetrachloroethane1122;
     }
 
-    public String getTetrachloroethane1122() 
+    public String getTetrachloroethane1122()
     {
         return tetrachloroethane1122;
     }
-    public void setTrichloropropane123(String trichloropropane123) 
+    public void setTrichloropropane123(String trichloropropane123)
     {
         this.trichloropropane123 = trichloropropane123;
     }
 
-    public String getTrichloropropane123() 
+    public String getTrichloropropane123()
     {
         return trichloropropane123;
+    }
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
+    public String getId()
+    {
+        return id;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-            .append("pointId", getPointId())
-            .append("sampleTime", getSampleTime())
-            .append("color", getColor())
-            .append("odorAndTaste", getOdorAndTaste())
-            .append("turbidity", getTurbidity())
-            .append("visibleMatters", getVisibleMatters())
-            .append("ph", getPh())
-            .append("totalHardness", getTotalHardness())
-            .append("totalDissolvedSolids", getTotalDissolvedSolids())
-            .append("sulfate", getSulfate())
-            .append("chloride", getChloride())
-            .append("iron", getIron())
-            .append("manganese", getManganese())
-            .append("aluminum", getAluminum())
-            .append("anionicSurfactant", getAnionicSurfactant())
-            .append("oxygenConsumption", getOxygenConsumption())
-            .append("sulfide", getSulfide())
-            .append("sodium", getSodium())
-            .append("nitriteNitrogen", getNitriteNitrogen())
-            .append("nitrateNitrogen", getNitrateNitrogen())
-            .append("iodide", getIodide())
-            .append("selenium", getSelenium())
-            .append("copper", getCopper())
-            .append("zinc", getZinc())
-            .append("volatilePhenol", getVolatilePhenol())
-            .append("ammoniaNitrogen", getAmmoniaNitrogen())
-            .append("cyanide", getCyanide())
-            .append("fluoride", getFluoride())
-            .append("mercury", getMercury())
-            .append("arsenic", getArsenic())
-            .append("cadmium", getCadmium())
-            .append("chromiumVi", getChromiumVi())
-            .append("lead", getLead())
-            .append("chloroform", getChloroform())
-            .append("carbonTetrachloride", getCarbonTetrachloride())
-            .append("benzene", getBenzene())
-            .append("toluene", getToluene())
-            .append("molybdenum", getMolybdenum())
-            .append("vanadium", getVanadium())
-            .append("cobalt", getCobalt())
-            .append("nickel", getNickel())
-            .append("dichloromethane", getDichloromethane())
-            .append("dichloroethane12", getDichloroethane12())
-            .append("trichloroethane111", getTrichloroethane111())
-            .append("trichloroethane112", getTrichloroethane112())
-            .append("dichloropropane12", getDichloropropane12())
-            .append("vinylChloride", getVinylChloride())
-            .append("dichloroethylene11", getDichloroethylene11())
-            .append("transDichloroethylene12", getTransDichloroethylene12())
-            .append("cisDichloroethylene12", getCisDichloroethylene12())
-            .append("trichloroethylene", getTrichloroethylene())
-            .append("tetrachloroethylene", getTetrachloroethylene())
-            .append("chlorobenzene", getChlorobenzene())
-            .append("dichlorobenzene12", getDichlorobenzene12())
-            .append("dichlorobenzene14", getDichlorobenzene14())
-            .append("ethylbenzene", getEthylbenzene())
-            .append("xyleneOrtho", getXyleneOrtho())
-            .append("xyleneMetaPara", getXyleneMetaPara())
-            .append("styrene", getStyrene())
-            .append("nitrobenzene", getNitrobenzene())
-            .append("naphthalene", getNaphthalene())
-            .append("anthracene", getAnthracene())
-            .append("fluoranthene", getFluoranthene())
-            .append("benzoBFluoranthene", getBenzoBFluoranthene())
-            .append("benzoAPyrene", getBenzoAPyrene())
-            .append("petroleumHydrocarbonsC6C9", getPetroleumHydrocarbonsC6C9())
-            .append("petroleumHydrocarbonsC10C40", getPetroleumHydrocarbonsC10C40())
-            .append("phenol", getPhenol())
-            .append("chlorophenol2", getChlorophenol2())
-            .append("aniline", getAniline())
-            .append("acenaphthylene", getAcenaphthylene())
-            .append("acenaphthene", getAcenaphthene())
-            .append("fluorene", getFluorene())
-            .append("phenanthrene", getPhenanthrene())
-            .append("pyrene", getPyrene())
-            .append("benzoAAnthracene", getBenzoAAnthracene())
-            .append("chrysene", getChrysene())
-            .append("benzoKFluoranthene", getBenzoKFluoranthene())
-            .append("indeno123CdPyrene", getIndeno123CdPyrene())
-            .append("dibenzoAHAnthracene", getDibenzoAHAnthracene())
-            .append("benzoGHIPerylene", getBenzoGHIPerylene())
-            .append("chloromethane", getChloromethane())
-            .append("dichloroethane11", getDichloroethane11())
-            .append("tetrachloroethane1112", getTetrachloroethane1112())
-            .append("tetrachloroethane1122", getTetrachloroethane1122())
-            .append("trichloropropane123", getTrichloropropane123())
-            .toString();
+        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+                .append("pointId", getPointId())
+                .append("sampleTime", getSampleTime())
+                .append("color", getColor())
+                .append("odorAndTaste", getOdorAndTaste())
+                .append("turbidity", getTurbidity())
+                .append("visibleMatters", getVisibleMatters())
+                .append("ph", getPh())
+                .append("totalHardness", getTotalHardness())
+                .append("totalDissolvedSolids", getTotalDissolvedSolids())
+                .append("sulfate", getSulfate())
+                .append("chloride", getChloride())
+                .append("iron", getIron())
+                .append("manganese", getManganese())
+                .append("aluminum", getAluminum())
+                .append("anionicSurfactant", getAnionicSurfactant())
+                .append("oxygenConsumption", getOxygenConsumption())
+                .append("sulfide", getSulfide())
+                .append("sodium", getSodium())
+                .append("nitriteNitrogen", getNitriteNitrogen())
+                .append("nitrateNitrogen", getNitrateNitrogen())
+                .append("iodide", getIodide())
+                .append("selenium", getSelenium())
+                .append("copper", getCopper())
+                .append("zinc", getZinc())
+                .append("volatilePhenol", getVolatilePhenol())
+                .append("ammoniaNitrogen", getAmmoniaNitrogen())
+                .append("cyanide", getCyanide())
+                .append("fluoride", getFluoride())
+                .append("mercury", getMercury())
+                .append("arsenic", getArsenic())
+                .append("cadmium", getCadmium())
+                .append("chromiumVi", getChromiumVi())
+                .append("lead", getLead())
+                .append("chloroform", getChloroform())
+                .append("carbonTetrachloride", getCarbonTetrachloride())
+                .append("benzene", getBenzene())
+                .append("toluene", getToluene())
+                .append("molybdenum", getMolybdenum())
+                .append("vanadium", getVanadium())
+                .append("cobalt", getCobalt())
+                .append("nickel", getNickel())
+                .append("dichloromethane", getDichloromethane())
+                .append("dichloroethane12", getDichloroethane12())
+                .append("trichloroethane111", getTrichloroethane111())
+                .append("trichloroethane112", getTrichloroethane112())
+                .append("dichloropropane12", getDichloropropane12())
+                .append("vinylChloride", getVinylChloride())
+                .append("dichloroethylene11", getDichloroethylene11())
+                .append("transDichloroethylene12", getTransDichloroethylene12())
+                .append("cisDichloroethylene12", getCisDichloroethylene12())
+                .append("trichloroethylene", getTrichloroethylene())
+                .append("tetrachloroethylene", getTetrachloroethylene())
+                .append("chlorobenzene", getChlorobenzene())
+                .append("dichlorobenzene12", getDichlorobenzene12())
+                .append("dichlorobenzene14", getDichlorobenzene14())
+                .append("ethylbenzene", getEthylbenzene())
+                .append("xyleneOrtho", getXyleneOrtho())
+                .append("xyleneMetaPara", getXyleneMetaPara())
+                .append("styrene", getStyrene())
+                .append("nitrobenzene", getNitrobenzene())
+                .append("naphthalene", getNaphthalene())
+                .append("anthracene", getAnthracene())
+                .append("fluoranthene", getFluoranthene())
+                .append("benzoBFluoranthene", getBenzoBFluoranthene())
+                .append("benzoAPyrene", getBenzoAPyrene())
+                .append("petroleumHydrocarbonsC6C9", getPetroleumHydrocarbonsC6C9())
+                .append("petroleumHydrocarbonsC10C40", getPetroleumHydrocarbonsC10C40())
+                .append("phenol", getPhenol())
+                .append("chlorophenol2", getChlorophenol2())
+                .append("aniline", getAniline())
+                .append("acenaphthylene", getAcenaphthylene())
+                .append("acenaphthene", getAcenaphthene())
+                .append("fluorene", getFluorene())
+                .append("phenanthrene", getPhenanthrene())
+                .append("pyrene", getPyrene())
+                .append("benzoAAnthracene", getBenzoAAnthracene())
+                .append("chrysene", getChrysene())
+                .append("benzoKFluoranthene", getBenzoKFluoranthene())
+                .append("indeno123CdPyrene", getIndeno123CdPyrene())
+                .append("dibenzoAHAnthracene", getDibenzoAHAnthracene())
+                .append("benzoGHIPerylene", getBenzoGHIPerylene())
+                .append("chloromethane", getChloromethane())
+                .append("dichloroethane11", getDichloroethane11())
+                .append("tetrachloroethane1112", getTetrachloroethane1112())
+                .append("tetrachloroethane1122", getTetrachloroethane1122())
+                .append("trichloropropane123", getTrichloropropane123())
+                .append("id", getId())
+                .toString();
     }
 }

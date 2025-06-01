@@ -1,63 +1,61 @@
 package com.ruoyi.admin.mapper;
 
-
+import java.util.List;
 import com.ruoyi.admin.domain.TWaterQualityMonitoring;
 
-import java.util.List;
-
 /**
- * 【请填写功能名称】Mapper接口
- * 
+ * 监测数据管理Mapper接口
+ *
  * @author ruoyi
- * @date 2025-05-30
+ * @date 2025-06-01
  */
-public interface TWaterQualityMonitoringMapper 
+public interface TWaterQualityMonitoringMapper
 {
     /**
-     * 查询【请填写功能名称】
-     * 
-     * @param pointId 【请填写功能名称】主键
-     * @return 【请填写功能名称】
+     * 查询监测数据管理
+     *
+     * @param id 监测数据管理主键
+     * @return 监测数据管理
      */
-    public TWaterQualityMonitoring selectTWaterQualityMonitoringByPointId(String pointId);
+    public TWaterQualityMonitoring selectTWaterQualityMonitoringById(String id);
 
     /**
-     * 查询【请填写功能名称】列表
-     * 
-     * @param tWaterQualityMonitoring 【请填写功能名称】
-     * @return 【请填写功能名称】集合
+     * 查询监测数据管理列表
+     *
+     * @param tWaterQualityMonitoring 监测数据管理
+     * @return 监测数据管理集合
      */
     public List<TWaterQualityMonitoring> selectTWaterQualityMonitoringList(TWaterQualityMonitoring tWaterQualityMonitoring);
 
     /**
-     * 新增【请填写功能名称】
-     * 
-     * @param tWaterQualityMonitoring 【请填写功能名称】
+     * 新增监测数据管理
+     *
+     * @param tWaterQualityMonitoring 监测数据管理
      * @return 结果
      */
     public int insertTWaterQualityMonitoring(TWaterQualityMonitoring tWaterQualityMonitoring);
 
     /**
-     * 修改【请填写功能名称】
-     * 
-     * @param tWaterQualityMonitoring 【请填写功能名称】
+     * 修改监测数据管理
+     *
+     * @param tWaterQualityMonitoring 监测数据管理
      * @return 结果
      */
     public int updateTWaterQualityMonitoring(TWaterQualityMonitoring tWaterQualityMonitoring);
 
     /**
-     * 删除【请填写功能名称】
-     * 
-     * @param pointId 【请填写功能名称】主键
+     * 删除监测数据管理
+     *
+     * @param id 监测数据管理主键
      * @return 结果
      */
-    public int deleteTWaterQualityMonitoringByPointId(String pointId);
+    public int deleteTWaterQualityMonitoringById(String id);
 
     /**
-     * 批量删除【请填写功能名称】
-     * 
-     * @param pointIds 需要删除的数据主键集合
+     * 批量删除监测数据管理
+     *
+     * @param ids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteTWaterQualityMonitoringByPointIds(String[] pointIds);
+    public int deleteTWaterQualityMonitoringByIds(String[] ids);
 }

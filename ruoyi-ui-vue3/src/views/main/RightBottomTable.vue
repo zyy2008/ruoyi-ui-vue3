@@ -20,12 +20,6 @@
   import { onMounted, reactive, toRaw, ref, nextTick } from "vue";
   const tableData = []
 
-  nextTick(() => {
-    setTimeout(() => {
-      var text = document.getElementsByClassName('el-table__empty-text');
-      text[0].innerHTML = '暂无报警'
-    }, 50);
-  })
   // const tableData = [
   //   {
   //     date: '检测井1',

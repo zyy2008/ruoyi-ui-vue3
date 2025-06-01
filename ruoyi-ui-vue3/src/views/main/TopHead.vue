@@ -25,27 +25,27 @@
   </div>
   <div class="bottom">
     <div class="bottomIn">
-      <div class="bottomInOt">
+      <div class="bottomInOt" @click="clickSystem('zhdd')">
         <img src="@/assets/static/1.png" />
         <div class="text">指挥调度</div>
       </div>
-      <div class="bottomInOt">
+      <div class="bottomInOt" @click="clickSystem('zxjc')">
         <img src="@/assets/static/2.png" />
         <div class="text">在线检测</div>
       </div>
-      <div class="bottomInOt">
+      <div class="bottomInOt" @click="clickSystem('qyxx')">
         <img src="@/assets/static/3.png" />
         <div class="text">企业信息</div>
       </div>
-      <div class="bottomInOt">
+      <div class="bottomInOt" @click="clickSystem('bjyb')">
         <img src="@/assets/static/4.png" />
         <div class="text">报警预报</div>
       </div>
     </div>
   </div>
-  <LeftTopTable class="leftTable" />
-  <RightTopLine class="RightLine" />
-  <RightBottomTable class="RightTable" />
+  <LeftTopTable class="leftTable" v-show="zhddShow"/>
+  <RightTopLine class="RightLine" v-show="zhddShow"/>
+  <RightBottomTable class="RightTable" v-show="zhddShow"/>
 </template>
 
 <script setup>
@@ -64,7 +64,7 @@
   const appStore = useAppStore();
   const userStore = useUserStore();
   const settingsStore = useSettingsStore();
-
+const zhddShow=ref(true)
   const emits = defineEmits(["setLayout"]);
   function setLayout() {
     emits("setLayout");
@@ -95,6 +95,10 @@
         });
       })
       .catch(() => { });
+  }
+
+  function clickSystem(ment){
+
   }
 
   function goSystem() {

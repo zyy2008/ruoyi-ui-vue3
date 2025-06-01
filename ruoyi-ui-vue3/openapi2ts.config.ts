@@ -3,7 +3,7 @@ export default [
     requestLibPath: "import request from '@/utils/http'",
     serversPath: "./src/services/",
     projectName: "api1",
-    apiPrefix: '"/api1"',
+    apiPrefix: '"/dev-api"',
     schemaPath: "http://39.100.43.147:11004/v3/api-docs",
     mock: false,
     hook: {

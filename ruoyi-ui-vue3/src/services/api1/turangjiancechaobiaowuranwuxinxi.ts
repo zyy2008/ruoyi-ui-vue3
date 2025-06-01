@@ -7,7 +7,7 @@ export async function putAdminSoilPollutant(
   body: API.turangjiancefaxiandechaobiaowuranwuxinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/soilPollutant`, {
+  return request<Record<string, any>>(`/dev-api/admin/soilPollutant`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postAdminSoilPollutant(
   body: API.turangjiancefaxiandechaobiaowuranwuxinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/soilPollutant`, {
+  return request<Record<string, any>>(`/dev-api/admin/soilPollutant`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -39,11 +39,14 @@ export async function deleteAdminSoilPollutantIds(
   options?: { [key: string]: any }
 ) {
   const { ids: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/soilPollutant/${param0}`, {
-    method: "DELETE",
-    params: { ...queryParams },
-    ...(options || {}),
-  });
+  return request<Record<string, any>>(
+    `/dev-api/admin/soilPollutant/${param0}`,
+    {
+      method: "DELETE",
+      params: { ...queryParams },
+      ...(options || {}),
+    }
+  );
 }
 
 /** 获取土壤监测超标污染物信息详细信息 GET /admin/soilPollutant/${param0} */
@@ -53,11 +56,14 @@ export async function getAdminSoilPollutantId(
   options?: { [key: string]: any }
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/soilPollutant/${param0}`, {
-    method: "GET",
-    params: { ...queryParams },
-    ...(options || {}),
-  });
+  return request<Record<string, any>>(
+    `/dev-api/admin/soilPollutant/${param0}`,
+    {
+      method: "GET",
+      params: { ...queryParams },
+      ...(options || {}),
+    }
+  );
 }
 
 /** 导出土壤监测超标污染物信息列表 POST /admin/soilPollutant/export */
@@ -66,7 +72,7 @@ export async function postAdminSoilPollutantExport(
   params: API.postAdminSoilPollutantExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/soilPollutant/export`, {
+  return request<any>(`/dev-api/admin/soilPollutant/export`, {
     method: "POST",
     params: {
       ...params,
@@ -83,7 +89,7 @@ export async function getAdminSoilPollutantList(
   params: API.getAdminSoilPollutantListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/soilPollutant/list`, {
+  return request<API.TableDataInfo>(`/dev-api/admin/soilPollutant/list`, {
     method: "GET",
     params: {
       ...params,

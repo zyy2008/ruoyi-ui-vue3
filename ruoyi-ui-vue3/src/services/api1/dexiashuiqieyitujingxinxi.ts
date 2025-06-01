@@ -7,7 +7,7 @@ export async function putAdminGroundwaterPathway(
   body: API.dexiashuiqieyitujingxinxiduixiang,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/groundwaterPathway`, {
+  return request<Record<string, any>>(`/dev-api/admin/groundwaterPathway`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postAdminGroundwaterPathway(
   body: API.dexiashuiqieyitujingxinxiduixiang,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/groundwaterPathway`, {
+  return request<Record<string, any>>(`/dev-api/admin/groundwaterPathway`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +40,7 @@ export async function deleteAdminGroundwaterPathwayIds(
 ) {
   const { ids: param0, ...queryParams } = params;
   return request<Record<string, any>>(
-    `/api1/admin/groundwaterPathway/${param0}`,
+    `/dev-api/admin/groundwaterPathway/${param0}`,
     {
       method: "DELETE",
       params: { ...queryParams },
@@ -57,7 +57,7 @@ export async function getAdminGroundwaterPathwayId(
 ) {
   const { id: param0, ...queryParams } = params;
   return request<Record<string, any>>(
-    `/api1/admin/groundwaterPathway/${param0}`,
+    `/dev-api/admin/groundwaterPathway/${param0}`,
     {
       method: "GET",
       params: { ...queryParams },
@@ -72,7 +72,7 @@ export async function postAdminGroundwaterPathwayExport(
   params: API.postAdminGroundwaterPathwayExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/groundwaterPathway/export`, {
+  return request<any>(`/dev-api/admin/groundwaterPathway/export`, {
     method: "POST",
     params: {
       ...params,
@@ -89,7 +89,7 @@ export async function getAdminGroundwaterPathwayList(
   params: API.getAdminGroundwaterPathwayListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/groundwaterPathway/list`, {
+  return request<API.TableDataInfo>(`/dev-api/admin/groundwaterPathway/list`, {
     method: "GET",
     params: {
       ...params,

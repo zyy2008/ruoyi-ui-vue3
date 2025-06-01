@@ -7,7 +7,7 @@ export async function putAdminGroundwaterMonitoring(
   body: API.qiyewuranyuan,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/groundwaterMonitoring`, {
+  return request<Record<string, any>>(`/dev-api/admin/groundwaterMonitoring`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postAdminGroundwaterMonitoring(
   body: API.qiyewuranyuan,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/groundwaterMonitoring`, {
+  return request<Record<string, any>>(`/dev-api/admin/groundwaterMonitoring`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +40,7 @@ export async function deleteAdminGroundwaterMonitoringIds(
 ) {
   const { ids: param0, ...queryParams } = params;
   return request<Record<string, any>>(
-    `/api1/admin/groundwaterMonitoring/${param0}`,
+    `/dev-api/admin/groundwaterMonitoring/${param0}`,
     {
       method: "DELETE",
       params: { ...queryParams },
@@ -57,7 +57,7 @@ export async function getAdminGroundwaterMonitoringId(
 ) {
   const { id: param0, ...queryParams } = params;
   return request<Record<string, any>>(
-    `/api1/admin/groundwaterMonitoring/${param0}`,
+    `/dev-api/admin/groundwaterMonitoring/${param0}`,
     {
       method: "GET",
       params: { ...queryParams },
@@ -72,7 +72,7 @@ export async function postAdminGroundwaterMonitoringExport(
   params: API.postAdminGroundwaterMonitoringExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/groundwaterMonitoring/export`, {
+  return request<any>(`/dev-api/admin/groundwaterMonitoring/export`, {
     method: "POST",
     params: {
       ...params,
@@ -89,13 +89,16 @@ export async function getAdminGroundwaterMonitoringList(
   params: API.getAdminGroundwaterMonitoringListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/groundwaterMonitoring/list`, {
-    method: "GET",
-    params: {
-      ...params,
-      params: undefined,
-      ...params["params"],
-    },
-    ...(options || {}),
-  });
+  return request<API.TableDataInfo>(
+    `/dev-api/admin/groundwaterMonitoring/list`,
+    {
+      method: "GET",
+      params: {
+        ...params,
+        params: undefined,
+        ...params["params"],
+      },
+      ...(options || {}),
+    }
+  );
 }

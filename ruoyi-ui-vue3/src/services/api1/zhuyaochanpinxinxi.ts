@@ -7,7 +7,7 @@ export async function putAdminMainProducts(
   body: API.zhuyaochanpinxinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/mainProducts`, {
+  return request<Record<string, any>>(`/dev-api/admin/mainProducts`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postAdminMainProducts(
   body: API.zhuyaochanpinxinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/mainProducts`, {
+  return request<Record<string, any>>(`/dev-api/admin/mainProducts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export async function deleteAdminMainProductsIds(
   options?: { [key: string]: any }
 ) {
   const { ids: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/mainProducts/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/mainProducts/${param0}`, {
     method: "DELETE",
     params: { ...queryParams },
     ...(options || {}),
@@ -53,7 +53,7 @@ export async function getAdminMainProductsId(
   options?: { [key: string]: any }
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/mainProducts/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/mainProducts/${param0}`, {
     method: "GET",
     params: { ...queryParams },
     ...(options || {}),
@@ -66,7 +66,7 @@ export async function postAdminMainProductsExport(
   params: API.postAdminMainProductsExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/mainProducts/export`, {
+  return request<any>(`/dev-api/admin/mainProducts/export`, {
     method: "POST",
     params: {
       ...params,
@@ -83,7 +83,7 @@ export async function getAdminMainProductsList(
   params: API.getAdminMainProductsListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/mainProducts/list`, {
+  return request<API.TableDataInfo>(`/dev-api/admin/mainProducts/list`, {
     method: "GET",
     params: {
       ...params,

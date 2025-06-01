@@ -160,7 +160,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门ID */
-    deptId?: number;
+    deptId?: string;
     /** 企业规模 */
     enterpriseScale?: string;
     /** 利用历史结束年份 */
@@ -194,6 +194,25 @@ declare namespace API {
     searchValue?: string;
     /** 开业时间 */
     startDate?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type getAdminEnterprisesListParams = {
+    area?: string;
+    createBy?: string;
+    createTime?: string;
+    enterpriseName?: string;
+    industryCategory?: string;
+    isKeyEnterprise?: string;
+    latitude?: string;
+    longitude?: string;
+    params?: Record<string, any>;
+    productionYears?: string;
+    remark?: string;
+    reportingStatus?: string;
+    searchValue?: string;
+    status?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -642,7 +661,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门ID */
-    deptId?: number;
+    deptId?: string;
     /** 企业规模 */
     enterpriseScale?: string;
     /** 利用历史结束年份 */
@@ -1231,7 +1250,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门ID */
-    deptId?: number;
+    deptId?: string;
     /** 企业规模 */
     enterpriseScale?: string;
     /** 利用历史结束年份 */

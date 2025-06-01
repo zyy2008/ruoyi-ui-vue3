@@ -7,7 +7,7 @@ export async function putAdminEnterprise(
   body: API.zaichanqiyedekuaixinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/enterprise`, {
+  return request<Record<string, any>>(`/dev-api/admin/enterprise`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postAdminEnterprise(
   body: API.zaichanqiyedekuaixinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/enterprise`, {
+  return request<Record<string, any>>(`/dev-api/admin/enterprise`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export async function deleteAdminEnterpriseIds(
   options?: { [key: string]: any }
 ) {
   const { ids: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/enterprise/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/enterprise/${param0}`, {
     method: "DELETE",
     params: { ...queryParams },
     ...(options || {}),
@@ -53,7 +53,7 @@ export async function getAdminEnterpriseId(
   options?: { [key: string]: any }
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/enterprise/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/enterprise/${param0}`, {
     method: "GET",
     params: { ...queryParams },
     ...(options || {}),
@@ -66,7 +66,7 @@ export async function postAdminEnterpriseExport(
   params: API.postAdminEnterpriseExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/enterprise/export`, {
+  return request<any>(`/dev-api/admin/enterprise/export`, {
     method: "POST",
     params: {
       ...params,
@@ -83,7 +83,7 @@ export async function getAdminEnterpriseList(
   params: API.getAdminEnterpriseListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/enterprise/list`, {
+  return request<API.TableDataInfo>(`/dev-api/admin/enterprise/list`, {
     method: "GET",
     params: {
       ...params,

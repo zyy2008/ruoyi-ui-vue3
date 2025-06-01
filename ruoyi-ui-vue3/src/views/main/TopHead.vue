@@ -27,25 +27,26 @@
     <div class="bottomIn">
       <div class="bottomInOt" @click="clickSystem('zhdd')">
         <img src="@/assets/static/1.png" />
-        <div class="text">指挥调度</div>
+        <div class="text" :class="{'text-active':activeText==='zhdd'}">指挥调度</div>
       </div>
       <div class="bottomInOt" @click="clickSystem('zxjc')">
         <img src="@/assets/static/2.png" />
-        <div class="text">在线监测</div>
+        <div class="text" :class="{'text-active':activeText==='zxjc'}">在线监测</div>
       </div>
       <div class="bottomInOt" @click="clickSystem('qyxx')">
         <img src="@/assets/static/3.png" />
-        <div class="text">企业信息</div>
+        <div class="text" :class="{'text-active':activeText==='qyxx'}">企业信息</div>
       </div>
       <div class="bottomInOt" @click="clickSystem('bjyb')">
         <img src="@/assets/static/4.png" />
-        <div class="text">报警预报</div>
+        <div class="text" :class="{'text-active':activeText==='bjyb'}">报警预报</div>
       </div>
     </div>
   </div>
-  <LeftTopTable class="leftTable" v-show="zhddShow"/>
-  <RightTopLine class="RightLine" v-show="zhddShow"/>
-  <RightBottomTable class="RightTable" v-show="zhddShow"/>
+  <LeftTopTable class="leftTable" v-show="zhddShow" @changeTableLine="changeTableLine" />
+  <RightTopLine class="RightLine" v-show="zhddShow" :chartInfo="chartInfo" />
+  <RightBottomTable class="RightTable" v-show="zhddShow" />
+  <enterprises v-show="qyxxShow" />
 </template>
 
 <script setup>
@@ -58,13 +59,19 @@
   import RightBottomTable from "./RightBottomTable.vue";
   import LeftTopTable from "./LeftTopTable.vue";
   import RightTopLine from "./RightTopLine.vue";
-  const router = useRouter();
+  import enterprises from '../admin/enterprises/index.vue'
   import layerStore from "@/store/modules/layer";
-
+  const router = useRouter();
   const appStore = useAppStore();
   const userStore = useUserStore();
   const settingsStore = useSettingsStore();
-const zhddShow=ref(true)
+  const zhddShow = ref(true)
+  const qyxxShow = ref(false)
+  const chartInfo = ref({
+    wellCode:'J01'
+  })
+  
+  const activeText=ref('zhdd')
   const emits = defineEmits(["setLayout"]);
   function setLayout() {
     emits("setLayout");
@@ -97,8 +104,14 @@ const zhddShow=ref(true)
       .catch(() => { });
   }
 
-  function clickSystem(ment){
+  function clickSystem(ment) {
+    zhddShow.value = ment === 'zhdd'
+    qyxxShow.value = ment === 'qyxx'
+    activeText.value=ment
+  }
 
+  function changeTableLine(value) {
+    chartInfo.value = value
   }
 
   function goSystem() {
@@ -176,7 +189,7 @@ const zhddShow=ref(true)
     position: absolute;
     bottom: 26px;
     background: url("@/assets/static/bottom.png") no-repeat;
-    background-size: 100vw 10vh; 
+    background-size: 100vw 10vh;
     z-index: 999;
     display: flex;
     justify-content: center;
@@ -236,7 +249,13 @@ const zhddShow=ref(true)
     right: 20px;
     z-index: 100;
   }
-    :deep() {
+
+  .app-container {
+    background-color: rgba(9, 21, 42, 0.8);
+    ;
+  }
+
+  :deep() {
     .el-table tr {
       background-color: rgba(21, 85, 75, 0.2);
     }
@@ -249,13 +268,17 @@ const zhddShow=ref(true)
     }
 
     .el-table .el-table__row:hover {
-    cursor: pointer;
-}
+      cursor: pointer;
+    }
 
     .el-table .el-table__header-wrapper th,
     .el-table .el-table__fixed-header-wrapper th {
       background-color: #155548 !important;
       color: white;
     }
+  }
+  .text-active{
+    color: yellow;
+    background-color: red;
   }
 </style>

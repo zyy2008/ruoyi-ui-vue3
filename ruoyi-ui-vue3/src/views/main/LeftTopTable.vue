@@ -54,20 +54,21 @@
     listWells(option).then((response) => {
       data = response.rows
       tableTotle.value = response.total
-      tableData.value = response.rows
       listMonitoring(option).then(res => {
-        // console.log(data, res);
-        for(let i in data){
-          // data['PH']=
+        for (let i in data) {
+          res.rows.forEach(ele => {
+            if (ele.pointId === data[i].wellCode) {
+              data[i]['ph'] = ele.ph
+            }
+          })
         }
-        // tableData.value = response.rows
+        tableData.value = data
       });
     });
-
   }
-
+  const emit = defineEmits(['changeTableLine'])
   const clickTable = (value) => {
-
+    emit('changeTableLine', value)
   }
 
 </script>

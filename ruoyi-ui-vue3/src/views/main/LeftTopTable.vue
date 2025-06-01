@@ -5,7 +5,7 @@
       <span> 实时数据 </span>
       <!-- <el-button @click="enterpriseApi"> 测试数据</el-button> -->
     </div>
-    <el-table :data="tableData" style="width: 100%" max-height="760" :row-class-name="tableRowClassName">
+    <el-table :data="tableData" style="width: 100%" max-height="680" :row-class-name="tableRowClassName">
       <el-table-column type="index" width="50" />
       <el-table-column prop="wellCode" label="名称" width="60" />
       <el-table-column prop="ph" label="PH" width="60" />
@@ -17,12 +17,6 @@
       <el-table-column prop="AD" label="氨氮" width="60" />
       <el-table-column prop="lng" label="位置" width="60" />
     </el-table>
-    <div style="float: right;margin-top: 10px;">
-      <el-pagination background layout="prev, pager, next" :page-size="15" :total="tableTotle"
-        @change="changePagination" hide-on-single-page>
-      </el-pagination>
-    </div>
-
   </div>
 </template>
 <script setup lang="ts">
@@ -51,16 +45,13 @@
   };
 
   onMounted(() => {
-    createBaseList({ pageNum: 1, pageSize: 15 })
+    createBaseList({ pageNum: 1, pageSize: 1000 })
   })
   const createBaseList = (option) => {
     listWells(option).then((response) => {
       tableData.value = response.rows
       tableTotle.value = response.total
     });
-  }
-  const changePagination = (value) => {
-    createBaseList({ pageSize: 15, pageNum: value })
   }
 
 </script>

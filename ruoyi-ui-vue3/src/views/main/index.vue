@@ -101,6 +101,7 @@ const layerStoreIns = layerStore();
 
 import { addLayer } from "@/api/admin/layer";
 import { loadWells, loadEnterprises } from "./mainMap";
+import { loadCadLayer } from "@/views/main/CadLayer.ts";
 
 const activeName = ref("first");
 
@@ -149,6 +150,7 @@ const marsOnload = async (map) => {
 
   window.map = map;
   window.layersObj = {};
+  loadCadLayer(map);
   await loadWells();
   await loadEnterprises();
 

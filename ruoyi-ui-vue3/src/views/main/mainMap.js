@@ -135,6 +135,8 @@ function addWellLayer(list) {
       if (btnDetails) {
         btnDetails.addEventListener("click", (e) => {
           openJCPage(event)
+          //
+          console.log("点击查看监测数据", event)
           graphic.closePopup();
         })
       }

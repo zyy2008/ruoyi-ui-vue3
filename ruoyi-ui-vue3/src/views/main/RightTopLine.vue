@@ -1,15 +1,21 @@
 <template>
   <div class="table">
     <div class="title">
-      <img src="@/assets/static/subTitle.png" alt="">
-      <span>
-        J15
-      </span>
-      <el-radio-group v-model="radio1" class="radio">
-        <el-radio-button label="一周"></el-radio-button>
-        <el-radio-button label="一月"></el-radio-button>
-      </el-radio-group>
+      <div class="image">
+        <img src="@/assets/static/subTitle.png" alt="">
+        <span> J01</span>
+      </div>
       <el-button type="text" class="text" @click="openChartLine">更多</el-button>
+    </div>
+    <div class="selectRadio">
+      <el-select v-model="selectValue" placeholder="请选择" style="width: 150px;margin-left: 55px;">
+        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+        </el-option>
+      </el-select>
+      <el-radio-group v-model="xAxis" class="radio" @change="changeChart">
+        <el-radio-button label="周"></el-radio-button>
+        <el-radio-button label="月"></el-radio-button>
+      </el-radio-group>
     </div>
     <div id="echart"> </div>
     <ChartLineModal ref="chartLine" />
@@ -21,24 +27,49 @@
   import * as echarts from "echarts";
   import ChartLineModal from './ChartLineModal.vue'
   const chartLine = ref()
-  const radio1 = ref('一周')
-  function openChartLine(){
-    chartLine.value.dialogVisible=true
+  const xAxis = ref('周')
+  let lineChart = null
+  let lineOption = {}
+  const selectValue = ref('PH')
+  const options = [{
+    value: '1',
+    label: 'PH'
+  }, {
+    value: '2',
+    label: '温度'
+  }, {
+    value: '3',
+    label: '水位'
+  }, {
+    value: '4',
+    label: '电位'
+  }, {
+    value: '5',
+    label: '溶解度'
+  }, {
+    value: '6',
+    label: '电导率'
+  }, {
+    value: '7',
+    label: '氨氮'
+  }]
+  function openChartLine() {
+    chartLine.value.dialogVisible = true
   }
+
   nextTick(() => {
     initEchart()
   })
+
   function initEchart() {
     var chartDom = document.getElementById('echart');
-    var myChart = echarts.init(chartDom);
-    var option;
-
+    lineChart = echarts.init(chartDom);
     var fontColor = '#30eee9';
-    option = {
+    lineOption = {
       grid: {
         left: '5%',
         right: '5%',
-        top: '5%',
+        top: '2%',
         bottom: '5%',
         containLabel: true
       },
@@ -47,7 +78,7 @@
         trigger: 'item'
       },
       legend: {
-        show: true,
+        show: false,
         x: 'center',
         y: '0',
         icon: 'stack',
@@ -86,9 +117,8 @@
       yAxis: [
         {
           type: 'value',
-          name: 'PH',
+          name: '值',
           min: 0,
-          max: 1000,
           axisLabel: {
             formatter: '{value}',
             textStyle: {
@@ -109,71 +139,11 @@
               color: '#11366e'
             }
           }
-        },
-        {
-          type: 'value',
-          name: '温度',
-          min: 0,
-          max: 1000,
-          axisLabel: {
-            formatter: '{value} ',
-            textStyle: {
-              color: '#186afe'
-            }
-          },
-          axisLine: {
-            lineStyle: {
-              color: '#186afe'
-            }
-          },
-          axisTick: {
-            show: false,
-          },
-          splitLine: {
-            show: true,
-            lineStyle: {
-              color: '#11366e'
-            }
-          }
         }
       ],
       series: [
         {
           name: 'PH',
-          type: 'line',
-          stack: '总量',
-          symbol: 'circle',
-          symbolSize: 8,
-          itemStyle: {
-            normal: {
-              color: '#0092f6',
-              lineStyle: {
-                color: "#0092f6",
-                width: 1
-              },
-              areaStyle: {
-                //color: '#94C9EC'
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                  offset: 0,
-                  color: 'rgba(7,44,90,0.3)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(0,146,246,0.9)'
-                }]),
-              }
-            }
-          },
-          markPoint: {
-            itemStyle: {
-              normal: {
-                color: 'red'
-              }
-            }
-          },
-          data: [120, 132, 101, 134, 90, 230, 210, 182, 191, 234, 290, 330]
-        },
-        {
-          name: '温度',
           type: 'line',
           stack: '总量',
           symbol: 'circle',
@@ -187,7 +157,7 @@
                 width: 1
               },
               areaStyle: {
-                //color: '#94C9EC'
+
                 color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
                   offset: 0,
                   color: 'rgba(7,44,90,0.3)'
@@ -200,146 +170,19 @@
           },
           data: [220, 182, 191, 234, 290, 330, 310, 201, 154, 190, 330, 410]
         },
-        {
-          name: '水位',
-          type: 'line',
-          stack: '总量',
-          symbol: 'circle',
-          symbolSize: 8,
-          itemStyle: {
-            normal: {
-              color: '#aecb56',
-              lineStyle: {
-                color: "#aecb56",
-                width: 1
-              },
-              areaStyle: {
-                //color: '#94C9EC'
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                  offset: 0,
-                  color: 'rgba(7,44,90,0.3)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(114,144,89,0.9)'
-                }]),
-              }
-            }
-          },
-          data: [150, 232, 201, 154, 190, 330, 410, 150, 232, 201, 154, 190]
-        },
-        {
-          name: '氧化还原电位',
-          type: 'line',
-          stack: '总量',
-          symbol: 'circle',
-          symbolSize: 8,
-          itemStyle: {
-            normal: {
-              color: '#aecb56',
-              lineStyle: {
-                color: "#aecb56",
-                width: 1
-              },
-              areaStyle: {
-                //color: '#94C9EC'
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                  offset: 0,
-                  color: 'rgba(7,44,90,0.3)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(114,144,89,0.9)'
-                }]),
-              }
-            }
-          },
-          data: [150, 232, 201, 154, 190, 330, 410, 150, 232, 201, 154, 190]
-        },
-        {
-          name: '溶解氧',
-          type: 'line',
-          stack: '总量',
-          symbol: 'circle',
-          symbolSize: 8,
-          itemStyle: {
-            normal: {
-              color: '#aecb56',
-              lineStyle: {
-                color: "#aecb56",
-                width: 1
-              },
-              areaStyle: {
-                //color: '#94C9EC'
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                  offset: 0,
-                  color: 'rgba(7,44,90,0.3)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(114,144,89,0.9)'
-                }]),
-              }
-            }
-          },
-          data: [150, 232, 201, 154, 190, 330, 410, 150, 232, 201, 154, 190]
-        },
-        {
-          name: '电导率',
-          type: 'line',
-          stack: '总量',
-          symbol: 'circle',
-          symbolSize: 8,
-          itemStyle: {
-            normal: {
-              color: '#aecb56',
-              lineStyle: {
-                color: "#aecb56",
-                width: 1
-              },
-              areaStyle: {
-                //color: '#94C9EC'
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                  offset: 0,
-                  color: 'rgba(7,44,90,0.3)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(114,144,89,0.9)'
-                }]),
-              }
-            }
-          },
-          data: [150, 232, 201, 154, 190, 330, 410, 150, 232, 201, 154, 190]
-        },
-        {
-          name: '氨氮',
-          type: 'line',
-          stack: '总量',
-          symbol: 'circle',
-          symbolSize: 8,
-          itemStyle: {
-            normal: {
-              color: '#aecb56',
-              lineStyle: {
-                color: "#aecb56",
-                width: 1
-              },
-              areaStyle: {
-                //color: '#94C9EC'
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                  offset: 0,
-                  color: 'rgba(7,44,90,0.3)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(114,144,89,0.9)'
-                }]),
-              }
-            }
-          },
-          data: [150, 232, 201, 154, 190, 330, 410, 150, 232, 201, 154, 190]
-        }
+      
       ]
     };
-
-    option && myChart.setOption(option);
-    //  data: ['PH', '温度', '水位', '氧化还原电位', '溶解氧', '电导率', '氨氮']
+    lineOption && lineChart.setOption(lineOption);
+  }
+  //切换周和月
+  const changeChart = () => {
+    if (xAxis.value === '月') {
+      lineOption.xAxis[0].data = ['10-01', '10-05', '10-10', '10-15', '10-20', '10-25', '10-30']
+    } else {
+      lineOption.xAxis[0].data = ['周一', '周二', '周三', '周四', '周五', '周六', '周天']
+    }
+    lineChart.setOption(lineOption);
   }
 </script>
 
@@ -354,26 +197,32 @@
       height: 42px;
       line-height: 42px;
       display: flex;
+      justify-content: space-between;
+
+      .image {
+        display: flex;
+      }
 
       span {
         font-size: 18px;
         display: inline-block;
       }
 
-      .radio {
-        margin-left: 130px;
-      }
-
       .text {
-        margin-left: 50px;
-        margin-top: 6px;
+        display: flex;
+        align-items: center;
       }
+    }
+
+    .selectRadio {
+      display: flex;
+      justify-content: space-between;
     }
 
     #echart {
       width: 100%;
-      margin-top: 10px;
-      height: calc(100% - 42px);
+      margin-top: 5px;
+      height: calc(100% - 60px);
     }
   }
 
@@ -399,6 +248,9 @@
 
     .el-select__wrapper {
       background-color: transparent;
+    }
+    .el-select__placeholder{
+      color: white;
     }
   }
 </style>

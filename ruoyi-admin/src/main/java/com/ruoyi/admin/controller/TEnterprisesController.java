@@ -2,10 +2,6 @@ package com.ruoyi.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
-
-import com.ruoyi.admin.domain.TEnterprises;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,18 +16,17 @@ import com.ruoyi.common.annotation.Log;
 import com.ruoyi.common.core.controller.BaseController;
 import com.ruoyi.common.core.domain.AjaxResult;
 import com.ruoyi.common.enums.BusinessType;
-
+import com.ruoyi.admin.domain.TEnterprises;
 import com.ruoyi.admin.service.ITEnterprisesService;
 import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
  * 企业管理Controller
- * 
+ *
  * @author wy
- * @date 2025-05-31
+ * @date 2025-06-01
  */
-@Api(tags = "企业管理")
 @RestController
 @RequestMapping("/admin/enterprises")
 public class TEnterprisesController extends BaseController
@@ -42,7 +37,6 @@ public class TEnterprisesController extends BaseController
     /**
      * 查询企业管理列表
      */
-    @ApiOperation("查询企业管理列表")
     @PreAuthorize("@ss.hasPermi('admin:enterprises:list')")
     @GetMapping("/list")
     public TableDataInfo list(TEnterprises tEnterprises)
@@ -69,10 +63,10 @@ public class TEnterprisesController extends BaseController
      * 获取企业管理详细信息
      */
     @PreAuthorize("@ss.hasPermi('admin:enterprises:query')")
-    @GetMapping(value = "/{enterpriseName}")
-    public AjaxResult getInfo(@PathVariable("enterpriseName") String enterpriseName)
+    @GetMapping(value = "/{id}")
+    public AjaxResult getInfo(@PathVariable("id") String id)
     {
-        return success(tEnterprisesService.selectTEnterprisesByEnterpriseName(enterpriseName));
+        return success(tEnterprisesService.selectTEnterprisesById(id));
     }
 
     /**
@@ -102,9 +96,9 @@ public class TEnterprisesController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('admin:enterprises:remove')")
     @Log(title = "企业管理", businessType = BusinessType.DELETE)
-	@DeleteMapping("/{enterpriseNames}")
-    public AjaxResult remove(@PathVariable String[] enterpriseNames)
+    @DeleteMapping("/{ids}")
+    public AjaxResult remove(@PathVariable String[] ids)
     {
-        return toAjax(tEnterprisesService.deleteTEnterprisesByEnterpriseNames(enterpriseNames));
+        return toAjax(tEnterprisesService.deleteTEnterprisesByIds(ids));
     }
 }

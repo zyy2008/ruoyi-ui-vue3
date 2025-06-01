@@ -131,7 +131,7 @@ public class SysUser extends BaseEntity {
     /**
      * 基地id
      */
-    private Long baseId;
+    private String baseId;
     private Long[] baseIds;
     /** 基地名称*/
     private String baseName;
@@ -312,11 +312,11 @@ public class SysUser extends BaseEntity {
         this.roleId = roleId;
     }
 
-    public Long getBaseId() {
+    public String getBaseId() {
         return baseId;
     }
 
-    public void setBaseId(Long baseId) {
+    public void setBaseId(String baseId) {
         this.baseId = baseId;
     }
 

@@ -91,15 +91,18 @@
         <result property="tetrachloroethane1112"    column="tetrachloroethane_1_1_1_2"    />
         <result property="tetrachloroethane1122"    column="tetrachloroethane_1_1_2_2"    />
         <result property="trichloropropane123"    column="trichloropropane_1_2_3"    />
+        <result property="id"    column="id"    />
     </resultMap>
 
     <sql id="selectTWaterQualityMonitoringVo">
-        select point_id, sample_time, color, odor_and_taste, turbidity, visible_matters, ph, total_hardness, total_dissolved_solids, sulfate, chloride, iron, manganese, aluminum, anionic_surfactant, oxygen_consumption, sulfide, sodium, nitrite_nitrogen, nitrate_nitrogen, iodide, selenium, copper, zinc, volatile_phenol, ammonia_nitrogen, cyanide, fluoride, mercury, arsenic, cadmium, chromium_vi, lead, chloroform, carbon_tetrachloride, benzene, toluene, molybdenum, vanadium, cobalt, nickel, dichloromethane, dichloroethane_1_2, trichloroethane_1_1_1, trichloroethane_1_1_2, dichloropropane_1_2, vinyl_chloride, dichloroethylene_1_1, trans_dichloroethylene_1_2, cis_dichloroethylene_1_2, trichloroethylene, tetrachloroethylene, chlorobenzene, dichlorobenzene_1_2, dichlorobenzene_1_4, ethylbenzene, xylene_ortho, xylene_meta_para, styrene, nitrobenzene, naphthalene, anthracene, fluoranthene, benzo_b_fluoranthene, benzo_a_pyrene, petroleum_hydrocarbons_c6_c9, petroleum_hydrocarbons_c10_c40, phenol, chlorophenol_2, aniline, acenaphthylene, acenaphthene, fluorene, phenanthrene, pyrene, benzo_a_anthracene, chrysene, benzo_k_fluoranthene, indeno_1_2_3_cd_pyrene, dibenzo_a_h_anthracene, benzo_g_h_i_perylene, chloromethane, dichloroethane_1_1, tetrachloroethane_1_1_1_2, tetrachloroethane_1_1_2_2, trichloropropane_1_2_3 from t_water_quality_monitoring
+        select point_id, sample_time, color, odor_and_taste, turbidity, visible_matters, ph, total_hardness, total_dissolved_solids, sulfate, chloride, iron, manganese, aluminum, anionic_surfactant, oxygen_consumption, sulfide, sodium, nitrite_nitrogen, nitrate_nitrogen, iodide, selenium, copper, zinc, volatile_phenol, ammonia_nitrogen, cyanide, fluoride, mercury, arsenic, cadmium, chromium_vi, lead, chloroform, carbon_tetrachloride, benzene, toluene, molybdenum, vanadium, cobalt, nickel, dichloromethane, dichloroethane_1_2, trichloroethane_1_1_1, trichloroethane_1_1_2, dichloropropane_1_2, vinyl_chloride, dichloroethylene_1_1, trans_dichloroethylene_1_2, cis_dichloroethylene_1_2, trichloroethylene, tetrachloroethylene, chlorobenzene, dichlorobenzene_1_2, dichlorobenzene_1_4, ethylbenzene, xylene_ortho, xylene_meta_para, styrene, nitrobenzene, naphthalene, anthracene, fluoranthene, benzo_b_fluoranthene, benzo_a_pyrene, petroleum_hydrocarbons_c6_c9, petroleum_hydrocarbons_c10_c40, phenol, chlorophenol_2, aniline, acenaphthylene, acenaphthene, fluorene, phenanthrene, pyrene, benzo_a_anthracene, chrysene, benzo_k_fluoranthene, indeno_1_2_3_cd_pyrene, dibenzo_a_h_anthracene, benzo_g_h_i_perylene, chloromethane, dichloroethane_1_1, tetrachloroethane_1_1_1_2, tetrachloroethane_1_1_2_2, trichloropropane_1_2_3, id from t_water_quality_monitoring
     </sql>
 
     <select id="selectTWaterQualityMonitoringList" parameterType="TWaterQualityMonitoring" resultMap="TWaterQualityMonitoringResult">
         <include refid="selectTWaterQualityMonitoringVo"/>
         <where>
+            <if test="pointId != null  and pointId != ''"> and point_id = #{pointId}</if>
+            <if test="sampleTime != null  and sampleTime != ''"> and sample_time = #{sampleTime}</if>
             <if test="color != null  and color != ''"> and color = #{color}</if>
             <if test="odorAndTaste != null  and odorAndTaste != ''"> and odor_and_taste = #{odorAndTaste}</if>
             <if test="turbidity != null  and turbidity != ''"> and turbidity = #{turbidity}</if>
@@ -187,16 +190,16 @@
         </where>
     </select>
 
-    <select id="selectTWaterQualityMonitoringByPointId" parameterType="String" resultMap="TWaterQualityMonitoringResult">
+    <select id="selectTWaterQualityMonitoringById" parameterType="String" resultMap="TWaterQualityMonitoringResult">
         <include refid="selectTWaterQualityMonitoringVo"/>
-        where point_id = #{pointId}
+        where id = #{id}
     </select>
 
     <insert id="insertTWaterQualityMonitoring" parameterType="TWaterQualityMonitoring">
         insert into t_water_quality_monitoring
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="pointId != null">point_id,</if>
-            <if test="sampleTime != null">sample_time,</if>
+            <if test="pointId != null and pointId != ''">point_id,</if>
+            <if test="sampleTime != null and sampleTime != ''">sample_time,</if>
             <if test="color != null">color,</if>
             <if test="odorAndTaste != null">odor_and_taste,</if>
             <if test="turbidity != null">turbidity,</if>
@@ -281,10 +284,11 @@
             <if test="tetrachloroethane1112 != null">tetrachloroethane_1_1_1_2,</if>
             <if test="tetrachloroethane1122 != null">tetrachloroethane_1_1_2_2,</if>
             <if test="trichloropropane123 != null">trichloropropane_1_2_3,</if>
+            <if test="id != null">id,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="pointId != null">#{pointId},</if>
-            <if test="sampleTime != null">#{sampleTime},</if>
+            <if test="pointId != null and pointId != ''">#{pointId},</if>
+            <if test="sampleTime != null and sampleTime != ''">#{sampleTime},</if>
             <if test="color != null">#{color},</if>
             <if test="odorAndTaste != null">#{odorAndTaste},</if>
             <if test="turbidity != null">#{turbidity},</if>
@@ -369,13 +373,15 @@
             <if test="tetrachloroethane1112 != null">#{tetrachloroethane1112},</if>
             <if test="tetrachloroethane1122 != null">#{tetrachloroethane1122},</if>
             <if test="trichloropropane123 != null">#{trichloropropane123},</if>
+            <if test="id != null">#{id},</if>
         </trim>
     </insert>
 
     <update id="updateTWaterQualityMonitoring" parameterType="TWaterQualityMonitoring">
         update t_water_quality_monitoring
         <trim prefix="SET" suffixOverrides=",">
-            <if test="sampleTime != null">sample_time = #{sampleTime},</if>
+            <if test="pointId != null and pointId != ''">point_id = #{pointId},</if>
+            <if test="sampleTime != null and sampleTime != ''">sample_time = #{sampleTime},</if>
             <if test="color != null">color = #{color},</if>
             <if test="odorAndTaste != null">odor_and_taste = #{odorAndTaste},</if>
             <if test="turbidity != null">turbidity = #{turbidity},</if>
@@ -461,17 +467,17 @@
             <if test="tetrachloroethane1122 != null">tetrachloroethane_1_1_2_2 = #{tetrachloroethane1122},</if>
             <if test="trichloropropane123 != null">trichloropropane_1_2_3 = #{trichloropropane123},</if>
         </trim>
-        where point_id = #{pointId}
+        where id = #{id}
     </update>
 
-    <delete id="deleteTWaterQualityMonitoringByPointId" parameterType="String">
-        delete from t_water_quality_monitoring where point_id = #{pointId}
+    <delete id="deleteTWaterQualityMonitoringById" parameterType="String">
+        delete from t_water_quality_monitoring where id = #{id}
     </delete>
 
-    <delete id="deleteTWaterQualityMonitoringByPointIds" parameterType="String">
-        delete from t_water_quality_monitoring where point_id in
-        <foreach item="pointId" collection="array" open="(" separator="," close=")">
-            #{pointId}
+    <delete id="deleteTWaterQualityMonitoringByIds" parameterType="String">
+        delete from t_water_quality_monitoring where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
         </foreach>
     </delete>
 </mapper>

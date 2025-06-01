@@ -26,7 +26,7 @@ public class TMonitoringWellsServiceImpl implements ITMonitoringWellsService
      * @return 园区初调监测井信息，记录每个监测井的基础属性与附加信息
      */
     @Override
-    public TMonitoringWells selectTMonitoringWellsById(Long id)
+    public TMonitoringWells selectTMonitoringWellsById(String id)
     {
         return tMonitoringWellsMapper.selectTMonitoringWellsById(id);
     }
@@ -74,7 +74,7 @@ public class TMonitoringWellsServiceImpl implements ITMonitoringWellsService
      * @return 结果
      */
     @Override
-    public int deleteTMonitoringWellsByIds(Long[] ids)
+    public int deleteTMonitoringWellsByIds(String[] ids)
     {
         return tMonitoringWellsMapper.deleteTMonitoringWellsByIds(ids);
     }
@@ -86,7 +86,7 @@ public class TMonitoringWellsServiceImpl implements ITMonitoringWellsService
      * @return 结果
      */
     @Override
-    public int deleteTMonitoringWellsById(Long id)
+    public int deleteTMonitoringWellsById(String id)
     {
         return tMonitoringWellsMapper.deleteTMonitoringWellsById(id);
     }

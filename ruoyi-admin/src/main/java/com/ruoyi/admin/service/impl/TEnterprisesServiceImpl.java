@@ -9,31 +9,31 @@ import com.ruoyi.admin.service.ITEnterprisesService;
 
 /**
  * 企业管理Service业务层处理
- * 
+ *
  * @author wy
- * @date 2025-05-31
+ * @date 2025-06-01
  */
 @Service
-public class TEnterprisesServiceImpl implements ITEnterprisesService 
+public class TEnterprisesServiceImpl implements ITEnterprisesService
 {
     @Autowired
     private TEnterprisesMapper tEnterprisesMapper;
 
     /**
      * 查询企业管理
-     * 
-     * @param enterpriseName 企业管理主键
+     *
+     * @param id 企业管理主键
      * @return 企业管理
      */
     @Override
-    public TEnterprises selectTEnterprisesByEnterpriseName(String enterpriseName)
+    public TEnterprises selectTEnterprisesById(String id)
     {
-        return tEnterprisesMapper.selectTEnterprisesByEnterpriseName(enterpriseName);
+        return tEnterprisesMapper.selectTEnterprisesById(id);
     }
 
     /**
      * 查询企业管理列表
-     * 
+     *
      * @param tEnterprises 企业管理
      * @return 企业管理
      */
@@ -45,7 +45,7 @@ public class TEnterprisesServiceImpl implements ITEnterprisesService
 
     /**
      * 新增企业管理
-     * 
+     *
      * @param tEnterprises 企业管理
      * @return 结果
      */
@@ -57,7 +57,7 @@ public class TEnterprisesServiceImpl implements ITEnterprisesService
 
     /**
      * 修改企业管理
-     * 
+     *
      * @param tEnterprises 企业管理
      * @return 结果
      */
@@ -69,25 +69,25 @@ public class TEnterprisesServiceImpl implements ITEnterprisesService
 
     /**
      * 批量删除企业管理
-     * 
-     * @param enterpriseNames 需要删除的企业管理主键
+     *
+     * @param ids 需要删除的企业管理主键
      * @return 结果
      */
     @Override
-    public int deleteTEnterprisesByEnterpriseNames(String[] enterpriseNames)
+    public int deleteTEnterprisesByIds(String[] ids)
     {
-        return tEnterprisesMapper.deleteTEnterprisesByEnterpriseNames(enterpriseNames);
+        return tEnterprisesMapper.deleteTEnterprisesByIds(ids);
     }
 
     /**
      * 删除企业管理信息
-     * 
-     * @param enterpriseName 企业管理主键
+     *
+     * @param id 企业管理主键
      * @return 结果
      */
     @Override
-    public int deleteTEnterprisesByEnterpriseName(String enterpriseName)
+    public int deleteTEnterprisesById(String id)
     {
-        return tEnterprisesMapper.deleteTEnterprisesByEnterpriseName(enterpriseName);
+        return tEnterprisesMapper.deleteTEnterprisesById(id);
     }
 }

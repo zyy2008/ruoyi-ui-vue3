@@ -1,5 +1,5 @@
 <template>
-  <el-dialog v-model="dialogVisible" title="检测井" width="800"  destroy-on-close @open="openChartLine"> 
+  <el-dialog z-index="999999" v-model="dialogVisible" title="检测井" width="800"  destroy-on-close @open="openChartLine"> 
     <el-date-picker v-model="timeValue" type="daterange" range-separator="至" start-placeholder="开始日期"
       style="width: 400px;" end-placeholder="结束日期">
     </el-date-picker>

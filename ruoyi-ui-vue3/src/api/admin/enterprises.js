@@ -10,9 +10,9 @@ export function listEnterprises(query) {
 }
 
 // 查询企业管理详细
-export function getEnterprises(enterpriseName) {
+export function getEnterprises(id) {
   return request({
-    url: '/admin/enterprises/' + enterpriseName,
+    url: '/admin/enterprises/' + id,
     method: 'get'
   })
 }
@@ -36,9 +36,9 @@ export function updateEnterprises(data) {
 }
 
 // 删除企业管理
-export function delEnterprises(enterpriseName) {
+export function delEnterprises(id) {
   return request({
-    url: '/admin/enterprises/' + enterpriseName,
+    url: '/admin/enterprises/' + id,
     method: 'delete'
   })
 }

@@ -37,6 +37,15 @@ public class TMonitoringWellsController extends BaseController {
     @Autowired
     private ITMonitoringWellsService tMonitoringWellsService;
 
+
+    @ApiOperation("查询园区所有监测井信息列表")
+    @PreAuthorize("@ss.hasPermi('admin:wells:list')")
+    @GetMapping("/all")
+    public TableDataInfo all(TMonitoringWells tMonitoringWells) {
+        List<TMonitoringWells> list = tMonitoringWellsService.selectTMonitoringWellsList(tMonitoringWells);
+        return getDataTable(list);
+    }
+
     /**
      * 查询园区监测井信息列表
      */
@@ -68,7 +77,7 @@ public class TMonitoringWellsController extends BaseController {
     @ApiOperation("获取园区监测井信息详细信息")
     @PreAuthorize("@ss.hasPermi('admin:wells:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id) {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return success(tMonitoringWellsService.selectTMonitoringWellsById(id));
     }
 
@@ -101,7 +110,7 @@ public class TMonitoringWellsController extends BaseController {
     @PreAuthorize("@ss.hasPermi('admin:wells:remove')")
     @Log(title = "园区监测井信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids) {
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(tMonitoringWellsService.deleteTMonitoringWellsByIds(ids));
     }
 }

@@ -3,7 +3,7 @@ import request from '@/utils/request'
 // 查询水质监测数据列表
 export function listMonitoring(query) {
   return request({
-    url: '/system/monitoring/list',
+    url: '/admin/monitoring/list',
     method: 'get',
     params: query
   })
@@ -12,7 +12,7 @@ export function listMonitoring(query) {
 // 查询水质监测数据详细
 export function getMonitoring(id) {
   return request({
-    url: '/system/monitoring/' + id,
+    url: '/admin/monitoring/' + id,
     method: 'get'
   })
 }
@@ -20,7 +20,7 @@ export function getMonitoring(id) {
 // 新增水质监测数据
 export function addMonitoring(data) {
   return request({
-    url: '/system/monitoring',
+    url: '/admin/monitoring',
     method: 'post',
     data: data
   })
@@ -29,7 +29,7 @@ export function addMonitoring(data) {
 // 修改水质监测数据
 export function updateMonitoring(data) {
   return request({
-    url: '/system/monitoring',
+    url: '/admin/monitoring',
     method: 'put',
     data: data
   })
@@ -38,7 +38,7 @@ export function updateMonitoring(data) {
 // 删除水质监测数据
 export function delMonitoring(id) {
   return request({
-    url: '/system/monitoring/' + id,
+    url: '/admin/monitoring/' + id,
     method: 'delete'
   })
 }
@@ -46,7 +46,7 @@ export function delMonitoring(id) {
 // 导出水质监测数据
 export function exportMonitoring(query) {
   return request({
-    url: '/system/monitoring/export',
+    url: '/admin/monitoring/export',
     method: 'get',
     params: query
   })

@@ -66,12 +66,15 @@ const useUserStore = defineStore("user", {
               this.roleId = user.roles[0].roleId;
             }
 
-            await layerStore().getBaseSelect(); //获取可以查看的基地
+            // await layerStore().getBaseSelect(); //获取可以查看的基地
 
-            if (this.baseIds && this.baseIds.length == 1) {
-              await layerStore().setBaseSelect(this.baseIds);
-            }
+            // if (this.baseIds && this.baseIds.length == 1) {
+            //   await layerStore().setBaseSelect(this.baseIds)
+            // }
             resolve(res);
+          })
+          .catch((error) => {
+            reject(error);
           })
           .catch((error) => {
             reject(error);

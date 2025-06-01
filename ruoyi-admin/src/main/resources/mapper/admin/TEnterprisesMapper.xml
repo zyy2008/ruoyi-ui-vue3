@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.admin.mapper.TEnterprisesMapper">
-    
+
     <resultMap type="TEnterprises" id="TEnterprisesResult">
         <result property="enterpriseName"    column="enterprise_name"    />
         <result property="industryCategory"    column="industry_category"    />
@@ -14,15 +14,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="latitude"    column="latitude"    />
         <result property="area"    column="area"    />
         <result property="isKeyEnterprise"    column="is_key_enterprise"    />
+        <result property="id"    column="id"    />
     </resultMap>
 
     <sql id="selectTEnterprisesVo">
-        select enterprise_name, industry_category, production_years, status, reporting_status, longitude, latitude, area, is_key_enterprise from t_enterprises
+        select enterprise_name, industry_category, production_years, status, reporting_status, longitude, latitude, area, is_key_enterprise, id from t_enterprises
     </sql>
 
     <select id="selectTEnterprisesList" parameterType="TEnterprises" resultMap="TEnterprisesResult">
         <include refid="selectTEnterprisesVo"/>
-        <where>  
+        <where>
             <if test="enterpriseName != null  and enterpriseName != ''"> and enterprise_name like concat('%', #{enterpriseName}, '%')</if>
             <if test="industryCategory != null  and industryCategory != ''"> and industry_category = #{industryCategory}</if>
             <if test="productionYears != null  and productionYears != ''"> and production_years = #{productionYears}</if>
@@ -34,10 +35,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isKeyEnterprise != null  and isKeyEnterprise != ''"> and is_key_enterprise = #{isKeyEnterprise}</if>
         </where>
     </select>
-    
-    <select id="selectTEnterprisesByEnterpriseName" parameterType="String" resultMap="TEnterprisesResult">
+
+    <select id="selectTEnterprisesById" parameterType="String" resultMap="TEnterprisesResult">
         <include refid="selectTEnterprisesVo"/>
-        where enterprise_name = #{enterpriseName}
+        where id = #{id}
     </select>
 
     <insert id="insertTEnterprises" parameterType="TEnterprises">
@@ -52,7 +53,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="latitude != null">latitude,</if>
             <if test="area != null">area,</if>
             <if test="isKeyEnterprise != null">is_key_enterprise,</if>
-         </trim>
+            <if test="id != null">id,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="enterpriseName != null">#{enterpriseName},</if>
             <if test="industryCategory != null">#{industryCategory},</if>
@@ -63,12 +65,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="latitude != null">#{latitude},</if>
             <if test="area != null">#{area},</if>
             <if test="isKeyEnterprise != null">#{isKeyEnterprise},</if>
-         </trim>
+            <if test="id != null">#{id},</if>
+        </trim>
     </insert>
 
     <update id="updateTEnterprises" parameterType="TEnterprises">
         update t_enterprises
         <trim prefix="SET" suffixOverrides=",">
+            <if test="enterpriseName != null">enterprise_name = #{enterpriseName},</if>
             <if test="industryCategory != null">industry_category = #{industryCategory},</if>
             <if test="productionYears != null">production_years = #{productionYears},</if>
             <if test="status != null">status = #{status},</if>
@@ -78,17 +82,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="area != null">area = #{area},</if>
             <if test="isKeyEnterprise != null">is_key_enterprise = #{isKeyEnterprise},</if>
         </trim>
-        where enterprise_name = #{enterpriseName}
+        where id = #{id}
     </update>
 
-    <delete id="deleteTEnterprisesByEnterpriseName" parameterType="String">
-        delete from t_enterprises where enterprise_name = #{enterpriseName}
+    <delete id="deleteTEnterprisesById" parameterType="String">
+        delete from t_enterprises where id = #{id}
     </delete>
 
-    <delete id="deleteTEnterprisesByEnterpriseNames" parameterType="String">
-        delete from t_enterprises where enterprise_name in 
-        <foreach item="enterpriseName" collection="array" open="(" separator="," close=")">
-            #{enterpriseName}
+    <delete id="deleteTEnterprisesByIds" parameterType="String">
+        delete from t_enterprises where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
         </foreach>
     </delete>
 </mapper>

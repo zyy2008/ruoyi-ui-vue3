@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.admin.mapper.TMonitoringWellsMapper">
-    
+
     <resultMap type="TMonitoringWells" id="TMonitoringWellsResult">
         <result property="id"    column="id"    />
         <result property="wellCode"    column="well_code"    />
@@ -35,7 +35,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectTMonitoringWellsList" parameterType="TMonitoringWells" resultMap="TMonitoringWellsResult">
         <include refid="selectTMonitoringWellsVo"/>
-        <where>  
+        <where>
             <if test="wellCode != null  and wellCode != ''"> and well_code = #{wellCode}</if>
             <if test="location != null  and location != ''"> and location = #{location}</if>
             <if test="pointType != null  and pointType != ''"> and point_type = #{pointType}</if>
@@ -59,15 +59,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="deptId != null "> and dept_id = #{deptId}</if>
         </where>
     </select>
-    
-    <select id="selectTMonitoringWellsById" parameterType="Long" resultMap="TMonitoringWellsResult">
+
+    <select id="selectTMonitoringWellsById" parameterType="String" resultMap="TMonitoringWellsResult">
         <include refid="selectTMonitoringWellsVo"/>
         where id = #{id}
     </select>
 
-    <insert id="insertTMonitoringWells" parameterType="TMonitoringWells" useGeneratedKeys="true" keyProperty="id">
+    <insert id="insertTMonitoringWells" parameterType="TMonitoringWells">
         insert into t_monitoring_wells
         <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
             <if test="wellCode != null">well_code,</if>
             <if test="location != null">location,</if>
             <if test="pointType != null">point_type,</if>
@@ -89,8 +90,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="altitude != null">altitude,</if>
             <if test="videoUrl != null">video_url,</if>
             <if test="deptId != null">dept_id,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
             <if test="wellCode != null">#{wellCode},</if>
             <if test="location != null">#{location},</if>
             <if test="pointType != null">#{pointType},</if>
@@ -112,7 +114,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="altitude != null">#{altitude},</if>
             <if test="videoUrl != null">#{videoUrl},</if>
             <if test="deptId != null">#{deptId},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateTMonitoringWells" parameterType="TMonitoringWells">
@@ -143,12 +145,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where id = #{id}
     </update>
 
-    <delete id="deleteTMonitoringWellsById" parameterType="Long">
+    <delete id="deleteTMonitoringWellsById" parameterType="String">
         delete from t_monitoring_wells where id = #{id}
     </delete>
 
     <delete id="deleteTMonitoringWellsByIds" parameterType="String">
-        delete from t_monitoring_wells where id in 
+        delete from t_monitoring_wells where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

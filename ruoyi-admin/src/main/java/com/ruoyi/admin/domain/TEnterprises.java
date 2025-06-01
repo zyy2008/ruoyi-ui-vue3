@@ -7,9 +7,9 @@ import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
  * 企业管理对象 t_enterprises
- * 
+ *
  * @author wy
- * @date 2025-05-31
+ * @date 2025-06-01
  */
 public class TEnterprises extends BaseEntity
 {
@@ -51,100 +51,113 @@ public class TEnterprises extends BaseEntity
     @Excel(name = "是否重点")
     private String isKeyEnterprise;
 
-    public void setEnterpriseName(String enterpriseName) 
+    /** 主键 */
+    private String id;
+
+    public void setEnterpriseName(String enterpriseName)
     {
         this.enterpriseName = enterpriseName;
     }
 
-    public String getEnterpriseName() 
+    public String getEnterpriseName()
     {
         return enterpriseName;
     }
-    public void setIndustryCategory(String industryCategory) 
+    public void setIndustryCategory(String industryCategory)
     {
         this.industryCategory = industryCategory;
     }
 
-    public String getIndustryCategory() 
+    public String getIndustryCategory()
     {
         return industryCategory;
     }
-    public void setProductionYears(String productionYears) 
+    public void setProductionYears(String productionYears)
     {
         this.productionYears = productionYears;
     }
 
-    public String getProductionYears() 
+    public String getProductionYears()
     {
         return productionYears;
     }
-    public void setStatus(String status) 
+    public void setStatus(String status)
     {
         this.status = status;
     }
 
-    public String getStatus() 
+    public String getStatus()
     {
         return status;
     }
-    public void setReportingStatus(String reportingStatus) 
+    public void setReportingStatus(String reportingStatus)
     {
         this.reportingStatus = reportingStatus;
     }
 
-    public String getReportingStatus() 
+    public String getReportingStatus()
     {
         return reportingStatus;
     }
-    public void setLongitude(String longitude) 
+    public void setLongitude(String longitude)
     {
         this.longitude = longitude;
     }
 
-    public String getLongitude() 
+    public String getLongitude()
     {
         return longitude;
     }
-    public void setLatitude(String latitude) 
+    public void setLatitude(String latitude)
     {
         this.latitude = latitude;
     }
 
-    public String getLatitude() 
+    public String getLatitude()
     {
         return latitude;
     }
-    public void setArea(String area) 
+    public void setArea(String area)
     {
         this.area = area;
     }
 
-    public String getArea() 
+    public String getArea()
     {
         return area;
     }
-    public void setIsKeyEnterprise(String isKeyEnterprise) 
+    public void setIsKeyEnterprise(String isKeyEnterprise)
     {
         this.isKeyEnterprise = isKeyEnterprise;
     }
 
-    public String getIsKeyEnterprise() 
+    public String getIsKeyEnterprise()
     {
         return isKeyEnterprise;
+    }
+    public void setId(String id)
+    {
+        this.id = id;
+    }
+
+    public String getId()
+    {
+        return id;
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("enterpriseName", getEnterpriseName())
-            .append("industryCategory", getIndustryCategory())
-            .append("productionYears", getProductionYears())
-            .append("status", getStatus())
-            .append("reportingStatus", getReportingStatus())
-            .append("longitude", getLongitude())
-            .append("latitude", getLatitude())
-            .append("area", getArea())
-            .append("isKeyEnterprise", getIsKeyEnterprise())
-            .toString();
+                .append("enterpriseName", getEnterpriseName())
+                .append("industryCategory", getIndustryCategory())
+                .append("productionYears", getProductionYears())
+                .append("status", getStatus())
+                .append("reportingStatus", getReportingStatus())
+                .append("longitude", getLongitude())
+                .append("latitude", getLatitude())
+                .append("area", getArea())
+                .append("isKeyEnterprise", getIsKeyEnterprise())
+                .append("id", getId())
+                .toString();
     }
 }

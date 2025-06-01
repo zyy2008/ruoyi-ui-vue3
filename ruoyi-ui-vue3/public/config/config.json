@@ -2,9 +2,9 @@
   "map3d": {
     "scene": {
       "center": {
-        "lat": 33.15586,
-        "lng": 104.245416,
-        "alt": 8838702.3,
+        "lat": 37.57318,
+        "lng": 112.286366,
+        "alt": 16820.9,
         "heading": 0,
         "pitch": -89.9
       },
@@ -141,7 +141,7 @@
         "type": "geojson",
         "name": "国界线",
         "url": "geojson/ChinaLine.geojson",
-        "show": true,
+        "show": false,
         "flyTo": false,
         "symbol": {
           "type": "polylineC",
@@ -167,29 +167,6 @@
         "maximumLevel": 17,
         "show": true,
         "url": "http://127.0.0.1:9998/gisData/qx/{z}/{x}/{y}.png"
-      },
-      {
-        "pid": 10,
-        "type": "geojson",
-        "name": "园区监测井",
-        "url": "geojson/园区监测井坐标.geojson",
-        "show": true,
-        "flyTo": true,
-        "cluster":{
-          "enabled":false,
-          "pixelRange":20
-        },
-        "popup":"all",
-        "symbol": {
-          "type": "div",
-          "styleOptions": {
-            "html": "<div class='marsBlueGradientPnl'><div>{点位编号}</div></div>",
-            "offsetY": -60,
-            "horizontalOrigin": 0,
-            "verticalOrigin": 1,
-            "clampToGround": true
-          }
-        }
       }
     ],
     "layers": []

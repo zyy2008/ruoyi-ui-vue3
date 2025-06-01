@@ -1,17 +1,36 @@
 <template>
   <div class="app-container">
-    <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch" label-width="68px">
+    <el-form
+      :model="queryParams"
+      ref="queryRef"
+      :inline="true"
+      v-show="showSearch"
+      label-width="68px"
+    >
       <el-form-item label="企业名称" prop="enterpriseName">
-        <el-input v-model="queryParams.enterpriseName" placeholder="请输入企业名称" clearable style="width: 200px" @keyup.enter="handleQuery"/>
+        <el-input
+          v-model="queryParams.enterpriseName"
+          placeholder="请输入企业名称"
+          clearable
+          style="width: 200px"
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item label="是否重点" prop="isKeyEnterprise">
-        <el-select v-model="queryParams.isKeyEnterprise" placeholder="请选择是否重点" clearable style="width: 200px">
+        <el-select
+          v-model="queryParams.isKeyEnterprise"
+          placeholder="请选择是否重点"
+          clearable
+          style="width: 200px"
+        >
           <el-option label="是" value="是" />
           <el-option label="否" value="否" />
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
+        <el-button type="primary" icon="Search" @click="handleQuery"
+          >搜索</el-button
+        >
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
@@ -24,7 +43,8 @@
           icon="Plus"
           @click="handleAdd"
           v-hasPermi="['admin:enterprises:add']"
-        >新增</el-button>
+          >新增</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -34,7 +54,8 @@
           :disabled="single"
           @click="handleUpdate"
           v-hasPermi="['admin:enterprises:edit']"
-        >修改</el-button>
+          >修改</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -44,7 +65,8 @@
           :disabled="multiple"
           @click="handleDelete"
           v-hasPermi="['admin:enterprises:remove']"
-        >删除</el-button>
+          >删除</el-button
+        >
       </el-col>
       <el-col :span="1.5">
         <el-button
@@ -53,15 +75,27 @@
           icon="Download"
           @click="handleExport"
           v-hasPermi="['admin:enterprises:export']"
-        >导出</el-button>
+          >导出</el-button
+        >
       </el-col>
-      <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
+      <right-toolbar
+        v-model:showSearch="showSearch"
+        @queryTable="getList"
+      ></right-toolbar>
     </el-row>
 
-    <el-table v-loading="loading" :data="enterprisesList" @selection-change="handleSelectionChange">
+    <el-table
+      v-loading="loading"
+      :data="enterprisesList"
+      @selection-change="handleSelectionChange"
+    >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="企业名称" align="center" prop="enterpriseName" />
-      <el-table-column label="行业类别" align="center" prop="industryCategory" />
+      <el-table-column
+        label="行业类别"
+        align="center"
+        prop="industryCategory"
+      />
       <el-table-column label="生产年限" align="center" prop="productionYears" />
       <el-table-column label="存续状态" align="center" prop="status" />
       <el-table-column label="报送情况" align="center" prop="reportingStatus" />
@@ -69,16 +103,42 @@
       <el-table-column label="纬度" align="center" prop="latitude" />
       <el-table-column label="占地面积" align="center" prop="area" />
       <el-table-column label="是否重点" align="center" prop="isKeyEnterprise" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column
+        label="操作"
+        align="center"
+        width="240"
+        class-name="small-padding fixed-width"
+      >
         <template #default="scope">
-          <el-button link type="primary" icon="Edit" @click="handleUpdate(scope.row)" v-hasPermi="['admin:enterprises:edit']">修改</el-button>
-          <el-button link type="primary" icon="Delete" @click="handleDelete(scope.row)" v-hasPermi="['admin:enterprises:remove']">删除</el-button>
+          <el-button
+            link
+            type="primary"
+            icon="View"
+            @click="handleDetail(scope.row)"
+            >详情</el-button
+          >
+          <el-button
+            link
+            type="primary"
+            icon="Edit"
+            @click="handleUpdate(scope.row)"
+            v-hasPermi="['admin:enterprises:edit']"
+            >修改</el-button
+          >
+          <el-button
+            link
+            type="danger"
+            icon="Delete"
+            @click="handleDelete(scope.row)"
+            v-hasPermi="['admin:enterprises:remove']"
+            >删除</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
-      v-show="total>0"
+      v-show="total > 0"
       :total="total"
       v-model:page="queryParams.pageNum"
       v-model:limit="queryParams.pageSize"
@@ -87,15 +147,29 @@
 
     <!-- 添加或修改企业管理对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="enterprisesRef" :model="form" :rules="rules" label-width="100px">
+      <el-form
+        ref="enterprisesRef"
+        :model="form"
+        :rules="rules"
+        label-width="100px"
+      >
         <el-form-item label="企业名称" prop="enterpriseName">
-          <el-input v-model="form.enterpriseName" placeholder="请输入企业名称" />
+          <el-input
+            v-model="form.enterpriseName"
+            placeholder="请输入企业名称"
+          />
         </el-form-item>
         <el-form-item label="行业类别" prop="industryCategory">
-          <el-input v-model="form.industryCategory" placeholder="请输入行业类别" />
+          <el-input
+            v-model="form.industryCategory"
+            placeholder="请输入行业类别"
+          />
         </el-form-item>
         <el-form-item label="生产年限" prop="productionYears">
-          <el-input v-model="form.productionYears" placeholder="请输入生产年限" />
+          <el-input
+            v-model="form.productionYears"
+            placeholder="请输入生产年限"
+          />
         </el-form-item>
         <el-form-item label="存续状态" prop="status">
           <el-select v-model="form.status" placeholder="请选择存续状态">
@@ -105,7 +179,10 @@
           </el-select>
         </el-form-item>
         <el-form-item label="报送情况" prop="reportingStatus">
-          <el-select v-model="form.reportingStatus" placeholder="请选择报送情况">
+          <el-select
+            v-model="form.reportingStatus"
+            placeholder="请选择报送情况"
+          >
             <el-option label="已报送" value="已报送" />
             <el-option label="未报送" value="未报送" />
           </el-select>
@@ -133,11 +210,56 @@
         </div>
       </template>
     </el-dialog>
+
+     <el-dialog
+      v-model="dialogVisible"
+      title="企业信息"
+      width="100vw"
+    >
+      <el-tabs
+        v-model="activeName"
+        type="card"
+        class="map-tabs"
+        @tab-click="handleClick"
+      >
+        <el-tab-pane label="企业地块基本情况" name="first"
+          ><form_tab1
+        /></el-tab-pane>
+        <el-tab-pane label="企业污染源信息" name="second"
+          ><form_tab2
+        /></el-tab-pane>
+        <el-tab-pane label="迁移途径信息" name="third"
+          ><form_tab3
+        /></el-tab-pane>
+        <el-tab-pane label="敏感受体信息" name="fourth"
+          ><form_tab4
+        /></el-tab-pane>
+        <el-tab-pane label="土壤或地下水环境监测" name="five"
+          ><form_tab5
+        /></el-tab-pane>
+        <el-tab-pane label="环境监测和调查评估信息" name="six"
+          ><form_tab6
+        /></el-tab-pane>
+      </el-tabs>
+    </el-dialog>
   </div>
 </template>
 
 <script setup name="Enterprises">
-import { listEnterprises, getEnterprises, delEnterprises, addEnterprises, updateEnterprises } from "@/api/admin/enterprises";
+import form_tab1 from "@/views/corporate/components/tab1/form";
+import form_tab2 from "@/views/corporate/components/tab2/form";
+import form_tab3 from "@/views/corporate/components/tab3/form";
+import form_tab4 from "@/views/corporate/components/tab4/form";
+import form_tab5 from "@/views/corporate/components/tab5/form";
+import form_tab6 from "@/views/corporate/components/tab6/form";
+import { generateUUID } from "@/utils/index";
+import {
+  listEnterprises,
+  getEnterprises,
+  delEnterprises,
+  addEnterprises,
+  updateEnterprises,
+} from "@/api/admin/enterprises";
 
 const { proxy } = getCurrentInstance();
 
@@ -150,6 +272,14 @@ const single = ref(true);
 const multiple = ref(true);
 const total = ref(0);
 const title = ref("");
+
+const activeName = ref("first");
+
+const handleClick = (tab, event) => {
+  console.log(tab, event);
+};
+
+const dialogVisible = ref(false);
 
 const data = reactive({
   form: {},
@@ -164,37 +294,9 @@ const data = reactive({
     longitude: null,
     latitude: null,
     area: null,
-    isKeyEnterprise: null
+    isKeyEnterprise: null,
   },
-  rules: {
-    enterpriseName: [
-      { required: true, message: "企业名称不能为空", trigger: "blur" }
-    ],
-    industryCategory: [
-      { required: true, message: "行业类别不能为空", trigger: "blur" }
-    ],
-    productionYears: [
-      { required: true, message: "生产年限不能为空", trigger: "blur" }
-    ],
-    status: [
-      { required: true, message: "存续状态不能为空", trigger: "change" }
-    ],
-    reportingStatus: [
-      { required: true, message: "报送情况不能为空", trigger: "change" }
-    ],
-    longitude: [
-      { required: true, message: "经度不能为空", trigger: "blur" }
-    ],
-    latitude: [
-      { required: true, message: "纬度不能为空", trigger: "blur" }
-    ],
-    area: [
-      { required: true, message: "占地面积不能为空", trigger: "blur" }
-    ],
-    isKeyEnterprise: [
-      { required: true, message: "是否重点不能为空", trigger: "change" }
-    ]
-  }
+  rules: {},
 });
 
 const { queryParams, form, rules } = toRefs(data);
@@ -202,7 +304,7 @@ const { queryParams, form, rules } = toRefs(data);
 /** 查询企业管理列表 */
 function getList() {
   loading.value = true;
-  listEnterprises(queryParams.value).then(response => {
+  listEnterprises(queryParams.value).then((response) => {
     enterprisesList.value = response.rows;
     total.value = response.total;
     loading.value = false;
@@ -226,7 +328,8 @@ function reset() {
     longitude: null,
     latitude: null,
     area: null,
-    isKeyEnterprise: null
+    isKeyEnterprise: null,
+    id: null,
   };
   proxy.resetForm("enterprisesRef");
 }
@@ -245,7 +348,7 @@ function resetQuery() {
 
 // 多选框选中数据
 function handleSelectionChange(selection) {
-  ids.value = selection.map(item => item.enterpriseName);
+  ids.value = selection.map((item) => item.id);
   single.value = selection.length != 1;
   multiple.value = !selection.length;
 }
@@ -260,8 +363,8 @@ function handleAdd() {
 /** 修改按钮操作 */
 function handleUpdate(row) {
   reset();
-  const _enterpriseName = row.enterpriseName || ids.value
-  getEnterprises(_enterpriseName).then(response => {
+  const _id = row.id || ids.value;
+  getEnterprises(_id).then((response) => {
     form.value = response.data;
     open.value = true;
     title.value = "修改企业管理";
@@ -270,16 +373,17 @@ function handleUpdate(row) {
 
 /** 提交按钮 */
 function submitForm() {
-  proxy.$refs["enterprisesRef"].validate(valid => {
+  proxy.$refs["enterprisesRef"].validate((valid) => {
     if (valid) {
-      if (form.value.enterpriseName != null) {
-        updateEnterprises(form.value).then(response => {
+      if (form.value.id != null) {
+        updateEnterprises(form.value).then((response) => {
           proxy.$modal.msgSuccess("修改成功");
           open.value = false;
           getList();
         });
       } else {
-        addEnterprises(form.value).then(response => {
+        form.value.id = generateUUID();
+        addEnterprises(form.value).then((response) => {
           proxy.$modal.msgSuccess("新增成功");
           open.value = false;
           getList();
@@ -291,20 +395,32 @@ function submitForm() {
 
 /** 删除按钮操作 */
 function handleDelete(row) {
-  const _enterpriseNames = row.enterpriseName || ids.value;
-  proxy.$modal.confirm('是否确认删除企业管理编号为"' + _enterpriseNames + '"的数据项？').then(function() {
-    return delEnterprises(_enterpriseNames);
-  }).then(() => {
-    getList();
-    proxy.$modal.msgSuccess("删除成功");
-  }).catch(() => {});
+  const _ids = row.id || ids.value;
+  proxy.$modal
+    .confirm('是否确认删除企业管理编号为"' + _ids + '"的数据项？')
+    .then(function () {
+      return delEnterprises(_ids);
+    })
+    .then(() => {
+      getList();
+      proxy.$modal.msgSuccess("删除成功");
+    })
+    .catch(() => {});
 }
 
 /** 导出按钮操作 */
 function handleExport() {
-  proxy.download('admin/enterprises/export', {
-    ...queryParams.value
-  }, `enterprises_${new Date().getTime()}.xlsx`)
+  proxy.download(
+    "admin/enterprises/export",
+    {
+      ...queryParams.value,
+    },
+    `enterprises_${new Date().getTime()}.xlsx`
+  );
+}
+
+function handleDetail(row) {
+  dialogVisible.value=true;
 }
 
 getList();

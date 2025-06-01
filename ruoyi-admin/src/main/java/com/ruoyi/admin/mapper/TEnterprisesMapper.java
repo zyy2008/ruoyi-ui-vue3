@@ -5,23 +5,23 @@ import com.ruoyi.admin.domain.TEnterprises;
 
 /**
  * 企业管理Mapper接口
- * 
+ *
  * @author wy
- * @date 2025-05-31
+ * @date 2025-06-01
  */
-public interface TEnterprisesMapper 
+public interface TEnterprisesMapper
 {
     /**
      * 查询企业管理
-     * 
-     * @param enterpriseName 企业管理主键
+     *
+     * @param id 企业管理主键
      * @return 企业管理
      */
-    public TEnterprises selectTEnterprisesByEnterpriseName(String enterpriseName);
+    public TEnterprises selectTEnterprisesById(String id);
 
     /**
      * 查询企业管理列表
-     * 
+     *
      * @param tEnterprises 企业管理
      * @return 企业管理集合
      */
@@ -29,7 +29,7 @@ public interface TEnterprisesMapper
 
     /**
      * 新增企业管理
-     * 
+     *
      * @param tEnterprises 企业管理
      * @return 结果
      */
@@ -37,7 +37,7 @@ public interface TEnterprisesMapper
 
     /**
      * 修改企业管理
-     * 
+     *
      * @param tEnterprises 企业管理
      * @return 结果
      */
@@ -45,17 +45,17 @@ public interface TEnterprisesMapper
 
     /**
      * 删除企业管理
-     * 
-     * @param enterpriseName 企业管理主键
+     *
+     * @param id 企业管理主键
      * @return 结果
      */
-    public int deleteTEnterprisesByEnterpriseName(String enterpriseName);
+    public int deleteTEnterprisesById(String id);
 
     /**
      * 批量删除企业管理
-     * 
-     * @param enterpriseNames 需要删除的数据主键集合
+     *
+     * @param ids 需要删除的数据主键集合
      * @return 结果
      */
-    public int deleteTEnterprisesByEnterpriseNames(String[] enterpriseNames);
+    public int deleteTEnterprisesByIds(String[] ids);
 }

@@ -1,5 +1,14 @@
 import request from '@/utils/request'
 
+
+export function allWells(query) {
+  return request({
+    url: '/admin/wells/all',
+    method: 'get',
+    params: query
+  })
+}
+
 // 查询园区初调监测井信息，记录每个监测井的基础属性与附加信息列表
 export function listWells(query) {
   return request({

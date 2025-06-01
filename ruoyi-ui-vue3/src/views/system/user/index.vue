@@ -317,13 +317,13 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item label="所属企业" prop="baseName">
-              <el-select v-model="form.baseName" placeholder="请选择" filterable>
+            <el-form-item label="所属企业" prop="baseId">
+              <el-select v-model="form.baseId" placeholder="请选择" filterable>
                 <el-option
                   v-for="item in enterpriseOptions"
-                  :key="item.enterpriseName"
+                  :key="item.id"
                   :label="item.enterpriseName"
-                  :value="item.enterpriseName"
+                  :value="item.id"
                 ></el-option>
               </el-select>
             </el-form-item>

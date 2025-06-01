@@ -31,7 +31,7 @@
       </div>
       <div class="bottomInOt">
         <img src="@/assets/static/2.png" />
-        <div class="text">在线检测</div>
+        <div class="text">在线监测</div>
       </div>
       <div class="bottomInOt">
         <img src="@/assets/static/3.png" />

@@ -37,6 +37,15 @@ public class TMonitoringWellsController extends BaseController {
     @Autowired
     private ITMonitoringWellsService tMonitoringWellsService;
 
+
+    @ApiOperation("查询园区所有监测井信息列表")
+    @PreAuthorize("@ss.hasPermi('admin:wells:list')")
+    @GetMapping("/all")
+    public TableDataInfo all(TMonitoringWells tMonitoringWells) {
+        List<TMonitoringWells> list = tMonitoringWellsService.selectTMonitoringWellsList(tMonitoringWells);
+        return getDataTable(list);
+    }
+
     /**
      * 查询园区监测井信息列表
      */

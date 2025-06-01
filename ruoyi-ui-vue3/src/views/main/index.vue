@@ -28,11 +28,49 @@
     >
       <div v-html="htmlComponent"></div>
     </mars-dialog>
+
+    <el-dialog
+      v-model="dialogVisible"
+      title="企业信息"
+      width="100vw"
+    >
+      <el-tabs
+        v-model="activeName"
+        type="card"
+        class="map-tabs"
+        @tab-click="handleClick"
+      >
+        <el-tab-pane label="企业地块基本情况" name="first"
+          ><form_tab1
+        /></el-tab-pane>
+        <el-tab-pane label="企业污染源信息" name="second"
+          ><form_tab2
+        /></el-tab-pane>
+        <el-tab-pane label="迁移途径信息" name="third"
+          ><form_tab3
+        /></el-tab-pane>
+        <el-tab-pane label="敏感受体信息" name="fourth"
+          ><form_tab4
+        /></el-tab-pane>
+        <el-tab-pane label="土壤或地下水环境监测" name="five"
+          ><form_tab5
+        /></el-tab-pane>
+        <el-tab-pane label="环境监测和调查评估信息" name="six"
+          ><form_tab6
+        /></el-tab-pane>
+      </el-tabs>
+    </el-dialog>
   </config-provider>
 </template>
 
 <script setup>
 import { ref, provide, computed } from "vue";
+import form_tab1 from "@/views/corporate/components/tab1/form";
+import form_tab2 from "@/views/corporate/components/tab2/form";
+import form_tab3 from "@/views/corporate/components/tab3/form";
+import form_tab4 from "@/views/corporate/components/tab4/form";
+import form_tab5 from "@/views/corporate/components/tab5/form";
+import form_tab6 from "@/views/corporate/components/tab6/form";
 import TopHead from "./TopHead.vue";
 import VerticalMenu from "./verticalMenu/index.vue";
 import * as mars3d from "mars3d";
@@ -43,7 +81,7 @@ import {
   getPositionTranslationOffest,
   geoJsonTransSelf,
 } from "./LocalWorldTransform";
-const configUrl = 'config/config.json';//"/config/config.json";
+const configUrl = "config/config.json"; //"/config/config.json";
 import request from "@/utils/request";
 const Cesium = mars3d.Cesium;
 
@@ -62,6 +100,19 @@ import layerStore from "@/store/modules/layer";
 const layerStoreIns = layerStore();
 
 import { addLayer } from "@/api/admin/layer";
+import { loadWells, loadEnterprises } from "./mainMap";
+
+const activeName = ref("first");
+
+const handleClick = (tab, event) => {
+  console.log(tab, event);
+};
+
+const dialogVisible = ref(false);
+
+window.openQYMSG = function (event) {
+  dialogVisible.value = true;
+};
 
 provide("getMapInstance", () => {
   return mapInstance;
@@ -75,7 +126,6 @@ window.showLayerAttribute = function (event) {
   htmlComponent.value = layerStore.getPopup(event);
   showLayer.value = true;
 };
-
 
 const marsOnload = async (map) => {
   //layerStoreIns.setProxy(proxy);
@@ -99,6 +149,8 @@ const marsOnload = async (map) => {
 
   window.map = map;
   window.layersObj = {};
+  await loadWells();
+  await loadEnterprises();
 
   //加载图层
   // layerStoreIns

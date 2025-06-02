@@ -3,7 +3,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 所属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 地块内职工人数分类 */
     employeeCountCategory?: string;
     /** 主键ID */
@@ -42,6 +42,11 @@ declare namespace API {
   };
 
   type deleteAdminGroundwaterPollutantIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
+  type deleteAdminIndicatorsIdsParams = {
     /** ids */
     ids: string;
   };
@@ -95,7 +100,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 主键ID */
     id?: number;
     /** 最大浓度 */
@@ -116,7 +121,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 地下水用途 */
     groundwaterUse?: string;
     /** 主键ID */
@@ -198,25 +203,6 @@ declare namespace API {
     updateTime?: string;
   };
 
-  type getAdminEnterprisesListParams = {
-    area?: string;
-    createBy?: string;
-    createTime?: string;
-    enterpriseName?: string;
-    industryCategory?: string;
-    isKeyEnterprise?: string;
-    latitude?: string;
-    longitude?: string;
-    params?: Record<string, any>;
-    productionYears?: string;
-    remark?: string;
-    reportingStatus?: string;
-    searchValue?: string;
-    status?: string;
-    updateBy?: string;
-    updateTime?: string;
-  };
-
   type getAdminGroundwaterMonitoringIdParams = {
     /** id */
     id: number;
@@ -226,7 +212,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 是否曾开展地下水环境调查监测 */
     hasMonitoring?: string;
     /** 主键ID */
@@ -255,7 +241,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 地下水用途 */
     groundwaterUse?: string;
     /** 主键ID */
@@ -282,7 +268,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 主键ID */
     id?: number;
     /** 最大浓度 */
@@ -296,6 +282,33 @@ declare namespace API {
     searchValue?: string;
     updateBy?: string;
     updateTime?: string;
+  };
+
+  type getAdminIndicatorsIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminIndicatorsListParams = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 是否启用 */
+    isEnabled?: string;
+    /** 是否国标 */
+    isNationalStandard?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    /** 类型 */
+    type?: string;
+    updateBy?: string;
+    updateTime?: string;
+    /** 值 */
+    value?: number;
   };
 
   type getAdminMainProductsIdParams = {
@@ -315,7 +328,7 @@ declare namespace API {
     /** 产品数据来源 */
     dataSource?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 主键ID */
     id?: number;
     params?: Record<string, any>;
@@ -340,7 +353,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 废气排放单位 */
     gasEmissionUnit?: string;
     /** 是否存在废气治理设施 */
@@ -427,7 +440,7 @@ declare namespace API {
     /** 数据来源 */
     dataSource?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 主键ID */
     id?: number;
     /** 原辅材料名称 */
@@ -452,7 +465,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 所属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 地块内职工人数分类 */
     employeeCountCategory?: string;
     /** 主键ID */
@@ -485,7 +498,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 是否曾开展土壤环境调查监测 */
     hasMonitoring?: string;
     /** 主键ID */
@@ -512,7 +525,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 上层埋深 */
     depthTopCm?: number;
     /** 主键ID */
@@ -538,16 +551,16 @@ declare namespace API {
   type getAdminSoilPollutantListParams = {
     createBy?: string;
     createTime?: string;
-    /** 主键ID */
-    deptId?: number;
+    /** 归属部门 */
+    deptId?: string;
     /** 主键ID */
     id?: number;
-    /** 主键ID */
+    /** 最大浓度 */
     maxConcentrationMgkg?: string;
-    /** 主键ID */
+    /** 关联的土壤监测记录ID */
     monitoringId?: number;
     params?: Record<string, any>;
-    /** 主键ID */
+    /** 超标污染物名称 */
     pollutantName?: string;
     remark?: string;
     searchValue?: string;
@@ -555,26 +568,80 @@ declare namespace API {
     updateTime?: string;
   };
 
-  type getAdminWellsIdParams = {
-    /** id */
-    id: number;
-  };
-
-  type getAdminWellsListParams = {
+  type getAdminWellsAllParams = {
     /** 高程 */
     altitude?: string;
-    /** 埋藏条件 */
+    /** 主键ID */
     burialCondition?: string;
     /** 成井时间 */
     completionDate?: string;
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 地下水类型 */
     groundwaterType?: string;
     /** 主键ID */
-    id?: number;
+    id?: string;
+    /** 井口内径 */
+    innerDiameter?: string;
+    /** 纬度 */
+    latitude?: string;
+    /** 监测井所在位置 */
+    location?: string;
+    /** 经度 */
+    longitude?: string;
+    /** 是否为多段筛管结构 */
+    multiScreenPipe?: string;
+    /** 监测井的权属单位 */
+    ownership?: string;
+    params?: Record<string, any>;
+    /** 井管材质 */
+    pipeMaterial?: string;
+    /** 监测点类型 */
+    pointType?: string;
+    remark?: string;
+    /** 筛管上部与下部的埋深范围 */
+    screenDepthRange?: string;
+    searchValue?: string;
+    /** 是否符合长期监测井的标准 */
+    suitableForLongterm?: string;
+    updateBy?: string;
+    updateTime?: string;
+    /** 视频资料地址 */
+    videoUrl?: string;
+    /** 水位埋深 */
+    waterBuriedDepth?: string;
+    /** 含水介质 */
+    waterMedium?: string;
+    /** 监测井编码 */
+    wellCode?: string;
+    /** 成井深度 */
+    wellDepth?: string;
+    /** 井口高程 */
+    wellElevation?: string;
+  };
+
+  type getAdminWellsIdParams = {
+    /** id */
+    id: string;
+  };
+
+  type getAdminWellsListParams = {
+    /** 高程 */
+    altitude?: string;
+    /** 主键ID */
+    burialCondition?: string;
+    /** 成井时间 */
+    completionDate?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 地下水类型 */
+    groundwaterType?: string;
+    /** 主键ID */
+    id?: string;
     /** 井口内径 */
     innerDiameter?: string;
     /** 纬度 */
@@ -620,22 +687,32 @@ declare namespace API {
   };
 
   type getAdminWorkshopEnvironmentListParams = {
+    /** 坐标位置 */
     coordinate?: string;
     createBy?: string;
     createTime?: string;
+    /** 添加时间 */
     createdAt?: string;
+    /** 添加人 */
     createdBy?: string;
-    deptId?: number;
+    /** 归属部门 */
+    deptId?: string;
+    /** 主键 */
     id?: number;
+    /** 跑冒滴漏点照片路径 */
     leakImagePath?: string;
+    /** 是否有泄漏现象 */
     leakage?: string;
     params?: Record<string, any>;
+    /** 生产工艺描述 */
     processDescription?: string;
     remark?: string;
     searchValue?: string;
+    /** 生产起始日期 */
     startDate?: string;
     updateBy?: string;
     updateTime?: string;
+    /** 车间名称 */
     workshopName?: string;
   };
 
@@ -703,7 +780,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 是否曾开展地下水环境调查监测 */
     hasMonitoring?: string;
     /** 主键ID */
@@ -727,7 +804,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 地下水用途 */
     groundwaterUse?: string;
     /** 主键ID */
@@ -749,7 +826,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 主键ID */
     id?: number;
     /** 最大浓度 */
@@ -765,6 +842,28 @@ declare namespace API {
     updateTime?: string;
   };
 
+  type postAdminIndicatorsExportParams = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 是否启用 */
+    isEnabled?: string;
+    /** 是否国标 */
+    isNationalStandard?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    /** 类型 */
+    type?: string;
+    updateBy?: string;
+    updateTime?: string;
+    /** 值 */
+    value?: number;
+  };
+
   type postAdminMainProductsExportParams = {
     /** 年平均产量 */
     annualOutput?: string;
@@ -777,7 +876,7 @@ declare namespace API {
     /** 产品数据来源 */
     dataSource?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 主键ID */
     id?: number;
     params?: Record<string, any>;
@@ -797,7 +896,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 废气排放单位 */
     gasEmissionUnit?: string;
     /** 是否存在废气治理设施 */
@@ -879,7 +978,7 @@ declare namespace API {
     /** 数据来源 */
     dataSource?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 主键ID */
     id?: number;
     /** 原辅材料名称 */
@@ -899,7 +998,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 所属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 地块内职工人数分类 */
     employeeCountCategory?: string;
     /** 主键ID */
@@ -927,7 +1026,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 是否曾开展土壤环境调查监测 */
     hasMonitoring?: string;
     /** 主键ID */
@@ -949,7 +1048,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 上层埋深 */
     depthTopCm?: number;
     /** 主键ID */
@@ -970,16 +1069,16 @@ declare namespace API {
   type postAdminSoilPollutantExportParams = {
     createBy?: string;
     createTime?: string;
-    /** 主键ID */
-    deptId?: number;
+    /** 归属部门 */
+    deptId?: string;
     /** 主键ID */
     id?: number;
-    /** 主键ID */
+    /** 最大浓度 */
     maxConcentrationMgkg?: string;
-    /** 主键ID */
+    /** 关联的土壤监测记录ID */
     monitoringId?: number;
     params?: Record<string, any>;
-    /** 主键ID */
+    /** 超标污染物名称 */
     pollutantName?: string;
     remark?: string;
     searchValue?: string;
@@ -990,18 +1089,18 @@ declare namespace API {
   type postAdminWellsExportParams = {
     /** 高程 */
     altitude?: string;
-    /** 埋藏条件 */
+    /** 主键ID */
     burialCondition?: string;
     /** 成井时间 */
     completionDate?: string;
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 地下水类型 */
     groundwaterType?: string;
     /** 主键ID */
-    id?: number;
+    id?: string;
     /** 井口内径 */
     innerDiameter?: string;
     /** 纬度 */
@@ -1042,22 +1141,32 @@ declare namespace API {
   };
 
   type postAdminWorkshopEnvironmentExportParams = {
+    /** 坐标位置 */
     coordinate?: string;
     createBy?: string;
     createTime?: string;
+    /** 添加时间 */
     createdAt?: string;
+    /** 添加人 */
     createdBy?: string;
-    deptId?: number;
+    /** 归属部门 */
+    deptId?: string;
+    /** 主键 */
     id?: number;
+    /** 跑冒滴漏点照片路径 */
     leakImagePath?: string;
+    /** 是否有泄漏现象 */
     leakage?: string;
     params?: Record<string, any>;
+    /** 生产工艺描述 */
     processDescription?: string;
     remark?: string;
     searchValue?: string;
+    /** 生产起始日期 */
     startDate?: string;
     updateBy?: string;
     updateTime?: string;
+    /** 车间名称 */
     workshopName?: string;
   };
 
@@ -1065,7 +1174,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 是否曾开展地下水环境调查监测 */
     hasMonitoring?: string;
     /** 主键ID */
@@ -1082,6 +1191,35 @@ declare namespace API {
     updateTime?: string;
   };
 
+  type shengchanchejianfenbuyuhuanjingqingkuang = {
+    /** 坐标位置 */
+    coordinate?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 添加时间 */
+    createdAt?: string;
+    /** 添加人 */
+    createdBy?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 主键 */
+    id?: number;
+    /** 跑冒滴漏点照片路径 */
+    leakImagePath?: string;
+    /** 是否有泄漏现象 */
+    leakage?: string;
+    params?: Record<string, any>;
+    /** 生产工艺描述 */
+    processDescription?: string;
+    remark?: string;
+    /** 生产起始日期 */
+    startDate?: string;
+    updateBy?: string;
+    updateTime?: string;
+    /** 车间名称 */
+    workshopName?: string;
+  };
+
   type TableDataInfo = {
     code?: number;
     msg?: string;
@@ -1093,7 +1231,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 上层埋深 */
     depthTopCm?: number;
     /** 主键ID */
@@ -1113,39 +1251,20 @@ declare namespace API {
   type turangjiancefaxiandechaobiaowuranwuxinxi = {
     createBy?: string;
     createTime?: string;
-    /** 主键ID */
-    deptId?: number;
+    /** 归属部门 */
+    deptId?: string;
     /** 主键ID */
     id?: number;
-    /** 主键ID */
+    /** 最大浓度 */
     maxConcentrationMgkg?: string;
-    /** 主键ID */
+    /** 关联的土壤监测记录ID */
     monitoringId?: number;
     params?: Record<string, any>;
-    /** 主键ID */
+    /** 超标污染物名称 */
     pollutantName?: string;
     remark?: string;
     updateBy?: string;
     updateTime?: string;
-  };
-
-  type TWorkshopEnvironment = {
-    coordinate?: string;
-    createBy?: string;
-    createTime?: string;
-    createdAt?: string;
-    createdBy?: string;
-    deptId?: number;
-    id?: number;
-    leakImagePath?: string;
-    leakage?: string;
-    params?: Record<string, any>;
-    processDescription?: string;
-    remark?: string;
-    startDate?: string;
-    updateBy?: string;
-    updateTime?: string;
-    workshopName?: string;
   };
 
   type yuanfucailiaoxinxi = {
@@ -1160,7 +1279,7 @@ declare namespace API {
     /** 数据来源 */
     dataSource?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 主键ID */
     id?: number;
     /** 原辅材料名称 */
@@ -1178,18 +1297,18 @@ declare namespace API {
   type yuanqujiancejingxinxi = {
     /** 高程 */
     altitude?: string;
-    /** 埋藏条件 */
+    /** 主键ID */
     burialCondition?: string;
     /** 成井时间 */
     completionDate?: string;
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 地下水类型 */
     groundwaterType?: string;
     /** 主键ID */
-    id?: number;
+    id?: string;
     /** 井口内径 */
     innerDiameter?: string;
     /** 纬度 */
@@ -1287,6 +1406,27 @@ declare namespace API {
     updateTime?: string;
   };
 
+  type zhibiaofenlei = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 是否启用 */
+    isEnabled?: string;
+    /** 是否国标 */
+    isNationalStandard?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    /** 类型 */
+    type?: string;
+    updateBy?: string;
+    updateTime?: string;
+    /** 值 */
+    value?: number;
+  };
+
   type zhuyaochanpinxinxi = {
     /** 年平均产量 */
     annualOutput?: string;
@@ -1299,7 +1439,7 @@ declare namespace API {
     /** 产品数据来源 */
     dataSource?: string;
     /** 归属部门 */
-    deptId?: number;
+    deptId?: string;
     /** 主键ID */
     id?: number;
     params?: Record<string, any>;

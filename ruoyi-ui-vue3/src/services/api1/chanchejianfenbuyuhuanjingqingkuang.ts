@@ -4,7 +4,7 @@ import request from "@/utils/http";
 
 /** 修改生产车间分布与环境情况 PUT /admin/workshopEnvironment */
 export async function putAdminWorkshopEnvironment(
-  body: API.TWorkshopEnvironment,
+  body: API.shengchanchejianfenbuyuhuanjingqingkuang,
   options?: { [key: string]: any }
 ) {
   return request<Record<string, any>>(`/dev-api/admin/workshopEnvironment`, {
@@ -19,7 +19,7 @@ export async function putAdminWorkshopEnvironment(
 
 /** 新增生产车间分布与环境情况 POST /admin/workshopEnvironment */
 export async function postAdminWorkshopEnvironment(
-  body: API.TWorkshopEnvironment,
+  body: API.shengchanchejianfenbuyuhuanjingqingkuang,
   options?: { [key: string]: any }
 ) {
   return request<Record<string, any>>(`/dev-api/admin/workshopEnvironment`, {

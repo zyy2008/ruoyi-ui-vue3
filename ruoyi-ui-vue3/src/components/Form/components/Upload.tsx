@@ -17,18 +17,48 @@ import { ArrayTable } from "@formily/element-plus";
 import { useRequest } from "vue-request";
 import useStore from "@/store/modules/user";
 import { Plus, Delete } from "@element-plus/icons-vue";
+import API from "@/services";
 
 const Index = observer(
   defineComponent({
     props: ["value", "onChange"],
     setup(props) {
+      const { loading, runAsync } = useRequest(
+        (formData: any) =>
+          API.postFileUpload(formData, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+          }),
+        {
+          manual: true,
+        }
+      );
       const value = toRef(props, "value");
       const dialogVisible = ref(false);
       const field: Ref<Field> = useField();
       return () => {
         return (
           <>
-            <ElUpload {...field.value.componentProps}>
+            <ElUpload
+              {...field.value.componentProps}
+              v-loading={loading.value}
+              element-loading-text="上传中..."
+              fileList={[]}
+              httpRequest={async (opt) => {
+                const { file } = opt;
+                const formData = new FormData();
+                formData.append("file", file);
+                runAsync(formData).then((res) => {
+                  if (res.code === 200) {
+                    props.onChange(res.data);
+                    ElMessage.success("上传成功");
+                  } else {
+                    ElMessage.success("上传失败");
+                  }
+                });
+              }}
+            >
               {value.value ? (
                 <>
                   <img

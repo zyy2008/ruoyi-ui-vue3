@@ -60,6 +60,23 @@ export async function getAdminWellsId(
   });
 }
 
+/** 查询园区所有监测井信息列表 GET /admin/wells/all */
+export async function getAdminWellsAll(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getAdminWellsAllParams,
+  options?: { [key: string]: any }
+) {
+  return request<API.TableDataInfo>(`/dev-api/admin/wells/all`, {
+    method: "GET",
+    params: {
+      ...params,
+      params: undefined,
+      ...params["params"],
+    },
+    ...(options || {}),
+  });
+}
+
 /** 导出园区监测井信息列表 POST /admin/wells/export */
 export async function postAdminWellsExport(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)

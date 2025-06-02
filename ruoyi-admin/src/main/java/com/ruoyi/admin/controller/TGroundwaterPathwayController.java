@@ -41,7 +41,7 @@ public class TGroundwaterPathwayController extends BaseController {
      * 查询地下水迁移途径信息列表
      */
     @ApiOperation("查询地下水迁移途径信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:pathway:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:pathway:list')")
     @GetMapping("/list")
     public TableDataInfo list(TGroundwaterPathway tGroundwaterPathway) {
         startPage();
@@ -53,7 +53,7 @@ public class TGroundwaterPathwayController extends BaseController {
      * 导出地下水迁移途径信息列表
      */
     @ApiOperation("导出地下水迁移途径信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:pathway:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:pathway:export')")
     @Log(title = "地下水迁移途径信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TGroundwaterPathway tGroundwaterPathway) {
@@ -66,7 +66,7 @@ public class TGroundwaterPathwayController extends BaseController {
      * 获取地下水迁移途径信息详细信息
      */
     @ApiOperation("获取地下水迁移途径信息详细信息")
-    @PreAuthorize("@ss.hasPermi('admin:pathway:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:pathway:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(tGroundwaterPathwayService.selectTGroundwaterPathwayById(id));
@@ -76,7 +76,7 @@ public class TGroundwaterPathwayController extends BaseController {
      * 新增地下水迁移途径信息
      */
     @ApiOperation("新增地下水迁移途径信息")
-    @PreAuthorize("@ss.hasPermi('admin:pathway:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:pathway:add')")
     @Log(title = "地下水迁移途径信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TGroundwaterPathway tGroundwaterPathway) {
@@ -87,7 +87,7 @@ public class TGroundwaterPathwayController extends BaseController {
      * 修改地下水迁移途径信息
      */
     @ApiOperation("修改地下水迁移途径信息")
-    @PreAuthorize("@ss.hasPermi('admin:pathway:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:pathway:edit')")
     @Log(title = "地下水迁移途径信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TGroundwaterPathway tGroundwaterPathway) {
@@ -98,7 +98,7 @@ public class TGroundwaterPathwayController extends BaseController {
      * 删除地下水迁移途径信息
      */
     @ApiOperation("删除地下水迁移途径信息")
-    @PreAuthorize("@ss.hasPermi('admin:pathway:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:pathway:remove')")
     @Log(title = "地下水迁移途径信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {

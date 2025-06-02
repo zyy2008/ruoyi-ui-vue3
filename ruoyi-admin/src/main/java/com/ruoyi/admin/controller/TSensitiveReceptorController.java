@@ -41,7 +41,7 @@ public class TSensitiveReceptorController extends BaseController {
      * 查询地块及周边敏感受体信息列表
      */
     @ApiOperation("查询地块及周边敏感受体信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:receptor:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:receptor:list')")
     @GetMapping("/list")
     public TableDataInfo list(TSensitiveReceptor tSensitiveReceptor) {
         startPage();
@@ -53,7 +53,7 @@ public class TSensitiveReceptorController extends BaseController {
      * 导出地块及周边敏感受体信息列表
      */
     @ApiOperation("导出地块及周边敏感受体信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:receptor:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:receptor:export')")
     @Log(title = "地块及周边敏感受体信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TSensitiveReceptor tSensitiveReceptor) {
@@ -66,7 +66,7 @@ public class TSensitiveReceptorController extends BaseController {
      * 获取地块及周边敏感受体信息详细信息
      */
     @ApiOperation("获取地块及周边敏感受体信息详细信息")
-    @PreAuthorize("@ss.hasPermi('admin:receptor:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:receptor:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(tSensitiveReceptorService.selectTSensitiveReceptorById(id));
@@ -76,7 +76,7 @@ public class TSensitiveReceptorController extends BaseController {
      * 新增地块及周边敏感受体信息
      */
     @ApiOperation("新增地块及周边敏感受体信息")
-    @PreAuthorize("@ss.hasPermi('admin:receptor:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:receptor:add')")
     @Log(title = "地块及周边敏感受体信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TSensitiveReceptor tSensitiveReceptor) {
@@ -87,7 +87,7 @@ public class TSensitiveReceptorController extends BaseController {
      * 修改地块及周边敏感受体信息
      */
     @ApiOperation("修改地块及周边敏感受体信息")
-    @PreAuthorize("@ss.hasPermi('admin:receptor:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:receptor:edit')")
     @Log(title = "地块及周边敏感受体信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TSensitiveReceptor tSensitiveReceptor) {
@@ -98,7 +98,7 @@ public class TSensitiveReceptorController extends BaseController {
      * 删除地块及周边敏感受体信息
      */
     @ApiOperation("删除地块及周边敏感受体信息")
-    @PreAuthorize("@ss.hasPermi('admin:receptor:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:receptor:remove')")
     @Log(title = "地块及周边敏感受体信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {

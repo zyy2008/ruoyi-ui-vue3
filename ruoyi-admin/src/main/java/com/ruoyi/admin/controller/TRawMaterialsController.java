@@ -41,7 +41,7 @@ public class TRawMaterialsController extends BaseController {
      * 查询原辅材料信息列表
      */
     @ApiOperation("查询原辅材料信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:rawMaterials:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:rawMaterials:list')")
     @GetMapping("/list")
     public TableDataInfo list(TRawMaterials tRawMaterials) {
         startPage();
@@ -53,7 +53,7 @@ public class TRawMaterialsController extends BaseController {
      * 导出原辅材料信息列表
      */
     @ApiOperation("导出原辅材料信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:rawMaterials:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:rawMaterials:export')")
     @Log(title = "原辅材料信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TRawMaterials tRawMaterials) {
@@ -66,7 +66,7 @@ public class TRawMaterialsController extends BaseController {
      * 获取原辅材料信息详细信息
      */
     @ApiOperation("获取原辅材料信息详细信息")
-    @PreAuthorize("@ss.hasPermi('admin:rawMaterials:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:rawMaterials:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(tRawMaterialsService.selectTRawMaterialsById(id));
@@ -76,7 +76,7 @@ public class TRawMaterialsController extends BaseController {
      * 新增原辅材料信息
      */
     @ApiOperation("新增原辅材料信息")
-    @PreAuthorize("@ss.hasPermi('admin:rawMaterials:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:rawMaterials:add')")
     @Log(title = "原辅材料信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TRawMaterials tRawMaterials) {
@@ -87,7 +87,7 @@ public class TRawMaterialsController extends BaseController {
      * 修改原辅材料信息
      */
     @ApiOperation("修改原辅材料信息")
-    @PreAuthorize("@ss.hasPermi('admin:rawMaterials:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:rawMaterials:edit')")
     @Log(title = "原辅材料信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TRawMaterials tRawMaterials) {
@@ -98,7 +98,7 @@ public class TRawMaterialsController extends BaseController {
      * 删除原辅材料信息
      */
     @ApiOperation("删除原辅材料信息")
-    @PreAuthorize("@ss.hasPermi('admin:rawMaterials:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:rawMaterials:remove')")
     @Log(title = "原辅材料信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {

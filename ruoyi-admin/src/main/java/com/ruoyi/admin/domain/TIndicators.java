@@ -9,14 +9,14 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 土壤监测发现的超标污染物信息对象 t_soil_pollutant
+ * 指标分类对象 t_indicators
  *
  * @author ruoyi
- * @date 2025-05-28
+ * @date 2025-06-02
  */
 @Data
-@ApiModel("土壤监测发现的超标污染物信息")
-public class TSoilPollutant extends BaseEntity {
+@ApiModel("指标分类")
+public class TIndicators extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -26,24 +26,32 @@ public class TSoilPollutant extends BaseEntity {
     private Long id;
 
     /**
-     * 关联的土壤监测记录ID
+     * 类型
      */
-    @ApiModelProperty("关联的土壤监测记录ID")
-    private Long monitoringId;
+    @Excel(name = "类型")
+    @ApiModelProperty("类型")
+    private String type;
 
     /**
-     * 超标污染物名称
+     * 值
      */
-    @Excel(name = "超标污染物名称")
-    @ApiModelProperty("超标污染物名称")
-    private String pollutantName;
+    @Excel(name = "值")
+    @ApiModelProperty("值")
+    private Long value;
 
     /**
-     * 最大浓度（mg/kg）
+     * 是否国标
      */
-    @Excel(name = "最大浓度", readConverterExp = "m=g/kg")
-    @ApiModelProperty("最大浓度")
-    private String maxConcentrationMgkg;
+    @Excel(name = "是否国标")
+    @ApiModelProperty("是否国标")
+    private String isNationalStandard;
+
+    /**
+     * 是否启用
+     */
+    @Excel(name = "是否启用")
+    @ApiModelProperty("是否启用")
+    private String isEnabled;
 
     /**
      * 归属部门

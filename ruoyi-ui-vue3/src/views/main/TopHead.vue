@@ -130,9 +130,9 @@ function showArea() {
   visible_Area.value = true;
 }
 
-function setLayout() {
-  emits("setLayout");
-}
+// function setLayout() {
+//   emits("setLayout");
+// }
 
 function handleCommand(command) {
   switch (command) {

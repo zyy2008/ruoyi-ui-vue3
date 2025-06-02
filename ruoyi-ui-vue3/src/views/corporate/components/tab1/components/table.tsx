@@ -16,7 +16,7 @@ const props: ISchemaFieldProps = {
         type: "void",
         "x-component": "Card",
         "x-component-props": {
-          header: "五、生产车间分布与环况",
+          header: "地块历史用途",
         },
         properties: {
           array: {
@@ -44,7 +44,7 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "车间名称",
+                    title: "起始时间",
                     width: 200,
                   },
                   properties: {
@@ -59,11 +59,11 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "坐标位置",
+                    title: "结束时间",
                     width: 200,
                   },
                   properties: {
-                    coordinate: {
+                    workshopName: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
@@ -74,75 +74,14 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "生产起始日期",
+                    title: "土地用途",
                     width: 200,
                   },
                   properties: {
-                    startDate: {
+                    coordinate: {
                       type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "DatePicker",
-                      "x-component-props": {
-                        type: "date",
-                      },
-                    },
-                  },
-                },
-                column5: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
-                    title: "生产工艺描述",
-                    width: 200,
-                  },
-                  properties: {
-                    processDescription: {
-                      type: "string",
-                      "x-decorator": "FormItem",
-                      "x-component": "Input.TextArea",
-                    },
-                  },
-                },
-                column9: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
-                    title: "滴漏现象",
-                    width: 200,
-                  },
-                  properties: {
-                    leakage: {
-                      type: "string",
-                      enum: [
-                        {
-                          label: "有",
-                          value: "0",
-                        },
-                        {
-                          label: "无",
-                          value: "1",
-                        },
-                      ],
-                      "x-decorator": "FormItem",
-                      "x-component": "Select",
-                    },
-                  },
-                },
-                column10: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
-                    title: "漏点照片",
-                    width: 200,
-                  },
-                  properties: {
-                    leakImagePath: {
-                      type: "string",
-                      "x-component": "UploadAjax",
-                      "x-component-props": {
-                        listType: "picture-card",
-                        accept: ".jpg,.png",
-                      },
+                      "x-component": "Input",
                     },
                   },
                 },

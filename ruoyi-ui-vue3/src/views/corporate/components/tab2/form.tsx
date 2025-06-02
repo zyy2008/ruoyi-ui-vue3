@@ -71,7 +71,7 @@ const props: ISchemaFieldProps = {
             type: "string",
             title: "平面布置图",
             "x-decorator": "FormItem",
-            "x-component": "Upload",
+            "x-component": "UploadAjax",
             "x-component-props": {
               listType: "picture-card",
               accept: ".jpg,.png",
@@ -124,7 +124,7 @@ const props: ISchemaFieldProps = {
                     type: "string",
                     title: "主要生产工艺流程图",
                     "x-decorator": "FormItem",
-                    "x-component": "Upload",
+                    "x-component": "UploadAjax",
                     "x-component-props": {
                       listType: "picture-card",
                       accept: ".jpg,.png",

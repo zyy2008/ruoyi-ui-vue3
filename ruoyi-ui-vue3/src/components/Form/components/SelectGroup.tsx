@@ -1,7 +1,7 @@
-import { defineComponent, inject, toRef, computed } from "vue";
+import { defineComponent, inject, toRef, computed, Ref } from "vue";
 import { observer } from "@formily/reactive-vue";
 import Schema from "@/components/Form";
-import { createForm } from "@formily/core";
+import { createForm, Field } from "@formily/core";
 import { FormProvider, ISchemaFieldProps, useField } from "@formily/vue";
 import {
   ElPopconfirm,
@@ -19,24 +19,29 @@ const Index = observer(
     props: ["value", "onChange"],
     setup(props) {
       const value = toRef(props, "value");
-      const field = useField();
+      const field: Ref<Field> = useField();
       const modelValue = computed(() => {
         if (value.value) {
           return value.value?.split(",");
         }
         return [];
       });
+      console.log(field);
       return () => {
         return (
           <ElSelect
-            modelValue={modelValue.value}
-            multiple
-            onChange={(val) => {
-              props.onChange(val?.join(","));
-            }}
+            {...field.value.componentProps}
+            modelValue={value.value}
+            onChange={props.onChange}
           >
-            {(field.value as any)?.dataSource?.map((item) => {
-              return <ElSelect.Option {...item} key={item.value} />;
+            {field.value?.dataSource?.map((item) => {
+              return (
+                <ElSelect.OptionGroup {...item} key={item.label}>
+                  {item?.options?.map((item) => (
+                    <ElSelect.Option {...item} key={item.value} />
+                  ))}
+                </ElSelect.OptionGroup>
+              );
             })}
           </ElSelect>
         );

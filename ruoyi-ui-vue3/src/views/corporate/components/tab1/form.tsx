@@ -10,6 +10,7 @@ import { CloseBold, EditPen } from "@element-plus/icons-vue";
 import { observer } from "@formily/reactive-vue";
 import { observable, autorun } from "@formily/reactive";
 import { useRequest } from "vue-request";
+import { FromTable } from "./components";
 
 const { SchemaField } = Schema;
 
@@ -42,9 +43,27 @@ const props: ISchemaFieldProps = {
             "x-decorator": "FormItem",
             "x-component": "Input",
           },
+          companyName: {
+            type: "string",
+            title: "单位名称",
+            "x-decorator": "FormItem",
+            "x-component": "Input",
+          },
+          companyCreditCode: {
+            type: "string",
+            title: "统一社会信用代码",
+            "x-decorator": "FormItem",
+            "x-component": "Input",
+          },
           legalRepresentative: {
             type: "string",
             title: "法定代表人",
+            "x-decorator": "FormItem",
+            "x-component": "Input",
+          },
+          regionCode: {
+            type: "string",
+            title: "行政区划代码",
             "x-decorator": "FormItem",
             "x-component": "Input",
           },
@@ -53,12 +72,6 @@ const props: ISchemaFieldProps = {
             title: "单位所在地详细地址",
             "x-decorator": "FormItem",
             "x-component": "Input.TextArea",
-          },
-          regionCode: {
-            type: "string",
-            title: "行政区划代码",
-            "x-decorator": "FormItem",
-            "x-component": "Input",
           },
           centerLatitude: {
             type: "string",
@@ -105,8 +118,89 @@ const props: ISchemaFieldProps = {
           registrationType: {
             type: "string",
             title: "登记注册类型",
+            enum: [
+              {
+                label: "内资企业",
+                options: [
+                  {
+                    label: "国有企业",
+                    value: "110",
+                  },
+                  {
+                    label: "集体企业",
+                    value: "120",
+                  },
+                  {
+                    label: "股份合作企业",
+                    value: "130",
+                  },
+                  {
+                    label: "联营企业",
+                    value: "140",
+                  },
+                  {
+                    label: "有限责任公司",
+                    value: "150",
+                  },
+                  {
+                    label: "股份有限公司",
+                    value: "160",
+                  },
+                  {
+                    label: "私营企业",
+                    value: "170",
+                  },
+                  {
+                    label: "其他企业",
+                    value: "190",
+                  },
+                ],
+              },
+              {
+                label: "港、澳、台商投资企业",
+                options: [
+                  {
+                    label: "国有企业",
+                    value: "210",
+                  },
+                  {
+                    label: "集体企业",
+                    value: "220",
+                  },
+                  {
+                    label: "股份合作企业",
+                    value: "230",
+                  },
+                  {
+                    label: "联营企业",
+                    value: "240",
+                  },
+                ],
+              },
+              {
+                label: "外商投资企业",
+                options: [
+                  {
+                    label: "中外合资经营企业",
+                    value: "310",
+                  },
+                  {
+                    label: "中外合作经营企业",
+                    value: "320",
+                  },
+                  {
+                    label: "外资企业",
+                    value: "330",
+                  },
+                  {
+                    label: "外商投资股份有限公司",
+                    value: "340",
+                  },
+                ],
+              },
+            ],
             "x-decorator": "FormItem",
-            "x-component": "Select",
+            "x-component": "SelectGroup",
           },
           enterpriseScale: {
             type: "string",
@@ -138,7 +232,7 @@ const props: ISchemaFieldProps = {
             "x-decorator": "FormItem",
             "x-component": "DatePicker",
             "x-component-props": {
-              type: "datetime",
+              type: "month",
               format: "YYYY-MM",
               valueFormat: "YYYY-MM",
             },
@@ -170,25 +264,12 @@ const props: ISchemaFieldProps = {
             "x-decorator": "FormItem",
             "x-component": "Radio.Group",
           },
-          areaActual: {
-            type: "string",
-            title: "地块实际使用面积",
-            "x-decorator": "FormItem",
-            "x-component": "Input",
-          },
-
-          companyCreditCode: {
-            type: "string",
-            title: "统一社会信用代码",
-            "x-decorator": "FormItem",
-            "x-component": "Input",
-          },
-          companyName: {
-            type: "string",
-            title: "单位名称",
-            "x-decorator": "FormItem",
-            "x-component": "Input",
-          },
+          // areaActual: {
+          //   type: "string",
+          //   title: "地块实际使用面积",
+          //   "x-decorator": "FormItem",
+          //   "x-component": "Input",
+          // },
 
           // deptId: {
           //   type: "number",
@@ -268,6 +349,10 @@ const props: ISchemaFieldProps = {
           //   },
           // },
         },
+      },
+      card: {
+        type: "void",
+        "x-component": <FromTable />,
       },
     },
   },

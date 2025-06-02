@@ -166,7 +166,7 @@
         "minimumLevel": 0,
         "maximumLevel": 17,
         "show": true,
-        "url": "http://127.0.0.1:9998/gisData/qx/{z}/{x}/{y}.png"
+        "url": "http://39.100.43.147:9998/gisData/qx/{z}/{x}/{y}.png"
       }
     ],
     "layers": []

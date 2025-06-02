@@ -1,7 +1,10 @@
 package com.ruoyi.admin.controller;
 
 import com.ruoyi.common.core.domain.AjaxResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,11 +25,12 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping("/file")
+@Api(tags = "文件管理")
 public class FileController {
 
-    @Value("${layer.otherFileWebUrl}")
+    @Value("${layer.webUrl}")
     private String otherFileWebUrl;
-    @Value("${layer.savePath}")
+    @Value("${file.savePath}")
     private String savePath;
     SimpleDateFormat sdf = new SimpleDateFormat("/yyyy/MM/dd/");
 
@@ -35,6 +39,7 @@ public class FileController {
      *
      * @return
      */
+    @ApiOperation("上传文件返回路径")
     @PostMapping("/upload")
     public AjaxResult upload(MultipartFile file, HttpServletRequest req) {
         //1、处理文件位置
@@ -58,7 +63,7 @@ public class FileController {
         try {
             //文件保存
             file.transferTo(new File(folder, newName));
-            String webPath = otherFileWebUrl + format + newName;//文件的访问路径
+            String webPath = "files/" + format + newName;//文件的访问路径
             return AjaxResult.success("成功", webPath);
         } catch (IOException e) {
             e.printStackTrace();

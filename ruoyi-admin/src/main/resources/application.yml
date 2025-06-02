@@ -137,3 +137,7 @@ layer:
   otherFileWebUrl: http://124.221.121.154/otherFile/
   workspace: test
   datastore: test
+
+file:
+  #文件存储路径
+  savePath: C:/groudwater

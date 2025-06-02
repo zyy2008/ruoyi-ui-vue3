@@ -74,6 +74,7 @@ const props: ISchemaFieldProps = {
             "x-component": "Upload",
             "x-component-props": {
               listType: "picture-card",
+              accept: ".jpg,.png",
             },
           },
         },
@@ -126,6 +127,7 @@ const props: ISchemaFieldProps = {
                     "x-component": "Upload",
                     "x-component-props": {
                       listType: "picture-card",
+                      accept: ".jpg,.png",
                     },
                   },
                   a23: {

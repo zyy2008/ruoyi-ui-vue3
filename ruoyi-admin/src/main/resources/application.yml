@@ -140,4 +140,6 @@ layer:
 
 file:
   #文件存储路径
-  savePath: C:/groudwater
+  savePath: C:/groudwater/
+  #访问地址前缀
+  webUrl: http://39.100.43.147:11004

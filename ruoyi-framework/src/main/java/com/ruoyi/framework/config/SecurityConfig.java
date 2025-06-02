@@ -98,7 +98,8 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 // 禁用HTTP响应标头
                 .headers((headersCustomizer) -> {
-                    headersCustomizer.cacheControl(cache -> cache.disable()).frameOptions(options -> options.sameOrigin());
+                    headersCustomizer.cacheControl(cache -> cache.disable())
+                            .frameOptions(options -> options.sameOrigin());
                 })
                 // 认证失败处理类
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(unauthorizedHandler))
@@ -107,15 +108,22 @@ public class SecurityConfig {
                 // 注解标记允许匿名访问的url
                 .authorizeHttpRequests((requests) -> {
                     permitAllUrl.getUrls().forEach(url -> requests.antMatchers(url).permitAll());
-                    // 对于登录login 注册register 验证码captchaImage 允许匿名访问
-                    requests.antMatchers("/login", "/register", "/captchaImage", "/prod-api/login",
-                                    "/prod-api/register", "/prod-api/captchaImage"
-                            ).permitAll()
-                            // 静态资源，可匿名访问
-                            .antMatchers(HttpMethod.GET, "/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", "/profile/**").permitAll()
-                            .antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/*/api-docs", "/druid/**").permitAll();
-                            // 除上面外的所有请求全部需要鉴权认证
-                           // .anyRequest().authenticated();
+
+                    // 登录、注册、验证码接口允许匿名访问
+                    requests.antMatchers(
+                            "/login", "/register", "/captchaImage",
+                            "/prod-api/login", "/prod-api/register", "/prod-api/captchaImage"
+                    ).permitAll();
+
+                    // 静态资源允许匿名访问
+                    requests.antMatchers(HttpMethod.GET, "/", "/*.html", "/**/*.html", "/**/*.css", "/**/*.js", "/profile/**").permitAll();
+                    requests.antMatchers("/swagger-ui.html", "/swagger-resources/**", "/webjars/**", "/*/api-docs", "/druid/**").permitAll();
+
+                    // ✅ 需要登录后才能访问文件资源
+                    requests.antMatchers("/files/**").authenticated();
+
+                    // 除上面外的所有请求全部需要鉴权认证
+                    requests.anyRequest().authenticated();
                 })
                 // 添加Logout filter
                 .logout(logout -> logout.logoutUrl("/logout").logoutSuccessHandler(logoutSuccessHandler))
@@ -126,6 +134,7 @@ public class SecurityConfig {
                 .addFilterBefore(corsFilter, LogoutFilter.class)
                 .build();
     }
+
 
     /**
      * 强散列哈希加密实现

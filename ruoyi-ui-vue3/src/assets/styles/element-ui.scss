@@ -104,6 +104,12 @@
     color: #000;
   }
 }
-.el-tree-select{
+.el-tree-select {
   width: 100%;
+}
+
+.el-upload--picture-card {
+  svg {
+    margin: 0 !important;
+  }
 }

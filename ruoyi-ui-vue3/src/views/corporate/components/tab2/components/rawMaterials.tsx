@@ -66,15 +66,15 @@ const props: ISchemaFieldProps = {
                     usageYear: {
                       type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "DatePicker",
-                      "x-component-props": {
-                        type: "year",
-                      },
-                      "x-reactions": (field: Field) => {
-                        setTimeout(() => {
-                          field.setValue(`${field.value}`);
-                        }, 0);
-                      },
+                      "x-component": "Input",
+                      // "x-component-props": {
+                      //   type: "year",
+                      // },
+                      // "x-reactions": (field: Field) => {
+                      //   setTimeout(() => {
+                      //     field.setValue(`${field.value}`);
+                      //   }, 0);
+                      // },
                     },
                   },
                 },

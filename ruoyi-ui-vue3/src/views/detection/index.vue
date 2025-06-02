@@ -16,14 +16,12 @@
         />
       </el-form-item>
       <el-form-item label="采样时间" prop="sampleTime">
-        <el-date-picker
-          clearable
+        <el-input
           v-model="queryParams.sampleTime"
-          type="date"
-          value-format="YYYY-MM-DD"
           placeholder="请选择采样时间"
-        >
-        </el-date-picker>
+          clearable
+          @keyup.enter="handleQuery"
+        />
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery"
@@ -93,7 +91,7 @@
         show-overflow-tooltip
       >
         <template #default="scope">
-          <span>{{ parseTime(scope.row.sampleTime, "{y}-{m}-{d}") }}</span>
+          <span>{{ scope.row.sampleTime }}</span>
         </template>
       </el-table-column>
       <el-table-column
@@ -213,14 +211,10 @@
           </el-descriptions-item>
           <el-descriptions-item label="采样时间">
             <el-form-item prop="sampleTime">
-              <el-date-picker
-                clearable
+              <el-input
                 v-model="form.sampleTime"
-                type="date"
-                value-format="YYYY-MM-DD"
-                placeholder="请选择采样时间"
-              >
-              </el-date-picker>
+                placeholder="请输入采样时间"
+              />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="色度(度)">
@@ -1081,7 +1075,7 @@
           form.pointId
         }}</el-descriptions-item>
         <el-descriptions-item label="采样时间">{{
-          parseTime(form.sampleTime, "{y}-{m}-{d}")
+          form.sampleTime
         }}</el-descriptions-item>
         <el-descriptions-item label="色度(度)">{{
           form.color

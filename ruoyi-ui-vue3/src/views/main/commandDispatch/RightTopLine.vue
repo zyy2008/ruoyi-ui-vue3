@@ -18,7 +18,7 @@
       </el-radio-group>
     </div>
     <div id="echart"> </div>
-    <ChartLineModal ref="chartLine" />
+    <ChartLineModal ref="chartLine" :chart="chart" :lineXAxis="lineXAxis" :lineSeries="lineSeries" />
   </div>
 
 </template>
@@ -32,6 +32,9 @@
   let lineChart = null
   let lineOption = {}
   const selectValue = ref('PH')
+  let lineInfo = ref([])
+    let lineXAxis =ref( [])
+  let lineSeries =ref( [])
   const chart = defineProps(['chartInfo'])
 
   const options = [{
@@ -56,24 +59,35 @@
     value: '7',
     label: '氨氮'
   }]
-  onMounted(()=>{
-     seekLineData({ pageNum: 1, pageSize: 1000, pointId: 'J01' })
+  onMounted(() => {
+    seekLineData({ pageNum: 1, pageSize: 1000, pointId: 'J01' })
   })
 
   watch(chart, (newValue, oldValue) => {
     seekLineData({ pageNum: 1, pageSize: 1000, pointId: chart.chartInfo.wellCode })
   })
+
   function seekLineData(option) {
+    chartLine.value.tableData = []
     listMonitoring(option).then(res => {
       lineOption.xAxis[0].data = []
       lineOption.series[0].data = []
+      lineSeries.value = []
+      lineXAxis.value = []
       const data = res.rows
       data.forEach((element, index) => {
         lineOption.xAxis[0].data.push(index)
         lineOption.series[0].data.push(element.ph)
+        chartLine.value.tableData.push({
+          ph: element.ph
+        })
+        lineXAxis.value.push(index)
+        lineSeries.value.push(element.ph)
       });
       lineChart.setOption(lineOption);
     });
+    console.log(lineXAxis);
+    
   }
 
   function openChartLine() {

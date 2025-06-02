@@ -1,5 +1,6 @@
 <template>
-  <el-dialog z-index="999999" v-model="dialogVisible" title="检测井" width="800"  destroy-on-close @open="openChartLine"> 
+  <el-dialog z-index="999999" v-model="dialogVisible" :title="chart.chart.chartInfo.wellCode" width="800"
+    destroy-on-close @open="openChartLine">
     <el-date-picker v-model="timeValue" type="daterange" range-separator="至" start-placeholder="开始日期"
       style="width: 400px;" end-placeholder="结束日期">
     </el-date-picker>
@@ -10,8 +11,8 @@
     <div id="echartLine"> </div>
     <el-table :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
       <el-table-column type="index" label="序号" width="55" />
-      <el-table-column prop="date" label="PH值" />
-      <el-table-column prop="name" label="温度" width="55" />
+      <el-table-column prop="ph" label="PH" />
+      <el-table-column prop="name" label="温度" />
       <el-table-column prop="address" label="水位" />
       <el-table-column prop="name1" label="电位" />
       <el-table-column prop="address1" label="溶解度" />
@@ -20,14 +21,14 @@
 
 </template>
 <script setup>
-  import { onMounted, reactive, toRaw, ref, nextTick } from "vue";
+  import { onMounted, reactive, toRaw, ref, nextTick, watch } from "vue";
   import * as echarts from "echarts";
-    let lineChart = null
+  let lineChart = null
   let lineOption = {}
   const selectValue = ref('PH')
   const timeValue = ref()
   const dialogVisible = ref(false);
-  defineExpose({ dialogVisible })
+  const chart = defineProps(['chart', 'lineXAxis', 'lineSeries'])
   const options = [{
     value: '1',
     label: 'PH'
@@ -50,39 +51,24 @@
     value: '7',
     label: '氨氮'
   }]
-  
-  const tableData = [
-    {
-      date: '检测井1',
-      name: 'PH',
-      address: '6.7',
-      name1: '7',
-      address1: '105%',
-    },
-    {
-      date: '检测井2',
-      name: '温度',
-      address: '42',
-      name1: '30',
-      address1: '70%',
-    },
-    {
-      date: '检测井3',
-      name: '氨氮',
-      address: '1',
-      name1: '0.8',
-      address1: '80%',
-    },
-    {
-      date: '检测井4',
-      name: '水位',
-      address: '60',
-      name1: '80',
-      address1: '120%',
-    },  
-  ]
+  const tableData = ref([])
 
- 
+  defineExpose({ dialogVisible, tableData })
+  watch(chart, (newValue, oldValue) => {
+    if (chart.lineXAxis&&lineOption.xAxis) {
+        seekLineData()
+    }
+  }, {
+    deep: true,
+    immediate: true 
+  })
+  function seekLineData() {
+    console.log(chart);
+    
+    lineOption.xAxis[0].data = chart.lineXAxis
+    lineOption.series[0].data = chart.lineSeries
+    lineChart.setOption(lineOption);
+  }
   function openChartLine() {
     var chartDom = document.getElementById('echartLine');
     lineChart = echarts.init(chartDom);
@@ -134,7 +120,7 @@
             }
           },
           // data: ['周一', '周二', '周三', '周四', '周五', '周六', '周天']
-             data: ['1', '2', '3']
+          data: ['0', '1', '2']
         }
       ],
       yAxis: [
@@ -191,7 +177,7 @@
               }
             }
           },
-          data: [7.5,8,7.6]
+          data: [7.04, 7.27, 7.65]
         },
       ]
     };
@@ -204,8 +190,9 @@
     width: 100%;
     height: 300px;
   }
-  :deep(){
-        .el-select__placeholder{
+
+  :deep() {
+    .el-select__placeholder {
       color: white;
     }
   }

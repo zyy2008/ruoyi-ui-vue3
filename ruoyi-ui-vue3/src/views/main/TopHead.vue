@@ -43,10 +43,12 @@
       </div>
     </div>
   </div>
-  <LeftTopTable class="leftTable" v-show="zhddShow" @changeTableLine="changeTableLine" />
-  <RightTopLine class="RightLine" v-show="zhddShow" :chartInfo="chartInfo" />
-  <RightBottomTable class="RightTable" v-show="zhddShow" />
-  <enterprises v-show="qyxxShow" />
+
+  <LeftTopTable class="leftTable" v-show="zxjcShow" @changeTableLine="changeTableLine" />
+  <RightTopLine class="RightLine" v-show="zhddShow||zxjcShow" :chartInfo="chartInfo" />
+  <RightBottomVideo class="RightTable" v-show="zxjcShow" />
+  <RightBottomTable class="RightTable" v-show="zhddShow||bjybShow" />
+  <RightTopTable class="RightLine" v-show="bjybShow" />
 </template>
 
 <script setup>
@@ -56,10 +58,11 @@
   import useUserStore from "@/store/modules/user";
   import useSettingsStore from "@/store/modules/settings";
   import { useRouter } from "vue-router";
-  import RightBottomTable from "./RightBottomTable.vue";
-  import LeftTopTable from "./LeftTopTable.vue";
-  import RightTopLine from "./RightTopLine.vue";
-  import enterprises from '../admin/enterprises/index.vue'
+  import RightBottomTable from "./commandDispatch/RightBottomTable.vue";
+  import RightBottomVideo from "./commandDispatch/RightBottomVideo.vue";
+  import LeftTopTable from "./commandDispatch/LeftTopTable.vue";
+  import RightTopLine from "./commandDispatch/RightTopLine.vue";
+    import RightTopTable from "./commandDispatch/RightTopTable.vue";
   import layerStore from "@/store/modules/layer";
   const router = useRouter();
   const appStore = useAppStore();
@@ -67,11 +70,13 @@
   const settingsStore = useSettingsStore();
   const zhddShow = ref(true)
   const qyxxShow = ref(false)
+  const zxjcShow = ref(false)
+  const bjybShow = ref(false)
   const chartInfo = ref({
-    wellCode:'J01'
+    wellCode: 'J01'
   })
-  
-  const activeText=ref('zhdd')
+
+  const activeText = ref('zhdd')
   const emits = defineEmits(["setLayout"]);
   function setLayout() {
     emits("setLayout");
@@ -107,7 +112,12 @@
   function clickSystem(ment) {
     zhddShow.value = ment === 'zhdd'
     qyxxShow.value = ment === 'qyxx'
-    activeText.value=ment
+    zxjcShow.value = ment === 'zxjc'
+    bjybShow.value = ment === 'bjyb'
+    activeText.value = ment
+    if (ment === 'qyxx') {
+      router.push({ path: "/system/enterprise" });
+    }
   }
 
   function changeTableLine(value) {
@@ -277,8 +287,8 @@
       color: white;
     }
   }
-  .text-active{
+
+  .text-active {
     color: yellow;
-    background-color: red;
   }
 </style>

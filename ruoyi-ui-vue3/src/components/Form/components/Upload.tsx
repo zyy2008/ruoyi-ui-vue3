@@ -1,4 +1,14 @@
-import { defineComponent, inject, toRef, computed, Ref, ref } from "vue";
+import {
+  defineComponent,
+  inject,
+  toRef,
+  computed,
+  Ref,
+  ref,
+  onMounted,
+  watch,
+  watchEffect,
+} from "vue";
 import { observer } from "@formily/reactive-vue";
 import Schema from "@/components/Form";
 import { createForm, Field } from "@formily/core";
@@ -18,11 +28,15 @@ import { useRequest } from "vue-request";
 import useStore from "@/store/modules/user";
 import { Plus, Delete } from "@element-plus/icons-vue";
 import API from "@/services";
+import request from "@/utils/http";
 
 const Index = observer(
   defineComponent({
     props: ["value", "onChange"],
     setup(props) {
+      const value = toRef(props, "value");
+      const dialogVisible = ref(false);
+      const field: Ref<Field> = useField();
       const { loading, runAsync } = useRequest(
         (formData: any) =>
           API.postFileUpload(formData, {
@@ -34,9 +48,22 @@ const Index = observer(
           manual: true,
         }
       );
-      const value = toRef(props, "value");
-      const dialogVisible = ref(false);
-      const field: Ref<Field> = useField();
+      const { data } = useRequest(
+        () => {
+          if (value.value) {
+            return request(`/dev-api/${value.value}`, {
+              method: "GET",
+              responseType: "blob",
+            }).then((res: Blob) => {
+              const url = URL.createObjectURL(res);
+              return url;
+            });
+          }
+        },
+        {
+          refreshDeps: [value],
+        }
+      );
       return () => {
         return (
           <>
@@ -63,7 +90,7 @@ const Index = observer(
                 <>
                   <img
                     class="el-upload-list__item-thumbnail"
-                    src={value.value}
+                    src={data.value}
                     alt=""
                   />
                   <span
@@ -112,7 +139,7 @@ const Index = observer(
                 style={{
                   width: "100%",
                 }}
-                src={value.value}
+                src={data.value}
               />
             </ElDialog>
           </>

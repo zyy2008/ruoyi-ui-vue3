@@ -113,6 +113,24 @@ const props: ISchemaFieldProps = {
             title: "企业规模",
             "x-decorator": "FormItem",
             "x-component": "Select",
+            enum: [
+              {
+                label: "大型",
+                value: "0",
+              },
+              {
+                label: "中型",
+                value: "1",
+              },
+              {
+                label: "小型",
+                value: "2",
+              },
+              {
+                label: "微型",
+                value: "3",
+              },
+            ],
           },
           startDate: {
             type: "string",
@@ -142,11 +160,11 @@ const props: ISchemaFieldProps = {
             enum: [
               {
                 label: "是",
-                value: true,
+                value: "0",
               },
               {
                 label: "否",
-                value: false,
+                value: "1",
               },
             ],
             "x-decorator": "FormItem",
@@ -189,7 +207,29 @@ const props: ISchemaFieldProps = {
             type: "string",
             title: "地块利用历史",
             "x-decorator": "FormItem",
-            "x-component": "Input",
+            "x-component": "SelectString",
+            enum: [
+              {
+                label: "工业类用地",
+                value: "0",
+              },
+              {
+                label: "住宅类用地",
+                value: "1",
+              },
+              {
+                label: "商业类用地",
+                value: "2",
+              },
+              {
+                label: "其他用途-荒地",
+                value: "3",
+              },
+              {
+                label: "不确定",
+                value: "4",
+              },
+            ],
           },
           // historyStartYear: {
           //   type: "number",
@@ -197,36 +237,36 @@ const props: ISchemaFieldProps = {
           //   "x-decorator": "FormItem",
           //   "x-component": "Input",
           // },
-          history: {
-            type: "array",
-            title: "地块利用历史年份",
-            "x-decorator": "FormItem",
-            "x-component": "DatePicker",
-            "x-component-props": {
-              type: "yearrange",
-              startPlaceholder: "开始年份",
-              endPlaceholder: "结束年份",
-              format: "YYYY",
-              valueFormat: "YYYY",
-            },
-            "x-reactions": (field: Field) => {
-              const form = field.form;
-              field.componentProps = {
-                ...field.componentProps,
-                onChange: (val: any) => {
-                  console.log(val);
-                  const [historyStartYear, historyEndYear] = val;
-                  form.setValuesIn("historyStartYear", historyStartYear);
-                  form.setValuesIn("historyEndYear", historyEndYear);
-                },
-              };
-              const { historyStartYear, historyEndYear } = field.form.values;
-              if (historyStartYear && historyEndYear) {
-                form.setValuesIn("historyStartYear", historyStartYear);
-                form.setValuesIn("historyEndYear", historyEndYear);
-              }
-            },
-          },
+          // history: {
+          //   type: "array",
+          //   title: "地块利用历史年份",
+          //   "x-decorator": "FormItem",
+          //   "x-component": "DatePicker",
+          //   "x-component-props": {
+          //     type: "yearrange",
+          //     startPlaceholder: "开始年份",
+          //     endPlaceholder: "结束年份",
+          //     format: "YYYY",
+          //     valueFormat: "YYYY",
+          //   },
+          //   "x-reactions": (field: Field) => {
+          //     const form = field.form;
+          //     field.componentProps = {
+          //       ...field.componentProps,
+          //       onChange: (val: any) => {
+          //         console.log(val);
+          //         const [historyStartYear, historyEndYear] = val;
+          //         form.setValuesIn("historyStartYear", historyStartYear);
+          //         form.setValuesIn("historyEndYear", historyEndYear);
+          //       },
+          //     };
+          //     const { historyStartYear, historyEndYear } = field.form.values;
+          //     if (historyStartYear && historyEndYear) {
+          //       form.setValuesIn("historyStartYear", historyStartYear);
+          //       form.setValuesIn("historyEndYear", historyEndYear);
+          //     }
+          //   },
+          // },
         },
       },
     },

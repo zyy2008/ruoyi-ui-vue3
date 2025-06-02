@@ -7,7 +7,7 @@
       </span>
     </div>
     <el-table :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
-      <el-table-column type="index" label="序号" width="55" />
+      <!-- <el-table-column type="index" label="序号" width="55" /> -->
       <el-table-column prop="date" label="监测井" />
       <el-table-column prop="name" label="指标"  />
       <el-table-column prop="address" label="标准值" />

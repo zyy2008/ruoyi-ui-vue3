@@ -79,6 +79,6 @@ public class TSensitiveReceptor extends BaseEntity {
      */
     @Excel(name = "所属部门")
     @ApiModelProperty("所属部门")
-    private Long deptId;
+    private String deptId;
 
 }

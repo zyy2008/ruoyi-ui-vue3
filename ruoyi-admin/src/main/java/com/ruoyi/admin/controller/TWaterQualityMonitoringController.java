@@ -37,7 +37,7 @@ public class TWaterQualityMonitoringController extends BaseController
     /**
      * 查询监测数据管理列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:list')")
     @GetMapping("/list")
     public TableDataInfo list(TWaterQualityMonitoring tWaterQualityMonitoring)
     {
@@ -49,7 +49,7 @@ public class TWaterQualityMonitoringController extends BaseController
     /**
      * 导出监测数据管理列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:export')")
     @Log(title = "监测数据管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TWaterQualityMonitoring tWaterQualityMonitoring)
@@ -62,7 +62,7 @@ public class TWaterQualityMonitoringController extends BaseController
     /**
      * 获取监测数据管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") String id)
     {
@@ -72,7 +72,7 @@ public class TWaterQualityMonitoringController extends BaseController
     /**
      * 新增监测数据管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:add')")
     @Log(title = "监测数据管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TWaterQualityMonitoring tWaterQualityMonitoring)
@@ -83,7 +83,7 @@ public class TWaterQualityMonitoringController extends BaseController
     /**
      * 修改监测数据管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:edit')")
     @Log(title = "监测数据管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TWaterQualityMonitoring tWaterQualityMonitoring)
@@ -94,7 +94,7 @@ public class TWaterQualityMonitoringController extends BaseController
     /**
      * 删除监测数据管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:remove')")
     @Log(title = "监测数据管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable String[] ids)

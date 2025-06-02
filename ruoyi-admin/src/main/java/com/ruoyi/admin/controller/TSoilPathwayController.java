@@ -41,7 +41,7 @@ public class TSoilPathwayController extends BaseController {
      * 查询土壤分层信息列表
      */
     @ApiOperation("查询土壤分层信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:pathway:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:pathway:list')")
     @GetMapping("/list")
     public TableDataInfo list(TSoilPathway tSoilPathway) {
         startPage();
@@ -53,7 +53,7 @@ public class TSoilPathwayController extends BaseController {
      * 导出土壤分层信息列表
      */
     @ApiOperation("导出土壤分层信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:pathway:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:pathway:export')")
     @Log(title = "土壤分层信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TSoilPathway tSoilPathway) {
@@ -66,7 +66,7 @@ public class TSoilPathwayController extends BaseController {
      * 获取土壤分层信息详细信息
      */
     @ApiOperation("获取土壤分层信息详细信息")
-    @PreAuthorize("@ss.hasPermi('admin:pathway:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:pathway:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(tSoilPathwayService.selectTSoilPathwayById(id));
@@ -76,7 +76,7 @@ public class TSoilPathwayController extends BaseController {
      * 新增土壤分层信息
      */
     @ApiOperation("新增土壤分层信息")
-    @PreAuthorize("@ss.hasPermi('admin:pathway:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:pathway:add')")
     @Log(title = "土壤分层信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TSoilPathway tSoilPathway) {
@@ -87,7 +87,7 @@ public class TSoilPathwayController extends BaseController {
      * 修改土壤分层信息
      */
     @ApiOperation("修改土壤分层信息")
-    @PreAuthorize("@ss.hasPermi('admin:pathway:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:pathway:edit')")
     @Log(title = "土壤分层信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TSoilPathway tSoilPathway) {
@@ -98,7 +98,7 @@ public class TSoilPathwayController extends BaseController {
      * 删除土壤分层信息
      */
     @ApiOperation("删除土壤分层信息")
-    @PreAuthorize("@ss.hasPermi('admin:pathway:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:pathway:remove')")
     @Log(title = "土壤分层信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {

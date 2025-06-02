@@ -37,7 +37,7 @@ public class TEnterprisesController extends BaseController
     /**
      * 查询企业管理列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:enterprises:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:enterprises:list')")
     @GetMapping("/list")
     public TableDataInfo list(TEnterprises tEnterprises)
     {
@@ -49,7 +49,7 @@ public class TEnterprisesController extends BaseController
     /**
      * 导出企业管理列表
      */
-    @PreAuthorize("@ss.hasPermi('admin:enterprises:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:enterprises:export')")
     @Log(title = "企业管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TEnterprises tEnterprises)
@@ -62,7 +62,7 @@ public class TEnterprisesController extends BaseController
     /**
      * 获取企业管理详细信息
      */
-    @PreAuthorize("@ss.hasPermi('admin:enterprises:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:enterprises:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") String id)
     {
@@ -72,7 +72,7 @@ public class TEnterprisesController extends BaseController
     /**
      * 新增企业管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:enterprises:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:enterprises:add')")
     @Log(title = "企业管理", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TEnterprises tEnterprises)
@@ -83,7 +83,7 @@ public class TEnterprisesController extends BaseController
     /**
      * 修改企业管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:enterprises:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:enterprises:edit')")
     @Log(title = "企业管理", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TEnterprises tEnterprises)
@@ -94,7 +94,7 @@ public class TEnterprisesController extends BaseController
     /**
      * 删除企业管理
      */
-    @PreAuthorize("@ss.hasPermi('admin:enterprises:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:enterprises:remove')")
     @Log(title = "企业管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable String[] ids)

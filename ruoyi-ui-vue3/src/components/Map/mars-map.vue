@@ -28,30 +28,31 @@ let map; // 地图对象
 const withKeyId = computed(() => `mars3d-container-${props.mapKey}`);
 
 onMounted(async () => {
-  let options = {
-    layers: layerStoreIns.layers,
-  };
+  // let options = {
+  //   layers: layerStoreIns.layers,
+  // };
 
-  //当只要一个基地的时候
-  if (layerStoreIns.setTrees.length == 1) {
-    let base = layerStoreIns.setTrees[0];
-    if (base.view) {
-      let view = JSON.parse(base.view);
-      options.scene = {
-        center: view,
-      };
+  // //当只要一个基地的时候
+  // if (layerStoreIns.setTrees.length == 1) {
+  //   let base = layerStoreIns.setTrees[0];
+  //   if (base.view) {
+  //     let view = JSON.parse(base.view);
+  //     options.scene = {
+  //       center: view,
+  //     };
 
-      console.log("view", view);
-    }
-  }
+  //     console.log("view", view);
+  //   }
+  // }
 
   // 获取配置
   mars3d.Util.fetchJson({ url: props.url }).then((data) => {
+
     initMars3d({
       // 合并配置项
       ...data.map3d,
       ...props.options,
-      ...options,
+      // ...options,
     });
   });
 });

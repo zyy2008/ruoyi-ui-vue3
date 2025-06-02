@@ -1,5 +1,9 @@
-﻿{
-  "map3d": {
+﻿
+
+
+{
+  "map3d": 
+  {
     "scene": {
       "center": {
         "lat": 37.57318,
@@ -18,7 +22,8 @@
       "showSkyAtmosphere": true,
       "fog": true,
       "fxaa": true,
-      "requestRenderMode": true,
+      "orderIndependentTranslucency": true,
+      "requestRenderMode": false,
       "globe": {
         "depthTestAgainstTerrain": false,
         "baseColor": "#546a53",
@@ -26,10 +31,7 @@
         "enableLighting": false
       },
       "contextOptions": {
-        "requestWebgl1": false,
-        "webgl": {
-          "preserveDrawingBuffer": true
-        }
+        "requestWebgl1": false
       },
       "cameraController": {
         "zoomFactor": 3.0,

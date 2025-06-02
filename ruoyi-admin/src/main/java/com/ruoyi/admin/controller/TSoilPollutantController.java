@@ -41,7 +41,7 @@ public class TSoilPollutantController extends BaseController {
      * 查询土壤监测超标污染物信息列表
      */
     @ApiOperation("查询土壤监测超标污染物信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:pollutant:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:pollutant:list')")
     @GetMapping("/list")
     public TableDataInfo list(TSoilPollutant tSoilPollutant) {
         startPage();
@@ -53,7 +53,7 @@ public class TSoilPollutantController extends BaseController {
      * 导出土壤监测超标污染物信息列表
      */
     @ApiOperation("导出土壤监测超标污染物信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:pollutant:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:pollutant:export')")
     @Log(title = "土壤监测超标污染物信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TSoilPollutant tSoilPollutant) {
@@ -66,7 +66,7 @@ public class TSoilPollutantController extends BaseController {
      * 获取土壤监测超标污染物信息详细信息
      */
     @ApiOperation("获取土壤监测超标污染物信息详细信息")
-    @PreAuthorize("@ss.hasPermi('admin:pollutant:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:pollutant:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(tSoilPollutantService.selectTSoilPollutantById(id));
@@ -76,7 +76,7 @@ public class TSoilPollutantController extends BaseController {
      * 新增土壤监测超标污染物信息
      */
     @ApiOperation("新增土壤监测超标污染物信息")
-    @PreAuthorize("@ss.hasPermi('admin:pollutant:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:pollutant:add')")
     @Log(title = "土壤监测超标污染物信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TSoilPollutant tSoilPollutant) {
@@ -87,7 +87,7 @@ public class TSoilPollutantController extends BaseController {
      * 修改土壤监测超标污染物信息
      */
     @ApiOperation("修改土壤监测超标污染物信息")
-    @PreAuthorize("@ss.hasPermi('admin:pollutant:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:pollutant:edit')")
     @Log(title = "土壤监测超标污染物信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TSoilPollutant tSoilPollutant) {
@@ -98,7 +98,7 @@ public class TSoilPollutantController extends BaseController {
      * 删除土壤监测超标污染物信息
      */
     @ApiOperation("删除土壤监测超标污染物信息")
-    @PreAuthorize("@ss.hasPermi('admin:pollutant:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:pollutant:remove')")
     @Log(title = "土壤监测超标污染物信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {

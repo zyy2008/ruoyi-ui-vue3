@@ -50,6 +50,6 @@ public class TGroundwaterPollutant extends BaseEntity {
      */
     @Excel(name = "归属部门")
     @ApiModelProperty("归属部门")
-    private Long deptId;
+    private String deptId;
 
 }

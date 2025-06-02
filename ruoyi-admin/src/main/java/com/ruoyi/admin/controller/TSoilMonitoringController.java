@@ -41,7 +41,7 @@ public class TSoilMonitoringController extends BaseController {
      * 查询土壤环境调查监测信息列表
      */
     @ApiOperation("查询土壤环境调查监测信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:list')")
     @GetMapping("/list")
     public TableDataInfo list(TSoilMonitoring tSoilMonitoring) {
         startPage();
@@ -53,7 +53,7 @@ public class TSoilMonitoringController extends BaseController {
      * 导出土壤环境调查监测信息列表
      */
     @ApiOperation("导出土壤环境调查监测信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:export')")
     @Log(title = "土壤环境调查监测信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TSoilMonitoring tSoilMonitoring) {
@@ -66,7 +66,7 @@ public class TSoilMonitoringController extends BaseController {
      * 获取土壤环境调查监测信息详细信息
      */
     @ApiOperation("获取土壤环境调查监测信息详细信息")
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(tSoilMonitoringService.selectTSoilMonitoringById(id));
@@ -76,7 +76,7 @@ public class TSoilMonitoringController extends BaseController {
      * 新增土壤环境调查监测信息
      */
     @ApiOperation("新增土壤环境调查监测信息")
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:add')")
     @Log(title = "土壤环境调查监测信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TSoilMonitoring tSoilMonitoring) {
@@ -87,7 +87,7 @@ public class TSoilMonitoringController extends BaseController {
      * 修改土壤环境调查监测信息
      */
     @ApiOperation("修改土壤环境调查监测信息")
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:edit')")
     @Log(title = "土壤环境调查监测信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TSoilMonitoring tSoilMonitoring) {
@@ -98,7 +98,7 @@ public class TSoilMonitoringController extends BaseController {
      * 删除土壤环境调查监测信息
      */
     @ApiOperation("删除土壤环境调查监测信息")
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:remove')")
     @Log(title = "土壤环境调查监测信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {

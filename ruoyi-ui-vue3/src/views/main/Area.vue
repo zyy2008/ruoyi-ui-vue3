@@ -26,20 +26,13 @@ onMounted(() => {
       color: "#ffffff",
       font_family: "楷体",
       font_size: 20,
-      background: false,
+      background: false
     },
-    isAutoEditing: false, // 绘制完成后是否自动激活编辑
+    isAutoEditing: false // 绘制完成后是否自动激活编辑
     // drawEndEventType: mars3d.EventType.rightClick,
     // drawDelEventType: mars3d.EventType.middleClick
   });
   map.addThing(measure);
-
-  measure.on(mars3d.EventType.start, function (e) {
-    console.log("开始异步分析", e);
-  });
-  measure.on(mars3d.EventType.end, function (e) {
-    console.log("完成异步分析", e);
-  });
 });
 
 onBeforeUnmount(() => {

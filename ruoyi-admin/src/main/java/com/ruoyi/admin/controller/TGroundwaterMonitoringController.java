@@ -41,7 +41,7 @@ public class TGroundwaterMonitoringController extends BaseController {
      * 查询地下水环境调查监测信息列表
      */
     @ApiOperation("查询地下水环境调查监测信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:list')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:list')")
     @GetMapping("/list")
     public TableDataInfo list(TGroundwaterMonitoring tGroundwaterMonitoring) {
         startPage();
@@ -53,7 +53,7 @@ public class TGroundwaterMonitoringController extends BaseController {
      * 导出地下水环境调查监测信息列表
      */
     @ApiOperation("导出地下水环境调查监测信息列表")
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:export')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:export')")
     @Log(title = "地下水环境调查监测信息", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TGroundwaterMonitoring tGroundwaterMonitoring) {
@@ -66,7 +66,7 @@ public class TGroundwaterMonitoringController extends BaseController {
      * 获取地下水环境调查监测信息详细信息
      */
     @ApiOperation("获取地下水环境调查监测信息详细信息")
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:query')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
         return success(tGroundwaterMonitoringService.selectTGroundwaterMonitoringById(id));
@@ -76,7 +76,7 @@ public class TGroundwaterMonitoringController extends BaseController {
      * 新增地下水环境调查监测信息
      */
     @ApiOperation("新增地下水环境调查监测信息")
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:add')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:add')")
     @Log(title = "地下水环境调查监测信息", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TGroundwaterMonitoring tGroundwaterMonitoring) {
@@ -87,7 +87,7 @@ public class TGroundwaterMonitoringController extends BaseController {
      * 修改地下水环境调查监测信息
      */
     @ApiOperation("修改地下水环境调查监测信息")
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:edit')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:edit')")
     @Log(title = "地下水环境调查监测信息", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TGroundwaterMonitoring tGroundwaterMonitoring) {
@@ -98,7 +98,7 @@ public class TGroundwaterMonitoringController extends BaseController {
      * 删除地下水环境调查监测信息
      */
     @ApiOperation("删除地下水环境调查监测信息")
-    @PreAuthorize("@ss.hasPermi('admin:monitoring:remove')")
+    //@PreAuthorize("@ss.hasPermi('admin:monitoring:remove')")
     @Log(title = "地下水环境调查监测信息", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {

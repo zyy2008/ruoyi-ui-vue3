@@ -57,31 +57,89 @@
     <div class="bottomIn">
       <div class="bottomInOt" @click="clickSystem('zhdd')">
         <img src="@/assets/static/1.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'zhdd' }">指挥调度</div>
+        <div class="text" :class="{ 'text-active': activeText === 'zhdd' }">
+          指挥调度
+        </div>
       </div>
       <div class="bottomInOt" @click="clickSystem('zxjc')">
         <img src="@/assets/static/2.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'zxjc' }">在线监测</div>
+        <div class="text" :class="{ 'text-active': activeText === 'zxjc' }">
+          在线监测
+        </div>
       </div>
       <div class="bottomInOt" @click="clickSystem('qyxx')">
         <img src="@/assets/static/3.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'qyxx' }">企业信息</div>
+        <div class="text" :class="{ 'text-active': activeText === 'qyxx' }">
+          企业信息
+        </div>
       </div>
       <div class="bottomInOt" @click="clickSystem('bjyb')">
         <img src="@/assets/static/4.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'bjyb' }">报警预报</div>
+        <div class="text" :class="{ 'text-active': activeText === 'bjyb' }">
+          报警预报
+        </div>
       </div>
     </div>
   </div>
 
-  <LeftTopTable class="leftTable" v-show="zxjcShow" @changeTableLine="changeTableLine" />
-  <RightTopLine class="RightLine" v-show="zhddShow || zxjcShow" :chartInfo="chartInfo" />
+  <LeftTopTable
+    class="leftTable"
+    v-show="zxjcShow"
+    @changeTableLine="changeTableLine"
+  />
+  <RightTopLine
+    class="RightLine"
+    v-show="zhddShow || zxjcShow"
+    :chartInfo="chartInfo"
+  />
   <RightBottomVideo class="RightTable" v-show="zxjcShow" />
   <RightBottomTable class="RightTable" v-show="zhddShow || bjybShow" />
   <RightTopTable class="RightLine" v-show="bjybShow" />
+
+  <el-dialog
+    modal-class="visible_SelectPoint map-dialog"
+    draggable
+    :title="'坐标查询'"
+    v-model="visible_SelectPoint"
+    width="350px"
+    :modal="false"
+    :close-on-click-modal="false"
+    :destroy-on-close="true"
+  >
+    <SelectPoint />
+  </el-dialog>
+
+  <el-dialog
+    modal-class="visible_Distance map-dialog"
+    draggable
+    :title="'距离测量'"
+    v-model="visible_Distance"
+    width="350px"
+    :modal="false"
+    :close-on-click-modal="false"
+    :destroy-on-close="true"
+  >
+    <Distance />
+  </el-dialog>
+
+  <el-dialog
+    modal-class="visible_Area map-dialog"
+    draggable
+    :title="'面积测量'"
+    v-model="visible_Area"
+    width="350px"
+    :modal="false"
+    :close-on-click-modal="false"
+    :destroy-on-close="true"
+  >
+    <Area />
+  </el-dialog>
 </template>
 
 <script setup>
+import SelectPoint from "./SelectPoint.vue";
+import Distance from "./Distance.vue";
+import Area from "./Area.vue";
 import TopMenu from "./TopMenu.vue";
 import { ElMessageBox } from "element-plus";
 import useAppStore from "@/store/modules/app";
@@ -130,10 +188,6 @@ function showArea() {
   visible_Area.value = true;
 }
 
-function setLayout() {
-  emits("setLayout");
-}
-
 function handleCommand(command) {
   switch (command) {
     case "goSystem":
@@ -162,13 +216,25 @@ function logout() {
 }
 
 function clickSystem(ment) {
-  zhddShow.value = ment === "zhdd";
-  qyxxShow.value = ment === "qyxx";
-  zxjcShow.value = ment === "zxjc";
-  bjybShow.value = ment === "bjyb";
-  activeText.value = ment;
+  if (ment === activeText.value) {
+    // If clicking the same button, toggle off
+    zhddShow.value = false;
+    qyxxShow.value = false;
+    zxjcShow.value = false;
+    bjybShow.value = false;
+    activeText.value = "";
+  } else {
+    // If clicking a different button, switch to it
+    zhddShow.value = ment === "zhdd";
+    qyxxShow.value = ment === "qyxx";
+    zxjcShow.value = ment === "zxjc";
+    bjybShow.value = ment === "bjyb";
+    activeText.value = ment;
+  }
+
   if (ment === "qyxx") {
-    router.push({ path: "/system/enterprise" });
+    const route = router.resolve({ path: "/system/enterprise" });
+    window.open(route.href, "_blank");
   }
 }
 

@@ -18,51 +18,52 @@
 </template>
 <script setup>
   import { onMounted, reactive, toRaw, ref, nextTick } from "vue";
+  const tableData = []
 
-  const tableData = [
-    {
-      date: '检测井1',
-      name: 'PH',
-      address: '6.7',
-      name1: '7',
-      address1: '105%',
-    },
-    {
-      date: '检测井2',
-      name: '温度',
-      address: '42',
-      name1: '30',
-      address1: '70%',
-    },
-    {
-      date: '检测井3',
-      name: '氨氮',
-      address: '1',
-      name1: '0.8',
-      address1: '80%',
-    },
-    {
-      date: '检测井4',
-      name: '水位',
-      address: '60',
-      name1: '80',
-      address1: '120%',
-    },  
-     {
-      date: '检测井5',
-      name: 'PH',
-      address: '6.7',
-      name1: '7',
-      address1: '105%',
-    },
-         {
-      date: '检测井6',
-      name: '水位',
-      address: '60',
-      name1: '40',
-      address1: '80%',
-    },
-  ]
+  // const tableData = [
+  //   {
+  //     date: '检测井1',
+  //     name: 'PH',
+  //     address: '6.7',
+  //     name1: '7',
+  //     address1: '105%',
+  //   },
+  //   {
+  //     date: '检测井2',
+  //     name: '温度',
+  //     address: '42',
+  //     name1: '30',
+  //     address1: '70%',
+  //   },
+  //   {
+  //     date: '检测井3',
+  //     name: '氨氮',
+  //     address: '1',
+  //     name1: '0.8',
+  //     address1: '80%',
+  //   },
+  //   {
+  //     date: '检测井4',
+  //     name: '水位',
+  //     address: '60',
+  //     name1: '80',
+  //     address1: '120%',
+  //   },
+  //    {
+  //     date: '检测井5',
+  //     name: 'PH',
+  //     address: '6.7',
+  //     name1: '7',
+  //     address1: '105%',
+  //   },
+  //        {
+  //     date: '检测井6',
+  //     name: '水位',
+  //     address: '60',
+  //     name1: '40',
+  //     address1: '80%',
+  //   },
+  // ]
 </script>
 
 <style lang="scss" scoped>

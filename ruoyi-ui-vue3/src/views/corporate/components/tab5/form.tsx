@@ -69,7 +69,7 @@ const props: ISchemaFieldProps = {
 export default defineComponent({
   setup() {
     const disabled = ref<boolean>();
-    const { deptId } = userStore();
+    const { enterpriseId: deptId } = userStore();
     const { runAsync, loading } = useRequest(
       () =>
         API.getAdminEnterpriseList({

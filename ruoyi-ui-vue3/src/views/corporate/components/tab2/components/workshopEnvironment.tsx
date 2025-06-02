@@ -226,7 +226,7 @@ export default observer(
       const form = createForm();
       const { data, run } = useRequest(() =>
         API.getAdminWorkshopEnvironmentList({
-          deptId: userStore().deptId,
+          deptId: userStore().enterpriseId,
         })
       );
       watchEffect(() => {

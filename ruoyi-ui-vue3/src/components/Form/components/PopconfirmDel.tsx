@@ -61,7 +61,7 @@ const Save = observer(
     setup() {
       const { apiEdit, apiAdd, run: getList } = inject<InjectProps>("form");
       const record = ArrayTable.useRecord();
-      const { deptId } = useStore();
+      const { enterpriseId: deptId } = useStore();
       const { runAsync, loading } = useRequest(
         (id) => {
           if (id != null && id !== undefined && id !== "") {

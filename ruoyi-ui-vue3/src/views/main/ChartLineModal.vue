@@ -3,7 +3,7 @@
     <el-date-picker v-model="timeValue" type="daterange" range-separator="至" start-placeholder="开始日期"
       style="width: 400px;" end-placeholder="结束日期">
     </el-date-picker>
-    <el-select v-model="selectValue" placeholder="请选择" style="width: 300px;float: right;" multiple>
+    <el-select v-model="selectValue" placeholder="请选择" style="width: 300px;float: right;">
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
       </el-option>
     </el-select>
@@ -22,10 +22,10 @@
 <script setup>
   import { onMounted, reactive, toRaw, ref, nextTick } from "vue";
   import * as echarts from "echarts";
-  console.log(123131);
-  
+    let lineChart = null
+  let lineOption = {}
+  const selectValue = ref('PH')
   const timeValue = ref()
-  const selectValue = ref()
   const dialogVisible = ref(false);
   defineExpose({ dialogVisible })
   const options = [{
@@ -81,20 +81,17 @@
       address1: '120%',
     },  
   ]
-  // nextTick(() => {
-  //   initEchart()
-  // })
 
+ 
   function openChartLine() {
     var chartDom = document.getElementById('echartLine');
-    var myChart = echarts.init(chartDom);
-    var option;
+    lineChart = echarts.init(chartDom);
     var fontColor = '#30eee9';
-    option = {
+    lineOption = {
       grid: {
         left: '5%',
         right: '5%',
-        top: '15%',
+        top: '2%',
         bottom: '5%',
         containLabel: true
       },
@@ -136,15 +133,15 @@
               color: '#195384'
             }
           },
-          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周天']
+          // data: ['周一', '周二', '周三', '周四', '周五', '周六', '周天']
+             data: ['1', '2', '3']
         }
       ],
       yAxis: [
         {
           type: 'value',
-          name: 'PH',
+          name: '值',
           min: 0,
-          max: 1000,
           axisLabel: {
             formatter: '{value}',
             textStyle: {
@@ -165,71 +162,11 @@
               color: '#11366e'
             }
           }
-        },
-        {
-          type: 'value',
-          name: '温度',
-          min: 0,
-          max: 1000,
-          axisLabel: {
-            formatter: '{value} ',
-            textStyle: {
-              color: '#186afe'
-            }
-          },
-          axisLine: {
-            lineStyle: {
-              color: '#186afe'
-            }
-          },
-          axisTick: {
-            show: false,
-          },
-          splitLine: {
-            show: true,
-            lineStyle: {
-              color: '#11366e'
-            }
-          }
         }
       ],
       series: [
         {
           name: 'PH',
-          type: 'line',
-          stack: '总量',
-          symbol: 'circle',
-          symbolSize: 8,
-          itemStyle: {
-            normal: {
-              color: '#0092f6',
-              lineStyle: {
-                color: "#0092f6",
-                width: 1
-              },
-              areaStyle: {
-                //color: '#94C9EC'
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                  offset: 0,
-                  color: 'rgba(7,44,90,0.3)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(0,146,246,0.9)'
-                }]),
-              }
-            }
-          },
-          markPoint: {
-            itemStyle: {
-              normal: {
-                color: 'red'
-              }
-            }
-          },
-          data: [120, 132, 101, 134, 90, 230, 210, 182, 191, 234, 290, 330]
-        },
-        {
-          name: '温度',
           type: 'line',
           stack: '总量',
           symbol: 'circle',
@@ -243,7 +180,7 @@
                 width: 1
               },
               areaStyle: {
-                //color: '#94C9EC'
+
                 color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
                   offset: 0,
                   color: 'rgba(7,44,90,0.3)'
@@ -254,148 +191,11 @@
               }
             }
           },
-          data: [220, 182, 191, 234, 290, 330, 310, 201, 154, 190, 330, 410]
+          data: [7.5,8,7.6]
         },
-        {
-          name: '水位',
-          type: 'line',
-          stack: '总量',
-          symbol: 'circle',
-          symbolSize: 8,
-          itemStyle: {
-            normal: {
-              color: '#aecb56',
-              lineStyle: {
-                color: "#aecb56",
-                width: 1
-              },
-              areaStyle: {
-                //color: '#94C9EC'
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                  offset: 0,
-                  color: 'rgba(7,44,90,0.3)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(114,144,89,0.9)'
-                }]),
-              }
-            }
-          },
-          data: [150, 232, 201, 154, 190, 330, 410, 150, 232, 201, 154, 190]
-        },
-        {
-          name: '氧化还原电位',
-          type: 'line',
-          stack: '总量',
-          symbol: 'circle',
-          symbolSize: 8,
-          itemStyle: {
-            normal: {
-              color: '#aecb56',
-              lineStyle: {
-                color: "#aecb56",
-                width: 1
-              },
-              areaStyle: {
-                //color: '#94C9EC'
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                  offset: 0,
-                  color: 'rgba(7,44,90,0.3)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(114,144,89,0.9)'
-                }]),
-              }
-            }
-          },
-          data: [150, 232, 201, 154, 190, 330, 410, 150, 232, 201, 154, 190]
-        },
-        {
-          name: '溶解氧',
-          type: 'line',
-          stack: '总量',
-          symbol: 'circle',
-          symbolSize: 8,
-          itemStyle: {
-            normal: {
-              color: '#aecb56',
-              lineStyle: {
-                color: "#aecb56",
-                width: 1
-              },
-              areaStyle: {
-                //color: '#94C9EC'
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                  offset: 0,
-                  color: 'rgba(7,44,90,0.3)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(114,144,89,0.9)'
-                }]),
-              }
-            }
-          },
-          data: [150, 232, 201, 154, 190, 330, 410, 150, 232, 201, 154, 190]
-        },
-        {
-          name: '电导率',
-          type: 'line',
-          stack: '总量',
-          symbol: 'circle',
-          symbolSize: 8,
-          itemStyle: {
-            normal: {
-              color: '#aecb56',
-              lineStyle: {
-                color: "#aecb56",
-                width: 1
-              },
-              areaStyle: {
-                //color: '#94C9EC'
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                  offset: 0,
-                  color: 'rgba(7,44,90,0.3)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(114,144,89,0.9)'
-                }]),
-              }
-            }
-          },
-          data: [150, 232, 201, 154, 190, 330, 410, 150, 232, 201, 154, 190]
-        },
-        {
-          name: '氨氮',
-          type: 'line',
-          stack: '总量',
-          symbol: 'circle',
-          symbolSize: 8,
-          itemStyle: {
-            normal: {
-              color: '#aecb56',
-              lineStyle: {
-                color: "#aecb56",
-                width: 1
-              },
-              areaStyle: {
-                //color: '#94C9EC'
-                color: new echarts.graphic.LinearGradient(0, 1, 0, 0, [{
-                  offset: 0,
-                  color: 'rgba(7,44,90,0.3)'
-                }, {
-                  offset: 1,
-                  color: 'rgba(114,144,89,0.9)'
-                }]),
-              }
-            }
-          },
-          data: [150, 232, 201, 154, 190, 330, 410, 150, 232, 201, 154, 190]
-        }
       ]
     };
-
-    option && myChart.setOption(option);
-    //  data: ['PH', '温度', '水位', '氧化还原电位', '溶解氧', '电导率', '氨氮']
+    lineOption && lineChart.setOption(lineOption);
   }
 </script>
 
@@ -403,5 +203,10 @@
   #echartLine {
     width: 100%;
     height: 300px;
+  }
+  :deep(){
+        .el-select__placeholder{
+      color: white;
+    }
   }
 </style>

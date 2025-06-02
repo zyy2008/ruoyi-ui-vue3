@@ -184,7 +184,7 @@ export default observer(
       const form = createForm();
       const { data, run, loading } = useRequest(() =>
         API.getAdminGroundwaterPathwayList({
-          deptId: userStore().deptId,
+          deptId: userStore().enterpriseId,
         })
       );
       watchEffect(() => {
@@ -215,7 +215,7 @@ export default observer(
                     : API.postAdminGroundwaterPathway;
                   api({
                     ...val,
-                    deptId: userStore().deptId,
+                    deptId: userStore().enterpriseId,
                   }).then((res) => {
                     if (res.code === 200) {
                       ElMessage.success("保存成功");

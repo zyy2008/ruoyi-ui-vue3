@@ -7,7 +7,7 @@ export async function putAdminWorkshopEnvironment(
   body: API.TWorkshopEnvironment,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/workshopEnvironment`, {
+  return request<Record<string, any>>(`/dev-api/admin/workshopEnvironment`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postAdminWorkshopEnvironment(
   body: API.TWorkshopEnvironment,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/workshopEnvironment`, {
+  return request<Record<string, any>>(`/dev-api/admin/workshopEnvironment`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +40,7 @@ export async function deleteAdminWorkshopEnvironmentIds(
 ) {
   const { ids: param0, ...queryParams } = params;
   return request<Record<string, any>>(
-    `/api1/admin/workshopEnvironment/${param0}`,
+    `/dev-api/admin/workshopEnvironment/${param0}`,
     {
       method: "DELETE",
       params: { ...queryParams },
@@ -57,7 +57,7 @@ export async function getAdminWorkshopEnvironmentId(
 ) {
   const { id: param0, ...queryParams } = params;
   return request<Record<string, any>>(
-    `/api1/admin/workshopEnvironment/${param0}`,
+    `/dev-api/admin/workshopEnvironment/${param0}`,
     {
       method: "GET",
       params: { ...queryParams },
@@ -72,7 +72,7 @@ export async function postAdminWorkshopEnvironmentExport(
   params: API.postAdminWorkshopEnvironmentExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/workshopEnvironment/export`, {
+  return request<any>(`/dev-api/admin/workshopEnvironment/export`, {
     method: "POST",
     params: {
       ...params,
@@ -89,7 +89,7 @@ export async function getAdminWorkshopEnvironmentList(
   params: API.getAdminWorkshopEnvironmentListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/workshopEnvironment/list`, {
+  return request<API.TableDataInfo>(`/dev-api/admin/workshopEnvironment/list`, {
     method: "GET",
     params: {
       ...params,

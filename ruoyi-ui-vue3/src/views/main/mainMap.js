@@ -49,10 +49,13 @@ function addEnterpriseLayer(list) {
     graphicLayer.addGraphic(graphic)
 
     graphic.on(mars3d.EventType.popupOpen, function (event) {
+
+      
       const container = event.container // popup对应的DOM
       const btnDetails = container.querySelector("#btnDetails")
       if (btnDetails) {
         btnDetails.addEventListener("click", (e) => {
+                console.log(132121313);
           openQYPage(event)
           graphic.closePopup();
         })
@@ -130,11 +133,14 @@ function addWellLayer(list) {
 
 
     graphic.on(mars3d.EventType.popupOpen, function (event) {
+      openLinePage(event)
       const container = event.container // popup对应的DOM
       const btnDetails = container.querySelector("#btnDetails")
       if (btnDetails) {
         btnDetails.addEventListener("click", (e) => {
           openJCPage(event)
+          //
+          console.log("点击查看监测数据", event)
           graphic.closePopup();
         })
       }
@@ -145,4 +151,8 @@ function addWellLayer(list) {
 
 window.openJCPage = function (event) {
   window.openJCPageVue(event)
+}
+
+window.openLinePage = function (event) {
+  window.openLineChartPage(event)
 }

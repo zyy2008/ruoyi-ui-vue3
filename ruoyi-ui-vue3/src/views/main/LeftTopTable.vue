@@ -3,18 +3,20 @@
     <div class="title">
       <img src="@/assets/static/subTitle.png" alt="" />
       <span> 实时数据 </span>
-      <el-button @click="enterpriseApi"> 测试数据</el-button>
+      <!-- <el-button @click="enterpriseApi"> 测试数据</el-button> -->
     </div>
     <el-table
       :data="tableData"
       style="width: 100%"
+      max-height="650"
       :row-class-name="tableRowClassName"
+      @row-click="clickTable"
     >
       <el-table-column type="index" width="50" />
-      <el-table-column prop="code" label="名称" width="60" />
-      <el-table-column prop="PH" label="PH" width="60" />
+      <el-table-column prop="wellCode" label="名称" width="60" />
+      <el-table-column prop="ph" label="PH" width="60" />
       <el-table-column prop="WD" label="温度" width="60" />
-      <el-table-column prop="SW" label="水位" width="60" />
+      <el-table-column prop="waterBuriedDepth" label="水位" width="60" />
       <el-table-column prop="DW" label="电位" />
       <el-table-column prop="RJY" label="溶解氧" width="70" />
       <el-table-column prop="DDL" label="电导率" width="70" />
@@ -24,7 +26,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import * as mars3d from "mars3d";
 import {
   DataType,
   Authority,
@@ -33,11 +36,29 @@ import {
   DataParams,
   ApiData,
 } from "@/api/platform/index";
+import {
+  listWells,
+  getWells,
+  delWells,
+  addWells,
+  updateWells,
+} from "@/api/admin/wells";
+import {
+  listMonitoring,
+  getMonitoring,
+  delMonitoring,
+  addMonitoring,
+  updateMonitoring,
+} from "@/api/admin/monitoring";
 import { param } from "@mars/utils";
-/*dataType: string;
-        authority: string;
-        params: {};
-        dataMethod: string;  */
+const tableData = ref();
+const tableTotle = ref();
+const selectedRow = ref(null);
+
+const tableRowClassName = ({ row }) => {
+  return row === selectedRow.value ? "selected-row" : "";
+};
+
 const enterpriseApi = async () => {
   const {} = await projectApi({
     apiData: {
@@ -48,80 +69,47 @@ const enterpriseApi = async () => {
     },
   });
 };
-const tableData = ref([
-  {
-    index: 1,
-    code: "J15",
-    WD: "60°",
-    SW: "60",
-    PH: "7",
-    DW: "20",
-    RJY: "15",
-    DDL: "8",
-    AD: "30",
-    lng: "680.8",
-  },
-  {
-    index: 2,
-    code: "J21",
-    WD: "50°",
-    SW: "40",
-    PH: "8.6",
-    DW: "10",
-    RJY: "35",
-    DDL: "80",
-    AD: "14",
-    lng: "650.8",
-  },
-  {
-    index: 3,
-    code: "J54",
-    WD: "58°",
-    SW: "40",
-    PH: "8",
-    DW: "10",
-    RJY: "13",
-    DDL: "12",
-    AD: "20",
-    lng: "610.8",
-  },
-  {
-    index: 4,
-    code: "J28-1",
-    WD: "60°",
-    SW: "60",
-    PH: "7",
-    DW: "20",
-    RJY: "15",
-    DDL: "8",
-    AD: "30",
-    lng: "610.8",
-  },
-  {
-    index: 5,
-    code: "J45",
-    WD: "44°",
-    SW: "55",
-    PH: "8.6",
-    DW: "60",
-    RJY: "15",
-    DDL: "11",
-    AD: "31",
-    lng: "640.3",
-  },
-  {
-    index: 6,
-    code: "J47",
-    WD: "30°",
-    SW: "40",
-    PH: "7.5",
-    DW: "28",
-    RJY: "12",
-    DDL: "17",
-    AD: "20",
-    lng: "610.8",
-  },
-]);
+
+onMounted(() => {
+  createBaseList({ pageNum: 1, pageSize: 1000 });
+});
+const createBaseList = (option) => {
+  let data = {};
+  listWells(option).then((response) => {
+    data = response.rows;
+    tableTotle.value = response.total;
+    listMonitoring(option).then((res) => {
+      for (let i in data) {
+        res.rows.forEach((ele) => {
+          if (ele.pointId === data[i].wellCode) {
+            data[i]["ph"] = ele.ph;
+          }
+        });
+      }
+      tableData.value = data;
+      if (data.length > 0) {
+        selectedRow.value = data[0];
+        emit("changeTableLine", data[0]);
+      }
+    });
+  });
+};
+const emit = defineEmits(["changeTableLine"]);
+const clickTable = (value) => {
+  selectedRow.value = value;
+  emit("changeTableLine", value);
+
+  console.log(value);
+
+  if (map && value.longitude && value.latitude) {
+
+    map.setCameraView({
+      lng:Number(value.longitude),
+      lat:Number(value.latitude),
+      alt:1200
+    })
+  }
+};
 </script>
 
 <style lang="scss" scoped>
@@ -129,7 +117,11 @@ const tableData = ref([
   width: 604px;
   padding: 10px;
   background: url("@/assets/static/left.png") no-repeat;
-  /* background-size: 100% 100%; */
+
+  :deep(.selected-row) {
+    background-color: #409eff !important;
+    color: #fff;
+  }
 
   .title {
     height: 42px;

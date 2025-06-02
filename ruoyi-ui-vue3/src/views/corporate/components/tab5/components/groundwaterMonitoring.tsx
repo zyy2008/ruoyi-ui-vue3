@@ -109,7 +109,7 @@ export default observer(
     setup() {
       const { data, run, loading } = useRequest(() =>
         API.getAdminGroundwaterMonitoringList({
-          deptId: userStore().deptId,
+          deptId: userStore().enterpriseId,
         })
       );
       watchEffect(() => {
@@ -140,7 +140,7 @@ export default observer(
                     : API.postAdminGroundwaterMonitoring;
                   api({
                     ...val,
-                    deptId: userStore().deptId,
+                    deptId: userStore().enterpriseId,
                   }).then((res) => {
                     if (res.code === 200) {
                       ElMessage.success("保存成功");

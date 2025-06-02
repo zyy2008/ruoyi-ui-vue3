@@ -7,7 +7,7 @@ export async function putAdminGroundwaterPollutant(
   body: API.dexiashuijiancefaxiandechaobiaowuranwuxinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/groundwaterPollutant`, {
+  return request<Record<string, any>>(`/dev-api/admin/groundwaterPollutant`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postAdminGroundwaterPollutant(
   body: API.dexiashuijiancefaxiandechaobiaowuranwuxinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/groundwaterPollutant`, {
+  return request<Record<string, any>>(`/dev-api/admin/groundwaterPollutant`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -40,7 +40,7 @@ export async function deleteAdminGroundwaterPollutantIds(
 ) {
   const { ids: param0, ...queryParams } = params;
   return request<Record<string, any>>(
-    `/api1/admin/groundwaterPollutant/${param0}`,
+    `/dev-api/admin/groundwaterPollutant/${param0}`,
     {
       method: "DELETE",
       params: { ...queryParams },
@@ -57,7 +57,7 @@ export async function getAdminGroundwaterPollutantId(
 ) {
   const { id: param0, ...queryParams } = params;
   return request<Record<string, any>>(
-    `/api1/admin/groundwaterPollutant/${param0}`,
+    `/dev-api/admin/groundwaterPollutant/${param0}`,
     {
       method: "GET",
       params: { ...queryParams },
@@ -72,7 +72,7 @@ export async function postAdminGroundwaterPollutantExport(
   params: API.postAdminGroundwaterPollutantExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/groundwaterPollutant/export`, {
+  return request<any>(`/dev-api/admin/groundwaterPollutant/export`, {
     method: "POST",
     params: {
       ...params,
@@ -89,13 +89,16 @@ export async function getAdminGroundwaterPollutantList(
   params: API.getAdminGroundwaterPollutantListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/groundwaterPollutant/list`, {
-    method: "GET",
-    params: {
-      ...params,
-      params: undefined,
-      ...params["params"],
-    },
-    ...(options || {}),
-  });
+  return request<API.TableDataInfo>(
+    `/dev-api/admin/groundwaterPollutant/list`,
+    {
+      method: "GET",
+      params: {
+        ...params,
+        params: undefined,
+        ...params["params"],
+      },
+      ...(options || {}),
+    }
+  );
 }

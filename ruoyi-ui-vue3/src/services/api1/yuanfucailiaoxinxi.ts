@@ -7,7 +7,7 @@ export async function putAdminRawMaterials(
   body: API.yuanfucailiaoxinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/rawMaterials`, {
+  return request<Record<string, any>>(`/dev-api/admin/rawMaterials`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postAdminRawMaterials(
   body: API.yuanfucailiaoxinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/rawMaterials`, {
+  return request<Record<string, any>>(`/dev-api/admin/rawMaterials`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export async function deleteAdminRawMaterialsIds(
   options?: { [key: string]: any }
 ) {
   const { ids: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/rawMaterials/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/rawMaterials/${param0}`, {
     method: "DELETE",
     params: { ...queryParams },
     ...(options || {}),
@@ -53,7 +53,7 @@ export async function getAdminRawMaterialsId(
   options?: { [key: string]: any }
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/rawMaterials/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/rawMaterials/${param0}`, {
     method: "GET",
     params: { ...queryParams },
     ...(options || {}),
@@ -66,7 +66,7 @@ export async function postAdminRawMaterialsExport(
   params: API.postAdminRawMaterialsExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/rawMaterials/export`, {
+  return request<any>(`/dev-api/admin/rawMaterials/export`, {
     method: "POST",
     params: {
       ...params,
@@ -83,7 +83,7 @@ export async function getAdminRawMaterialsList(
   params: API.getAdminRawMaterialsListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/rawMaterials/list`, {
+  return request<API.TableDataInfo>(`/dev-api/admin/rawMaterials/list`, {
     method: "GET",
     params: {
       ...params,

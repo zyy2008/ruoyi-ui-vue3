@@ -7,7 +7,7 @@ export async function putAdminPollution(
   body: API.qiyewuranyuan,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/pollution`, {
+  return request<Record<string, any>>(`/dev-api/admin/pollution`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postAdminPollution(
   body: API.qiyewuranyuan,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/pollution`, {
+  return request<Record<string, any>>(`/dev-api/admin/pollution`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export async function deleteAdminPollutionIds(
   options?: { [key: string]: any }
 ) {
   const { ids: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/pollution/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/pollution/${param0}`, {
     method: "DELETE",
     params: { ...queryParams },
     ...(options || {}),
@@ -53,7 +53,7 @@ export async function getAdminPollutionId(
   options?: { [key: string]: any }
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/pollution/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/pollution/${param0}`, {
     method: "GET",
     params: { ...queryParams },
     ...(options || {}),
@@ -66,7 +66,7 @@ export async function postAdminPollutionExport(
   params: API.postAdminPollutionExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/pollution/export`, {
+  return request<any>(`/dev-api/admin/pollution/export`, {
     method: "POST",
     params: {
       ...params,
@@ -83,7 +83,7 @@ export async function getAdminPollutionList(
   params: API.getAdminPollutionListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/pollution/list`, {
+  return request<API.TableDataInfo>(`/dev-api/admin/pollution/list`, {
     method: "GET",
     params: {
       ...params,

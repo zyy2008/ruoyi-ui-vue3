@@ -7,7 +7,7 @@ export async function putAdminSoilPathway(
   body: API.turanghuanjingdiaochajiancexinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/soilPathway`, {
+  return request<Record<string, any>>(`/dev-api/admin/soilPathway`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postAdminSoilPathway(
   body: API.turanghuanjingdiaochajiancexinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/soilPathway`, {
+  return request<Record<string, any>>(`/dev-api/admin/soilPathway`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export async function deleteAdminSoilPathwayIds(
   options?: { [key: string]: any }
 ) {
   const { ids: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/soilPathway/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/soilPathway/${param0}`, {
     method: "DELETE",
     params: { ...queryParams },
     ...(options || {}),
@@ -53,7 +53,7 @@ export async function getAdminSoilPathwayId(
   options?: { [key: string]: any }
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/soilPathway/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/soilPathway/${param0}`, {
     method: "GET",
     params: { ...queryParams },
     ...(options || {}),
@@ -66,7 +66,7 @@ export async function postAdminSoilPathwayExport(
   params: API.postAdminSoilPathwayExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/soilPathway/export`, {
+  return request<any>(`/dev-api/admin/soilPathway/export`, {
     method: "POST",
     params: {
       ...params,
@@ -83,7 +83,7 @@ export async function getAdminSoilPathwayList(
   params: API.getAdminSoilPathwayListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/soilPathway/list`, {
+  return request<API.TableDataInfo>(`/dev-api/admin/soilPathway/list`, {
     method: "GET",
     params: {
       ...params,

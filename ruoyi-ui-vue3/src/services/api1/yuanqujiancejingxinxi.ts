@@ -7,7 +7,7 @@ export async function putAdminWells(
   body: API.yuanqujiancejingxinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/wells`, {
+  return request<Record<string, any>>(`/dev-api/admin/wells`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postAdminWells(
   body: API.yuanqujiancejingxinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/wells`, {
+  return request<Record<string, any>>(`/dev-api/admin/wells`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -39,7 +39,7 @@ export async function deleteAdminWellsIds(
   options?: { [key: string]: any }
 ) {
   const { ids: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/wells/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/wells/${param0}`, {
     method: "DELETE",
     params: { ...queryParams },
     ...(options || {}),
@@ -53,7 +53,7 @@ export async function getAdminWellsId(
   options?: { [key: string]: any }
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/wells/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/wells/${param0}`, {
     method: "GET",
     params: { ...queryParams },
     ...(options || {}),
@@ -66,7 +66,7 @@ export async function postAdminWellsExport(
   params: API.postAdminWellsExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/wells/export`, {
+  return request<any>(`/dev-api/admin/wells/export`, {
     method: "POST",
     params: {
       ...params,
@@ -83,7 +83,7 @@ export async function getAdminWellsList(
   params: API.getAdminWellsListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/wells/list`, {
+  return request<API.TableDataInfo>(`/dev-api/admin/wells/list`, {
     method: "GET",
     params: {
       ...params,

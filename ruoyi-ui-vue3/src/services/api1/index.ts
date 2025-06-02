@@ -4,6 +4,7 @@
 // API 唯一标识：
 import * as zaichanqiyedekuaixinxi from "./zaichanqiyedekuaixinxi";
 import * as qiyewuranyuan from "./qiyewuranyuan";
+import * as qiyeguanli from "./qiyeguanli";
 import * as dexiashuihuanjingdiaochajiance from "./dexiashuihuanjingdiaochajiance";
 import * as dexiashuiqieyitujingxinxi from "./dexiashuiqieyitujingxinxi";
 import * as dexiashuijiancefaxiandechaobiaowuranwuxinxi from "./dexiashuijiancefaxiandechaobiaowuranwuxinxi";
@@ -18,6 +19,7 @@ import * as chanchejianfenbuyuhuanjingqingkuang from "./chanchejianfenbuyuhuanji
 export default {
   zaichanqiyedekuaixinxi,
   qiyewuranyuan,
+  qiyeguanli,
   dexiashuihuanjingdiaochajiance,
   dexiashuiqieyitujingxinxi,
   dexiashuijiancefaxiandechaobiaowuranwuxinxi,

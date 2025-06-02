@@ -7,7 +7,7 @@ export async function putAdminSoilMonitoring(
   body: API.turanghuanjingdiaochajiancexinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/soilMonitoring`, {
+  return request<Record<string, any>>(`/dev-api/admin/soilMonitoring`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -22,7 +22,7 @@ export async function postAdminSoilMonitoring(
   body: API.turanghuanjingdiaochajiancexinxi,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/api1/admin/soilMonitoring`, {
+  return request<Record<string, any>>(`/dev-api/admin/soilMonitoring`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -39,11 +39,14 @@ export async function deleteAdminSoilMonitoringIds(
   options?: { [key: string]: any }
 ) {
   const { ids: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/soilMonitoring/${param0}`, {
-    method: "DELETE",
-    params: { ...queryParams },
-    ...(options || {}),
-  });
+  return request<Record<string, any>>(
+    `/dev-api/admin/soilMonitoring/${param0}`,
+    {
+      method: "DELETE",
+      params: { ...queryParams },
+      ...(options || {}),
+    }
+  );
 }
 
 /** 获取土壤环境调查监测信息详细信息 GET /admin/soilMonitoring/${param0} */
@@ -53,11 +56,14 @@ export async function getAdminSoilMonitoringId(
   options?: { [key: string]: any }
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/api1/admin/soilMonitoring/${param0}`, {
-    method: "GET",
-    params: { ...queryParams },
-    ...(options || {}),
-  });
+  return request<Record<string, any>>(
+    `/dev-api/admin/soilMonitoring/${param0}`,
+    {
+      method: "GET",
+      params: { ...queryParams },
+      ...(options || {}),
+    }
+  );
 }
 
 /** 导出土壤环境调查监测信息列表 POST /admin/soilMonitoring/export */
@@ -66,7 +72,7 @@ export async function postAdminSoilMonitoringExport(
   params: API.postAdminSoilMonitoringExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/api1/admin/soilMonitoring/export`, {
+  return request<any>(`/dev-api/admin/soilMonitoring/export`, {
     method: "POST",
     params: {
       ...params,
@@ -83,7 +89,7 @@ export async function getAdminSoilMonitoringList(
   params: API.getAdminSoilMonitoringListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/api1/admin/soilMonitoring/list`, {
+  return request<API.TableDataInfo>(`/dev-api/admin/soilMonitoring/list`, {
     method: "GET",
     params: {
       ...params,

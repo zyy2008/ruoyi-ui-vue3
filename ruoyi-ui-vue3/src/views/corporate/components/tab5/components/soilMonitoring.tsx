@@ -111,7 +111,7 @@ export default observer(
       const form = createForm();
       const { data, run, loading } = useRequest(() =>
         API.getAdminSoilMonitoringList({
-          deptId: userStore().deptId,
+          deptId: userStore().enterpriseId,
           // searchValue: prop.searchValue,
         })
       );
@@ -143,7 +143,7 @@ export default observer(
                     : API.postAdminSoilMonitoring;
                   api({
                     ...val,
-                    deptId: userStore().deptId,
+                    deptId: userStore().enterpriseId,
                   }).then((res) => {
                     if (res.code === 200) {
                       ElMessage.success("保存成功");

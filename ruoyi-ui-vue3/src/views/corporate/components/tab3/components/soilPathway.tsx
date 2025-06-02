@@ -166,7 +166,7 @@ export default observer(
       const form = createForm();
       const { data, run } = useRequest(() =>
         API.getAdminSoilPathwayList({
-          deptId: userStore().deptId,
+          deptId: userStore().enterpriseId,
         })
       );
       watchEffect(() => {

@@ -142,6 +142,64 @@ const props: ISchemaFieldProps = {
                 type: "void",
                 "x-component": <WorkshopEnvironment />,
               },
+              card5: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "六、生产车间分布与环境情况",
+                },
+                properties: {
+                  c1: {
+                    type: "string",
+                    title: "企业是否开展过清洁生产审核",
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "是",
+                        value: "0",
+                      },
+                      {
+                        label: "否",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                  c2: {
+                    type: "string",
+                    title: "洁洁生产审校时间",
+                    "x-decorator": "FormItem",
+                    "x-component": "DatePicker",
+                    "x-component-props": {
+                      type: "month",
+                    },
+                  },
+                  c3: {
+                    type: "string",
+                    title: "清洁生产水平",
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "一级",
+                        value: "0",
+                      },
+                      {
+                        label: "二级",
+                        value: "1",
+                      },
+                      {
+                        label: "三级",
+                        value: "2",
+                      },
+                      {
+                        label: "未知",
+                        value: "3",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
             },
           },
           tab2: {
@@ -151,143 +209,267 @@ const props: ISchemaFieldProps = {
               title: "二、存储区",
             },
             properties: {
-              array2: {
-                type: "array",
-                "x-component": "ArrayTable",
-                items: {
-                  type: "object",
-                  properties: {
-                    column1: {
-                      type: "void",
-                      "x-component": "ArrayTable.Column",
-                      "x-component-props": {
-                        width: 80,
-                        title: "序号",
-                        align: "center",
-                      },
-                      properties: {
-                        index: {
-                          type: "void",
-                          "x-component": "ArrayTable.Index",
-                        },
-                      },
-                    },
-                    column2: {
-                      type: "void",
-                      "x-component": "ArrayTable.Column",
-                      "x-component-props": {
-                        width: 200,
-                        title: "产品名称",
-                      },
-                      properties: {
-                        a1: {
-                          type: "string",
-                          "x-decorator": "FormItem",
-                          "x-component": "Input",
-                        },
-                      },
-                    },
-                    column3: {
-                      type: "void",
-                      "x-component": "ArrayTable.Column",
-                      "x-component-props": {
-                        width: 200,
-                        title: "生产年代",
-                      },
-                      properties: {
-                        a1: {
-                          type: "string",
-                          "x-decorator": "FormItem",
-                          "x-component": "Input",
-                        },
-                      },
-                    },
-                    column4: {
-                      type: "void",
-                      "x-component": "ArrayTable.Column",
-                      "x-component-props": {
-                        width: 200,
-                        title: "计量单位",
-                      },
-                      properties: {
-                        a1: {
-                          type: "string",
-                          "x-decorator": "FormItem",
-                          "x-component": "Input",
-                        },
-                      },
-                    },
-                    column5: {
-                      type: "void",
-                      "x-component": "ArrayTable.Column",
-                      "x-component-props": {
-                        width: 200,
-                        title: "年平均产量",
-                      },
-                      properties: {
-                        a1: {
-                          type: "string",
-                          "x-decorator": "FormItem",
-                          "x-component": "Input",
-                        },
-                      },
-                    },
-                    column6: {
-                      type: "void",
-                      "x-component": "ArrayTable.Column",
-                      "x-component-props": {
-                        width: 200,
-                        title: "添加人",
-                      },
-                      properties: {
-                        a1000: {
-                          type: "string",
-                          "x-decorator": "FormItem",
-                          "x-component": "AddPeople",
-                          "x-editable": true,
-                        },
-                      },
-                    },
-                    column7: {
-                      type: "void",
-                      "x-component": "ArrayTable.Column",
-                      "x-component-props": {
-                        title: "操作",
-                        prop: "operations",
-                        width: 200,
-                        fixed: "right",
-                      },
-                      properties: {
-                        item: {
-                          type: "void",
-                          "x-component": "FormItem",
-                          properties: {
-                            remove: {
-                              type: "void",
-                              "x-component": "ArrayTable.Remove",
-                            },
-                            moveDown: {
-                              type: "void",
-                              "x-component": "ArrayTable.MoveDown",
-                            },
-                            moveUp: {
-                              type: "void",
-                              "x-component": "ArrayTable.MoveUp",
-                            },
-                          },
-                        },
-                      },
-                    },
-                  },
+              card1: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "储罐、储槽等储存设施",
                 },
                 properties: {
-                  add: {
-                    type: "void",
-                    "x-component": "ArrayTable.Addition",
-                    title: "添加条目",
+                  gt1: {
+                    type: "string",
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "有",
+                        value: "0",
+                      },
+                      {
+                        label: "无",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
                   },
                 },
               },
+              // card2: {
+              //   type: "void",
+              //   "x-component": "Card",
+              //   "x-component-props": {
+              //     header: "存放产品、原材料的或其他有毒物质的仓库等",
+              //   },
+              //   properties: {
+              //     gt2: {
+              //       type: "string",
+              //       "x-decorator": "FormItem",
+              //       enum: [
+              //         {
+              //           label: "有",
+              //           value: "0",
+              //         },
+              //         {
+              //           label: "无",
+              //           value: "1",
+              //         },
+              //       ],
+              //       "x-component": "Radio.Group",
+              //     },
+              //   },
+              // },
+              // card3: {
+              //   type: "void",
+              //   "x-component": "Card",
+              //   "x-component-props": {
+              //     header: "产品，原材料或其他有毒有害物质的仓库等",
+              //   },
+              //   properties: {
+              //     gt3: {
+              //       type: "string",
+              //       "x-decorator": "FormItem",
+              //       enum: [
+              //         {
+              //           label: "有",
+              //           value: "0",
+              //         },
+              //         {
+              //           label: "无",
+              //           value: "1",
+              //         },
+              //       ],
+              //       "x-component": "Radio.Group",
+              //     },
+              //   },
+              // },
+
+              // gt4: {
+              //   type: "void",
+              //   "x-component": () => (
+              //     <div
+              //       style={{
+              //         margin: "10px 0",
+              //       }}
+              //     >
+              //       以上三项中任何一项选择是，则须填写以下各项内容，否则不填
+              //     </div>
+              //   ),
+              // },
+              // card4: {
+              //   type: "void",
+              //   "x-component": "Card",
+              //   "x-component-props": {
+              //     header: "储存区",
+              //   },
+              //   properties: {
+              //     array2: {
+              //       type: "array",
+              //       "x-component": "ArrayTable",
+              //       items: {
+              //         type: "object",
+              //         properties: {
+              //           column1: {
+              //             type: "void",
+              //             "x-component": "ArrayTable.Column",
+              //             "x-component-props": {
+              //               width: 80,
+              //               title: "序号",
+              //               align: "center",
+              //             },
+              //             properties: {
+              //               index: {
+              //                 type: "void",
+              //                 "x-component": "ArrayTable.Index",
+              //               },
+              //             },
+              //           },
+              //           column2: {
+              //             type: "void",
+              //             "x-component": "ArrayTable.Column",
+              //             "x-component-props": {
+              //               width: 200,
+              //               title: "产品名称",
+              //             },
+              //             properties: {
+              //               a1: {
+              //                 type: "string",
+              //                 "x-decorator": "FormItem",
+              //                 "x-component": "Input",
+              //               },
+              //             },
+              //           },
+              //           column3: {
+              //             type: "void",
+              //             "x-component": "ArrayTable.Column",
+              //             "x-component-props": {
+              //               width: 200,
+              //               title: "生产年代",
+              //             },
+              //             properties: {
+              //               a1: {
+              //                 type: "string",
+              //                 "x-decorator": "FormItem",
+              //                 "x-component": "Input",
+              //               },
+              //             },
+              //           },
+              //           column4: {
+              //             type: "void",
+              //             "x-component": "ArrayTable.Column",
+              //             "x-component-props": {
+              //               width: 200,
+              //               title: "计量单位",
+              //             },
+              //             properties: {
+              //               a1: {
+              //                 type: "string",
+              //                 "x-decorator": "FormItem",
+              //                 "x-component": "Input",
+              //               },
+              //             },
+              //           },
+              //           column5: {
+              //             type: "void",
+              //             "x-component": "ArrayTable.Column",
+              //             "x-component-props": {
+              //               width: 200,
+              //               title: "年平均产量",
+              //             },
+              //             properties: {
+              //               a1: {
+              //                 type: "string",
+              //                 "x-decorator": "FormItem",
+              //                 "x-component": "Input",
+              //               },
+              //             },
+              //           },
+              //           column6: {
+              //             type: "void",
+              //             "x-component": "ArrayTable.Column",
+              //             "x-component-props": {
+              //               width: 200,
+              //               title: "添加人",
+              //             },
+              //             properties: {
+              //               a1000: {
+              //                 type: "string",
+              //                 "x-decorator": "FormItem",
+              //                 "x-component": "AddPeople",
+              //                 "x-editable": true,
+              //               },
+              //             },
+              //           },
+              //           column8: {
+              //             type: "void",
+              //             "x-component": "ArrayTable.Column",
+              //             "x-component-props": {
+              //               title: "添加时间",
+              //               width: 300,
+              //             },
+
+              //             properties: {
+              //               createdAt: {
+              //                 type: "string",
+              //                 "x-decorator": "FormItem",
+              //                 "x-component": "Input",
+              //                 "x-editable": false,
+              //               },
+              //             },
+              //           },
+              //           column7: {
+              //             type: "void",
+              //             "x-component": "ArrayTable.Column",
+              //             "x-component-props": {
+              //               title: "操作",
+              //               prop: "operations",
+              //               width: 200,
+              //               fixed: "right",
+              //             },
+              //             properties: {
+              //               item: {
+              //                 type: "void",
+              //                 "x-component": "FormItem",
+              //                 properties: {
+              //                   remove: {
+              //                     type: "void",
+              //                     "x-component": "ArrayTable.Remove",
+              //                   },
+              //                   moveDown: {
+              //                     type: "void",
+              //                     "x-component": "ArrayTable.MoveDown",
+              //                   },
+              //                   moveUp: {
+              //                     type: "void",
+              //                     "x-component": "ArrayTable.MoveUp",
+              //                   },
+              //                 },
+              //               },
+              //             },
+              //           },
+              //         },
+              //       },
+              //       properties: {
+              //         add: {
+              //           type: "void",
+              //           "x-component": "ArrayTable.Addition",
+              //           title: "添加条目",
+              //         },
+              //       },
+              //     },
+              //   },
+              // },
+              // card5: {
+              //   type: "void",
+              //   "x-component": "Card",
+              //   "x-component-props": {
+              //     header: "各估存区城防护措施(多选)",
+              //   },
+              //   properties: {
+              //     gt10: {
+              //       type: "string",
+              //       "x-component": "CheckboxGroup",
+              //     }
+              //   },
+              // },
             },
           },
         },

@@ -21,6 +21,7 @@ const props: ISchemaFieldProps = {
         properties: {
           array: {
             type: "array",
+            "x-decorator": "FormItem",
             "x-component": "ArrayTable",
             items: {
               type: "object",
@@ -214,6 +215,12 @@ const props: ISchemaFieldProps = {
                 title: "添加条目",
               },
             },
+          },
+          b1: {
+            type: "string",
+            title: "生产车问总面积",
+            "x-decorator": "FormItem",
+            "x-component": "Input",
           },
         },
       },

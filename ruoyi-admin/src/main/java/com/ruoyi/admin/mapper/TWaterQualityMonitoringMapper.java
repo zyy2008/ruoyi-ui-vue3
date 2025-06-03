@@ -1,6 +1,8 @@
 package com.ruoyi.admin.mapper;
 
 import java.util.List;
+
+import com.ruoyi.admin.domain.GJJLRES;
 import com.ruoyi.admin.domain.TWaterQualityMonitoring;
 
 /**
@@ -11,6 +13,8 @@ import com.ruoyi.admin.domain.TWaterQualityMonitoring;
  */
 public interface TWaterQualityMonitoringMapper
 {
+
+    public List<GJJLRES> selectGJJL();
     /**
      * 查询监测数据管理
      *

@@ -1,4 +1,10 @@
-import { defineComponent, ExtractPropTypes, PropType, watchEffect } from "vue";
+import {
+  defineComponent,
+  ExtractPropTypes,
+  PropType,
+  watchEffect,
+  inject,
+} from "vue";
 import Schema from "@/components/Form";
 import { ISchemaFieldProps, FormProvider } from "@formily/vue";
 import { Field, createForm, onFormInit, Form } from "@formily/core";
@@ -11,6 +17,8 @@ import { observer } from "@formily/reactive-vue";
 import { observable, autorun } from "@formily/reactive";
 import { useRequest } from "vue-request";
 import { FromTable } from "./components";
+import { useDeptId } from "@/hooks";
+import { listEnterprises, getEnterprises } from "@/api/admin/enterprises";
 
 const { SchemaField } = Schema;
 
@@ -363,15 +371,13 @@ const form = createForm();
 
 export default defineComponent({
   setup() {
-    const { enterpriseId: deptId } = userStore();
-    const { run, loading, data } = useRequest(() =>
-      API.getAdminEnterpriseList({
-        deptId,
-      })
+    const { deptId } = useDeptId();
+    const { run, loading, data } = useRequest<any>(() =>
+      getEnterprises(deptId)
     );
     watchEffect(() => {
       if (data.value?.code === 200) {
-        const [item] = data.value.rows;
+        const item = data.value.data;
         form.reset().then(() => {
           form.setValues(item);
         });

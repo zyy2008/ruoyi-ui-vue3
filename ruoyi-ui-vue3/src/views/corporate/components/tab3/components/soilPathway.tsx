@@ -7,6 +7,7 @@ import { useRequest } from "vue-request";
 import API from "@/services";
 import userStore from "@/store/modules/user";
 import { Field } from "@formily/core";
+import { useDeptId } from "@/hooks";
 
 const props: ISchemaFieldProps = {
   schema: {
@@ -164,9 +165,10 @@ export default observer(
   defineComponent({
     setup() {
       const form = createForm();
+      const { deptId } = useDeptId();
       const { data, run } = useRequest(() =>
         API.getAdminSoilPathwayList({
-          deptId: userStore().enterpriseId,
+          deptId,
         })
       );
       watchEffect(() => {

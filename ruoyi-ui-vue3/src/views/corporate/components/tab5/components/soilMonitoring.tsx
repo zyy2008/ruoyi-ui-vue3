@@ -10,6 +10,7 @@ import { Field } from "@formily/core";
 import { FormButtonGroup, Submit, Reset } from "@formily/element-plus";
 import { ElButton, ElMessage } from "element-plus";
 import SoilPollutant from "./soilPollutant";
+import { useDeptId } from "@/hooks";
 
 const props: ISchemaFieldProps = {
   schema: {
@@ -109,9 +110,10 @@ export default observer(
     props: ["searchValue"],
     setup(prop) {
       const form = createForm();
+      const { deptId } = useDeptId();
       const { data, run, loading } = useRequest(() =>
         API.getAdminSoilMonitoringList({
-          deptId: userStore().enterpriseId,
+          deptId,
           // searchValue: prop.searchValue,
         })
       );
@@ -143,7 +145,7 @@ export default observer(
                     : API.postAdminSoilMonitoring;
                   api({
                     ...val,
-                    deptId: userStore().enterpriseId,
+                    deptId,
                   }).then((res) => {
                     if (res.code === 200) {
                       ElMessage.success("保存成功");

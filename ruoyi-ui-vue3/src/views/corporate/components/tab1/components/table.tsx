@@ -7,6 +7,7 @@ import { useRequest } from "vue-request";
 import API from "@/services";
 import userStore from "@/store/modules/user";
 import { Field } from "@formily/core";
+import { useDeptId } from "@/hooks";
 
 const props: ISchemaFieldProps = {
   schema: {
@@ -163,10 +164,11 @@ const props: ISchemaFieldProps = {
 export default observer(
   defineComponent({
     setup() {
+      const { deptId } = useDeptId();
       const form = createForm();
       const { data, run } = useRequest(() =>
         API.getAdminWorkshopEnvironmentList({
-          deptId: userStore().enterpriseId,
+          deptId,
         })
       );
       watchEffect(() => {

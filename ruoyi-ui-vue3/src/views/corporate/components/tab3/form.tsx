@@ -11,6 +11,7 @@ import { observer } from "@formily/reactive-vue";
 import { observable, autorun } from "@formily/reactive";
 import { useRequest } from "vue-request";
 import { SoilPathway, GroundwaterPathway } from "./components";
+import { useDeptId } from "@/hooks";
 
 const { SchemaField } = Schema;
 
@@ -56,7 +57,7 @@ const props: ISchemaFieldProps = {
 const form = createForm();
 export default defineComponent({
   setup() {
-    const { enterpriseId: deptId } = userStore();
+    const { deptId } = useDeptId();
 
     return () => (
       <div class="app-container">

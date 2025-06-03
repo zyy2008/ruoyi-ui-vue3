@@ -16,11 +16,12 @@ const props: ISchemaFieldProps = {
         type: "void",
         "x-component": "Card",
         "x-component-props": {
-          header: "五、生产车间分布与环况",
+          header: "五、生产车间分布与环境情况",
         },
         properties: {
           array: {
             type: "array",
+            "x-decorator": "FormItem",
             "x-component": "ArrayTable",
             items: {
               type: "object",
@@ -157,7 +158,7 @@ const props: ISchemaFieldProps = {
                     createdBy: {
                       type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "Input",
+                      "x-component": "AddPeople",
                       "x-editable": false,
                     },
                   },
@@ -214,6 +215,12 @@ const props: ISchemaFieldProps = {
                 title: "添加条目",
               },
             },
+          },
+          b1: {
+            type: "string",
+            title: "生产车问总面积",
+            "x-decorator": "FormItem",
+            "x-component": "Input",
           },
         },
       },

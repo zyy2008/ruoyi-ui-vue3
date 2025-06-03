@@ -73,18 +73,19 @@ const props: ISchemaFieldProps = {
             "x-decorator": "FormItem",
             "x-component": "Input.TextArea",
           },
-          centerLatitude: {
-            type: "string",
-            title: "中心纬度",
-            "x-decorator": "FormItem",
-            "x-component": "Input",
-          },
           centerLongitude: {
             type: "string",
             title: "中心经度",
             "x-decorator": "FormItem",
             "x-component": "Input",
           },
+          centerLatitude: {
+            type: "string",
+            title: "中心纬度",
+            "x-decorator": "FormItem",
+            "x-component": "Input",
+          },
+
           areaLandCert: {
             type: "string",
             title: "地块占地面积(m2)",

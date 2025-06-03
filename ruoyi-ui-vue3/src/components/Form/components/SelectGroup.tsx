@@ -26,7 +26,6 @@ const Index = observer(
         }
         return [];
       });
-      console.log(field);
       return () => {
         return (
           <ElSelect

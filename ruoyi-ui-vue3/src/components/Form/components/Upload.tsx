@@ -114,7 +114,7 @@ const Index = observer(
                       class="el-upload-list__item-delete"
                       onClick={(e) => {
                         e.stopPropagation();
-                        props.onChange(void 0);
+                        props.onChange("");
                       }}
                     >
                       <el-icon>

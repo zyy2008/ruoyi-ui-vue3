@@ -31,6 +31,7 @@
 
     <el-dialog
       v-model="dialogVisible"
+      :destroy-on-close="true"
       title="企业信息"
       width="100vw"
     >
@@ -96,7 +97,7 @@ const openAtStart = computed(() => widgetStore.state.openAtStart);
 let mapInstance = null;
 const { proxy } = getCurrentInstance();
 import layerStore from "@/store/modules/layer";
-
+import userStore from "@/store/modules/user";
 const layerStoreIns = layerStore();
 
 import { addLayer } from "@/api/admin/layer";
@@ -112,6 +113,10 @@ const handleClick = (tab, event) => {
 const dialogVisible = ref(false);
 
 window.openQYMSG = function (event) {
+  console.log(event);
+
+  userStore().setEnterpriseId(event.attr.id);
+
   dialogVisible.value = true;
 };
 

@@ -1,5 +1,14 @@
 import request from '@/utils/request'
 
+export function selectGJJL(query) {
+  return request({
+    url: '/admin/monitoring/selectGJJL',
+    method: 'get',
+    params: query
+  })
+}
+
+
 // 查询监测数据管理列表
 export function listMonitoring(query) {
   return request({

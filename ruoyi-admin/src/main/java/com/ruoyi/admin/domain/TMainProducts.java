@@ -37,7 +37,7 @@ public class TMainProducts extends BaseEntity {
      */
     @Excel(name = "生产年代")
     @ApiModelProperty("生产年代")
-    private Long productionYear;
+    private String productionYear;
 
     /**
      * 计量单位

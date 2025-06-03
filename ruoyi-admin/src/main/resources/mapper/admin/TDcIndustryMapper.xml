@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TDcIndustryMapper">
+    
+    <resultMap type="TDcIndustry" id="TDcIndustryResult">
+        <result property="id"    column="id"    />
+        <result property="industryCategory"    column="industry_category"    />
+        <result property="code"    column="code"    />
+        <result property="pCode"    column="p_code"    />
+    </resultMap>
+
+    <sql id="selectTDcIndustryVo">
+        select id, industry_category, code, p_code from t_dc_industry
+    </sql>
+
+    <select id="selectTDcIndustryList" parameterType="TDcIndustry" resultMap="TDcIndustryResult">
+        <include refid="selectTDcIndustryVo"/>
+        <where>  
+            <if test="industryCategory != null  and industryCategory != ''"> and industry_category = #{industryCategory}</if>
+            <if test="code != null  and code != ''"> and code = #{code}</if>
+            <if test="pCode != null  and pCode != ''"> and p_code = #{pCode}</if>
+        </where>
+    </select>
+    
+    <select id="selectTDcIndustryById" parameterType="Long" resultMap="TDcIndustryResult">
+        <include refid="selectTDcIndustryVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTDcIndustry" parameterType="TDcIndustry" useGeneratedKeys="true" keyProperty="id">
+        insert into t_dc_industry
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="industryCategory != null">industry_category,</if>
+            <if test="code != null">code,</if>
+            <if test="pCode != null">p_code,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="industryCategory != null">#{industryCategory},</if>
+            <if test="code != null">#{code},</if>
+            <if test="pCode != null">#{pCode},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTDcIndustry" parameterType="TDcIndustry">
+        update t_dc_industry
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="industryCategory != null">industry_category = #{industryCategory},</if>
+            <if test="code != null">code = #{code},</if>
+            <if test="pCode != null">p_code = #{pCode},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTDcIndustryById" parameterType="Long">
+        delete from t_dc_industry where id = #{id}
+    </delete>
+
+    <delete id="deleteTDcIndustryByIds" parameterType="String">
+        delete from t_dc_industry where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

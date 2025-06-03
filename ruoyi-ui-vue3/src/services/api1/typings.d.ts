@@ -31,6 +31,11 @@ declare namespace API {
     ids: string;
   };
 
+  type deleteAdminEnterprisesIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
   type deleteAdminGroundwaterMonitoringIdsParams = {
     /** ids */
     ids: string;
@@ -47,6 +52,11 @@ declare namespace API {
   };
 
   type deleteAdminIndicatorsIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
+  type deleteAdminIndustryIdsParams = {
     /** ids */
     ids: string;
   };
@@ -203,6 +213,81 @@ declare namespace API {
     updateTime?: string;
   };
 
+  type getAdminEnterprisesIdParams = {
+    /** id */
+    id: string;
+  };
+
+  type getAdminEnterprisesListParams = {
+    /** 单位所在地详细地址 */
+    address?: string;
+    /** 占地面积 */
+    area?: string;
+    /** 地块实际使用面积 */
+    areaActual?: string;
+    /** 地块占地面积 */
+    areaLandCert?: string;
+    /** 统一社会信用代码 */
+    companyCreditCode?: string;
+    /** 单位名称 */
+    companyName?: string;
+    /** 联系人姓名 */
+    contactName?: string;
+    /** 联系人电话 */
+    contactPhone?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 企业名称 */
+    enterpriseName?: string;
+    /** 企业规模 */
+    enterpriseScale?: string;
+    /** 利用历史结束年份 */
+    historyEndYear?: number;
+    /** 地块利用历史 */
+    historyLandUse?: string;
+    /** 利用历史起始年份 */
+    historyStartYear?: number;
+    /** 主键 */
+    id?: string;
+    /** 是否位于工业园区或集聚区 */
+    inIndustrialPark?: string;
+    /** 行业类别 */
+    industryCategory?: string;
+    /** 行业代码 */
+    industryCode?: string;
+    /** 是否重点 */
+    isKeyEnterprise?: string;
+    /** 最新改扩建时间 */
+    latestExpansionDate?: string;
+    /** 纬度 */
+    latitude?: string;
+    /** 法定代表人 */
+    legalRepresentative?: string;
+    /** 经度 */
+    longitude?: string;
+    params?: Record<string, any>;
+    /** 地块编码 */
+    plotCode?: string;
+    /** 地块名称 */
+    plotName?: string;
+    /** 生产年限 */
+    productionYears?: string;
+    /** 行政区划代码 */
+    regionCode?: string;
+    /** 登记注册类型 */
+    registrationType?: string;
+    remark?: string;
+    /** 报送情况 */
+    reportingStatus?: string;
+    searchValue?: string;
+    /** 开业时间 */
+    startDate?: string;
+    /** 存续状态 */
+    status?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
   type getAdminGroundwaterMonitoringIdParams = {
     /** id */
     id: number;
@@ -311,6 +396,28 @@ declare namespace API {
     value?: number;
   };
 
+  type getAdminIndustryIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminIndustryListParams = {
+    PCode?: string;
+    /** 行业编码 */
+    code?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 主键ID */
+    id?: number;
+    /** 行业名称 */
+    industryCategory?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
   type getAdminMainProductsIdParams = {
     /** id */
     id: number;
@@ -335,7 +442,7 @@ declare namespace API {
     /** 产品名称 */
     productName?: string;
     /** 生产年代 */
-    productionYear?: number;
+    productionYear?: string;
     remark?: string;
     searchValue?: string;
     /** 计量单位 */
@@ -453,7 +560,7 @@ declare namespace API {
     updateBy?: string;
     updateTime?: string;
     /** 使用年代 */
-    usageYear?: number;
+    usageYear?: string;
   };
 
   type getAdminReceptorIdParams = {
@@ -710,6 +817,8 @@ declare namespace API {
     searchValue?: string;
     /** 生产起始日期 */
     startDate?: string;
+    /** 总面积 */
+    totalArea?: string;
     updateBy?: string;
     updateTime?: string;
     /** 车间名称 */
@@ -772,6 +881,76 @@ declare namespace API {
     searchValue?: string;
     /** 开业时间 */
     startDate?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type postAdminEnterprisesExportParams = {
+    /** 单位所在地详细地址 */
+    address?: string;
+    /** 占地面积 */
+    area?: string;
+    /** 地块实际使用面积 */
+    areaActual?: string;
+    /** 地块占地面积 */
+    areaLandCert?: string;
+    /** 统一社会信用代码 */
+    companyCreditCode?: string;
+    /** 单位名称 */
+    companyName?: string;
+    /** 联系人姓名 */
+    contactName?: string;
+    /** 联系人电话 */
+    contactPhone?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 企业名称 */
+    enterpriseName?: string;
+    /** 企业规模 */
+    enterpriseScale?: string;
+    /** 利用历史结束年份 */
+    historyEndYear?: number;
+    /** 地块利用历史 */
+    historyLandUse?: string;
+    /** 利用历史起始年份 */
+    historyStartYear?: number;
+    /** 主键 */
+    id?: string;
+    /** 是否位于工业园区或集聚区 */
+    inIndustrialPark?: string;
+    /** 行业类别 */
+    industryCategory?: string;
+    /** 行业代码 */
+    industryCode?: string;
+    /** 是否重点 */
+    isKeyEnterprise?: string;
+    /** 最新改扩建时间 */
+    latestExpansionDate?: string;
+    /** 纬度 */
+    latitude?: string;
+    /** 法定代表人 */
+    legalRepresentative?: string;
+    /** 经度 */
+    longitude?: string;
+    params?: Record<string, any>;
+    /** 地块编码 */
+    plotCode?: string;
+    /** 地块名称 */
+    plotName?: string;
+    /** 生产年限 */
+    productionYears?: string;
+    /** 行政区划代码 */
+    regionCode?: string;
+    /** 登记注册类型 */
+    registrationType?: string;
+    remark?: string;
+    /** 报送情况 */
+    reportingStatus?: string;
+    searchValue?: string;
+    /** 开业时间 */
+    startDate?: string;
+    /** 存续状态 */
+    status?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -864,6 +1043,23 @@ declare namespace API {
     value?: number;
   };
 
+  type postAdminIndustryExportParams = {
+    PCode?: string;
+    /** 行业编码 */
+    code?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 主键ID */
+    id?: number;
+    /** 行业名称 */
+    industryCategory?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
   type postAdminMainProductsExportParams = {
     /** 年平均产量 */
     annualOutput?: string;
@@ -883,7 +1079,7 @@ declare namespace API {
     /** 产品名称 */
     productName?: string;
     /** 生产年代 */
-    productionYear?: number;
+    productionYear?: string;
     remark?: string;
     searchValue?: string;
     /** 计量单位 */
@@ -991,7 +1187,7 @@ declare namespace API {
     updateBy?: string;
     updateTime?: string;
     /** 使用年代 */
-    usageYear?: number;
+    usageYear?: string;
   };
 
   type postAdminReceptorExportParams = {
@@ -1164,10 +1360,81 @@ declare namespace API {
     searchValue?: string;
     /** 生产起始日期 */
     startDate?: string;
+    /** 总面积 */
+    totalArea?: string;
     updateBy?: string;
     updateTime?: string;
     /** 车间名称 */
     workshopName?: string;
+  };
+
+  type qiyeguanli = {
+    /** 单位所在地详细地址 */
+    address?: string;
+    /** 占地面积 */
+    area?: string;
+    /** 地块实际使用面积 */
+    areaActual?: string;
+    /** 地块占地面积 */
+    areaLandCert?: string;
+    /** 统一社会信用代码 */
+    companyCreditCode?: string;
+    /** 单位名称 */
+    companyName?: string;
+    /** 联系人姓名 */
+    contactName?: string;
+    /** 联系人电话 */
+    contactPhone?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 企业名称 */
+    enterpriseName?: string;
+    /** 企业规模 */
+    enterpriseScale?: string;
+    /** 利用历史结束年份 */
+    historyEndYear?: number;
+    /** 地块利用历史 */
+    historyLandUse?: string;
+    /** 利用历史起始年份 */
+    historyStartYear?: number;
+    /** 主键 */
+    id?: string;
+    /** 是否位于工业园区或集聚区 */
+    inIndustrialPark?: string;
+    /** 行业类别 */
+    industryCategory?: string;
+    /** 行业代码 */
+    industryCode?: string;
+    /** 是否重点 */
+    isKeyEnterprise?: string;
+    /** 最新改扩建时间 */
+    latestExpansionDate?: string;
+    /** 纬度 */
+    latitude?: string;
+    /** 法定代表人 */
+    legalRepresentative?: string;
+    /** 经度 */
+    longitude?: string;
+    params?: Record<string, any>;
+    /** 地块编码 */
+    plotCode?: string;
+    /** 地块名称 */
+    plotName?: string;
+    /** 生产年限 */
+    productionYears?: string;
+    /** 行政区划代码 */
+    regionCode?: string;
+    /** 登记注册类型 */
+    registrationType?: string;
+    remark?: string;
+    /** 报送情况 */
+    reportingStatus?: string;
+    /** 开业时间 */
+    startDate?: string;
+    /** 存续状态 */
+    status?: string;
+    updateBy?: string;
+    updateTime?: string;
   };
 
   type qiyewuranyuan = {
@@ -1214,6 +1481,8 @@ declare namespace API {
     remark?: string;
     /** 生产起始日期 */
     startDate?: string;
+    /** 总面积 */
+    totalArea?: string;
     updateBy?: string;
     updateTime?: string;
     /** 车间名称 */
@@ -1267,6 +1536,22 @@ declare namespace API {
     updateTime?: string;
   };
 
+  type xingyefenlei = {
+    /** 行业编码 */
+    code?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 主键ID */
+    id?: number;
+    /** 行业名称 */
+    industryCategory?: string;
+    params?: Record<string, any>;
+    pcode?: string;
+    remark?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
   type yuanfucailiaoxinxi = {
     /** 年平均用量 */
     annualUsage?: string;
@@ -1291,7 +1576,7 @@ declare namespace API {
     updateBy?: string;
     updateTime?: string;
     /** 使用年代 */
-    usageYear?: number;
+    usageYear?: string;
   };
 
   type yuanqujiancejingxinxi = {
@@ -1446,7 +1731,7 @@ declare namespace API {
     /** 产品名称 */
     productName?: string;
     /** 生产年代 */
-    productionYear?: number;
+    productionYear?: string;
     remark?: string;
     /** 计量单位 */
     unit?: string;

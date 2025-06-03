@@ -3,8 +3,10 @@
 // API 更新时间：
 // API 唯一标识：
 import * as wenjianguanli from "./wenjianguanli";
+import * as xingyefenlei from "./xingyefenlei";
 import * as zaichanqiyedekuaixinxi from "./zaichanqiyedekuaixinxi";
 import * as qiyewuranyuan from "./qiyewuranyuan";
+import * as qiyeguanli from "./qiyeguanli";
 import * as dexiashuihuanjingdiaochajiance from "./dexiashuihuanjingdiaochajiance";
 import * as dexiashuiqieyitujingxinxi from "./dexiashuiqieyitujingxinxi";
 import * as dexiashuijiancefaxiandechaobiaowuranwuxinxi from "./dexiashuijiancefaxiandechaobiaowuranwuxinxi";
@@ -19,8 +21,10 @@ import * as turangjiancechaobiaowuranwuxinxi from "./turangjiancechaobiaowuranwu
 import * as chanchejianfenbuyuhuanjingqingkuang from "./chanchejianfenbuyuhuanjingqingkuang";
 export default {
   wenjianguanli,
+  xingyefenlei,
   zaichanqiyedekuaixinxi,
   qiyewuranyuan,
+  qiyeguanli,
   dexiashuihuanjingdiaochajiance,
   dexiashuiqieyitujingxinxi,
   dexiashuijiancefaxiandechaobiaowuranwuxinxi,

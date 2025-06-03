@@ -240,11 +240,11 @@ const props: ISchemaFieldProps = {
                         title: "添加人",
                       },
                       properties: {
-                        a1: {
+                        a1000: {
                           type: "string",
                           "x-decorator": "FormItem",
                           "x-component": "AddPeople",
-                          "x-editable": false,
+                          "x-editable": true,
                         },
                       },
                     },

@@ -73,18 +73,20 @@
     },
   ];
   onMounted(() => {
-    seekLineData({ pageNum: 1, pageSize: 1000, pointId: "J01" });
+    seekLineData({ pageNum: 1, pageSize: 1000, pointId: "J01" }, 'ph');
   });
 
   watch(chart, (newValue, oldValue) => {
+       selectValue.value='PH'
     seekLineData({
       pageNum: 1,
       pageSize: 1000,
       pointId: chart.chartInfo.wellCode,
-    });
+    },'ph');
   });
 
-  function seekLineData(option) {
+  function seekLineData(option, type) {
+ 
     chartLine.value.tableData = [];
     listMonitoring(option).then((res) => {
       lineOption.xAxis[0].data = [];
@@ -92,34 +94,70 @@
       lineSeries.value = [];
       lineXAxis.value = [];
       const data = res.rows;
-      
       let dataList = data.sort((a, b) => {
         return Number(a.sampleTime) - Number(b.sampleTime)
       })
+
       dataList.forEach((element, index) => {
-        lineOption.xAxis[0].data.push(element.sampleTime);
-        lineOption.series[0].data.push(element.ph);
+
         chartLine.value.tableData.push({
           ph: element.ph,
+          totalDissolvedSolids: element.totalDissolvedSolids,
+          ammoniaNitrogen:element.ammoniaNitrogen,
+          sampleTime:element.sampleTime
         });
+        
+       
+        if (type === 'ph') {
+          if (element.ph) {
+            lineOption.series[0].data.push(element.ph);
+            lineSeries.value.push(element.ph);
+                  lineOption.xAxis[0].data.push(element.sampleTime);
         lineXAxis.value.push(element.sampleTime);
-        lineSeries.value.push(element.ph);
+          }
+        } else if (type === 'dissolved') {
+          if (element.totalDissolvedSolids) {
+            lineOption.series[0].data.push(element.totalDissolvedSolids);
+            lineSeries.value.push(element.totalDissolvedSolids);
+                  lineOption.xAxis[0].data.push(element.sampleTime);
+        lineXAxis.value.push(element.sampleTime);
+          }
+        } else if (type === 'ammoniaNitrogen') {
+          if (element.ammoniaNitrogen) {
+            lineOption.series[0].data.push(element.ammoniaNitrogen);
+            lineSeries.value.push(element.ammoniaNitrogen);
+                  lineOption.xAxis[0].data.push(element.sampleTime);
+        lineXAxis.value.push(element.sampleTime);
+          }
+        }
       });
       lineChart.setOption(lineOption);
     });
   }
 
   function changeSelect(label) {
-    if (label != 1) {
-      lineOption.xAxis[0].data = [];
-      lineOption.series[0].data = [];
-      lineChart.setOption(lineOption);
-    } else {
+    if (label === '1') {
       seekLineData({
         pageNum: 1,
         pageSize: 1000,
         pointId: chart.chartInfo.wellCode,
-      });
+      }, 'ph');
+    } else if (label === '5') {
+      seekLineData({
+        pageNum: 1,
+        pageSize: 1000,
+        pointId: chart.chartInfo.wellCode,
+      }, 'dissolved');
+    } else if (label === '7') {
+      seekLineData({
+        pageNum: 1,
+        pageSize: 1000,
+        pointId: chart.chartInfo.wellCode,
+      }, 'ammoniaNitrogen');
+    } else {
+      lineOption.xAxis[0].data = [];
+      lineOption.series[0].data = [];
+      lineChart.setOption(lineOption);
     }
   }
 
@@ -128,13 +166,13 @@
       pageNum: 1,
       pageSize: 1000,
       pointId: chart.chartInfo.wellCode,
-    });
+    },'ph');
     chartLine.value.dialogVisible = true;
   }
 
   window.openJCPageVue = function (data) {
     let attr = data.attr;
-    seekLineData({ pageNum: 1, pageSize: 1000, pointId: attr.wellCode });
+    seekLineData({ pageNum: 1, pageSize: 1000, pointId: attr.wellCode },'ph');
     nextTick(() => {
       chartLine.value.dialogVisible = true;
     });

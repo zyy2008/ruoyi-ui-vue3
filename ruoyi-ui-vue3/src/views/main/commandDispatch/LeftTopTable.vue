@@ -98,11 +98,7 @@ const emit = defineEmits(["changeTableLine"]);
 const clickTable = (value) => {
   selectedRow.value = value;
   emit("changeTableLine", value);
-
-  console.log(value);
-
   if (map && value.longitude && value.latitude) {
-
     map.setCameraView({
       lng:Number(value.longitude),
       lat:Number(value.latitude),

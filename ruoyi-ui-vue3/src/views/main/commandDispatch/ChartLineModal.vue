@@ -15,9 +15,9 @@
       <el-table-column prop="name" label="温度" />
       <el-table-column prop="address" label="水位" />
       <el-table-column prop="name1" label="电位" />
-      <el-table-column prop="address1" label="溶解性" />
+      <el-table-column prop="totalDissolvedSolids" label="溶解性" />
       <el-table-column prop="name1" label="电导率" />
-      <el-table-column prop="address1" label="氨氮" />
+      <el-table-column prop="ammoniaNitrogen" label="氨氮" />
     </el-table>
   </el-dialog>
 
@@ -58,29 +58,50 @@
   defineExpose({ dialogVisible, tableData })
   watch(chart, (newValue, oldValue) => {
     if (chart.lineXAxis && lineOption.xAxis) {
-      seekLineData()
+      const time = tableData.value.map(ele => ele.sampleTime)
+      const data = tableData.value.map(ele => ele.ph)
+      seekLineData(data, time)
     }
   }, {
     deep: true,
     immediate: true
   })
-  
-  function seekLineData() {
-    lineOption.xAxis[0].data = chart.lineXAxis
-    lineOption.series[0].data = chart.lineSeries
+
+  function seekLineData(data, time) {
+    lineOption.xAxis[0].data = time
+    lineOption.series[0].data = data
     lineChart.setOption(lineOption);
   }
 
   function changeSelect(label) {
-    if (label != 1) {
-      lineOption.xAxis[0].data = [];
-      lineOption.series[0].data = [];
-      lineChart.setOption(lineOption);
+    let time = tableData.value.map(ele => ele.sampleTime)
+    let data = []
+    if (label === '1') {
+      tableData.value.forEach(ele => {
+        if (ele.ph) {
+          data.push(ele.ph)
+        }
+      })
+    } else if (label === '5') {
+      tableData.value.forEach(ele => {
+        if (ele.totalDissolvedSolids) {
+          data.push(ele.totalDissolvedSolids)
+        }
+      })
+    } else if (label === '7') {
+      tableData.value.forEach(ele => {
+        if (ele.ammoniaNitrogen) {
+          data.push(ele.ammoniaNitrogen)
+        }
+      })
     } else {
-      seekLineData();
+      data = []
+      time = []
     }
+    seekLineData(data, time)
   }
   function openChartLine() {
+    selectValue.value = 'PH'
     var chartDom = document.getElementById('echartLine');
     lineChart = echarts.init(chartDom);
     var fontColor = '#30eee9';

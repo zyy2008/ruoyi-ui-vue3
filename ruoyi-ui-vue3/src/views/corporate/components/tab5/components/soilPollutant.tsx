@@ -81,7 +81,7 @@ const props: ISchemaFieldProps = {
                     createdBy: {
                       type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "Input",
+                      "x-component": "AddPeople",
                       "x-editable": false,
                     },
                   },

@@ -243,7 +243,8 @@ const props: ISchemaFieldProps = {
                         a1: {
                           type: "string",
                           "x-decorator": "FormItem",
-                          "x-component": "Input",
+                          "x-component": "AddPeople",
+                          "x-editable": false,
                         },
                       },
                     },

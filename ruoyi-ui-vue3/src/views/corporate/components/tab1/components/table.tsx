@@ -96,7 +96,7 @@ const props: ISchemaFieldProps = {
                     createdBy: {
                       type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "Input",
+                      "x-component": "AddPeople",
                       "x-editable": false,
                     },
                   },
@@ -170,19 +170,19 @@ export default observer(
         })
       );
       watchEffect(() => {
-        if (data.value?.code === 200) {
-          form.reset().then(() => {
-            form.setValues({
-              array: data.value.rows ?? [],
-            });
-          });
-        }
+        // if (data.value?.code === 200) {
+        //   form.reset().then(() => {
+        //     form.setValues({
+        //       array: data.value.rows ?? [],
+        //     });
+        //   });
+        // }
       });
       provide("form", {
         run,
-        apiAdd: API.postAdminWorkshopEnvironment,
-        apiEdit: API.putAdminWorkshopEnvironment,
-        apiDel: API.deleteAdminWorkshopEnvironmentIds,
+        // apiAdd: API.postAdminWorkshopEnvironment,
+        // apiEdit: API.putAdminWorkshopEnvironment,
+        // apiDel: API.deleteAdminWorkshopEnvironmentIds,
       });
       return () => (
         <FormProvider form={form}>

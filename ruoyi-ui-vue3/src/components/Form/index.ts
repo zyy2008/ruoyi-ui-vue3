@@ -19,6 +19,7 @@ import {
   SelectString,
   UploadAjax,
   SelectGroup,
+  AddPeople,
 } from "./components";
 
 const schema = createSchemaField({
@@ -40,6 +41,7 @@ const schema = createSchemaField({
     SelectString,
     UploadAjax,
     SelectGroup,
+    AddPeople,
   },
 });
 

@@ -9,6 +9,7 @@ import userStore from "@/store/modules/user";
 import { Field } from "@formily/core";
 import { FormButtonGroup, Submit, Reset } from "@formily/element-plus";
 import { ElButton, ElMessage } from "element-plus";
+import { useDeptId } from "@/hooks";
 
 const props: ISchemaFieldProps = {
   schema: {
@@ -182,9 +183,10 @@ export default observer(
   defineComponent({
     setup() {
       const form = createForm();
+      const { deptId } = useDeptId();
       const { data, run, loading } = useRequest(() =>
         API.getAdminGroundwaterPathwayList({
-          deptId: userStore().enterpriseId,
+          deptId,
         })
       );
       watchEffect(() => {
@@ -215,7 +217,7 @@ export default observer(
                     : API.postAdminGroundwaterPathway;
                   api({
                     ...val,
-                    deptId: userStore().enterpriseId,
+                    deptId,
                   }).then((res) => {
                     if (res.code === 200) {
                       ElMessage.success("保存成功");

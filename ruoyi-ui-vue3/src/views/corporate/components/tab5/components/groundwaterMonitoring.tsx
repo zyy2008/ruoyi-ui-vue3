@@ -10,6 +10,7 @@ import { Field } from "@formily/core";
 import { FormButtonGroup, Submit, Reset } from "@formily/element-plus";
 import { ElButton, ElMessage } from "element-plus";
 import GroundwaterPollutant from "./groundwaterPollutant";
+import { useDeptId } from "@/hooks";
 
 const props: ISchemaFieldProps = {
   schema: {
@@ -107,9 +108,10 @@ const form = createForm();
 export default observer(
   defineComponent({
     setup() {
+      const { deptId } = useDeptId();
       const { data, run, loading } = useRequest(() =>
         API.getAdminGroundwaterMonitoringList({
-          deptId: userStore().enterpriseId,
+          deptId,
         })
       );
       watchEffect(() => {
@@ -140,7 +142,7 @@ export default observer(
                     : API.postAdminGroundwaterMonitoring;
                   api({
                     ...val,
-                    deptId: userStore().enterpriseId,
+                    deptId,
                   }).then((res) => {
                     if (res.code === 200) {
                       ElMessage.success("保存成功");

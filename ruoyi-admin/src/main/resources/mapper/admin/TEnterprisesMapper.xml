@@ -6,7 +6,6 @@
 
     <resultMap type="TEnterprises" id="TEnterprisesResult">
         <result property="enterpriseName"    column="enterprise_name"    />
-        <result property="industryCategory"    column="industry_category"    />
         <result property="productionYears"    column="production_years"    />
         <result property="status"    column="status"    />
         <result property="reportingStatus"    column="reporting_status"    />
@@ -15,17 +14,43 @@
         <result property="area"    column="area"    />
         <result property="isKeyEnterprise"    column="is_key_enterprise"    />
         <result property="id"    column="id"    />
+
+        <result property="plotCode"    column="plot_code"    />
+        <result property="plotName"    column="plot_name"    />
+        <result property="companyName"    column="company_name"    />
+        <result property="companyCreditCode"    column="company_credit_code"    />
+        <result property="legalRepresentative"    column="legal_representative"    />
+        <result property="address"    column="address"    />
+        <result property="regionCode"    column="region_code"    />
+        <result property="areaLandCert"    column="area_land_cert"    />
+        <result property="areaActual"    column="area_actual"    />
+        <result property="contactName"    column="contact_name"    />
+        <result property="contactPhone"    column="contact_phone"    />
+        <result property="industryCategory"    column="industry_category"    />
+        <result property="registrationType"    column="registration_type"    />
+        <result property="enterpriseScale"    column="enterprise_scale"    />
+        <result property="startDate"    column="start_date"    />
+        <result property="latestExpansionDate"    column="latest_expansion_date"    />
+        <result property="inIndustrialPark"    column="in_industrial_park"    />
+        <result property="historyLandUse"    column="history_land_use"    />
+        <result property="historyStartYear"    column="history_start_year"    />
+        <result property="historyEndYear"    column="history_end_year"    />
     </resultMap>
 
     <sql id="selectTEnterprisesVo">
-        select enterprise_name, industry_category, production_years, status, reporting_status, longitude, latitude, area, is_key_enterprise, id from t_enterprises
+        select plot_code, plot_name, company_name, company_credit_code, legal_representative,
+               address, region_code, area_land_cert, area_actual, contact_name, contact_phone,
+               industry_category, industry_code, registration_type, enterprise_scale, start_date,
+               latest_expansion_date, in_industrial_park, history_land_use, history_start_year,
+               history_end_year, dept_id,enterprise_name, industry_category, production_years,
+               status, reporting_status, longitude, latitude, area, is_key_enterprise, id
+        from t_enterprises
     </sql>
 
     <select id="selectTEnterprisesList" parameterType="TEnterprises" resultMap="TEnterprisesResult">
         <include refid="selectTEnterprisesVo"/>
         <where>
             <if test="enterpriseName != null  and enterpriseName != ''"> and enterprise_name like concat('%', #{enterpriseName}, '%')</if>
-            <if test="industryCategory != null  and industryCategory != ''"> and industry_category = #{industryCategory}</if>
             <if test="productionYears != null  and productionYears != ''"> and production_years = #{productionYears}</if>
             <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="reportingStatus != null  and reportingStatus != ''"> and reporting_status = #{reportingStatus}</if>
@@ -33,6 +58,26 @@
             <if test="latitude != null  and latitude != ''"> and latitude = #{latitude}</if>
             <if test="area != null  and area != ''"> and area = #{area}</if>
             <if test="isKeyEnterprise != null  and isKeyEnterprise != ''"> and is_key_enterprise = #{isKeyEnterprise}</if>
+
+            <if test="plotName != null  and plotName != ''"> and plot_name like concat('%', #{plotName}, '%')</if>
+            <if test="companyName != null  and companyName != ''"> and company_name like concat('%', #{companyName}, '%')</if>
+            <if test="companyCreditCode != null  and companyCreditCode != ''"> and company_credit_code like concat('%', #{companyCreditCode}, '%')</if>
+            <if test="legalRepresentative != null  and legalRepresentative != ''"> and legal_representative = #{legalRepresentative}</if>
+            <if test="address != null  and address != ''"> and address like concat('%', #{address}, '%')</if>
+            <if test="regionCode != null  and regionCode != ''"> and region_code = #{regionCode}</if>
+            <if test="areaLandCert != null  and areaLandCert != ''"> and area_land_cert = #{areaLandCert}</if>
+            <if test="areaActual != null  and areaActual != ''"> and area_actual = #{areaActual}</if>
+            <if test="contactName != null  and contactName != ''"> and contact_name like concat('%', #{contactName}, '%')</if>
+            <if test="contactPhone != null  and contactPhone != ''"> and contact_phone like concat('%', #{contactPhone}, '%')</if>
+            <if test="industryCategory != null  and industryCategory != ''"> and industry_category = #{industryCategory}</if>
+            <if test="industryCode != null  and industryCode != ''"> and industry_code = #{industryCode}</if>
+            <if test="registrationType != null  and registrationType != ''"> and registration_type = #{registrationType}</if>
+            <if test="startDate != null "> and start_date = #{startDate}</if>
+            <if test="latestExpansionDate != null "> and latest_expansion_date = #{latestExpansionDate}</if>
+            <if test="inIndustrialPark != null  and inIndustrialPark != ''"> and in_industrial_park = #{inIndustrialPark}</if>
+            <if test="historyLandUse != null  and historyLandUse != ''"> and history_land_use = #{historyLandUse}</if>
+            <if test="historyStartYear != null "> and history_start_year = #{historyStartYear}</if>
+            <if test="historyEndYear != null "> and history_end_year = #{historyEndYear}</if>
         </where>
     </select>
 
@@ -45,7 +90,6 @@
         insert into t_enterprises
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="enterpriseName != null">enterprise_name,</if>
-            <if test="industryCategory != null">industry_category,</if>
             <if test="productionYears != null">production_years,</if>
             <if test="status != null">status,</if>
             <if test="reportingStatus != null">reporting_status,</if>
@@ -54,10 +98,31 @@
             <if test="area != null">area,</if>
             <if test="isKeyEnterprise != null">is_key_enterprise,</if>
             <if test="id != null">id,</if>
+
+            <if test="plotCode != null">plot_code,</if>
+            <if test="plotName != null and plotName != ''">plot_name,</if>
+            <if test="companyName != null and companyName != ''">company_name,</if>
+            <if test="companyCreditCode != null and companyCreditCode != ''">company_credit_code,</if>
+            <if test="legalRepresentative != null and legalRepresentative != ''">legal_representative,</if>
+            <if test="address != null and address != ''">address,</if>
+            <if test="regionCode != null and regionCode != ''">region_code,</if>
+            <if test="areaLandCert != null and areaLandCert != ''">area_land_cert,</if>
+            <if test="areaActual != null and areaActual != ''">area_actual,</if>
+            <if test="contactName != null and contactName != ''">contact_name,</if>
+            <if test="contactPhone != null and contactPhone != ''">contact_phone,</if>
+            <if test="industryCategory != null and industryCategory != ''">industry_category,</if>
+            <if test="industryCode != null and industryCode != ''">industry_code,</if>
+            <if test="registrationType != null">registration_type,</if>
+            <if test="enterpriseScale != null">enterprise_scale,</if>
+            <if test="startDate != null">start_date,</if>
+            <if test="latestExpansionDate != null">latest_expansion_date,</if>
+            <if test="inIndustrialPark != null">in_industrial_park,</if>
+            <if test="historyLandUse != null">history_land_use,</if>
+            <if test="historyStartYear != null">history_start_year,</if>
+            <if test="historyEndYear != null">history_end_year,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="enterpriseName != null">#{enterpriseName},</if>
-            <if test="industryCategory != null">#{industryCategory},</if>
             <if test="productionYears != null">#{productionYears},</if>
             <if test="status != null">#{status},</if>
             <if test="reportingStatus != null">#{reportingStatus},</if>
@@ -65,7 +130,29 @@
             <if test="latitude != null">#{latitude},</if>
             <if test="area != null">#{area},</if>
             <if test="isKeyEnterprise != null">#{isKeyEnterprise},</if>
+
             <if test="id != null">#{id},</if>
+            <if test="plotCode != null">#{plotCode},</if>
+            <if test="plotName != null and plotName != ''">#{plotName},</if>
+            <if test="companyName != null and companyName != ''">#{companyName},</if>
+            <if test="companyCreditCode != null and companyCreditCode != ''">#{companyCreditCode},</if>
+            <if test="legalRepresentative != null and legalRepresentative != ''">#{legalRepresentative},</if>
+            <if test="address != null and address != ''">#{address},</if>
+            <if test="regionCode != null and regionCode != ''">#{regionCode},</if>
+            <if test="areaLandCert != null and areaLandCert != ''">#{areaLandCert},</if>
+            <if test="areaActual != null and areaActual != ''">#{areaActual},</if>
+            <if test="contactName != null and contactName != ''">#{contactName},</if>
+            <if test="contactPhone != null and contactPhone != ''">#{contactPhone},</if>
+            <if test="industryCategory != null and industryCategory != ''">#{industryCategory},</if>
+            <if test="industryCode != null and industryCode != ''">#{industryCode},</if>
+            <if test="registrationType != null">#{registrationType},</if>
+            <if test="enterpriseScale != null">#{enterpriseScale},</if>
+            <if test="startDate != null">#{startDate},</if>
+            <if test="latestExpansionDate != null">#{latestExpansionDate},</if>
+            <if test="inIndustrialPark != null">#{inIndustrialPark},</if>
+            <if test="historyLandUse != null">#{historyLandUse},</if>
+            <if test="historyStartYear != null">#{historyStartYear},</if>
+            <if test="historyEndYear != null">#{historyEndYear},</if>
         </trim>
     </insert>
 
@@ -73,7 +160,6 @@
         update t_enterprises
         <trim prefix="SET" suffixOverrides=",">
             <if test="enterpriseName != null">enterprise_name = #{enterpriseName},</if>
-            <if test="industryCategory != null">industry_category = #{industryCategory},</if>
             <if test="productionYears != null">production_years = #{productionYears},</if>
             <if test="status != null">status = #{status},</if>
             <if test="reportingStatus != null">reporting_status = #{reportingStatus},</if>
@@ -81,6 +167,28 @@
             <if test="latitude != null">latitude = #{latitude},</if>
             <if test="area != null">area = #{area},</if>
             <if test="isKeyEnterprise != null">is_key_enterprise = #{isKeyEnterprise},</if>
+
+            <if test="plotCode != null">plot_code = #{plotCode},</if>
+            <if test="plotName != null and plotName != ''">plot_name = #{plotName},</if>
+            <if test="companyName != null and companyName != ''">company_name = #{companyName},</if>
+            <if test="companyCreditCode != null and companyCreditCode != ''">company_credit_code = #{companyCreditCode},</if>
+            <if test="legalRepresentative != null and legalRepresentative != ''">legal_representative = #{legalRepresentative},</if>
+            <if test="address != null and address != ''">address = #{address},</if>
+            <if test="regionCode != null and regionCode != ''">region_code = #{regionCode},</if>
+            <if test="areaLandCert != null and areaLandCert != ''">area_land_cert = #{areaLandCert},</if>
+            <if test="areaActual != null and areaActual != ''">area_actual = #{areaActual},</if>
+            <if test="contactName != null and contactName != ''">contact_name = #{contactName},</if>
+            <if test="contactPhone != null and contactPhone != ''">contact_phone = #{contactPhone},</if>
+            <if test="industryCategory != null and industryCategory != ''">industry_category = #{industryCategory},</if>
+            <if test="industryCode != null and industryCode != ''">industry_code = #{industryCode},</if>
+            <if test="registrationType != null">registration_type = #{registrationType},</if>
+            <if test="enterpriseScale != null">enterprise_scale = #{enterpriseScale},</if>
+            <if test="startDate != null">start_date = #{startDate},</if>
+            <if test="latestExpansionDate != null">latest_expansion_date = #{latestExpansionDate},</if>
+            <if test="inIndustrialPark != null">in_industrial_park = #{inIndustrialPark},</if>
+            <if test="historyLandUse != null">history_land_use = #{historyLandUse},</if>
+            <if test="historyStartYear != null">history_start_year = #{historyStartYear},</if>
+            <if test="historyEndYear != null">history_end_year = #{historyEndYear},</if>
         </trim>
         where id = #{id}
     </update>

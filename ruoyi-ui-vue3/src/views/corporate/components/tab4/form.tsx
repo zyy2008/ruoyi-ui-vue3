@@ -17,6 +17,7 @@ import { observer } from "@formily/reactive-vue";
 import { observable, autorun } from "@formily/reactive";
 import { useRequest } from "vue-request";
 import { CheckboxGroup } from "./components";
+import { useDeptId } from "@/hooks";
 
 const { SchemaField } = Schema;
 
@@ -171,7 +172,7 @@ const form = createForm();
 
 export default defineComponent({
   setup() {
-    const { enterpriseId: deptId } = userStore();
+    const { deptId } = useDeptId();
     const { run, data, loading } = useRequest(() =>
       API.getAdminReceptorList({
         deptId,

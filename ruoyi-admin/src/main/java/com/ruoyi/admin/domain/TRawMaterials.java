@@ -37,7 +37,7 @@ public class TRawMaterials extends BaseEntity {
      */
     @Excel(name = "使用年代")
     @ApiModelProperty("使用年代")
-    private Long usageYear;
+    private String usageYear;
 
     /**
      * 计量单位

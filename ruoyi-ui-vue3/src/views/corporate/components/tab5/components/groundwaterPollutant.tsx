@@ -7,6 +7,7 @@ import { useRequest } from "vue-request";
 import API from "@/services";
 import userStore from "@/store/modules/user";
 import { Field } from "@formily/core";
+import { useDeptId } from "@/hooks";
 
 const props: ISchemaFieldProps = {
   schema: {
@@ -148,9 +149,10 @@ const form = createForm();
 export default observer(
   defineComponent({
     setup() {
+      const { deptId } = useDeptId();
       const { data, run } = useRequest(() =>
         API.getAdminGroundwaterPollutantList({
-          deptId: userStore().enterpriseId,
+          deptId,
         })
       );
       watchEffect(() => {

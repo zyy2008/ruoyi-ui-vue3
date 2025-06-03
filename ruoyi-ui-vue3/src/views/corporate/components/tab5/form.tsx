@@ -11,6 +11,7 @@ import { observer } from "@formily/reactive-vue";
 import { observable, autorun } from "@formily/reactive";
 import { useRequest } from "vue-request";
 import { SoilMonitoring, GroundwaterMonitoring } from "./components";
+import { useDeptId } from "@/hooks";
 
 const { SchemaField } = Schema;
 
@@ -69,7 +70,7 @@ const props: ISchemaFieldProps = {
 export default defineComponent({
   setup() {
     const disabled = ref<boolean>();
-    const { enterpriseId: deptId } = userStore();
+    const { deptId } = useDeptId();
     const { runAsync, loading } = useRequest(
       () =>
         API.getAdminEnterpriseList({

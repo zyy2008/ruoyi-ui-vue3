@@ -7,6 +7,7 @@ import { ElPopconfirm, ElButton, ElMessage } from "element-plus";
 import { ArrayTable } from "@formily/element-plus";
 import { useRequest } from "vue-request";
 import useStore from "@/store/modules/user";
+import { useDeptId } from "@/hooks";
 
 type InjectProps = {
   apiDel: (T?: any) => Promise<any>;
@@ -61,7 +62,7 @@ const Save = observer(
     setup() {
       const { apiEdit, apiAdd, run: getList } = inject<InjectProps>("form");
       const record = ArrayTable.useRecord();
-      const { enterpriseId: deptId } = useStore();
+      const { deptId } = useDeptId();
       const { runAsync, loading } = useRequest(
         (id) => {
           if (id != null && id !== undefined && id !== "") {

@@ -1,4 +1,10 @@
-import { defineComponent, ExtractPropTypes, PropType, watchEffect } from "vue";
+import {
+  defineComponent,
+  ExtractPropTypes,
+  PropType,
+  watchEffect,
+  inject,
+} from "vue";
 import Schema from "@/components/Form";
 import { ISchemaFieldProps, FormProvider } from "@formily/vue";
 import { Field, createForm, onFormInit, Form } from "@formily/core";
@@ -11,6 +17,12 @@ import { observer } from "@formily/reactive-vue";
 import { observable, autorun } from "@formily/reactive";
 import { useRequest } from "vue-request";
 import { FromTable } from "./components";
+import { useDeptId } from "@/hooks";
+import {
+  listEnterprises,
+  getEnterprises,
+  updateEnterprises,
+} from "@/api/admin/enterprises";
 
 const { SchemaField } = Schema;
 
@@ -43,7 +55,7 @@ const props: ISchemaFieldProps = {
             "x-decorator": "FormItem",
             "x-component": "Input",
           },
-          companyName: {
+          enterpriseName: {
             type: "string",
             title: "单位名称",
             "x-decorator": "FormItem",
@@ -73,20 +85,20 @@ const props: ISchemaFieldProps = {
             "x-decorator": "FormItem",
             "x-component": "Input.TextArea",
           },
-          centerLongitude: {
+          longitude: {
             type: "string",
             title: "中心经度",
             "x-decorator": "FormItem",
             "x-component": "Input",
           },
-          centerLatitude: {
+          latitude: {
             type: "string",
             title: "中心纬度",
             "x-decorator": "FormItem",
             "x-component": "Input",
           },
 
-          areaLandCert: {
+          area: {
             type: "string",
             title: "地块占地面积(m2)",
             "x-decorator": "FormItem",
@@ -109,6 +121,21 @@ const props: ISchemaFieldProps = {
             title: "行业类别",
             "x-decorator": "FormItem",
             "x-component": "Select",
+            "x-component-props": {},
+            "x-reactions": (field: Field) => {
+              field.loading = true;
+              API.getAdminIndustryList({})
+                .then((res) => {
+                  field.dataSource =
+                    res?.rows?.map((item) => ({
+                      label: item.industryCategory,
+                      value: item.code,
+                    })) ?? [];
+                })
+                .finally(() => {
+                  field.loading = false;
+                });
+            },
           },
           industryCode: {
             type: "string",
@@ -363,15 +390,13 @@ const form = createForm();
 
 export default defineComponent({
   setup() {
-    const { enterpriseId: deptId } = userStore();
-    const { run, loading, data } = useRequest(() =>
-      API.getAdminEnterpriseList({
-        deptId,
-      })
+    const { deptId } = useDeptId();
+    const { run, loading, data } = useRequest<any>(() =>
+      getEnterprises(deptId)
     );
     watchEffect(() => {
       if (data.value?.code === 200) {
-        const [item] = data.value.rows;
+        const item = data.value.data;
         form.reset().then(() => {
           form.setValues(item);
         });
@@ -394,14 +419,7 @@ export default defineComponent({
                 loading={loading.value}
                 onClick={() => {
                   form.submit().then((val: any) => {
-                    const { id } = val;
-                    const api = id
-                      ? API.putAdminEnterprise
-                      : API.postAdminEnterprise;
-                    api({
-                      ...val,
-                      deptId,
-                    }).then((res) => {
+                    updateEnterprises(val).then((res: any) => {
                       if (res.code === 200) {
                         ElMessage.success("保存成功");
                         run();

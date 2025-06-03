@@ -15,10 +15,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="createdBy"    column="created_by"    />
         <result property="createdAt"    column="created_at"    />
         <result property="deptId"    column="dept_id"    />
+        <result property="totalArea"    column="total_area"    />
     </resultMap>
 
     <sql id="selectTWorkshopEnvironmentVo">
-        select id, workshop_name, coordinate, start_date, process_description, leakage, leak_image_path, created_by, created_at, dept_id from t_workshop_environment
+        select id, workshop_name, coordinate, start_date, total_area,process_description, leakage, leak_image_path, created_by, created_at, dept_id from t_workshop_environment
     </sql>
 
     <select id="selectTWorkshopEnvironmentList" parameterType="TWorkshopEnvironment" resultMap="TWorkshopEnvironmentResult">
@@ -33,6 +34,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createdBy != null  and createdBy != ''"> and created_by = #{createdBy}</if>
             <if test="createdAt != null  and createdAt != ''"> and created_at = #{createdAt}</if>
             <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="totalArea != null "> and total_area = #{totalArea}</if>
         </where>
     </select>
     
@@ -53,6 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createdBy != null">created_by,</if>
             <if test="createdAt != null">created_at,</if>
             <if test="deptId != null">dept_id,</if>
+            <if test="totalArea != null">total_area,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="workshopName != null and workshopName != ''">#{workshopName},</if>
@@ -64,6 +67,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createdBy != null">#{createdBy},</if>
             <if test="createdAt != null">#{createdAt},</if>
             <if test="deptId != null">#{deptId},</if>
+            <if test="totalArea != null">#{totalArea},</if>
          </trim>
     </insert>
 
@@ -79,6 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="createdBy != null">created_by = #{createdBy},</if>
             <if test="createdAt != null">created_at = #{createdAt},</if>
             <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="totalArea != null">total_area = #{totalArea},</if>
         </trim>
         where id = #{id}
     </update>

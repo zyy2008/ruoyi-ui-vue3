@@ -92,4 +92,11 @@ public class TWorkshopEnvironment extends BaseEntity {
     @ApiModelProperty("归属部门")
     private String deptId;
 
+    /**
+     * 总面积
+     */
+    @Excel(name = "总面积")
+    @ApiModelProperty("总面积")
+    private String totalArea;
+
 }

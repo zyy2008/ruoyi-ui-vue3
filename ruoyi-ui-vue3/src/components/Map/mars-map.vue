@@ -442,6 +442,7 @@ onUnmounted(() => {
 }
 .mars3d-template-content label {
   padding-right: 6px;
+  width: 80px;
 }
 .mars3d-template-titile {
   border-bottom: 1px solid #3ea6ff;

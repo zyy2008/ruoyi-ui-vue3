@@ -11,9 +11,8 @@
     >
       <el-table-column type="index" label="序号" width="55" />
       <el-table-column prop="name" label="指标类型" />
-      <el-table-column prop="address" label="标准值" />
+      <el-table-column prop="address" width="120" label="标准值" />
       <el-table-column prop="name1" label="是否国标" />
-      <el-table-column prop="address1" label="是否启用" />
     </el-table>
   </div>
 </template>
@@ -23,7 +22,7 @@ const tableData = [
   {
     date: "检测井1",
     name: "PH",
-    address: "6.7",
+    address: "5.5~6.5:8.5~9",
     name1: "是",
     address1: "是",
   },
@@ -65,7 +64,7 @@ const tableData = [
   {
     date: "检测井6",
     name: "氨氮",
-    address: "30",
+    address: "≤10.0",
     name1: "是",
     address1: "是",
   },

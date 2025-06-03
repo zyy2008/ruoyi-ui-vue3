@@ -103,6 +103,10 @@ const useUserStore = defineStore("user", {
           });
       });
     },
+    setEnterpriseId(val){
+      console.log("企业信息Id，val")
+      this.enterpriseId=val;
+    }
   },
 });
 

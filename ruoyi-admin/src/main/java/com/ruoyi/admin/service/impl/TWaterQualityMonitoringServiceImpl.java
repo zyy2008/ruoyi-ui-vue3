@@ -1,6 +1,8 @@
 package com.ruoyi.admin.service.impl;
 
 import java.util.List;
+
+import com.ruoyi.admin.domain.GJJLRES;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.admin.mapper.TWaterQualityMonitoringMapper;
@@ -19,6 +21,11 @@ public class TWaterQualityMonitoringServiceImpl implements ITWaterQualityMonitor
     @Autowired
     private TWaterQualityMonitoringMapper tWaterQualityMonitoringMapper;
 
+
+    @Override
+    public List<GJJLRES> selectGJJL(){
+        return tWaterQualityMonitoringMapper.selectGJJL();
+    }
     /**
      * 查询监测数据管理
      *

@@ -17,7 +17,7 @@
 | 在线监测  |猫又  |   |
 | 企业信息  |zyy   |企业地块基本情况、企业污染源信息、迁移途径信息、敏感受体信息、土壤或地下水环境监测   |
 | 报警预报  |猫又   |   |
-| 园区地图发布展示  | LihaideXiaofu  |环境监测和调查评估信息   |
+| 园区地图发布展示  | LihaideXiaofu  |转换CAD格式为geosjon   |
 
 #### bug修复
 
@@ -37,12 +37,12 @@
 
 
 
+# 任务清单（时间：0603）
 
-#### 特技
+| **任务编号** | **责任人** | **任务内容**                                                                 |
+|--------------|------------|------------------------------------------------------------------------------|
+| 任务1         | 小班       | 弃用`t_enterprise_plots`表，将该表中多余字段补充至`t_enterprises`表。          |
+| 任务2         | 小班       | 新增行业分类代码字典，具体内容见群内SQL。新增组成成分字典，具体内容见群内SQL。 |
+| 任务3         | zyy        | 完成最后一个企业信息模块（环境监测和调查评估信息），并同步修改上述接口变动。                              |
+| 任务4         | 钟涛       | 测试大屏内容。                                                                |
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)

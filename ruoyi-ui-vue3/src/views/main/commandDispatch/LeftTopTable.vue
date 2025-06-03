@@ -18,7 +18,7 @@
       <el-table-column prop="WD" label="温度" width="60" />
       <el-table-column prop="waterBuriedDepth" label="水位" width="60" />
       <el-table-column prop="DW" label="电位" />
-      <el-table-column prop="RJY" label="溶解氧" width="70" />
+      <el-table-column prop="RJY" label="溶解性" width="70" />
       <el-table-column prop="DDL" label="电导率" width="70" />
       <el-table-column prop="AD" label="氨氮" width="60" />
       <el-table-column prop="lng" label="位置" width="60" />

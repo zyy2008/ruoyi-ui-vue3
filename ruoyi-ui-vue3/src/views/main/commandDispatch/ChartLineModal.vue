@@ -4,7 +4,7 @@
     <el-date-picker v-model="timeValue" type="daterange" range-separator="至" start-placeholder="开始日期"
       style="width: 400px;" end-placeholder="结束日期">
     </el-date-picker>
-    <el-select v-model="selectValue" placeholder="请选择" style="width: 300px;float: right;">
+    <el-select v-model="selectValue" placeholder="请选择" style="width: 300px;float: right;" @change="changeSelect">
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
       </el-option>
     </el-select>
@@ -15,7 +15,9 @@
       <el-table-column prop="name" label="温度" />
       <el-table-column prop="address" label="水位" />
       <el-table-column prop="name1" label="电位" />
-      <el-table-column prop="address1" label="溶解度" />
+      <el-table-column prop="address1" label="溶解性" />
+      <el-table-column prop="name1" label="电导率" />
+      <el-table-column prop="address1" label="氨氮" />
     </el-table>
   </el-dialog>
 
@@ -43,7 +45,7 @@
     label: '电位'
   }, {
     value: '5',
-    label: '溶解度'
+    label: '溶解性'
   }, {
     value: '6',
     label: '电导率'
@@ -55,19 +57,28 @@
 
   defineExpose({ dialogVisible, tableData })
   watch(chart, (newValue, oldValue) => {
-    if (chart.lineXAxis&&lineOption.xAxis) {
-        seekLineData()
+    if (chart.lineXAxis && lineOption.xAxis) {
+      seekLineData()
     }
   }, {
     deep: true,
-    immediate: true 
+    immediate: true
   })
+  
   function seekLineData() {
-    console.log(chart);
-    
     lineOption.xAxis[0].data = chart.lineXAxis
     lineOption.series[0].data = chart.lineSeries
     lineChart.setOption(lineOption);
+  }
+
+  function changeSelect(label) {
+    if (label != 1) {
+      lineOption.xAxis[0].data = [];
+      lineOption.series[0].data = [];
+      lineChart.setOption(lineOption);
+    } else {
+      seekLineData();
+    }
   }
   function openChartLine() {
     var chartDom = document.getElementById('echartLine');
@@ -95,7 +106,7 @@
         textStyle: {
           color: '#1bb4f6'
         },
-        data: ['PH', '温度', '水位', '氧化还原电位', '溶解氧', '电导率', '氨氮']
+        data: ['PH', '温度', '水位', '氧化还原电位', '溶解性', '电导率', '氨氮']
       },
       xAxis: [
         {

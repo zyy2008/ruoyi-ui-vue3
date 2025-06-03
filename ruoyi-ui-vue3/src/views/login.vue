@@ -1,11 +1,6 @@
 <template>
   <div class="login">
-    <el-form
-      ref="loginRef"
-      :model="loginForm"
-      :rules="loginRules"
-      class="login-form"
-    >
+    <el-form ref="loginRef" :model="loginForm" :rules="loginRules" class="login-form">
       <h3 class="title">清徐地下水在线监测软件平台</h3>
       <el-form-item prop="username">
         <el-input
@@ -51,9 +46,7 @@
           <img :src="codeUrl" @click="getCode" class="login-code-img" />
         </div>
       </el-form-item>
-      <el-checkbox
-        v-model="loginForm.rememberMe"
-        style="margin: 0px 0px 25px 0px"
+      <el-checkbox v-model="loginForm.rememberMe" style="margin: 0px 0px 25px 0px"
         >记住密码</el-checkbox
       >
       <el-form-item style="width: 100%">
@@ -68,9 +61,7 @@
           <span v-else>登 录 中...</span>
         </el-button>
         <div style="float: right" v-if="register">
-          <router-link class="link-type" :to="'/register'"
-            >立即注册</router-link
-          >
+          <router-link class="link-type" :to="'/register'">立即注册</router-link>
         </div>
       </el-form-item>
     </el-form>
@@ -148,8 +139,8 @@ function handleLogin() {
       // 调用action的登录方法
       userStore
         .login(loginForm.value)
-        .then(() => {
-          layerStore().setProxy(proxy);
+        .then((res) => {
+          // layerStore().setProxy(proxy);
           const query = route.query;
           const otherQueryParams = Object.keys(query).reduce((acc, cur) => {
             if (cur !== "redirect") {
@@ -157,7 +148,7 @@ function handleLogin() {
             }
             return acc;
           }, {});
-          if (loginForm.value.username === "test3") {
+          if (res?.roles?.includes("company")) {
             router.push({ path: "/corporate/tab1", query: otherQueryParams });
           } else {
             router.push({ path: "/main", query: otherQueryParams });
@@ -177,8 +168,7 @@ function handleLogin() {
 
 function getCode() {
   getCodeImg().then((res) => {
-    captchaEnabled.value =
-      res.captchaEnabled === undefined ? true : res.captchaEnabled;
+    captchaEnabled.value = res.captchaEnabled === undefined ? true : res.captchaEnabled;
     if (captchaEnabled.value) {
       codeUrl.value = "data:image/gif;base64," + res.img;
       loginForm.value.uuid = res.uuid;
@@ -192,8 +182,7 @@ function getCookie() {
   const rememberMe = Cookies.get("rememberMe");
   loginForm.value = {
     username: username === undefined ? loginForm.value.username : username,
-    password:
-      password === undefined ? loginForm.value.password : decrypt(password),
+    password: password === undefined ? loginForm.value.password : decrypt(password),
     rememberMe: rememberMe === undefined ? false : Boolean(rememberMe),
   };
 }

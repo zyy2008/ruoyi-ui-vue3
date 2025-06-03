@@ -57,41 +57,25 @@
     <div class="bottomIn">
       <div class="bottomInOt" @click="clickSystem('zhdd')">
         <img src="@/assets/static/1.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'zhdd' }">
-          指挥调度
-        </div>
+        <div class="text" :class="{ 'text-active': activeText === 'zhdd' }">指挥调度</div>
       </div>
       <div class="bottomInOt" @click="clickSystem('zxjc')">
         <img src="@/assets/static/2.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'zxjc' }">
-          在线监测
-        </div>
+        <div class="text" :class="{ 'text-active': activeText === 'zxjc' }">在线监测</div>
       </div>
       <div class="bottomInOt" @click="clickSystem('qyxx')">
         <img src="@/assets/static/3.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'qyxx' }">
-          企业信息
-        </div>
+        <div class="text" :class="{ 'text-active': activeText === 'qyxx' }">企业信息</div>
       </div>
       <div class="bottomInOt" @click="clickSystem('bjyb')">
         <img src="@/assets/static/4.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'bjyb' }">
-          报警预报
-        </div>
+        <div class="text" :class="{ 'text-active': activeText === 'bjyb' }">报警预报</div>
       </div>
     </div>
   </div>
 
-  <LeftTopTable
-    class="leftTable"
-    v-show="zxjcShow"
-    @changeTableLine="changeTableLine"
-  />
-  <RightTopLine
-    class="RightLine"
-    v-show="zhddShow || zxjcShow"
-    :chartInfo="chartInfo"
-  />
+  <LeftTopTable class="leftTable" v-show="zxjcShow" @changeTableLine="changeTableLine" />
+  <RightTopLine class="RightLine" v-show="zhddShow || zxjcShow" :chartInfo="chartInfo" />
   <RightBottomVideo class="RightTable" v-show="zxjcShow" />
   <RightBottomTable class="RightTable" v-show="zhddShow || bjybShow" />
   <RightTopTable class="RightLine" v-show="bjybShow" />

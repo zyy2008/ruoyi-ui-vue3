@@ -130,7 +130,7 @@ const props: ISchemaFieldProps = {
                       accept: ".jpg,.png",
                     },
                   },
-                  a23: {
+                  a2000: {
                     type: "string",
                     title: "主要生产工艺描述",
                     "x-decorator": "FormItem",

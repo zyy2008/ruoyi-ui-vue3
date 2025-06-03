@@ -16,7 +16,7 @@ const props: ISchemaFieldProps = {
         type: "void",
         "x-component": "Card",
         "x-component-props": {
-          header: "五、生产车间分布与环况",
+          header: "五、生产车间分布与环境情况",
         },
         properties: {
           array: {

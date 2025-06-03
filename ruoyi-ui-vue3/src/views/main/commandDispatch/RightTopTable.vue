@@ -57,7 +57,7 @@ const tableData = [
   },
   {
     date: "检测井5",
-    name: "溶解性总固体",
+    name: "溶解性",
     address: "≤2000",
     name1: "是",
     address1: "是",

@@ -149,16 +149,16 @@ public class TEnterprisePlots extends BaseEntity {
     /**
      * 开业时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "开业时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM")
+    @Excel(name = "开业时间", width = 30, dateFormat = "yyyy-MM")
     @ApiModelProperty("开业时间")
     private Date startDate;
 
     /**
      * 最新改扩建时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "最新改扩建时间", width = 30, dateFormat = "yyyy-MM-dd")
+    @JsonFormat(pattern = "yyyy-MM")
+    @Excel(name = "最新改扩建时间", width = 30, dateFormat = "yyyy-MM")
     @ApiModelProperty("最新改扩建时间")
     private Date latestExpansionDate;
 

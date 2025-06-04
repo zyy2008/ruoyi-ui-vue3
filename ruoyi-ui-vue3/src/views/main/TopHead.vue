@@ -398,7 +398,7 @@ function handleToolClick(tool) {
   position: absolute;
   top: 510px;
   right: 20px;
-  z-index: 100;
+  z-index: 10;
 }
 
 .app-container {

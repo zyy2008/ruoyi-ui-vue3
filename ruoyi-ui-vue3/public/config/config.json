@@ -170,11 +170,16 @@
         "pid": 10,
         "type": "geojson",
         "name": "重点企业",
-        "crs":"EPSG:4519",
+        "crs": "EPSG:4519",
         "url": "geojson/1重点企业厂区边界.geojson",
         "show": true,
         "flyTo": false,
-        "popup":"all",
+        "popup": [
+          {
+            "field": "Layer",
+            "name": "类型"
+          }
+        ],
         "symbol": {
           "type": "polygonC",
           "styleOptions": {
@@ -191,7 +196,12 @@
         "url": "geojson/2非重点企业厂区边界.geojson",
         "show": true,
         "flyTo": false,
-        "popup":"all",
+        "popup": [
+          {
+            "field": "Layer",
+            "name": "类型"
+          }
+        ],
         "symbol": {
           "type": "polygonC",
           "styleOptions": {
@@ -208,7 +218,10 @@
         "url": "geojson/4其它企业.geojson",
         "show": true,
         "flyTo": false,
-        "popup":"all",
+         "popup": [
+          { "field": "Layer", "name": "类型"
+          }
+        ],
         "symbol": {
           "type": "polygonC",
           "styleOptions": {
@@ -225,7 +238,10 @@
         "url": "geojson/5耕地.geojson",
         "show": true,
         "flyTo": false,
-        "popup":"all",
+         "popup": [
+          { "field": "Layer", "name": "类型"
+          }
+        ],
         "symbol": {
           "type": "polygonC",
           "styleOptions": {

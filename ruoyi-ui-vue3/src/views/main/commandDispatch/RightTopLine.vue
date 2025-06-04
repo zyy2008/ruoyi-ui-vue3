@@ -43,35 +43,218 @@
   const chart = defineProps(["chartInfo"]);
 
   const options = [
-    {
-      value: "1",
-      label: "PH",
-    },
-    {
-      value: "2",
-      label: "温度",
-    },
-    {
-      value: "3",
-      label: "水位",
-    },
-    {
-      value: "4",
-      label: "电位",
-    },
-    {
-      value: "5",
-      label: "溶解性",
-    },
-    {
-      value: "6",
-      label: "电导率",
-    },
-    {
-      value: "7",
-      label: "氨氮",
-    },
-  ];
+  {
+    value: "1",
+    label: "pH", // 修正为标准写法
+  },
+  {
+    value: "2",
+    label: "温度",
+  },
+  {
+    value: "3",
+    label: "水位",
+  },
+  {
+    value: "4",
+    label: "电位",
+  },
+  {
+    value: "5",
+    label: "溶解性固体", // 建议更具体的描述
+  },
+  {
+    value: "6",
+    label: "电导率",
+  },
+  {
+    value: "7",
+    label: "氨氮",
+  },
+  {
+    value: "8",
+    label: "色度",
+  },
+  {
+    value: "9",
+    label: "浑浊度",
+  },
+  {
+    value: "10",
+    label: "总硬度",
+  },
+  {
+    value: "11",
+    label: "溶解性总固体",
+  },
+  {
+    value: "12",
+    label: "硫酸盐",
+  },
+  {
+    value: "13",
+    label: "氯化物",
+  },
+  {
+    value: "14",
+    label: "铁",
+  },
+  {
+    value: "15",
+    label: "锰",
+  },
+  {
+    value: "16",
+    label: "铝",
+  },
+  {
+    value: "17",
+    label: "阴离子表面活性剂",
+  },
+  {
+    value: "18",
+    label: "耗氧量",
+  },
+  {
+    value: "19",
+    label: "硫化物",
+  },
+  {
+    value: "20",
+    label: "钠",
+  },
+  {
+    value: "21",
+    label: "亚硝酸盐氮",
+  },
+  {
+    value: "22",
+    label: "硝酸盐氮",
+  },
+  {
+    value: "23",
+    label: "碘化物",
+  },
+  {
+    value: "24",
+    label: "硒",
+  },
+  {
+    value: "25",
+    label: "铜",
+  },
+  {
+    value: "26",
+    label: "挥发酚",
+  },
+  {
+    value: "27",
+    label: "氰化物",
+  },
+  {
+    value: "28",
+    label: "氟化物",
+  },
+  {
+    value: "29",
+    label: "汞",
+  },
+  {
+    value: "30",
+    label: "砷",
+  },
+  {
+    value: "31",
+    label: "镉",
+  },
+  // 新增选项（去除单位，仅保留核心名称）
+  { value: "32", label: "六价铬" },
+  { value: "33", label: "铅" },
+  { value: "34", label: "氯仿" },
+  { value: "35", label: "四氯化碳" },
+  { value: "36", label: "苯" },
+  { value: "37", label: "甲苯" },
+  { value: "38", label: "钼" },
+  { value: "39", label: "钒" },
+  { value: "40", label: "钴" },
+  { value: "41", label: "镍" },
+  { value: "42", label: "二氯甲烷" },
+  { value: "43", label: "1,2-二氯乙烷" },
+  { value: "44", label: "1,1,1-三氯乙烷" },
+  { value: "45", label: "1,1,2-三氯乙烷" },
+  { value: "46", label: "1,2-二氯丙烷" },
+  { value: "47", label: "氯乙烯" },
+  { value: "48", label: "1,1-二氯乙烯" },
+  { value: "49", label: "反式-1,2-二氯乙烯" },
+  { value: "50", label: "顺式-1,2-二氯乙烯" },
+  { value: "51", label: "三氯乙烯" },
+  { value: "52", label: "四氯乙烯" },
+  { value: "53", label: "氯苯" },
+  { value: "54", label: "1,2-二氯苯" },
+  { value: "55", label: "1,4-二氯苯" },
+  { value: "56", label: "乙苯" },
+  { value: "57", label: "邻二甲苯" },
+  { value: "58", label: "间/对-二甲苯" },
+  { value: "59", label: "苯乙烯" },
+  { value: "60", label: "硝基苯" },
+  { value: "61", label: "萘" },
+  { value: "62", label: "蒽" },
+  { value: "63", label: "荧蒽" },
+  { value: "64", label: "苯并[b]荧蒽" },
+  { value: "65", label: "苯并[a]芘" },
+  { value: "66", label: "石油烃(C6-C9)" },
+  { value: "67", label: "石油烃(C10-C40)" },
+  { value: "68", label: "苯酚" },
+  { value: "69", label: "2-氯酚" },
+  { value: "70", label: "苯胺" },
+  { value: "71", label: "苊烯" },
+  { value: "72", label: "苊" },
+  { value: "73", label: "芴" },
+  { value: "74", label: "菲" },
+  { value: "75", label: "芘" },
+  { value: "76", label: "苯并[a]蒽" },
+  { value: "77", label: "䓛" },
+  { value: "78", label: "苯并[k]荧蒽" },
+  { value: "79", label: "茚并[1,2,3-c,d]芘" },
+  { value: "80", label: "二苯并[a,h]蒽" },
+  { value: "81", label: "苯并[g,h,i]苝" },
+  { value: "82", label: "氯甲烷" },
+  { value: "83", label: "1,1-二氯乙烷" },
+  { value: "84", label: "1,1,1,2-四氯乙烷" },
+  { value: "85", label: "1,1,2,2-四氯乙烷" },
+  { value: "86", label: "1,2,3-三氯丙烷" },
+];
+
+  // const options = [
+  //   {
+  //     value: "1",
+  //     label: "PH",
+  //   },
+  //   {
+  //     value: "2",
+  //     label: "温度",
+  //   },
+  //   {
+  //     value: "3",
+  //     label: "水位",
+  //   },
+  //   {
+  //     value: "4",
+  //     label: "电位",
+  //   },
+  //   {
+  //     value: "5",
+  //     label: "溶解性",
+  //   },
+  //   {
+  //     value: "6",
+  //     label: "电导率",
+  //   },
+  //   {
+  //     value: "7",
+  //     label: "氨氮",
+  //   },
+  // ];
   onMounted(() => {
     seekLineData({ pageNum: 1, pageSize: 1000, pointId: "J01" }, 'ph');
   });
@@ -214,7 +397,7 @@
         textStyle: {
           color: "#1bb4f6",
         },
-        data: ["PH", "温度", "水位", "氧化还原电位", "溶解性", "电导率", "氨氮"],
+        data: ["PH", "温度", "水位", "氧化还原电位", "溶解性总固体", "电导率", "氨氮"],
       },
       xAxis: [
         {

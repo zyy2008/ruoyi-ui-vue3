@@ -103,6 +103,24 @@
         "show": true,
         "url": "http://39.100.43.147:9998/gisData/qx/{z}/{x}/{y}.png"
       },
+         {
+        "pid": 10,
+        "type": "geojson",
+        "name": "园区范围",
+        "crs": "EPSG:4519",
+        "url": "geojson/园区范围.geojson",
+        "show": true,
+        "flyTo": false,
+        "symbol": {
+          "type": "polylineC",
+          "styleOptions": {
+            "width": 5, 
+            "clampToGround": true,
+            "opacity": 1,
+            "color": "#ff0000"
+          }
+        }
+      },
       {
         "pid": 10,
         "type": "geojson",

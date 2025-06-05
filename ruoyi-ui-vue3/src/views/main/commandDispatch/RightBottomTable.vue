@@ -34,7 +34,6 @@ const tableData = ref([]);
 function initList() {
   selectGJJL().then((res) => {
     tableData.value = res.data;
-    debugger;
   });
 }
 initList();

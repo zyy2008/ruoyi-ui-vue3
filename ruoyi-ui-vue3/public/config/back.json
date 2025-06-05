@@ -1,9 +1,5 @@
-
-
-
 {
-  "map3d": 
-  {
+  "map3d": {
     "scene": {
       "center": {
         "lat": 37.57318,
@@ -169,6 +165,91 @@
         "maximumLevel": 17,
         "show": true,
         "url": "http://39.100.43.147:9998/gisData/qx/{z}/{x}/{y}.png"
+      },
+      {
+        "pid": 10,
+        "type": "geojson",
+        "name": "重点企业",
+        "crs": "EPSG:4519",
+        "url": "geojson/1重点企业厂区边界.geojson",
+        "show": true,
+        "flyTo": false,
+        "popup": [
+          {
+            "field": "Layer",
+            "name": "类型"
+          }
+        ],
+        "symbol": {
+          "type": "polygonC",
+          "styleOptions": {
+            "clampToGround": true,
+            "opacity": 0.4,
+            "color": "#ff0000"
+          }
+        }
+      },
+      {
+        "pid": 10,
+        "type": "geojson",
+        "name": "非重点企业",
+        "url": "geojson/2非重点企业厂区边界.geojson",
+        "show": true,
+        "flyTo": false,
+        "popup": [
+          {
+            "field": "Layer",
+            "name": "类型"
+          }
+        ],
+        "symbol": {
+          "type": "polygonC",
+          "styleOptions": {
+            "clampToGround": true,
+            "opacity": 0.4,
+            "color": "#0000ff"
+          }
+        }
+      },
+      {
+        "pid": 10,
+        "type": "geojson",
+        "name": "其它企业",
+        "url": "geojson/4其它企业.geojson",
+        "show": true,
+        "flyTo": false,
+         "popup": [
+          { "field": "Layer", "name": "类型"
+          }
+        ],
+        "symbol": {
+          "type": "polygonC",
+          "styleOptions": {
+            "clampToGround": true,
+            "opacity": 0.4,
+            "color": "#ffff00"
+          }
+        }
+      },
+      {
+        "pid": 10,
+        "type": "geojson",
+        "name": "耕地",
+        "url": "geojson/5耕地.geojson",
+        "show": true,
+        "flyTo": false,
+         "popup": [
+          { "field": "Layer", "name": "类型"
+          }
+        ],
+        "symbol": {
+          "type": "polygonC",
+          "styleOptions": {
+            "clampToGround": true,
+            "opacity": 0.2,
+            "color": "#00ff00"
+          }
+        }
       }
     ],
     "layers": []

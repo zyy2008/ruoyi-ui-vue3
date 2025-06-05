@@ -11,7 +11,7 @@
       "scene3DOnly": false,
       "shadows": false,
       "removeDblClick": true,
-      "sceneMode": 3,
+      "sceneMode": 2,
       "showSun": true,
       "showMoon": true,
       "showSkyBox": true,
@@ -22,7 +22,7 @@
       "requestRenderMode": false,
       "globe": {
         "depthTestAgainstTerrain": false,
-        "baseColor": "#546a53",
+        "baseColor": "#3c3c3c",
         "showGroundAtmosphere": true,
         "enableLighting": false
       },
@@ -84,7 +84,7 @@
     },
     "terrain": {
       "url": "//data.mars3d.cn/terrain",
-      "show": true,
+      "show": false,
       "clip": true
     },
     "basemaps": [
@@ -92,69 +92,6 @@
         "id": 10,
         "name": "地图底图",
         "type": "group"
-      },
-      {
-        "pid": 10,
-        "name": "高德影像",
-        "type": "group",
-        "icon": "img/basemaps/gaode_img.png",
-        "layers": [
-          {
-            "name": "底图",
-            "type": "gaode",
-            "layer": "img_d"
-          },
-          {
-            "name": "注记",
-            "type": "gaode",
-            "layer": "img_z"
-          }
-        ],
-        "show": true
-      },
-      {
-        "pid": 10,
-        "name": "暗色底图",
-        "icon": "//data.mars3d.cn/img/thumbnail/basemap/bd-c-dark.png",
-        "type": "gaode",
-        "layer": "vec",
-        "chinaCRS": "GCJ02",
-        "invertColor": true,
-        "filterColor": "#909090",
-        "brightness": 0.6,
-        "contrast": 1.8,
-        "gamma": 0.3,
-        "hue": 1,
-        "saturation": 0
-      },
-      {
-        "pid": 10,
-        "name": "交通流量图",
-        "type": "baidu",
-        "layer": "time",
-        "mapSplit": false
-      },
-      {
-        "pid": 10,
-        "type": "geojson",
-        "name": "国界线",
-        "url": "geojson/ChinaLine.geojson",
-        "show": false,
-        "flyTo": false,
-        "symbol": {
-          "type": "polylineC",
-          "styleOptions": {
-            "width": 1,
-            "color": "#ffffff"
-          }
-        }
-      },
-      {
-        "pid": 10,
-        "name": "行政区划",
-        "type": "tdt",
-        "layer": "xzqh",
-        "mapSplit": false
       },
       {
         "pid": 10,
@@ -218,8 +155,10 @@
         "url": "geojson/4其它企业.geojson",
         "show": true,
         "flyTo": false,
-         "popup": [
-          { "field": "Layer", "name": "类型"
+        "popup": [
+          {
+            "field": "Layer",
+            "name": "类型"
           }
         ],
         "symbol": {
@@ -238,8 +177,10 @@
         "url": "geojson/5耕地.geojson",
         "show": true,
         "flyTo": false,
-         "popup": [
-          { "field": "Layer", "name": "类型"
+        "popup": [
+          {
+            "field": "Layer",
+            "name": "类型"
           }
         ],
         "symbol": {

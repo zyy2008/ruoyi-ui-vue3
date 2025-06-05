@@ -144,7 +144,6 @@ const info = ref({});
 
 /** 提交按钮 */
 function submitForm() {
-  debugger;
   const basicForm = proxy.$refs.basicInfo.$refs.basicInfoForm;
   const genForm = proxy.$refs.genInfo.$refs.genInfoForm;
   Promise.all([basicForm, genForm].map(getFormPromise)).then(res => {

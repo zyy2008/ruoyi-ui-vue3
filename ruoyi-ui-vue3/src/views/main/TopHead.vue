@@ -30,6 +30,16 @@
   <div class="map-tools">
     <div
       class="tool-button"
+      @click="handleToolClick('layer')"
+      :class="{ active: currentTool === 'layer' }"
+    >
+      <!-- <el-icon><Position /></el-icon> -->
+      <svg-icon icon-class="tcgl" />
+      <span>图层管理</span>
+    </div>
+
+    <div
+      class="tool-button"
       @click="handleToolClick('location')"
       :class="{ active: currentTool === 'location' }"
     >
@@ -57,25 +67,41 @@
     <div class="bottomIn">
       <div class="bottomInOt" @click="clickSystem('zhdd')">
         <img src="@/assets/static/1.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'zhdd' }">指挥调度</div>
+        <div class="text" :class="{ 'text-active': activeText === 'zhdd' }">
+          指挥调度
+        </div>
       </div>
       <div class="bottomInOt" @click="clickSystem('zxjc')">
         <img src="@/assets/static/2.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'zxjc' }">在线监测</div>
+        <div class="text" :class="{ 'text-active': activeText === 'zxjc' }">
+          在线监测
+        </div>
       </div>
       <div class="bottomInOt" @click="clickSystem('qyxx')">
         <img src="@/assets/static/3.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'qyxx' }">企业信息</div>
+        <div class="text" :class="{ 'text-active': activeText === 'qyxx' }">
+          企业信息
+        </div>
       </div>
       <div class="bottomInOt" @click="clickSystem('bjyb')">
         <img src="@/assets/static/4.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'bjyb' }">报警预报</div>
+        <div class="text" :class="{ 'text-active': activeText === 'bjyb' }">
+          报警预报
+        </div>
       </div>
     </div>
   </div>
 
-  <LeftTopTable class="leftTable" v-show="zxjcShow" @changeTableLine="changeTableLine" />
-  <RightTopLine class="RightLine" v-show="zhddShow || zxjcShow" :chartInfo="chartInfo" />
+  <LeftTopTable
+    class="leftTable"
+    v-show="zxjcShow"
+    @changeTableLine="changeTableLine"
+  />
+  <RightTopLine
+    class="RightLine"
+    v-show="zhddShow || zxjcShow"
+    :chartInfo="chartInfo"
+  />
   <RightBottomVideo class="RightTable" v-show="zxjcShow" />
   <RightBottomTable class="RightTable" v-show="zhddShow || bjybShow" />
   <RightTopTable class="RightLine" v-show="bjybShow" />
@@ -136,6 +162,9 @@ import LeftTopTable from "./commandDispatch/LeftTopTable.vue";
 import RightTopLine from "./commandDispatch/RightTopLine.vue";
 import RightTopTable from "./commandDispatch/RightTopTable.vue";
 import layerStore from "@/store/modules/layer";
+import { useWidget } from "@mars/widgets/common/store/widget";
+//相关处理
+const { activate, disable, isActivate, updateWidget } = useWidget();
 const router = useRouter();
 const appStore = useAppStore();
 const userStore = useUserStore();
@@ -159,6 +188,10 @@ const currentTool = ref("");
 let visible_SelectPoint = ref(false);
 let visible_Distance = ref(false);
 let visible_Area = ref(false);
+
+function showLayerTree() {
+  activate("manage-layers");
+}
 
 function showSelectPoint() {
   visible_SelectPoint.value = true;
@@ -250,6 +283,10 @@ function handleToolClick(tool) {
   } else {
     currentTool.value = tool;
     switch (tool) {
+      case "layer":
+        showLayerTree();
+        console.log("激活图层工具");
+        break;
       case "location":
         showSelectPoint();
         console.log("激活定位工具");

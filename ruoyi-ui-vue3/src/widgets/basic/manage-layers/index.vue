@@ -2,86 +2,93 @@
   <mars-dialog
     custom-class="manage-layer_pannel"
     :draggable="true"
-    title="图层"
+    title="图层管理"
     width="300"
     :min-width="250"
-    top="50"
+    top="100"
     left="50"
   >
-    <div>
-      <el-select
-        v-if="baseOptions && baseOptions.length > 1"
-        class="select-with-layer"
-        v-model="baseIds"
-        multiple
-        placeholder="请选择部门"
-      >
-        <el-option
-          v-for="item in baseOptions"
-          :key="item.id"
-          :label="item.name"
-          :value="item.id"
-        ></el-option>
-      </el-select>
-      <!-- <el-input
-        v-model="text"
-        style="max-width: 600px"
-        placeholder="请输入"
-        class="input-with-layer"
-      >
-        <template #append>
-          <el-button :icon="Search" />
-        </template>
-      </el-input> -->
-    </div>
-    <mars-tree
-      class="layer-tree"
-      checkable
-      :tree-data="treeData"
-      v-model:expandedKeys="expandedKeys"
-      v-model:checkedKeys="checkedKeys"
-      v-model:defaultExpandedKeys="defaultExpandedKeys"
-      @check="checkedChange"
-    >
-      <template #title="node">
-        <mars-dropdown-menu :trigger="['contextmenu']">
-          <span @dblclick="flyTo(node)">{{ node.title }}</span>
-          <template #overlay v-if="node.hasZIndex">
-            <a-menu @click="(menu) => onContextMenuClick(node, menu.key)">
-              <a-menu-item key="1">图层置为顶层</a-menu-item>
-              <a-menu-item key="2">图层上移一层</a-menu-item>
-              <a-menu-item key="3">图层下移一层</a-menu-item>
-              <a-menu-item key="4">图层置为底层</a-menu-item>
-            </a-menu>
+    <el-tabs class="map-tab" v-model="activeName">
+      <el-tab-pane label="基础图层" name="basic">
+        <div></div>
+        <mars-tree
+          class="layer-tree"
+          checkable
+          :tree-data="treeData"
+          v-model:expandedKeys="expandedKeys"
+          v-model:checkedKeys="checkedKeys"
+          v-model:defaultExpandedKeys="defaultExpandedKeys"
+          @check="checkedChange"
+        >
+          <template #title="node">
+            <mars-dropdown-menu :trigger="['contextmenu']">
+              <span @dblclick="flyTo(node)">{{ node.title }}</span>
+              <template #overlay v-if="node.hasZIndex">
+                <a-menu @click="(menu) => onContextMenuClick(node, menu.key)">
+                  <a-menu-item key="1">图层置为顶层</a-menu-item>
+                  <a-menu-item key="2">图层上移一层</a-menu-item>
+                  <a-menu-item key="3">图层下移一层</a-menu-item>
+                  <a-menu-item key="4">图层置为底层</a-menu-item>
+                </a-menu>
+              </template>
+            </mars-dropdown-menu>
+            <span
+              v-if="node.hasOpacity"
+              v-show="node.checked"
+              class="tree-slider"
+            >
+              <mars-slider
+                v-model:value="opacityObj[node.id]"
+                :min="0"
+                :step="1"
+                :max="100"
+                @change="opcityChange(node)"
+              />
+            </span>
           </template>
-        </mars-dropdown-menu>
-        <span v-if="node.hasOpacity" v-show="node.checked" class="tree-slider">
-          <mars-slider
-            v-model:value="opacityObj[node.id]"
-            :min="0"
-            :step="1"
-            :max="100"
-            @change="opcityChange(node)"
-          />
-        </span>
-      </template>
-    </mars-tree>
+        </mars-tree>
+      </el-tab-pane>
+      <el-tab-pane
+        style="height: 600px; overflow-y: auto"
+        label="分类图层"
+        name="FLTC"
+      >
+        <a-collapse v-model:activeKey="activeKey">
+          <a-collapse-panel
+            v-for="(value, key, index) in FLDATA"
+            :key="index"
+            :header="key"
+          >
+            <div
+              @click="flyToWell(item)"
+              v-for="item in value"
+              class="line-wellCode"
+              :key="item.id"
+            >
+              <!-- <img :src="getImageUrl()" /> -->
+              <span style="color:#ffff00;">{{ item.attr.wellCode }}</span>
+              <span>{{ `(${item.attr.location})` }}</span>
+            </div>
+          </a-collapse-panel>
+        </a-collapse>
+      </el-tab-pane>
+    </el-tabs>
 
     <template #footer>
       <div class="tips">提示：双击可定位视域至其所在位置</div>
     </template>
-
   </mars-dialog>
 </template>
 
 <script lang="ts" setup>
-import { onUnmounted, nextTick, reactive, ref, onMounted } from "vue";
+import { onUnmounted, nextTick, reactive, ref, onMounted, computed } from "vue";
 import useLifecycle from "@mars/widgets/common/uses/use-lifecycle";
 import * as mapWork from "./map";
 import { useWidget } from "@mars/widgets/common/store/widget";
 import { Search } from "@element-plus/icons-vue";
 const { activate, disable, currentWidget } = useWidget();
-
+const activeName = ref("basic");
+const activeKey = ref(["0"]);
 //import layerStore from "@/store/modules/layer";
 
 //const layerStoreIns = layerStore();
@@ -95,7 +102,7 @@ useLifecycle(mapWork);
 //   //initTree();
 // });
 const baseIds = ref<number[]>([]);
-const baseOptions = [];//layerStoreIns.baseList;
+const baseOptions = []; //layerStoreIns.baseList;
 const text = ref<string>("");
 const treeData = ref<any[]>([]);
 
@@ -107,14 +114,42 @@ const checkedKeys = ref<string[]>([]);
 const layersObj: any = {};
 
 const opacityObj: any = reactive({});
-
+let FLDATA = ref({});
 onMounted(() => {
   //baseIds.value = layerStoreIns.selectedBase.slice();
   initTree();
+  initFLTC();
 });
 onUnmounted(() => {
   disable("layer-tree");
 });
+function initFLTC() {
+  let layer = map.getLayer("监测井信息", "name");
+  let graphics = layer?.graphics || [];
+  // 按照 attr.pointType 分类
+  FLDATA.value = graphics.reduce((acc: any, graphic: any) => {
+    const type = graphic?.attr?.pointType || "未知";
+    graphic.logo = "img/marker/well.png";
+    if (!acc[type]) acc[type] = [];
+    acc[type].push(graphic);
+    return acc;
+  }, {} as Record<string, any[]>);
+  console.log("按pointType分类结果", FLDATA);
+}
+function flyToWell(item) {
+  if (map && item.attr.longitude && item.attr.latitude) {
+    map.setCameraView({
+      lng: Number(item.attr.longitude),
+      lat: Number(item.attr.latitude),
+      alt: 1200,
+    });
+  }
+}
+function getImageUrl(name) {
+  name = name || "well.png";
+  alert("获取图片路径：" + name);
+  return new URL(`@/assets/images/${name}.png`, import.meta.url).href;
+}
 
 function filterTree(node, keyword) {
   // 创建一个数组来存储匹配的节点
@@ -290,7 +325,7 @@ function initTree() {
   // sectionLayersOne = [];
 
   const layers = mapWork.getLayers();
-  //console.log("layers", layers);
+  console.log("layers", layers);
   for (let i = layers.length - 1; i >= 0; i--) {
     const layer = layers[i]; // 创建图层
 
@@ -303,13 +338,18 @@ function initTree() {
       continue;
     }
 
-    if (!layer._hasMapInit && !item._hasMapInit && layer.pid === -1 && layer.id !== 99) {
+    if (
+      !layer._hasMapInit &&
+      !item._hasMapInit &&
+      layer.pid === -1 &&
+      layer.id !== 99
+    ) {
       layer.pid = 99; // 示例中创建的图层都放到99分组下面
     }
 
     layersObj[layer.id] = layer;
 
-    if (layer && layer.pid === -1) {
+    if (layer && !layer.pid) {
       const node: any = reactive({
         index: i,
         title: layer.name || `未命名(${layer.type})`,
@@ -337,34 +377,10 @@ function initTree() {
       }
     }
   }
-
-  // treeData.value.forEach((data: any) => {
-  //   data.children.forEach((item: any) => {
-  //     if (item.children) {
-  //       item.children.forEach((chil: any) => {
-  //         if (layersObj[chil.key].options.radio) {
-  //           chil.parent.disabled = true;
-  //         }
-  //       });
-  //     }
-  //   });
-  // });
-
-  //console.log(treeData.value);
-  // layerStoreIns.setLengthStatistics(
-  //   treeData.value,
-  //   lengthStatistics,
-  //   flowDirection,
-  //   sectionLayers,
-  //   sectionLayersOne
-  // );
-
-  // bindLiyersClick();
 }
 import * as mars3d from "mars3d";
 const eventTarget = new mars3d.BaseClass(); // 事件对象，用于抛出事件到面板中
 function bindLiyersClick() {
-
   let list = map.getLayers({
     basemaps: true,
     layers: true,
@@ -376,7 +392,7 @@ function bindLiyersClick() {
         console.log("监听layer，单击了矢量对象", event);
         if (event.target && event.target.name == "宝武集团") {
           event.attr = event.graphic.attr;
-          changeBase(event.attr)
+          changeBase(event.attr);
         }
         if (event.target && event.target.name == "全国钢铁") {
           event.attr = event.graphic.attr;
@@ -390,8 +406,8 @@ function bindLiyersClick() {
   }
 }
 
-function changeBase(attr){
-  baseIds.value=[attr.ID]
+function changeBase(attr) {
+  baseIds.value = [attr.ID];
 }
 
 function findChild(parent: any, list: any[]) {
@@ -656,6 +672,15 @@ function removeLayer() {
 </script>
 
 <style lang="scss">
+.map-tab {
+  .el-tabs__item {
+    color: #ffffff;
+  }
+  .el-tabs__nav-wrap:after {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
+}
 .manage-layer_pannel {
   .mars-dialog__content {
     overflow-x: hidden !important;
@@ -663,7 +688,7 @@ function removeLayer() {
 }
 
 .layer-tree {
-  height: 800px;
+  height: 600px;
   .ant-tree-treenode-checkbox-checked {
     .ant-tree-node-content-wrapper {
       width: calc(100% - 55px);
@@ -725,6 +750,14 @@ function removeLayer() {
 </style>
 
 <style scoped lang="scss">
+.line-wellCode {
+  transition: background 0.2s;
+  cursor: pointer;
+  padding: 4px 6px;
+}
+.line-wellCode:hover {
+  background: rgba(33, 241, 194, 0.3);
+}
 .title {
   width: 50%;
   display: inline-flex;

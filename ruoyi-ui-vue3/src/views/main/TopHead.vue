@@ -172,6 +172,7 @@ const zhddShow = ref(true);
 const qyxxShow = ref(false);
 const zxjcShow = ref(false);
 const bjybShow = ref(false);
+
 const chartInfo = ref({
   wellCode: "J01",
 });

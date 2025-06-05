@@ -1,6 +1,7 @@
 <template>
-  <el-dialog z-index="9999999999" v-model="dialogVisible" :title="chart.chart.chartInfo.wellCode+'('+chart.chart.chartInfo.location+')'" width="100vw"
-    :top="'200px'" destroy-on-close @open="openChartLine" style="height: 650px;">
+  <el-dialog z-index="9999999999" v-model="dialogVisible"
+    :title="chart.chart.chartInfo.wellCode+'('+chart.chart.chartInfo.location+')'" width="100vw" :top="'200px'"
+    destroy-on-close @open="openChartLine" style="height: 650px;">
     <el-date-picker v-model="timeValue" type="daterange" range-separator="至" start-placeholder="开始日期"
       style="width: 400px" end-placeholder="结束日期">
     </el-date-picker>
@@ -10,7 +11,7 @@
       </el-option>
     </el-select>
     <div id="echartLine"></div>
-    <el-table :data="tableData" style="width: 100%" :row-class-name="tableRowClassName">
+    <el-table :data="tableInfo" style="width: 100%" :row-class-name="tableRowClassName">
       <!-- <el-table-column type="index" label="序号" width="55" /> -->
       <!-- <el-table-column prop="ph" label="PH" />
       <el-table-column prop="name" label="温度" />
@@ -111,6 +112,7 @@
   import { onMounted, reactive, toRaw, ref, nextTick, watch } from "vue";
   import * as echarts from "echarts";
   import { Search } from '@element-plus/icons-vue'
+  import { listMonitoring } from "@/api/admin/monitoring";
   let lineChart = null;
   let lineOption = {};
   const selectValue = ref("PH");
@@ -299,9 +301,22 @@
     { value: "85", label: "1,1,2,2-四氯乙烷" },
     { value: "86", label: "1,2,3-三氯丙烷" },
   ];
-  const tableData = ref([]);
 
+  const tableData = ref([]);
+  const tableInfo = ref([])
+  onMounted(() => {
+    createLineInfo()
+  })
+
+  function createLineInfo() {
+    listMonitoring({ pageNum: 1, pageSize: 1000, pointId: chart.chart.chartInfo.wellCode }).then((res) => {
+      if (res.code === 200) {
+        tableInfo.value = res.rows
+      }
+    });
+  }
   defineExpose({ dialogVisible, tableData });
+
   watch(
     chart,
     (newValue, oldValue) => {
@@ -309,6 +324,7 @@
         const time = tableData.value.map((ele) => ele.sampleTime);
         const data = tableData.value.map((ele) => ele.ph);
         seekLineData(data, time);
+        createLineInfo()
       }
     },
     {
@@ -480,5 +496,6 @@
     .el-select__placeholder {
       color: white;
     }
+    
   }
 </style>

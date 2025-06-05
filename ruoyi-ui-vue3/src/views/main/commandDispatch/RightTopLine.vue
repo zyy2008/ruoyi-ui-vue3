@@ -470,12 +470,15 @@
       justify-content: space-between;
 
       .image {
+        width: 100%;
         display: flex;
       }
 
       span {
         font-size: 18px;
         display: inline-block;
+         overflow: hidden; 
+        text-overflow: ellipsis;
       }
 
       .text {

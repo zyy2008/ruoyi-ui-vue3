@@ -61,12 +61,11 @@
   onMounted(() => {
     createBaseList({ pageNum: 1, pageSize: 1000 });
   });
+  
   const createBaseList = (option) => {
     let data = {};
     listWells(option).then((response) => {
       data = response.rows;
-      console.log(data);
-      
       tableTotle.value = response.total;
       listMonitoring(option).then((res) => {
         for (let i in data) {
@@ -85,6 +84,7 @@
     });
   };
   const emit = defineEmits(["changeTableLine"]);
+
   const clickTable = (value) => {
     selectedRow.value = value;
     emit("changeTableLine", value);
@@ -96,6 +96,7 @@
       })
     }
   };
+
 </script>
 
 <style lang="scss" scoped>

@@ -16,7 +16,6 @@
       <!-- <el-table-column prop="bzz" label="标准值" /> -->
       <el-table-column width="110" prop="sample_time" label="监测时间" />
       <el-table-column  width="70" prop="jcz" label="监测值" />
-      <!-- <el-table-column  prop="cbbl" label="超标倍率" /> -->
            <el-table-column prop="cbbl" label="超标倍率">
       <template v-slot="scope">
         <span style="color: red;">

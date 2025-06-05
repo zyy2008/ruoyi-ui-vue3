@@ -2,7 +2,6 @@
   <div class="head-div">
     <div class="header">
       <span class="main-text">清徐地下水在线监测软件平台</span>
-
       <div class="avatar-container">
         <el-dropdown
           @command="handleCommand"
@@ -416,7 +415,7 @@ function handleToolClick(tool) {
   position: absolute;
   left: 20px;
   top: 100px;
-  z-index: 100;
+  z-index: 10;
   background-color: rgba(9, 21, 42, 0.8);
 }
 
@@ -473,7 +472,7 @@ function handleToolClick(tool) {
   position: fixed;
   left: 20px;
   top: 20px;
-  z-index: 1000;
+  z-index: 1;
   display: flex;
   flex-direction: row;
   gap: 10px;

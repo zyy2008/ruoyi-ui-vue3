@@ -29,216 +29,187 @@ public class TEnterprisePollutionInfo extends BaseEntity {
     private Long id;
 
     /**
-     * 产品名称
+     * 设施区域
      */
-    @Excel(name = "产品名称")
-    @ApiModelProperty("产品名称")
-    private String productName;
-
+    @ApiModelProperty("设施区域（多选）")
+    private String facilitiesAreas;
     /**
-     * 产品生产年份范围（例如：2020-2023）
+     * 平面布置图
      */
-    @Excel(name = "产品生产年份范围", readConverterExp = "例=如：2020-2023")
-    @ApiModelProperty("产品生产年份范围")
-    private String productionYearRange;
-
+    @ApiModelProperty("平面布置图")
+    private String floorPlan;
     /**
-     * 产品单位（例如：吨、件）
+     * 主中间产物名称
      */
-    @Excel(name = "产品单位", readConverterExp = "例=如：吨、件")
-    @ApiModelProperty("产品单位")
-    private String productUnit;
-
+    @ApiModelProperty("主中间产物名称")
+    private String mainIntermediateProductName;
     /**
-     * 年均产量
+     * 主要生产工艺流程图
      */
-    @Excel(name = "年均产量")
-    @ApiModelProperty("年均产量")
-    private String productAvgOutput;
-
+    @ApiModelProperty("主要生产工艺流程图")
+    private String mainProcessFlowChart;
     /**
-     * 原料名称
+     * 主要生产工艺描述
      */
-    @Excel(name = "原料名称")
-    @ApiModelProperty("原料名称")
-    private String materialName;
-
+    @ApiModelProperty("主要生产工艺描述")
+    private String mainProcessProductionDescription;
     /**
-     * 原料使用年份范围
+     * 企业是否开展过清洁生产审核
      */
-    @Excel(name = "原料使用年份范围")
-    @ApiModelProperty("原料使用年份范围")
-    private String materialUseYearRange;
-
+    @ApiModelProperty("企业是否开展过清洁生产审核")
+    private String isCleanProductionAudited;
     /**
-     * 原料单位
+     * 清洁生产审核时间
      */
-    @Excel(name = "原料单位")
-    @ApiModelProperty("原料单位")
-    private String materialUnit;
-
+    @ApiModelProperty("清洁生产审核时间")
+    private String cleanAuditTime;
     /**
-     * 原料年均用量
+     * 清洁生产水平
      */
-    @Excel(name = "原料年均用量")
-    @ApiModelProperty("原料年均用量")
-    private String materialAvgUsage;
-
+    @ApiModelProperty("清洁生产水平")
+    private String cleanLevel;
     /**
-     * 生产线名称
+     * 储罐、储槽等储存设施
      */
-    @Excel(name = "生产线名称")
-    @ApiModelProperty("生产线名称")
-    private String processLineName;
-
+    @ApiModelProperty("储罐、储槽等储存设施")
+    private String storageFacility;
     /**
-     * 生产线经度
+     * 存放产品、原材料的或其他有毒有害物质的仓库等
      */
-    @Excel(name = "生产线经度")
-    @ApiModelProperty("生产线经度")
-    private String longitude;
-
+    @ApiModelProperty("存放产品、原材料的或其他有毒有害物质的仓库等")
+    private String hazardousMaterialWarehouse;
     /**
-     * 生产线纬度
+     * 产品、原材料或其他有毒有害物质装卸区
      */
-    @Excel(name = "生产线纬度")
-    @ApiModelProperty("生产线纬度")
-    private String latitude;
-
-    /**
-     * 投产时间
-     */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "投产时间", width = 30, dateFormat = "yyyy-MM-dd")
-    @ApiModelProperty("投产时间")
-    private Date startupDate;
-
-    /**
-     * 工艺描述
-     */
-    @Excel(name = "工艺描述")
-    @ApiModelProperty("工艺描述")
-    private String processDescription;
-
-    /**
-     * 是否存在泄漏（是/否/不详）
-     */
-    @Excel(name = "是否存在泄漏", readConverterExp = "是=/否/不详")
-    @ApiModelProperty("是否存在泄漏")
-    private String leakStatus;
-
-    /**
-     * 车间面积（平方米）
-     */
-    @Excel(name = "车间面积", readConverterExp = "平=方米")
-    @ApiModelProperty("车间面积")
-    private String workshopArea;
-
-    /**
-     * 储存区名称
-     */
-    @Excel(name = "储存区名称")
-    @ApiModelProperty("储存区名称")
-    private String storageAreaName;
-
-    /**
-     * 储存区经度
-     */
-    @Excel(name = "储存区经度")
-    @ApiModelProperty("储存区经度")
-    private String storageLongitude;
-
-    /**
-     * 储存区纬度
-     */
-    @Excel(name = "储存区纬度")
-    @ApiModelProperty("储存区纬度")
-    private String storageLatitude;
-
-    /**
-     * 储罐数量
-     */
-    @Excel(name = "储罐数量")
-    @ApiModelProperty("储罐数量")
-    private Long tankCount;
-
-    /**
-     * 储存物料名称
-     */
-    @Excel(name = "储存物料名称")
-    @ApiModelProperty("储存物料名称")
-    private String storedMaterial;
-
-    /**
-     * 是否为危化品（true/false）
-     */
-    @Excel(name = "是否为危化品", readConverterExp = "t=rue/false")
-    @ApiModelProperty("是否为危化品")
-    private String isHazardous;
-
-    /**
-     * 储存量
-     */
-    @Excel(name = "储存量")
-    @ApiModelProperty("储存量")
-    private String storageAmount;
-
-    /**
-     * 储存单位
-     */
-    @Excel(name = "储存单位")
-    @ApiModelProperty("储存单位")
-    private String storageUnit;
-
-    /**
-     * 储存开始时间
-     */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @Excel(name = "储存开始时间", width = 30, dateFormat = "yyyy-MM-dd")
-    @ApiModelProperty("储存开始时间")
-    private Date storageStartDate;
-
-    /**
-     * 是否存在泄漏（是/否/不详）
-     */
-    @Excel(name = "是否存在泄漏", readConverterExp = "是=/否/不详")
-    @ApiModelProperty("是否存在泄漏")
-    private String storageLeakStatus;
-
-    /**
-     * 备注信息
-     */
-    @Excel(name = "备注信息")
-    @ApiModelProperty("备注信息")
-    private String storageRemark;
-
+    @ApiModelProperty("产品、原材料或其他有毒有害物质装卸区")
+    private String hazardousMaterialLoadingAndUnloadingArea;
     /**
      * 储存区面积（平方米）
      */
     @Excel(name = "储存区面积", readConverterExp = "平=方米")
     @ApiModelProperty("储存区面积")
     private String storageArea;
-
+    /**
+     * 各储存区域防护措施
+     */
+    @ApiModelProperty("各储存区域防护措施")
+    private String protectionMeasuresForStorageAreas;
+    /**
+     * 管道是否发生过泄漏
+     */
+    @ApiModelProperty("管道是否发生过泄漏")
+    private String hasThereBeenAPipeLeak;
+    /**
+     * 地下管道管线图
+     */
+    @ApiModelProperty("地下管道管线图")
+    private String undergroundPipeLineDiagram;
     /**
      * 是否存在废气治理设施（true/false）
      */
     @Excel(name = "是否存在废气治理设施", readConverterExp = "t=rue/false")
     @ApiModelProperty("是否存在废气治理设施")
     private String gasTreatmentExists;
-
     /**
      * 废气排放总量
      */
-    @Excel(name = "废气排放总量")
-    @ApiModelProperty("废气排放总量")
+    @Excel(name = "废气排放量")
+    @ApiModelProperty("废气排放量")
     private String totalGasEmission;
+    /**
+     * 废气中主要污染物名称
+     */
+    @ApiModelProperty(name = "废气中主要污染物名称")
+    private String mainPollutantsInEmissions;
+    /**
+     * 是否有废气在线监测装置
+     */
+    @ApiModelProperty(name = "是否有废气在线监测装置")
+    private String isThereAnOnlineMonitoringDeviceForEmissions;
+    /**
+     * 在线监测装置运行情况
+     */
+    @ApiModelProperty(name = "在线监测装置运行情况")
+    private String operationStatusOfOnlineMonitoringDevice;
+    /**
+     * 是否有废气治理设施
+     */
+    @ApiModelProperty(name = "是否有废气治理设施")
+    private String isThereAnEmissionTreatmentFacility;
+    /**
+     * 废气治理设施运行情况
+     */
+    @ApiModelProperty(name = "废气治理设施运行情况")
+    private String operationStatusOfEmissionTreatmentFacility;
+
 
     /**
-     * 废气排放单位（例如：立方米/年）
+     * 是否有废水排放
      */
-    @Excel(name = "废气排放单位", readConverterExp = "例=如：立方米/年")
-    @ApiModelProperty("废气排放单位")
-    private String gasEmissionUnit;
+    @ApiModelProperty(name = "是否有废水排放")
+    private String isThereWastewaterDischarge;
+    /**
+     * 废水排放量
+     */
+    @ApiModelProperty(name = "废水排放量")
+    private String wastewaterDischargeVolume;
+    /**
+     * 废水中主要污染物名称
+     */
+    @ApiModelProperty(name = "废水中主要污染物名称")
+    private String mainPollutantsInWastewater;
+    /**
+     * 是否有废水在线监测装置
+     */
+    @ApiModelProperty(name = "是否有废水在线监测装置")
+    private String isThereAnOnlineMonitoringDeviceForWastewater;
+    /**
+     * 是否有废水治理设施
+     */
+    @ApiModelProperty(name = "是否有废水治理设施")
+    private String isThereAWastewaterTreatmentFacility;
+    /**
+     * 废水治理设施运行情况
+     */
+    @ApiModelProperty(name = "废水治理设施运行情况")
+    private String operationStatusOfWastewaterTreatmentFacility;
+    /**
+     * 废水治理区坐标位置
+     */
+    @ApiModelProperty(name = "废水治理区坐标位置")
+    private String coordinatesOfWastewaterTreatmentArea;
+    /**
+     * 废水治理区面积
+     */
+    @ApiModelProperty(name = "废水治理区面积")
+    private String areaOfWastewaterTreatmentArea;
+    /**
+     * 废水治理区污染痕迹
+     */
+    @ApiModelProperty(name = "废水治理区污染痕迹")
+    private String pollutionTracesInWastewaterTreatmentArea;
+    /**
+     * 污染痕迹照片
+     */
+    @ApiModelProperty(name = "污染痕迹照片")
+    private String photosOfPollutionTraces;
+    /**
+     * 废水治理区防护措施
+     */
+    @ApiModelProperty(name = "废水治理区防护措施")
+    private String protectionMeasuresInWastewaterTreatmentArea;
+
+
+
+
+
+
+
+
+
+
+
+
 
     /**
      * 归属部门

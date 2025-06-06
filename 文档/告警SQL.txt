@@ -1,0 +1,133 @@
+WITH monitoring_data AS (
+  -- 色度
+  SELECT 
+    point_id, 
+    '色度' AS zb, 
+    '≤25' AS bzz, 
+    color AS jcz,
+    color::NUMERIC AS value  -- 统一转换为数值类型
+  FROM t_water_quality_monitoring
+  WHERE color ~ '^\d+(\.\d+)?$'  -- 过滤可转换为数值的数据
+  
+  UNION ALL
+  
+  -- 浑浊度（浊度）
+  SELECT 
+    point_id, 
+    '浑浊度' AS zb, 
+    '≤10' AS bzz, 
+    turbidity AS jcz,
+    turbidity::NUMERIC AS value
+  FROM t_water_quality_monitoring
+  WHERE turbidity ~ '^\d+(\.\d+)?$'
+  
+  UNION ALL
+  
+  -- 总硬度
+  SELECT 
+    point_id, 
+    '总硬度' AS zb, 
+    '≤650' AS bzz, 
+    total_hardness AS jcz,
+    total_hardness::NUMERIC AS value
+  FROM t_water_quality_monitoring
+  WHERE total_hardness ~ '^\d+(\.\d+)?$'
+  
+  UNION ALL
+  
+  -- 溶解性总固体
+  SELECT 
+    point_id, 
+    '溶解性总固体' AS zb, 
+    '≤2000' AS bzz, 
+    total_dissolved_solids AS jcz,
+    total_dissolved_solids::NUMERIC AS value
+  FROM t_water_quality_monitoring
+  WHERE total_dissolved_solids ~ '^\d+(\.\d+)?$'
+  
+  UNION ALL
+  
+  -- 硫酸盐
+  SELECT 
+    point_id, 
+    '硫酸盐' AS zb, 
+    '≤350' AS bzz, 
+    sulfate AS jcz,
+    sulfate::NUMERIC AS value
+  FROM t_water_quality_monitoring
+  WHERE sulfate ~ '^\d+(\.\d+)?$'
+  
+  UNION ALL
+  
+  -- 氯化物
+  SELECT 
+    point_id, 
+    '氯化物' AS zb, 
+    '≤350' AS bzz, 
+    chloride AS jcz,
+    chloride::NUMERIC AS value
+  FROM t_water_quality_monitoring
+  WHERE chloride ~ '^\d+(\.\d+)?$'
+  
+  UNION ALL
+  
+  -- 氨氮
+  SELECT 
+    point_id, 
+    '氨氮' AS zb, 
+    '≤1.50' AS bzz, 
+    ammonia_nitrogen AS jcz,
+    ammonia_nitrogen::NUMERIC AS value
+  FROM t_water_quality_monitoring
+  WHERE ammonia_nitrogen ~ '^\d+(\.\d+)?$'
+)
+
+SELECT 
+  point_id,
+  zb,
+  bzz,
+  jcz,
+  -- 计算超标倍率并保留两位小数
+  ROUND(
+    CASE WHEN value > CASE zb
+      WHEN '色度' THEN 25.0
+      WHEN '浑浊度' THEN 10.0
+      WHEN '总硬度' THEN 650.0
+      WHEN '溶解性总固体' THEN 2000.0
+      WHEN '硫酸盐' THEN 350.0
+      WHEN '氯化物' THEN 350.0
+      WHEN '氨氮' THEN 1.50
+    END 
+    THEN (value - CASE zb
+      WHEN '色度' THEN 25.0
+      WHEN '浑浊度' THEN 10.0
+      WHEN '总硬度' THEN 650.0
+      WHEN '溶解性总固体' THEN 2000.0
+      WHEN '硫酸盐' THEN 350.0
+      WHEN '氯化物' THEN 350.0
+      WHEN '氨氮' THEN 1.50
+    END) / CASE zb
+      WHEN '色度' THEN 25.0
+      WHEN '浑浊度' THEN 10.0
+      WHEN '总硬度' THEN 650.0
+      WHEN '溶解性总固体' THEN 2000.0
+      WHEN '硫酸盐' THEN 350.0
+      WHEN '氯化物' THEN 350.0
+      WHEN '氨氮' THEN 1.50
+    END
+    ELSE 0.0
+  END, 2) AS cbbl
+FROM monitoring_data
+WHERE value > CASE zb
+  WHEN '色度' THEN 25.0
+  WHEN '浑浊度' THEN 10.0
+  WHEN '总硬度' THEN 650.0
+  WHEN '溶解性总固体' THEN 2000.0
+  WHEN '硫酸盐' THEN 350.0
+  WHEN '氯化物' THEN 350.0
+  WHEN '氨氮' THEN 1.50
+END
+AND point_id !~ '-上.*' AND point_id !~'7'
+
+ORDER BY point_id
+;

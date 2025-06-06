@@ -1,0 +1,11 @@
+CREATE TABLE t_realtime_water_quality_monitoring (
+    id TEXT PRIMARY KEY,
+    ph_value NUMERIC(5, 2),
+    temperature NUMERIC(5, 2),
+    water_level NUMERIC(8, 3),
+    dissolved_oxygen NUMERIC(6, 3),
+    conductivity NUMERIC(10, 4),
+    ammonia_nitrogen NUMERIC(8, 5),
+    monitoring_time TIMESTAMP WITH TIME ZONE NOT NULL,
+    synchronization_time TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);

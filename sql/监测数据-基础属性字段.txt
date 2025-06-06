@@ -1,0 +1,19 @@
+ALTER TABLE t_water_quality_monitoring
+ADD COLUMN analysis_number VARCHAR(20),       -- 分析编号
+ADD COLUMN original_number VARCHAR(20),       -- 原编号
+ADD COLUMN carbonate NUMERIC,                 -- 碳酸根
+ADD COLUMN bicarbonate NUMERIC,               -- 碳酸氢根
+ADD COLUMN ferrous_ion NUMERIC,               -- 亚铁离子
+ADD COLUMN potassium NUMERIC,                 -- 钾
+ADD COLUMN calcium NUMERIC,                   -- 钙
+ADD COLUMN magnesium NUMERIC;                 -- 镁
+
+-- 添加基础属性字段注释
+COMMENT ON COLUMN t_water_quality_monitoring.analysis_number IS '字段说明：分析编号，记录样品分析的唯一标识';
+COMMENT ON COLUMN t_water_quality_monitoring.original_number IS '字段说明：原编号，样品的原始编号';
+COMMENT ON COLUMN t_water_quality_monitoring.carbonate IS '单位：mg/L，字段说明：碳酸根离子浓度';
+COMMENT ON COLUMN t_water_quality_monitoring.bicarbonate IS '单位：mg/L，字段说明：碳酸氢根离子浓度';
+COMMENT ON COLUMN t_water_quality_monitoring.ferrous_ion IS '单位：mg/L，字段说明：亚铁离子浓度';
+COMMENT ON COLUMN t_water_quality_monitoring.potassium IS '单位：mg/L，字段说明：钾离子浓度';
+COMMENT ON COLUMN t_water_quality_monitoring.calcium IS '单位：mg/L，字段说明：钙离子浓度';
+COMMENT ON COLUMN t_water_quality_monitoring.magnesium IS '单位：mg/L，字段说明：镁离子浓度';

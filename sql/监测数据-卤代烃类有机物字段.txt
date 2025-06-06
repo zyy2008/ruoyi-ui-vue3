@@ -1,0 +1,80 @@
+ALTER TABLE t_water_quality_monitoring
+-- 卤代烯烃类
+ADD COLUMN chloroprene NUMERIC,               -- 氯丁二烯
+ADD COLUMN "1,1-dichloropropene" NUMERIC,     -- 1,1-二氯丙烯
+ADD COLUMN "trans-1,3-dichloropropene" NUMERIC, -- 反-1,3-二氯丙烯
+ADD COLUMN "cis-1,3-dichloropropene" NUMERIC,   -- 顺-1,3-二氯丙烯
+-- 卤代烷烃类
+ADD COLUMN "2,2-dichloropropane" NUMERIC,     -- 2,2-二氯丙烷
+ADD COLUMN bromochloromethane NUMERIC,        -- 溴氯甲烷
+ADD COLUMN bromodichloromethane NUMERIC,      -- 一溴二氯甲烷
+ADD COLUMN dibromomethane NUMERIC,            -- 二溴甲烷
+ADD COLUMN "1,1-dichloroethane" NUMERIC,      -- 1,1-二氯乙烷（注：原表已有此字段，若重复需排除）
+ADD COLUMN "1,2-dibromoethane" NUMERIC,       -- 1,2-二溴乙烷
+ADD COLUMN "1,3-dichloropropane" NUMERIC,     -- 1,3-二氯丙烷
+ADD COLUMN dibromochloromethane NUMERIC,      -- 二溴氯甲烷
+ADD COLUMN bromoform NUMERIC,                 -- 溴仿（三溴甲烷）
+ADD COLUMN "1,1,1,2-tetrachloroethane" NUMERIC, -- 1,1,1,2-四氯乙烷（若原表 `tetrachloroethane_1_1_1_2` 为同一物质，需确认是否重复）
+ADD COLUMN "1,1,2,2-tetrachloroethane" NUMERIC, -- 1,1,2,2-四氯乙烷（若原表 `tetrachloroethane_1_1_2_2` 为同一物质，需确认是否重复）
+ADD COLUMN "1,2,3-trichloropropane" NUMERIC,  -- 1,2,3-三氯丙烷（原表已有此字段，若重复需排除）
+-- 卤代芳香烃类
+ADD COLUMN cumene NUMERIC,                    -- 异丙苯（苯基丙烷）
+ADD COLUMN n_propylbenzene NUMERIC,           -- 正丙苯（丙基苯）
+ADD COLUMN bromobenzene NUMERIC,              -- 溴苯（苯基溴）
+ADD COLUMN "1,3,5-trimethylbenzene" NUMERIC,    -- 1,3,5-三甲基苯（均三甲苯）
+ADD COLUMN o_chlorotoluene NUMERIC,           -- 邻氯甲苯（2-氯甲苯）
+ADD COLUMN p_chlorotoluene NUMERIC,           -- 对氯甲苯（4-氯甲苯）
+ADD COLUMN tert_butylbenzene NUMERIC,         -- 叔丁基苯（2-甲基-2-苯基丙烷）
+ADD COLUMN "1,2,4-trimethylbenzene" NUMERIC,    -- 1,2,4-三甲基苯（偏三甲苯）
+ADD COLUMN sec_butylbenzene NUMERIC,          -- 仲丁基苯（1-甲基丙基苯）
+ADD COLUMN "4-isopropyltoluene" NUMERIC,        -- 4-异丙基甲苯（对异丙基甲苯）
+ADD COLUMN n_butylbenzene NUMERIC,            -- 正丁基苯（丁基苯）
+-- 其他卤代烃
+ADD COLUMN epichlorohydrin NUMERIC,           -- 环氧氯丙烷（3-氯-1,2-环氧丙烷）
+ADD COLUMN "1,2-dibromo-3-chloropropane" NUMERIC, -- 1,2-二溴-3-氯丙烷
+ADD COLUMN "1,2,4-trichlorobenzene" NUMERIC,    -- 1,2,4-三氯苯
+ADD COLUMN hexachlorobutadiene NUMERIC,       -- 六氯丁二烯（全氯丁二烯）
+ADD COLUMN "1,2,3-trichlorobenzene" NUMERIC;    -- 1,2,3-三氯苯;
+
+-- 卤代烯烃类
+COMMENT ON COLUMN t_water_quality_monitoring.chloroprene IS '单位：µg/L，字段说明：氯丁二烯（2-氯-1,3-丁二烯）浓度，常用于合成橡胶，具有挥发性';
+COMMENT ON COLUMN t_water_quality_monitoring."1,1-dichloropropene" IS '单位：µg/L，字段说明：1,1-二氯丙烯（1,1-二氯-1-丙烯）浓度，属于不饱和卤代烃';
+COMMENT ON COLUMN t_water_quality_monitoring."trans-1,3-dichloropropene" IS '单位：µg/L，字段说明：反式-1,3-二氯丙烯浓度，几何异构体，用于有机合成';
+COMMENT ON COLUMN t_water_quality_monitoring."cis-1,3-dichloropropene" IS '单位：µg/L，字段说明：顺式-1,3-二氯丙烯浓度，与反式结构互为同分异构体';
+
+-- 卤代烷烃类
+COMMENT ON COLUMN t_water_quality_monitoring."2,2-dichloropropane" IS '单位：µg/L，字段说明：2,2-二氯丙烷（对称二氯丙烷）浓度，用于溶剂和化工原料';
+COMMENT ON COLUMN t_water_quality_monitoring.bromochloromethane IS '单位：µg/L，字段说明：溴氯甲烷（氯溴甲烷）浓度，混合卤代烃，用作溶剂';
+COMMENT ON COLUMN t_water_quality_monitoring.bromodichloromethane IS '单位：µg/L，字段说明：一溴二氯甲烷（二氯溴甲烷）浓度，饮用水中消毒副产物';
+COMMENT ON COLUMN t_water_quality_monitoring.dibromomethane IS '单位：µg/L，字段说明：二溴甲烷浓度，用于有机合成和阻燃剂';
+COMMENT ON COLUMN t_water_quality_monitoring."1,1-dichloroethane" IS '单位：µg/L，字段说明：1,1-二氯乙烷浓度，与1,2-二氯乙烷互为同分异构体（原表已有，若重复需调整）';
+COMMENT ON COLUMN t_water_quality_monitoring."1,2-dibromoethane" IS '单位：µg/L，字段说明：1,2-二溴乙烷浓度，曾用作汽油抗震剂，有毒性';
+COMMENT ON COLUMN t_water_quality_monitoring."1,3-dichloropropane" IS '单位：µg/L，字段说明：1,3-二氯丙烷浓度，用于生产农药和医药中间体';
+COMMENT ON COLUMN t_water_quality_monitoring.dibromochloromethane IS '单位：µg/L，字段说明：二溴氯甲烷浓度，三卤甲烷类消毒副产物';
+COMMENT ON COLUMN t_water_quality_monitoring.bromoform IS '单位：µg/L，字段说明：溴仿（三溴甲烷）浓度，曾用作麻醉剂，饮用水污染物';
+COMMENT ON COLUMN t_water_quality_monitoring."1,1,1,2-tetrachloroethane" IS '单位：µg/L，字段说明：1,1,1,2-四氯乙烷浓度，与1,1,2,2-四氯乙烷互为同分异构体';
+COMMENT ON COLUMN t_water_quality_monitoring."1,1,2,2-tetrachloroethane" IS '单位：µg/L，字段说明：1,1,2,2-四氯乙烷浓度，用于溶剂和化工原料';
+COMMENT ON COLUMN t_water_quality_monitoring."1,2,3-trichloropropane" IS '单位：µg/L，字段说明：1,2,3-三氯丙烷浓度，原表已有此字段，需确认是否重复添加';
+
+-- 卤代芳香烃类
+COMMENT ON COLUMN t_water_quality_monitoring.cumene IS '单位：µg/L，字段说明：异丙苯（枯烯）浓度，用于生产苯酚和丙酮';
+COMMENT ON COLUMN t_water_quality_monitoring.n_propylbenzene IS '单位：µg/L，字段说明：正丙苯浓度，丙基苯的直链异构体，工业溶剂';
+COMMENT ON COLUMN t_water_quality_monitoring.bromobenzene IS '单位：µg/L，字段说明：溴苯浓度，用于医药、农药中间体';
+COMMENT ON COLUMN t_water_quality_monitoring."1,3,5-trimethylbenzene" IS '单位：µg/L，字段说明：1,3,5-三甲基苯（均三甲苯）浓度，用于制备合成树脂';
+COMMENT ON COLUMN t_water_quality_monitoring.o_chlorotoluene IS '单位：µg/L，字段说明：邻氯甲苯（2-氯甲苯）浓度，甲苯的邻位氯代物，有机合成原料';
+COMMENT ON COLUMN t_water_quality_monitoring.p_chlorotoluene IS '单位：µg/L，字段说明：对氯甲苯（4-氯甲苯）浓度，用于生产医药、染料';
+COMMENT ON COLUMN t_water_quality_monitoring.tert_butylbenzene IS '单位：µg/L，字段说明：叔丁基苯浓度，用于有机合成和香料工业';
+COMMENT ON COLUMN t_water_quality_monitoring."1,2,4-trimethylbenzene" IS '单位：µg/L，字段说明：1,2,4-三甲基苯（偏三甲苯）浓度，用于制备均苯三甲酸';
+COMMENT ON COLUMN t_water_quality_monitoring.sec_butylbenzene IS '单位：µg/L，字段说明：仲丁基苯浓度，丁基苯的支链异构体，溶剂';
+COMMENT ON COLUMN t_water_quality_monitoring."4-isopropyltoluene" IS '单位：µg/L，字段说明：4-异丙基甲苯浓度，对异丙基甲苯，用于生产麝香香料';
+COMMENT ON COLUMN t_water_quality_monitoring.n_butylbenzene IS '单位：µg/L，字段说明：正丁基苯浓度，丁基苯的直链异构体，工业溶剂';
+
+-- 其他卤代烃
+COMMENT ON COLUMN t_water_quality_monitoring.epichlorohydrin IS '单位：µg/L，字段说明：环氧氯丙烷（3-氯-1,2-环氧丙烷）浓度，用于生产环氧树脂';
+COMMENT ON COLUMN t_water_quality_monitoring."1,2-dibromo-3-chloropropane" IS '单位：µg/L，字段说明：1,2-二溴-3-氯丙烷浓度，曾用作土壤熏蒸剂，剧毒';
+COMMENT ON COLUMN t_water_quality_monitoring."1,2,4-trichlorobenzene" IS '单位：µg/L，字段说明：1,2,4-三氯苯浓度，用于生产农药和染料';
+COMMENT ON COLUMN t_water_quality_monitoring.hexachlorobutadiene IS '单位：µg/L，字段说明：六氯丁二烯浓度，全氯丁二烯，用作溶剂和热载体';
+COMMENT ON COLUMN t_water_quality_monitoring."1,2,3-trichlorobenzene" IS '单位：µg/L，字段说明：1,2,3-三氯苯浓度，三氯苯的三种异构体之一，工业污染物';
+
+
+

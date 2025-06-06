@@ -1,0 +1,172 @@
+CREATE TABLE water_quality_monitoring (
+    point_id VARCHAR(10),          -- 点位编号
+    sample_time VARCHAR(8),        -- 采样时间
+    color NUMERIC,                 -- 色度
+    odor_and_taste VARCHAR(50),    -- 臭和味
+    turbidity NUMERIC,             -- 浊度
+    visible_matters VARCHAR(50),   -- 肉眼可见物
+    ph NUMERIC,                    -- pH
+    total_hardness NUMERIC,        -- 总硬度(以CaCO3计)
+    total_dissolved_solids NUMERIC, -- 溶解性总固体
+    sulfate NUMERIC,               -- 硫酸盐
+    chloride NUMERIC,              -- 氯化物
+    iron NUMERIC,                  -- 铁
+    manganese NUMERIC,             -- 锰
+    aluminum NUMERIC,              -- 铝
+    anionic_surfactant NUMERIC,    -- 阴离子表面活性剂
+    oxygen_consumption NUMERIC,    -- 耗氧量
+    sulfide NUMERIC,               -- 硫化物
+    sodium NUMERIC,                -- 钠
+    nitrite_nitrogen NUMERIC,      -- 亚硝酸盐氮
+    nitrate_nitrogen NUMERIC,      -- 硝酸盐氮
+    iodide NUMERIC,                -- 碘化物
+    selenium NUMERIC,              -- 硒
+    copper NUMERIC,                -- 铜
+    zinc NUMERIC,                  -- 锌
+    volatile_phenol NUMERIC,       -- 挥发酚
+    ammonia_nitrogen NUMERIC,      -- 氨氮
+    cyanide NUMERIC,               -- 氰化物
+    fluoride NUMERIC,              -- 氟化物
+    mercury NUMERIC,               -- 汞
+    arsenic NUMERIC,               -- 砷
+    cadmium NUMERIC,               -- 镉
+    chromium_vi NUMERIC,           -- 六价铬
+    lead NUMERIC,                  -- 铅
+    chloroform NUMERIC,            -- 氯仿
+    carbon_tetrachloride NUMERIC,  -- 四氯化碳
+    benzene NUMERIC,               -- 苯
+    toluene NUMERIC,               -- 甲苯
+    molybdenum NUMERIC,            -- 钼
+    vanadium NUMERIC,              -- 钒
+    cobalt NUMERIC,                -- 钴
+    nickel NUMERIC,                -- 镍
+    dichloromethane NUMERIC,       -- 二氯甲烷
+    dichloroethane_1_2 NUMERIC,    -- 1,2-二氯乙烷
+    trichloroethane_1_1_1 NUMERIC, -- 1,1,1-三氯乙烷
+    trichloroethane_1_1_2 NUMERIC, -- 1,1,2-三氯乙烷
+    dichloropropane_1_2 NUMERIC,   -- 1,2-二氯丙烷
+    vinyl_chloride NUMERIC,        -- 氯乙烯
+    dichloroethylene_1_1 NUMERIC,  -- 1,1-二氯乙烯
+    trans_dichloroethylene_1_2 NUMERIC, -- 反式-1,2-二氯乙烯
+    cis_dichloroethylene_1_2 NUMERIC,   -- 顺式-1,2-二氯乙烯
+    trichloroethylene NUMERIC,     -- 三氯乙烯
+    tetrachloroethylene NUMERIC,   -- 四氯乙烯
+    chlorobenzene NUMERIC,         -- 氯苯
+    dichlorobenzene_1_2 NUMERIC,   -- 1,2-二氯苯
+    dichlorobenzene_1_4 NUMERIC,   -- 1,4-二氯苯
+    ethylbenzene NUMERIC,          -- 乙苯
+    xylene_ortho NUMERIC,          -- 邻二甲苯
+    xylene_meta_para NUMERIC,      -- 间/对-二甲苯
+    styrene NUMERIC,               -- 苯乙烯
+    nitrobenzene NUMERIC,          -- 硝基苯
+    naphthalene NUMERIC,           -- 萘
+    anthracene NUMERIC,            -- 蒽
+    fluoranthene NUMERIC,          -- 荧蒽
+    benzo_b_fluoranthene NUMERIC,  -- 苯并[b]荧蒽
+    benzo_a_pyrene NUMERIC,        -- 苯并[a]芘
+    petroleum_hydrocarbons_c6_c9 NUMERIC,   -- 石油烃(C6-C9)
+    petroleum_hydrocarbons_c10_c40 NUMERIC, -- 石油烃(C10-C40)
+    phenol NUMERIC,                -- 苯酚
+    chlorophenol_2 NUMERIC,        -- 2-氯酚
+    aniline NUMERIC,               -- 苯胺
+    acenaphthylene NUMERIC,        -- 苊烯
+    acenaphthene NUMERIC,          -- 苊
+    fluorene NUMERIC,              -- 芴
+    phenanthrene NUMERIC,          -- 菲
+    pyrene NUMERIC,                -- 芘
+    benzo_a_anthracene NUMERIC,    -- 苯并[a]蒽
+    chrysene NUMERIC,              -- 䓛
+    benzo_k_fluoranthene NUMERIC,  -- 苯并[k]荧蒽
+    indeno_1_2_3_cd_pyrene NUMERIC, -- 茚并[1,2,3-c,d]芘
+    dibenzo_a_h_anthracene NUMERIC, -- 二苯并[a,h]蒽
+    benzo_g_h_i_perylene NUMERIC,  -- 苯并[g,h,i]苝
+    chloromethane NUMERIC,          -- 氯甲烷
+    dichloroethane_1_1 NUMERIC,    -- 1,1-二氯乙烷
+    tetrachloroethane_1_1_1_2 NUMERIC, -- 1,1,1,2-四氯乙烷
+    tetrachloroethane_1_1_2_2 NUMERIC, -- 1,1,2,2-四氯乙烷
+    trichloropropane_1_2_3 NUMERIC, -- 1,2,3-三氯丙烷
+    PRIMARY KEY (point_id, sample_time) -- 主键：点位编号+采样时间
+);
+
+-- 添加注释说明字段单位
+COMMENT ON COLUMN water_quality_monitoring.color IS '单位: 度';
+COMMENT ON COLUMN water_quality_monitoring.turbidity IS '单位: NTU';
+COMMENT ON COLUMN water_quality_monitoring.total_hardness IS '单位: mg/L (以CaCO3计)';
+COMMENT ON COLUMN water_quality_monitoring.total_dissolved_solids IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.sulfate IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.chloride IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.iron IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.manganese IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.aluminum IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.anionic_surfactant IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.oxygen_consumption IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.sulfide IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.sodium IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.nitrite_nitrogen IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.nitrate_nitrogen IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.iodide IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.selenium IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.copper IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.zinc IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.volatile_phenol IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.ammonia_nitrogen IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.cyanide IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.fluoride IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.mercury IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.arsenic IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.cadmium IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.chromium_vi IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.lead IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.chloroform IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.carbon_tetrachloride IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.benzene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.toluene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.molybdenum IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.vanadium IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.cobalt IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.nickel IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.dichloromethane IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.dichloroethane_1_2 IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.trichloroethane_1_1_1 IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.trichloroethane_1_1_2 IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.dichloropropane_1_2 IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.vinyl_chloride IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.dichloroethylene_1_1 IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.trans_dichloroethylene_1_2 IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.cis_dichloroethylene_1_2 IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.trichloroethylene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.tetrachloroethylene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.chlorobenzene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.dichlorobenzene_1_2 IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.dichlorobenzene_1_4 IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.ethylbenzene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.xylene_ortho IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.xylene_meta_para IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.styrene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.nitrobenzene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.naphthalene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.anthracene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.fluoranthene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.benzo_b_fluoranthene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.benzo_a_pyrene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.petroleum_hydrocarbons_c6_c9 IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.petroleum_hydrocarbons_c10_c40 IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.phenol IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.chlorophenol_2 IS '单位: mg/L';
+COMMENT ON COLUMN water_quality_monitoring.aniline IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.acenaphthylene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.acenaphthene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.fluorene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.phenanthrene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.pyrene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.benzo_a_anthracene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.chrysene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.benzo_k_fluoranthene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.indeno_1_2_3_cd_pyrene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.dibenzo_a_h_anthracene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.benzo_g_h_i_perylene IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.chloromethane IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.dichloroethane_1_1 IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.tetrachloroethane_1_1_1_2 IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.tetrachloroethane_1_1_2_2 IS '单位: µg/L';
+COMMENT ON COLUMN water_quality_monitoring.trichloropropane_1_2_3 IS '单位: µg/L';

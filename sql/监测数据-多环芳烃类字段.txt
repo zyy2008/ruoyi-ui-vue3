@@ -1,0 +1,7 @@
+ALTER TABLE t_water_quality_monitoring
+ADD COLUMN "2-methylnaphthalene" NUMERIC,       -- 2-甲基萘（含特殊符号需加双引号）
+ADD COLUMN "1-methylnaphthalene" NUMERIC;       -- 1-甲基萘（含特殊符号需加双引号）
+
+-- 添加多环芳烃类字段注释
+COMMENT ON COLUMN t_water_quality_monitoring."2-methylnaphthalene" IS '单位：µg/L，字段说明：2-甲基萘浓度，属于多环芳烃';
+COMMENT ON COLUMN t_water_quality_monitoring."1-methylnaphthalene" IS '单位：µg/L，字段说明：1-甲基萘浓度，属于多环芳烃';

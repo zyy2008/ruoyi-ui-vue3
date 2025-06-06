@@ -66,7 +66,7 @@
               :key="item.id"
             >
               <!-- <img :src="getImageUrl()" /> -->
-              <span style="color:#ffff00;">{{ item.attr.wellCode }}</span>
+              <span style="color: #ffff00">{{ item.attr.wellCode }}</span>
               <span>{{ `(${item.attr.location})` }}</span>
             </div>
           </a-collapse-panel>
@@ -348,8 +348,12 @@ function initTree() {
     }
 
     layersObj[layer.id] = layer;
+    if (!layer) {
+      console.log("空图层不加入图层管理", layer);
+      continue;
+    }
 
-    if (layer && !layer.pid) {
+    if (!layer.pid || layer.pid === -1) {
       const node: any = reactive({
         index: i,
         title: layer.name || `未命名(${layer.type})`,

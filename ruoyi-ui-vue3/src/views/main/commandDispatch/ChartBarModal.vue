@@ -14,7 +14,7 @@
   import { listMonitoring } from "@/api/admin/monitoring";
   let barChart = null;
   let barOption = {};
-  const selectValue = ref("PH");
+  const selectValue = ref("pH");
   const dialogVisible = ref(false);
   let xAxisData = []
   let seriesData = []
@@ -77,6 +77,7 @@
   function openChartBar() {
     xAxisData = []
     seriesData = []
+    selectValue.value='pH'
     var chartDom = document.getElementById("echartBar");
     barChart = echarts.init(chartDom);
     var fontColor = "#30eee9";

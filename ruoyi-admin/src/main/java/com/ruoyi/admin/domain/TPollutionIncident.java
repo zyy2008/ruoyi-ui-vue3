@@ -22,7 +22,7 @@ public class TPollutionIncident extends BaseEntity {
     /**
      * $column.columnComment
      */
-    @ApiModelProperty("是否曾开展地下水环境调查监测")
+    @ApiModelProperty("主键ID")
     private Long id;
 
     /**

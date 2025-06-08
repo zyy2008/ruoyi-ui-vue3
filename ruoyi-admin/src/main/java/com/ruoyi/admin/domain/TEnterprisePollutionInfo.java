@@ -86,7 +86,6 @@ public class TEnterprisePollutionInfo extends BaseEntity {
     /**
      * 储存区面积（平方米）
      */
-    @Excel(name = "储存区面积", readConverterExp = "平=方米")
     @ApiModelProperty("储存区面积")
     private String storageArea;
     /**
@@ -107,13 +106,11 @@ public class TEnterprisePollutionInfo extends BaseEntity {
     /**
      * 是否存在废气治理设施（true/false）
      */
-    @Excel(name = "是否存在废气治理设施", readConverterExp = "t=rue/false")
     @ApiModelProperty("是否存在废气治理设施")
     private String gasTreatmentExists;
     /**
      * 废气排放总量
      */
-    @Excel(name = "废气排放量")
     @ApiModelProperty("废气排放量")
     private String totalGasEmission;
     /**
@@ -217,11 +214,6 @@ public class TEnterprisePollutionInfo extends BaseEntity {
     @ApiModelProperty(name = "是否有危险废物自处置")
     private String isHazardousWasteSelfDisposed;
     /**
-     * 废水治理区防护措施
-     */
-    @ApiModelProperty(name = "废水治理区防护措施")
-    private String wastewaterTreatmentAreaProtectionMeasures;
-    /**
      * 固废贮存处置区防护措施
      */
     @ApiModelProperty(name = "固废贮存处置区防护措施")
@@ -255,7 +247,6 @@ public class TEnterprisePollutionInfo extends BaseEntity {
     /**
      * 归属部门
      */
-    @Excel(name = "归属部门")
     @ApiModelProperty("归属部门")
     private String deptId;
 

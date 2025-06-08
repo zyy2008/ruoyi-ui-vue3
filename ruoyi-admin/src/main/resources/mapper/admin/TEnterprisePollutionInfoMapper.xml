@@ -42,7 +42,6 @@
         <result property="isSolidWasteGenerated"    column="is_solid_waste_generated"    />
         <result property="isSolidWasteStored"    column="is_solid_waste_stored"    />
         <result property="isHazardousWasteSelfDisposed"    column="is_hazardous_waste_self_disposed"    />
-        <result property="wastewaterTreatmentAreaProtectionMeasures"    column="wastewater_treatment_area_protection_measures"    />
         <result property="solidWasteStorageAndDisposalAreaProtectionMeasures"    column="solid_waste_storage_and_disposal_area_protection_measures"    />
         <result property="hazardousWasteStorageAndDisposalAreaProtectionMeasures"    column="hazardous_waste_storage_and_disposal_area_protection_measures"    />
         <result property="hazardousWasteStandardizedManagementAssessmentResults"    column="hazardous_waste_standardized_management_assessment_results"    />
@@ -92,7 +91,6 @@
             <if test="isSolidWasteGenerated != null  and isSolidWasteGenerated != ''"> and is_solid_waste_generated = #{isSolidWasteGenerated}</if>
             <if test="isSolidWasteStored != null  and isSolidWasteStored != ''"> and is_solid_waste_stored = #{isSolidWasteStored}</if>
             <if test="isHazardousWasteSelfDisposed != null  and isHazardousWasteSelfDisposed != ''"> and is_hazardous_waste_self_disposed = #{isHazardousWasteSelfDisposed}</if>
-            <if test="wastewaterTreatmentAreaProtectionMeasures != null  and wastewaterTreatmentAreaProtectionMeasures != ''"> and wastewater_treatment_area_protection_measures = #{wastewaterTreatmentAreaProtectionMeasures}</if>
             <if test="solidWasteStorageAndDisposalAreaProtectionMeasures != null  and solidWasteStorageAndDisposalAreaProtectionMeasures != ''"> and solid_waste_storage_and_disposal_area_protection_measures = #{solidWasteStorageAndDisposalAreaProtectionMeasures}</if>
             <if test="hazardousWasteStorageAndDisposalAreaProtectionMeasures != null  and hazardousWasteStorageAndDisposalAreaProtectionMeasures != ''"> and hazardous_waste_storage_and_disposal_area_protection_measures = #{hazardousWasteStorageAndDisposalAreaProtectionMeasures}</if>
             <if test="hazardousWasteStandardizedManagementAssessmentResults != null  and hazardousWasteStandardizedManagementAssessmentResults != ''"> and hazardous_waste_standardized_management_assessment_results = #{hazardousWasteStandardizedManagementAssessmentResults}</if>
@@ -144,7 +142,6 @@
             <if test="isSolidWasteGenerated != null">is_solid_waste_generated,</if>
             <if test="isSolidWasteStored != null">is_solid_waste_stored,</if>
             <if test="isHazardousWasteSelfDisposed != null">is_hazardous_waste_self_disposed,</if>
-            <if test="wastewaterTreatmentAreaProtectionMeasures != null">wastewater_treatment_area_protection_measures,</if>
             <if test="solidWasteStorageAndDisposalAreaProtectionMeasures != null">solid_waste_storage_and_disposal_area_protection_measures,</if>
             <if test="hazardousWasteStorageAndDisposalAreaProtectionMeasures != null">hazardous_waste_storage_and_disposal_area_protection_measures,</if>
             <if test="hazardousWasteStandardizedManagementAssessmentResults != null">hazardous_waste_standardized_management_assessment_results,</if>
@@ -187,7 +184,6 @@
             <if test="isSolidWasteGenerated != null">#{isSolidWasteGenerated},</if>
             <if test="isSolidWasteStored != null">#{isSolidWasteStored},</if>
             <if test="isHazardousWasteSelfDisposed != null">#{isHazardousWasteSelfDisposed},</if>
-            <if test="wastewaterTreatmentAreaProtectionMeasures != null">#{wastewaterTreatmentAreaProtectionMeasures},</if>
             <if test="solidWasteStorageAndDisposalAreaProtectionMeasures != null">#{solidWasteStorageAndDisposalAreaProtectionMeasures},</if>
             <if test="hazardousWasteStorageAndDisposalAreaProtectionMeasures != null">#{hazardousWasteStorageAndDisposalAreaProtectionMeasures},</if>
             <if test="hazardousWasteStandardizedManagementAssessmentResults != null">#{hazardousWasteStandardizedManagementAssessmentResults},</if>
@@ -234,7 +230,6 @@
             <if test="isSolidWasteGenerated != null">is_solid_waste_generated = #{isSolidWasteGenerated},</if>
             <if test="isSolidWasteStored != null">is_solid_waste_stored = #{isSolidWasteStored},</if>
             <if test="isHazardousWasteSelfDisposed != null">is_hazardous_waste_self_disposed = #{isHazardousWasteSelfDisposed},</if>
-            <if test="wastewaterTreatmentAreaProtectionMeasures != null">wastewater_treatment_area_protection_measures = #{wastewaterTreatmentAreaProtectionMeasures},</if>
             <if test="solidWasteStorageAndDisposalAreaProtectionMeasures != null">solid_waste_storage_and_disposal_area_protection_measures = #{solidWasteStorageAndDisposalAreaProtectionMeasures},</if>
             <if test="hazardousWasteStorageAndDisposalAreaProtectionMeasures != null">hazardous_waste_storage_and_disposal_area_protection_measures = #{hazardousWasteStorageAndDisposalAreaProtectionMeasures},</if>
             <if test="hazardousWasteStandardizedManagementAssessmentResults != null">hazardous_waste_standardized_management_assessment_results = #{hazardousWasteStandardizedManagementAssessmentResults},</if>

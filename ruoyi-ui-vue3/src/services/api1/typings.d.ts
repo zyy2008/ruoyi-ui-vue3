@@ -1,4 +1,43 @@
 declare namespace API {
+  type chucunqu = {
+    /** 区域名称 */
+    areaName?: string;
+    /** 区域类型 */
+    areaType?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 是否为危险化学品 */
+    isHazardousChemical?: string;
+    /** 泄漏或污染痕迹 */
+    leakageOrPollutionTraces?: string;
+    /** 左边位置 */
+    leftPosition?: string;
+    params?: Record<string, any>;
+    /** 照片 */
+    photos?: string;
+    remark?: string;
+    /** 储存量 */
+    storageAmount?: string;
+    /** 储存年代 */
+    storageYear?: string;
+    /** 储存物质名称 */
+    storedSubstanceName?: string;
+    /** 储罐数量 */
+    tankCount?: number;
+    /** 储罐类型 */
+    tankType?: string;
+    /** 计量单位 */
+    unit?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
   type dekuaijizhoubianminganshoutixinxi = {
     createBy?: string;
     createTime?: string;
@@ -22,6 +61,25 @@ declare namespace API {
     surroundingLandSouth?: string;
     /** 西侧用地类型 */
     surroundingLandWest?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type dekuaiwuranqingkuangfenxi = {
+    /** 特征污染物名称 */
+    characteristicPollutantName?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    params?: Record<string, any>;
+    remark?: string;
+    /** 疑似土壤污染区名称 */
+    suspectedPollutionAreaName?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -61,12 +119,27 @@ declare namespace API {
     ids: string;
   };
 
+  type deleteAdminLandPollutionAnalysisIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
   type deleteAdminMainProductsIdsParams = {
     /** ids */
     ids: string;
   };
 
+  type deleteAdminPipelineLeakIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
   type deleteAdminPollutionIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
+  type deleteAdminPollutionIncidentIdsParams = {
     /** ids */
     ids: string;
   };
@@ -77,6 +150,11 @@ declare namespace API {
   };
 
   type deleteAdminReceptorIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
+  type deleteAdminSewageSolidWasteIdsParams = {
     /** ids */
     ids: string;
   };
@@ -96,6 +174,11 @@ declare namespace API {
     ids: string;
   };
 
+  type deleteAdminStorageAreaIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
   type deleteAdminWellsIdsParams = {
     /** ids */
     ids: string;
@@ -104,6 +187,27 @@ declare namespace API {
   type deleteAdminWorkshopEnvironmentIdsParams = {
     /** ids */
     ids: string;
+  };
+
+  type dexiashuihuanjingdiaochajiancexinxi = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 是否曾开展地下水环境调查监测 */
+    hasMonitoring?: string;
+    /** 主键ID */
+    id?: number;
+    params?: Record<string, any>;
+    /** 是否发现超标污染物 */
+    pollutantsExceed?: string;
+    remark?: string;
+    /** 数据来源 */
+    source?: string;
+    /** 调查时间 */
+    surveyDate?: string;
+    updateBy?: string;
+    updateTime?: string;
   };
 
   type dexiashuijiancefaxiandechaobiaowuranwuxinxi = {
@@ -418,6 +522,31 @@ declare namespace API {
     updateTime?: string;
   };
 
+  type getAdminLandPollutionAnalysisIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminLandPollutionAnalysisListParams = {
+    /** 特征污染物名称 */
+    characteristicPollutantName?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    /** 疑似土壤污染区名称 */
+    suspectedPollutionAreaName?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
   type getAdminMainProductsIdParams = {
     /** id */
     id: number;
@@ -451,83 +580,138 @@ declare namespace API {
     updateTime?: string;
   };
 
+  type getAdminPipelineLeakIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminPipelineLeakListParams = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 泄漏点坐标位置 */
+    leakCoordinates?: string;
+    /** 泄漏的物质名称 */
+    leakedSubstanceName?: string;
+    params?: Record<string, any>;
+    /** 管道类型 */
+    pipelineType?: string;
+    remark?: string;
+    searchValue?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
   type getAdminPollutionIdParams = {
     /** id */
     id: number;
   };
 
-  type getAdminPollutionListParams = {
+  type getAdminPollutionIncidentIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminPollutionIncidentListParams = {
+    /** 事故发生坐标 */
+    coordinates?: string;
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
     deptId?: string;
-    /** 废气排放单位 */
-    gasEmissionUnit?: string;
-    /** 是否存在废气治理设施 */
-    gasTreatmentExists?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
     /** 主键ID */
     id?: number;
-    /** 是否为危化品 */
-    isHazardous?: string;
-    /** 生产线纬度 */
-    latitude?: string;
-    /** 是否存在泄漏 */
-    leakStatus?: string;
-    /** 生产线经度 */
-    longitude?: string;
-    /** 原料年均用量 */
-    materialAvgUsage?: string;
-    /** 原料名称 */
-    materialName?: string;
-    /** 原料单位 */
-    materialUnit?: string;
-    /** 原料使用年份范围 */
-    materialUseYearRange?: string;
+    /** 突发环境事件等级 */
+    incidentLevel?: string;
+    /** 发生时间 */
+    incidentTime?: string;
+    /** 事故发生地点 */
+    location?: string;
     params?: Record<string, any>;
-    /** 工艺描述 */
-    processDescription?: string;
-    /** 生产线名称 */
-    processLineName?: string;
-    /** 年均产量 */
-    productAvgOutput?: string;
-    /** 产品名称 */
-    productName?: string;
-    /** 产品单位 */
-    productUnit?: string;
-    /** 产品生产年份范围 */
-    productionYearRange?: string;
     remark?: string;
     searchValue?: string;
-    /** 投产时间 */
-    startupDate?: string;
-    /** 储存量 */
-    storageAmount?: string;
-    /** 储存区面积 */
-    storageArea?: string;
-    /** 储存区名称 */
-    storageAreaName?: string;
-    /** 储存区纬度 */
-    storageLatitude?: string;
-    /** 是否存在泄漏 */
-    storageLeakStatus?: string;
-    /** 储存区经度 */
-    storageLongitude?: string;
-    /** 备注信息 */
-    storageRemark?: string;
-    /** 储存开始时间 */
-    storageStartDate?: string;
-    /** 储存单位 */
-    storageUnit?: string;
-    /** 储存物料名称 */
-    storedMaterial?: string;
-    /** 储罐数量 */
-    tankCount?: number;
-    /** 废气排放总量 */
-    totalGasEmission?: string;
     updateBy?: string;
     updateTime?: string;
-    /** 车间面积 */
-    workshopArea?: string;
+  };
+
+  type getAdminPollutionListParams = {
+    /** 清洁生产审核时间 */
+    cleanAuditTime?: string;
+    /** 清洁生产水平 */
+    cleanLevel?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 设施区域（多选） */
+    facilitiesAreas?: string;
+    /** 平面布置图 */
+    floorPlan?: string;
+    /** 是否存在废气治理设施 */
+    gasTreatmentExists?: string;
+    /** 管道是否发生过泄漏 */
+    hasThereBeenAPipeLeak?: string;
+    /** 产品、原材料或其他有毒有害物质装卸区 */
+    hazardousMaterialLoadingAndUnloadingArea?: string;
+    /** 存放产品、原材料的或其他有毒有害物质的仓库等 */
+    hazardousMaterialWarehouse?: string;
+    /** 主键ID */
+    id?: number;
+    /** 企业是否开展过清洁生产审核 */
+    isCleanProductionAudited?: string;
+    /** 主中间产物名称 */
+    mainIntermediateProductName?: string;
+    /** 主要生产工艺流程图 */
+    mainProcessFlowChart?: string;
+    /** 主要生产工艺描述 */
+    mainProcessProductionDescription?: string;
+    params?: Record<string, any>;
+    /** 各储存区域防护措施 */
+    protectionMeasuresForStorageAreas?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 储存区面积 */
+    storageArea?: string;
+    /** 储罐、储槽等储存设施 */
+    storageFacility?: string;
+    /** 废气排放量 */
+    totalGasEmission?: string;
+    /** 地下管道管线图 */
+    undergroundPipeLineDiagram?: string;
+    updateBy?: string;
+    updateTime?: string;
+    事故基本情况描述?: string;
+    危废贮存处置区防护措施?: string;
+    危险废物规范化管理考核评估结果?: string;
+    固废贮存处置区防护措施?: string;
+    在线监测装置运行情况?: string;
+    废气中主要污染物名称?: string;
+    废气治理设施运行情况?: string;
+    废水中主要污染物名称?: string;
+    废水排放量?: string;
+    废水治理区坐标位置?: string;
+    废水治理区污染痕迹?: string;
+    废水治理区防护措施?: string;
+    废水治理区面积?: string;
+    废水治理设施运行情况?: string;
+    是否产生固体废物?: string;
+    是否有危险废物自处置?: string;
+    是否有固体废物贮存?: string;
+    是否有废气在线监测装置?: string;
+    是否有废气治理设施?: string;
+    是否有废水在线监测装置?: string;
+    是否有废水排放?: string;
+    是否有废水治理设施?: string;
+    污染区域处理情况?: string;
+    污染痕迹照片?: string;
+    环境污染事故发生情况?: string;
   };
 
   type getAdminRawMaterialsIdParams = {
@@ -592,6 +776,43 @@ declare namespace API {
     surroundingLandSouth?: string;
     /** 西侧用地类型 */
     surroundingLandWest?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type getAdminSewageSolidWasteIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminSewageSolidWasteListParams = {
+    /** 面积 */
+    area?: string;
+    /** 区域名称 */
+    areaName?: string;
+    /** 坐标位置 */
+    coordinates?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 是否为危险废物 */
+    isHazardousWaste?: string;
+    /** 地点 */
+    location?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    /** 固体废物名称 */
+    solidWasteName?: string;
+    /** 贮存量处置量 */
+    storageAndDisposalAmount?: string;
+    /** 贮存量处置照片 */
+    storageAndDisposalPhotos?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -671,6 +892,51 @@ declare namespace API {
     pollutantName?: string;
     remark?: string;
     searchValue?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type getAdminStorageAreaIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminStorageAreaListParams = {
+    /** 区域名称 */
+    areaName?: string;
+    /** 区域类型 */
+    areaType?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 是否为危险化学品 */
+    isHazardousChemical?: string;
+    /** 泄漏或污染痕迹 */
+    leakageOrPollutionTraces?: string;
+    /** 左边位置 */
+    leftPosition?: string;
+    params?: Record<string, any>;
+    /** 照片 */
+    photos?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 储存量 */
+    storageAmount?: string;
+    /** 储存年代 */
+    storageYear?: string;
+    /** 储存物质名称 */
+    storedSubstanceName?: string;
+    /** 储罐数量 */
+    tankCount?: number;
+    /** 储罐类型 */
+    tankType?: string;
+    /** 计量单位 */
+    unit?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -823,6 +1089,50 @@ declare namespace API {
     updateTime?: string;
     /** 车间名称 */
     workshopName?: string;
+  };
+
+  type guandaoxielou = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 泄漏点坐标位置 */
+    leakCoordinates?: string;
+    /** 泄漏的物质名称 */
+    leakedSubstanceName?: string;
+    params?: Record<string, any>;
+    /** 管道类型 */
+    pipelineType?: string;
+    remark?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type huanjingwuranshigufashengqingkuang = {
+    /** 事故发生坐标 */
+    coordinates?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 突发环境事件等级 */
+    incidentLevel?: string;
+    /** 发生时间 */
+    incidentTime?: string;
+    /** 事故发生地点 */
+    location?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    updateBy?: string;
+    updateTime?: string;
   };
 
   type postAdminEnterpriseExportParams = {
@@ -1060,6 +1370,26 @@ declare namespace API {
     updateTime?: string;
   };
 
+  type postAdminLandPollutionAnalysisExportParams = {
+    /** 特征污染物名称 */
+    characteristicPollutantName?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    /** 疑似土壤污染区名称 */
+    suspectedPollutionAreaName?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
   type postAdminMainProductsExportParams = {
     /** 年平均产量 */
     annualOutput?: string;
@@ -1088,78 +1418,123 @@ declare namespace API {
     updateTime?: string;
   };
 
-  type postAdminPollutionExportParams = {
+  type postAdminPipelineLeakExportParams = {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
     deptId?: string;
-    /** 废气排放单位 */
-    gasEmissionUnit?: string;
-    /** 是否存在废气治理设施 */
-    gasTreatmentExists?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
     /** 主键ID */
     id?: number;
-    /** 是否为危化品 */
-    isHazardous?: string;
-    /** 生产线纬度 */
-    latitude?: string;
-    /** 是否存在泄漏 */
-    leakStatus?: string;
-    /** 生产线经度 */
-    longitude?: string;
-    /** 原料年均用量 */
-    materialAvgUsage?: string;
-    /** 原料名称 */
-    materialName?: string;
-    /** 原料单位 */
-    materialUnit?: string;
-    /** 原料使用年份范围 */
-    materialUseYearRange?: string;
+    /** 泄漏点坐标位置 */
+    leakCoordinates?: string;
+    /** 泄漏的物质名称 */
+    leakedSubstanceName?: string;
     params?: Record<string, any>;
-    /** 工艺描述 */
-    processDescription?: string;
-    /** 生产线名称 */
-    processLineName?: string;
-    /** 年均产量 */
-    productAvgOutput?: string;
-    /** 产品名称 */
-    productName?: string;
-    /** 产品单位 */
-    productUnit?: string;
-    /** 产品生产年份范围 */
-    productionYearRange?: string;
+    /** 管道类型 */
+    pipelineType?: string;
     remark?: string;
     searchValue?: string;
-    /** 投产时间 */
-    startupDate?: string;
-    /** 储存量 */
-    storageAmount?: string;
-    /** 储存区面积 */
-    storageArea?: string;
-    /** 储存区名称 */
-    storageAreaName?: string;
-    /** 储存区纬度 */
-    storageLatitude?: string;
-    /** 是否存在泄漏 */
-    storageLeakStatus?: string;
-    /** 储存区经度 */
-    storageLongitude?: string;
-    /** 备注信息 */
-    storageRemark?: string;
-    /** 储存开始时间 */
-    storageStartDate?: string;
-    /** 储存单位 */
-    storageUnit?: string;
-    /** 储存物料名称 */
-    storedMaterial?: string;
-    /** 储罐数量 */
-    tankCount?: number;
-    /** 废气排放总量 */
-    totalGasEmission?: string;
     updateBy?: string;
     updateTime?: string;
-    /** 车间面积 */
-    workshopArea?: string;
+  };
+
+  type postAdminPollutionExportParams = {
+    /** 清洁生产审核时间 */
+    cleanAuditTime?: string;
+    /** 清洁生产水平 */
+    cleanLevel?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 设施区域（多选） */
+    facilitiesAreas?: string;
+    /** 平面布置图 */
+    floorPlan?: string;
+    /** 是否存在废气治理设施 */
+    gasTreatmentExists?: string;
+    /** 管道是否发生过泄漏 */
+    hasThereBeenAPipeLeak?: string;
+    /** 产品、原材料或其他有毒有害物质装卸区 */
+    hazardousMaterialLoadingAndUnloadingArea?: string;
+    /** 存放产品、原材料的或其他有毒有害物质的仓库等 */
+    hazardousMaterialWarehouse?: string;
+    /** 主键ID */
+    id?: number;
+    /** 企业是否开展过清洁生产审核 */
+    isCleanProductionAudited?: string;
+    /** 主中间产物名称 */
+    mainIntermediateProductName?: string;
+    /** 主要生产工艺流程图 */
+    mainProcessFlowChart?: string;
+    /** 主要生产工艺描述 */
+    mainProcessProductionDescription?: string;
+    params?: Record<string, any>;
+    /** 各储存区域防护措施 */
+    protectionMeasuresForStorageAreas?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 储存区面积 */
+    storageArea?: string;
+    /** 储罐、储槽等储存设施 */
+    storageFacility?: string;
+    /** 废气排放量 */
+    totalGasEmission?: string;
+    /** 地下管道管线图 */
+    undergroundPipeLineDiagram?: string;
+    updateBy?: string;
+    updateTime?: string;
+    事故基本情况描述?: string;
+    危废贮存处置区防护措施?: string;
+    危险废物规范化管理考核评估结果?: string;
+    固废贮存处置区防护措施?: string;
+    在线监测装置运行情况?: string;
+    废气中主要污染物名称?: string;
+    废气治理设施运行情况?: string;
+    废水中主要污染物名称?: string;
+    废水排放量?: string;
+    废水治理区坐标位置?: string;
+    废水治理区污染痕迹?: string;
+    废水治理区防护措施?: string;
+    废水治理区面积?: string;
+    废水治理设施运行情况?: string;
+    是否产生固体废物?: string;
+    是否有危险废物自处置?: string;
+    是否有固体废物贮存?: string;
+    是否有废气在线监测装置?: string;
+    是否有废气治理设施?: string;
+    是否有废水在线监测装置?: string;
+    是否有废水排放?: string;
+    是否有废水治理设施?: string;
+    污染区域处理情况?: string;
+    污染痕迹照片?: string;
+    环境污染事故发生情况?: string;
+  };
+
+  type postAdminPollutionIncidentExportParams = {
+    /** 事故发生坐标 */
+    coordinates?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 突发环境事件等级 */
+    incidentLevel?: string;
+    /** 发生时间 */
+    incidentTime?: string;
+    /** 事故发生地点 */
+    location?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    updateBy?: string;
+    updateTime?: string;
   };
 
   type postAdminRawMaterialsExportParams = {
@@ -1214,6 +1589,38 @@ declare namespace API {
     surroundingLandSouth?: string;
     /** 西侧用地类型 */
     surroundingLandWest?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type postAdminSewageSolidWasteExportParams = {
+    /** 面积 */
+    area?: string;
+    /** 区域名称 */
+    areaName?: string;
+    /** 坐标位置 */
+    coordinates?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 是否为危险废物 */
+    isHazardousWaste?: string;
+    /** 地点 */
+    location?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    /** 固体废物名称 */
+    solidWasteName?: string;
+    /** 贮存量处置量 */
+    storageAndDisposalAmount?: string;
+    /** 贮存量处置照片 */
+    storageAndDisposalPhotos?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -1278,6 +1685,46 @@ declare namespace API {
     pollutantName?: string;
     remark?: string;
     searchValue?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type postAdminStorageAreaExportParams = {
+    /** 区域名称 */
+    areaName?: string;
+    /** 区域类型 */
+    areaType?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 是否为危险化学品 */
+    isHazardousChemical?: string;
+    /** 泄漏或污染痕迹 */
+    leakageOrPollutionTraces?: string;
+    /** 左边位置 */
+    leftPosition?: string;
+    params?: Record<string, any>;
+    /** 照片 */
+    photos?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 储存量 */
+    storageAmount?: string;
+    /** 储存年代 */
+    storageYear?: string;
+    /** 储存物质名称 */
+    storedSubstanceName?: string;
+    /** 储罐数量 */
+    tankCount?: number;
+    /** 储罐类型 */
+    tankType?: string;
+    /** 计量单位 */
+    unit?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -1438,24 +1885,75 @@ declare namespace API {
   };
 
   type qiyewuranyuan = {
+    areaOfWastewaterTreatmentArea?: string;
+    basicDescriptionOfAccident?: string;
+    /** 清洁生产审核时间 */
+    cleanAuditTime?: string;
+    /** 清洁生产水平 */
+    cleanLevel?: string;
+    coordinatesOfWastewaterTreatmentArea?: string;
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
     deptId?: string;
-    /** 是否曾开展地下水环境调查监测 */
-    hasMonitoring?: string;
+    environmentalPollutionAccidentOccurrence?: string;
+    /** 设施区域（多选） */
+    facilitiesAreas?: string;
+    /** 平面布置图 */
+    floorPlan?: string;
+    /** 是否存在废气治理设施 */
+    gasTreatmentExists?: string;
+    /** 管道是否发生过泄漏 */
+    hasThereBeenAPipeLeak?: string;
+    /** 产品、原材料或其他有毒有害物质装卸区 */
+    hazardousMaterialLoadingAndUnloadingArea?: string;
+    /** 存放产品、原材料的或其他有毒有害物质的仓库等 */
+    hazardousMaterialWarehouse?: string;
+    hazardousWasteStandardizedManagementAssessmentResults?: string;
+    hazardousWasteStorageAndDisposalAreaProtectionMeasures?: string;
     /** 主键ID */
     id?: number;
+    /** 企业是否开展过清洁生产审核 */
+    isCleanProductionAudited?: string;
+    isHazardousWasteSelfDisposed?: string;
+    isSolidWasteGenerated?: string;
+    isSolidWasteStored?: string;
+    isThereAWastewaterTreatmentFacility?: string;
+    isThereAnEmissionTreatmentFacility?: string;
+    isThereAnOnlineMonitoringDeviceForEmissions?: string;
+    isThereAnOnlineMonitoringDeviceForWastewater?: string;
+    isThereWastewaterDischarge?: string;
+    /** 主中间产物名称 */
+    mainIntermediateProductName?: string;
+    mainPollutantsInEmissions?: string;
+    mainPollutantsInWastewater?: string;
+    /** 主要生产工艺流程图 */
+    mainProcessFlowChart?: string;
+    /** 主要生产工艺描述 */
+    mainProcessProductionDescription?: string;
+    operationStatusOfEmissionTreatmentFacility?: string;
+    operationStatusOfOnlineMonitoringDevice?: string;
+    operationStatusOfWastewaterTreatmentFacility?: string;
     params?: Record<string, any>;
-    /** 是否发现超标污染物 */
-    pollutantsExceed?: string;
+    photosOfPollutionTraces?: string;
+    pollutionAreaTreatmentSituation?: string;
+    pollutionTracesInWastewaterTreatmentArea?: string;
+    /** 各储存区域防护措施 */
+    protectionMeasuresForStorageAreas?: string;
+    protectionMeasuresInWastewaterTreatmentArea?: string;
     remark?: string;
-    /** 数据来源 */
-    source?: string;
-    /** 调查时间 */
-    surveyDate?: string;
+    solidWasteStorageAndDisposalAreaProtectionMeasures?: string;
+    /** 储存区面积 */
+    storageArea?: string;
+    /** 储罐、储槽等储存设施 */
+    storageFacility?: string;
+    /** 废气排放量 */
+    totalGasEmission?: string;
+    /** 地下管道管线图 */
+    undergroundPipeLineDiagram?: string;
     updateBy?: string;
     updateTime?: string;
+    wastewaterDischargeVolume?: string;
   };
 
   type shengchanchejianfenbuyuhuanjingqingkuang = {
@@ -1532,6 +2030,37 @@ declare namespace API {
     /** 超标污染物名称 */
     pollutantName?: string;
     remark?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type wushuichulichanggutifeiwuchanshengliangjiwuranfangzhicuoshi = {
+    /** 面积 */
+    area?: string;
+    /** 区域名称 */
+    areaName?: string;
+    /** 坐标位置 */
+    coordinates?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 是否为危险废物 */
+    isHazardousWaste?: string;
+    /** 地点 */
+    location?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    /** 固体废物名称 */
+    solidWasteName?: string;
+    /** 贮存量处置量 */
+    storageAndDisposalAmount?: string;
+    /** 贮存量处置照片 */
+    storageAndDisposalPhotos?: string;
     updateBy?: string;
     updateTime?: string;
   };

@@ -1,7 +1,7 @@
 <template>
   <el-dialog z-index="10" v-model="dialogVisible"
     :title="chart.chart.chartInfo.wellCode+'('+chart.chart.chartInfo.location+')'" width="100vw" :top="'200px'"
-    destroy-on-close @open="openChartLine" style="height: 650px;">
+    destroy-on-close @open="openChartLine" @close="closeChartLine" style="height: 650px;">
     <el-date-picker v-model="timeValue" type="daterange" range-separator="至" start-placeholder="开始日期"
       style="width: 400px" end-placeholder="结束日期">
     </el-date-picker>
@@ -365,6 +365,11 @@
       time = [];
     }
     seekLineData(data, time);
+  }
+
+    function closeChartLine() {
+    const elements = document.getElementsByClassName('RightLine');
+    elements[0].style.zIndex = 20
   }
   function openChartLine() {
     selectValue.value = "PH";

@@ -25,7 +25,7 @@
   import { onMounted, reactive, toRaw, ref, nextTick, watch } from "vue";
   import * as echarts from "echarts";
   import ChartLineModal from "./ChartLineModal.vue";
-  import { listMonitoring} from "@/api/admin/monitoring";
+  import { listMonitoring } from "@/api/admin/monitoring";
   const chartLine = ref();
   const xAxis = ref("周");
   let lineChart = null;
@@ -310,6 +310,8 @@
       pointId: chart.chartInfo.wellCode,
     }, 'ph');
     chartLine.value.dialogVisible = true;
+    const elements = document.getElementsByClassName('RightLine');
+    elements[0].style.zIndex = 100
   }
 
   window.openJCPageVue = function (data) {
@@ -462,6 +464,7 @@
     padding: 10px;
     background: url("@/assets/static/left.png") no-repeat;
     background-color: rgba(9, 21, 42, 0.8);
+
     .title {
       height: 42px;
       line-height: 42px;
@@ -476,7 +479,7 @@
       span {
         font-size: 18px;
         display: inline-block;
-         overflow: hidden; 
+        overflow: hidden;
         text-overflow: ellipsis;
       }
 
@@ -502,6 +505,4 @@
     background-color: rgba(9, 21, 42, 0.8);
     border-color: rgba(9, 21, 42, 0.8);
   }
-
-
 </style>

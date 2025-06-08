@@ -1,6 +1,6 @@
 <template>
   <el-dialog z-index="10" v-model="dialogVisible" title="指标详情" width="100vw" :top="'200px'" destroy-on-close
-    @open="openChartBar" style="height: 650px;">
+    @open="openChartBar" @close="closeChartBar" style="height: 650px;">
     <el-select v-model="selectValue" placeholder="请选择" style="width: 300px; " @change="changeSelect">
       <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
       </el-option>
@@ -53,7 +53,7 @@
 
 
   const changeSelect = (label) => {
-    seriesData=[]
+    seriesData = []
     barList.forEach((ele, index) => {
       if (index < 18) {
         if (label === '1') {
@@ -69,9 +69,14 @@
     barChart.setOption(barOption);
   }
 
+  function closeChartBar() {
+    const elements = document.getElementsByClassName('leftTable');
+    elements[0].style.zIndex = 20
+  }
+
   function openChartBar() {
-    xAxisData=[]
-    seriesData=[]
+    xAxisData = []
+    seriesData = []
     var chartDom = document.getElementById("echartBar");
     barChart = echarts.init(chartDom);
     var fontColor = "#30eee9";

@@ -98,8 +98,10 @@
     }
   };
 
-  const openChartBar=()=>{
-     chartBar.value.dialogVisible = true;
+  const openChartBar = () => {
+    chartBar.value.dialogVisible = true;
+    const elements = document.getElementsByClassName('leftTable');
+    elements[0].style.zIndex = 100
   }
 
 </script>

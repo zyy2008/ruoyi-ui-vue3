@@ -18,7 +18,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @date 2025-05-28
  */
 @Data
-@ApiModel("企业污染源")
+@ApiModel("地下水环境调查监测信息")
 public class TGroundwaterMonitoring extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

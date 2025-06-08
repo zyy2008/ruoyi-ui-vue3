@@ -201,15 +201,56 @@ public class TEnterprisePollutionInfo extends BaseEntity {
 
 
 
-
-
-
-
-
-
-
-
-
+    /**
+     * 是否产生固体废物
+     */
+    @ApiModelProperty(name = "是否产生固体废物")
+    private String isSolidWasteGenerated;
+    /**
+     * 是否有固体废物贮存
+     */
+    @ApiModelProperty(name = "是否有固体废物贮存")
+    private String isSolidWasteStored;
+    /**
+     * 是否有危险废物自处置
+     */
+    @ApiModelProperty(name = "是否有危险废物自处置")
+    private String isHazardousWasteSelfDisposed;
+    /**
+     * 废水治理区防护措施
+     */
+    @ApiModelProperty(name = "废水治理区防护措施")
+    private String wastewaterTreatmentAreaProtectionMeasures;
+    /**
+     * 固废贮存处置区防护措施
+     */
+    @ApiModelProperty(name = "固废贮存处置区防护措施")
+    private String solidWasteStorageAndDisposalAreaProtectionMeasures;
+    /**
+     * 危废贮存处置区防护措施
+     */
+    @ApiModelProperty(name = "危废贮存处置区防护措施")
+    private String hazardousWasteStorageAndDisposalAreaProtectionMeasures;
+    /**
+     * 危险废物规范化管理考核评估结果
+     */
+    @ApiModelProperty(name = "危险废物规范化管理考核评估结果")
+    private String hazardousWasteStandardizedManagementAssessmentResults;
+    /**
+     * 环境污染事故发生情况
+     */
+    @ApiModelProperty(name = "环境污染事故发生情况")
+    private String environmentalPollutionAccidentOccurrence;
+    /**
+     * 事故基本情况描述
+     */
+    @ApiModelProperty(name = "事故基本情况描述")
+    private String basicDescriptionOfAccident;
+    /**
+     * 污染区域处理情况
+     */
+    @ApiModelProperty(name = "污染区域处理情况")
+    private String pollutionAreaTreatmentSituation;
 
     /**
      * 归属部门

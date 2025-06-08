@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TSewageSolidWasteMapper">
+    
+    <resultMap type="TSewageSolidWaste" id="TSewageSolidWasteResult">
+        <result property="id"    column="id"    />
+        <result property="areaName"    column="area_name"    />
+        <result property="location"    column="location"    />
+        <result property="coordinates"    column="coordinates"    />
+        <result property="area"    column="area"    />
+        <result property="solidWasteName"    column="solid_waste_name"    />
+        <result property="isHazardousWaste"    column="is_hazardous_waste"    />
+        <result property="storageAndDisposalAmount"    column="storage_and_disposal_amount"    />
+        <result property="storageAndDisposalPhotos"    column="storage_and_disposal_photos"    />
+        <result property="enterprisePollutionInfoId"    column="enterprise_pollution_info_id"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTSewageSolidWasteVo">
+        select id, area_name, location, coordinates, area, solid_waste_name, is_hazardous_waste, storage_and_disposal_amount, storage_and_disposal_photos, enterprise_pollution_info_id, dept_id from t_sewage_solid_waste
+    </sql>
+
+    <select id="selectTSewageSolidWasteList" parameterType="TSewageSolidWaste" resultMap="TSewageSolidWasteResult">
+        <include refid="selectTSewageSolidWasteVo"/>
+        <where>  
+            <if test="areaName != null  and areaName != ''"> and area_name like concat('%', #{areaName}, '%')</if>
+            <if test="location != null  and location != ''"> and location = #{location}</if>
+            <if test="coordinates != null  and coordinates != ''"> and coordinates = #{coordinates}</if>
+            <if test="area != null  and area != ''"> and area = #{area}</if>
+            <if test="solidWasteName != null  and solidWasteName != ''"> and solid_waste_name like concat('%', #{solidWasteName}, '%')</if>
+            <if test="isHazardousWaste != null  and isHazardousWaste != ''"> and is_hazardous_waste = #{isHazardousWaste}</if>
+            <if test="storageAndDisposalAmount != null  and storageAndDisposalAmount != ''"> and storage_and_disposal_amount = #{storageAndDisposalAmount}</if>
+            <if test="storageAndDisposalPhotos != null  and storageAndDisposalPhotos != ''"> and storage_and_disposal_photos = #{storageAndDisposalPhotos}</if>
+            <if test="enterprisePollutionInfoId != null  and enterprisePollutionInfoId != ''"> and enterprise_pollution_info_id = #{enterprisePollutionInfoId}</if>
+            <if test="deptId != null  and deptId != ''"> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTSewageSolidWasteById" parameterType="Long" resultMap="TSewageSolidWasteResult">
+        <include refid="selectTSewageSolidWasteVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTSewageSolidWaste" parameterType="TSewageSolidWaste" useGeneratedKeys="true" keyProperty="id">
+        insert into t_sewage_solid_waste
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="areaName != null">area_name,</if>
+            <if test="location != null">location,</if>
+            <if test="coordinates != null">coordinates,</if>
+            <if test="area != null">area,</if>
+            <if test="solidWasteName != null">solid_waste_name,</if>
+            <if test="isHazardousWaste != null">is_hazardous_waste,</if>
+            <if test="storageAndDisposalAmount != null">storage_and_disposal_amount,</if>
+            <if test="storageAndDisposalPhotos != null">storage_and_disposal_photos,</if>
+            <if test="enterprisePollutionInfoId != null">enterprise_pollution_info_id,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="areaName != null">#{areaName},</if>
+            <if test="location != null">#{location},</if>
+            <if test="coordinates != null">#{coordinates},</if>
+            <if test="area != null">#{area},</if>
+            <if test="solidWasteName != null">#{solidWasteName},</if>
+            <if test="isHazardousWaste != null">#{isHazardousWaste},</if>
+            <if test="storageAndDisposalAmount != null">#{storageAndDisposalAmount},</if>
+            <if test="storageAndDisposalPhotos != null">#{storageAndDisposalPhotos},</if>
+            <if test="enterprisePollutionInfoId != null">#{enterprisePollutionInfoId},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTSewageSolidWaste" parameterType="TSewageSolidWaste">
+        update t_sewage_solid_waste
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="areaName != null">area_name = #{areaName},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="coordinates != null">coordinates = #{coordinates},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="solidWasteName != null">solid_waste_name = #{solidWasteName},</if>
+            <if test="isHazardousWaste != null">is_hazardous_waste = #{isHazardousWaste},</if>
+            <if test="storageAndDisposalAmount != null">storage_and_disposal_amount = #{storageAndDisposalAmount},</if>
+            <if test="storageAndDisposalPhotos != null">storage_and_disposal_photos = #{storageAndDisposalPhotos},</if>
+            <if test="enterprisePollutionInfoId != null">enterprise_pollution_info_id = #{enterprisePollutionInfoId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTSewageSolidWasteById" parameterType="Long">
+        delete from t_sewage_solid_waste where id = #{id}
+    </delete>
+
+    <delete id="deleteTSewageSolidWasteByIds" parameterType="String">
+        delete from t_sewage_solid_waste where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

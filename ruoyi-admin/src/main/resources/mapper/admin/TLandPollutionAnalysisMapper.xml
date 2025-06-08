@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TLandPollutionAnalysisMapper">
+    
+    <resultMap type="TLandPollutionAnalysis" id="TLandPollutionAnalysisResult">
+        <result property="id"    column="id"    />
+        <result property="suspectedPollutionAreaName"    column="suspected_pollution_area_name"    />
+        <result property="characteristicPollutantName"    column="characteristic_pollutant_name"    />
+        <result property="enterprisePollutionInfoId"    column="enterprise_pollution_info_id"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTLandPollutionAnalysisVo">
+        select id, suspected_pollution_area_name, characteristic_pollutant_name, enterprise_pollution_info_id, dept_id from t_land_pollution_analysis
+    </sql>
+
+    <select id="selectTLandPollutionAnalysisList" parameterType="TLandPollutionAnalysis" resultMap="TLandPollutionAnalysisResult">
+        <include refid="selectTLandPollutionAnalysisVo"/>
+        <where>  
+            <if test="suspectedPollutionAreaName != null  and suspectedPollutionAreaName != ''"> and suspected_pollution_area_name like concat('%', #{suspectedPollutionAreaName}, '%')</if>
+            <if test="characteristicPollutantName != null  and characteristicPollutantName != ''"> and characteristic_pollutant_name like concat('%', #{characteristicPollutantName}, '%')</if>
+            <if test="enterprisePollutionInfoId != null  and enterprisePollutionInfoId != ''"> and enterprise_pollution_info_id = #{enterprisePollutionInfoId}</if>
+            <if test="deptId != null  and deptId != ''"> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTLandPollutionAnalysisById" parameterType="Long" resultMap="TLandPollutionAnalysisResult">
+        <include refid="selectTLandPollutionAnalysisVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTLandPollutionAnalysis" parameterType="TLandPollutionAnalysis" useGeneratedKeys="true" keyProperty="id">
+        insert into t_land_pollution_analysis
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="suspectedPollutionAreaName != null">suspected_pollution_area_name,</if>
+            <if test="characteristicPollutantName != null">characteristic_pollutant_name,</if>
+            <if test="enterprisePollutionInfoId != null">enterprise_pollution_info_id,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="suspectedPollutionAreaName != null">#{suspectedPollutionAreaName},</if>
+            <if test="characteristicPollutantName != null">#{characteristicPollutantName},</if>
+            <if test="enterprisePollutionInfoId != null">#{enterprisePollutionInfoId},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTLandPollutionAnalysis" parameterType="TLandPollutionAnalysis">
+        update t_land_pollution_analysis
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="suspectedPollutionAreaName != null">suspected_pollution_area_name = #{suspectedPollutionAreaName},</if>
+            <if test="characteristicPollutantName != null">characteristic_pollutant_name = #{characteristicPollutantName},</if>
+            <if test="enterprisePollutionInfoId != null">enterprise_pollution_info_id = #{enterprisePollutionInfoId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTLandPollutionAnalysisById" parameterType="Long">
+        delete from t_land_pollution_analysis where id = #{id}
+    </delete>
+
+    <delete id="deleteTLandPollutionAnalysisByIds" parameterType="String">
+        delete from t_land_pollution_analysis where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TPollutionIncidentMapper">
+    
+    <resultMap type="TPollutionIncident" id="TPollutionIncidentResult">
+        <result property="id"    column="id"    />
+        <result property="incidentTime"    column="incident_time"    />
+        <result property="location"    column="location"    />
+        <result property="coordinates"    column="coordinates"    />
+        <result property="incidentLevel"    column="incident_level"    />
+        <result property="enterprisePollutionInfoId"    column="enterprise_pollution_info_id"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTPollutionIncidentVo">
+        select id, incident_time, location, coordinates, incident_level, enterprise_pollution_info_id, dept_id from t_pollution_incident
+    </sql>
+
+    <select id="selectTPollutionIncidentList" parameterType="TPollutionIncident" resultMap="TPollutionIncidentResult">
+        <include refid="selectTPollutionIncidentVo"/>
+        <where>  
+            <if test="incidentTime != null  and incidentTime != ''"> and incident_time = #{incidentTime}</if>
+            <if test="location != null  and location != ''"> and location = #{location}</if>
+            <if test="coordinates != null  and coordinates != ''"> and coordinates = #{coordinates}</if>
+            <if test="incidentLevel != null  and incidentLevel != ''"> and incident_level = #{incidentLevel}</if>
+            <if test="enterprisePollutionInfoId != null  and enterprisePollutionInfoId != ''"> and enterprise_pollution_info_id = #{enterprisePollutionInfoId}</if>
+            <if test="deptId != null  and deptId != ''"> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTPollutionIncidentById" parameterType="Long" resultMap="TPollutionIncidentResult">
+        <include refid="selectTPollutionIncidentVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTPollutionIncident" parameterType="TPollutionIncident" useGeneratedKeys="true" keyProperty="id">
+        insert into t_pollution_incident
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="incidentTime != null">incident_time,</if>
+            <if test="location != null">location,</if>
+            <if test="coordinates != null">coordinates,</if>
+            <if test="incidentLevel != null">incident_level,</if>
+            <if test="enterprisePollutionInfoId != null">enterprise_pollution_info_id,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="incidentTime != null">#{incidentTime},</if>
+            <if test="location != null">#{location},</if>
+            <if test="coordinates != null">#{coordinates},</if>
+            <if test="incidentLevel != null">#{incidentLevel},</if>
+            <if test="enterprisePollutionInfoId != null">#{enterprisePollutionInfoId},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTPollutionIncident" parameterType="TPollutionIncident">
+        update t_pollution_incident
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="incidentTime != null">incident_time = #{incidentTime},</if>
+            <if test="location != null">location = #{location},</if>
+            <if test="coordinates != null">coordinates = #{coordinates},</if>
+            <if test="incidentLevel != null">incident_level = #{incidentLevel},</if>
+            <if test="enterprisePollutionInfoId != null">enterprise_pollution_info_id = #{enterprisePollutionInfoId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTPollutionIncidentById" parameterType="Long">
+        delete from t_pollution_incident where id = #{id}
+    </delete>
+
+    <delete id="deleteTPollutionIncidentByIds" parameterType="String">
+        delete from t_pollution_incident where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

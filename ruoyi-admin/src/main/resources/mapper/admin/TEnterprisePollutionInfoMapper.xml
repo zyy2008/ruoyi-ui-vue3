@@ -1,85 +1,105 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.admin.mapper.TEnterprisePollutionInfoMapper">
-    
+
     <resultMap type="TEnterprisePollutionInfo" id="TEnterprisePollutionInfoResult">
         <result property="id"    column="id"    />
-        <result property="productName"    column="product_name"    />
-        <result property="productionYearRange"    column="production_year_range"    />
-        <result property="productUnit"    column="product_unit"    />
-        <result property="productAvgOutput"    column="product_avg_output"    />
-        <result property="materialName"    column="material_name"    />
-        <result property="materialUseYearRange"    column="material_use_year_range"    />
-        <result property="materialUnit"    column="material_unit"    />
-        <result property="materialAvgUsage"    column="material_avg_usage"    />
-        <result property="processLineName"    column="process_line_name"    />
-        <result property="longitude"    column="longitude"    />
-        <result property="latitude"    column="latitude"    />
-        <result property="startupDate"    column="startup_date"    />
-        <result property="processDescription"    column="process_description"    />
-        <result property="leakStatus"    column="leak_status"    />
-        <result property="workshopArea"    column="workshop_area"    />
-        <result property="storageAreaName"    column="storage_area_name"    />
-        <result property="storageLongitude"    column="storage_longitude"    />
-        <result property="storageLatitude"    column="storage_latitude"    />
-        <result property="tankCount"    column="tank_count"    />
-        <result property="storedMaterial"    column="stored_material"    />
-        <result property="isHazardous"    column="is_hazardous"    />
-        <result property="storageAmount"    column="storage_amount"    />
-        <result property="storageUnit"    column="storage_unit"    />
-        <result property="storageStartDate"    column="storage_start_date"    />
-        <result property="storageLeakStatus"    column="storage_leak_status"    />
-        <result property="storageRemark"    column="storage_remark"    />
+        <result property="facilitiesAreas"    column="facilities_areas"    />
+        <result property="floorPlan"    column="floor_plan"    />
+        <result property="mainIntermediateProductName"    column="main_intermediate_product_name"    />
+        <result property="mainProcessFlowChart"    column="main_process_flow_chart"    />
+        <result property="mainProcessProductionDescription"    column="main_process_production_description"    />
+        <result property="isCleanProductionAudited"    column="is_clean_production_audited"    />
+        <result property="cleanAuditTime"    column="clean_audit_time"    />
+        <result property="cleanLevel"    column="clean_level"    />
+        <result property="storageFacility"    column="storage_facility"    />
+        <result property="hazardousMaterialWarehouse"    column="hazardous_material_warehouse"    />
+        <result property="hazardousMaterialLoadingAndUnloadingArea"    column="hazardous_material_loading_and_unloading_area"    />
         <result property="storageArea"    column="storage_area"    />
+        <result property="protectionMeasuresForStorageAreas"    column="protection_measures_for_storage_areas"    />
+        <result property="hasThereBeenAPipeLeak"    column="has_there_been_a_pipe_leak"    />
+        <result property="undergroundPipeLineDiagram"    column="underground_pipe_line_diagram"    />
         <result property="gasTreatmentExists"    column="gas_treatment_exists"    />
         <result property="totalGasEmission"    column="total_gas_emission"    />
-        <result property="gasEmissionUnit"    column="gas_emission_unit"    />
+        <result property="mainPollutantsInEmissions"    column="main_pollutants_in_emissions"    />
+        <result property="isThereAnOnlineMonitoringDeviceForEmissions"    column="is_there_an_online_monitoring_device_for_emissions"    />
+        <result property="operationStatusOfOnlineMonitoringDevice"    column="operation_status_of_online_monitoring_device"    />
+        <result property="isThereAnEmissionTreatmentFacility"    column="is_there_an_emission_treatment_facility"    />
+        <result property="operationStatusOfEmissionTreatmentFacility"    column="operation_status_of_emission_treatment_facility"    />
+        <result property="isThereWastewaterDischarge"    column="is_there_wastewater_discharge"    />
+        <result property="wastewaterDischargeVolume"    column="wastewater_discharge_volume"    />
+        <result property="mainPollutantsInWastewater"    column="main_pollutants_in_wastewater"    />
+        <result property="isThereAnOnlineMonitoringDeviceForWastewater"    column="is_there_an_online_monitoring_device_for_wastewater"    />
+        <result property="isThereAWastewaterTreatmentFacility"    column="is_there_a_wastewater_treatment_facility"    />
+        <result property="operationStatusOfWastewaterTreatmentFacility"    column="operation_status_of_wastewater_treatment_facility"    />
+        <result property="coordinatesOfWastewaterTreatmentArea"    column="coordinates_of_wastewater_treatment_area"    />
+        <result property="areaOfWastewaterTreatmentArea"    column="area_of_wastewater_treatment_area"    />
+        <result property="pollutionTracesInWastewaterTreatmentArea"    column="pollution_traces_in_wastewater_treatment_area"    />
+        <result property="photosOfPollutionTraces"    column="photos_of_pollution_traces"    />
+        <result property="protectionMeasuresInWastewaterTreatmentArea"    column="protection_measures_in_wastewater_treatment_area"    />
+        <result property="isSolidWasteGenerated"    column="is_solid_waste_generated"    />
+        <result property="isSolidWasteStored"    column="is_solid_waste_stored"    />
+        <result property="isHazardousWasteSelfDisposed"    column="is_hazardous_waste_self_disposed"    />
+        <result property="wastewaterTreatmentAreaProtectionMeasures"    column="wastewater_treatment_area_protection_measures"    />
+        <result property="solidWasteStorageAndDisposalAreaProtectionMeasures"    column="solid_waste_storage_and_disposal_area_protection_measures"    />
+        <result property="hazardousWasteStorageAndDisposalAreaProtectionMeasures"    column="hazardous_waste_storage_and_disposal_area_protection_measures"    />
+        <result property="hazardousWasteStandardizedManagementAssessmentResults"    column="hazardous_waste_standardized_management_assessment_results"    />
         <result property="deptId"    column="dept_id"    />
     </resultMap>
 
     <sql id="selectTEnterprisePollutionInfoVo">
-        select id, product_name, production_year_range, product_unit, product_avg_output, material_name, material_use_year_range, material_unit, material_avg_usage, process_line_name, longitude, latitude, startup_date, process_description, leak_status, workshop_area, storage_area_name, storage_longitude, storage_latitude, tank_count, stored_material, is_hazardous, storage_amount, storage_unit, storage_start_date, storage_leak_status, storage_remark, storage_area, gas_treatment_exists, total_gas_emission, gas_emission_unit, dept_id from t_enterprise_pollution_info
+        select id, facilities_areas, floor_plan, main_intermediate_product_name, main_process_flow_chart, main_process_production_description, is_clean_production_audited, clean_audit_time, clean_level, storage_facility, hazardous_material_warehouse, hazardous_material_loading_and_unloading_area, storage_area, protection_measures_for_storage_areas, has_there_been_a_pipe_leak, underground_pipe_line_diagram, gas_treatment_exists, total_gas_emission, main_pollutants_in_emissions, is_there_an_online_monitoring_device_for_emissions, operation_status_of_online_monitoring_device, is_there_an_emission_treatment_facility, operation_status_of_emission_treatment_facility, is_there_wastewater_discharge, wastewater_discharge_volume, main_pollutants_in_wastewater, is_there_an_online_monitoring_device_for_wastewater, is_there_a_wastewater_treatment_facility, operation_status_of_wastewater_treatment_facility, coordinates_of_wastewater_treatment_area, area_of_wastewater_treatment_area, pollution_traces_in_wastewater_treatment_area, photos_of_pollution_traces, protection_measures_in_wastewater_treatment_area, is_solid_waste_generated, is_solid_waste_stored, is_hazardous_waste_self_disposed, wastewater_treatment_area_protection_measures, solid_waste_storage_and_disposal_area_protection_measures, hazardous_waste_storage_and_disposal_area_protection_measures, hazardous_waste_standardized_management_assessment_results, dept_id from t_enterprise_pollution_info
     </sql>
 
     <select id="selectTEnterprisePollutionInfoList" parameterType="TEnterprisePollutionInfo" resultMap="TEnterprisePollutionInfoResult">
         <include refid="selectTEnterprisePollutionInfoVo"/>
-        <where>  
-            <if test="productName != null  and productName != ''"> and product_name like concat('%', #{productName}, '%')</if>
-            <if test="productionYearRange != null  and productionYearRange != ''"> and production_year_range = #{productionYearRange}</if>
-            <if test="productUnit != null  and productUnit != ''"> and product_unit = #{productUnit}</if>
-            <if test="productAvgOutput != null  and productAvgOutput != ''"> and product_avg_output = #{productAvgOutput}</if>
-            <if test="materialName != null  and materialName != ''"> and material_name like concat('%', #{materialName}, '%')</if>
-            <if test="materialUseYearRange != null  and materialUseYearRange != ''"> and material_use_year_range = #{materialUseYearRange}</if>
-            <if test="materialUnit != null  and materialUnit != ''"> and material_unit = #{materialUnit}</if>
-            <if test="materialAvgUsage != null  and materialAvgUsage != ''"> and material_avg_usage = #{materialAvgUsage}</if>
-            <if test="processLineName != null  and processLineName != ''"> and process_line_name like concat('%', #{processLineName}, '%')</if>
-            <if test="longitude != null  and longitude != ''"> and longitude = #{longitude}</if>
-            <if test="latitude != null  and latitude != ''"> and latitude = #{latitude}</if>
-            <if test="startupDate != null "> and startup_date = #{startupDate}</if>
-            <if test="processDescription != null  and processDescription != ''"> and process_description = #{processDescription}</if>
-            <if test="leakStatus != null  and leakStatus != ''"> and leak_status = #{leakStatus}</if>
-            <if test="workshopArea != null  and workshopArea != ''"> and workshop_area = #{workshopArea}</if>
-            <if test="storageAreaName != null  and storageAreaName != ''"> and storage_area_name like concat('%', #{storageAreaName}, '%')</if>
-            <if test="storageLongitude != null  and storageLongitude != ''"> and storage_longitude = #{storageLongitude}</if>
-            <if test="storageLatitude != null  and storageLatitude != ''"> and storage_latitude = #{storageLatitude}</if>
-            <if test="tankCount != null "> and tank_count = #{tankCount}</if>
-            <if test="storedMaterial != null  and storedMaterial != ''"> and stored_material = #{storedMaterial}</if>
-            <if test="isHazardous != null  and isHazardous != ''"> and is_hazardous = #{isHazardous}</if>
-            <if test="storageAmount != null  and storageAmount != ''"> and storage_amount = #{storageAmount}</if>
-            <if test="storageUnit != null  and storageUnit != ''"> and storage_unit = #{storageUnit}</if>
-            <if test="storageStartDate != null "> and storage_start_date = #{storageStartDate}</if>
-            <if test="storageLeakStatus != null  and storageLeakStatus != ''"> and storage_leak_status = #{storageLeakStatus}</if>
-            <if test="storageRemark != null  and storageRemark != ''"> and storage_remark = #{storageRemark}</if>
+        <where>
+            <if test="facilitiesAreas != null  and facilitiesAreas != ''"> and facilities_areas = #{facilitiesAreas}</if>
+            <if test="floorPlan != null  and floorPlan != ''"> and floor_plan = #{floorPlan}</if>
+            <if test="mainIntermediateProductName != null  and mainIntermediateProductName != ''"> and main_intermediate_product_name like concat('%', #{mainIntermediateProductName}, '%')</if>
+            <if test="mainProcessFlowChart != null  and mainProcessFlowChart != ''"> and main_process_flow_chart = #{mainProcessFlowChart}</if>
+            <if test="mainProcessProductionDescription != null  and mainProcessProductionDescription != ''"> and main_process_production_description = #{mainProcessProductionDescription}</if>
+            <if test="isCleanProductionAudited != null  and isCleanProductionAudited != ''"> and is_clean_production_audited = #{isCleanProductionAudited}</if>
+            <if test="cleanAuditTime != null  and cleanAuditTime != ''"> and clean_audit_time = #{cleanAuditTime}</if>
+            <if test="cleanLevel != null  and cleanLevel != ''"> and clean_level = #{cleanLevel}</if>
+            <if test="storageFacility != null  and storageFacility != ''"> and storage_facility = #{storageFacility}</if>
+            <if test="hazardousMaterialWarehouse != null  and hazardousMaterialWarehouse != ''"> and hazardous_material_warehouse = #{hazardousMaterialWarehouse}</if>
+            <if test="hazardousMaterialLoadingAndUnloadingArea != null  and hazardousMaterialLoadingAndUnloadingArea != ''"> and hazardous_material_loading_and_unloading_area = #{hazardousMaterialLoadingAndUnloadingArea}</if>
             <if test="storageArea != null  and storageArea != ''"> and storage_area = #{storageArea}</if>
+            <if test="protectionMeasuresForStorageAreas != null  and protectionMeasuresForStorageAreas != ''"> and protection_measures_for_storage_areas = #{protectionMeasuresForStorageAreas}</if>
+            <if test="hasThereBeenAPipeLeak != null  and hasThereBeenAPipeLeak != ''"> and has_there_been_a_pipe_leak = #{hasThereBeenAPipeLeak}</if>
+            <if test="undergroundPipeLineDiagram != null  and undergroundPipeLineDiagram != ''"> and underground_pipe_line_diagram = #{undergroundPipeLineDiagram}</if>
             <if test="gasTreatmentExists != null  and gasTreatmentExists != ''"> and gas_treatment_exists = #{gasTreatmentExists}</if>
             <if test="totalGasEmission != null  and totalGasEmission != ''"> and total_gas_emission = #{totalGasEmission}</if>
-            <if test="gasEmissionUnit != null  and gasEmissionUnit != ''"> and gas_emission_unit = #{gasEmissionUnit}</if>
-            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="mainPollutantsInEmissions != null  and mainPollutantsInEmissions != ''"> and main_pollutants_in_emissions = #{mainPollutantsInEmissions}</if>
+            <if test="isThereAnOnlineMonitoringDeviceForEmissions != null  and isThereAnOnlineMonitoringDeviceForEmissions != ''"> and is_there_an_online_monitoring_device_for_emissions = #{isThereAnOnlineMonitoringDeviceForEmissions}</if>
+            <if test="operationStatusOfOnlineMonitoringDevice != null  and operationStatusOfOnlineMonitoringDevice != ''"> and operation_status_of_online_monitoring_device = #{operationStatusOfOnlineMonitoringDevice}</if>
+            <if test="isThereAnEmissionTreatmentFacility != null  and isThereAnEmissionTreatmentFacility != ''"> and is_there_an_emission_treatment_facility = #{isThereAnEmissionTreatmentFacility}</if>
+            <if test="operationStatusOfEmissionTreatmentFacility != null  and operationStatusOfEmissionTreatmentFacility != ''"> and operation_status_of_emission_treatment_facility = #{operationStatusOfEmissionTreatmentFacility}</if>
+            <if test="isThereWastewaterDischarge != null  and isThereWastewaterDischarge != ''"> and is_there_wastewater_discharge = #{isThereWastewaterDischarge}</if>
+            <if test="wastewaterDischargeVolume != null  and wastewaterDischargeVolume != ''"> and wastewater_discharge_volume = #{wastewaterDischargeVolume}</if>
+            <if test="mainPollutantsInWastewater != null  and mainPollutantsInWastewater != ''"> and main_pollutants_in_wastewater = #{mainPollutantsInWastewater}</if>
+            <if test="isThereAnOnlineMonitoringDeviceForWastewater != null  and isThereAnOnlineMonitoringDeviceForWastewater != ''"> and is_there_an_online_monitoring_device_for_wastewater = #{isThereAnOnlineMonitoringDeviceForWastewater}</if>
+            <if test="isThereAWastewaterTreatmentFacility != null  and isThereAWastewaterTreatmentFacility != ''"> and is_there_a_wastewater_treatment_facility = #{isThereAWastewaterTreatmentFacility}</if>
+            <if test="operationStatusOfWastewaterTreatmentFacility != null  and operationStatusOfWastewaterTreatmentFacility != ''"> and operation_status_of_wastewater_treatment_facility = #{operationStatusOfWastewaterTreatmentFacility}</if>
+            <if test="coordinatesOfWastewaterTreatmentArea != null  and coordinatesOfWastewaterTreatmentArea != ''"> and coordinates_of_wastewater_treatment_area = #{coordinatesOfWastewaterTreatmentArea}</if>
+            <if test="areaOfWastewaterTreatmentArea != null  and areaOfWastewaterTreatmentArea != ''"> and area_of_wastewater_treatment_area = #{areaOfWastewaterTreatmentArea}</if>
+            <if test="pollutionTracesInWastewaterTreatmentArea != null  and pollutionTracesInWastewaterTreatmentArea != ''"> and pollution_traces_in_wastewater_treatment_area = #{pollutionTracesInWastewaterTreatmentArea}</if>
+            <if test="photosOfPollutionTraces != null  and photosOfPollutionTraces != ''"> and photos_of_pollution_traces = #{photosOfPollutionTraces}</if>
+            <if test="protectionMeasuresInWastewaterTreatmentArea != null  and protectionMeasuresInWastewaterTreatmentArea != ''"> and protection_measures_in_wastewater_treatment_area = #{protectionMeasuresInWastewaterTreatmentArea}</if>
+            <if test="isSolidWasteGenerated != null  and isSolidWasteGenerated != ''"> and is_solid_waste_generated = #{isSolidWasteGenerated}</if>
+            <if test="isSolidWasteStored != null  and isSolidWasteStored != ''"> and is_solid_waste_stored = #{isSolidWasteStored}</if>
+            <if test="isHazardousWasteSelfDisposed != null  and isHazardousWasteSelfDisposed != ''"> and is_hazardous_waste_self_disposed = #{isHazardousWasteSelfDisposed}</if>
+            <if test="wastewaterTreatmentAreaProtectionMeasures != null  and wastewaterTreatmentAreaProtectionMeasures != ''"> and wastewater_treatment_area_protection_measures = #{wastewaterTreatmentAreaProtectionMeasures}</if>
+            <if test="solidWasteStorageAndDisposalAreaProtectionMeasures != null  and solidWasteStorageAndDisposalAreaProtectionMeasures != ''"> and solid_waste_storage_and_disposal_area_protection_measures = #{solidWasteStorageAndDisposalAreaProtectionMeasures}</if>
+            <if test="hazardousWasteStorageAndDisposalAreaProtectionMeasures != null  and hazardousWasteStorageAndDisposalAreaProtectionMeasures != ''"> and hazardous_waste_storage_and_disposal_area_protection_measures = #{hazardousWasteStorageAndDisposalAreaProtectionMeasures}</if>
+            <if test="hazardousWasteStandardizedManagementAssessmentResults != null  and hazardousWasteStandardizedManagementAssessmentResults != ''"> and hazardous_waste_standardized_management_assessment_results = #{hazardousWasteStandardizedManagementAssessmentResults}</if>
+            <if test="deptId != null  and deptId != ''"> and dept_id = #{deptId}</if>
         </where>
     </select>
-    
+
     <select id="selectTEnterprisePollutionInfoById" parameterType="Long" resultMap="TEnterprisePollutionInfoResult">
         <include refid="selectTEnterprisePollutionInfoVo"/>
         where id = #{id}
@@ -88,106 +108,136 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     <insert id="insertTEnterprisePollutionInfo" parameterType="TEnterprisePollutionInfo" useGeneratedKeys="true" keyProperty="id">
         insert into t_enterprise_pollution_info
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="productName != null">product_name,</if>
-            <if test="productionYearRange != null">production_year_range,</if>
-            <if test="productUnit != null">product_unit,</if>
-            <if test="productAvgOutput != null">product_avg_output,</if>
-            <if test="materialName != null">material_name,</if>
-            <if test="materialUseYearRange != null">material_use_year_range,</if>
-            <if test="materialUnit != null">material_unit,</if>
-            <if test="materialAvgUsage != null">material_avg_usage,</if>
-            <if test="processLineName != null">process_line_name,</if>
-            <if test="longitude != null">longitude,</if>
-            <if test="latitude != null">latitude,</if>
-            <if test="startupDate != null">startup_date,</if>
-            <if test="processDescription != null">process_description,</if>
-            <if test="leakStatus != null">leak_status,</if>
-            <if test="workshopArea != null">workshop_area,</if>
-            <if test="storageAreaName != null">storage_area_name,</if>
-            <if test="storageLongitude != null">storage_longitude,</if>
-            <if test="storageLatitude != null">storage_latitude,</if>
-            <if test="tankCount != null">tank_count,</if>
-            <if test="storedMaterial != null">stored_material,</if>
-            <if test="isHazardous != null">is_hazardous,</if>
-            <if test="storageAmount != null">storage_amount,</if>
-            <if test="storageUnit != null">storage_unit,</if>
-            <if test="storageStartDate != null">storage_start_date,</if>
-            <if test="storageLeakStatus != null">storage_leak_status,</if>
-            <if test="storageRemark != null">storage_remark,</if>
+            <if test="facilitiesAreas != null">facilities_areas,</if>
+            <if test="floorPlan != null">floor_plan,</if>
+            <if test="mainIntermediateProductName != null">main_intermediate_product_name,</if>
+            <if test="mainProcessFlowChart != null">main_process_flow_chart,</if>
+            <if test="mainProcessProductionDescription != null">main_process_production_description,</if>
+            <if test="isCleanProductionAudited != null">is_clean_production_audited,</if>
+            <if test="cleanAuditTime != null">clean_audit_time,</if>
+            <if test="cleanLevel != null">clean_level,</if>
+            <if test="storageFacility != null">storage_facility,</if>
+            <if test="hazardousMaterialWarehouse != null">hazardous_material_warehouse,</if>
+            <if test="hazardousMaterialLoadingAndUnloadingArea != null">hazardous_material_loading_and_unloading_area,</if>
             <if test="storageArea != null">storage_area,</if>
+            <if test="protectionMeasuresForStorageAreas != null">protection_measures_for_storage_areas,</if>
+            <if test="hasThereBeenAPipeLeak != null">has_there_been_a_pipe_leak,</if>
+            <if test="undergroundPipeLineDiagram != null">underground_pipe_line_diagram,</if>
             <if test="gasTreatmentExists != null">gas_treatment_exists,</if>
             <if test="totalGasEmission != null">total_gas_emission,</if>
-            <if test="gasEmissionUnit != null">gas_emission_unit,</if>
+            <if test="mainPollutantsInEmissions != null">main_pollutants_in_emissions,</if>
+            <if test="isThereAnOnlineMonitoringDeviceForEmissions != null">is_there_an_online_monitoring_device_for_emissions,</if>
+            <if test="operationStatusOfOnlineMonitoringDevice != null">operation_status_of_online_monitoring_device,</if>
+            <if test="isThereAnEmissionTreatmentFacility != null">is_there_an_emission_treatment_facility,</if>
+            <if test="operationStatusOfEmissionTreatmentFacility != null">operation_status_of_emission_treatment_facility,</if>
+            <if test="isThereWastewaterDischarge != null">is_there_wastewater_discharge,</if>
+            <if test="wastewaterDischargeVolume != null">wastewater_discharge_volume,</if>
+            <if test="mainPollutantsInWastewater != null">main_pollutants_in_wastewater,</if>
+            <if test="isThereAnOnlineMonitoringDeviceForWastewater != null">is_there_an_online_monitoring_device_for_wastewater,</if>
+            <if test="isThereAWastewaterTreatmentFacility != null">is_there_a_wastewater_treatment_facility,</if>
+            <if test="operationStatusOfWastewaterTreatmentFacility != null">operation_status_of_wastewater_treatment_facility,</if>
+            <if test="coordinatesOfWastewaterTreatmentArea != null">coordinates_of_wastewater_treatment_area,</if>
+            <if test="areaOfWastewaterTreatmentArea != null">area_of_wastewater_treatment_area,</if>
+            <if test="pollutionTracesInWastewaterTreatmentArea != null">pollution_traces_in_wastewater_treatment_area,</if>
+            <if test="photosOfPollutionTraces != null">photos_of_pollution_traces,</if>
+            <if test="protectionMeasuresInWastewaterTreatmentArea != null">protection_measures_in_wastewater_treatment_area,</if>
+            <if test="isSolidWasteGenerated != null">is_solid_waste_generated,</if>
+            <if test="isSolidWasteStored != null">is_solid_waste_stored,</if>
+            <if test="isHazardousWasteSelfDisposed != null">is_hazardous_waste_self_disposed,</if>
+            <if test="wastewaterTreatmentAreaProtectionMeasures != null">wastewater_treatment_area_protection_measures,</if>
+            <if test="solidWasteStorageAndDisposalAreaProtectionMeasures != null">solid_waste_storage_and_disposal_area_protection_measures,</if>
+            <if test="hazardousWasteStorageAndDisposalAreaProtectionMeasures != null">hazardous_waste_storage_and_disposal_area_protection_measures,</if>
+            <if test="hazardousWasteStandardizedManagementAssessmentResults != null">hazardous_waste_standardized_management_assessment_results,</if>
             <if test="deptId != null">dept_id,</if>
-         </trim>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="productName != null">#{productName},</if>
-            <if test="productionYearRange != null">#{productionYearRange},</if>
-            <if test="productUnit != null">#{productUnit},</if>
-            <if test="productAvgOutput != null">#{productAvgOutput},</if>
-            <if test="materialName != null">#{materialName},</if>
-            <if test="materialUseYearRange != null">#{materialUseYearRange},</if>
-            <if test="materialUnit != null">#{materialUnit},</if>
-            <if test="materialAvgUsage != null">#{materialAvgUsage},</if>
-            <if test="processLineName != null">#{processLineName},</if>
-            <if test="longitude != null">#{longitude},</if>
-            <if test="latitude != null">#{latitude},</if>
-            <if test="startupDate != null">#{startupDate},</if>
-            <if test="processDescription != null">#{processDescription},</if>
-            <if test="leakStatus != null">#{leakStatus},</if>
-            <if test="workshopArea != null">#{workshopArea},</if>
-            <if test="storageAreaName != null">#{storageAreaName},</if>
-            <if test="storageLongitude != null">#{storageLongitude},</if>
-            <if test="storageLatitude != null">#{storageLatitude},</if>
-            <if test="tankCount != null">#{tankCount},</if>
-            <if test="storedMaterial != null">#{storedMaterial},</if>
-            <if test="isHazardous != null">#{isHazardous},</if>
-            <if test="storageAmount != null">#{storageAmount},</if>
-            <if test="storageUnit != null">#{storageUnit},</if>
-            <if test="storageStartDate != null">#{storageStartDate},</if>
-            <if test="storageLeakStatus != null">#{storageLeakStatus},</if>
-            <if test="storageRemark != null">#{storageRemark},</if>
+            <if test="facilitiesAreas != null">#{facilitiesAreas},</if>
+            <if test="floorPlan != null">#{floorPlan},</if>
+            <if test="mainIntermediateProductName != null">#{mainIntermediateProductName},</if>
+            <if test="mainProcessFlowChart != null">#{mainProcessFlowChart},</if>
+            <if test="mainProcessProductionDescription != null">#{mainProcessProductionDescription},</if>
+            <if test="isCleanProductionAudited != null">#{isCleanProductionAudited},</if>
+            <if test="cleanAuditTime != null">#{cleanAuditTime},</if>
+            <if test="cleanLevel != null">#{cleanLevel},</if>
+            <if test="storageFacility != null">#{storageFacility},</if>
+            <if test="hazardousMaterialWarehouse != null">#{hazardousMaterialWarehouse},</if>
+            <if test="hazardousMaterialLoadingAndUnloadingArea != null">#{hazardousMaterialLoadingAndUnloadingArea},</if>
             <if test="storageArea != null">#{storageArea},</if>
+            <if test="protectionMeasuresForStorageAreas != null">#{protectionMeasuresForStorageAreas},</if>
+            <if test="hasThereBeenAPipeLeak != null">#{hasThereBeenAPipeLeak},</if>
+            <if test="undergroundPipeLineDiagram != null">#{undergroundPipeLineDiagram},</if>
             <if test="gasTreatmentExists != null">#{gasTreatmentExists},</if>
             <if test="totalGasEmission != null">#{totalGasEmission},</if>
-            <if test="gasEmissionUnit != null">#{gasEmissionUnit},</if>
+            <if test="mainPollutantsInEmissions != null">#{mainPollutantsInEmissions},</if>
+            <if test="isThereAnOnlineMonitoringDeviceForEmissions != null">#{isThereAnOnlineMonitoringDeviceForEmissions},</if>
+            <if test="operationStatusOfOnlineMonitoringDevice != null">#{operationStatusOfOnlineMonitoringDevice},</if>
+            <if test="isThereAnEmissionTreatmentFacility != null">#{isThereAnEmissionTreatmentFacility},</if>
+            <if test="operationStatusOfEmissionTreatmentFacility != null">#{operationStatusOfEmissionTreatmentFacility},</if>
+            <if test="isThereWastewaterDischarge != null">#{isThereWastewaterDischarge},</if>
+            <if test="wastewaterDischargeVolume != null">#{wastewaterDischargeVolume},</if>
+            <if test="mainPollutantsInWastewater != null">#{mainPollutantsInWastewater},</if>
+            <if test="isThereAnOnlineMonitoringDeviceForWastewater != null">#{isThereAnOnlineMonitoringDeviceForWastewater},</if>
+            <if test="isThereAWastewaterTreatmentFacility != null">#{isThereAWastewaterTreatmentFacility},</if>
+            <if test="operationStatusOfWastewaterTreatmentFacility != null">#{operationStatusOfWastewaterTreatmentFacility},</if>
+            <if test="coordinatesOfWastewaterTreatmentArea != null">#{coordinatesOfWastewaterTreatmentArea},</if>
+            <if test="areaOfWastewaterTreatmentArea != null">#{areaOfWastewaterTreatmentArea},</if>
+            <if test="pollutionTracesInWastewaterTreatmentArea != null">#{pollutionTracesInWastewaterTreatmentArea},</if>
+            <if test="photosOfPollutionTraces != null">#{photosOfPollutionTraces},</if>
+            <if test="protectionMeasuresInWastewaterTreatmentArea != null">#{protectionMeasuresInWastewaterTreatmentArea},</if>
+            <if test="isSolidWasteGenerated != null">#{isSolidWasteGenerated},</if>
+            <if test="isSolidWasteStored != null">#{isSolidWasteStored},</if>
+            <if test="isHazardousWasteSelfDisposed != null">#{isHazardousWasteSelfDisposed},</if>
+            <if test="wastewaterTreatmentAreaProtectionMeasures != null">#{wastewaterTreatmentAreaProtectionMeasures},</if>
+            <if test="solidWasteStorageAndDisposalAreaProtectionMeasures != null">#{solidWasteStorageAndDisposalAreaProtectionMeasures},</if>
+            <if test="hazardousWasteStorageAndDisposalAreaProtectionMeasures != null">#{hazardousWasteStorageAndDisposalAreaProtectionMeasures},</if>
+            <if test="hazardousWasteStandardizedManagementAssessmentResults != null">#{hazardousWasteStandardizedManagementAssessmentResults},</if>
             <if test="deptId != null">#{deptId},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateTEnterprisePollutionInfo" parameterType="TEnterprisePollutionInfo">
         update t_enterprise_pollution_info
         <trim prefix="SET" suffixOverrides=",">
-            <if test="productName != null">product_name = #{productName},</if>
-            <if test="productionYearRange != null">production_year_range = #{productionYearRange},</if>
-            <if test="productUnit != null">product_unit = #{productUnit},</if>
-            <if test="productAvgOutput != null">product_avg_output = #{productAvgOutput},</if>
-            <if test="materialName != null">material_name = #{materialName},</if>
-            <if test="materialUseYearRange != null">material_use_year_range = #{materialUseYearRange},</if>
-            <if test="materialUnit != null">material_unit = #{materialUnit},</if>
-            <if test="materialAvgUsage != null">material_avg_usage = #{materialAvgUsage},</if>
-            <if test="processLineName != null">process_line_name = #{processLineName},</if>
-            <if test="longitude != null">longitude = #{longitude},</if>
-            <if test="latitude != null">latitude = #{latitude},</if>
-            <if test="startupDate != null">startup_date = #{startupDate},</if>
-            <if test="processDescription != null">process_description = #{processDescription},</if>
-            <if test="leakStatus != null">leak_status = #{leakStatus},</if>
-            <if test="workshopArea != null">workshop_area = #{workshopArea},</if>
-            <if test="storageAreaName != null">storage_area_name = #{storageAreaName},</if>
-            <if test="storageLongitude != null">storage_longitude = #{storageLongitude},</if>
-            <if test="storageLatitude != null">storage_latitude = #{storageLatitude},</if>
-            <if test="tankCount != null">tank_count = #{tankCount},</if>
-            <if test="storedMaterial != null">stored_material = #{storedMaterial},</if>
-            <if test="isHazardous != null">is_hazardous = #{isHazardous},</if>
-            <if test="storageAmount != null">storage_amount = #{storageAmount},</if>
-            <if test="storageUnit != null">storage_unit = #{storageUnit},</if>
-            <if test="storageStartDate != null">storage_start_date = #{storageStartDate},</if>
-            <if test="storageLeakStatus != null">storage_leak_status = #{storageLeakStatus},</if>
-            <if test="storageRemark != null">storage_remark = #{storageRemark},</if>
+            <if test="facilitiesAreas != null">facilities_areas = #{facilitiesAreas},</if>
+            <if test="floorPlan != null">floor_plan = #{floorPlan},</if>
+            <if test="mainIntermediateProductName != null">main_intermediate_product_name = #{mainIntermediateProductName},</if>
+            <if test="mainProcessFlowChart != null">main_process_flow_chart = #{mainProcessFlowChart},</if>
+            <if test="mainProcessProductionDescription != null">main_process_production_description = #{mainProcessProductionDescription},</if>
+            <if test="isCleanProductionAudited != null">is_clean_production_audited = #{isCleanProductionAudited},</if>
+            <if test="cleanAuditTime != null">clean_audit_time = #{cleanAuditTime},</if>
+            <if test="cleanLevel != null">clean_level = #{cleanLevel},</if>
+            <if test="storageFacility != null">storage_facility = #{storageFacility},</if>
+            <if test="hazardousMaterialWarehouse != null">hazardous_material_warehouse = #{hazardousMaterialWarehouse},</if>
+            <if test="hazardousMaterialLoadingAndUnloadingArea != null">hazardous_material_loading_and_unloading_area = #{hazardousMaterialLoadingAndUnloadingArea},</if>
             <if test="storageArea != null">storage_area = #{storageArea},</if>
+            <if test="protectionMeasuresForStorageAreas != null">protection_measures_for_storage_areas = #{protectionMeasuresForStorageAreas},</if>
+            <if test="hasThereBeenAPipeLeak != null">has_there_been_a_pipe_leak = #{hasThereBeenAPipeLeak},</if>
+            <if test="undergroundPipeLineDiagram != null">underground_pipe_line_diagram = #{undergroundPipeLineDiagram},</if>
             <if test="gasTreatmentExists != null">gas_treatment_exists = #{gasTreatmentExists},</if>
             <if test="totalGasEmission != null">total_gas_emission = #{totalGasEmission},</if>
-            <if test="gasEmissionUnit != null">gas_emission_unit = #{gasEmissionUnit},</if>
+            <if test="mainPollutantsInEmissions != null">main_pollutants_in_emissions = #{mainPollutantsInEmissions},</if>
+            <if test="isThereAnOnlineMonitoringDeviceForEmissions != null">is_there_an_online_monitoring_device_for_emissions = #{isThereAnOnlineMonitoringDeviceForEmissions},</if>
+            <if test="operationStatusOfOnlineMonitoringDevice != null">operation_status_of_online_monitoring_device = #{operationStatusOfOnlineMonitoringDevice},</if>
+            <if test="isThereAnEmissionTreatmentFacility != null">is_there_an_emission_treatment_facility = #{isThereAnEmissionTreatmentFacility},</if>
+            <if test="operationStatusOfEmissionTreatmentFacility != null">operation_status_of_emission_treatment_facility = #{operationStatusOfEmissionTreatmentFacility},</if>
+            <if test="isThereWastewaterDischarge != null">is_there_wastewater_discharge = #{isThereWastewaterDischarge},</if>
+            <if test="wastewaterDischargeVolume != null">wastewater_discharge_volume = #{wastewaterDischargeVolume},</if>
+            <if test="mainPollutantsInWastewater != null">main_pollutants_in_wastewater = #{mainPollutantsInWastewater},</if>
+            <if test="isThereAnOnlineMonitoringDeviceForWastewater != null">is_there_an_online_monitoring_device_for_wastewater = #{isThereAnOnlineMonitoringDeviceForWastewater},</if>
+            <if test="isThereAWastewaterTreatmentFacility != null">is_there_a_wastewater_treatment_facility = #{isThereAWastewaterTreatmentFacility},</if>
+            <if test="operationStatusOfWastewaterTreatmentFacility != null">operation_status_of_wastewater_treatment_facility = #{operationStatusOfWastewaterTreatmentFacility},</if>
+            <if test="coordinatesOfWastewaterTreatmentArea != null">coordinates_of_wastewater_treatment_area = #{coordinatesOfWastewaterTreatmentArea},</if>
+            <if test="areaOfWastewaterTreatmentArea != null">area_of_wastewater_treatment_area = #{areaOfWastewaterTreatmentArea},</if>
+            <if test="pollutionTracesInWastewaterTreatmentArea != null">pollution_traces_in_wastewater_treatment_area = #{pollutionTracesInWastewaterTreatmentArea},</if>
+            <if test="photosOfPollutionTraces != null">photos_of_pollution_traces = #{photosOfPollutionTraces},</if>
+            <if test="protectionMeasuresInWastewaterTreatmentArea != null">protection_measures_in_wastewater_treatment_area = #{protectionMeasuresInWastewaterTreatmentArea},</if>
+            <if test="isSolidWasteGenerated != null">is_solid_waste_generated = #{isSolidWasteGenerated},</if>
+            <if test="isSolidWasteStored != null">is_solid_waste_stored = #{isSolidWasteStored},</if>
+            <if test="isHazardousWasteSelfDisposed != null">is_hazardous_waste_self_disposed = #{isHazardousWasteSelfDisposed},</if>
+            <if test="wastewaterTreatmentAreaProtectionMeasures != null">wastewater_treatment_area_protection_measures = #{wastewaterTreatmentAreaProtectionMeasures},</if>
+            <if test="solidWasteStorageAndDisposalAreaProtectionMeasures != null">solid_waste_storage_and_disposal_area_protection_measures = #{solidWasteStorageAndDisposalAreaProtectionMeasures},</if>
+            <if test="hazardousWasteStorageAndDisposalAreaProtectionMeasures != null">hazardous_waste_storage_and_disposal_area_protection_measures = #{hazardousWasteStorageAndDisposalAreaProtectionMeasures},</if>
+            <if test="hazardousWasteStandardizedManagementAssessmentResults != null">hazardous_waste_standardized_management_assessment_results = #{hazardousWasteStandardizedManagementAssessmentResults},</if>
             <if test="deptId != null">dept_id = #{deptId},</if>
         </trim>
         where id = #{id}
@@ -198,7 +248,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteTEnterprisePollutionInfoByIds" parameterType="String">
-        delete from t_enterprise_pollution_info where id in 
+        delete from t_enterprise_pollution_info where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TPipelineLeakMapper">
+    
+    <resultMap type="TPipelineLeak" id="TPipelineLeakResult">
+        <result property="id"    column="id"    />
+        <result property="pipelineType"    column="pipeline_type"    />
+        <result property="leakCoordinates"    column="leak_coordinates"    />
+        <result property="leakedSubstanceName"    column="leaked_substance_name"    />
+        <result property="enterprisePollutionInfoId"    column="enterprise_pollution_info_id"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTPipelineLeakVo">
+        select id, pipeline_type, leak_coordinates, leaked_substance_name, enterprise_pollution_info_id, dept_id from t_pipeline_leak
+    </sql>
+
+    <select id="selectTPipelineLeakList" parameterType="TPipelineLeak" resultMap="TPipelineLeakResult">
+        <include refid="selectTPipelineLeakVo"/>
+        <where>  
+            <if test="pipelineType != null  and pipelineType != ''"> and pipeline_type = #{pipelineType}</if>
+            <if test="leakCoordinates != null  and leakCoordinates != ''"> and leak_coordinates = #{leakCoordinates}</if>
+            <if test="leakedSubstanceName != null  and leakedSubstanceName != ''"> and leaked_substance_name like concat('%', #{leakedSubstanceName}, '%')</if>
+            <if test="enterprisePollutionInfoId != null  and enterprisePollutionInfoId != ''"> and enterprise_pollution_info_id = #{enterprisePollutionInfoId}</if>
+            <if test="deptId != null  and deptId != ''"> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTPipelineLeakById" parameterType="Long" resultMap="TPipelineLeakResult">
+        <include refid="selectTPipelineLeakVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTPipelineLeak" parameterType="TPipelineLeak" useGeneratedKeys="true" keyProperty="id">
+        insert into t_pipeline_leak
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="pipelineType != null">pipeline_type,</if>
+            <if test="leakCoordinates != null">leak_coordinates,</if>
+            <if test="leakedSubstanceName != null">leaked_substance_name,</if>
+            <if test="enterprisePollutionInfoId != null">enterprise_pollution_info_id,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="pipelineType != null">#{pipelineType},</if>
+            <if test="leakCoordinates != null">#{leakCoordinates},</if>
+            <if test="leakedSubstanceName != null">#{leakedSubstanceName},</if>
+            <if test="enterprisePollutionInfoId != null">#{enterprisePollutionInfoId},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTPipelineLeak" parameterType="TPipelineLeak">
+        update t_pipeline_leak
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="pipelineType != null">pipeline_type = #{pipelineType},</if>
+            <if test="leakCoordinates != null">leak_coordinates = #{leakCoordinates},</if>
+            <if test="leakedSubstanceName != null">leaked_substance_name = #{leakedSubstanceName},</if>
+            <if test="enterprisePollutionInfoId != null">enterprise_pollution_info_id = #{enterprisePollutionInfoId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTPipelineLeakById" parameterType="Long">
+        delete from t_pipeline_leak where id = #{id}
+    </delete>
+
+    <delete id="deleteTPipelineLeakByIds" parameterType="String">
+        delete from t_pipeline_leak where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

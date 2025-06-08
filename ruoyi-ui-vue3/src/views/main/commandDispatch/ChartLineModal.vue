@@ -1,5 +1,5 @@
 <template>
-  <el-dialog z-index="9999999999" v-model="dialogVisible"
+  <el-dialog z-index="10" v-model="dialogVisible"
     :title="chart.chart.chartInfo.wellCode+'('+chart.chart.chartInfo.location+')'" width="100vw" :top="'200px'"
     destroy-on-close @open="openChartLine" style="height: 650px;">
     <el-date-picker v-model="timeValue" type="daterange" range-separator="至" start-placeholder="开始日期"
@@ -417,7 +417,6 @@
               color: "#195384",
             },
           },
-          // data: ['周一', '周二', '周三', '周四', '周五', '周六', '周天']
           data: ["0", "1", "2"],
         },
       ],

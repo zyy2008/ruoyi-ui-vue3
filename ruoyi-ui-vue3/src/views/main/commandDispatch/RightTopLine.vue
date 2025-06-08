@@ -462,7 +462,6 @@
     padding: 10px;
     background: url("@/assets/static/left.png") no-repeat;
     background-color: rgba(9, 21, 42, 0.8);
-
     .title {
       height: 42px;
       line-height: 42px;
@@ -504,25 +503,5 @@
     border-color: rgba(9, 21, 42, 0.8);
   }
 
-  :deep() {
-    .el-dialog {
-      --el-dialog-bg-color: rgba(9, 21, 42, 0.8) !important;
-    }
 
-    .el-dialog__title {
-      color: white;
-    }
-
-    .el-input__wrapper {
-      background-color: transparent;
-    }
-
-    .el-select__wrapper {
-      background-color: transparent;
-    }
-
-    .el-select__placeholder {
-      color: white;
-    }
-  }
 </style>

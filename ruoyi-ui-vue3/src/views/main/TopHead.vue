@@ -416,7 +416,7 @@ function handleToolClick(tool) {
   position: absolute;
   left: 20px;
   top: 100px;
-  z-index: 10;
+  z-index: 21;
   background-color: rgba(9, 21, 42, 0.8);
 }
 
@@ -515,4 +515,25 @@ function handleToolClick(tool) {
     color: yellow;
   }
 }
+  :deep() {
+    .el-dialog {
+      --el-dialog-bg-color: rgba(9, 21, 42, 0.8) !important;
+    }
+
+    .el-dialog__title {
+      color: white;
+    }
+
+    .el-input__wrapper {
+      background-color: transparent;
+    }
+
+    .el-select__wrapper {
+      background-color: transparent;
+    }
+
+    .el-select__placeholder {
+      color: white;
+    }
+  }
 </style>

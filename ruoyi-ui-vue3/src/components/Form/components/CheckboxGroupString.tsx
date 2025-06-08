@@ -6,11 +6,12 @@ import {
   toRef,
   computed,
   ref,
+  Ref,
 } from "vue";
 import { observer } from "@formily/reactive-vue";
 import Schema from "@/components/Form";
 import { createForm } from "@formily/core";
-import { FormProvider, ISchemaFieldProps } from "@formily/vue";
+import { FormProvider, ISchemaFieldProps, useField } from "@formily/vue";
 import { useRequest } from "vue-request";
 import API from "@/services";
 import userStore from "@/store/modules/user";
@@ -21,9 +22,10 @@ import { key } from "@mars/widgets/common/store/widget";
 
 export default observer(
   defineComponent({
-    props: ["value", "onChange", "datas"],
+    props: ["value", "onChange"],
     setup(props) {
       const value = toRef(props, "value");
+      const field: Ref<Field> = useField();
       const modelValue = computed(() => {
         if (!value.value) {
           return [];
@@ -37,27 +39,9 @@ export default observer(
             props.onChange(val.join(","));
           }}
         >
-          <FormGrid>
-            {(props?.datas ?? []).map((item, colIndex) => {
-              return (
-                <FormGrid.GridColumn
-                  key={colIndex}
-                  style={{
-                    display: "flex",
-                    flexDirection: "column",
-                  }}
-                >
-                  {item.map((item, rowindex) => (
-                    <ElCheckbox
-                      key={rowindex}
-                      label={item}
-                      value={`${colIndex}-${rowindex}`}
-                    />
-                  ))}
-                </FormGrid.GridColumn>
-              );
-            })}
-          </FormGrid>
+          {field.value?.dataSource?.map((item, index) => (
+            <ElCheckbox key={index} {...item} />
+          ))}
         </ElCheckboxGroup>
       );
     },

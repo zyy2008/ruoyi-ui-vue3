@@ -1,4 +1,4 @@
-import { defineComponent, ExtractPropTypes, PropType, ref } from "vue";
+import { defineComponent, ExtractPropTypes, PropType, watchEffect } from "vue";
 import Schema from "@/components/Form";
 import { ISchemaFieldProps, FormProvider } from "@formily/vue";
 import { Field, createForm, onFormInit, Form } from "@formily/core";
@@ -10,7 +10,15 @@ import { CloseBold, EditPen } from "@element-plus/icons-vue";
 import { observer } from "@formily/reactive-vue";
 import { observable, autorun } from "@formily/reactive";
 import { useRequest } from "vue-request";
-import { MainProducts, RawMaterials, WorkshopEnvironment } from "./components";
+import {
+  MainProducts,
+  RawMaterials,
+  WorkshopEnvironment,
+  StorageArea,
+  CheckboxCol,
+  Radios,
+  PipelineLeak,
+} from "./components";
 import { useDeptId } from "@/hooks";
 
 const { SchemaField } = Schema;
@@ -23,18 +31,19 @@ const props: ISchemaFieldProps = {
         type: "void",
         "x-decorator": "FormLayout",
         "x-decorator-props": {
-          labelCol: 10,
-          wrapperCol: 14,
+          labelCol: 8,
+          wrapperCol: 16,
         },
         "x-component": "FormGrid",
         "x-component-props": {
-          minColumns: 3,
-          maxColumns: 3,
+          minColumns: 2,
+          maxColumns: 2,
         },
         properties: {
-          plotCode: {
+          facilitiesAreas: {
             type: "string",
-            title: "企业存在以下设施或区域",
+            title: "企业存在以下设施或区域(多选)",
+            required: true,
             "x-decorator": "FormItem",
             enum: [
               {
@@ -66,9 +75,9 @@ const props: ISchemaFieldProps = {
                 value: "7",
               },
             ],
-            "x-component": "Checkbox.Group",
+            "x-component": "CheckboxGroupString",
           },
-          plotName: {
+          floorPlan: {
             type: "string",
             title: "平面布置图",
             "x-decorator": "FormItem",
@@ -106,11 +115,11 @@ const props: ISchemaFieldProps = {
                   header: "三、主要中间产物",
                 },
                 properties: {
-                  a23: {
+                  mainIntermediateProductName: {
                     type: "string",
                     title: "主要中间产物名称",
                     "x-decorator": "FormItem",
-                    "x-component": "Input.TextArea",
+                    "x-component": "Input",
                   },
                 },
               },
@@ -121,7 +130,7 @@ const props: ISchemaFieldProps = {
                   header: "四、生产工艺",
                 },
                 properties: {
-                  a22: {
+                  mainProcessFlowChart: {
                     type: "string",
                     title: "主要生产工艺流程图",
                     "x-decorator": "FormItem",
@@ -131,7 +140,7 @@ const props: ISchemaFieldProps = {
                       accept: ".jpg,.png",
                     },
                   },
-                  a2000: {
+                  mainProcessProductionDescription: {
                     type: "string",
                     title: "主要生产工艺描述",
                     "x-decorator": "FormItem",
@@ -141,16 +150,31 @@ const props: ISchemaFieldProps = {
               },
               card4: {
                 type: "void",
-                "x-component": <WorkshopEnvironment />,
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "五、生产车间分布与环境情况",
+                },
+                properties: {
+                  card: {
+                    type: "void",
+                    "x-component": <WorkshopEnvironment />,
+                  },
+                  workshopArea: {
+                    type: "string",
+                    title: "生产车间总面积",
+                    "x-decorator": "FormItem",
+                    "x-component": "Input",
+                  },
+                },
               },
               card5: {
                 type: "void",
                 "x-component": "Card",
                 "x-component-props": {
-                  header: "六、生产车间分布与环境情况",
+                  header: "六、清洁生产审核",
                 },
                 properties: {
-                  c1: {
+                  isCleanProductionAudited: {
                     type: "string",
                     title: "企业是否开展过清洁生产审核",
                     "x-decorator": "FormItem",
@@ -166,7 +190,7 @@ const props: ISchemaFieldProps = {
                     ],
                     "x-component": "Radio.Group",
                   },
-                  c2: {
+                  cleanAuditTime: {
                     type: "string",
                     title: "洁洁生产审校时间",
                     "x-decorator": "FormItem",
@@ -175,7 +199,7 @@ const props: ISchemaFieldProps = {
                       type: "month",
                     },
                   },
-                  c3: {
+                  cleanLevel: {
                     type: "string",
                     title: "清洁生产水平",
                     "x-decorator": "FormItem",
@@ -214,11 +238,62 @@ const props: ISchemaFieldProps = {
                 type: "void",
                 "x-component": "Card",
                 "x-component-props": {
-                  header: "储罐、储槽等储存设施",
+                  header: "储罐、储槽等储存设施*",
                 },
                 properties: {
-                  gt1: {
+                  storageFacility: {
                     type: "string",
+                    "x-decorator": "FormItem",
+                    required: true,
+                    enum: [
+                      {
+                        label: "有",
+                        value: "0",
+                      },
+                      {
+                        label: "无",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card2: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "存放产品、原材料的或其他有毒物质的仓库等*",
+                },
+                properties: {
+                  hazardousMaterialWarehouse: {
+                    type: "string",
+                    "x-decorator": "FormItem",
+                    required: true,
+                    enum: [
+                      {
+                        label: "有",
+                        value: "0",
+                      },
+                      {
+                        label: "无",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card3: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "产品，原材料或其他有毒有害物质的仓库等*",
+                },
+                properties: {
+                  hazardousMaterialLoadingAndUnloadingArea: {
+                    type: "string",
+                    required: true,
                     "x-decorator": "FormItem",
                     enum: [
                       {
@@ -234,243 +309,836 @@ const props: ISchemaFieldProps = {
                   },
                 },
               },
-              // card2: {
-              //   type: "void",
-              //   "x-component": "Card",
-              //   "x-component-props": {
-              //     header: "存放产品、原材料的或其他有毒物质的仓库等",
-              //   },
-              //   properties: {
-              //     gt2: {
-              //       type: "string",
-              //       "x-decorator": "FormItem",
-              //       enum: [
-              //         {
-              //           label: "有",
-              //           value: "0",
-              //         },
-              //         {
-              //           label: "无",
-              //           value: "1",
-              //         },
-              //       ],
-              //       "x-component": "Radio.Group",
-              //     },
-              //   },
-              // },
-              // card3: {
-              //   type: "void",
-              //   "x-component": "Card",
-              //   "x-component-props": {
-              //     header: "产品，原材料或其他有毒有害物质的仓库等",
-              //   },
-              //   properties: {
-              //     gt3: {
-              //       type: "string",
-              //       "x-decorator": "FormItem",
-              //       enum: [
-              //         {
-              //           label: "有",
-              //           value: "0",
-              //         },
-              //         {
-              //           label: "无",
-              //           value: "1",
-              //         },
-              //       ],
-              //       "x-component": "Radio.Group",
-              //     },
-              //   },
-              // },
-
-              // gt4: {
-              //   type: "void",
-              //   "x-component": () => (
-              //     <div
-              //       style={{
-              //         margin: "10px 0",
-              //       }}
-              //     >
-              //       以上三项中任何一项选择是，则须填写以下各项内容，否则不填
-              //     </div>
-              //   ),
-              // },
-              // card4: {
-              //   type: "void",
-              //   "x-component": "Card",
-              //   "x-component-props": {
-              //     header: "储存区",
-              //   },
-              //   properties: {
-              //     array2: {
-              //       type: "array",
-              //       "x-component": "ArrayTable",
-              //       items: {
-              //         type: "object",
-              //         properties: {
-              //           column1: {
-              //             type: "void",
-              //             "x-component": "ArrayTable.Column",
-              //             "x-component-props": {
-              //               width: 80,
-              //               title: "序号",
-              //               align: "center",
-              //             },
-              //             properties: {
-              //               index: {
-              //                 type: "void",
-              //                 "x-component": "ArrayTable.Index",
-              //               },
-              //             },
-              //           },
-              //           column2: {
-              //             type: "void",
-              //             "x-component": "ArrayTable.Column",
-              //             "x-component-props": {
-              //               width: 200,
-              //               title: "产品名称",
-              //             },
-              //             properties: {
-              //               a1: {
-              //                 type: "string",
-              //                 "x-decorator": "FormItem",
-              //                 "x-component": "Input",
-              //               },
-              //             },
-              //           },
-              //           column3: {
-              //             type: "void",
-              //             "x-component": "ArrayTable.Column",
-              //             "x-component-props": {
-              //               width: 200,
-              //               title: "生产年代",
-              //             },
-              //             properties: {
-              //               a1: {
-              //                 type: "string",
-              //                 "x-decorator": "FormItem",
-              //                 "x-component": "Input",
-              //               },
-              //             },
-              //           },
-              //           column4: {
-              //             type: "void",
-              //             "x-component": "ArrayTable.Column",
-              //             "x-component-props": {
-              //               width: 200,
-              //               title: "计量单位",
-              //             },
-              //             properties: {
-              //               a1: {
-              //                 type: "string",
-              //                 "x-decorator": "FormItem",
-              //                 "x-component": "Input",
-              //               },
-              //             },
-              //           },
-              //           column5: {
-              //             type: "void",
-              //             "x-component": "ArrayTable.Column",
-              //             "x-component-props": {
-              //               width: 200,
-              //               title: "年平均产量",
-              //             },
-              //             properties: {
-              //               a1: {
-              //                 type: "string",
-              //                 "x-decorator": "FormItem",
-              //                 "x-component": "Input",
-              //               },
-              //             },
-              //           },
-              //           column6: {
-              //             type: "void",
-              //             "x-component": "ArrayTable.Column",
-              //             "x-component-props": {
-              //               width: 200,
-              //               title: "添加人",
-              //             },
-              //             properties: {
-              //               a1000: {
-              //                 type: "string",
-              //                 "x-decorator": "FormItem",
-              //                 "x-component": "AddPeople",
-              //                 "x-editable": true,
-              //               },
-              //             },
-              //           },
-              //           column8: {
-              //             type: "void",
-              //             "x-component": "ArrayTable.Column",
-              //             "x-component-props": {
-              //               title: "添加时间",
-              //               width: 300,
-              //             },
-
-              //             properties: {
-              //               createdAt: {
-              //                 type: "string",
-              //                 "x-decorator": "FormItem",
-              //                 "x-component": "Input",
-              //                 "x-editable": false,
-              //               },
-              //             },
-              //           },
-              //           column7: {
-              //             type: "void",
-              //             "x-component": "ArrayTable.Column",
-              //             "x-component-props": {
-              //               title: "操作",
-              //               prop: "operations",
-              //               width: 200,
-              //               fixed: "right",
-              //             },
-              //             properties: {
-              //               item: {
-              //                 type: "void",
-              //                 "x-component": "FormItem",
-              //                 properties: {
-              //                   remove: {
-              //                     type: "void",
-              //                     "x-component": "ArrayTable.Remove",
-              //                   },
-              //                   moveDown: {
-              //                     type: "void",
-              //                     "x-component": "ArrayTable.MoveDown",
-              //                   },
-              //                   moveUp: {
-              //                     type: "void",
-              //                     "x-component": "ArrayTable.MoveUp",
-              //                   },
-              //                 },
-              //               },
-              //             },
-              //           },
-              //         },
-              //       },
-              //       properties: {
-              //         add: {
-              //           type: "void",
-              //           "x-component": "ArrayTable.Addition",
-              //           title: "添加条目",
-              //         },
-              //       },
-              //     },
-              //   },
-              // },
-              // card5: {
-              //   type: "void",
-              //   "x-component": "Card",
-              //   "x-component-props": {
-              //     header: "各估存区城防护措施(多选)",
-              //   },
-              //   properties: {
-              //     gt10: {
-              //       type: "string",
-              //       "x-component": "CheckboxGroup",
-              //     }
-              //   },
-              // },
+              gt4: {
+                type: "void",
+                "x-component": () => (
+                  <div
+                    style={{
+                      margin: "10px 0",
+                    }}
+                  >
+                    以上三项中任何一项选择是，则须填写以下各项内容，否则不填
+                  </div>
+                ),
+              },
+              card4: {
+                type: "void",
+                "x-component": <StorageArea />,
+              },
+              card5: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "各储存区城防护措施*(多选)",
+                },
+                properties: {
+                  protectionMeasuresForStorageAreas: {
+                    type: "string",
+                    "x-decorator": "FormItem",
+                    "x-component": (
+                      <CheckboxCol
+                        datas={[
+                          [
+                            "地面无任何处理",
+                            "铺设防渗材料",
+                            "有顶棚或表面覆盖",
+                            "四周有围堰或围墙",
+                            "有雨水收集池或导排管道",
+                          ],
+                          [
+                            "地面硬化且完整",
+                            "防渗材料完整无破损",
+                            "顶棚或表面覆盖完整",
+                            "围堰或围墙完整",
+                            "雨水收集池或导排管道有渗漏",
+                          ],
+                          [
+                            "硬化地面有裂缝",
+                            "防渗材料有破损",
+                            "顶棚或表面覆盖有破损",
+                            "围堰或围墙不完整，可随意进入",
+                          ],
+                        ]}
+                      />
+                    ),
+                  },
+                },
+              },
+              card7: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "存储区总面积*",
+                },
+                properties: {
+                  protectionMeasuresForStorageAreas: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    "x-component": "Input",
+                  },
+                },
+              },
+            },
+          },
+          tab3: {
+            type: "void",
+            "x-component": "FormCollapse.Item",
+            "x-component-props": {
+              title: "三、管道",
+            },
+            properties: {
+              card: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "管道是否发生泄漏*",
+                },
+                properties: {
+                  hasThereBeenAPipeLeak: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    "x-component": <Radios.Input />,
+                  },
+                },
+              },
+              card1: {
+                type: "void",
+                "x-component": <PipelineLeak />,
+              },
+              card2: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "地下管道管线图*",
+                },
+                properties: {
+                  undergroundPipeLineDiagram: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    "x-component": "UploadAjax",
+                    "x-component-props": {
+                      listType: "picture-card",
+                      accept: ".jpg,.png",
+                    },
+                  },
+                },
+              },
+            },
+          },
+          tab4: {
+            type: "void",
+            "x-component": "FormCollapse.Item",
+            "x-component-props": {
+              title: "四、废气治理设施",
+            },
+            properties: {
+              card: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "是否有废气排放*(若选择有，则需填写以下各项内容)",
+                },
+                properties: {
+                  是否有废气排放: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "有",
+                        value: "0",
+                      },
+                      {
+                        label: "无",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card1: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "废气排放量*(万立方米)",
+                },
+                properties: {
+                  totalGasEmission: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    "x-component": "Input",
+                  },
+                },
+              },
+              card2: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "废气中主要污染物名称*",
+                },
+                properties: {
+                  mainPollutantsInEmissions: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    "x-component": "Select",
+                  },
+                },
+              },
+              card3: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "是否有废气在线监测装置*",
+                },
+                properties: {
+                  isThereAnOnlineMonitoringDeviceForEmissions: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "有",
+                        value: "0",
+                      },
+                      {
+                        label: "无",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card4: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "在线监测装固运行情况*",
+                },
+                properties: {
+                  在线监测装固运行情况: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "运行良好",
+                        value: "0",
+                      },
+                      {
+                        label: "未运行",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card5: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "是否有废气治理设施*",
+                },
+                properties: {
+                  isThereAnEmissionTreatmentFacility: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "有",
+                        value: "0",
+                      },
+                      {
+                        label: "无",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card6: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "废气治理设施运行情况*",
+                },
+                properties: {
+                  operationStatusOfEmissionTreatmentFacility: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "运行良好",
+                        value: "0",
+                      },
+                      {
+                        label: "未运行",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card7: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "数据来源",
+                },
+                properties: {
+                  数据来源: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    "x-component": "Input",
+                  },
+                },
+              },
+            },
+          },
+          tab5: {
+            type: "void",
+            "x-component": "FormCollapse.Item",
+            "x-component-props": {
+              title: "五、废水治理设施",
+            },
+            properties: {
+              card: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "是否有废水排放*(若选择有，则需填写以下各项内容)",
+                },
+                properties: {
+                  isThereWastewaterDischarge: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "有",
+                        value: "0",
+                      },
+                      {
+                        label: "无",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card1: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "废水排放量*(吨)",
+                },
+                properties: {
+                  wastewaterDischargeVolume: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    "x-component": "Input",
+                  },
+                },
+              },
+              card2: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "废水中主要污染物名称*",
+                },
+                properties: {
+                  mainPollutantsInWastewater: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    "x-component": "Select",
+                  },
+                },
+              },
+              card3: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "是否有废水在线监测装置*",
+                },
+                properties: {
+                  isThereAnOnlineMonitoringDeviceForWastewater: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "有",
+                        value: "0",
+                      },
+                      {
+                        label: "无",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card4: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "在线监测装固运行情况*",
+                },
+                properties: {
+                  operationStatusOfOnlineMonitoringDevice: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "运行良好",
+                        value: "0",
+                      },
+                      {
+                        label: "未运行",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card5: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "是否有废气治理设施*",
+                },
+                properties: {
+                  isThereAWastewaterTreatmentFacility: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "有",
+                        value: "0",
+                      },
+                      {
+                        label: "无",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card6: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "废气治理设施运行情况*",
+                },
+                properties: {
+                  operationStatusOfWastewaterTreatmentFacility: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "运行良好",
+                        value: "0",
+                      },
+                      {
+                        label: "未运行",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card7: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "废水治理区坐标位置",
+                },
+                properties: {
+                  coordinatesOfWastewaterTreatmentArea: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    "x-component": "Input",
+                  },
+                },
+              },
+              card8: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "废水治理区面积*",
+                },
+                properties: {
+                  areaOfWastewaterTreatmentArea: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    "x-component": "Input",
+                  },
+                },
+              },
+              card9: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "废水治理区污染痕迹",
+                },
+                properties: {
+                  pollutionTracesInWastewaterTreatmentArea: {
+                    type: "string",
+                    "x-decorator": "FormItem",
+                    "x-component": "Input",
+                  },
+                },
+              },
+            },
+          },
+          tab6: {
+            type: "void",
+            "x-component": "FormCollapse.Item",
+            "x-component-props": {
+              title: "六、固体废物贮存或处置区",
+            },
+            properties: {
+              card: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header:
+                    "是否产生固体废物*(若选择有，则需填写以下第2-16项内容)",
+                },
+                properties: {
+                  isSolidWasteGenerated: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "是",
+                        value: "0",
+                      },
+                      {
+                        label: "否",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card1: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "是否有固体废物贮存*",
+                },
+                properties: {
+                  isSolidWasteStored: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "是",
+                        value: "0",
+                      },
+                      {
+                        label: "否",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card2: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "是否有危险废物自处置*",
+                },
+                properties: {
+                  isHazardousWasteSelfDisposed: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "是",
+                        value: "0",
+                      },
+                      {
+                        label: "否",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card3: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "污染物痕迹",
+                },
+                properties: {},
+              },
+              card4: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "固废贮存或处置区防护措施*(多选)",
+                },
+                properties: {
+                  solidWasteStorageAndDisposalAreaProtectionMeasures: {
+                    type: "string",
+                    "x-decorator": "FormItem",
+                    "x-component": (
+                      <CheckboxCol
+                        datas={[
+                          [
+                            "地面无任何处理",
+                            "防渗材料完整无破损",
+                            "表面覆盖有破损",
+                            "有雨水收集池或导排管道",
+                          ],
+                          [
+                            "地面硬化且完整",
+                            "防渗材料有破损",
+                            "四周有围堰或围墙",
+                            "雨水收集池或导排管道有渗漏",
+                          ],
+                          [
+                            "硬化地面有裂缝",
+                            "有表面覆盖",
+                            "围堰或围墙完整",
+                            "有渗滤液收集或处理设施",
+                          ],
+                          [
+                            "铺设防渗材料",
+                            "表面覆盖完整",
+                            "围堰或围墙不完整，可随意进入",
+                            "渗滤液收集或处理设施有渗漏",
+                          ],
+                        ]}
+                      />
+                    ),
+                  },
+                },
+              },
+              card5: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "危废贮存或处置区防护措施*(多选)",
+                },
+                properties: {
+                  solidWasteStorageAndDisposalAreaProtectionMeasures: {
+                    type: "string",
+                    "x-decorator": "FormItem",
+                    "x-component": (
+                      <CheckboxCol
+                        datas={[
+                          [
+                            "地面无任何处理",
+                            "防渗材料完整无破损",
+                            "表面覆盖有破损",
+                            "有雨水收集池或导排管道",
+                          ],
+                          [
+                            "地面硬化且完整",
+                            "防渗材料有破损",
+                            "四周有围堰或围墙",
+                            "雨水收集池或导排管道有渗漏",
+                          ],
+                          [
+                            "硬化地面有裂缝",
+                            "有表面覆盖",
+                            "围堰或围墙完整",
+                            "有渗滤液收集或处理设施",
+                          ],
+                          [
+                            "铺设防渗材料",
+                            "表面覆盖完整",
+                            "围堰或围墙不完整，可随意进入",
+                            "渗滤液收集或处理设施有渗漏",
+                          ],
+                        ]}
+                      />
+                    ),
+                  },
+                },
+              },
+              card6: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "危险废物规范化管理考核评估结果",
+                },
+                properties: {
+                  hazardousWasteStandardizedManagementAssessmentResults: {
+                    type: "string",
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "达标",
+                        value: "0",
+                      },
+                      {
+                        label: "基本达标",
+                        value: "1",
+                      },
+                      {
+                        label: "不达标",
+                        value: "2",
+                      },
+                      {
+                        label: "未知",
+                        value: "3",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+            },
+          },
+          tab7: {
+            type: "void",
+            "x-component": "FormCollapse.Item",
+            "x-component-props": {
+              title: "七、其他可疑污染源或污染痕迹",
+            },
+            properties: {
+              card: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header:
+                    "地块内道路、地表、建（构）筑物表面、墙壁、空地污染痕迹（若选择有，则需填写以下第2-6项内容，否则不填）",
+                },
+                properties: {
+                  isSolidWasteGenerated: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "有",
+                        value: "0",
+                      },
+                      {
+                        label: "无",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card1: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "污染物痕迹",
+                },
+                properties: {},
+              },
+              card2: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "空气异味状况*",
+                },
+                properties: {
+                  isHazardousWasteSelfDisposed: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    "x-component": <Radios.Radio />,
+                  },
+                },
+              },
+            },
+          },
+          tab8: {
+            type: "void",
+            "x-component": "FormCollapse.Item",
+            "x-component-props": {
+              title: "八、环境污染事故发生情况",
+            },
+            properties: {
+              card: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "环境污染事故发生情况",
+                },
+                properties: {
+                  isSolidWasteGenerated: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    "x-component": <Radios.Input1 />,
+                  },
+                },
+              },
+              card1: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "污染物痕迹",
+                },
+                properties: {},
+              },
+              card2: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "空气异味状况*",
+                },
+                properties: {
+                  isHazardousWasteSelfDisposed: {
+                    type: "string",
+                    required: true,
+                    "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "是",
+                        value: "0",
+                      },
+                      {
+                        label: "否",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
             },
           },
         },
@@ -485,6 +1153,18 @@ export default defineComponent({
 
     const form = createForm();
 
+    const { run, loading, data } = useRequest<any>(() =>
+      API.getAdminPollutionList({ deptId })
+    );
+    watchEffect(() => {
+      if (data.value?.code === 200) {
+        const item = data.value.data;
+        form.reset().then(() => {
+          form.setValues(item);
+        });
+      }
+    });
+
     return () => (
       <div class="app-container">
         <ElCard>
@@ -496,15 +1176,15 @@ export default defineComponent({
                 margin: "10px",
               }}
             >
-              {/* <ElButton
+              <ElButton
                 type="primary"
                 loading={loading.value}
                 onClick={() => {
                   form.submit().then((val: any) => {
                     const { id } = val;
                     const api = id
-                      ? API.putAdminEnterprise
-                      : API.postAdminEnterprise;
+                      ? API.putAdminPollution
+                      : API.postAdminPollution;
                     api({
                       ...val,
                       deptId,
@@ -520,7 +1200,7 @@ export default defineComponent({
                 }}
               >
                 保存
-              </ElButton> */}
+              </ElButton>
             </FormButtonGroup>
           </FormProvider>
         </ElCard>

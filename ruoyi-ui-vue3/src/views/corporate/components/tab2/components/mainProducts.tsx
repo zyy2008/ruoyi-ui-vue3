@@ -71,11 +71,6 @@ const props: ISchemaFieldProps = {
                       "x-component-props": {
                         type: "year",
                       },
-                      // "x-reactions": (field: Field) => {
-                      //   setTimeout(() => {
-                      //     field.setValue(`${field.value}`);
-                      //   }, 0);
-                      // },
                     },
                   },
                 },

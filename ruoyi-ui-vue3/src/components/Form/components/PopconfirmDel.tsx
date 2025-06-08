@@ -2,7 +2,7 @@ import { defineComponent, inject } from "vue";
 import { observer } from "@formily/reactive-vue";
 import Schema from "@/components/Form";
 import { createForm } from "@formily/core";
-import { FormProvider, ISchemaFieldProps } from "@formily/vue";
+import { FormProvider, ISchemaFieldProps, useForm } from "@formily/vue";
 import { ElPopconfirm, ElButton, ElMessage } from "element-plus";
 import { ArrayTable } from "@formily/element-plus";
 import { useRequest } from "vue-request";
@@ -63,6 +63,7 @@ const Save = observer(
       const { apiEdit, apiAdd, run: getList } = inject<InjectProps>("form");
       const record = ArrayTable.useRecord();
       const { deptId } = useDeptId();
+      const form = useForm();
       const { runAsync, loading } = useRequest(
         (id) => {
           if (id != null && id !== undefined && id !== "") {
@@ -84,14 +85,21 @@ const Save = observer(
         <ElPopconfirm
           title="确定保存当前条目吗？"
           onConfirm={() => {
-            runAsync(record.value?.id).then((res) => {
-              if (res.code === 200) {
-                ElMessage.success("保存成功");
-                getList();
-              } else {
-                ElMessage.warning("保存失败");
-              }
-            });
+            form.value
+              .submit()
+              .then(() => {
+                runAsync(record.value?.id).then((res) => {
+                  if (res.code === 200) {
+                    ElMessage.success("保存成功");
+                    getList();
+                  } else {
+                    ElMessage.warning("保存失败");
+                  }
+                });
+              })
+              .catch((res) => {
+                ElMessage.error("请检查必填字段");
+              });
           }}
         >
           {{

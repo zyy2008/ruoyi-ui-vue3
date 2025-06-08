@@ -17,7 +17,7 @@ const props: ISchemaFieldProps = {
         type: "void",
         "x-component": "Card",
         "x-component-props": {
-          header: "二、主要原辅材料",
+          header: "(若选择是，则需填写以下第2到5项内容，否则不填)",
         },
         properties: {
           array: {
@@ -31,7 +31,7 @@ const props: ISchemaFieldProps = {
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
                     width: 80,
-                    title: "序号",
+                    title: "事故序号",
                     align: "center",
                   },
                   properties: {
@@ -45,14 +45,24 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "原辅材料名称",
                     width: 200,
+                    title: "管道类型",
                   },
                   properties: {
-                    materialName: {
+                    pipelineType: {
                       type: "string",
+                      enum: [
+                        {
+                          label: "地上",
+                          value: "0",
+                        },
+                        {
+                          label: "地下",
+                          value: "1",
+                        },
+                      ],
                       "x-decorator": "FormItem",
-                      "x-component": "Input",
+                      "x-component": "Select",
                     },
                   },
                 },
@@ -60,22 +70,14 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "使用年代",
                     width: 200,
+                    title: "泄漏点坐标位置",
                   },
                   properties: {
-                    usageYear: {
+                    leakCoordinates: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
-                      // "x-component-props": {
-                      //   type: "year",
-                      // },
-                      // "x-reactions": (field: Field) => {
-                      //   setTimeout(() => {
-                      //     field.setValue(`${field.value}`);
-                      //   }, 0);
-                      // },
                     },
                   },
                 },
@@ -83,45 +85,14 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "计量单位",
                     width: 200,
+                    title: "泄漏的物质名称",
                   },
                   properties: {
-                    unit: {
+                    leakedSubstanceName: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
-                    },
-                  },
-                },
-                column5: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
-                    title: "年平均产量",
-                    width: 200,
-                  },
-                  properties: {
-                    annualUsage: {
-                      type: "string",
-                      "x-decorator": "FormItem",
-                      "x-component": "Input",
-                    },
-                  },
-                },
-                column6: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
-                    title: "添加人",
-                    width: 200,
-                  },
-                  properties: {
-                    createdBy: {
-                      type: "string",
-                      "x-decorator": "FormItem",
-                      "x-component": "AddPeople",
-                      "x-editable": false,
                     },
                   },
                 },
@@ -129,26 +100,9 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "添加时间",
-                    width: 300,
-                  },
-
-                  properties: {
-                    createdAt: {
-                      type: "string",
-                      "x-decorator": "FormItem",
-                      "x-component": "Input",
-                      "x-editable": false,
-                    },
-                  },
-                },
-                column8: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
                     title: "操作",
                     prop: "operations",
-                    width: 160,
+                    width: 200,
                     fixed: "right",
                   },
                   properties: {
@@ -190,7 +144,7 @@ export default observer(
       const form = createForm();
       const { deptId } = useDeptId();
       const { data, run } = useRequest(() =>
-        API.getAdminRawMaterialsList({
+        API.getAdminPipelineLeakList({
           deptId,
         })
       );
@@ -205,9 +159,9 @@ export default observer(
       });
       provide("form", {
         run,
-        apiAdd: API.postAdminRawMaterials,
-        apiEdit: API.putAdminRawMaterials,
-        apiDel: API.deleteAdminRawMaterialsIds,
+        apiAdd: API.postAdminPipelineLeak,
+        apiEdit: API.putAdminPipelineLeak,
+        apiDel: API.deleteAdminPipelineLeakIds,
       });
       return () => (
         <FormProvider form={form}>

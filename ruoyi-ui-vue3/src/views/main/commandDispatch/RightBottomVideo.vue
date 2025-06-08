@@ -8,13 +8,15 @@
     </div>
 
     <div class="video">
-      <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls style="width: 200px">
+      <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls style="width: 250px">
       </video>
-      <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls style="width: 200px">
+      <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls style="width: 250px">
       </video>
-      <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls style="width: 200px">
+      <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls style="width: 250px">
       </video>
-      <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls style="width: 200px">
+      <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls style="width: 250px">
+      </video>
+      <video src="https://www.w3schools.com/html/mov_bbb.mp4" controls style="width: 250px">
       </video>
     </div>
   </div>

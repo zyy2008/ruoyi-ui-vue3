@@ -1,19 +1,30 @@
 <template>
-  <el-dialog z-index="9999999999" v-model="dialogVisible"
+  <el-dialog z-index="10" v-model="dialogVisible"
     :title="chart.chart.chartInfo.wellCode+'('+chart.chart.chartInfo.location+')'" width="100vw" :top="'200px'"
-    destroy-on-close @open="openChartLine" style="height: 650px;">
+    destroy-on-close @open="openChartLine" @close="closeChartLine" style="height: 650px;">
     <el-date-picker v-model="timeValue" type="daterange" range-separator="至" start-placeholder="开始日期"
       style="width: 400px" end-placeholder="结束日期">
     </el-date-picker>
     <el-button type="primary" color="#072d50" :icon="Search" style="margin-left: 20px;">查询</el-button>
     <el-select v-model="selectValue" placeholder="请选择" style="width: 300px; float: right" @change="changeSelect">
-      <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
+      <el-option v-for="item in chart.chartType==='monitor'?options1: options" :key="item.value" :label="item.label"
+        :value="item.value">
       </el-option>
     </el-select>
     <div id="echartLine"></div>
-    <el-table :data="tableInfo" style="width: 100%" :row-class-name="tableRowClassName">
+    <el-table :data="tableInfo" style="width: 100%" v-show="chart.chartType==='monitor'">
+      <el-table-column type="index" label="序号" width="55" />
+      <el-table-column prop="ph" label="pH" />
+      <el-table-column prop="name" label="温度" />
+      <el-table-column prop="address" label="水位" />
+      <el-table-column prop="name1" label="电位" />
+      <el-table-column prop="totalDissolvedSolids" label="溶解性" />
+      <el-table-column prop="name1" label="电导率" />
+      <el-table-column prop="ammoniaNitrogen" label="氨氮" />
+    </el-table>
+    <el-table :data="tableInfo" style="width: 100%" v-show="chart.chartType!='monitor'">
       <!-- <el-table-column type="index" label="序号" width="55" /> -->
-      <!-- <el-table-column prop="ph" label="PH" />
+      <!-- <el-table-column prop="ph" label="pH" />
       <el-table-column prop="name" label="温度" />
       <el-table-column prop="address" label="水位" />
       <el-table-column prop="name1" label="电位" />
@@ -115,10 +126,41 @@
   import { listMonitoring } from "@/api/admin/monitoring";
   let lineChart = null;
   let lineOption = {};
-  const selectValue = ref("PH");
+  const selectValue = ref("pH");
   const timeValue = ref();
   const dialogVisible = ref(false);
-  const chart = defineProps(["chart", "lineXAxis", "lineSeries"]);
+  const chart = defineProps(["chart", "lineXAxis", "lineSeries", 'chartType']);
+  const options1 = [
+    {
+      value: "1",
+      label: "pH",
+    },
+    {
+      value: "2",
+      label: "温度",
+    },
+    {
+      value: "3",
+      label: "水位",
+    },
+    {
+      value: "4",
+      label: "电位",
+    },
+    {
+      value: "5",
+      label: "溶解性固体", // 建议更具体的描述
+    },
+    {
+      value: "6",
+      label: "电导率",
+    },
+    {
+      value: "7",
+      label: "氨氮",
+    }
+  ]
+
   const options = [
     {
       value: "1",
@@ -366,8 +408,13 @@
     }
     seekLineData(data, time);
   }
+
+  function closeChartLine() {
+    const elements = document.getElementsByClassName('RightLine');
+    elements[0].style.zIndex = 20
+  }
   function openChartLine() {
-    selectValue.value = "PH";
+    selectValue.value = "pH";
     var chartDom = document.getElementById("echartLine");
     lineChart = echarts.init(chartDom);
     var fontColor = "#30eee9";
@@ -393,7 +440,7 @@
         textStyle: {
           color: "#1bb4f6",
         },
-        data: ["PH", "温度", "水位", "氧化还原电位", "溶解性", "电导率", "氨氮"],
+        data: ["pH", "温度", "水位", "氧化还原电位", "溶解性", "电导率", "氨氮"],
       },
       xAxis: [
         {
@@ -417,7 +464,6 @@
               color: "#195384",
             },
           },
-          // data: ['周一', '周二', '周三', '周四', '周五', '周六', '周天']
           data: ["0", "1", "2"],
         },
       ],
@@ -450,7 +496,7 @@
       ],
       series: [
         {
-          name: "PH",
+          name: "pH",
           type: "line",
           stack: "总量",
           symbol: "circle",
@@ -496,6 +542,6 @@
     .el-select__placeholder {
       color: white;
     }
-    
+
   }
 </style>

@@ -84,6 +84,11 @@ public class TEnterprises extends BaseEntity {
     @Excel(name = "是否重点")
     @ApiModelProperty("是否重点")
     private String isKeyEnterprise;
+    /**
+     * 监管类型
+     */
+    @ApiModelProperty("监管类型")
+    private String regulatoryType;
 
     /**
      * 主键

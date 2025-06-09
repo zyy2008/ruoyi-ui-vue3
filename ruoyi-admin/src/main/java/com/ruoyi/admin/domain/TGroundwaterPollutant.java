@@ -29,7 +29,7 @@ public class TGroundwaterPollutant extends BaseEntity {
      * 关联的地下水监测记录ID
      */
     @ApiModelProperty("关联的地下水监测记录ID")
-    private Long monitoringId;
+    private String monitoringId;
 
     /**
      * 超标污染物名称

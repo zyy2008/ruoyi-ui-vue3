@@ -44,19 +44,23 @@ public class TSoilPathway extends BaseEntity {
      */
     @Excel(name = "上层埋深", readConverterExp = "单=位cm")
     @ApiModelProperty("上层埋深")
-    private Long depthTopCm;
+    private String depthTopCm;
 
     /**
      * 土层厚度（单位cm）
      */
     @Excel(name = "土层厚度", readConverterExp = "单=位cm")
     @ApiModelProperty("土层厚度")
-    private Long thicknessCm;
+    private String thicknessCm;
 
     /**
      * 归属部门
      */
-    @Excel(name = "归属部门")
+    @ApiModelProperty("绑定的地下水迁移途径信息")
+    private String groundwaterPathwayId;
+    /**
+     * 归属部门
+     */
     @ApiModelProperty("归属部门")
     private String deptId;
 

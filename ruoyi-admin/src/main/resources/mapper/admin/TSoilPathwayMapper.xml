@@ -11,10 +11,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="depthTopCm"    column="depth_top_cm"    />
         <result property="thicknessCm"    column="thickness_cm"    />
         <result property="deptId"    column="dept_id"    />
+        <result property="groundwaterPathwayId"    column="groundwater_pathway_id"    />
     </resultMap>
 
     <sql id="selectTSoilPathwayVo">
-        select id, seq_no, soil_type, depth_top_cm, thickness_cm, dept_id from t_soil_pathway
+        select id, seq_no, soil_type, depth_top_cm, thickness_cm, dept_id,groundwater_pathway_id from t_soil_pathway
     </sql>
 
     <select id="selectTSoilPathwayList" parameterType="TSoilPathway" resultMap="TSoilPathwayResult">
@@ -25,6 +26,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="depthTopCm != null "> and depth_top_cm = #{depthTopCm}</if>
             <if test="thicknessCm != null "> and thickness_cm = #{thicknessCm}</if>
             <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="groundwaterPathwayId != null "> and groundwater_pathway_id = #{groundwaterPathwayId}</if>
         </where>
     </select>
     
@@ -41,6 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="depthTopCm != null">depth_top_cm,</if>
             <if test="thicknessCm != null">thickness_cm,</if>
             <if test="deptId != null">dept_id,</if>
+            <if test="groundwaterPathwayId != null">groundwater_pathway_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="seqNo != null">#{seqNo},</if>
@@ -48,6 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="depthTopCm != null">#{depthTopCm},</if>
             <if test="thicknessCm != null">#{thicknessCm},</if>
             <if test="deptId != null">#{deptId},</if>
+            <if test="groundwaterPathwayId != null">#{groundwaterPathwayId},</if>
          </trim>
     </insert>
 
@@ -59,6 +63,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="depthTopCm != null">depth_top_cm = #{depthTopCm},</if>
             <if test="thicknessCm != null">thickness_cm = #{thicknessCm},</if>
             <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="groundwaterPathwayId != null">groundwater_pathway_id = #{groundwaterPathwayId},</if>
         </trim>
         where id = #{id}
     </update>

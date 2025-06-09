@@ -54,10 +54,10 @@ public class TSensitiveReceptor extends BaseEntity {
     private String surroundingLandNorth;
 
     /**
-     * 地块内职工人数分类
+     * 地块内职工人数
      */
-    @Excel(name = "地块内职工人数分类")
-    @ApiModelProperty("地块内职工人数分类")
+    @Excel(name = "地块内职工人数")
+    @ApiModelProperty("地块内职工人数")
     private String employeeCountCategory;
 
     /**

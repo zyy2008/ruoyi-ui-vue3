@@ -35,6 +35,7 @@
         <result property="historyLandUse"    column="history_land_use"    />
         <result property="historyStartYear"    column="history_start_year"    />
         <result property="historyEndYear"    column="history_end_year"    />
+        <result property="regulatoryType"    column="regulatory_type"    />
     </resultMap>
 
     <sql id="selectTEnterprisesVo">
@@ -43,7 +44,7 @@
                industry_category, industry_code, registration_type, enterprise_scale, start_date,
                latest_expansion_date, in_industrial_park, history_land_use, history_start_year,
                history_end_year, dept_id,enterprise_name, industry_category, production_years,
-               status, reporting_status, longitude, latitude, area, is_key_enterprise, id
+               status, reporting_status, longitude, latitude, area, is_key_enterprise, id,regulatory_type
         from t_enterprises
     </sql>
 
@@ -52,6 +53,7 @@
         <where>
             <if test="enterpriseName != null  and enterpriseName != ''"> and enterprise_name like concat('%', #{enterpriseName}, '%')</if>
             <if test="productionYears != null  and productionYears != ''"> and production_years = #{productionYears}</if>
+            <if test="regulatoryType != null  and regulatoryType != ''"> and regulatory_type = #{regulatoryType}</if>
             <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="reportingStatus != null  and reportingStatus != ''"> and reporting_status = #{reportingStatus}</if>
             <if test="longitude != null  and longitude != ''"> and longitude = #{longitude}</if>
@@ -120,6 +122,7 @@
             <if test="historyLandUse != null">history_land_use,</if>
             <if test="historyStartYear != null">history_start_year,</if>
             <if test="historyEndYear != null">history_end_year,</if>
+            <if test="regulatoryType != null">regulatory_type,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="enterpriseName != null">#{enterpriseName},</if>
@@ -153,6 +156,7 @@
             <if test="historyLandUse != null">#{historyLandUse},</if>
             <if test="historyStartYear != null">#{historyStartYear},</if>
             <if test="historyEndYear != null">#{historyEndYear},</if>
+            <if test="regulatoryType != null">#{regulatoryType},</if>
         </trim>
     </insert>
 
@@ -189,6 +193,7 @@
             <if test="historyLandUse != null">history_land_use = #{historyLandUse},</if>
             <if test="historyStartYear != null">history_start_year = #{historyStartYear},</if>
             <if test="historyEndYear != null">history_end_year = #{historyEndYear},</if>
+            <if test="regulatoryType != null">regulatory_type = #{regulatoryType},</if>
         </trim>
         where id = #{id}
     </update>

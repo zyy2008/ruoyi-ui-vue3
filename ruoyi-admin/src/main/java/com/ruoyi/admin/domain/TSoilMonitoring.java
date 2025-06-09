@@ -41,7 +41,7 @@ public class TSoilMonitoring extends BaseEntity {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "调查时间", width = 30, dateFormat = "yyyy-MM-dd")
     @ApiModelProperty("调查时间")
-    private Date surveyDate;
+    private String surveyDate;
 
     /**
      * 是否发现超标污染物

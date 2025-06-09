@@ -41,18 +41,6 @@
   let lineSeries = ref([]);
   const chartType=ref('monitor')
   const chart = defineProps(["chartInfo"]);
-  onMounted(() => {
-    // seekLineData({ pageNum: 1, pageSize: 1000, pointId: "J01" }, 'ph');
-  });
-
-  watch(chart, (newValue, oldValue) => {
-    selectValue.value = 'pH'
-    seekLineData({
-      pageNum: 1,
-      pageSize: 1000,
-      pointId: chart.chartInfo.wellCode,
-    }, 'ph');
-  });
 
   function seekLineData(option, type) {
     chartLine.value.tableData = [];
@@ -96,35 +84,9 @@
           }
         }
       });
-      lineChart.setOption(lineOption);
+      // lineChart.setOption(lineOption);
     });
   }
-
-  // function changeSelect(label) {
-  //   if (label === '1') {
-  //     seekLineData({
-  //       pageNum: 1,
-  //       pageSize: 1000,
-  //       pointId: chart.chartInfo.wellCode,
-  //     }, 'ph');
-  //   } else if (label === '5') {
-  //     seekLineData({
-  //       pageNum: 1,
-  //       pageSize: 1000,
-  //       pointId: chart.chartInfo.wellCode,
-  //     }, 'dissolved');
-  //   } else if (label === '7') {
-  //     seekLineData({
-  //       pageNum: 1,
-  //       pageSize: 1000,
-  //       pointId: chart.chartInfo.wellCode,
-  //     }, 'ammoniaNitrogen');
-  //   } else {
-  //     lineOption.xAxis[0].data = [];
-  //     lineOption.series[0].data = [];
-  //     lineChart.setOption(lineOption);
-  //   }
-  // }
 
   function openChartLine() {
     seekLineData({
@@ -136,20 +98,6 @@
     const elements = document.getElementsByClassName('RightCenter');
     elements[0].style.zIndex = 100
   }
-
-  window.openJCPageVue = function (data) {
-    let attr = data.attr;
-    seekLineData({ pageNum: 1, pageSize: 1000, pointId: attr.wellCode }, 'ph');
-    nextTick(() => {
-      chartLine.value.dialogVisible = true;
-    });
-  };
-
-  window.openLineChartPage = function (data) {
-    nextTick(() => {
-      chart.chartInfo.wellCode = data.graphic.label.text;
-    });
-  };
 
   nextTick(() => {
     initEchart('echart1', 'pH');
@@ -284,12 +232,6 @@
   }
   //切换周和月
   const changeChart = () => {
-    // if (xAxis.value === '月') {
-    //   lineOption.xAxis[0].data = ['10-01', '10-05', '10-10', '10-15', '10-20', '10-25', '10-30']
-    // } else {
-    //   lineOption.xAxis[0].data = ['周一', '周二', '周三', '周四', '周五', '周六', '周天']
-    // }
-    // lineChart.setOption(lineOption);
   };
 </script>
 

@@ -369,7 +369,7 @@
     position: absolute;
     left: 20px;
     top: 90px;
-    z-index: 21;
+    z-index: 30;
     background-color: rgba(9, 21, 42, 0.8);
   }
 
@@ -388,7 +388,7 @@
     position: absolute;
     top: 90px;
     right: 20px;
-    z-index: 20;
+    z-index: 10;
   }
 
   .RightTable {

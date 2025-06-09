@@ -19,6 +19,7 @@
         <result property="hazardousMaterialLoadingAndUnloadingArea"    column="hazardous_material_loading_and_unloading_area"    />
         <result property="storageArea"    column="storage_area"    />
         <result property="protectionMeasuresForStorageAreas"    column="protection_measures_for_storage_areas"    />
+        <result property="workshopArea"    column="workshop_area"    />
         <result property="hasThereBeenAPipeLeak"    column="has_there_been_a_pipe_leak"    />
         <result property="undergroundPipeLineDiagram"    column="underground_pipe_line_diagram"    />
         <result property="gasTreatmentExists"    column="gas_treatment_exists"    />
@@ -46,10 +47,32 @@
         <result property="hazardousWasteStorageAndDisposalAreaProtectionMeasures"    column="hazardous_waste_storage_and_disposal_area_protection_measures"    />
         <result property="hazardousWasteStandardizedManagementAssessmentResults"    column="hazardous_waste_standardized_management_assessment_results"    />
         <result property="deptId"    column="dept_id"    />
+        <result property="isWasteGasEmission" column="is_waste_gas_emission"/>
+        <result property="dataSourceOfProductionArea" column="data_source_of_production_area"/>
+        <result property="dataSourceOfRawAndAuxiliaryMaterials" column="data_source_of_raw_and_auxiliary_materials"/>
+        <result property="dataSourceOfStorageArea" column="data_source_of_storage_area"/>
+        <result property="dataSourceOfWasteGas" column="data_source_of_waste_gas"/>
+        <result property="dataSourceOfWastewater" column="data_source_of_wastewater"/>
+        <result property="dataSourceOfSolidWasteStorageAndDisposalArea" column="data_source_of_solid_waste_storage_and_disposal_area"/>
+        <result property="internalPollutionTracesOfThePlot" column="internal_pollution_traces_of_the_plot"/>
     </resultMap>
 
     <sql id="selectTEnterprisePollutionInfoVo">
-        select id, facilities_areas, floor_plan, main_intermediate_product_name, main_process_flow_chart, main_process_production_description, is_clean_production_audited, clean_audit_time, clean_level, storage_facility, hazardous_material_warehouse, hazardous_material_loading_and_unloading_area, storage_area, protection_measures_for_storage_areas, has_there_been_a_pipe_leak, underground_pipe_line_diagram, gas_treatment_exists, total_gas_emission, main_pollutants_in_emissions, is_there_an_online_monitoring_device_for_emissions, operation_status_of_online_monitoring_device, is_there_an_emission_treatment_facility, operation_status_of_emission_treatment_facility, is_there_wastewater_discharge, wastewater_discharge_volume, main_pollutants_in_wastewater, is_there_an_online_monitoring_device_for_wastewater, is_there_a_wastewater_treatment_facility, operation_status_of_wastewater_treatment_facility, coordinates_of_wastewater_treatment_area, area_of_wastewater_treatment_area, pollution_traces_in_wastewater_treatment_area, photos_of_pollution_traces, protection_measures_in_wastewater_treatment_area, is_solid_waste_generated, is_solid_waste_stored, is_hazardous_waste_self_disposed, wastewater_treatment_area_protection_measures, solid_waste_storage_and_disposal_area_protection_measures, hazardous_waste_storage_and_disposal_area_protection_measures, hazardous_waste_standardized_management_assessment_results, dept_id from t_enterprise_pollution_info
+        select id, facilities_areas, floor_plan, workshop_area,main_intermediate_product_name, main_process_flow_chart,
+               main_process_production_description, is_clean_production_audited, clean_audit_time, clean_level, storage_facility,
+               hazardous_material_warehouse, hazardous_material_loading_and_unloading_area, storage_area, protection_measures_for_storage_areas,
+               has_there_been_a_pipe_leak, underground_pipe_line_diagram, gas_treatment_exists, total_gas_emission, main_pollutants_in_emissions,
+               is_there_an_online_monitoring_device_for_emissions, operation_status_of_online_monitoring_device, is_there_an_emission_treatment_facility,
+               operation_status_of_emission_treatment_facility, is_there_wastewater_discharge, wastewater_discharge_volume, main_pollutants_in_wastewater,
+               is_there_an_online_monitoring_device_for_wastewater, is_there_a_wastewater_treatment_facility, operation_status_of_wastewater_treatment_facility,
+               coordinates_of_wastewater_treatment_area, area_of_wastewater_treatment_area, pollution_traces_in_wastewater_treatment_area,
+               photos_of_pollution_traces, protection_measures_in_wastewater_treatment_area, is_solid_waste_generated, is_solid_waste_stored,
+               is_hazardous_waste_self_disposed, wastewater_treatment_area_protection_measures, solid_waste_storage_and_disposal_area_protection_measures,
+               hazardous_waste_storage_and_disposal_area_protection_measures, hazardous_waste_standardized_management_assessment_results, dept_id,
+               is_waste_gas_emission, data_source_of_production_area, data_source_of_raw_and_auxiliary_materials,
+               data_source_of_storage_area, data_source_of_waste_gas, data_source_of_wastewater,
+               data_source_of_solid_waste_storage_and_disposal_area, internal_pollution_traces_of_the_plot,
+        from t_enterprise_pollution_info
     </sql>
 
     <select id="selectTEnterprisePollutionInfoList" parameterType="TEnterprisePollutionInfo" resultMap="TEnterprisePollutionInfoResult">
@@ -67,6 +90,7 @@
             <if test="hazardousMaterialWarehouse != null  and hazardousMaterialWarehouse != ''"> and hazardous_material_warehouse = #{hazardousMaterialWarehouse}</if>
             <if test="hazardousMaterialLoadingAndUnloadingArea != null  and hazardousMaterialLoadingAndUnloadingArea != ''"> and hazardous_material_loading_and_unloading_area = #{hazardousMaterialLoadingAndUnloadingArea}</if>
             <if test="storageArea != null  and storageArea != ''"> and storage_area = #{storageArea}</if>
+            <if test="workshopArea != null  and workshopArea != ''"> and workshop_area = #{workshopArea}</if>
             <if test="protectionMeasuresForStorageAreas != null  and protectionMeasuresForStorageAreas != ''"> and protection_measures_for_storage_areas = #{protectionMeasuresForStorageAreas}</if>
             <if test="hasThereBeenAPipeLeak != null  and hasThereBeenAPipeLeak != ''"> and has_there_been_a_pipe_leak = #{hasThereBeenAPipeLeak}</if>
             <if test="undergroundPipeLineDiagram != null  and undergroundPipeLineDiagram != ''"> and underground_pipe_line_diagram = #{undergroundPipeLineDiagram}</if>
@@ -95,6 +119,31 @@
             <if test="hazardousWasteStorageAndDisposalAreaProtectionMeasures != null  and hazardousWasteStorageAndDisposalAreaProtectionMeasures != ''"> and hazardous_waste_storage_and_disposal_area_protection_measures = #{hazardousWasteStorageAndDisposalAreaProtectionMeasures}</if>
             <if test="hazardousWasteStandardizedManagementAssessmentResults != null  and hazardousWasteStandardizedManagementAssessmentResults != ''"> and hazardous_waste_standardized_management_assessment_results = #{hazardousWasteStandardizedManagementAssessmentResults}</if>
             <if test="deptId != null  and deptId != ''"> and dept_id = #{deptId}</if>
+            <if test="isWasteGasEmission != null and isWasteGasEmission != ''">
+                and is_waste_gas_emission = #{isWasteGasEmission}
+            </if>
+            <if test="dataSourceOfProductionArea != null and dataSourceOfProductionArea != ''">
+                and data_source_of_production_area = #{dataSourceOfProductionArea}
+            </if>
+            <if test="dataSourceOfRawAndAuxiliaryMaterials != null and dataSourceOfRawAndAuxiliaryMaterials != ''">
+                and data_source_of_raw_and_auxiliary_materials = #{dataSourceOfRawAndAuxiliaryMaterials}
+            </if>
+            <if test="dataSourceOfStorageArea != null and dataSourceOfStorageArea != ''">
+                and data_source_of_storage_area = #{dataSourceOfStorageArea}
+            </if>
+            <if test="dataSourceOfWasteGas != null and dataSourceOfWasteGas != ''">
+                and data_source_of_waste_gas = #{dataSourceOfWasteGas}
+            </if>
+            <if test="dataSourceOfWastewater != null and dataSourceOfWastewater != ''">
+                and data_source_of_wastewater = #{dataSourceOfWastewater}
+            </if>
+            <if test="dataSourceOfSolidWasteStorageAndDisposalArea != null and dataSourceOfSolidWasteStorageAndDisposalArea != ''">
+                and data_source_of_solid_waste_storage_and_disposal_area = #{dataSourceOfSolidWasteStorageAndDisposalArea}
+            </if>
+            <if test="internalPollutionTracesOfThePlot != null and internalPollutionTracesOfThePlot != ''">
+                and internal_pollution_traces_of_the_plot = #{internalPollutionTracesOfThePlot}
+            </if>
+
         </where>
     </select>
 
@@ -118,6 +167,7 @@
             <if test="hazardousMaterialWarehouse != null">hazardous_material_warehouse,</if>
             <if test="hazardousMaterialLoadingAndUnloadingArea != null">hazardous_material_loading_and_unloading_area,</if>
             <if test="storageArea != null">storage_area,</if>
+            <if test="workshopArea != null">workshop_area,</if>
             <if test="protectionMeasuresForStorageAreas != null">protection_measures_for_storage_areas,</if>
             <if test="hasThereBeenAPipeLeak != null">has_there_been_a_pipe_leak,</if>
             <if test="undergroundPipeLineDiagram != null">underground_pipe_line_diagram,</if>
@@ -146,6 +196,15 @@
             <if test="hazardousWasteStorageAndDisposalAreaProtectionMeasures != null">hazardous_waste_storage_and_disposal_area_protection_measures,</if>
             <if test="hazardousWasteStandardizedManagementAssessmentResults != null">hazardous_waste_standardized_management_assessment_results,</if>
             <if test="deptId != null">dept_id,</if>
+            <if test="isWasteGasEmission != null">is_waste_gas_emission,</if>
+            <if test="dataSourceOfProductionArea != null">data_source_of_production_area,</if>
+            <if test="dataSourceOfRawAndAuxiliaryMaterials != null">data_source_of_raw_and_auxiliary_materials,</if>
+            <if test="dataSourceOfStorageArea != null">data_source_of_storage_area,</if>
+            <if test="dataSourceOfWasteGas != null">data_source_of_waste_gas,</if>
+            <if test="dataSourceOfWastewater != null">data_source_of_wastewater,</if>
+            <if test="dataSourceOfSolidWasteStorageAndDisposalArea != null">data_source_of_solid_waste_storage_and_disposal_area,</if>
+            <if test="internalPollutionTracesOfThePlot != null">internal_pollution_traces_of_the_plot,</if>
+
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="facilitiesAreas != null">#{facilitiesAreas},</if>
@@ -160,6 +219,7 @@
             <if test="hazardousMaterialWarehouse != null">#{hazardousMaterialWarehouse},</if>
             <if test="hazardousMaterialLoadingAndUnloadingArea != null">#{hazardousMaterialLoadingAndUnloadingArea},</if>
             <if test="storageArea != null">#{storageArea},</if>
+            <if test="workshopArea != null">#{workshopArea},</if>
             <if test="protectionMeasuresForStorageAreas != null">#{protectionMeasuresForStorageAreas},</if>
             <if test="hasThereBeenAPipeLeak != null">#{hasThereBeenAPipeLeak},</if>
             <if test="undergroundPipeLineDiagram != null">#{undergroundPipeLineDiagram},</if>
@@ -188,6 +248,15 @@
             <if test="hazardousWasteStorageAndDisposalAreaProtectionMeasures != null">#{hazardousWasteStorageAndDisposalAreaProtectionMeasures},</if>
             <if test="hazardousWasteStandardizedManagementAssessmentResults != null">#{hazardousWasteStandardizedManagementAssessmentResults},</if>
             <if test="deptId != null">#{deptId},</if>
+            <if test="isWasteGasEmission != null">#{isWasteGasEmission},</if>
+            <if test="dataSourceOfProductionArea != null">#{dataSourceOfProductionArea},</if>
+            <if test="dataSourceOfRawAndAuxiliaryMaterials != null">#{dataSourceOfRawAndAuxiliaryMaterials},</if>
+            <if test="dataSourceOfStorageArea != null">#{dataSourceOfStorageArea},</if>
+            <if test="dataSourceOfWasteGas != null">#{dataSourceOfWasteGas},</if>
+            <if test="dataSourceOfWastewater != null">#{dataSourceOfWastewater},</if>
+            <if test="dataSourceOfSolidWasteStorageAndDisposalArea != null">#{dataSourceOfSolidWasteStorageAndDisposalArea},</if>
+            <if test="internalPollutionTracesOfThePlot != null">#{internalPollutionTracesOfThePlot},</if>
+
         </trim>
     </insert>
 
@@ -206,6 +275,7 @@
             <if test="hazardousMaterialWarehouse != null">hazardous_material_warehouse = #{hazardousMaterialWarehouse},</if>
             <if test="hazardousMaterialLoadingAndUnloadingArea != null">hazardous_material_loading_and_unloading_area = #{hazardousMaterialLoadingAndUnloadingArea},</if>
             <if test="storageArea != null">storage_area = #{storageArea},</if>
+            <if test="workshopArea != null">workshop_area = #{workshopArea},</if>
             <if test="protectionMeasuresForStorageAreas != null">protection_measures_for_storage_areas = #{protectionMeasuresForStorageAreas},</if>
             <if test="hasThereBeenAPipeLeak != null">has_there_been_a_pipe_leak = #{hasThereBeenAPipeLeak},</if>
             <if test="undergroundPipeLineDiagram != null">underground_pipe_line_diagram = #{undergroundPipeLineDiagram},</if>
@@ -234,6 +304,31 @@
             <if test="hazardousWasteStorageAndDisposalAreaProtectionMeasures != null">hazardous_waste_storage_and_disposal_area_protection_measures = #{hazardousWasteStorageAndDisposalAreaProtectionMeasures},</if>
             <if test="hazardousWasteStandardizedManagementAssessmentResults != null">hazardous_waste_standardized_management_assessment_results = #{hazardousWasteStandardizedManagementAssessmentResults},</if>
             <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="isWasteGasEmission != null">
+                is_waste_gas_emission = #{isWasteGasEmission},
+            </if>
+            <if test="dataSourceOfProductionArea != null">
+                data_source_of_production_area = #{dataSourceOfProductionArea},
+            </if>
+            <if test="dataSourceOfRawAndAuxiliaryMaterials != null">
+                data_source_of_raw_and_auxiliary_materials = #{dataSourceOfRawAndAuxiliaryMaterials},
+            </if>
+            <if test="dataSourceOfStorageArea != null">
+                data_source_of_storage_area = #{dataSourceOfStorageArea},
+            </if>
+            <if test="dataSourceOfWasteGas != null">
+                data_source_of_waste_gas = #{dataSourceOfWasteGas},
+            </if>
+            <if test="dataSourceOfWastewater != null">
+                data_source_of_wastewater = #{dataSourceOfWastewater},
+            </if>
+            <if test="dataSourceOfSolidWasteStorageAndDisposalArea != null">
+                data_source_of_solid_waste_storage_and_disposal_area = #{dataSourceOfSolidWasteStorageAndDisposalArea},
+            </if>
+            <if test="internalPollutionTracesOfThePlot != null">
+                internal_pollution_traces_of_the_plot = #{internalPollutionTracesOfThePlot},
+            </if>
+
         </trim>
         where id = #{id}
     </update>

@@ -5,3 +5,7 @@ export { default as StorageArea } from "./storageArea";
 export { default as CheckboxCol } from "./checkbox-col";
 export { default as Radios } from "./radio-input";
 export { default as PipelineLeak } from "./pipelineLeak";
+export { default as SuspectedPollutionTrace } from "./suspectedPollutionTrace";
+export { default as PollutionIncident } from "./pollutionIncident";
+export { default as LandPollutionAnalysis } from "./landPollutionAnalysis";
+export { default as SewageSolidWaste } from "./sewageSolidWaste";

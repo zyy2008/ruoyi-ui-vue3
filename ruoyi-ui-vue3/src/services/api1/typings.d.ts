@@ -43,7 +43,7 @@ declare namespace API {
     createTime?: string;
     /** 所属部门 */
     deptId?: string;
-    /** 地块内职工人数分类 */
+    /** 地块内职工人数 */
     employeeCountCategory?: string;
     /** 主键ID */
     id?: number;
@@ -179,6 +179,11 @@ declare namespace API {
     ids: string;
   };
 
+  type deleteAdminSuspectedPollutionTraceIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
   type deleteAdminWellsIdsParams = {
     /** ids */
     ids: string;
@@ -189,7 +194,26 @@ declare namespace API {
     ids: string;
   };
 
-  type dexiashuihuanjingdiaochajiancexinxi = {
+  type dexiashuijiancefaxiandechaobiaowuranwuxinxi = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 主键ID */
+    id?: number;
+    /** 最大浓度 */
+    maxConcentrationMgl?: string;
+    /** 关联的地下水监测记录ID */
+    monitoringId?: string;
+    params?: Record<string, any>;
+    /** 超标污染物名称 */
+    pollutantName?: string;
+    remark?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type dexiashuijianceshuju = {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
@@ -206,25 +230,6 @@ declare namespace API {
     source?: string;
     /** 调查时间 */
     surveyDate?: string;
-    updateBy?: string;
-    updateTime?: string;
-  };
-
-  type dexiashuijiancefaxiandechaobiaowuranwuxinxi = {
-    createBy?: string;
-    createTime?: string;
-    /** 归属部门 */
-    deptId?: string;
-    /** 主键ID */
-    id?: number;
-    /** 最大浓度 */
-    maxConcentrationMgl?: string;
-    /** 关联的地下水监测记录ID */
-    monitoringId?: number;
-    params?: Record<string, any>;
-    /** 超标污染物名称 */
-    pollutantName?: string;
-    remark?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -380,6 +385,8 @@ declare namespace API {
     regionCode?: string;
     /** 登记注册类型 */
     registrationType?: string;
+    /** 监管类型 */
+    regulatoryType?: string;
     remark?: string;
     /** 报送情况 */
     reportingStatus?: string;
@@ -463,7 +470,7 @@ declare namespace API {
     /** 最大浓度 */
     maxConcentrationMgl?: string;
     /** 关联的地下水监测记录ID */
-    monitoringId?: number;
+    monitoringId?: string;
     params?: Record<string, any>;
     /** 超标污染物名称 */
     pollutantName?: string;
@@ -642,14 +649,34 @@ declare namespace API {
   };
 
   type getAdminPollutionListParams = {
+    /** 废水治理区面积 */
+    areaOfWastewaterTreatmentArea?: string;
+    /** 事故基本情况描述 */
+    basicDescriptionOfAccident?: string;
     /** 清洁生产审核时间 */
     cleanAuditTime?: string;
     /** 清洁生产水平 */
     cleanLevel?: string;
+    /** 废水治理区坐标位置 */
+    coordinatesOfWastewaterTreatmentArea?: string;
     createBy?: string;
     createTime?: string;
+    /** 生产区数据来源 */
+    dataSourceOfProductionArea?: string;
+    /** 原辅材料数据来源 */
+    dataSourceOfRawAndAuxiliaryMaterials?: string;
+    /** 固体废物贮存处置区数据来源 */
+    dataSourceOfSolidWasteStorageAndDisposalArea?: string;
+    /** 储存区数据来源 */
+    dataSourceOfStorageArea?: string;
+    /** 废气数据来源 */
+    dataSourceOfWasteGas?: string;
+    /** 废水数据来源 */
+    dataSourceOfWastewater?: string;
     /** 归属部门 */
     deptId?: string;
+    /** 环境污染事故发生情况 */
+    environmentalPollutionAccidentOccurrence?: string;
     /** 设施区域（多选） */
     facilitiesAreas?: string;
     /** 平面布置图 */
@@ -662,21 +689,65 @@ declare namespace API {
     hazardousMaterialLoadingAndUnloadingArea?: string;
     /** 存放产品、原材料的或其他有毒有害物质的仓库等 */
     hazardousMaterialWarehouse?: string;
+    /** 危险废物规范化管理考核评估结果 */
+    hazardousWasteStandardizedManagementAssessmentResults?: string;
+    /** 危废贮存处置区防护措施 */
+    hazardousWasteStorageAndDisposalAreaProtectionMeasures?: string;
     /** 主键ID */
     id?: number;
+    /** 地块内道路、地表、建（构）筑物表面、墙壁、空地污染痕迹 */
+    internalPollutionTracesOfThePlot?: string;
     /** 企业是否开展过清洁生产审核 */
     isCleanProductionAudited?: string;
+    /** 是否有危险废物自处置 */
+    isHazardousWasteSelfDisposed?: string;
+    /** 是否产生固体废物 */
+    isSolidWasteGenerated?: string;
+    /** 是否有固体废物贮存 */
+    isSolidWasteStored?: string;
+    /** 是否有废水治理设施 */
+    isThereAWastewaterTreatmentFacility?: string;
+    /** 是否有废气治理设施 */
+    isThereAnEmissionTreatmentFacility?: string;
+    /** 是否有废气在线监测装置 */
+    isThereAnOnlineMonitoringDeviceForEmissions?: string;
+    /** 是否有废水在线监测装置 */
+    isThereAnOnlineMonitoringDeviceForWastewater?: string;
+    /** 是否有废水排放 */
+    isThereWastewaterDischarge?: string;
+    /** 是否有废气排放 */
+    isWasteGasEmission?: string;
     /** 主中间产物名称 */
     mainIntermediateProductName?: string;
+    /** 废气中主要污染物名称 */
+    mainPollutantsInEmissions?: string;
+    /** 废水中主要污染物名称 */
+    mainPollutantsInWastewater?: string;
     /** 主要生产工艺流程图 */
     mainProcessFlowChart?: string;
     /** 主要生产工艺描述 */
     mainProcessProductionDescription?: string;
+    /** 废气治理设施运行情况 */
+    operationStatusOfEmissionTreatmentFacility?: string;
+    /** 在线监测装置运行情况 */
+    operationStatusOfOnlineMonitoringDevice?: string;
+    /** 废水治理设施运行情况 */
+    operationStatusOfWastewaterTreatmentFacility?: string;
     params?: Record<string, any>;
+    /** 污染痕迹照片 */
+    photosOfPollutionTraces?: string;
+    /** 污染区域处理情况 */
+    pollutionAreaTreatmentSituation?: string;
+    /** 废水治理区污染痕迹 */
+    pollutionTracesInWastewaterTreatmentArea?: string;
     /** 各储存区域防护措施 */
     protectionMeasuresForStorageAreas?: string;
+    /** 废水治理区防护措施 */
+    protectionMeasuresInWastewaterTreatmentArea?: string;
     remark?: string;
     searchValue?: string;
+    /** 固废贮存处置区防护措施 */
+    solidWasteStorageAndDisposalAreaProtectionMeasures?: string;
     /** 储存区面积 */
     storageArea?: string;
     /** 储罐、储槽等储存设施 */
@@ -687,31 +758,10 @@ declare namespace API {
     undergroundPipeLineDiagram?: string;
     updateBy?: string;
     updateTime?: string;
-    事故基本情况描述?: string;
-    危废贮存处置区防护措施?: string;
-    危险废物规范化管理考核评估结果?: string;
-    固废贮存处置区防护措施?: string;
-    在线监测装置运行情况?: string;
-    废气中主要污染物名称?: string;
-    废气治理设施运行情况?: string;
-    废水中主要污染物名称?: string;
-    废水排放量?: string;
-    废水治理区坐标位置?: string;
-    废水治理区污染痕迹?: string;
-    废水治理区防护措施?: string;
-    废水治理区面积?: string;
-    废水治理设施运行情况?: string;
-    是否产生固体废物?: string;
-    是否有危险废物自处置?: string;
-    是否有固体废物贮存?: string;
-    是否有废气在线监测装置?: string;
-    是否有废气治理设施?: string;
-    是否有废水在线监测装置?: string;
-    是否有废水排放?: string;
-    是否有废水治理设施?: string;
-    污染区域处理情况?: string;
-    污染痕迹照片?: string;
-    环境污染事故发生情况?: string;
+    /** 废水排放量 */
+    wastewaterDischargeVolume?: string;
+    /** 车间总面积 */
+    workshopArea?: string;
   };
 
   type getAdminRawMaterialsIdParams = {
@@ -757,7 +807,7 @@ declare namespace API {
     createTime?: string;
     /** 所属部门 */
     deptId?: string;
-    /** 地块内职工人数分类 */
+    /** 地块内职工人数 */
     employeeCountCategory?: string;
     /** 主键ID */
     id?: number;
@@ -855,7 +905,9 @@ declare namespace API {
     /** 归属部门 */
     deptId?: string;
     /** 上层埋深 */
-    depthTopCm?: number;
+    depthTopCm?: string;
+    /** 绑定的地下水迁移途径信息 */
+    groundwaterPathwayId?: string;
     /** 主键ID */
     id?: number;
     params?: Record<string, any>;
@@ -866,7 +918,7 @@ declare namespace API {
     /** 土层性质 */
     soilType?: string;
     /** 土层厚度 */
-    thicknessCm?: number;
+    thicknessCm?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -886,7 +938,7 @@ declare namespace API {
     /** 最大浓度 */
     maxConcentrationMgkg?: string;
     /** 关联的土壤监测记录ID */
-    monitoringId?: number;
+    monitoringId?: string;
     params?: Record<string, any>;
     /** 超标污染物名称 */
     pollutantName?: string;
@@ -941,57 +993,63 @@ declare namespace API {
     updateTime?: string;
   };
 
-  type getAdminWellsAllParams = {
-    /** 高程 */
-    altitude?: string;
-    /** 主键ID */
-    burialCondition?: string;
-    /** 成井时间 */
-    completionDate?: string;
+  type getAdminSuspectedPollutionTraceIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminSuspectedPollutionTraceListParams = {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
     deptId?: string;
-    /** 地下水类型 */
-    groundwaterType?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
     /** 主键ID */
+    id?: number;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    /** 污染痕迹出现的坐标位置 */
+    traceCoordinates?: string;
+    /** 污染痕迹出现的地点 */
+    traceLocation?: string;
+    /** 污染痕迹照片 */
+    tracePhotos?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type getAdminWellsAllParams = {
+    altitude?: string;
+    burialCondition?: string;
+    completionDate?: string;
+    createBy?: string;
+    createTime?: string;
+    deptId?: string;
+    groundwaterType?: string;
     id?: string;
-    /** 井口内径 */
     innerDiameter?: string;
-    /** 纬度 */
     latitude?: string;
-    /** 监测井所在位置 */
     location?: string;
-    /** 经度 */
     longitude?: string;
-    /** 是否为多段筛管结构 */
     multiScreenPipe?: string;
-    /** 监测井的权属单位 */
     ownership?: string;
     params?: Record<string, any>;
-    /** 井管材质 */
     pipeMaterial?: string;
-    /** 监测点类型 */
     pointType?: string;
+    realTime?: string;
     remark?: string;
-    /** 筛管上部与下部的埋深范围 */
     screenDepthRange?: string;
     searchValue?: string;
-    /** 是否符合长期监测井的标准 */
     suitableForLongterm?: string;
     updateBy?: string;
     updateTime?: string;
-    /** 视频资料地址 */
     videoUrl?: string;
-    /** 水位埋深 */
     waterBuriedDepth?: string;
-    /** 含水介质 */
     waterMedium?: string;
-    /** 监测井编码 */
     wellCode?: string;
-    /** 成井深度 */
     wellDepth?: string;
-    /** 井口高程 */
     wellElevation?: string;
   };
 
@@ -1001,56 +1059,35 @@ declare namespace API {
   };
 
   type getAdminWellsListParams = {
-    /** 高程 */
     altitude?: string;
-    /** 主键ID */
     burialCondition?: string;
-    /** 成井时间 */
     completionDate?: string;
     createBy?: string;
     createTime?: string;
-    /** 归属部门 */
     deptId?: string;
-    /** 地下水类型 */
     groundwaterType?: string;
-    /** 主键ID */
     id?: string;
-    /** 井口内径 */
     innerDiameter?: string;
-    /** 纬度 */
     latitude?: string;
-    /** 监测井所在位置 */
     location?: string;
-    /** 经度 */
     longitude?: string;
-    /** 是否为多段筛管结构 */
     multiScreenPipe?: string;
-    /** 监测井的权属单位 */
     ownership?: string;
     params?: Record<string, any>;
-    /** 井管材质 */
     pipeMaterial?: string;
-    /** 监测点类型 */
     pointType?: string;
+    realTime?: string;
     remark?: string;
-    /** 筛管上部与下部的埋深范围 */
     screenDepthRange?: string;
     searchValue?: string;
-    /** 是否符合长期监测井的标准 */
     suitableForLongterm?: string;
     updateBy?: string;
     updateTime?: string;
-    /** 视频资料地址 */
     videoUrl?: string;
-    /** 水位埋深 */
     waterBuriedDepth?: string;
-    /** 含水介质 */
     waterMedium?: string;
-    /** 监测井编码 */
     wellCode?: string;
-    /** 成井深度 */
     wellDepth?: string;
-    /** 井口高程 */
     wellElevation?: string;
   };
 
@@ -1131,6 +1168,59 @@ declare namespace API {
     location?: string;
     params?: Record<string, any>;
     remark?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type jiancejingduixiang = {
+    altitude?: string;
+    burialCondition?: string;
+    completionDate?: string;
+    createBy?: string;
+    createTime?: string;
+    deptId?: string;
+    groundwaterType?: string;
+    id?: string;
+    innerDiameter?: string;
+    latitude?: string;
+    location?: string;
+    longitude?: string;
+    multiScreenPipe?: string;
+    ownership?: string;
+    params?: Record<string, any>;
+    pipeMaterial?: string;
+    pointType?: string;
+    realTime?: string;
+    remark?: string;
+    screenDepthRange?: string;
+    suitableForLongterm?: string;
+    updateBy?: string;
+    updateTime?: string;
+    videoUrl?: string;
+    waterBuriedDepth?: string;
+    waterMedium?: string;
+    wellCode?: string;
+    wellDepth?: string;
+    wellElevation?: string;
+  };
+
+  type keyiwuranyuanhuowuranhenji = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
+    /** 主键ID */
+    id?: number;
+    params?: Record<string, any>;
+    remark?: string;
+    /** 污染痕迹出现的坐标位置 */
+    traceCoordinates?: string;
+    /** 污染痕迹出现的地点 */
+    traceLocation?: string;
+    /** 污染痕迹照片 */
+    tracePhotos?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -1253,6 +1343,8 @@ declare namespace API {
     regionCode?: string;
     /** 登记注册类型 */
     registrationType?: string;
+    /** 监管类型 */
+    regulatoryType?: string;
     remark?: string;
     /** 报送情况 */
     reportingStatus?: string;
@@ -1321,7 +1413,7 @@ declare namespace API {
     /** 最大浓度 */
     maxConcentrationMgl?: string;
     /** 关联的地下水监测记录ID */
-    monitoringId?: number;
+    monitoringId?: string;
     params?: Record<string, any>;
     /** 超标污染物名称 */
     pollutantName?: string;
@@ -1441,14 +1533,34 @@ declare namespace API {
   };
 
   type postAdminPollutionExportParams = {
+    /** 废水治理区面积 */
+    areaOfWastewaterTreatmentArea?: string;
+    /** 事故基本情况描述 */
+    basicDescriptionOfAccident?: string;
     /** 清洁生产审核时间 */
     cleanAuditTime?: string;
     /** 清洁生产水平 */
     cleanLevel?: string;
+    /** 废水治理区坐标位置 */
+    coordinatesOfWastewaterTreatmentArea?: string;
     createBy?: string;
     createTime?: string;
+    /** 生产区数据来源 */
+    dataSourceOfProductionArea?: string;
+    /** 原辅材料数据来源 */
+    dataSourceOfRawAndAuxiliaryMaterials?: string;
+    /** 固体废物贮存处置区数据来源 */
+    dataSourceOfSolidWasteStorageAndDisposalArea?: string;
+    /** 储存区数据来源 */
+    dataSourceOfStorageArea?: string;
+    /** 废气数据来源 */
+    dataSourceOfWasteGas?: string;
+    /** 废水数据来源 */
+    dataSourceOfWastewater?: string;
     /** 归属部门 */
     deptId?: string;
+    /** 环境污染事故发生情况 */
+    environmentalPollutionAccidentOccurrence?: string;
     /** 设施区域（多选） */
     facilitiesAreas?: string;
     /** 平面布置图 */
@@ -1461,21 +1573,65 @@ declare namespace API {
     hazardousMaterialLoadingAndUnloadingArea?: string;
     /** 存放产品、原材料的或其他有毒有害物质的仓库等 */
     hazardousMaterialWarehouse?: string;
+    /** 危险废物规范化管理考核评估结果 */
+    hazardousWasteStandardizedManagementAssessmentResults?: string;
+    /** 危废贮存处置区防护措施 */
+    hazardousWasteStorageAndDisposalAreaProtectionMeasures?: string;
     /** 主键ID */
     id?: number;
+    /** 地块内道路、地表、建（构）筑物表面、墙壁、空地污染痕迹 */
+    internalPollutionTracesOfThePlot?: string;
     /** 企业是否开展过清洁生产审核 */
     isCleanProductionAudited?: string;
+    /** 是否有危险废物自处置 */
+    isHazardousWasteSelfDisposed?: string;
+    /** 是否产生固体废物 */
+    isSolidWasteGenerated?: string;
+    /** 是否有固体废物贮存 */
+    isSolidWasteStored?: string;
+    /** 是否有废水治理设施 */
+    isThereAWastewaterTreatmentFacility?: string;
+    /** 是否有废气治理设施 */
+    isThereAnEmissionTreatmentFacility?: string;
+    /** 是否有废气在线监测装置 */
+    isThereAnOnlineMonitoringDeviceForEmissions?: string;
+    /** 是否有废水在线监测装置 */
+    isThereAnOnlineMonitoringDeviceForWastewater?: string;
+    /** 是否有废水排放 */
+    isThereWastewaterDischarge?: string;
+    /** 是否有废气排放 */
+    isWasteGasEmission?: string;
     /** 主中间产物名称 */
     mainIntermediateProductName?: string;
+    /** 废气中主要污染物名称 */
+    mainPollutantsInEmissions?: string;
+    /** 废水中主要污染物名称 */
+    mainPollutantsInWastewater?: string;
     /** 主要生产工艺流程图 */
     mainProcessFlowChart?: string;
     /** 主要生产工艺描述 */
     mainProcessProductionDescription?: string;
+    /** 废气治理设施运行情况 */
+    operationStatusOfEmissionTreatmentFacility?: string;
+    /** 在线监测装置运行情况 */
+    operationStatusOfOnlineMonitoringDevice?: string;
+    /** 废水治理设施运行情况 */
+    operationStatusOfWastewaterTreatmentFacility?: string;
     params?: Record<string, any>;
+    /** 污染痕迹照片 */
+    photosOfPollutionTraces?: string;
+    /** 污染区域处理情况 */
+    pollutionAreaTreatmentSituation?: string;
+    /** 废水治理区污染痕迹 */
+    pollutionTracesInWastewaterTreatmentArea?: string;
     /** 各储存区域防护措施 */
     protectionMeasuresForStorageAreas?: string;
+    /** 废水治理区防护措施 */
+    protectionMeasuresInWastewaterTreatmentArea?: string;
     remark?: string;
     searchValue?: string;
+    /** 固废贮存处置区防护措施 */
+    solidWasteStorageAndDisposalAreaProtectionMeasures?: string;
     /** 储存区面积 */
     storageArea?: string;
     /** 储罐、储槽等储存设施 */
@@ -1486,31 +1642,10 @@ declare namespace API {
     undergroundPipeLineDiagram?: string;
     updateBy?: string;
     updateTime?: string;
-    事故基本情况描述?: string;
-    危废贮存处置区防护措施?: string;
-    危险废物规范化管理考核评估结果?: string;
-    固废贮存处置区防护措施?: string;
-    在线监测装置运行情况?: string;
-    废气中主要污染物名称?: string;
-    废气治理设施运行情况?: string;
-    废水中主要污染物名称?: string;
-    废水排放量?: string;
-    废水治理区坐标位置?: string;
-    废水治理区污染痕迹?: string;
-    废水治理区防护措施?: string;
-    废水治理区面积?: string;
-    废水治理设施运行情况?: string;
-    是否产生固体废物?: string;
-    是否有危险废物自处置?: string;
-    是否有固体废物贮存?: string;
-    是否有废气在线监测装置?: string;
-    是否有废气治理设施?: string;
-    是否有废水在线监测装置?: string;
-    是否有废水排放?: string;
-    是否有废水治理设施?: string;
-    污染区域处理情况?: string;
-    污染痕迹照片?: string;
-    环境污染事故发生情况?: string;
+    /** 废水排放量 */
+    wastewaterDischargeVolume?: string;
+    /** 车间总面积 */
+    workshopArea?: string;
   };
 
   type postAdminPollutionIncidentExportParams = {
@@ -1570,7 +1705,7 @@ declare namespace API {
     createTime?: string;
     /** 所属部门 */
     deptId?: string;
-    /** 地块内职工人数分类 */
+    /** 地块内职工人数 */
     employeeCountCategory?: string;
     /** 主键ID */
     id?: number;
@@ -1653,7 +1788,9 @@ declare namespace API {
     /** 归属部门 */
     deptId?: string;
     /** 上层埋深 */
-    depthTopCm?: number;
+    depthTopCm?: string;
+    /** 绑定的地下水迁移途径信息 */
+    groundwaterPathwayId?: string;
     /** 主键ID */
     id?: number;
     params?: Record<string, any>;
@@ -1664,7 +1801,7 @@ declare namespace API {
     /** 土层性质 */
     soilType?: string;
     /** 土层厚度 */
-    thicknessCm?: number;
+    thicknessCm?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -1679,7 +1816,7 @@ declare namespace API {
     /** 最大浓度 */
     maxConcentrationMgkg?: string;
     /** 关联的土壤监测记录ID */
-    monitoringId?: number;
+    monitoringId?: string;
     params?: Record<string, any>;
     /** 超标污染物名称 */
     pollutantName?: string;
@@ -1729,57 +1866,58 @@ declare namespace API {
     updateTime?: string;
   };
 
-  type postAdminWellsExportParams = {
-    /** 高程 */
-    altitude?: string;
-    /** 主键ID */
-    burialCondition?: string;
-    /** 成井时间 */
-    completionDate?: string;
+  type postAdminSuspectedPollutionTraceExportParams = {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */
     deptId?: string;
-    /** 地下水类型 */
-    groundwaterType?: string;
+    /** 绑定的污染源 */
+    enterprisePollutionInfoId?: string;
     /** 主键ID */
+    id?: number;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    /** 污染痕迹出现的坐标位置 */
+    traceCoordinates?: string;
+    /** 污染痕迹出现的地点 */
+    traceLocation?: string;
+    /** 污染痕迹照片 */
+    tracePhotos?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type postAdminWellsExportParams = {
+    altitude?: string;
+    burialCondition?: string;
+    completionDate?: string;
+    createBy?: string;
+    createTime?: string;
+    deptId?: string;
+    groundwaterType?: string;
     id?: string;
-    /** 井口内径 */
     innerDiameter?: string;
-    /** 纬度 */
     latitude?: string;
-    /** 监测井所在位置 */
     location?: string;
-    /** 经度 */
     longitude?: string;
-    /** 是否为多段筛管结构 */
     multiScreenPipe?: string;
-    /** 监测井的权属单位 */
     ownership?: string;
     params?: Record<string, any>;
-    /** 井管材质 */
     pipeMaterial?: string;
-    /** 监测点类型 */
     pointType?: string;
+    realTime?: string;
     remark?: string;
-    /** 筛管上部与下部的埋深范围 */
     screenDepthRange?: string;
     searchValue?: string;
-    /** 是否符合长期监测井的标准 */
     suitableForLongterm?: string;
     updateBy?: string;
     updateTime?: string;
-    /** 视频资料地址 */
     videoUrl?: string;
-    /** 水位埋深 */
     waterBuriedDepth?: string;
-    /** 含水介质 */
     waterMedium?: string;
-    /** 监测井编码 */
     wellCode?: string;
-    /** 成井深度 */
     wellDepth?: string;
-    /** 井口高程 */
     wellElevation?: string;
   };
 
@@ -1873,6 +2011,8 @@ declare namespace API {
     regionCode?: string;
     /** 登记注册类型 */
     registrationType?: string;
+    /** 监管类型 */
+    regulatoryType?: string;
     remark?: string;
     /** 报送情况 */
     reportingStatus?: string;
@@ -1885,17 +2025,33 @@ declare namespace API {
   };
 
   type qiyewuranyuan = {
+    /** 废水治理区面积 */
     areaOfWastewaterTreatmentArea?: string;
+    /** 事故基本情况描述 */
     basicDescriptionOfAccident?: string;
     /** 清洁生产审核时间 */
     cleanAuditTime?: string;
     /** 清洁生产水平 */
     cleanLevel?: string;
+    /** 废水治理区坐标位置 */
     coordinatesOfWastewaterTreatmentArea?: string;
     createBy?: string;
     createTime?: string;
+    /** 生产区数据来源 */
+    dataSourceOfProductionArea?: string;
+    /** 原辅材料数据来源 */
+    dataSourceOfRawAndAuxiliaryMaterials?: string;
+    /** 固体废物贮存处置区数据来源 */
+    dataSourceOfSolidWasteStorageAndDisposalArea?: string;
+    /** 储存区数据来源 */
+    dataSourceOfStorageArea?: string;
+    /** 废气数据来源 */
+    dataSourceOfWasteGas?: string;
+    /** 废水数据来源 */
+    dataSourceOfWastewater?: string;
     /** 归属部门 */
     deptId?: string;
+    /** 环境污染事故发生情况 */
     environmentalPollutionAccidentOccurrence?: string;
     /** 设施区域（多选） */
     facilitiesAreas?: string;
@@ -1909,39 +2065,63 @@ declare namespace API {
     hazardousMaterialLoadingAndUnloadingArea?: string;
     /** 存放产品、原材料的或其他有毒有害物质的仓库等 */
     hazardousMaterialWarehouse?: string;
+    /** 危险废物规范化管理考核评估结果 */
     hazardousWasteStandardizedManagementAssessmentResults?: string;
+    /** 危废贮存处置区防护措施 */
     hazardousWasteStorageAndDisposalAreaProtectionMeasures?: string;
     /** 主键ID */
     id?: number;
+    /** 地块内道路、地表、建（构）筑物表面、墙壁、空地污染痕迹 */
+    internalPollutionTracesOfThePlot?: string;
     /** 企业是否开展过清洁生产审核 */
     isCleanProductionAudited?: string;
+    /** 是否有危险废物自处置 */
     isHazardousWasteSelfDisposed?: string;
+    /** 是否产生固体废物 */
     isSolidWasteGenerated?: string;
+    /** 是否有固体废物贮存 */
     isSolidWasteStored?: string;
+    /** 是否有废水治理设施 */
     isThereAWastewaterTreatmentFacility?: string;
+    /** 是否有废气治理设施 */
     isThereAnEmissionTreatmentFacility?: string;
+    /** 是否有废气在线监测装置 */
     isThereAnOnlineMonitoringDeviceForEmissions?: string;
+    /** 是否有废水在线监测装置 */
     isThereAnOnlineMonitoringDeviceForWastewater?: string;
+    /** 是否有废水排放 */
     isThereWastewaterDischarge?: string;
+    /** 是否有废气排放 */
+    isWasteGasEmission?: string;
     /** 主中间产物名称 */
     mainIntermediateProductName?: string;
+    /** 废气中主要污染物名称 */
     mainPollutantsInEmissions?: string;
+    /** 废水中主要污染物名称 */
     mainPollutantsInWastewater?: string;
     /** 主要生产工艺流程图 */
     mainProcessFlowChart?: string;
     /** 主要生产工艺描述 */
     mainProcessProductionDescription?: string;
+    /** 废气治理设施运行情况 */
     operationStatusOfEmissionTreatmentFacility?: string;
+    /** 在线监测装置运行情况 */
     operationStatusOfOnlineMonitoringDevice?: string;
+    /** 废水治理设施运行情况 */
     operationStatusOfWastewaterTreatmentFacility?: string;
     params?: Record<string, any>;
+    /** 污染痕迹照片 */
     photosOfPollutionTraces?: string;
+    /** 污染区域处理情况 */
     pollutionAreaTreatmentSituation?: string;
+    /** 废水治理区污染痕迹 */
     pollutionTracesInWastewaterTreatmentArea?: string;
     /** 各储存区域防护措施 */
     protectionMeasuresForStorageAreas?: string;
+    /** 废水治理区防护措施 */
     protectionMeasuresInWastewaterTreatmentArea?: string;
     remark?: string;
+    /** 固废贮存处置区防护措施 */
     solidWasteStorageAndDisposalAreaProtectionMeasures?: string;
     /** 储存区面积 */
     storageArea?: string;
@@ -1953,7 +2133,10 @@ declare namespace API {
     undergroundPipeLineDiagram?: string;
     updateBy?: string;
     updateTime?: string;
+    /** 废水排放量 */
     wastewaterDischargeVolume?: string;
+    /** 车间总面积 */
+    workshopArea?: string;
   };
 
   type shengchanchejianfenbuyuhuanjingqingkuang = {
@@ -2000,7 +2183,9 @@ declare namespace API {
     /** 归属部门 */
     deptId?: string;
     /** 上层埋深 */
-    depthTopCm?: number;
+    depthTopCm?: string;
+    /** 绑定的地下水迁移途径信息 */
+    groundwaterPathwayId?: string;
     /** 主键ID */
     id?: number;
     params?: Record<string, any>;
@@ -2010,7 +2195,7 @@ declare namespace API {
     /** 土层性质 */
     soilType?: string;
     /** 土层厚度 */
-    thicknessCm?: number;
+    thicknessCm?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -2025,7 +2210,7 @@ declare namespace API {
     /** 最大浓度 */
     maxConcentrationMgkg?: string;
     /** 关联的土壤监测记录ID */
-    monitoringId?: number;
+    monitoringId?: string;
     params?: Record<string, any>;
     /** 超标污染物名称 */
     pollutantName?: string;
@@ -2108,59 +2293,6 @@ declare namespace API {
     usageYear?: string;
   };
 
-  type yuanqujiancejingxinxi = {
-    /** 高程 */
-    altitude?: string;
-    /** 主键ID */
-    burialCondition?: string;
-    /** 成井时间 */
-    completionDate?: string;
-    createBy?: string;
-    createTime?: string;
-    /** 归属部门 */
-    deptId?: string;
-    /** 地下水类型 */
-    groundwaterType?: string;
-    /** 主键ID */
-    id?: string;
-    /** 井口内径 */
-    innerDiameter?: string;
-    /** 纬度 */
-    latitude?: string;
-    /** 监测井所在位置 */
-    location?: string;
-    /** 经度 */
-    longitude?: string;
-    /** 是否为多段筛管结构 */
-    multiScreenPipe?: string;
-    /** 监测井的权属单位 */
-    ownership?: string;
-    params?: Record<string, any>;
-    /** 井管材质 */
-    pipeMaterial?: string;
-    /** 监测点类型 */
-    pointType?: string;
-    remark?: string;
-    /** 筛管上部与下部的埋深范围 */
-    screenDepthRange?: string;
-    /** 是否符合长期监测井的标准 */
-    suitableForLongterm?: string;
-    updateBy?: string;
-    updateTime?: string;
-    /** 视频资料地址 */
-    videoUrl?: string;
-    /** 水位埋深 */
-    waterBuriedDepth?: string;
-    /** 含水介质 */
-    waterMedium?: string;
-    /** 监测井编码 */
-    wellCode?: string;
-    /** 成井深度 */
-    wellDepth?: string;
-    /** 井口高程 */
-    wellElevation?: string;
-  };
-
   type zaichanqiyedekuaixinxi = {
     /** 单位所在地详细地址 */
     address?: string;
@@ -2220,7 +2352,7 @@ declare namespace API {
     updateTime?: string;
   };
 
-  type zhibiaofenlei = {
+  type zhibiaobiaozhunbiao = {
     createBy?: string;
     createTime?: string;
     /** 归属部门 */

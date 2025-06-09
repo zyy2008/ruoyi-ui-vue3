@@ -18,10 +18,19 @@ import {
   CheckboxCol,
   Radios,
   PipelineLeak,
+  SuspectedPollutionTrace,
+  PollutionIncident,
+  LandPollutionAnalysis,
+  SewageSolidWaste,
 } from "./components";
 import { useDeptId } from "@/hooks";
+import { FormCollapse } from "@formily/element-plus";
 
 const { SchemaField } = Schema;
+
+const formCollapse = FormCollapse.createFormCollapse();
+
+formCollapse.setActiveKeys([]);
 
 const props: ISchemaFieldProps = {
   schema: {
@@ -92,6 +101,9 @@ const props: ISchemaFieldProps = {
       collapse: {
         type: "void",
         "x-component": "FormCollapse",
+        "x-component-props": {
+          formCollapse: formCollapse,
+        },
         properties: {
           tab1: {
             type: "void",
@@ -335,6 +347,7 @@ const props: ISchemaFieldProps = {
                   protectionMeasuresForStorageAreas: {
                     type: "string",
                     "x-decorator": "FormItem",
+                    required: true,
                     "x-component": (
                       <CheckboxCol
                         datas={[
@@ -371,9 +384,23 @@ const props: ISchemaFieldProps = {
                   header: "存储区总面积*",
                 },
                 properties: {
-                  protectionMeasuresForStorageAreas: {
+                  storageArea: {
                     type: "string",
                     required: true,
+                    "x-decorator": "FormItem",
+                    "x-component": "Input",
+                  },
+                },
+              },
+              card8: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "数据来源",
+                },
+                properties: {
+                  dataSourceOfStorageArea: {
+                    type: "string",
                     "x-decorator": "FormItem",
                     "x-component": "Input",
                   },
@@ -486,7 +513,7 @@ const props: ISchemaFieldProps = {
                     type: "string",
                     required: true,
                     "x-decorator": "FormItem",
-                    "x-component": "Select",
+                    "x-component": "Input",
                   },
                 },
               },
@@ -597,7 +624,7 @@ const props: ISchemaFieldProps = {
                   header: "数据来源",
                 },
                 properties: {
-                  数据来源: {
+                  dataSourceOfWasteGas: {
                     type: "string",
                     required: true,
                     "x-decorator": "FormItem",
@@ -665,7 +692,7 @@ const props: ISchemaFieldProps = {
                     type: "string",
                     required: true,
                     "x-decorator": "FormItem",
-                    "x-component": "Select",
+                    "x-component": "Input",
                   },
                 },
               },
@@ -809,6 +836,85 @@ const props: ISchemaFieldProps = {
                   pollutionTracesInWastewaterTreatmentArea: {
                     type: "string",
                     "x-decorator": "FormItem",
+                    enum: [
+                      {
+                        label: "有",
+                        value: "0",
+                      },
+                      {
+                        label: "无",
+                        value: "1",
+                      },
+                    ],
+                    "x-component": "Radio.Group",
+                  },
+                },
+              },
+              card10: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "污染痕迹照片",
+                },
+                properties: {
+                  photosOfPollutionTraces: {
+                    type: "string",
+                    "x-decorator": "FormItem",
+                    "x-component": "UploadAjax",
+                    "x-component-props": {
+                      listType: "picture-card",
+                      accept: ".jpg,.png",
+                    },
+                  },
+                },
+              },
+              card11: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "废水治理区防护措施",
+                },
+                properties: {
+                  protectionMeasuresInWastewaterTreatmentArea: {
+                    type: "string",
+                    "x-decorator": "FormItem",
+                    required: true,
+                    "x-component": (
+                      <CheckboxCol
+                        datas={[
+                          [
+                            "地面无任何处理",
+                            "铺设防渗材料",
+                            "四周有围堰或围墙",
+                            "有事故水应急池",
+                          ],
+                          [
+                            "地面硬化且完整",
+                            "防渗材料完整无破损",
+                            "围堰或围墙完整",
+                            "事故水应急池有渗漏",
+                          ],
+                          [
+                            "硬化地面有裂缝",
+                            "防渗材料有破损",
+                            "围堰或围墙不完整，可随意进入",
+                          ],
+                        ]}
+                      />
+                    ),
+                  },
+                },
+              },
+              card12: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "数据来源",
+                },
+                properties: {
+                  dataSourceOfWastewater: {
+                    type: "string",
+                    "x-decorator": "FormItem",
                     "x-component": "Input",
                   },
                 },
@@ -900,11 +1006,7 @@ const props: ISchemaFieldProps = {
               },
               card3: {
                 type: "void",
-                "x-component": "Card",
-                "x-component-props": {
-                  header: "污染物痕迹",
-                },
-                properties: {},
+                "x-component": <SewageSolidWaste />,
               },
               card4: {
                 type: "void",
@@ -1041,7 +1143,7 @@ const props: ISchemaFieldProps = {
                     "地块内道路、地表、建（构）筑物表面、墙壁、空地污染痕迹（若选择有，则需填写以下第2-6项内容，否则不填）",
                 },
                 properties: {
-                  isSolidWasteGenerated: {
+                  internalPollutionTracesOfThePlot: {
                     type: "string",
                     required: true,
                     "x-decorator": "FormItem",
@@ -1061,11 +1163,7 @@ const props: ISchemaFieldProps = {
               },
               card1: {
                 type: "void",
-                "x-component": "Card",
-                "x-component-props": {
-                  header: "污染物痕迹",
-                },
-                properties: {},
+                "x-component": <SuspectedPollutionTrace />,
               },
               card2: {
                 type: "void",
@@ -1098,7 +1196,7 @@ const props: ISchemaFieldProps = {
                   header: "环境污染事故发生情况",
                 },
                 properties: {
-                  isSolidWasteGenerated: {
+                  environmentalPollutionAccidentOccurrence: {
                     type: "string",
                     required: true,
                     "x-decorator": "FormItem",
@@ -1108,36 +1206,48 @@ const props: ISchemaFieldProps = {
               },
               card1: {
                 type: "void",
-                "x-component": "Card",
-                "x-component-props": {
-                  header: "污染物痕迹",
-                },
-                properties: {},
+                "x-component": <PollutionIncident />,
               },
               card2: {
                 type: "void",
                 "x-component": "Card",
                 "x-component-props": {
-                  header: "空气异味状况*",
+                  header: "事故基本情况描述",
                 },
                 properties: {
-                  isHazardousWasteSelfDisposed: {
+                  basicDescriptionOfAccident: {
                     type: "string",
-                    required: true,
                     "x-decorator": "FormItem",
-                    enum: [
-                      {
-                        label: "是",
-                        value: "0",
-                      },
-                      {
-                        label: "否",
-                        value: "1",
-                      },
-                    ],
-                    "x-component": "Radio.Group",
+                    "x-component": "Input.TextArea",
                   },
                 },
+              },
+              card3: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "污染区域处理情况",
+                },
+                properties: {
+                  pollutionAreaTreatmentSituation: {
+                    type: "string",
+                    "x-decorator": "FormItem",
+                    "x-component": "Input.TextArea",
+                  },
+                },
+              },
+            },
+          },
+          tab9: {
+            type: "void",
+            "x-component": "FormCollapse.Item",
+            "x-component-props": {
+              title: "九、地块污染情况分析",
+            },
+            properties: {
+              card: {
+                type: "void",
+                "x-component": <LandPollutionAnalysis />,
               },
             },
           },

@@ -2,9 +2,9 @@
 /* eslint-disable */
 import request from "@/utils/http";
 
-/** 修改指标分类 PUT /admin/indicators */
+/** 修改指标标准表 PUT /admin/indicators */
 export async function putAdminIndicators(
-  body: API.zhibiaofenlei,
+  body: API.zhibiaobiaozhunbiao,
   options?: { [key: string]: any }
 ) {
   return request<Record<string, any>>(`/dev-api/admin/indicators`, {
@@ -17,9 +17,9 @@ export async function putAdminIndicators(
   });
 }
 
-/** 新增指标分类 POST /admin/indicators */
+/** 新增指标标准表 POST /admin/indicators */
 export async function postAdminIndicators(
-  body: API.zhibiaofenlei,
+  body: API.zhibiaobiaozhunbiao,
   options?: { [key: string]: any }
 ) {
   return request<Record<string, any>>(`/dev-api/admin/indicators`, {
@@ -32,7 +32,7 @@ export async function postAdminIndicators(
   });
 }
 
-/** 删除指标分类 DELETE /admin/indicators/${param0} */
+/** 删除指标标准表 DELETE /admin/indicators/${param0} */
 export async function deleteAdminIndicatorsIds(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.deleteAdminIndicatorsIdsParams,
@@ -46,7 +46,7 @@ export async function deleteAdminIndicatorsIds(
   });
 }
 
-/** 获取指标分类详细信息 GET /admin/indicators/${param0} */
+/** 获取指标标准表详细信息 GET /admin/indicators/${param0} */
 export async function getAdminIndicatorsId(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.getAdminIndicatorsIdParams,
@@ -60,7 +60,7 @@ export async function getAdminIndicatorsId(
   });
 }
 
-/** 导出指标分类列表 POST /admin/indicators/export */
+/** 导出指标标准表列表 POST /admin/indicators/export */
 export async function postAdminIndicatorsExport(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.postAdminIndicatorsExportParams,
@@ -77,7 +77,7 @@ export async function postAdminIndicatorsExport(
   });
 }
 
-/** 查询指标分类列表 GET /admin/indicators/list */
+/** 查询指标标准表列表 GET /admin/indicators/list */
 export async function getAdminIndicatorsList(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
   params: API.getAdminIndicatorsListParams,

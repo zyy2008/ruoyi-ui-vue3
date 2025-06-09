@@ -18,7 +18,7 @@
       <el-table-column prop="name" label="温度" />
       <el-table-column prop="address" label="水位" />
       <el-table-column prop="name1" label="电位" />
-      <el-table-column prop="totalDissolvedSolids" label="溶解性" />
+      <el-table-column prop="totalDissolvedSolids" label="溶解性总固体" />
       <el-table-column prop="name1" label="电导率" />
       <el-table-column prop="ammoniaNitrogen" label="氨氮" />
     </el-table>
@@ -149,7 +149,7 @@
     },
     {
       value: "5",
-      label: "溶解性固体", // 建议更具体的描述
+      label: "溶解性总固体", // 建议更具体的描述
     },
     {
       value: "6",
@@ -412,6 +412,8 @@
   function closeChartLine() {
     const elements = document.getElementsByClassName('RightLine');
     elements[0].style.zIndex = 20
+      const elements1 = document.getElementsByClassName('RightCenter');
+    elements1[0].style.zIndex = 20
   }
   function openChartLine() {
     selectValue.value = "pH";

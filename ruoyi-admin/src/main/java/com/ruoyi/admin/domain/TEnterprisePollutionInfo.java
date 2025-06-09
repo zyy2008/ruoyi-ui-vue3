@@ -29,6 +29,11 @@ public class TEnterprisePollutionInfo extends BaseEntity {
     private Long id;
 
     /**
+     * 车间面积（平方米）
+     */
+    @ApiModelProperty("车间总面积")
+    private String workshopArea;
+    /**
      * 设施区域
      */
     @ApiModelProperty("设施区域（多选）")
@@ -116,84 +121,84 @@ public class TEnterprisePollutionInfo extends BaseEntity {
     /**
      * 废气中主要污染物名称
      */
-    @ApiModelProperty(name = "废气中主要污染物名称")
+    @ApiModelProperty("废气中主要污染物名称")
     private String mainPollutantsInEmissions;
     /**
      * 是否有废气在线监测装置
      */
-    @ApiModelProperty(name = "是否有废气在线监测装置")
+    @ApiModelProperty("是否有废气在线监测装置")
     private String isThereAnOnlineMonitoringDeviceForEmissions;
     /**
      * 在线监测装置运行情况
      */
-    @ApiModelProperty(name = "在线监测装置运行情况")
+    @ApiModelProperty("在线监测装置运行情况")
     private String operationStatusOfOnlineMonitoringDevice;
     /**
      * 是否有废气治理设施
      */
-    @ApiModelProperty(name = "是否有废气治理设施")
+    @ApiModelProperty("是否有废气治理设施")
     private String isThereAnEmissionTreatmentFacility;
     /**
      * 废气治理设施运行情况
      */
-    @ApiModelProperty(name = "废气治理设施运行情况")
+    @ApiModelProperty("废气治理设施运行情况")
     private String operationStatusOfEmissionTreatmentFacility;
 
 
     /**
      * 是否有废水排放
      */
-    @ApiModelProperty(name = "是否有废水排放")
+    @ApiModelProperty("是否有废水排放")
     private String isThereWastewaterDischarge;
     /**
      * 废水排放量
      */
-    @ApiModelProperty(name = "废水排放量")
+    @ApiModelProperty("废水排放量")
     private String wastewaterDischargeVolume;
     /**
      * 废水中主要污染物名称
      */
-    @ApiModelProperty(name = "废水中主要污染物名称")
+    @ApiModelProperty("废水中主要污染物名称")
     private String mainPollutantsInWastewater;
     /**
      * 是否有废水在线监测装置
      */
-    @ApiModelProperty(name = "是否有废水在线监测装置")
+    @ApiModelProperty("是否有废水在线监测装置")
     private String isThereAnOnlineMonitoringDeviceForWastewater;
     /**
      * 是否有废水治理设施
      */
-    @ApiModelProperty(name = "是否有废水治理设施")
+    @ApiModelProperty("是否有废水治理设施")
     private String isThereAWastewaterTreatmentFacility;
     /**
      * 废水治理设施运行情况
      */
-    @ApiModelProperty(name = "废水治理设施运行情况")
+    @ApiModelProperty("废水治理设施运行情况")
     private String operationStatusOfWastewaterTreatmentFacility;
     /**
      * 废水治理区坐标位置
      */
-    @ApiModelProperty(name = "废水治理区坐标位置")
+    @ApiModelProperty("废水治理区坐标位置")
     private String coordinatesOfWastewaterTreatmentArea;
     /**
      * 废水治理区面积
      */
-    @ApiModelProperty(name = "废水治理区面积")
+    @ApiModelProperty("废水治理区面积")
     private String areaOfWastewaterTreatmentArea;
     /**
      * 废水治理区污染痕迹
      */
-    @ApiModelProperty(name = "废水治理区污染痕迹")
+    @ApiModelProperty("废水治理区污染痕迹")
     private String pollutionTracesInWastewaterTreatmentArea;
     /**
      * 污染痕迹照片
      */
-    @ApiModelProperty(name = "污染痕迹照片")
+    @ApiModelProperty("污染痕迹照片")
     private String photosOfPollutionTraces;
     /**
      * 废水治理区防护措施
      */
-    @ApiModelProperty(name = "废水治理区防护措施")
+    @ApiModelProperty("废水治理区防护措施")
     private String protectionMeasuresInWastewaterTreatmentArea;
 
 
@@ -201,47 +206,47 @@ public class TEnterprisePollutionInfo extends BaseEntity {
     /**
      * 是否产生固体废物
      */
-    @ApiModelProperty(name = "是否产生固体废物")
+    @ApiModelProperty("是否产生固体废物")
     private String isSolidWasteGenerated;
     /**
      * 是否有固体废物贮存
      */
-    @ApiModelProperty(name = "是否有固体废物贮存")
+    @ApiModelProperty("是否有固体废物贮存")
     private String isSolidWasteStored;
     /**
      * 是否有危险废物自处置
      */
-    @ApiModelProperty(name = "是否有危险废物自处置")
+    @ApiModelProperty("是否有危险废物自处置")
     private String isHazardousWasteSelfDisposed;
     /**
      * 固废贮存处置区防护措施
      */
-    @ApiModelProperty(name = "固废贮存处置区防护措施")
+    @ApiModelProperty("固废贮存处置区防护措施")
     private String solidWasteStorageAndDisposalAreaProtectionMeasures;
     /**
      * 危废贮存处置区防护措施
      */
-    @ApiModelProperty(name = "危废贮存处置区防护措施")
+    @ApiModelProperty("危废贮存处置区防护措施")
     private String hazardousWasteStorageAndDisposalAreaProtectionMeasures;
     /**
      * 危险废物规范化管理考核评估结果
      */
-    @ApiModelProperty(name = "危险废物规范化管理考核评估结果")
+    @ApiModelProperty("危险废物规范化管理考核评估结果")
     private String hazardousWasteStandardizedManagementAssessmentResults;
     /**
      * 环境污染事故发生情况
      */
-    @ApiModelProperty(name = "环境污染事故发生情况")
+    @ApiModelProperty("环境污染事故发生情况")
     private String environmentalPollutionAccidentOccurrence;
     /**
      * 事故基本情况描述
      */
-    @ApiModelProperty(name = "事故基本情况描述")
+    @ApiModelProperty("事故基本情况描述")
     private String basicDescriptionOfAccident;
     /**
      * 污染区域处理情况
      */
-    @ApiModelProperty(name = "污染区域处理情况")
+    @ApiModelProperty("污染区域处理情况")
     private String pollutionAreaTreatmentSituation;
 
     /**
@@ -249,5 +254,47 @@ public class TEnterprisePollutionInfo extends BaseEntity {
      */
     @ApiModelProperty("归属部门")
     private String deptId;
+
+
+    /**
+     * 是否有废气排放
+     */
+    @ApiModelProperty("是否有废气排放")
+    private String isWasteGasEmission;
+    /**
+     * 生产区数据来源
+     */
+    @ApiModelProperty("生产区数据来源")
+    private String dataSourceOfProductionArea;
+    /**
+     * 原辅材料数据来源
+     */
+    @ApiModelProperty("原辅材料数据来源")
+    private String dataSourceOfRawAndAuxiliaryMaterials;
+    /**
+     * 储存区数据来源
+     */
+    @ApiModelProperty("储存区数据来源")
+    private String dataSourceOfStorageArea;
+    /**
+     * 废气数据来源
+     */
+    @ApiModelProperty("废气数据来源")
+    private String dataSourceOfWasteGas;
+    /**
+     * 废水数据来源
+     */
+    @ApiModelProperty("废水数据来源")
+    private String dataSourceOfWastewater;
+    /**
+     * 固体废物贮存处置区数据来源
+     */
+    @ApiModelProperty("固体废物贮存处置区数据来源")
+    private String dataSourceOfSolidWasteStorageAndDisposalArea;
+    /**
+     * 地块内道路、地表、建（构）筑物表面、墙壁、空地污染痕迹
+     */
+    @ApiModelProperty("地块内道路、地表、建（构）筑物表面、墙壁、空地污染痕迹")
+    private String internalPollutionTracesOfThePlot;
 
 }

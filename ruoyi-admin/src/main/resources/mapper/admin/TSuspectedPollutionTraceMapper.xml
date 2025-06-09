@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TSuspectedPollutionTraceMapper">
+    
+    <resultMap type="TSuspectedPollutionTrace" id="TSuspectedPollutionTraceResult">
+        <result property="id"    column="id"    />
+        <result property="traceLocation"    column="trace_location"    />
+        <result property="traceCoordinates"    column="trace_coordinates"    />
+        <result property="tracePhotos"    column="trace_photos"    />
+        <result property="enterprisePollutionInfoId"    column="enterprise_pollution_info_id"    />
+        <result property="deptId"    column="dept_id"    />
+    </resultMap>
+
+    <sql id="selectTSuspectedPollutionTraceVo">
+        select id, trace_location, trace_coordinates, trace_photos, enterprise_pollution_info_id, dept_id from t_suspected_pollution_trace
+    </sql>
+
+    <select id="selectTSuspectedPollutionTraceList" parameterType="TSuspectedPollutionTrace" resultMap="TSuspectedPollutionTraceResult">
+        <include refid="selectTSuspectedPollutionTraceVo"/>
+        <where>  
+            <if test="traceLocation != null  and traceLocation != ''"> and trace_location = #{traceLocation}</if>
+            <if test="traceCoordinates != null  and traceCoordinates != ''"> and trace_coordinates = #{traceCoordinates}</if>
+            <if test="tracePhotos != null  and tracePhotos != ''"> and trace_photos = #{tracePhotos}</if>
+            <if test="enterprisePollutionInfoId != null  and enterprisePollutionInfoId != ''"> and enterprise_pollution_info_id = #{enterprisePollutionInfoId}</if>
+            <if test="deptId != null  and deptId != ''"> and dept_id = #{deptId}</if>
+        </where>
+    </select>
+    
+    <select id="selectTSuspectedPollutionTraceById" parameterType="Long" resultMap="TSuspectedPollutionTraceResult">
+        <include refid="selectTSuspectedPollutionTraceVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTSuspectedPollutionTrace" parameterType="TSuspectedPollutionTrace" useGeneratedKeys="true" keyProperty="id">
+        insert into t_suspected_pollution_trace
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="traceLocation != null">trace_location,</if>
+            <if test="traceCoordinates != null">trace_coordinates,</if>
+            <if test="tracePhotos != null">trace_photos,</if>
+            <if test="enterprisePollutionInfoId != null">enterprise_pollution_info_id,</if>
+            <if test="deptId != null">dept_id,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="traceLocation != null">#{traceLocation},</if>
+            <if test="traceCoordinates != null">#{traceCoordinates},</if>
+            <if test="tracePhotos != null">#{tracePhotos},</if>
+            <if test="enterprisePollutionInfoId != null">#{enterprisePollutionInfoId},</if>
+            <if test="deptId != null">#{deptId},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTSuspectedPollutionTrace" parameterType="TSuspectedPollutionTrace">
+        update t_suspected_pollution_trace
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="traceLocation != null">trace_location = #{traceLocation},</if>
+            <if test="traceCoordinates != null">trace_coordinates = #{traceCoordinates},</if>
+            <if test="tracePhotos != null">trace_photos = #{tracePhotos},</if>
+            <if test="enterprisePollutionInfoId != null">enterprise_pollution_info_id = #{enterprisePollutionInfoId},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTSuspectedPollutionTraceById" parameterType="Long">
+        delete from t_suspected_pollution_trace where id = #{id}
+    </delete>
+
+    <delete id="deleteTSuspectedPollutionTraceByIds" parameterType="String">
+        delete from t_suspected_pollution_trace where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

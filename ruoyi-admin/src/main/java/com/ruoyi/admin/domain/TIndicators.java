@@ -15,7 +15,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @date 2025-06-02
  */
 @Data
-@ApiModel("指标分类")
+@ApiModel("指标标准表")
 public class TIndicators extends BaseEntity {
     private static final long serialVersionUID = 1L;
 

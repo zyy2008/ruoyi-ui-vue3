@@ -3,21 +3,21 @@
     <div class="title">
       <img src="@/assets/static/subTitle.png" alt="" />
       <span> 实时数据 </span>
-      <!-- <el-button @click="enterpriseApi"> 测试数据</el-button> -->
+      <el-button type="text" class="text" @click="openChartBar">详情</el-button>
     </div>
     <el-table :data="tableData" style="width: 100%" max-height="650" :row-class-name="tableRowClassName"
       @row-click="clickTable">
-      <el-table-column type="index" width="50" />
+      <el-table-column type="index" label="序号" width="60" />
       <el-table-column prop="wellCode" label="名称" width="60" />
       <el-table-column prop="ph" label="PH" width="60" />
       <el-table-column prop="WD" label="温度" width="60" />
       <el-table-column prop="waterBuriedDepth" label="水位" width="60" />
-      <el-table-column prop="DW" label="电位" />
-      <el-table-column prop="RJY" label="溶解性总固体" width="70" />
+      <!-- <el-table-column prop="DW" label="电位" /> -->
+      <el-table-column prop="RJY" label="溶解氧" width="110" />
       <el-table-column prop="DDL" label="电导率" width="70" />
       <el-table-column prop="AD" label="氨氮" width="60" />
-      <el-table-column prop="lng" label="位置" width="60" />
     </el-table>
+    <ChartBarModal ref="chartBar" />
   </div>
 </template>
 <script setup lang="ts">
@@ -30,7 +30,7 @@
     DataMethod,
     ApiData,
   } from "@/api/platform/index";
-  import {  listWells} from "@/api/admin/wells";
+  import { listWells } from "@/api/admin/wells";
   import {
     listMonitoring,
     getMonitoring,
@@ -38,11 +38,12 @@
     addMonitoring,
     updateMonitoring,
   } from "@/api/admin/monitoring";
+  import ChartBarModal from './ChartBarModal.vue'
   import { param } from "@mars/utils";
   const tableData = ref();
   const tableTotle = ref();
   const selectedRow = ref(null);
-
+  const chartBar = ref()
   const tableRowClassName = ({ row }) => {
     return row === selectedRow.value ? "selected-row" : "";
   };
@@ -50,8 +51,8 @@
   const enterpriseApi = async () => {
     const { } = await projectApi({
       apiData: {
-        dataType: "pollutantSource" as DataType,
-        dataMethod: "add" as DataMethod,
+        dataType: "pollutantSource",
+        dataMethod: "add",
         params: { id: 0 },
         authority: "admin",
       },
@@ -61,7 +62,7 @@
   onMounted(() => {
     createBaseList({ pageNum: 1, pageSize: 1000 });
   });
-  
+
   const createBaseList = (option) => {
     let data = {};
     listWells(option).then((response) => {
@@ -97,6 +98,12 @@
     }
   };
 
+  const openChartBar = () => {
+    chartBar.value.dialogVisible = true;
+    const elements = document.getElementsByClassName('leftTable');
+    elements[0].style.zIndex = 100
+  }
+
 </script>
 
 <style lang="scss" scoped>
@@ -115,10 +122,15 @@
       height: 42px;
       line-height: 42px;
       display: flex;
+      align-items: center;
 
       span {
         font-size: 18px;
         display: inline-block;
+      }
+
+      .text {
+        margin-left: 250px
       }
     }
   }

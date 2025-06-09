@@ -5,20 +5,25 @@
         <img src="@/assets/static/subTitle.png" alt="" />
         <span> {{ chart.chartInfo.wellCode+'(' +chart.chartInfo.location+')' }} </span>
       </div>
-      <el-button type="text" class="text" @click="openChartLine">更多</el-button>
-    </div>
-    <div class="selectRadio">
-      <el-select v-model="selectValue" placeholder="请选择" style="width: 150px; margin-left: 55px" @change="changeSelect">
-        <el-option v-for="item in options" :key="item.value" :label="item.label" :value="item.value">
-        </el-option>
-      </el-select>
-      <el-radio-group v-model="xAxis" class="radio" @change="changeChart">
+      <el-radio-group v-model="xAxis" style="width: 150px;" @change="changeChart">
         <el-radio-button label="周"></el-radio-button>
         <el-radio-button label="月"></el-radio-button>
       </el-radio-group>
+      <el-button type="text" class="text" @click="openChartLine">更多</el-button>
     </div>
-    <div id="echart"></div>
-    <ChartLineModal ref="chartLine" :chart="chart" :lineXAxis="lineXAxis" :lineSeries="lineSeries" />
+    <div class="echartLine">
+      <div class="echart">
+        <div id="echart1"></div>
+        <div id="echart2"> </div>
+        <div id="echart3"></div>
+      </div>
+      <div class="echart">
+        <div id="echart4"></div>
+        <div id="echart5"></div>
+        <div id="echart6"></div>
+      </div>
+    </div>
+    <ChartLineModal ref="chartLine" :chart="chart" :lineXAxis="lineXAxis" :lineSeries="lineSeries" :chartType="chartType" />
   </div>
 </template>
 <script setup>
@@ -34,192 +39,10 @@
   let lineInfo = ref([]);
   let lineXAxis = ref([]);
   let lineSeries = ref([]);
+  const chartType=ref('monitor')
   const chart = defineProps(["chartInfo"]);
-
-  const options = [
-    {
-      value: "1",
-      label: "pH", // 修正为标准写法
-    },
-    {
-      value: "2",
-      label: "温度",
-    },
-    {
-      value: "3",
-      label: "水位",
-    },
-    {
-      value: "4",
-      label: "电位",
-    },
-    {
-      value: "5",
-      label: "溶解性固体", // 建议更具体的描述
-    },
-    {
-      value: "6",
-      label: "电导率",
-    },
-    {
-      value: "7",
-      label: "氨氮",
-    },
-    {
-      value: "8",
-      label: "色度",
-    },
-    {
-      value: "9",
-      label: "浑浊度",
-    },
-    {
-      value: "10",
-      label: "总硬度",
-    },
-    {
-      value: "11",
-      label: "溶解性总固体",
-    },
-    {
-      value: "12",
-      label: "硫酸盐",
-    },
-    {
-      value: "13",
-      label: "氯化物",
-    },
-    {
-      value: "14",
-      label: "铁",
-    },
-    {
-      value: "15",
-      label: "锰",
-    },
-    {
-      value: "16",
-      label: "铝",
-    },
-    {
-      value: "17",
-      label: "阴离子表面活性剂",
-    },
-    {
-      value: "18",
-      label: "耗氧量",
-    },
-    {
-      value: "19",
-      label: "硫化物",
-    },
-    {
-      value: "20",
-      label: "钠",
-    },
-    {
-      value: "21",
-      label: "亚硝酸盐氮",
-    },
-    {
-      value: "22",
-      label: "硝酸盐氮",
-    },
-    {
-      value: "23",
-      label: "碘化物",
-    },
-    {
-      value: "24",
-      label: "硒",
-    },
-    {
-      value: "25",
-      label: "铜",
-    },
-    {
-      value: "26",
-      label: "挥发酚",
-    },
-    {
-      value: "27",
-      label: "氰化物",
-    },
-    {
-      value: "28",
-      label: "氟化物",
-    },
-    {
-      value: "29",
-      label: "汞",
-    },
-    {
-      value: "30",
-      label: "砷",
-    },
-    {
-      value: "31",
-      label: "镉",
-    },
-    // 新增选项（去除单位，仅保留核心名称）
-    { value: "32", label: "六价铬" },
-    { value: "33", label: "铅" },
-    { value: "34", label: "氯仿" },
-    { value: "35", label: "四氯化碳" },
-    { value: "36", label: "苯" },
-    { value: "37", label: "甲苯" },
-    { value: "38", label: "钼" },
-    { value: "39", label: "钒" },
-    { value: "40", label: "钴" },
-    { value: "41", label: "镍" },
-    { value: "42", label: "二氯甲烷" },
-    { value: "43", label: "1,2-二氯乙烷" },
-    { value: "44", label: "1,1,1-三氯乙烷" },
-    { value: "45", label: "1,1,2-三氯乙烷" },
-    { value: "46", label: "1,2-二氯丙烷" },
-    { value: "47", label: "氯乙烯" },
-    { value: "48", label: "1,1-二氯乙烯" },
-    { value: "49", label: "反式-1,2-二氯乙烯" },
-    { value: "50", label: "顺式-1,2-二氯乙烯" },
-    { value: "51", label: "三氯乙烯" },
-    { value: "52", label: "四氯乙烯" },
-    { value: "53", label: "氯苯" },
-    { value: "54", label: "1,2-二氯苯" },
-    { value: "55", label: "1,4-二氯苯" },
-    { value: "56", label: "乙苯" },
-    { value: "57", label: "邻二甲苯" },
-    { value: "58", label: "间/对-二甲苯" },
-    { value: "59", label: "苯乙烯" },
-    { value: "60", label: "硝基苯" },
-    { value: "61", label: "萘" },
-    { value: "62", label: "蒽" },
-    { value: "63", label: "荧蒽" },
-    { value: "64", label: "苯并[b]荧蒽" },
-    { value: "65", label: "苯并[a]芘" },
-    { value: "66", label: "石油烃(C6-C9)" },
-    { value: "67", label: "石油烃(C10-C40)" },
-    { value: "68", label: "苯酚" },
-    { value: "69", label: "2-氯酚" },
-    { value: "70", label: "苯胺" },
-    { value: "71", label: "苊烯" },
-    { value: "72", label: "苊" },
-    { value: "73", label: "芴" },
-    { value: "74", label: "菲" },
-    { value: "75", label: "芘" },
-    { value: "76", label: "苯并[a]蒽" },
-    { value: "77", label: "䓛" },
-    { value: "78", label: "苯并[k]荧蒽" },
-    { value: "79", label: "茚并[1,2,3-c,d]芘" },
-    { value: "80", label: "二苯并[a,h]蒽" },
-    { value: "81", label: "苯并[g,h,i]苝" },
-    { value: "82", label: "氯甲烷" },
-    { value: "83", label: "1,1-二氯乙烷" },
-    { value: "84", label: "1,1,1,2-四氯乙烷" },
-    { value: "85", label: "1,1,2,2-四氯乙烷" },
-    { value: "86", label: "1,2,3-三氯丙烷" },
-  ];
   onMounted(() => {
-    seekLineData({ pageNum: 1, pageSize: 1000, pointId: "J01" }, 'ph');
+    // seekLineData({ pageNum: 1, pageSize: 1000, pointId: "J01" }, 'ph');
   });
 
   watch(chart, (newValue, oldValue) => {
@@ -277,31 +100,31 @@
     });
   }
 
-  function changeSelect(label) {
-    if (label === '1') {
-      seekLineData({
-        pageNum: 1,
-        pageSize: 1000,
-        pointId: chart.chartInfo.wellCode,
-      }, 'ph');
-    } else if (label === '5') {
-      seekLineData({
-        pageNum: 1,
-        pageSize: 1000,
-        pointId: chart.chartInfo.wellCode,
-      }, 'dissolved');
-    } else if (label === '7') {
-      seekLineData({
-        pageNum: 1,
-        pageSize: 1000,
-        pointId: chart.chartInfo.wellCode,
-      }, 'ammoniaNitrogen');
-    } else {
-      lineOption.xAxis[0].data = [];
-      lineOption.series[0].data = [];
-      lineChart.setOption(lineOption);
-    }
-  }
+  // function changeSelect(label) {
+  //   if (label === '1') {
+  //     seekLineData({
+  //       pageNum: 1,
+  //       pageSize: 1000,
+  //       pointId: chart.chartInfo.wellCode,
+  //     }, 'ph');
+  //   } else if (label === '5') {
+  //     seekLineData({
+  //       pageNum: 1,
+  //       pageSize: 1000,
+  //       pointId: chart.chartInfo.wellCode,
+  //     }, 'dissolved');
+  //   } else if (label === '7') {
+  //     seekLineData({
+  //       pageNum: 1,
+  //       pageSize: 1000,
+  //       pointId: chart.chartInfo.wellCode,
+  //     }, 'ammoniaNitrogen');
+  //   } else {
+  //     lineOption.xAxis[0].data = [];
+  //     lineOption.series[0].data = [];
+  //     lineChart.setOption(lineOption);
+  //   }
+  // }
 
   function openChartLine() {
     seekLineData({
@@ -310,7 +133,7 @@
       pointId: chart.chartInfo.wellCode,
     }, 'ph');
     chartLine.value.dialogVisible = true;
-    const elements = document.getElementsByClassName('RightLine');
+    const elements = document.getElementsByClassName('RightCenter');
     elements[0].style.zIndex = 100
   }
 
@@ -329,18 +152,31 @@
   };
 
   nextTick(() => {
-    initEchart();
+    initEchart('echart1', 'pH');
+    initEchart('echart2', '温度');
+    initEchart('echart3', '水位');
+    initEchart('echart4', '溶解氧');
+    initEchart('echart5', '电导率');
+    initEchart('echart6', '氨氮');
   });
 
-  function initEchart() {
-    var chartDom = document.getElementById("echart");
-    lineChart = echarts.init(chartDom);
+  function initEchart(id, title) {
+    var chartDom = document.getElementById(id);
+    const lineChart = echarts.init(chartDom);
     var fontColor = "#30eee9";
     lineOption = {
+      "title": {
+        "text": title,
+        x: "center",
+        textStyle: {
+          color: '#fff',
+          fontSize: '12'
+        },
+      },
       grid: {
         left: "5%",
         right: "5%",
-        top: "2%",
+        top: "10%",
         bottom: "5%",
         containLabel: true,
       },
@@ -388,7 +224,6 @@
       yAxis: [
         {
           type: "value",
-          name: "值",
           min: 0,
           axisLabel: {
             formatter: "{value}",
@@ -462,7 +297,7 @@
   .table {
     width: 604px;
     padding: 10px;
-    background: url("@/assets/static/left.png") no-repeat;
+    /* background: url("@/assets/static/left.png") no-repeat; */
     background-color: rgba(9, 21, 42, 0.8);
 
     .title {
@@ -470,6 +305,7 @@
       line-height: 42px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
 
       .image {
         width: 100%;
@@ -489,16 +325,41 @@
       }
     }
 
+    .echartLine {
+      height: calc(100% - 42px);
+      display: flex;
+
+      flex-direction: column;
+
+      .echart {
+        display: flex;
+        height: 50%;
+        justify-content: space-between;
+
+        #echart1,
+        #echart2,
+        #echart3,
+        #echart4,
+        #echart5,
+        #echart6 {
+          flex: 1;
+          width: 465px;
+          height: 220px;
+        }
+      }
+
+    }
+
     .selectRadio {
       display: flex;
       justify-content: space-between;
     }
 
-    #echart {
+    /* #echart {
       width: 100%;
       margin-top: 5px;
       height: calc(100% - 60px);
-    }
+    } */
   }
 
   :deep() .el-radio-button__original-radio:checked+.el-radio-button__inner {

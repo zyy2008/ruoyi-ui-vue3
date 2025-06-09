@@ -60,7 +60,7 @@
   };
 
   onMounted(() => {
-    createBaseList({ pageNum: 1, pageSize: 1000 });
+    createBaseList({ pageNum: 1, pageSize: 1000 ,realTime:"是"});
   });
 
   const createBaseList = (option) => {

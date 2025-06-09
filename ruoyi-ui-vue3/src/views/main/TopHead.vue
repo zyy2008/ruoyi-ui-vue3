@@ -374,7 +374,7 @@
   }
 
   .RightLine {
-    width: 430px;
+    width: 460px;
     height: 400px;
     position: absolute;
     top: 90px;
@@ -392,7 +392,7 @@
   }
 
   .RightTable {
-    width: 430px;
+    width: 460px;
     height: 350px;
     position: absolute;
     top: 510px;

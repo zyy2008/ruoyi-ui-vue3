@@ -469,7 +469,7 @@ const props: ISchemaFieldProps = {
                   header: "是否有废气排放*(若选择有，则需填写以下各项内容)",
                 },
                 properties: {
-                  是否有废气排放: {
+                  isWasteGasEmission: {
                     type: "string",
                     required: true,
                     "x-decorator": "FormItem",
@@ -546,10 +546,10 @@ const props: ISchemaFieldProps = {
                 type: "void",
                 "x-component": "Card",
                 "x-component-props": {
-                  header: "在线监测装固运行情况*",
+                  header: "在线监测装置运行情况*",
                 },
                 properties: {
-                  在线监测装固运行情况: {
+                  在线监测装置运行情况: {
                     type: "string",
                     required: true,
                     "x-decorator": "FormItem",
@@ -725,10 +725,10 @@ const props: ISchemaFieldProps = {
                 type: "void",
                 "x-component": "Card",
                 "x-component-props": {
-                  header: "在线监测装固运行情况*",
+                  header: "在线监测装置运行情况*",
                 },
                 properties: {
-                  operationStatusOfOnlineMonitoringDevice: {
+                  在线监测装置运行情况: {
                     type: "string",
                     required: true,
                     "x-decorator": "FormItem",
@@ -1018,6 +1018,7 @@ const props: ISchemaFieldProps = {
                   solidWasteStorageAndDisposalAreaProtectionMeasures: {
                     type: "string",
                     "x-decorator": "FormItem",
+                    required: true,
                     "x-component": (
                       <CheckboxCol
                         datas={[
@@ -1058,9 +1059,10 @@ const props: ISchemaFieldProps = {
                   header: "危废贮存或处置区防护措施*(多选)",
                 },
                 properties: {
-                  solidWasteStorageAndDisposalAreaProtectionMeasures: {
+                  hazardousWasteStorageAndDisposalAreaProtectionMeasures: {
                     type: "string",
                     "x-decorator": "FormItem",
+                    required: true,
                     "x-component": (
                       <CheckboxCol
                         datas={[
@@ -1126,6 +1128,20 @@ const props: ISchemaFieldProps = {
                   },
                 },
               },
+              card7: {
+                type: "void",
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "数据来源",
+                },
+                properties: {
+                  dataSourceOfSolidWasteStorageAndDisposalArea: {
+                    type: "string",
+                    "x-decorator": "FormItem",
+                    "x-component": "Input",
+                  },
+                },
+              },
             },
           },
           tab7: {
@@ -1145,7 +1161,6 @@ const props: ISchemaFieldProps = {
                 properties: {
                   internalPollutionTracesOfThePlot: {
                     type: "string",
-                    required: true,
                     "x-decorator": "FormItem",
                     enum: [
                       {
@@ -1193,7 +1208,7 @@ const props: ISchemaFieldProps = {
                 type: "void",
                 "x-component": "Card",
                 "x-component-props": {
-                  header: "环境污染事故发生情况",
+                  header: "环境污染事故发生情况*",
                 },
                 properties: {
                   environmentalPollutionAccidentOccurrence: {

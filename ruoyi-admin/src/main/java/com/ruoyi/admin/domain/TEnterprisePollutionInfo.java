@@ -129,10 +129,10 @@ public class TEnterprisePollutionInfo extends BaseEntity {
     @ApiModelProperty("是否有废气在线监测装置")
     private String isThereAnOnlineMonitoringDeviceForEmissions;
     /**
-     * 在线监测装置运行情况
+     * 废气在线监测装置运行情况
      */
-    @ApiModelProperty("在线监测装置运行情况")
-    private String operationStatusOfOnlineMonitoringDevice;
+    @ApiModelProperty("废气在线监测装置运行情况")
+    private String operationStatusOfOnlineMonitoringDeviceForEmissions;
     /**
      * 是否有废气治理设施
      */
@@ -150,6 +150,11 @@ public class TEnterprisePollutionInfo extends BaseEntity {
      */
     @ApiModelProperty("是否有废水排放")
     private String isThereWastewaterDischarge;
+    /**
+     * 废水在线监测装置运行情况
+     */
+    @ApiModelProperty("废水在线监测装置运行情况")
+    private String operationStatusOfOnlineMonitoringDeviceForWastewater;
     /**
      * 废水排放量
      */
@@ -262,9 +267,9 @@ public class TEnterprisePollutionInfo extends BaseEntity {
     @ApiModelProperty("是否有废气排放")
     private String isWasteGasEmission;
     /**
-     * 生产区数据来源
+     * 主要产品数据来源
      */
-    @ApiModelProperty("生产区数据来源")
+    @ApiModelProperty("主要产品数据来源")
     private String dataSourceOfProductionArea;
     /**
      * 原辅材料数据来源
@@ -296,5 +301,10 @@ public class TEnterprisePollutionInfo extends BaseEntity {
      */
     @ApiModelProperty("地块内道路、地表、建（构）筑物表面、墙壁、空地污染痕迹")
     private String internalPollutionTracesOfThePlot;
+    /**
+     * 空气异味状况
+     */
+    @ApiModelProperty("空气异味状况")
+    private String airOdorCondition;
 
 }

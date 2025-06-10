@@ -114,11 +114,41 @@ const props: ISchemaFieldProps = {
             properties: {
               card: {
                 type: "void",
-                "x-component": <MainProducts />,
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "一、主要产品",
+                },
+                properties: {
+                  card: {
+                    type: "void",
+                    "x-component": <MainProducts />,
+                  },
+                  dataSourceOfProductionArea: {
+                    type: "string",
+                    title: "主要产品数据来源",
+                    "x-decorator": "FormItem",
+                    "x-component": "Input",
+                  },
+                },
               },
               card1: {
                 type: "void",
-                "x-component": <RawMaterials />,
+                "x-component": "Card",
+                "x-component-props": {
+                  header: "二、主要原辅材料",
+                },
+                properties: {
+                  card: {
+                    type: "void",
+                    "x-component": <RawMaterials />,
+                  },
+                  dataSourceOfRawAndAuxiliaryMaterials: {
+                    type: "string",
+                    title: "原辅材料数据来源",
+                    "x-decorator": "FormItem",
+                    "x-component": "Input",
+                  },
+                },
               },
               card2: {
                 type: "void",
@@ -549,7 +579,7 @@ const props: ISchemaFieldProps = {
                   header: "在线监测装置运行情况*",
                 },
                 properties: {
-                  在线监测装置运行情况: {
+                  operationStatusOfOnlineMonitoringDeviceForEmissions: {
                     type: "string",
                     required: true,
                     "x-decorator": "FormItem",
@@ -728,7 +758,7 @@ const props: ISchemaFieldProps = {
                   header: "在线监测装置运行情况*",
                 },
                 properties: {
-                  在线监测装置运行情况: {
+                  operationStatusOfOnlineMonitoringDeviceForWastewater: {
                     type: "string",
                     required: true,
                     "x-decorator": "FormItem",

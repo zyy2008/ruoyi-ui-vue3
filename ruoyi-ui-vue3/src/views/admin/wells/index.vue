@@ -15,6 +15,23 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
+
+      <el-form-item label="所属企业" prop="deptId">
+        <el-select
+          v-model="queryParams.deptId"
+          placeholder="请选择所属企业"
+          clearable
+          filterable
+          style="width: 200px"
+        >
+          <el-option
+            :key="index"
+            v-for="(item, index) in enterprisesList"
+            :label="item.enterpriseName"
+            :value="item.id"
+          />
+        </el-select>
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="Search" @click="handleQuery"
           >搜索</el-button
@@ -79,6 +96,18 @@
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="编码" align="center" prop="wellCode" />
+      <el-table-column
+        width="240"
+        label="所属企业"
+        align="center"
+        prop="enterpriseName"
+      >
+        <template #default="scope">
+          <el-button link type="primary" @click="handleDetailQY(scope.row)">{{
+            scope.row.enterpriseName || "公共区域"
+          }}</el-button>
+        </template>
+      </el-table-column>
       <el-table-column label="位置" align="center" prop="location" />
       <el-table-column label="类型" align="center" prop="pointType" />
       <el-table-column
@@ -146,6 +175,24 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
+            <el-form-item label="所属企业" prop="deptId">
+              <el-select
+                v-model="form.deptId"
+                placeholder="请选择所属企业"
+                clearable
+                filterable
+                style="width:100%"
+              >
+                <el-option
+                  :key="index"
+                  v-for="(item, index) in enterprisesList"
+                  :label="item.enterpriseName"
+                  :value="item.id"
+                />
+              </el-select>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
             <el-form-item label="监测井位置" prop="location">
               <el-input v-model="form.location" placeholder="请输入内容" />
             </el-form-item>
@@ -192,11 +239,6 @@
           <el-col :span="12">
             <el-form-item label="视频资料地址" prop="videoUrl">
               <el-input v-model="form.videoUrl" placeholder="请输入内容" />
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="归属部门" prop="deptId">
-              <el-input v-model="form.deptId" placeholder="请输入归属部门" />
             </el-form-item>
           </el-col>
         </el-row>
@@ -274,7 +316,7 @@
         <el-descriptions-item label="视频">{{
           detailForm.videoUrl
         }}</el-descriptions-item>
-        <el-descriptions-item label="归属部门">{{
+        <el-descriptions-item label="所属企业">{{
           detailForm.deptId
         }}</el-descriptions-item>
       </el-descriptions>
@@ -284,10 +326,45 @@
         </div>
       </template>
     </el-dialog>
+
+    <el-dialog
+      v-model="dialogVisible"
+      title="企业信息"
+      width="100vw"
+      destroy-on-close
+    >
+      <TabsCard :deptId="deptId" />
+      <!-- <el-tabs
+        v-model="activeName"
+        type="card"
+        class="map-tabs"
+        @tab-click="handleClick"
+      >
+        <el-tab-pane label="企业地块基本情况" name="first"
+          ><form_tab1
+        /></el-tab-pane>
+        <el-tab-pane label="企业污染源信息" name="second"
+          ><form_tab2
+        /></el-tab-pane>
+        <el-tab-pane label="迁移途径信息" name="third"
+          ><form_tab3
+        /></el-tab-pane>
+        <el-tab-pane label="敏感受体信息" name="fourth"
+          ><form_tab4
+        /></el-tab-pane>
+        <el-tab-pane label="土壤或地下水环境监测" name="five"
+          ><form_tab5
+        /></el-tab-pane>
+        <el-tab-pane label="环境监测和调查评估信息" name="six"
+          ><form_tab6
+        /></el-tab-pane>
+      </el-tabs> -->
+    </el-dialog>
   </div>
 </template>
 
 <script setup name="Wells">
+import { listEnterprises } from "@/api/admin/enterprises";
 import {
   listWells,
   getWells,
@@ -295,9 +372,10 @@ import {
   addWells,
   updateWells,
 } from "@/api/admin/wells";
+import TabsCard from "@/views/corporate";
 import { generateUUID } from "@/utils/index";
 const { proxy } = getCurrentInstance();
-
+import { ElMessage } from "element-plus";
 const wellsList = ref([]);
 const open = ref(false);
 const loading = ref(true);
@@ -309,6 +387,30 @@ const total = ref(0);
 const title = ref("");
 const detailOpen = ref(false);
 const detailForm = ref({});
+const dialogVisible = ref(false);
+const deptId = ref(null);
+const enterprisesList = ref([]);
+function handleDetailQY(row) {
+  if (!row || !row.deptId) {
+    ElMessage({
+      message: "该监测点属于公共区域",
+      type: "warning",
+    });
+    return;
+  }
+  dialogVisible.value = true;
+  deptId.value = row.deptId;
+}
+
+function getlistEnterprises() {
+  loading.value = true;
+  listEnterprises({
+    pageNum: 1,
+    pageSize: 2000,
+  }).then((response) => {
+    enterprisesList.value = response.rows;
+  });
+}
 
 const data = reactive({
   form: {},
@@ -483,6 +585,6 @@ function handleDetail(row) {
     detailOpen.value = true;
   });
 }
-
+getlistEnterprises();
 getList();
 </script>

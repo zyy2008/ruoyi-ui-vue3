@@ -130,7 +130,7 @@ function addEnterpriseLayer_isNotKey(list) {
 }
 
 window.openQYPage = function (event) {
-  window.openQYMSG(event)
+  window.openQYMSG(event.attr.id)
 }
 
 export async function loadWells() {
@@ -178,6 +178,7 @@ function addWellLayer_NotrealTime(list) {
       attr: { ...item },
       popup: [
         { field: "wellCode", name: "监测井编码" },
+        { field: "enterpriseName", name: "所属企业" },
         { field: "location", name: "监测井位置" },
         { field: "completionDate", name: "成井时间" },
         { field: "pipeMaterial", name: "井管材质" },
@@ -186,7 +187,6 @@ function addWellLayer_NotrealTime(list) {
         { field: "waterMedium", name: "含水介质" },
         { field: "ownership", name: "权属单位" },
         { field: "videoUrl", name: "视频资料地址" },
-        { field: "deptId", name: "归属部门" },
         { field: "pointType", name: "类型" },
         { field: "waterBuriedDepth", name: "水位埋深" },
         { field: "wellElevation", name: "井口高程" },
@@ -196,6 +196,10 @@ function addWellLayer_NotrealTime(list) {
         {
           type: "html",
           html: "<label>监测数据</label><div style='cursor: pointer;color: #ff0000;' id='btnDetails'>点击查看</div>"
+        },
+        {
+          type: "html",
+          html: "<label>企业详情</label><div style='cursor: pointer;color: #ff0000;' id='btnDetailsQy'>点击查看</div>"
         }
       ],
     })
@@ -209,9 +213,22 @@ function addWellLayer_NotrealTime(list) {
       if (btnDetails) {
         btnDetails.addEventListener("click", (e) => {
           openJCPage(event)
-          //
-          console.log("点击查看监测数据", event)
           graphic.closePopup();
+          console.log("点击查看监测数据", event)
+
+        })
+      }
+
+      const btnDetailsQy = container.querySelector("#btnDetailsQy")
+      if (btnDetailsQy) {
+        btnDetailsQy.addEventListener("click", (e) => {
+
+          if (!event.attr || !event.attr.deptId) {
+            globalMsg("该监测点属于公共区域")
+            return;
+          }
+          graphic.closePopup();
+          window.openQYMSG(event.attr.deptId)
         })
       }
     })
@@ -251,6 +268,7 @@ function addWellLayer_realTime(list) {
       attr: { ...item },
       popup: [
         { field: "wellCode", name: "监测井编码" },
+        { field: "enterpriseName", name: "所属企业" },
         { field: "location", name: "监测井位置" },
         { field: "completionDate", name: "成井时间" },
         { field: "pipeMaterial", name: "井管材质" },
@@ -259,7 +277,6 @@ function addWellLayer_realTime(list) {
         { field: "waterMedium", name: "含水介质" },
         { field: "ownership", name: "权属单位" },
         { field: "videoUrl", name: "视频资料地址" },
-        { field: "deptId", name: "归属部门" },
         { field: "pointType", name: "类型" },
         { field: "waterBuriedDepth", name: "水位埋深" },
         { field: "wellElevation", name: "井口高程" },
@@ -269,6 +286,10 @@ function addWellLayer_realTime(list) {
         {
           type: "html",
           html: "<label>监测数据</label><div style='cursor: pointer;color: #ff0000;' id='btnDetails'>点击查看</div>"
+        },
+        {
+          type: "html",
+          html: "<label>企业详情</label><div style='cursor: pointer;color: #ff0000;' id='btnDetailsQy'>点击查看</div>"
         }
       ],
     })
@@ -281,10 +302,25 @@ function addWellLayer_realTime(list) {
       const btnDetails = container.querySelector("#btnDetails")
       if (btnDetails) {
         btnDetails.addEventListener("click", (e) => {
+          graphic.closePopup();
           openJCPage(event)
           //
           console.log("点击查看监测数据", event)
+
+        })
+      }
+
+
+      const btnDetailsQy = container.querySelector("#btnDetailsQy")
+      if (btnDetailsQy) {
+        btnDetailsQy.addEventListener("click", (e) => {
+
+          if (!event.attr || !event.attr.deptId) {
+            globalMsg("该监测点属于公共区域")
+            return;
+          }
           graphic.closePopup();
+          window.openQYMSG(event.attr.deptId)
         })
       }
     })

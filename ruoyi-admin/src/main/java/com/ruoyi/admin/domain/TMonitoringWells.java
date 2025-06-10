@@ -110,6 +110,20 @@ public class TMonitoringWells extends BaseEntity
     @Excel(name = "是否实时监测")
     private String realTime;
 
+    private String enterpriseName;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public String getEnterpriseName() {
+        return enterpriseName;
+    }
+
+    public void setEnterpriseName(String enterpriseName) {
+        this.enterpriseName = enterpriseName;
+    }
+
     public void setId(String id)
     {
         this.id = id;

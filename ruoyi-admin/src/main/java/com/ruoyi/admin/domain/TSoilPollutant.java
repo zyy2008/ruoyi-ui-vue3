@@ -48,7 +48,12 @@ public class TSoilPollutant extends BaseEntity {
     /**
      * 归属部门
      */
-    @Excel(name = "归属部门")
     @ApiModelProperty("归属部门")
     private String deptId;
+
+    /**
+     * 监测类型（土壤地下水&环境调查评估）
+     */
+    @ApiModelProperty("监测类型（土壤地下水&环境调查评估）")
+    private String monitoringType;
 }

@@ -51,8 +51,30 @@ const props: ISchemaFieldProps = {
                   properties: {
                     soilType: {
                       type: "string",
+                      enum: [
+                        {
+                          label: "碎石土",
+                          value: "0",
+                        },
+                        {
+                          label: "砂土",
+                          value: "1",
+                        },
+                        {
+                          label: "粉土",
+                          value: "2",
+                        },
+                        {
+                          label: "黏性土",
+                          value: "3",
+                        },
+                        {
+                          label: "不确定",
+                          value: "4",
+                        },
+                      ],
                       "x-decorator": "FormItem",
-                      "x-component": "Input",
+                      "x-component": "Select",
                     },
                   },
                 },

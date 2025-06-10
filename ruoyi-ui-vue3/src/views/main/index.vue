@@ -35,7 +35,8 @@
       title="企业信息"
       width="100vw"
     >
-      <el-tabs
+      <TabsCard :deptId="deptId" />
+      <!-- <el-tabs
         v-model="activeName"
         type="card"
         class="map-tabs"
@@ -59,7 +60,7 @@
         <el-tab-pane label="环境监测和调查评估信息" name="six"
           ><form_tab6
         /></el-tab-pane>
-      </el-tabs>
+      </el-tabs> -->
     </el-dialog>
   </config-provider>
 </template>
@@ -90,6 +91,7 @@ import locale from "ant-design-vue/es/locale/zh_CN";
 import { ConfigProvider } from "ant-design-vue";
 import MarsWidget from "@mars/widgets/widget.vue";
 import { useWidgetStore } from "@mars/widgets/common/store/widget";
+import TabsCard from "@/views/corporate";
 const widgetStore = useWidgetStore();
 const mapLoaded = ref(false); // map加载完成
 const widgets = computed(() => widgetStore.state.widgets);
@@ -103,7 +105,7 @@ const layerStoreIns = layerStore();
 import { addLayer } from "@/api/admin/layer";
 import { loadWells, loadEnterprises } from "./mainMap";
 import { loadCadLayer } from "@/views/main/CadLayer.ts";
-
+const deptId = ref(null);
 const activeName = ref("first");
 
 const handleClick = (tab, event) => {
@@ -112,12 +114,14 @@ const handleClick = (tab, event) => {
 
 const dialogVisible = ref(false);
 
-window.openQYMSG = function (event) {
-  console.log(event);
+window.openQYMSG = function (id) {
+  // console.log(event);
 
-  userStore().setEnterpriseId(event.attr.id);
+  // userStore().setEnterpriseId(event.attr.id);
 
   dialogVisible.value = true;
+
+  deptId.value = id;
 };
 
 provide("getMapInstance", () => {

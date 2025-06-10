@@ -124,8 +124,12 @@ onUnmounted(() => {
   disable("layer-tree");
 });
 function initFLTC() {
-  let layer = map.getLayer("监测井信息", "name");
-  let graphics = layer?.graphics || [];
+  let layer1 = map.getLayer("常规监测点", "name");
+  let layer2 = map.getLayer("在线监测点", "name");
+
+  let graphics1 = layer1?.graphics || [];
+  let graphics2 = layer2?.graphics || [];
+  let graphics = [...graphics1, ...graphics2];
   // 按照 attr.pointType 分类
   FLDATA.value = graphics.reduce((acc: any, graphic: any) => {
     const type = graphic?.attr?.pointType || "未知";

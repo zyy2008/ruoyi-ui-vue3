@@ -324,7 +324,8 @@
 
   window.openLineChartPage = function (data) {
     nextTick(() => {
-      chart.chartInfo.wellCode = data.graphic.label.text;
+      chart.chartInfo.wellCode = data.attr.wellCode;
+      chart.chartInfo.location = data.attr.location
     });
   };
 

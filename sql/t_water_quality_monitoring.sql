@@ -12,7 +12,7 @@
  Target Server Version : 140003
  File Encoding         : 65001
 
- Date: 06/06/2025 14:30:03
+ Date: 09/06/2025 20:20:01
 */
 
 
@@ -110,46 +110,41 @@ CREATE TABLE "public"."t_water_quality_monitoring" (
   "id" varchar(36) COLLATE "pg_catalog"."default" NOT NULL,
   "analysis_number" varchar(20) COLLATE "pg_catalog"."default",
   "original_number" varchar(20) COLLATE "pg_catalog"."default",
-  "carbonate" numeric,
-  "bicarbonate" numeric,
-  "ferrous_ion" numeric,
-  "potassium" numeric,
-  "calcium" numeric,
-  "magnesium" numeric,
-  "chloroprene" numeric,
-  "1,1-dichloropropene" numeric,
-  "trans-1,3-dichloropropene" numeric,
-  "cis-1,3-dichloropropene" numeric,
-  "2,2-dichloropropane" numeric,
-  "bromochloromethane" numeric,
-  "bromodichloromethane" numeric,
-  "dibromomethane" numeric,
-  "1,1-dichloroethane" numeric,
-  "1,2-dibromoethane" numeric,
-  "1,3-dichloropropane" numeric,
-  "dibromochloromethane" numeric,
-  "bromoform" numeric,
-  "1,1,1,2-tetrachloroethane" numeric,
-  "1,1,2,2-tetrachloroethane" numeric,
-  "1,2,3-trichloropropane" numeric,
-  "cumene" numeric,
-  "n_propylbenzene" numeric,
-  "bromobenzene" numeric,
-  "1,3,5-trimethylbenzene" numeric,
-  "o_chlorotoluene" numeric,
-  "p_chlorotoluene" numeric,
-  "tert_butylbenzene" numeric,
-  "1,2,4-trimethylbenzene" numeric,
-  "sec_butylbenzene" numeric,
-  "4-isopropyltoluene" numeric,
-  "n_butylbenzene" numeric,
-  "epichlorohydrin" numeric,
-  "1,2-dibromo-3-chloropropane" numeric,
-  "1,2,4-trichlorobenzene" numeric,
-  "hexachlorobutadiene" numeric,
-  "1,2,3-trichlorobenzene" numeric,
-  "2-methylnaphthalene" numeric,
-  "1-methylnaphthalene" numeric
+  "carbonate" varchar(50) COLLATE "pg_catalog"."default",
+  "bicarbonate" varchar(50) COLLATE "pg_catalog"."default",
+  "ferrous_ion" varchar(50) COLLATE "pg_catalog"."default",
+  "potassium" varchar(50) COLLATE "pg_catalog"."default",
+  "calcium" varchar(50) COLLATE "pg_catalog"."default",
+  "magnesium" varchar(50) COLLATE "pg_catalog"."default",
+  "chloroprene" varchar(50) COLLATE "pg_catalog"."default",
+  "bromochloromethane" varchar(50) COLLATE "pg_catalog"."default",
+  "bromodichloromethane" varchar(50) COLLATE "pg_catalog"."default",
+  "dibromomethane" varchar(50) COLLATE "pg_catalog"."default",
+  "dibromochloromethane" varchar(50) COLLATE "pg_catalog"."default",
+  "bromoform" varchar(50) COLLATE "pg_catalog"."default",
+  "cumene" varchar(50) COLLATE "pg_catalog"."default",
+  "n_propylbenzene" varchar(50) COLLATE "pg_catalog"."default",
+  "bromobenzene" varchar(50) COLLATE "pg_catalog"."default",
+  "trimethylbenzene_1_3_5" varchar(50) COLLATE "pg_catalog"."default",
+  "o_chlorotoluene" varchar(50) COLLATE "pg_catalog"."default",
+  "p_chlorotoluene" varchar(50) COLLATE "pg_catalog"."default",
+  "tert_butylbenzene" varchar(50) COLLATE "pg_catalog"."default",
+  "trimethylbenzene_1__4" varchar(50) COLLATE "pg_catalog"."default",
+  "sec_butylbenzene" varchar(50) COLLATE "pg_catalog"."default",
+  "isopropyltoluene_4" varchar(50) COLLATE "pg_catalog"."default",
+  "n_butylbenzene" varchar(50) COLLATE "pg_catalog"."default",
+  "epichlorohydrin" varchar(50) COLLATE "pg_catalog"."default",
+  "dibromo3_chloropropane_1_2" varchar(50) COLLATE "pg_catalog"."default",
+  "trichlorobenzene_1_2_4" varchar(50) COLLATE "pg_catalog"."default",
+  "hexachlorobutadiene" varchar(50) COLLATE "pg_catalog"."default",
+  "methylnaphthalene_2" varchar(50) COLLATE "pg_catalog"."default",
+  "methylnaphthalene_1" varchar(50) COLLATE "pg_catalog"."default",
+  "dichloropropene_1_1" varchar(50) COLLATE "pg_catalog"."default",
+  "trans1_3_dichloropropene" varchar(50) COLLATE "pg_catalog"."default",
+  "cis1_3_dichloropropene" varchar(50) COLLATE "pg_catalog"."default",
+  "dichloropropane_2_2" varchar(50) COLLATE "pg_catalog"."default",
+  "dibromoethane_1_2" varchar(50) COLLATE "pg_catalog"."default",
+  "dichloropropane_1_3" varchar(50) COLLATE "pg_catalog"."default"
 )
 ;
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."point_id" IS '字段说明：监测点位编号，唯一标识监测位置，长度不超过10位字符';
@@ -247,39 +242,34 @@ COMMENT ON COLUMN "public"."t_water_quality_monitoring"."potassium" IS '单位�
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."calcium" IS '单位：mg/L，字段说明：钙离子浓度';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."magnesium" IS '单位：mg/L，字段说明：镁离子浓度';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."chloroprene" IS '单位：µg/L，字段说明：氯丁二烯（2-氯-1,3-丁二烯）浓度，常用于合成橡胶，具有挥发性';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."1,1-dichloropropene" IS '单位：µg/L，字段说明：1,1-二氯丙烯（1,1-二氯-1-丙烯）浓度，属于不饱和卤代烃';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."trans-1,3-dichloropropene" IS '单位：µg/L，字段说明：反式-1,3-二氯丙烯浓度，几何异构体，用于有机合成';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."cis-1,3-dichloropropene" IS '单位：µg/L，字段说明：顺式-1,3-二氯丙烯浓度，与反式结构互为同分异构体';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."2,2-dichloropropane" IS '单位：µg/L，字段说明：2,2-二氯丙烷（对称二氯丙烷）浓度，用于溶剂和化工原料';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."bromochloromethane" IS '单位：µg/L，字段说明：溴氯甲烷（氯溴甲烷）浓度，混合卤代烃，用作溶剂';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."bromodichloromethane" IS '单位：µg/L，字段说明：一溴二氯甲烷（二氯溴甲烷）浓度，饮用水中消毒副产物';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."dibromomethane" IS '单位：µg/L，字段说明：二溴甲烷浓度，用于有机合成和阻燃剂';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."1,1-dichloroethane" IS '单位：µg/L，字段说明：1,1-二氯乙烷浓度，与1,2-二氯乙烷互为同分异构体（原表已有，若重复需调整）';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."1,2-dibromoethane" IS '单位：µg/L，字段说明：1,2-二溴乙烷浓度，曾用作汽油抗震剂，有毒性';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."1,3-dichloropropane" IS '单位：µg/L，字段说明：1,3-二氯丙烷浓度，用于生产农药和医药中间体';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."dibromochloromethane" IS '单位：µg/L，字段说明：二溴氯甲烷浓度，三卤甲烷类消毒副产物';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."bromoform" IS '单位：µg/L，字段说明：溴仿（三溴甲烷）浓度，曾用作麻醉剂，饮用水污染物';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."1,1,1,2-tetrachloroethane" IS '单位：µg/L，字段说明：1,1,1,2-四氯乙烷浓度，与1,1,2,2-四氯乙烷互为同分异构体';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."1,1,2,2-tetrachloroethane" IS '单位：µg/L，字段说明：1,1,2,2-四氯乙烷浓度，用于溶剂和化工原料';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."1,2,3-trichloropropane" IS '单位：µg/L，字段说明：1,2,3-三氯丙烷浓度，原表已有此字段，需确认是否重复添加';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."cumene" IS '单位：µg/L，字段说明：异丙苯（枯烯）浓度，用于生产苯酚和丙酮';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."n_propylbenzene" IS '单位：µg/L，字段说明：正丙苯浓度，丙基苯的直链异构体，工业溶剂';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."bromobenzene" IS '单位：µg/L，字段说明：溴苯浓度，用于医药、农药中间体';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."1,3,5-trimethylbenzene" IS '单位：µg/L，字段说明：1,3,5-三甲基苯（均三甲苯）浓度，用于制备合成树脂';
+COMMENT ON COLUMN "public"."t_water_quality_monitoring"."trimethylbenzene_1_3_5" IS '单位：µg/L，字段说明：1,3,5-三甲基苯（均三甲苯）浓度，用于制备合成树脂';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."o_chlorotoluene" IS '单位：µg/L，字段说明：邻氯甲苯（2-氯甲苯）浓度，甲苯的邻位氯代物，有机合成原料';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."p_chlorotoluene" IS '单位：µg/L，字段说明：对氯甲苯（4-氯甲苯）浓度，用于生产医药、染料';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."tert_butylbenzene" IS '单位：µg/L，字段说明：叔丁基苯浓度，用于有机合成和香料工业';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."1,2,4-trimethylbenzene" IS '单位：µg/L，字段说明：1,2,4-三甲基苯（偏三甲苯）浓度，用于制备均苯三甲酸';
+COMMENT ON COLUMN "public"."t_water_quality_monitoring"."trimethylbenzene_1__4" IS '单位：µg/L，字段说明：1,2,4-三甲基苯（偏三甲苯）浓度，用于制备均苯三甲酸';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."sec_butylbenzene" IS '单位：µg/L，字段说明：仲丁基苯浓度，丁基苯的支链异构体，溶剂';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."4-isopropyltoluene" IS '单位：µg/L，字段说明：4-异丙基甲苯浓度，对异丙基甲苯，用于生产麝香香料';
+COMMENT ON COLUMN "public"."t_water_quality_monitoring"."isopropyltoluene_4" IS '单位：µg/L，字段说明：4-异丙基甲苯浓度，对异丙基甲苯，用于生产麝香香料';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."n_butylbenzene" IS '单位：µg/L，字段说明：正丁基苯浓度，丁基苯的直链异构体，工业溶剂';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."epichlorohydrin" IS '单位：µg/L，字段说明：环氧氯丙烷（3-氯-1,2-环氧丙烷）浓度，用于生产环氧树脂';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."1,2-dibromo-3-chloropropane" IS '单位：µg/L，字段说明：1,2-二溴-3-氯丙烷浓度，曾用作土壤熏蒸剂，剧毒';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."1,2,4-trichlorobenzene" IS '单位：µg/L，字段说明：1,2,4-三氯苯浓度，用于生产农药和染料';
+COMMENT ON COLUMN "public"."t_water_quality_monitoring"."dibromo3_chloropropane_1_2" IS '单位：µg/L，字段说明：1,2-二溴-3-氯丙烷浓度，曾用作土壤熏蒸剂，剧毒';
+COMMENT ON COLUMN "public"."t_water_quality_monitoring"."trichlorobenzene_1_2_4" IS '单位：µg/L，字段说明：1,2,4-三氯苯浓度，用于生产农药和染料';
 COMMENT ON COLUMN "public"."t_water_quality_monitoring"."hexachlorobutadiene" IS '单位：µg/L，字段说明：六氯丁二烯浓度，全氯丁二烯，用作溶剂和热载体';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."1,2,3-trichlorobenzene" IS '单位：µg/L，字段说明：1,2,3-三氯苯浓度，三氯苯的三种异构体之一，工业污染物';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."2-methylnaphthalene" IS '单位：µg/L，字段说明：2-甲基萘浓度，属于多环芳烃';
-COMMENT ON COLUMN "public"."t_water_quality_monitoring"."1-methylnaphthalene" IS '单位：µg/L，字段说明：1-甲基萘浓度，属于多环芳烃';
+COMMENT ON COLUMN "public"."t_water_quality_monitoring"."methylnaphthalene_2" IS '单位：µg/L，字段说明：2-甲基萘浓度，属于多环芳烃';
+COMMENT ON COLUMN "public"."t_water_quality_monitoring"."methylnaphthalene_1" IS '单位：µg/L，字段说明：1-甲基萘浓度，属于多环芳烃';
+COMMENT ON COLUMN "public"."t_water_quality_monitoring"."dichloropropene_1_1" IS '单位：µg/L，字段说明：1,1-二氯丙烯（1,1-二氯-1-丙烯）浓度，属于不饱和卤代烃';
+COMMENT ON COLUMN "public"."t_water_quality_monitoring"."trans1_3_dichloropropene" IS '单位：µg/L，字段说明：反式-1,3-二氯丙烯浓度，几何异构体，用于有机合成';
+COMMENT ON COLUMN "public"."t_water_quality_monitoring"."cis1_3_dichloropropene" IS '单位：µg/L，字段说明：顺式-1,3-二氯丙烯浓度，与反式结构互为同分异构体';
+COMMENT ON COLUMN "public"."t_water_quality_monitoring"."dichloropropane_2_2" IS '单位：µg/L，字段说明：2,2-二氯丙烷（对称二氯丙烷）浓度，用于溶剂和化工原料';
+COMMENT ON COLUMN "public"."t_water_quality_monitoring"."dibromoethane_1_2" IS '单位：µg/L，字段说明：1,2-二溴乙烷浓度，曾用作汽油抗震剂，有毒性';
+COMMENT ON COLUMN "public"."t_water_quality_monitoring"."dichloropropane_1_3" IS '单位：µg/L，字段说明：1,3-二氯丙烷浓度，用于生产农药和医药中间体';
 
 -- ----------------------------
 -- Primary Key structure for table t_water_quality_monitoring

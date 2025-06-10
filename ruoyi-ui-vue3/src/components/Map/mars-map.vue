@@ -296,71 +296,71 @@ onUnmounted(() => {
   }
 }
 /**cesium 工具按钮栏*/
-.cesium-viewer-toolbar {
-  top: auto !important;
-  bottom: 35px !important;
-  left: auto !important;
-  right: 14px !important;
-}
-.cesium-toolbar-button img {
-  height: 100%;
-}
-.cesium-viewer-toolbar > .cesium-toolbar-button,
-.cesium-navigationHelpButton-wrapper,
-.cesium-viewer-geocoderContainer {
-  margin-bottom: 5px;
-  float: right;
-  clear: both;
-  text-align: center;
-}
-.cesium-button {
-  background-color: rgba(23, 49, 71, 0.8);
-  color: #e6e6e6;
-  fill: #e6e6e6;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
-  line-height: 32px;
-}
-.cesium-button:hover {
-  background: #3ea6ff;
-}
+// .cesium-viewer-toolbar {
+//   top: auto !important;
+//   bottom: 35px !important;
+//   left: auto !important;
+//   right: 14px !important;
+// }
+// .cesium-toolbar-button img {
+//   height: 100%;
+// }
+// .cesium-viewer-toolbar > .cesium-toolbar-button,
+// .cesium-navigationHelpButton-wrapper,
+// .cesium-viewer-geocoderContainer {
+//   margin-bottom: 5px;
+//   float: right;
+//   clear: both;
+//   text-align: center;
+// }
+// .cesium-button {
+//   background-color: rgba(23, 49, 71, 0.8);
+//   color: #e6e6e6;
+//   fill: #e6e6e6;
+//   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+//   line-height: 32px;
+// }
+// .cesium-button:hover {
+//   background: #3ea6ff;
+// }
 
-/**cesium 底图切换面板*/
-.cesium-baseLayerPicker-dropDown {
-  bottom: 0;
-  left: 40px;
-  max-height: 700px;
-  margin-bottom: 5px;
-  background-color: rgba(23, 49, 71, 0.8);
-}
+// /**cesium 底图切换面板*/
+// .cesium-baseLayerPicker-dropDown {
+//   bottom: 0;
+//   left: 40px;
+//   max-height: 700px;
+//   margin-bottom: 5px;
+//   background-color: rgba(23, 49, 71, 0.8);
+// }
 
-/**cesium 帮助面板*/
-.cesium-navigation-help {
-  top: auto;
-  bottom: 0;
-  right: 40px;
-  transform-origin: right bottom;
-  background: none;
-  background-color: rgba(23, 49, 71, 0.8);
-  .cesium-navigation-help-instructions {
-    background: none;
-  }
-  .cesium-navigation-button {
-    background: none;
-  }
-  .cesium-navigation-button-selected,
-  .cesium-navigation-button-unselected:hover {
-    background: rgba(0, 138, 255, 0.2);
-  }
-}
+// /**cesium 帮助面板*/
+// .cesium-navigation-help {
+//   top: auto;
+//   bottom: 0;
+//   right: 40px;
+//   transform-origin: right bottom;
+//   background: none;
+//   background-color: rgba(23, 49, 71, 0.8);
+//   .cesium-navigation-help-instructions {
+//     background: none;
+//   }
+//   .cesium-navigation-button {
+//     background: none;
+//   }
+//   .cesium-navigation-button-selected,
+//   .cesium-navigation-button-unselected:hover {
+//     background: rgba(0, 138, 255, 0.2);
+//   }
+// }
 
-/**cesium 二维三维切换*/
-.cesium-sceneModePicker-wrapper {
-  width: auto;
-}
-.cesium-sceneModePicker-wrapper .cesium-sceneModePicker-dropDown-icon {
-  float: left;
-  margin: 0 3px;
-}
+// /**cesium 二维三维切换*/
+// .cesium-sceneModePicker-wrapper {
+//   width: auto;
+// }
+// .cesium-sceneModePicker-wrapper .cesium-sceneModePicker-dropDown-icon {
+//   float: left;
+//   margin: 0 3px;
+// }
 
 /**cesium POI查询输入框*/
 .cesium-viewer-geocoderContainer .search-results {

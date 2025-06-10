@@ -369,12 +369,12 @@
     position: absolute;
     left: 20px;
     top: 90px;
-    z-index: 21;
+    z-index: 30;
     background-color: rgba(9, 21, 42, 0.8);
   }
 
   .RightLine {
-    width: 430px;
+    width: 460px;
     height: 400px;
     position: absolute;
     top: 90px;
@@ -388,11 +388,11 @@
     position: absolute;
     top: 90px;
     right: 20px;
-    z-index: 20;
+    z-index: 10;
   }
 
   .RightTable {
-    width: 430px;
+    width: 460px;
     height: 350px;
     position: absolute;
     top: 510px;

@@ -55,6 +55,7 @@
         <result property="dataSourceOfWastewater" column="data_source_of_wastewater"/>
         <result property="dataSourceOfSolidWasteStorageAndDisposalArea" column="data_source_of_solid_waste_storage_and_disposal_area"/>
         <result property="internalPollutionTracesOfThePlot" column="internal_pollution_traces_of_the_plot"/>
+        <result property="airOdorCondition" column="air_odor_condition"/>
     </resultMap>
 
     <sql id="selectTEnterprisePollutionInfoVo">
@@ -70,8 +71,8 @@
                is_hazardous_waste_self_disposed, wastewater_treatment_area_protection_measures, solid_waste_storage_and_disposal_area_protection_measures,
                hazardous_waste_storage_and_disposal_area_protection_measures, hazardous_waste_standardized_management_assessment_results, dept_id,
                is_waste_gas_emission, data_source_of_production_area, data_source_of_raw_and_auxiliary_materials,
-               data_source_of_storage_area, data_source_of_waste_gas, data_source_of_wastewater,
-               data_source_of_solid_waste_storage_and_disposal_area, internal_pollution_traces_of_the_plot,
+               data_source_of_storage_area, data_source_of_waste_gas, data_source_of_wastewater,air_odor_condition,
+               data_source_of_solid_waste_storage_and_disposal_area, internal_pollution_traces_of_the_plot
         from t_enterprise_pollution_info
     </sql>
 
@@ -143,6 +144,9 @@
             <if test="internalPollutionTracesOfThePlot != null and internalPollutionTracesOfThePlot != ''">
                 and internal_pollution_traces_of_the_plot = #{internalPollutionTracesOfThePlot}
             </if>
+            <if test="airOdorCondition != null and airOdorCondition != ''">
+                and air_odor_condition = #{airOdorCondition}
+            </if>
 
         </where>
     </select>
@@ -204,6 +208,7 @@
             <if test="dataSourceOfWastewater != null">data_source_of_wastewater,</if>
             <if test="dataSourceOfSolidWasteStorageAndDisposalArea != null">data_source_of_solid_waste_storage_and_disposal_area,</if>
             <if test="internalPollutionTracesOfThePlot != null">internal_pollution_traces_of_the_plot,</if>
+            <if test="airOdorCondition != null">air_odor_condition,</if>
 
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -256,6 +261,7 @@
             <if test="dataSourceOfWastewater != null">#{dataSourceOfWastewater},</if>
             <if test="dataSourceOfSolidWasteStorageAndDisposalArea != null">#{dataSourceOfSolidWasteStorageAndDisposalArea},</if>
             <if test="internalPollutionTracesOfThePlot != null">#{internalPollutionTracesOfThePlot},</if>
+            <if test="airOdorCondition != null">#{airOdorCondition},</if>
 
         </trim>
     </insert>
@@ -328,7 +334,9 @@
             <if test="internalPollutionTracesOfThePlot != null">
                 internal_pollution_traces_of_the_plot = #{internalPollutionTracesOfThePlot},
             </if>
-
+            <if test="airOdorCondition != null">
+                air_odor_condition = #{airOdorCondition},
+            </if>
         </trim>
         where id = #{id}
     </update>

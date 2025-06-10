@@ -649,6 +649,8 @@ declare namespace API {
   };
 
   type getAdminPollutionListParams = {
+    /** 空气异味状况 */
+    airOdorCondition?: string;
     /** 废水治理区面积 */
     areaOfWastewaterTreatmentArea?: string;
     /** 事故基本情况描述 */
@@ -661,7 +663,7 @@ declare namespace API {
     coordinatesOfWastewaterTreatmentArea?: string;
     createBy?: string;
     createTime?: string;
-    /** 生产区数据来源 */
+    /** 主要产品数据来源 */
     dataSourceOfProductionArea?: string;
     /** 原辅材料数据来源 */
     dataSourceOfRawAndAuxiliaryMaterials?: string;
@@ -729,8 +731,10 @@ declare namespace API {
     mainProcessProductionDescription?: string;
     /** 废气治理设施运行情况 */
     operationStatusOfEmissionTreatmentFacility?: string;
-    /** 在线监测装置运行情况 */
-    operationStatusOfOnlineMonitoringDevice?: string;
+    /** 废气在线监测装置运行情况 */
+    operationStatusOfOnlineMonitoringDeviceForEmissions?: string;
+    /** 废水在线监测装置运行情况 */
+    operationStatusOfOnlineMonitoringDeviceForWastewater?: string;
     /** 废水治理设施运行情况 */
     operationStatusOfWastewaterTreatmentFacility?: string;
     params?: Record<string, any>;
@@ -1027,6 +1031,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     deptId?: string;
+    enterpriseName?: string;
     groundwaterType?: string;
     id?: string;
     innerDiameter?: string;
@@ -1065,6 +1070,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     deptId?: string;
+    enterpriseName?: string;
     groundwaterType?: string;
     id?: string;
     innerDiameter?: string;
@@ -1179,6 +1185,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     deptId?: string;
+    enterpriseName?: string;
     groundwaterType?: string;
     id?: string;
     innerDiameter?: string;
@@ -1533,6 +1540,8 @@ declare namespace API {
   };
 
   type postAdminPollutionExportParams = {
+    /** 空气异味状况 */
+    airOdorCondition?: string;
     /** 废水治理区面积 */
     areaOfWastewaterTreatmentArea?: string;
     /** 事故基本情况描述 */
@@ -1545,7 +1554,7 @@ declare namespace API {
     coordinatesOfWastewaterTreatmentArea?: string;
     createBy?: string;
     createTime?: string;
-    /** 生产区数据来源 */
+    /** 主要产品数据来源 */
     dataSourceOfProductionArea?: string;
     /** 原辅材料数据来源 */
     dataSourceOfRawAndAuxiliaryMaterials?: string;
@@ -1613,8 +1622,10 @@ declare namespace API {
     mainProcessProductionDescription?: string;
     /** 废气治理设施运行情况 */
     operationStatusOfEmissionTreatmentFacility?: string;
-    /** 在线监测装置运行情况 */
-    operationStatusOfOnlineMonitoringDevice?: string;
+    /** 废气在线监测装置运行情况 */
+    operationStatusOfOnlineMonitoringDeviceForEmissions?: string;
+    /** 废水在线监测装置运行情况 */
+    operationStatusOfOnlineMonitoringDeviceForWastewater?: string;
     /** 废水治理设施运行情况 */
     operationStatusOfWastewaterTreatmentFacility?: string;
     params?: Record<string, any>;
@@ -1895,6 +1906,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     deptId?: string;
+    enterpriseName?: string;
     groundwaterType?: string;
     id?: string;
     innerDiameter?: string;
@@ -2025,6 +2037,8 @@ declare namespace API {
   };
 
   type qiyewuranyuan = {
+    /** 空气异味状况 */
+    airOdorCondition?: string;
     /** 废水治理区面积 */
     areaOfWastewaterTreatmentArea?: string;
     /** 事故基本情况描述 */
@@ -2037,7 +2051,7 @@ declare namespace API {
     coordinatesOfWastewaterTreatmentArea?: string;
     createBy?: string;
     createTime?: string;
-    /** 生产区数据来源 */
+    /** 主要产品数据来源 */
     dataSourceOfProductionArea?: string;
     /** 原辅材料数据来源 */
     dataSourceOfRawAndAuxiliaryMaterials?: string;
@@ -2105,8 +2119,10 @@ declare namespace API {
     mainProcessProductionDescription?: string;
     /** 废气治理设施运行情况 */
     operationStatusOfEmissionTreatmentFacility?: string;
-    /** 在线监测装置运行情况 */
-    operationStatusOfOnlineMonitoringDevice?: string;
+    /** 废气在线监测装置运行情况 */
+    operationStatusOfOnlineMonitoringDeviceForEmissions?: string;
+    /** 废水在线监测装置运行情况 */
+    operationStatusOfOnlineMonitoringDeviceForWastewater?: string;
     /** 废水治理设施运行情况 */
     operationStatusOfWastewaterTreatmentFacility?: string;
     params?: Record<string, any>;

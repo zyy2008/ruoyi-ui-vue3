@@ -1217,7 +1217,7 @@ const props: ISchemaFieldProps = {
                   header: "空气异味状况*",
                 },
                 properties: {
-                  isHazardousWasteSelfDisposed: {
+                  airOdorCondition: {
                     type: "string",
                     required: true,
                     "x-decorator": "FormItem",

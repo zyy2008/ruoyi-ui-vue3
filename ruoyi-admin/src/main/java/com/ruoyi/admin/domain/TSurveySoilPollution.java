@@ -15,7 +15,7 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * @date 2025-06-10
  */
 @Data
-@ApiModel("调查评估基本信息")
+@ApiModel("调查评估土壤污染区信息")
 public class TSurveySoilPollution extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -42,4 +42,10 @@ public class TSurveySoilPollution extends BaseEntity {
     @ApiModelProperty("最大浓度")
     private String maxConcentration;
 
+    /**
+     * 归属部门
+     */
+    @Excel(name = "归属部门")
+    @ApiModelProperty("归属部门")
+    private String deptId;
 }

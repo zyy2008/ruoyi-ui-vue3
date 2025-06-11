@@ -10,10 +10,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="assessmentTime"    column="assessment_time"    />
         <result property="hasSoilPollution"    column="has_soil_pollution"    />
         <result property="hasGroundwaterPollution"    column="has_groundwater_pollution"    />
+        <result property="deptId"    column="dept_id"    />
     </resultMap>
 
     <sql id="selectTSurveyAssessmentVo">
-        select id, assessment, assessment_time, has_soil_pollution, has_groundwater_pollution from t_survey_assessment
+        select id, assessment, assessment_time, has_soil_pollution, has_groundwater_pollution,dept_id from t_survey_assessment
     </sql>
 
     <select id="selectTSurveyAssessmentList" parameterType="TSurveyAssessment" resultMap="TSurveyAssessmentResult">
@@ -23,6 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="assessmentTime != null  and assessmentTime != ''"> and assessment_time = #{assessmentTime}</if>
             <if test="hasSoilPollution != null  and hasSoilPollution != ''"> and has_soil_pollution = #{hasSoilPollution}</if>
             <if test="hasGroundwaterPollution != null  and hasGroundwaterPollution != ''"> and has_groundwater_pollution = #{hasGroundwaterPollution}</if>
+            <if test="deptId != null  and deptId != ''"> and dept_id = #{deptId}</if>
         </where>
     </select>
     
@@ -38,12 +40,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="assessmentTime != null">assessment_time,</if>
             <if test="hasSoilPollution != null">has_soil_pollution,</if>
             <if test="hasGroundwaterPollution != null">has_groundwater_pollution,</if>
+            <if test="deptId != null">dept_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="assessment != null">#{assessment},</if>
             <if test="assessmentTime != null">#{assessmentTime},</if>
             <if test="hasSoilPollution != null">#{hasSoilPollution},</if>
-            <if test="hasGroundwaterPollution != null">#{hasGroundwaterPollution},</if>
+            <if test="deptId != null">#{deptId},</if>
          </trim>
     </insert>
 
@@ -54,6 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="assessmentTime != null">assessment_time = #{assessmentTime},</if>
             <if test="hasSoilPollution != null">has_soil_pollution = #{hasSoilPollution},</if>
             <if test="hasGroundwaterPollution != null">has_groundwater_pollution = #{hasGroundwaterPollution},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
         </trim>
         where id = #{id}
     </update>

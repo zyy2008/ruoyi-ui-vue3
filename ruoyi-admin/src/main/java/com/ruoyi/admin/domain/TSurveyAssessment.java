@@ -49,4 +49,10 @@ public class TSurveyAssessment extends BaseEntity {
     @ApiModelProperty("是否存在地下水污染")
     private String hasGroundwaterPollution;
 
+    /**
+     * 归属部门
+     */
+    @Excel(name = "归属部门")
+    @ApiModelProperty("归属部门")
+    private String deptId;
 }

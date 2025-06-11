@@ -9,10 +9,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="surveyAssessmentId"    column="survey_assessment_id"    />
         <result property="pollutantName"    column="pollutant_name"    />
         <result property="maxConcentration"    column="max_concentration"    />
+        <result property="deptId"    column="dept_id"    />
     </resultMap>
 
     <sql id="selectTSurveySoilPollutionVo">
-        select id, survey_assessment_id, pollutant_name, max_concentration from t_survey_soil_pollution
+        select id, survey_assessment_id, pollutant_name, max_concentration,dept_id from t_survey_soil_pollution
     </sql>
 
     <select id="selectTSurveySoilPollutionList" parameterType="TSurveySoilPollution" resultMap="TSurveySoilPollutionResult">
@@ -21,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="surveyAssessmentId != null  and surveyAssessmentId != ''"> and survey_assessment_id = #{surveyAssessmentId}</if>
             <if test="pollutantName != null  and pollutantName != ''"> and pollutant_name like concat('%', #{pollutantName}, '%')</if>
             <if test="maxConcentration != null  and maxConcentration != ''"> and max_concentration = #{maxConcentration}</if>
+            <if test="deptId != null  and deptId != ''"> and dept_id = #{deptId}</if>
         </where>
     </select>
     
@@ -35,11 +37,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="surveyAssessmentId != null">survey_assessment_id,</if>
             <if test="pollutantName != null">pollutant_name,</if>
             <if test="maxConcentration != null">max_concentration,</if>
+            <if test="deptId != null">dept_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="surveyAssessmentId != null">#{surveyAssessmentId},</if>
             <if test="pollutantName != null">#{pollutantName},</if>
             <if test="maxConcentration != null">#{maxConcentration},</if>
+            <if test="deptId != null">#{deptId},</if>
          </trim>
     </insert>
 
@@ -49,6 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="surveyAssessmentId != null">survey_assessment_id = #{surveyAssessmentId},</if>
             <if test="pollutantName != null">pollutant_name = #{pollutantName},</if>
             <if test="maxConcentration != null">max_concentration = #{maxConcentration},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
         </trim>
         where id = #{id}
     </update>

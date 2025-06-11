@@ -177,20 +177,6 @@ public class TEnterprisePlots extends BaseEntity {
     private String historyLandUse;
 
     /**
-     * 利用历史起始年份
-     */
-    @Excel(name = "利用历史起始年份")
-    @ApiModelProperty("利用历史起始年份")
-    private Long historyStartYear;
-
-    /**
-     * 利用历史结束年份
-     */
-    @Excel(name = "利用历史结束年份")
-    @ApiModelProperty("利用历史结束年份")
-    private Long historyEndYear;
-
-    /**
      * 归属部门ID
      */
     @Excel(name = "归属部门ID")

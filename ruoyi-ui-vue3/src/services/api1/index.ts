@@ -12,6 +12,7 @@ import * as dexiashuiqieyitujingxinxi from "./dexiashuiqieyitujingxinxi";
 import * as dexiashuijiancefaxiandechaobiaowuranwuxinxi from "./dexiashuijiancefaxiandechaobiaowuranwuxinxi";
 import * as zhibiaobiaozhunbiao from "./zhibiaobiaozhunbiao";
 import * as dekuaiwuranqingkuangfenxi from "./dekuaiwuranqingkuangfenxi";
+import * as dekuailishiyongtuxinxi from "./dekuailishiyongtuxinxi";
 import * as zhuyaochanpinxinxi from "./zhuyaochanpinxinxi";
 import * as yuanqujiancejingxinxi from "./yuanqujiancejingxinxi";
 import * as guandaoxielou from "./guandaoxielou";
@@ -23,6 +24,9 @@ import * as turanghuanjingdiaochajiancexinxi from "./turanghuanjingdiaochajiance
 import * as turangfencengxinxi from "./turangfencengxinxi";
 import * as turangjiancechaobiaowuranwuxinxi from "./turangjiancechaobiaowuranwuxinxi";
 import * as chucunqu from "./chucunqu";
+import * as diaochapinggujibenxinxi from "./diaochapinggujibenxinxi";
+import * as diaochapinggudexiashuiwuranquxinxi from "./diaochapinggudexiashuiwuranquxinxi";
+import * as diaochapingguturangwuranquxinxi from "./diaochapingguturangwuranquxinxi";
 import * as keyiwuranyuanhuowuranhenji from "./keyiwuranyuanhuowuranhenji";
 import * as chanchejianfenbuyuhuanjingqingkuang from "./chanchejianfenbuyuhuanjingqingkuang";
 export default {
@@ -36,6 +40,7 @@ export default {
   dexiashuijiancefaxiandechaobiaowuranwuxinxi,
   zhibiaobiaozhunbiao,
   dekuaiwuranqingkuangfenxi,
+  dekuailishiyongtuxinxi,
   zhuyaochanpinxinxi,
   yuanqujiancejingxinxi,
   guandaoxielou,
@@ -47,6 +52,9 @@ export default {
   turangfencengxinxi,
   turangjiancechaobiaowuranwuxinxi,
   chucunqu,
+  diaochapinggujibenxinxi,
+  diaochapinggudexiashuiwuranquxinxi,
+  diaochapingguturangwuranquxinxi,
   keyiwuranyuanhuowuranhenji,
   chanchejianfenbuyuhuanjingqingkuang,
 };

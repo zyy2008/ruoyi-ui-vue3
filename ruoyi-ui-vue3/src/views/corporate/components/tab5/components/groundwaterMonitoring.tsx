@@ -12,7 +12,7 @@ import { ElButton, ElMessage } from "element-plus";
 import GroundwaterPollutant from "./groundwaterPollutant";
 import { useDeptId } from "@/hooks";
 
-const props: ISchemaFieldProps = {
+const fieldProps: ISchemaFieldProps = {
   schema: {
     type: "void",
     properties: {
@@ -107,11 +107,13 @@ const props: ISchemaFieldProps = {
 const form = createForm();
 export default observer(
   defineComponent({
-    setup() {
+    props: ["monitoringType"],
+    setup(props) {
       const { deptId } = useDeptId();
       const { data, run, loading } = useRequest(() =>
         API.getAdminGroundwaterMonitoringList({
           deptId,
+          monitoringType: props.monitoringType,
         })
       );
       watchEffect(() => {
@@ -124,7 +126,7 @@ export default observer(
       });
       return () => (
         <FormProvider form={form}>
-          <Schema.SchemaField {...props} />
+          <Schema.SchemaField {...fieldProps} />
           <FormButtonGroup
             align="center"
             style={{

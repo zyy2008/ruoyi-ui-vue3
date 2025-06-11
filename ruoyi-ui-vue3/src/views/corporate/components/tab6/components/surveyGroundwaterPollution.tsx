@@ -8,8 +8,6 @@ import API from "@/services";
 import userStore from "@/store/modules/user";
 import { Field } from "@formily/core";
 import { useDeptId } from "@/hooks";
-import { FormButtonGroup } from "@formily/element-plus";
-import { ElButton, ElMessage } from "element-plus";
 
 const props: ISchemaFieldProps = {
   schema: {
@@ -19,7 +17,7 @@ const props: ISchemaFieldProps = {
         type: "void",
         "x-component": "Card",
         "x-component-props": {
-          header: "地块历史用途",
+          header: "（一）土壤污染区",
         },
         properties: {
           array: {
@@ -47,11 +45,11 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "起始时间",
+                    title: "地下水超标污染物名称",
                     width: 200,
                   },
                   properties: {
-                    startTime: {
+                    pollutantName: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
@@ -62,26 +60,11 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "结束时间",
+                    title: "最大浓度（mg/l）",
                     width: 200,
                   },
                   properties: {
-                    endTime: {
-                      type: "string",
-                      "x-decorator": "FormItem",
-                      "x-component": "Input",
-                    },
-                  },
-                },
-                column4: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
-                    title: "土地用途",
-                    width: 200,
-                  },
-                  properties: {
-                    landUse: {
+                    maxConcentration: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
@@ -108,12 +91,12 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "添加时间",
+                    title: "创建时间",
                     width: 300,
                   },
 
                   properties: {
-                    createdAt: {
+                    createTime: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
@@ -166,10 +149,10 @@ const props: ISchemaFieldProps = {
 export default observer(
   defineComponent({
     setup() {
-      const { deptId } = useDeptId();
       const form = createForm();
+      const { deptId } = useDeptId();
       const { data, run } = useRequest(() =>
-        API.getAdminLandUseHistoryList({
+        API.getAdminSurveySoilPollutionList({
           deptId,
         })
       );
@@ -184,9 +167,9 @@ export default observer(
       });
       provide("form", {
         run,
-        apiAdd: API.postAdminLandUseHistory,
-        apiEdit: API.putAdminLandUseHistory,
-        apiDel: API.deleteAdminLandUseHistoryIds,
+        apiAdd: API.postAdminSurveySoilPollution,
+        apiEdit: API.putAdminSurveySoilPollution,
+        apiDel: API.deleteAdminSurveySoilPollutionIds,
       });
       return () => (
         <FormProvider form={form}>

@@ -7,10 +7,14 @@ import { useRequest } from "vue-request";
 import API from "@/services";
 import userStore from "@/store/modules/user";
 import { Field } from "@formily/core";
-import { FormButtonGroup, Submit, Reset } from "@formily/element-plus";
-import { ElButton, ElMessage } from "element-plus";
-import SoilPollutant from "./soilPollutant";
 import { useDeptId } from "@/hooks";
+import { FormButtonGroup } from "@formily/element-plus";
+import { ElButton, ElMessage } from "element-plus";
+import {
+  Radios,
+  SurveySoilPollution,
+  SurveyGroundwaterPollution,
+} from "./index";
 
 const props: ISchemaFieldProps = {
   schema: {
@@ -21,21 +25,25 @@ const props: ISchemaFieldProps = {
         "x-component": "Card",
         "x-component-props": {
           header:
-            "土壤环境调查检测工作未展开过(若选择曾展开过，则须填写以下第2-7项内容，否则不填)",
+            "调查评估（若选择正在开展或已经完成，则需填写以下第2-5项内容，否则不填）",
         },
         properties: {
-          hasMonitoring: {
+          assessment: {
             type: "string",
             "x-decorator": "FormItem",
             "x-component": "Radio.Group",
             enum: [
               {
-                label: "未展开过",
+                label: "未开展过",
                 value: "0",
               },
               {
-                label: "曾展开过",
+                label: "正在开展",
                 value: "1",
+              },
+              {
+                label: "己经完成",
+                value: "2",
               },
             ],
           },
@@ -48,12 +56,14 @@ const props: ISchemaFieldProps = {
           header: "调查时间",
         },
         properties: {
-          surveyDate: {
+          assessmentTime: {
             type: "string",
             "x-decorator": "FormItem",
             "x-component": "DatePicker",
             "x-component-props": {
-              type: "date",
+              type: "year",
+              format: "YYYY",
+              valueFormat: "YYYY",
             },
           },
         },
@@ -63,43 +73,38 @@ const props: ISchemaFieldProps = {
         "x-component": "Card",
         "x-component-props": {
           header:
-            "是否检出污染物超标 (若选择是，则须填写以下第4-6项内容，否则不填)",
+            "调查结果显示是否有土壤污染 （若选择是，则需填写（一）土壤污染区内容，否则不填）",
         },
         properties: {
-          pollutantsExceed: {
+          hasSoilPollution: {
             type: "string",
             "x-decorator": "FormItem",
-            "x-component": "Radio.Group",
-            enum: [
-              {
-                label: "否",
-                value: "0",
-              },
-              {
-                label: "是",
-                value: "1",
-              },
-            ],
+            "x-component": <Radios.Input />,
           },
         },
-      },
-      card3: {
-        type: "void",
-        "x-component": <SoilPollutant />,
       },
       card4: {
         type: "void",
         "x-component": "Card",
         "x-component-props": {
-          header: "数据来源",
+          header:
+            "调查结果显示是否有地下水污染 （若选择是，则需填写（二）地下水污染区内容，否则不填）",
         },
         properties: {
-          source: {
+          hasGroundwaterPollution: {
             type: "string",
             "x-decorator": "FormItem",
-            "x-component": "Input",
+            "x-component": <Radios.Input />,
           },
         },
+      },
+      card6: {
+        type: "void",
+        "x-component": <SurveyGroundwaterPollution />,
+      },
+      card3: {
+        type: "void",
+        "x-component": <SurveySoilPollution />,
       },
     },
   },
@@ -107,14 +112,12 @@ const props: ISchemaFieldProps = {
 
 export default observer(
   defineComponent({
-    props: ["monitoringType"],
-    setup(prop) {
+    setup() {
       const form = createForm();
       const { deptId } = useDeptId();
       const { data, run, loading } = useRequest(() =>
-        API.getAdminSoilMonitoringList({
+        API.getAdminSurveyAssessmentList({
           deptId,
-          monitoringType: prop.monitoringType,
         })
       );
       watchEffect(() => {
@@ -141,8 +144,8 @@ export default observer(
                 form.submit().then((val: any) => {
                   const { id } = val;
                   const api = id
-                    ? API.putAdminSoilMonitoring
-                    : API.postAdminSoilMonitoring;
+                    ? API.putAdminSurveyAssessment
+                    : API.postAdminSurveyAssessment;
                   api({
                     ...val,
                     deptId,

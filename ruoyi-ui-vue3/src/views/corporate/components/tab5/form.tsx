@@ -15,7 +15,10 @@ import { useDeptId } from "@/hooks";
 
 const { SchemaField } = Schema;
 
-export const handeSchema: (T?: ISchema["properties"]) => ISchema = (val) => {
+export const handeSchema: (T?: ISchema["properties"], V?: string) => ISchema = (
+  val,
+  monitoringType
+) => {
   return {
     type: "object",
     properties: {
@@ -32,7 +35,9 @@ export const handeSchema: (T?: ISchema["properties"]) => ISchema = (val) => {
             properties: {
               card: {
                 type: "void",
-                "x-component": <SoilMonitoring searchValue={"0"} />,
+                "x-component": (
+                  <SoilMonitoring monitoringType={monitoringType} />
+                ),
               },
             },
           },
@@ -45,7 +50,9 @@ export const handeSchema: (T?: ISchema["properties"]) => ISchema = (val) => {
             properties: {
               card: {
                 type: "void",
-                "x-component": <GroundwaterMonitoring />,
+                "x-component": (
+                  <GroundwaterMonitoring monitoringType={monitoringType} />
+                ),
               },
             },
           },
@@ -57,34 +64,12 @@ export const handeSchema: (T?: ISchema["properties"]) => ISchema = (val) => {
 };
 
 const props: ISchemaFieldProps = {
-  schema: handeSchema(),
+  schema: handeSchema({}, "土壤或地下水环境监测"),
 };
-
-// const actionProps = () => ({
-//   disabled: Boolean,
-//   form: { type: Object as PropType<Form<any>>, default: undefined },
-// });
-
-// type ActionProps = Partial<ExtractPropTypes<ReturnType<typeof actionProps>>>;
 
 export default defineComponent({
   setup() {
-    const disabled = ref<boolean>();
-    const { deptId } = useDeptId();
-    const { runAsync, loading } = useRequest(
-      () =>
-        API.getAdminEnterpriseList({
-          deptId,
-        }),
-      {
-        manual: true,
-      }
-    );
     const form = createForm();
-    // autorun(() => {
-    //   disabled.value = form.disabled;
-    // });
-
     return () => (
       <div class="app-container">
         <ElCard>

@@ -65,6 +65,22 @@ declare namespace API {
     updateTime?: string;
   };
 
+  type dekuailishiyongtuxinxi = {
+    createBy?: string;
+    createTime?: string;
+    /** 结束时间 */
+    endTime?: string;
+    id?: number;
+    /** 土地用途 */
+    landUse?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    /** 起始时间 */
+    startTime?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
   type dekuaiwuranqingkuangfenxi = {
     /** 特征污染物名称 */
     characteristicPollutantName?: string;
@@ -124,6 +140,11 @@ declare namespace API {
     ids: string;
   };
 
+  type deleteAdminLandUseHistoryIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
   type deleteAdminMainProductsIdsParams = {
     /** ids */
     ids: string;
@@ -179,6 +200,21 @@ declare namespace API {
     ids: string;
   };
 
+  type deleteAdminSurveyAssessmentIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
+  type deleteAdminSurveyGroundwaterPollutionIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
+  type deleteAdminSurveySoilPollutionIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
   type deleteAdminSuspectedPollutionTraceIdsParams = {
     /** ids */
     ids: string;
@@ -205,6 +241,8 @@ declare namespace API {
     maxConcentrationMgl?: string;
     /** 关联的地下水监测记录ID */
     monitoringId?: string;
+    /** 监测类型（土壤地下水&环境调查评估） */
+    monitoringType?: string;
     params?: Record<string, any>;
     /** 超标污染物名称 */
     pollutantName?: string;
@@ -257,6 +295,63 @@ declare namespace API {
     waterDepthCategory?: string;
   };
 
+  type diaochapinggudexiashuiwuranquxinxi = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    id?: number;
+    /** 最大浓度 */
+    maxConcentration?: string;
+    params?: Record<string, any>;
+    /** 地下水超标污染物名称 */
+    pollutantName?: string;
+    remark?: string;
+    /** 关联的调查评估ID */
+    surveyAssessmentId?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type diaochapinggujibenxinxi = {
+    /** 调查评估结论或内容 */
+    assessment?: string;
+    /** 调查评估时间 */
+    assessmentTime?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 是否存在地下水污染 */
+    hasGroundwaterPollution?: string;
+    /** 是否存在土壤污染 */
+    hasSoilPollution?: string;
+    /** 主键ID */
+    id?: number;
+    params?: Record<string, any>;
+    remark?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type diaochapingguturangwuranquxinxi = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    id?: number;
+    /** 最大浓度 */
+    maxConcentration?: string;
+    params?: Record<string, any>;
+    /** 土壤超标污染物名称 */
+    pollutantName?: string;
+    remark?: string;
+    /** 关联的调查评估ID */
+    surveyAssessmentId?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
   type getAdminEnterpriseIdParams = {
     /** id */
     id: number;
@@ -287,12 +382,8 @@ declare namespace API {
     deptId?: string;
     /** 企业规模 */
     enterpriseScale?: string;
-    /** 利用历史结束年份 */
-    historyEndYear?: number;
     /** 地块利用历史 */
     historyLandUse?: string;
-    /** 利用历史起始年份 */
-    historyStartYear?: number;
     /** 主键ID */
     id?: number;
     /** 是否位于工业园区或集聚区 */
@@ -471,6 +562,8 @@ declare namespace API {
     maxConcentrationMgl?: string;
     /** 关联的地下水监测记录ID */
     monitoringId?: string;
+    /** 监测类型（土壤地下水&环境调查评估） */
+    monitoringType?: string;
     params?: Record<string, any>;
     /** 超标污染物名称 */
     pollutantName?: string;
@@ -550,6 +643,28 @@ declare namespace API {
     searchValue?: string;
     /** 疑似土壤污染区名称 */
     suspectedPollutionAreaName?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type getAdminLandUseHistoryIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminLandUseHistoryListParams = {
+    createBy?: string;
+    createTime?: string;
+    /** 结束时间 */
+    endTime?: string;
+    id?: number;
+    /** 土地用途 */
+    landUse?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    /** 起始时间 */
+    startTime?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -943,6 +1058,8 @@ declare namespace API {
     maxConcentrationMgkg?: string;
     /** 关联的土壤监测记录ID */
     monitoringId?: string;
+    /** 监测类型（土壤地下水&环境调查评估） */
+    monitoringType?: string;
     params?: Record<string, any>;
     /** 超标污染物名称 */
     pollutantName?: string;
@@ -993,6 +1110,81 @@ declare namespace API {
     tankType?: string;
     /** 计量单位 */
     unit?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type getAdminSurveyAssessmentIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminSurveyAssessmentListParams = {
+    /** 调查评估结论或内容 */
+    assessment?: string;
+    /** 调查评估时间 */
+    assessmentTime?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 是否存在地下水污染 */
+    hasGroundwaterPollution?: string;
+    /** 是否存在土壤污染 */
+    hasSoilPollution?: string;
+    /** 主键ID */
+    id?: number;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type getAdminSurveyGroundwaterPollutionIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminSurveyGroundwaterPollutionListParams = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    id?: number;
+    /** 最大浓度 */
+    maxConcentration?: string;
+    params?: Record<string, any>;
+    /** 地下水超标污染物名称 */
+    pollutantName?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 关联的调查评估ID */
+    surveyAssessmentId?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type getAdminSurveySoilPollutionIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminSurveySoilPollutionListParams = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    id?: number;
+    /** 最大浓度 */
+    maxConcentration?: string;
+    params?: Record<string, any>;
+    /** 土壤超标污染物名称 */
+    pollutantName?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 关联的调查评估ID */
+    surveyAssessmentId?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -1257,12 +1449,8 @@ declare namespace API {
     deptId?: string;
     /** 企业规模 */
     enterpriseScale?: string;
-    /** 利用历史结束年份 */
-    historyEndYear?: number;
     /** 地块利用历史 */
     historyLandUse?: string;
-    /** 利用历史起始年份 */
-    historyStartYear?: number;
     /** 主键ID */
     id?: number;
     /** 是否位于工业园区或集聚区 */
@@ -1421,6 +1609,8 @@ declare namespace API {
     maxConcentrationMgl?: string;
     /** 关联的地下水监测记录ID */
     monitoringId?: string;
+    /** 监测类型（土壤地下水&环境调查评估） */
+    monitoringType?: string;
     params?: Record<string, any>;
     /** 超标污染物名称 */
     pollutantName?: string;
@@ -1485,6 +1675,23 @@ declare namespace API {
     searchValue?: string;
     /** 疑似土壤污染区名称 */
     suspectedPollutionAreaName?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type postAdminLandUseHistoryExportParams = {
+    createBy?: string;
+    createTime?: string;
+    /** 结束时间 */
+    endTime?: string;
+    id?: number;
+    /** 土地用途 */
+    landUse?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    /** 起始时间 */
+    startTime?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -1828,6 +2035,8 @@ declare namespace API {
     maxConcentrationMgkg?: string;
     /** 关联的土壤监测记录ID */
     monitoringId?: string;
+    /** 监测类型（土壤地下水&环境调查评估） */
+    monitoringType?: string;
     params?: Record<string, any>;
     /** 超标污染物名称 */
     pollutantName?: string;
@@ -1873,6 +2082,66 @@ declare namespace API {
     tankType?: string;
     /** 计量单位 */
     unit?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type postAdminSurveyAssessmentExportParams = {
+    /** 调查评估结论或内容 */
+    assessment?: string;
+    /** 调查评估时间 */
+    assessmentTime?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    /** 是否存在地下水污染 */
+    hasGroundwaterPollution?: string;
+    /** 是否存在土壤污染 */
+    hasSoilPollution?: string;
+    /** 主键ID */
+    id?: number;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type postAdminSurveyGroundwaterPollutionExportParams = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    id?: number;
+    /** 最大浓度 */
+    maxConcentration?: string;
+    params?: Record<string, any>;
+    /** 地下水超标污染物名称 */
+    pollutantName?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 关联的调查评估ID */
+    surveyAssessmentId?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type postAdminSurveySoilPollutionExportParams = {
+    createBy?: string;
+    createTime?: string;
+    /** 归属部门 */
+    deptId?: string;
+    id?: number;
+    /** 最大浓度 */
+    maxConcentration?: string;
+    params?: Record<string, any>;
+    /** 土壤超标污染物名称 */
+    pollutantName?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 关联的调查评估ID */
+    surveyAssessmentId?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -2227,6 +2496,8 @@ declare namespace API {
     maxConcentrationMgkg?: string;
     /** 关联的土壤监测记录ID */
     monitoringId?: string;
+    /** 监测类型（土壤地下水&环境调查评估） */
+    monitoringType?: string;
     params?: Record<string, any>;
     /** 超标污染物名称 */
     pollutantName?: string;
@@ -2334,12 +2605,8 @@ declare namespace API {
     deptId?: string;
     /** 企业规模 */
     enterpriseScale?: string;
-    /** 利用历史结束年份 */
-    historyEndYear?: number;
     /** 地块利用历史 */
     historyLandUse?: string;
-    /** 利用历史起始年份 */
-    historyStartYear?: number;
     /** 主键ID */
     id?: number;
     /** 是否位于工业园区或集聚区 */

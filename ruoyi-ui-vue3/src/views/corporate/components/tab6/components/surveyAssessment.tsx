@@ -10,11 +10,9 @@ import { Field } from "@formily/core";
 import { useDeptId } from "@/hooks";
 import { FormButtonGroup } from "@formily/element-plus";
 import { ElButton, ElMessage } from "element-plus";
-import {
-  Radios,
-  SurveySoilPollution,
-  SurveyGroundwaterPollution,
-} from "./index";
+import Radios from "./radio-input";
+import SurveySoilPollution from "./surveySoilPollution";
+import SurveyGroundwaterPollution from "./surveyGroundwaterPollution";
 
 const props: ISchemaFieldProps = {
   schema: {

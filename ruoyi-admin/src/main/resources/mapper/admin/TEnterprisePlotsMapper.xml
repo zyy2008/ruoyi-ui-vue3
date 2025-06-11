@@ -27,13 +27,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="latestExpansionDate"    column="latest_expansion_date"    />
         <result property="inIndustrialPark"    column="in_industrial_park"    />
         <result property="historyLandUse"    column="history_land_use"    />
-        <result property="historyStartYear"    column="history_start_year"    />
-        <result property="historyEndYear"    column="history_end_year"    />
         <result property="deptId"    column="dept_id"    />
     </resultMap>
 
     <sql id="selectTEnterprisePlotsVo">
-        select id, plot_code, plot_name, company_name, company_credit_code, legal_representative, address, region_code, center_longitude, center_latitude, area_land_cert, area_actual, contact_name, contact_phone, industry_category, industry_code, registration_type, enterprise_scale, start_date, latest_expansion_date, in_industrial_park, history_land_use, history_start_year, history_end_year, dept_id from t_enterprise_plots
+        select id, plot_code, plot_name, company_name, company_credit_code, legal_representative, address, region_code, center_longitude, center_latitude, area_land_cert, area_actual, contact_name, contact_phone, industry_category, industry_code, registration_type, enterprise_scale, start_date, latest_expansion_date, in_industrial_park, history_land_use, dept_id from t_enterprise_plots
     </sql>
 
     <select id="selectTEnterprisePlotsList" parameterType="TEnterprisePlots" resultMap="TEnterprisePlotsResult">
@@ -58,8 +56,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="latestExpansionDate != null "> and latest_expansion_date = #{latestExpansionDate}</if>
             <if test="inIndustrialPark != null  and inIndustrialPark != ''"> and in_industrial_park = #{inIndustrialPark}</if>
             <if test="historyLandUse != null  and historyLandUse != ''"> and history_land_use = #{historyLandUse}</if>
-            <if test="historyStartYear != null "> and history_start_year = #{historyStartYear}</if>
-            <if test="historyEndYear != null "> and history_end_year = #{historyEndYear}</if>
             <if test="deptId != null "> and dept_id = #{deptId}</if>
         </where>
     </select>
@@ -94,8 +90,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="latestExpansionDate != null">latest_expansion_date,</if>
             <if test="inIndustrialPark != null">in_industrial_park,</if>
             <if test="historyLandUse != null">history_land_use,</if>
-            <if test="historyStartYear != null">history_start_year,</if>
-            <if test="historyEndYear != null">history_end_year,</if>
             <if test="deptId != null">dept_id,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -151,8 +145,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="latestExpansionDate != null">latest_expansion_date = #{latestExpansionDate},</if>
             <if test="inIndustrialPark != null">in_industrial_park = #{inIndustrialPark},</if>
             <if test="historyLandUse != null">history_land_use = #{historyLandUse},</if>
-            <if test="historyStartYear != null">history_start_year = #{historyStartYear},</if>
-            <if test="historyEndYear != null">history_end_year = #{historyEndYear},</if>
             <if test="deptId != null">dept_id = #{deptId},</if>
         </trim>
         where id = #{id}

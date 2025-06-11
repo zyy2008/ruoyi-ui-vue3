@@ -1,7 +1,12 @@
 <template>
   <div class="login">
-    <el-form ref="loginRef" :model="loginForm" :rules="loginRules" class="login-form">
-      <h3 class="title">清徐地下水在线监测软件平台</h3>
+    <el-form
+      ref="loginRef"
+      :model="loginForm"
+      :rules="loginRules"
+      class="login-form"
+    >
+      <h3 v-show="true" class="title">用户登录</h3>
       <el-form-item prop="username">
         <el-input
           v-model="loginForm.username"
@@ -46,7 +51,9 @@
           <img :src="codeUrl" @click="getCode" class="login-code-img" />
         </div>
       </el-form-item>
-      <el-checkbox v-model="loginForm.rememberMe" style="margin: 0px 0px 25px 0px"
+      <el-checkbox
+        v-model="loginForm.rememberMe"
+        style="margin: 0px 0px 25px 0px"
         >记住密码</el-checkbox
       >
       <el-form-item style="width: 100%">
@@ -54,14 +61,16 @@
           :loading="loading"
           size="large"
           type="primary"
-          style="width: 100%"
+          style="width: 100%;background-color: #012597;"
           @click.prevent="handleLogin"
         >
           <span v-if="!loading">登 录</span>
           <span v-else>登 录 中...</span>
         </el-button>
         <div style="float: right" v-if="register">
-          <router-link class="link-type" :to="'/register'">立即注册</router-link>
+          <router-link class="link-type" :to="'/register'"
+            >立即注册</router-link
+          >
         </div>
       </el-form-item>
     </el-form>
@@ -168,7 +177,8 @@ function handleLogin() {
 
 function getCode() {
   getCodeImg().then((res) => {
-    captchaEnabled.value = res.captchaEnabled === undefined ? true : res.captchaEnabled;
+    captchaEnabled.value =
+      res.captchaEnabled === undefined ? true : res.captchaEnabled;
     if (captchaEnabled.value) {
       codeUrl.value = "data:image/gif;base64," + res.img;
       loginForm.value.uuid = res.uuid;
@@ -182,7 +192,8 @@ function getCookie() {
   const rememberMe = Cookies.get("rememberMe");
   loginForm.value = {
     username: username === undefined ? loginForm.value.username : username,
-    password: password === undefined ? loginForm.value.password : decrypt(password),
+    password:
+      password === undefined ? loginForm.value.password : decrypt(password),
     rememberMe: rememberMe === undefined ? false : Boolean(rememberMe),
   };
 }
@@ -201,9 +212,11 @@ getCookie();
   background-size: cover;
 }
 .title {
-  margin: 0px auto 30px auto;
-  text-align: center;
-  color: #707070;
+    margin: 0px auto 30px auto;
+    text-align: center;
+    color: #3F3F3F;
+    font-size: 24px;
+    font-weight: 600;
 }
 
 .login-form {
@@ -211,6 +224,9 @@ getCookie();
   background: #ffffff;
   width: 400px;
   padding: 25px 25px 5px 25px;
+  position: absolute;
+  left: 63.96vw; // 1228 / 1920 * 100
+  top: 38vh;  // 340 / 1080 * 100
   .el-input {
     height: 40px;
     input {
@@ -244,10 +260,11 @@ getCookie();
   bottom: 0;
   width: 100%;
   text-align: center;
-  color: #fff;
+  color: #878787;
   font-family: Arial;
   font-size: 12px;
   letter-spacing: 1px;
+  background-color: #F5F5F5;
 }
 .login-code-img {
   height: 40px;

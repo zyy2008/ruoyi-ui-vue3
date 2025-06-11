@@ -2,12 +2,12 @@
 /* eslint-disable */
 import request from "@/utils/http";
 
-/** 修改指标分类 PUT /admin/indicators */
-export async function putAdminIndicators(
-  body: API.zhibiaofenlei,
+/** 修改管道泄漏 PUT /admin/pipelineLeak */
+export async function putAdminPipelineLeak(
+  body: API.guandaoxielou,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/dev-api/admin/indicators`, {
+  return request<Record<string, any>>(`/dev-api/admin/pipelineLeak`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -17,12 +17,12 @@ export async function putAdminIndicators(
   });
 }
 
-/** 新增指标分类 POST /admin/indicators */
-export async function postAdminIndicators(
-  body: API.zhibiaofenlei,
+/** 新增管道泄漏 POST /admin/pipelineLeak */
+export async function postAdminPipelineLeak(
+  body: API.guandaoxielou,
   options?: { [key: string]: any }
 ) {
-  return request<Record<string, any>>(`/dev-api/admin/indicators`, {
+  return request<Record<string, any>>(`/dev-api/admin/pipelineLeak`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -32,41 +32,41 @@ export async function postAdminIndicators(
   });
 }
 
-/** 删除指标分类 DELETE /admin/indicators/${param0} */
-export async function deleteAdminIndicatorsIds(
+/** 删除管道泄漏 DELETE /admin/pipelineLeak/${param0} */
+export async function deleteAdminPipelineLeakIds(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.deleteAdminIndicatorsIdsParams,
+  params: API.deleteAdminPipelineLeakIdsParams,
   options?: { [key: string]: any }
 ) {
   const { ids: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/dev-api/admin/indicators/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/pipelineLeak/${param0}`, {
     method: "DELETE",
     params: { ...queryParams },
     ...(options || {}),
   });
 }
 
-/** 获取指标分类详细信息 GET /admin/indicators/${param0} */
-export async function getAdminIndicatorsId(
+/** 获取管道泄漏详细信息 GET /admin/pipelineLeak/${param0} */
+export async function getAdminPipelineLeakId(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.getAdminIndicatorsIdParams,
+  params: API.getAdminPipelineLeakIdParams,
   options?: { [key: string]: any }
 ) {
   const { id: param0, ...queryParams } = params;
-  return request<Record<string, any>>(`/dev-api/admin/indicators/${param0}`, {
+  return request<Record<string, any>>(`/dev-api/admin/pipelineLeak/${param0}`, {
     method: "GET",
     params: { ...queryParams },
     ...(options || {}),
   });
 }
 
-/** 导出指标分类列表 POST /admin/indicators/export */
-export async function postAdminIndicatorsExport(
+/** 导出管道泄漏列表 POST /admin/pipelineLeak/export */
+export async function postAdminPipelineLeakExport(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.postAdminIndicatorsExportParams,
+  params: API.postAdminPipelineLeakExportParams,
   options?: { [key: string]: any }
 ) {
-  return request<any>(`/dev-api/admin/indicators/export`, {
+  return request<any>(`/dev-api/admin/pipelineLeak/export`, {
     method: "POST",
     params: {
       ...params,
@@ -77,13 +77,13 @@ export async function postAdminIndicatorsExport(
   });
 }
 
-/** 查询指标分类列表 GET /admin/indicators/list */
-export async function getAdminIndicatorsList(
+/** 查询管道泄漏列表 GET /admin/pipelineLeak/list */
+export async function getAdminPipelineLeakList(
   // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
-  params: API.getAdminIndicatorsListParams,
+  params: API.getAdminPipelineLeakListParams,
   options?: { [key: string]: any }
 ) {
-  return request<API.TableDataInfo>(`/dev-api/admin/indicators/list`, {
+  return request<API.TableDataInfo>(`/dev-api/admin/pipelineLeak/list`, {
     method: "GET",
     params: {
       ...params,

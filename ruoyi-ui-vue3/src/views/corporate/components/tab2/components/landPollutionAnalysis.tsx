@@ -17,7 +17,7 @@ const props: ISchemaFieldProps = {
         type: "void",
         "x-component": "Card",
         "x-component-props": {
-          header: "含水层以上士壤分层情况(自上而下)",
+          header: "地块污染情况分析",
         },
         properties: {
           array: {
@@ -45,36 +45,14 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "土层性质",
                     width: 200,
+                    title: "疑似土壤污染区名称",
                   },
                   properties: {
-                    soilType: {
+                    suspectedPollutionAreaName: {
                       type: "string",
-                      enum: [
-                        {
-                          label: "碎石土",
-                          value: "0",
-                        },
-                        {
-                          label: "砂土",
-                          value: "1",
-                        },
-                        {
-                          label: "粉土",
-                          value: "2",
-                        },
-                        {
-                          label: "黏性土",
-                          value: "3",
-                        },
-                        {
-                          label: "不确定",
-                          value: "4",
-                        },
-                      ],
                       "x-decorator": "FormItem",
-                      "x-component": "Select",
+                      "x-component": "Input",
                     },
                   },
                 },
@@ -82,45 +60,14 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "土层(上层)埋深(cm)",
                     width: 200,
+                    title: "特征污染物名称",
                   },
                   properties: {
-                    depthTopCm: {
-                      type: "number",
-                      "x-decorator": "FormItem",
-                      "x-component": "InputNumber",
-                    },
-                  },
-                },
-                column4: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
-                    title: "土层厚度",
-                    width: 200,
-                  },
-                  properties: {
-                    thicknessCm: {
-                      type: "number",
-                      "x-decorator": "FormItem",
-                      "x-component": "InputNumber",
-                    },
-                  },
-                },
-                column6: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
-                    title: "添加人",
-                    width: 200,
-                  },
-                  properties: {
-                    createdBy: {
+                    characteristicPollutantName: {
                       type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "AddPeople",
-                      "x-editable": false,
+                      "x-component": "Input.TextArea",
                     },
                   },
                 },
@@ -128,26 +75,9 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "创建时间",
-                    width: 300,
-                  },
-
-                  properties: {
-                    createTime: {
-                      type: "string",
-                      "x-decorator": "FormItem",
-                      "x-component": "Input",
-                      "x-editable": false,
-                    },
-                  },
-                },
-                column8: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
                     title: "操作",
                     prop: "operations",
-                    width: 160,
+                    width: 200,
                     fixed: "right",
                   },
                   properties: {
@@ -189,7 +119,7 @@ export default observer(
       const form = createForm();
       const { deptId } = useDeptId();
       const { data, run } = useRequest(() =>
-        API.getAdminSoilPathwayList({
+        API.getAdminLandPollutionAnalysisList({
           deptId,
         })
       );
@@ -204,9 +134,9 @@ export default observer(
       });
       provide("form", {
         run,
-        apiAdd: API.postAdminSoilPathway,
-        apiEdit: API.putAdminSoilPathway,
-        apiDel: API.deleteAdminSoilPathwayIds,
+        apiAdd: API.postAdminLandPollutionAnalysis,
+        apiEdit: API.putAdminLandPollutionAnalysis,
+        apiDel: API.deleteAdminLandPollutionAnalysisIds,
       });
       return () => (
         <FormProvider form={form}>

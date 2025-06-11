@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TLandUseHistoryMapper">
+    
+    <resultMap type="TLandUseHistory" id="TLandUseHistoryResult">
+        <result property="id"    column="id"    />
+        <result property="startTime"    column="start_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="landUse"    column="land_use"    />
+    </resultMap>
+
+    <sql id="selectTLandUseHistoryVo">
+        select id, start_time, end_time, land_use from t_land_use_history
+    </sql>
+
+    <select id="selectTLandUseHistoryList" parameterType="TLandUseHistory" resultMap="TLandUseHistoryResult">
+        <include refid="selectTLandUseHistoryVo"/>
+        <where>  
+            <if test="startTime != null  and startTime != ''"> and start_time = #{startTime}</if>
+            <if test="endTime != null  and endTime != ''"> and end_time = #{endTime}</if>
+            <if test="landUse != null  and landUse != ''"> and land_use = #{landUse}</if>
+        </where>
+    </select>
+    
+    <select id="selectTLandUseHistoryById" parameterType="Long" resultMap="TLandUseHistoryResult">
+        <include refid="selectTLandUseHistoryVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTLandUseHistory" parameterType="TLandUseHistory" useGeneratedKeys="true" keyProperty="id">
+        insert into t_land_use_history
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="startTime != null">start_time,</if>
+            <if test="endTime != null">end_time,</if>
+            <if test="landUse != null">land_use,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="startTime != null">#{startTime},</if>
+            <if test="endTime != null">#{endTime},</if>
+            <if test="landUse != null">#{landUse},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTLandUseHistory" parameterType="TLandUseHistory">
+        update t_land_use_history
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="landUse != null">land_use = #{landUse},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTLandUseHistoryById" parameterType="Long">
+        delete from t_land_use_history where id = #{id}
+    </delete>
+
+    <delete id="deleteTLandUseHistoryByIds" parameterType="String">
+        delete from t_land_use_history where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

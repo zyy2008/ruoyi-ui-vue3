@@ -17,7 +17,7 @@ const props: ISchemaFieldProps = {
         type: "void",
         "x-component": "Card",
         "x-component-props": {
-          header: "含水层以上士壤分层情况(自上而下)",
+          header: "(若选择是，则需填写以下第2到5项内容，否则不填)",
         },
         properties: {
           array: {
@@ -31,7 +31,7 @@ const props: ISchemaFieldProps = {
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
                     width: 80,
-                    title: "序号",
+                    title: "事故序号",
                     align: "center",
                   },
                   properties: {
@@ -45,32 +45,20 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "土层性质",
                     width: 200,
+                    title: "管道类型",
                   },
                   properties: {
-                    soilType: {
+                    pipelineType: {
                       type: "string",
                       enum: [
                         {
-                          label: "碎石土",
+                          label: "地上",
                           value: "0",
                         },
                         {
-                          label: "砂土",
+                          label: "地下",
                           value: "1",
-                        },
-                        {
-                          label: "粉土",
-                          value: "2",
-                        },
-                        {
-                          label: "黏性土",
-                          value: "3",
-                        },
-                        {
-                          label: "不确定",
-                          value: "4",
                         },
                       ],
                       "x-decorator": "FormItem",
@@ -82,14 +70,14 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "土层(上层)埋深(cm)",
                     width: 200,
+                    title: "泄漏点坐标位置",
                   },
                   properties: {
-                    depthTopCm: {
-                      type: "number",
+                    leakCoordinates: {
+                      type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "InputNumber",
+                      "x-component": "Input",
                     },
                   },
                 },
@@ -97,30 +85,14 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "土层厚度",
                     width: 200,
+                    title: "泄漏的物质名称",
                   },
                   properties: {
-                    thicknessCm: {
-                      type: "number",
-                      "x-decorator": "FormItem",
-                      "x-component": "InputNumber",
-                    },
-                  },
-                },
-                column6: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
-                    title: "添加人",
-                    width: 200,
-                  },
-                  properties: {
-                    createdBy: {
+                    leakedSubstanceName: {
                       type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "AddPeople",
-                      "x-editable": false,
+                      "x-component": "Input",
                     },
                   },
                 },
@@ -128,26 +100,9 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "创建时间",
-                    width: 300,
-                  },
-
-                  properties: {
-                    createTime: {
-                      type: "string",
-                      "x-decorator": "FormItem",
-                      "x-component": "Input",
-                      "x-editable": false,
-                    },
-                  },
-                },
-                column8: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
                     title: "操作",
                     prop: "operations",
-                    width: 160,
+                    width: 200,
                     fixed: "right",
                   },
                   properties: {
@@ -189,7 +144,7 @@ export default observer(
       const form = createForm();
       const { deptId } = useDeptId();
       const { data, run } = useRequest(() =>
-        API.getAdminSoilPathwayList({
+        API.getAdminPipelineLeakList({
           deptId,
         })
       );
@@ -204,9 +159,9 @@ export default observer(
       });
       provide("form", {
         run,
-        apiAdd: API.postAdminSoilPathway,
-        apiEdit: API.putAdminSoilPathway,
-        apiDel: API.deleteAdminSoilPathwayIds,
+        apiAdd: API.postAdminPipelineLeak,
+        apiEdit: API.putAdminPipelineLeak,
+        apiDel: API.deleteAdminPipelineLeakIds,
       });
       return () => (
         <FormProvider form={form}>

@@ -17,7 +17,7 @@ const props: ISchemaFieldProps = {
         type: "void",
         "x-component": "Card",
         "x-component-props": {
-          header: "含水层以上士壤分层情况(自上而下)",
+          header: "污染物痕迹",
         },
         properties: {
           array: {
@@ -45,36 +45,15 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "土层性质",
                     width: 200,
+                    title: "区域名称",
                   },
                   properties: {
-                    soilType: {
+                    areaName: {
                       type: "string",
-                      enum: [
-                        {
-                          label: "碎石土",
-                          value: "0",
-                        },
-                        {
-                          label: "砂土",
-                          value: "1",
-                        },
-                        {
-                          label: "粉土",
-                          value: "2",
-                        },
-                        {
-                          label: "黏性土",
-                          value: "3",
-                        },
-                        {
-                          label: "不确定",
-                          value: "4",
-                        },
-                      ],
+                      required: true,
                       "x-decorator": "FormItem",
-                      "x-component": "Select",
+                      "x-component": "Input",
                     },
                   },
                 },
@@ -82,14 +61,14 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "土层(上层)埋深(cm)",
                     width: 200,
+                    title: "地点",
                   },
                   properties: {
-                    depthTopCm: {
-                      type: "number",
+                    location: {
+                      type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "InputNumber",
+                      "x-component": "Input.TextArea",
                     },
                   },
                 },
@@ -97,14 +76,30 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "土层厚度",
                     width: 200,
+                    title: "坐标位置（经度，纬度）",
                   },
                   properties: {
-                    thicknessCm: {
-                      type: "number",
+                    coordinates: {
+                      type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "InputNumber",
+                      "x-component": "Input",
+                    },
+                  },
+                },
+                column5: {
+                  type: "void",
+                  "x-component": "ArrayTable.Column",
+                  "x-component-props": {
+                    width: 200,
+                    title: "面积(m²)",
+                  },
+                  properties: {
+                    area: {
+                      type: "string",
+                      required: true,
+                      "x-decorator": "FormItem",
+                      "x-component": "Input",
                     },
                   },
                 },
@@ -112,32 +107,15 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "添加人",
                     width: 200,
+                    title: "固体废物名称",
                   },
                   properties: {
-                    createdBy: {
+                    solidWasteName: {
                       type: "string",
-                      "x-decorator": "FormItem",
-                      "x-component": "AddPeople",
-                      "x-editable": false,
-                    },
-                  },
-                },
-                column7: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
-                    title: "创建时间",
-                    width: 300,
-                  },
-
-                  properties: {
-                    createTime: {
-                      type: "string",
+                      required: true,
                       "x-decorator": "FormItem",
                       "x-component": "Input",
-                      "x-editable": false,
                     },
                   },
                 },
@@ -145,9 +123,69 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
+                    width: 200,
+                    title: "是否为危险废物",
+                  },
+                  properties: {
+                    isHazardousWaste: {
+                      type: "string",
+                      required: true,
+                      enum: [
+                        {
+                          label: "是",
+                          value: "0",
+                        },
+                        {
+                          label: "否",
+                          value: "1",
+                        },
+                      ],
+                      "x-decorator": "FormItem",
+                      "x-component": "Select",
+                    },
+                  },
+                },
+                column10: {
+                  type: "void",
+                  "x-component": "ArrayTable.Column",
+                  "x-component-props": {
+                    width: 200,
+                    title: "贮存量或处置量（吨）",
+                  },
+                  properties: {
+                    storageAndDisposalAmount: {
+                      type: "string",
+                      "x-decorator": "FormItem",
+                      "x-component": "Input",
+                    },
+                  },
+                },
+                column11: {
+                  type: "void",
+                  "x-component": "ArrayTable.Column",
+                  "x-component-props": {
+                    width: 200,
+                    title: "贮存或处置照片",
+                  },
+                  properties: {
+                    storageAndDisposalPhotos: {
+                      type: "string",
+                      "x-decorator": "FormItem",
+                      "x-component": "UploadAjax",
+                      "x-component-props": {
+                        listType: "picture-card",
+                        accept: ".jpg,.png",
+                      },
+                    },
+                  },
+                },
+                column7: {
+                  type: "void",
+                  "x-component": "ArrayTable.Column",
+                  "x-component-props": {
                     title: "操作",
                     prop: "operations",
-                    width: 160,
+                    width: 200,
                     fixed: "right",
                   },
                   properties: {
@@ -189,7 +227,7 @@ export default observer(
       const form = createForm();
       const { deptId } = useDeptId();
       const { data, run } = useRequest(() =>
-        API.getAdminSoilPathwayList({
+        API.getAdminSewageSolidWasteList({
           deptId,
         })
       );
@@ -204,9 +242,9 @@ export default observer(
       });
       provide("form", {
         run,
-        apiAdd: API.postAdminSoilPathway,
-        apiEdit: API.putAdminSoilPathway,
-        apiDel: API.deleteAdminSoilPathwayIds,
+        apiAdd: API.postAdminSewageSolidWaste,
+        apiEdit: API.putAdminSewageSolidWaste,
+        apiDel: API.deleteAdminSewageSolidWasteIds,
       });
       return () => (
         <FormProvider form={form}>

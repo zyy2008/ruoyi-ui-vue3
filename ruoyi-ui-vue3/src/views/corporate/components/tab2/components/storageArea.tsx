@@ -17,7 +17,7 @@ const props: ISchemaFieldProps = {
         type: "void",
         "x-component": "Card",
         "x-component-props": {
-          header: "含水层以上士壤分层情况(自上而下)",
+          header: "储存区",
         },
         properties: {
           array: {
@@ -45,36 +45,15 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "土层性质",
                     width: 200,
+                    title: "区域类型",
                   },
                   properties: {
-                    soilType: {
+                    areaType: {
                       type: "string",
-                      enum: [
-                        {
-                          label: "碎石土",
-                          value: "0",
-                        },
-                        {
-                          label: "砂土",
-                          value: "1",
-                        },
-                        {
-                          label: "粉土",
-                          value: "2",
-                        },
-                        {
-                          label: "黏性土",
-                          value: "3",
-                        },
-                        {
-                          label: "不确定",
-                          value: "4",
-                        },
-                      ],
+                      required: true,
                       "x-decorator": "FormItem",
-                      "x-component": "Select",
+                      "x-component": "Input",
                     },
                   },
                 },
@@ -82,14 +61,14 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "土层(上层)埋深(cm)",
                     width: 200,
+                    title: "储罐数量",
                   },
                   properties: {
-                    depthTopCm: {
-                      type: "number",
+                    tankCount: {
+                      type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "InputNumber",
+                      "x-component": "Input",
                     },
                   },
                 },
@@ -97,14 +76,50 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "土层厚度",
                     width: 200,
+                    title: "储罐类型",
                   },
                   properties: {
-                    thicknessCm: {
-                      type: "number",
+                    tankType: {
+                      type: "string",
                       "x-decorator": "FormItem",
-                      "x-component": "InputNumber",
+                      "x-component": "Input",
+                    },
+                  },
+                },
+                column5: {
+                  type: "void",
+                  "x-component": "ArrayTable.Column",
+                  "x-component-props": {
+                    width: 200,
+                    title: "储存物质名称",
+                  },
+                  properties: {
+                    storedSubstanceName: {
+                      type: "string",
+                      required: true,
+                      "x-decorator": "FormItem",
+                      "x-component": "Input",
+                    },
+                  },
+                },
+                column9: {
+                  type: "void",
+                  "x-component": "ArrayTable.Column",
+                  "x-component-props": {
+                    width: 200,
+                    title: "是否为危险化学品",
+                  },
+                  properties: {
+                    isHazardousChemical: {
+                      type: "string",
+                      required: true,
+                      enum: [
+                        { label: "是", value: "0" },
+                        { label: "否", value: "1" },
+                      ],
+                      "x-decorator": "FormItem",
+                      "x-component": "Select",
                     },
                   },
                 },
@@ -112,32 +127,14 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
-                    title: "添加人",
                     width: 200,
+                    title: "储存量",
                   },
                   properties: {
-                    createdBy: {
-                      type: "string",
-                      "x-decorator": "FormItem",
-                      "x-component": "AddPeople",
-                      "x-editable": false,
-                    },
-                  },
-                },
-                column7: {
-                  type: "void",
-                  "x-component": "ArrayTable.Column",
-                  "x-component-props": {
-                    title: "创建时间",
-                    width: 300,
-                  },
-
-                  properties: {
-                    createTime: {
+                    storageAmount: {
                       type: "string",
                       "x-decorator": "FormItem",
                       "x-component": "Input",
-                      "x-editable": false,
                     },
                   },
                 },
@@ -145,9 +142,92 @@ const props: ISchemaFieldProps = {
                   type: "void",
                   "x-component": "ArrayTable.Column",
                   "x-component-props": {
+                    title: "计量单位",
+                    width: 200,
+                  },
+
+                  properties: {
+                    unit: {
+                      type: "string",
+                      required: true,
+                      "x-decorator": "FormItem",
+                      "x-component": "Input",
+                    },
+                  },
+                },
+                column10: {
+                  type: "void",
+                  "x-component": "ArrayTable.Column",
+                  "x-component-props": {
+                    title: "储存年代",
+                    width: 200,
+                  },
+
+                  properties: {
+                    storageYear: {
+                      type: "string",
+                      "x-decorator": "FormItem",
+                      "x-component": "DatePicker",
+                      "x-component-props": {
+                        type: "year",
+                        format: "YYYY",
+                        valueFormat: "YYYY",
+                      },
+                    },
+                  },
+                },
+                column11: {
+                  type: "void",
+                  "x-component": "ArrayTable.Column",
+                  "x-component-props": {
+                    title: "泄漏或污染痕迹",
+                    width: 200,
+                  },
+
+                  properties: {
+                    leakageOrPollutionTraces: {
+                      type: "string",
+                      enum: [
+                        {
+                          label: "有",
+                          value: "0",
+                        },
+                        {
+                          label: "无",
+                          value: "1",
+                        },
+                      ],
+                      "x-decorator": "FormItem",
+                      "x-component": "Select",
+                    },
+                  },
+                },
+                column12: {
+                  type: "void",
+                  "x-component": "ArrayTable.Column",
+                  "x-component-props": {
+                    title: "照片",
+                    width: 200,
+                  },
+                  properties: {
+                    photos: {
+                      type: "string",
+                      "x-decorator": "FormItem",
+                      "x-component": "UploadAjax",
+                      "x-component-props": {
+                        listType: "picture-card",
+                        accept: ".jpg,.png",
+                      },
+                    },
+                  },
+                },
+                column7: {
+                  type: "void",
+                  "x-component": "ArrayTable.Column",
+                  "x-component-props": {
                     title: "操作",
                     prop: "operations",
-                    width: 160,
+                    width: 200,
                     fixed: "right",
                   },
                   properties: {
@@ -189,7 +269,7 @@ export default observer(
       const form = createForm();
       const { deptId } = useDeptId();
       const { data, run } = useRequest(() =>
-        API.getAdminSoilPathwayList({
+        API.getAdminStorageAreaList({
           deptId,
         })
       );
@@ -204,9 +284,9 @@ export default observer(
       });
       provide("form", {
         run,
-        apiAdd: API.postAdminSoilPathway,
-        apiEdit: API.putAdminSoilPathway,
-        apiDel: API.deleteAdminSoilPathwayIds,
+        apiAdd: API.postAdminStorageArea,
+        apiEdit: API.putAdminStorageArea,
+        apiDel: API.deleteAdminStorageAreaIds,
       });
       return () => (
         <FormProvider form={form}>

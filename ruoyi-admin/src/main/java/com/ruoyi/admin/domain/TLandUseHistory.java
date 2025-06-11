@@ -26,19 +26,19 @@ public class TLandUseHistory extends BaseEntity {
     /**
      * 起始时间
      */
-    @ApiModelProperty(name = "起始时间")
+    @ApiModelProperty("起始时间")
     private String startTime;
 
     /**
      * 结束时间
      */
-    @ApiModelProperty(name = "结束时间")
+    @ApiModelProperty("结束时间")
     private String endTime;
 
     /**
      * 土地用途
      */
-    @ApiModelProperty(name = "土地用途")
+    @ApiModelProperty("土地用途")
     private String landUse;
 
 }

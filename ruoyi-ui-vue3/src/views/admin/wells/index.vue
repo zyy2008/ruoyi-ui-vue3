@@ -15,6 +15,17 @@
           @keyup.enter="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="在线监测井" prop="realTime">
+        <el-select
+          v-model="queryParams.realTime"
+          placeholder="请选择"
+          clearable
+          style="width: 200px"
+        >
+          <el-option label="是" value="是" />
+          <el-option label="否" value="否" />
+        </el-select>
+      </el-form-item>
       <el-form-item label="设备编码" prop="deviceNo">
         <el-input
           v-model="queryParams.deviceNo"
@@ -104,6 +115,8 @@
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="监测井编码" align="center" prop="wellCode" />
+      <el-table-column label="在线监测井" align="center" prop="realTime" />
+
       <el-table-column
         width="240"
         label="所属企业"
@@ -182,6 +195,12 @@
           <el-col :span="12">
             <el-form-item label="监测井编码" prop="wellCode">
               <el-input v-model="form.wellCode" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="12">
+            <el-form-item label="在线监测井" prop="realTime">
+              <el-input v-model="form.realTime" placeholder="请输入内容" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -338,6 +357,9 @@
       <el-descriptions :column="2" border>
         <el-descriptions-item label="监测井编码">{{
           detailForm.wellCode
+        }}</el-descriptions-item>
+        <el-descriptions-item label="在线监测井">{{
+          detailForm.realTime
         }}</el-descriptions-item>
         <el-descriptions-item label="设备编码">{{
           detailForm.deviceNo

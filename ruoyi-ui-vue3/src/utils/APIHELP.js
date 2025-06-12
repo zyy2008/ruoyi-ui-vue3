@@ -46,7 +46,7 @@ function generateSignature(params, timestamp, key) {
 
 // 示例调用
 //http://admin.yun-sense.com/v1/getDeviceData
-const baseUrl = "http://admin.sensor-monitor.cn/v1/getDeviceData";
+const baseUrl = "http://admin.yun-sense.com/v1/getDeviceData";
 const deviceNo = "AMT24112216420021";
 const apiKey = "YpMDbau7rxFI7QIkQsQiDLBSnr65OiCU";
 

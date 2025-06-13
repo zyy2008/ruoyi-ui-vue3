@@ -2,6 +2,7 @@ package com.ruoyi.admin.mapper;
 
 import java.util.List;
 import com.ruoyi.admin.domain.TRealtimeWaterQualityMonitoring;
+import com.ruoyi.admin.domain.vo.BatchWellVo;
 
 /**
  * 实时数据监测Mapper接口
@@ -26,7 +27,7 @@ public interface TRealtimeWaterQualityMonitoringMapper
      * @return 实时数据监测集合
      */
     public List<TRealtimeWaterQualityMonitoring> selectTRealtimeWaterQualityMonitoringList(TRealtimeWaterQualityMonitoring tRealtimeWaterQualityMonitoring);
-    public List<TRealtimeWaterQualityMonitoring> getBatchData(String deptId);
+    public List<TRealtimeWaterQualityMonitoring> getBatchData(BatchWellVo batchWellVo);
 
     /**
      * 新增实时数据监测

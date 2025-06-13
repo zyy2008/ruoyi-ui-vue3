@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.ruoyi.admin.domain.vo.BatchWellVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.admin.mapper.TRealtimeWaterQualityMonitoringMapper;
@@ -44,17 +45,8 @@ public class TRealtimeWaterQualityMonitoringServiceImpl implements ITRealtimeWat
     }
 
     @Override
-    public List<TRealtimeWaterQualityMonitoring> getBatchData(String deptIdString) {
-//        List<String> deptId = new ArrayList<>();
-//        if (-1 == deptIdString.indexOf(",")) {
-//            String[] wellArr = deptIdString.split(",");
-//            deptId = Arrays.asList(wellArr);
-//        } else {
-//            deptId.add(deptIdString);
-//        }
-//        if (deptId.isEmpty())
-//            return new ArrayList<>();
-        return tRealtimeWaterQualityMonitoringMapper.getBatchData(deptIdString);
+    public List<TRealtimeWaterQualityMonitoring> getBatchData(BatchWellVo batchWellVo) {
+        return tRealtimeWaterQualityMonitoringMapper.getBatchData(batchWellVo);
     }
 
     /**

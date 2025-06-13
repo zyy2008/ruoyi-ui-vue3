@@ -3,6 +3,7 @@ package com.ruoyi.admin.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.admin.domain.vo.BatchWellVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -50,15 +51,15 @@ public class TRealtimeWaterQualityMonitoringController extends BaseController {
     }
 
     /**
-     * 通过部门获取监测井最新数据
+     * 获取监测井最新数据
      */
-    @ApiOperation("通过部门获取监测井最新数据")
+    @ApiOperation("获取监测井最新数据")
     //@PreAuthorize("@ss.hasPermi('admin:realtimeWaterQualityMonitoring:list')")
-    @GetMapping("/getBatchData/{deptId}")
-    public AjaxResult getBatchData(@PathVariable("deptId") String deptId) {
-        if (null == deptId || 0 == deptId.length())
+    @GetMapping("/getBatchData")
+    public AjaxResult getBatchData(BatchWellVo batchWellVo) {
+        if (null == batchWellVo.getDeptId() || 0 == batchWellVo.getDeptId().length())
             return AjaxResult.error("参数异常");
-        return AjaxResult.success(tRealtimeWaterQualityMonitoringService.getBatchData(deptId));
+        return AjaxResult.success(tRealtimeWaterQualityMonitoringService.getBatchData(batchWellVo));
     }
 
     /**

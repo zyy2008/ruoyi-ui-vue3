@@ -45,16 +45,16 @@ public class TRealtimeWaterQualityMonitoringServiceImpl implements ITRealtimeWat
 
     @Override
     public List<TRealtimeWaterQualityMonitoring> getBatchData(String deptIdString) {
-        List<String> deptId = new ArrayList<>();
-        if (-1 == deptIdString.indexOf(",")) {
-            String[] wellArr = deptIdString.split(",");
-            deptId = Arrays.asList(wellArr);
-        } else {
-            deptId.add(deptIdString);
-        }
-        if (deptId.isEmpty())
-            return new ArrayList<>();
-        return tRealtimeWaterQualityMonitoringMapper.getBatchData(deptId);
+//        List<String> deptId = new ArrayList<>();
+//        if (-1 == deptIdString.indexOf(",")) {
+//            String[] wellArr = deptIdString.split(",");
+//            deptId = Arrays.asList(wellArr);
+//        } else {
+//            deptId.add(deptIdString);
+//        }
+//        if (deptId.isEmpty())
+//            return new ArrayList<>();
+        return tRealtimeWaterQualityMonitoringMapper.getBatchData(deptIdString);
     }
 
     /**

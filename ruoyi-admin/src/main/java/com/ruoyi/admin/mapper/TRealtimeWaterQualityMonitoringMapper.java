@@ -26,7 +26,7 @@ public interface TRealtimeWaterQualityMonitoringMapper
      * @return 实时数据监测集合
      */
     public List<TRealtimeWaterQualityMonitoring> selectTRealtimeWaterQualityMonitoringList(TRealtimeWaterQualityMonitoring tRealtimeWaterQualityMonitoring);
-    public List<TRealtimeWaterQualityMonitoring> getBatchData(List<String> deptId);
+    public List<TRealtimeWaterQualityMonitoring> getBatchData(String deptId);
 
     /**
      * 新增实时数据监测

@@ -56,6 +56,8 @@ public class TRealtimeWaterQualityMonitoringController extends BaseController {
     //@PreAuthorize("@ss.hasPermi('admin:realtimeWaterQualityMonitoring:list')")
     @GetMapping("/getBatchData/{deptId}")
     public AjaxResult getBatchData(@PathVariable("deptId") String deptId) {
+        if (null == deptId || 0 == deptId.length())
+            return AjaxResult.error("参数异常");
         return AjaxResult.success(tRealtimeWaterQualityMonitoringService.getBatchData(deptId));
     }
 

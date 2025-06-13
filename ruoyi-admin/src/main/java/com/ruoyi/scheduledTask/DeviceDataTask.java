@@ -31,7 +31,7 @@ public class DeviceDataTask {
     @Autowired
     private ITRealtimeWaterQualityMonitoringService itRealtimeWaterQualityMonitoringService;
 
-    @Scheduled(fixedRate = 1000 * 60)
+    @Scheduled(fixedRate = 1000 * 60 * 60)
     public void fetchDeviceData() {
         log.info("=================同步监测进数据");
         try {
@@ -84,6 +84,8 @@ public class DeviceDataTask {
 
                             }
                         }
+                    } else {
+                        log.info("获取异常的监测井：{}", monitoringWells.getDeviceNo());
                     }
                 }
             }

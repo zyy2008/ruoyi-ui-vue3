@@ -37,7 +37,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="redoxPotential != null  and redoxPotential != ''"> and redox_potential = #{redoxPotential}</if>
         </where>
     </select>
-    
+
+    <select id="getBatchData" parameterType="java.util.List" resultMap="TRealtimeWaterQualityMonitoringResult">
+        SELECT rwqn.*
+        FROM public.t_monitoring_wells mw
+        LEFT JOIN (
+        SELECT DISTINCT ON (monitoring_well) *
+        FROM public.t_realtime_water_quality_monitoring
+        WHERE synchronization_time IS NOT NULL
+        ORDER BY monitoring_well, synchronization_time DESC
+        ) rwqn ON rwqn.monitoring_well = mw.well_code
+        WHERE mw.dept_id IN
+        <foreach collection="list" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        ORDER BY rwqn.synchronization_time DESC;
+    </select>
+
+
     <select id="selectTRealtimeWaterQualityMonitoringById" parameterType="String" resultMap="TRealtimeWaterQualityMonitoringResult">
         <include refid="selectTRealtimeWaterQualityMonitoringVo"/>
         where id = #{id}

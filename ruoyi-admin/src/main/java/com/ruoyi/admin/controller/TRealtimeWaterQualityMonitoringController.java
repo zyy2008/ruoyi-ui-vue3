@@ -50,6 +50,16 @@ public class TRealtimeWaterQualityMonitoringController extends BaseController {
     }
 
     /**
+     * 通过部门获取监测井最新数据
+     */
+    @ApiOperation("通过部门获取监测井最新数据")
+    //@PreAuthorize("@ss.hasPermi('admin:realtimeWaterQualityMonitoring:list')")
+    @GetMapping("/getBatchData/{deptId}")
+    public AjaxResult getBatchData(@PathVariable("deptId") String deptId) {
+        return AjaxResult.success(tRealtimeWaterQualityMonitoringService.getBatchData(deptId));
+    }
+
+    /**
      * 导出实时数据监测列表
      */
     @ApiOperation("导出实时数据监测列表")

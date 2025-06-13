@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TRealtimeWaterQualityMonitoringMapper">
+    
+    <resultMap type="TRealtimeWaterQualityMonitoring" id="TRealtimeWaterQualityMonitoringResult">
+        <result property="id"    column="id"    />
+        <result property="phValue"    column="ph_value"    />
+        <result property="temperature"    column="temperature"    />
+        <result property="waterLevel"    column="water_level"    />
+        <result property="dissolvedOxygen"    column="dissolved_oxygen"    />
+        <result property="conductivity"    column="conductivity"    />
+        <result property="ammoniaNitrogen"    column="ammonia_nitrogen"    />
+        <result property="monitoringTime"    column="monitoring_time"    />
+        <result property="synchronizationTime"    column="synchronization_time"    />
+        <result property="monitoringWell"    column="monitoring_well"    />
+        <result property="redoxPotential"    column="redox_potential"    />
+    </resultMap>
+
+    <sql id="selectTRealtimeWaterQualityMonitoringVo">
+        select id, ph_value, temperature, water_level, dissolved_oxygen,redox_potential, conductivity, ammonia_nitrogen, monitoring_time, synchronization_time, monitoring_well from t_realtime_water_quality_monitoring
+    </sql>
+
+    <select id="selectTRealtimeWaterQualityMonitoringList" parameterType="TRealtimeWaterQualityMonitoring" resultMap="TRealtimeWaterQualityMonitoringResult">
+        <include refid="selectTRealtimeWaterQualityMonitoringVo"/>
+        <where>  
+            <if test="phValue != null  and phValue != ''"> and ph_value = #{phValue}</if>
+            <if test="temperature != null  and temperature != ''"> and temperature = #{temperature}</if>
+            <if test="waterLevel != null  and waterLevel != ''"> and water_level = #{waterLevel}</if>
+            <if test="dissolvedOxygen != null  and dissolvedOxygen != ''"> and dissolved_oxygen = #{dissolvedOxygen}</if>
+            <if test="conductivity != null  and conductivity != ''"> and conductivity = #{conductivity}</if>
+            <if test="ammoniaNitrogen != null  and ammoniaNitrogen != ''"> and ammonia_nitrogen = #{ammoniaNitrogen}</if>
+            <if test="monitoringTime != null  and monitoringTime != ''"> and monitoring_time = #{monitoringTime}</if>
+            <if test="synchronizationTime != null  and synchronizationTime != ''"> and synchronization_time = #{synchronizationTime}</if>
+            <if test="monitoringWell != null  and monitoringWell != ''"> and monitoring_well = #{monitoringWell}</if>
+            <if test="redoxPotential != null  and redoxPotential != ''"> and redox_potential = #{redoxPotential}</if>
+        </where>
+    </select>
+    
+    <select id="selectTRealtimeWaterQualityMonitoringById" parameterType="String" resultMap="TRealtimeWaterQualityMonitoringResult">
+        <include refid="selectTRealtimeWaterQualityMonitoringVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTRealtimeWaterQualityMonitoring" parameterType="TRealtimeWaterQualityMonitoring">
+        insert into t_realtime_water_quality_monitoring
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="phValue != null">ph_value,</if>
+            <if test="temperature != null">temperature,</if>
+            <if test="waterLevel != null">water_level,</if>
+            <if test="dissolvedOxygen != null">dissolved_oxygen,</if>
+            <if test="conductivity != null">conductivity,</if>
+            <if test="ammoniaNitrogen != null">ammonia_nitrogen,</if>
+            <if test="monitoringTime != null">monitoring_time,</if>
+            <if test="synchronizationTime != null">synchronization_time,</if>
+            <if test="monitoringWell != null">monitoring_well,</if>
+            <if test="redoxPotential != null">redox_potential,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="phValue != null">#{phValue},</if>
+            <if test="temperature != null">#{temperature},</if>
+            <if test="waterLevel != null">#{waterLevel},</if>
+            <if test="dissolvedOxygen != null">#{dissolvedOxygen},</if>
+            <if test="conductivity != null">#{conductivity},</if>
+            <if test="ammoniaNitrogen != null">#{ammoniaNitrogen},</if>
+            <if test="monitoringTime != null">#{monitoringTime},</if>
+            <if test="synchronizationTime != null">#{synchronizationTime},</if>
+            <if test="monitoringWell != null">#{monitoringWell},</if>
+            <if test="redoxPotential != null">#{redoxPotential},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTRealtimeWaterQualityMonitoring" parameterType="TRealtimeWaterQualityMonitoring">
+        update t_realtime_water_quality_monitoring
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="phValue != null">ph_value = #{phValue},</if>
+            <if test="temperature != null">temperature = #{temperature},</if>
+            <if test="waterLevel != null">water_level = #{waterLevel},</if>
+            <if test="dissolvedOxygen != null">dissolved_oxygen = #{dissolvedOxygen},</if>
+            <if test="conductivity != null">conductivity = #{conductivity},</if>
+            <if test="ammoniaNitrogen != null">ammonia_nitrogen = #{ammoniaNitrogen},</if>
+            <if test="monitoringTime != null">monitoring_time = #{monitoringTime},</if>
+            <if test="synchronizationTime != null">synchronization_time = #{synchronizationTime},</if>
+            <if test="monitoringWell != null">monitoring_well = #{monitoringWell},</if>
+            <if test="redoxPotential != null">redox_potential = #{redoxPotential},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTRealtimeWaterQualityMonitoringById" parameterType="String">
+        delete from t_realtime_water_quality_monitoring where id = #{id}
+    </delete>
+
+    <delete id="deleteTRealtimeWaterQualityMonitoringByIds" parameterType="String">
+        delete from t_realtime_water_quality_monitoring where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

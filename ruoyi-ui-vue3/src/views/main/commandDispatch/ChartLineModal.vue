@@ -1,7 +1,6 @@
 <template>
-  <el-dialog z-index="10" v-model="dialogVisible"
-    :title="chart.chart.chartInfo.wellCode+'('+chart.chart.chartInfo.location+')'" width="100vw" :top="'200px'"
-    destroy-on-close @open="openChartLine" @close="closeChartLine" style="height: 650px;">
+  <el-dialog z-index="10" v-model="dialogVisible" :title="chart.chartTitle.wellCode+'('+chart.chartTitle.location+')'"
+    width="100vw" :top="'200px'" destroy-on-close @open="openChartLine" @close="closeChartLine" style="height: 900px;">
     <el-date-picker v-model="timeValue" type="daterange" range-separator="至" start-placeholder="开始日期"
       style="width: 400px" end-placeholder="结束日期">
     </el-date-picker>
@@ -12,17 +11,17 @@
       </el-option>
     </el-select>
     <div id="echartLine"></div>
-    <el-table :data="tableInfo" style="width: 100%" v-show="chart.chartType==='monitor'">
+    <el-table :data="tableData" style="width: 100%" max-height="350" v-show="chart.chartType==='monitor'">
       <el-table-column type="index" label="序号" width="55" />
-      <el-table-column prop="ph" label="pH" />
-      <el-table-column prop="name" label="温度" />
-      <el-table-column prop="address" label="水位" />
-      <el-table-column prop="name1" label="电位" />
-      <el-table-column prop="totalDissolvedSolids" label="溶解性总固体" />
-      <el-table-column prop="name1" label="电导率" />
+      <el-table-column prop="phValue" label="pH" />
+      <el-table-column prop="temperature" label="温度" />
+      <el-table-column prop="waterLevel" label="水位" />
+      <!-- <el-table-column prop="name1" label="电位" /> -->
+      <el-table-column prop="dissolvedOxygen" label="溶解性总固体" />
+      <el-table-column prop="conductivity" label="电导率" />
       <el-table-column prop="ammoniaNitrogen" label="氨氮" />
     </el-table>
-    <el-table :data="tableInfo" style="width: 100%" v-show="chart.chartType!='monitor'">
+    <el-table :data="tableData" style="width: 100%" max-height="350" v-show="chart.chartType!='monitor'">
       <!-- <el-table-column type="index" label="序号" width="55" /> -->
       <!-- <el-table-column prop="ph" label="pH" />
       <el-table-column prop="name" label="温度" />
@@ -129,7 +128,7 @@
   const selectValue = ref("pH");
   const timeValue = ref();
   const dialogVisible = ref(false);
-  const chart = defineProps(["chart", "lineXAxis", "lineSeries", 'chartType']);
+  const chart = defineProps(["chartTitle", 'chartType']);
   const options1 = [
     {
       value: "1",
@@ -160,261 +159,224 @@
       label: "氨氮",
     }
   ]
-
   const options = [
     {
-      value: "1",
+      value: "ph",
       label: "pH", // 修正为标准写法
     },
+    // {
+    //   value: "2",
+    //   label: "温度",
+    // },
+    // {
+    //   value: "3",
+    //   label: "水位",
+    // },
+    // {
+    //   value: "4",
+    //   label: "电位",
+    // },
+    // {
+    //   value: "5",
+    //   label: "溶解性固体", // 建议更具体的描述
+    // },
+    // {
+    //   value: "6",
+    //   label: "电导率",
+    // },
     {
-      value: "2",
-      label: "温度",
-    },
-    {
-      value: "3",
-      label: "水位",
-    },
-    {
-      value: "4",
-      label: "电位",
-    },
-    {
-      value: "5",
-      label: "溶解性固体", // 建议更具体的描述
-    },
-    {
-      value: "6",
-      label: "电导率",
-    },
-    {
-      value: "7",
+      value: "ammoniaNitrogen",
       label: "氨氮",
     },
     {
-      value: "8",
+      value: "color",
       label: "色度",
     },
     {
-      value: "9",
+      value: "turbidity",
       label: "浑浊度",
     },
     {
-      value: "10",
+      value: "totalHardness",
       label: "总硬度",
     },
     {
-      value: "11",
+      value: "totalDissolvedSolids",
       label: "溶解性总固体",
     },
     {
-      value: "12",
+      value: "sulfate",
       label: "硫酸盐",
     },
     {
-      value: "13",
+      value: "chloride",
       label: "氯化物",
     },
     {
-      value: "14",
+      value: "iron",
       label: "铁",
     },
     {
-      value: "15",
+      value: "manganese",
       label: "锰",
     },
     {
-      value: "16",
+      value: "aluminum",
       label: "铝",
     },
     {
-      value: "17",
+      value: "anionicSurfactant",
       label: "阴离子表面活性剂",
     },
     {
-      value: "18",
+      value: "oxygenConsumption",
       label: "耗氧量",
     },
     {
-      value: "19",
+      value: "sulfide",
       label: "硫化物",
     },
     {
-      value: "20",
+      value: "sodium",
       label: "钠",
     },
     {
-      value: "21",
+      value: "nitriteNitrogen",
       label: "亚硝酸盐氮",
     },
     {
-      value: "22",
+      value: "nitrateNitrogen",
       label: "硝酸盐氮",
     },
     {
-      value: "23",
+      value: "iodide",
       label: "碘化物",
     },
     {
-      value: "24",
+      value: "selenium",
       label: "硒",
     },
     {
-      value: "25",
+      value: "copper",
       label: "铜",
     },
     {
-      value: "26",
+      value: "volatilePhenol",
       label: "挥发酚",
     },
     {
-      value: "27",
+      value: "cyanide",
       label: "氰化物",
     },
     {
-      value: "28",
+      value: "fluoride",
       label: "氟化物",
     },
     {
-      value: "29",
+      value: "mercury",
       label: "汞",
     },
     {
-      value: "30",
+      value: "arsenic",
       label: "砷",
     },
     {
-      value: "31",
+      value: "cadmium",
       label: "镉",
     },
     // 新增选项（去除单位，仅保留核心名称）
-    { value: "32", label: "六价铬" },
-    { value: "33", label: "铅" },
-    { value: "34", label: "氯仿" },
-    { value: "35", label: "四氯化碳" },
-    { value: "36", label: "苯" },
-    { value: "37", label: "甲苯" },
-    { value: "38", label: "钼" },
-    { value: "39", label: "钒" },
-    { value: "40", label: "钴" },
-    { value: "41", label: "镍" },
-    { value: "42", label: "二氯甲烷" },
-    { value: "43", label: "1,2-二氯乙烷" },
-    { value: "44", label: "1,1,1-三氯乙烷" },
-    { value: "45", label: "1,1,2-三氯乙烷" },
-    { value: "46", label: "1,2-二氯丙烷" },
-    { value: "47", label: "氯乙烯" },
-    { value: "48", label: "1,1-二氯乙烯" },
-    { value: "49", label: "反式-1,2-二氯乙烯" },
-    { value: "50", label: "顺式-1,2-二氯乙烯" },
-    { value: "51", label: "三氯乙烯" },
-    { value: "52", label: "四氯乙烯" },
-    { value: "53", label: "氯苯" },
-    { value: "54", label: "1,2-二氯苯" },
-    { value: "55", label: "1,4-二氯苯" },
-    { value: "56", label: "乙苯" },
-    { value: "57", label: "邻二甲苯" },
-    { value: "58", label: "间/对-二甲苯" },
-    { value: "59", label: "苯乙烯" },
-    { value: "60", label: "硝基苯" },
-    { value: "61", label: "萘" },
-    { value: "62", label: "蒽" },
-    { value: "63", label: "荧蒽" },
-    { value: "64", label: "苯并[b]荧蒽" },
-    { value: "65", label: "苯并[a]芘" },
-    { value: "66", label: "石油烃(C6-C9)" },
-    { value: "67", label: "石油烃(C10-C40)" },
-    { value: "68", label: "苯酚" },
-    { value: "69", label: "2-氯酚" },
-    { value: "70", label: "苯胺" },
-    { value: "71", label: "苊烯" },
-    { value: "72", label: "苊" },
-    { value: "73", label: "芴" },
-    { value: "74", label: "菲" },
-    { value: "75", label: "芘" },
-    { value: "76", label: "苯并[a]蒽" },
-    { value: "77", label: "䓛" },
-    { value: "78", label: "苯并[k]荧蒽" },
-    { value: "79", label: "茚并[1,2,3-c,d]芘" },
-    { value: "80", label: "二苯并[a,h]蒽" },
-    { value: "81", label: "苯并[g,h,i]苝" },
-    { value: "82", label: "氯甲烷" },
-    { value: "83", label: "1,1-二氯乙烷" },
-    { value: "84", label: "1,1,1,2-四氯乙烷" },
-    { value: "85", label: "1,1,2,2-四氯乙烷" },
-    { value: "86", label: "1,2,3-三氯丙烷" },
+    { value: "chromiumVi", label: "六价铬" },
+    { value: "lead", label: "铅" },
+    { value: "chloroform", label: "氯仿" },
+    { value: "carbonTetrachloride", label: "四氯化碳" },
+    { value: "benzene", label: "苯" },
+    { value: "toluene", label: "甲苯" },
+    { value: "molybdenum", label: "钼" },
+    { value: "vanadium", label: "钒" },
+    { value: "cobalt", label: "钴" },
+    { value: "nickel", label: "镍" },
+    { value: "dichloromethane", label: "二氯甲烷" },
+    { value: "dichloroethane12", label: "1,2-二氯乙烷" },
+    { value: "trichloroethane111", label: "1,1,1-三氯乙烷" },
+    { value: "trichloroethane112", label: "1,1,2-三氯乙烷" },
+    { value: "dichloropropane12", label: "1,2-二氯丙烷" },
+    { value: "vinylChloride", label: "氯乙烯" },
+    { value: "dichloroethylene11", label: "1,1-二氯乙烯" },
+    { value: "transDichloroethylene12", label: "反式-1,2-二氯乙烯" },
+    { value: "cisDichloroethylene12", label: "顺式-1,2-二氯乙烯" },
+    { value: "trichloroethylene", label: "三氯乙烯" },
+    { value: "tetrachloroethylene", label: "四氯乙烯" },
+    { value: "chlorobenzene", label: "氯苯" },
+    { value: "dichlorobenzene12", label: "1,2-二氯苯" },
+    { value: "dichlorobenzene14", label: "1,4-二氯苯" },
+    { value: "ethylbenzene", label: "乙苯" },
+    { value: "xyleneOrtho", label: "邻二甲苯" },
+    { value: "xyleneMetaPara", label: "间/对-二甲苯" },
+    { value: "styrene", label: "苯乙烯" },
+    { value: "nitrobenzene", label: "硝基苯" },
+    { value: "naphthalene", label: "萘" },
+    { value: "anthracene", label: "蒽" },
+    { value: "fluoranthene", label: "荧蒽" },
+    { value: "benzoBFluoranthene", label: "苯并[b]荧蒽" },
+    { value: "benzoAPyrene", label: "苯并[a]芘" },
+    { value: "petroleumHydrocarbonsC6C9", label: "石油烃(C6-C9)" },
+    { value: "petroleumHydrocarbonsC10C40", label: "石油烃(C10-C40)" },
+    { value: "phenol", label: "苯酚" },
+    { value: "chlorophenol2", label: "2-氯酚" },
+    { value: "aniline", label: "苯胺" },
+    { value: "acenaphthylene", label: "苊烯" },
+    { value: "acenaphthene", label: "苊" },
+    { value: "fluorene", label: "芴" },
+    { value: "phenanthrene", label: "菲" },
+    { value: "pyrene", label: "芘" },
+    { value: "benzoAAnthracene", label: "苯并[a]蒽" },
+    { value: "chrysene", label: "䓛" },
+    { value: "benzoKFluoranthene", label: "苯并[k]荧蒽" },
+    { value: "indeno123cdPyrene", label: "茚并[1,2,3-c,d]芘" },
+    { value: "dibenzoAhAnthracene", label: "二苯并[a,h]蒽" },
+    { value: "benzoGhiPerylene", label: "苯并[g,h,i]苝" },
+    { value: "chloromethane", label: "氯甲烷" },
+    { value: "dichloroethane11", label: "1,1-二氯乙烷" },
+    { value: "tetrachloroethane1112", label: "1,1,1,2-四氯乙烷" },
+    { value: "tetrachloroethane1122", label: "1,1,2,2-四氯乙烷" },
+    { value: "trichloropropane123", label: "1,2,3-三氯丙烷" },
   ];
 
   const tableData = ref([]);
-  const tableInfo = ref([])
-  onMounted(() => {
-    createLineInfo()
-  })
 
-  function createLineInfo() {
-    listMonitoring({ pageNum: 1, pageSize: 1000, pointId: chart.chart.chartInfo.wellCode }).then((res) => {
-      if (res.code === 200) {
-        tableInfo.value = res.rows
-      }
-    });
-  }
   defineExpose({ dialogVisible, tableData });
 
-  watch(
-    chart,
-    (newValue, oldValue) => {
-      if (chart.lineXAxis && lineOption.xAxis) {
-        const time = tableData.value.map((ele) => ele.sampleTime);
-        const data = tableData.value.map((ele) => ele.ph);
-        seekLineData(data, time);
-        createLineInfo()
-      }
-    },
-    {
-      deep: true,
-      immediate: true,
-    }
-  );
-
+  // 重新渲染折线图
   function seekLineData(data, time) {
     lineOption.xAxis[0].data = time;
     lineOption.series[0].data = data;
     lineChart.setOption(lineOption);
   }
 
+  // 切换指标
   function changeSelect(label) {
-    let time = tableData.value.map((ele) => ele.sampleTime);
     let data = [];
-    if (label === "1") {
-      tableData.value.forEach((ele) => {
-        if (ele.ph) {
-          data.push(ele.ph);
-        }
-      });
-    } else if (label === "5") {
-      tableData.value.forEach((ele) => {
-        if (ele.totalDissolvedSolids) {
-          data.push(ele.totalDissolvedSolids);
-        }
-      });
-    } else if (label === "7") {
-      tableData.value.forEach((ele) => {
-        if (ele.ammoniaNitrogen) {
-          data.push(ele.ammoniaNitrogen);
-        }
-      });
-    } else {
-      data = [];
-      time = [];
-    }
+    let time = tableData.value.map((ele) => ele.sampleTime);
+    tableData.value.forEach((ele) => {
+      data.push(ele[label]);
+    });
     seekLineData(data, time);
   }
 
+  // 关闭弹窗
   function closeChartLine() {
     const elements = document.getElementsByClassName('RightLine');
-    elements[0].style.zIndex = 20
-      const elements1 = document.getElementsByClassName('RightCenter');
-    elements1[0].style.zIndex = 20
+    if (elements[0]) {
+      elements[0].style.zIndex = 20
+    }
+
+    const elements1 = document.getElementsByClassName('RightCenter');
+    if (elements1[0]) {
+      elements1[0].style.zIndex = 20
+    }
   }
+
+  // 打开弹窗
   function openChartLine() {
     selectValue.value = "pH";
     var chartDom = document.getElementById("echartLine");
@@ -442,7 +404,7 @@
         textStyle: {
           color: "#1bb4f6",
         },
-        data: ["pH", "温度", "水位", "氧化还原电位", "溶解性", "电导率", "氨氮"],
+        data: [],
       },
       xAxis: [
         {
@@ -525,11 +487,12 @@
               },
             },
           },
-          data: [7.04, 7.27, 7.65],
+          data: [],
         },
       ],
     };
     lineOption && lineChart.setOption(lineOption);
+    changeSelect('ph')
   }
 </script>
 

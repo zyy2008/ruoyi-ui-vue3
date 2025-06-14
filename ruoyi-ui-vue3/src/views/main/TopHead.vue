@@ -78,7 +78,7 @@
   </div>
 
   <LeftTopTable class="leftTable" v-show="zxjcShow" @changeTableLine="changeTableLine" />
-  <RightTopLine class="RightLine" v-show="zhddShow" :chartInfo="chartInfo" />
+  <RightTopLine class="RightLine" v-show="zhddShow" />
   <RightBottomVideo class="RightVideo" v-show="zxjcShow" />
   <RightBottomTable class="RightTable" v-show="zhddShow || bjybShow" />
   <RightTopTable class="RightLine" v-show="bjybShow" />
@@ -211,6 +211,8 @@
   }
 
   function changeTableLine(value) {
+    console.log(chartInfo.value);
+
     chartInfo.value = value;
   }
 

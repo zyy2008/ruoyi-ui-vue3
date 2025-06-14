@@ -203,7 +203,8 @@
     <!-- 添加或修改水质监测信息对话框 -->
     <el-dialog :title="title" v-model="open" width="98vw" append-to-body>
       <el-form ref="monitoringRef" :model="form" :rules="rules">
-        <el-descriptions :column="6" border>
+        <el-descriptions :column="6" border style="width: 100%">
+          <!-- 基础指标 -->
           <el-descriptions-item label="点位编号">
             <el-form-item prop="pointId">
               <el-input v-model="form.pointId" placeholder="请输入点位编号" />
@@ -217,839 +218,1019 @@
               />
             </el-form-item>
           </el-descriptions-item>
+
+          <!-- 补充缺失的元数据字段 -->
+          <el-descriptions-item label="分析编号">
+            <el-form-item prop="analysisNumber">
+              <el-input
+                v-model="form.analysisNumber"
+                placeholder="请输入分析编号"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="原编号">
+            <el-form-item prop="originalNumber">
+              <el-input
+                v-model="form.originalNumber"
+                placeholder="请输入原编号"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+
+          <!-- 补充无机离子字段 -->
+          <el-descriptions-item label="碳酸根(mg/L)">
+            <el-form-item prop="carbonate">
+              <el-input
+                v-model="form.carbonate"
+                placeholder="请输入碳酸根含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="碳酸氢根(mg/L)">
+            <el-form-item prop="bicarbonate">
+              <el-input
+                v-model="form.bicarbonate"
+                placeholder="请输入碳酸氢根含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="亚铁离子(mg/L)">
+            <el-form-item prop="ferrousIon">
+              <el-input
+                v-model="form.ferrousIon"
+                placeholder="请输入亚铁离子含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="钾(mg/L)">
+            <el-form-item prop="potassium">
+              <el-input v-model="form.potassium" placeholder="请输入钾含量" />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="钙(mg/L)">
+            <el-form-item prop="calcium">
+              <el-input v-model="form.calcium" placeholder="请输入钙含量" />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="镁(mg/L)">
+            <el-form-item prop="magnesium">
+              <el-input v-model="form.magnesium" placeholder="请输入镁含量" />
+            </el-form-item>
+          </el-descriptions-item>
+
+          <!-- 补充有机污染物字段 -->
+          <el-descriptions-item label="氯丁二烯(μg/L)">
+            <el-form-item prop="chloroprene">
+              <el-input
+                v-model="form.chloroprene"
+                placeholder="请输入氯丁二烯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="1,1-二氯乙烷(μg/L)">
+            <el-form-item prop="dichloroethane11">
+              <el-input
+                v-model="form.dichloroethane11"
+                placeholder="请输入1,1-二氯乙烷含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="1,1,2,2-四氯乙烷(μg/L)">
+            <el-form-item prop="tetrachloroethane1122">
+              <el-input
+                v-model="form.tetrachloroethane1122"
+                placeholder="请输入1,1,2,2-四氯乙烷含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+
           <el-descriptions-item label="色度(度)">
             <el-form-item prop="color">
-              <el-input-number
-                v-model="form.color"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入色度"
-              />
+              <el-input v-model="form.color" placeholder="请输入色度" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="臭和味">
             <el-form-item prop="odorAndTaste">
               <el-input
                 v-model="form.odorAndTaste"
-                placeholder="请输入臭和味"
+                placeholder="请输入臭和味描述"
               />
             </el-form-item>
           </el-descriptions-item>
-          <el-descriptions-item label="浊度(NTU)">
+          <el-descriptions-item label="浑浊度(NTU)">
             <el-form-item prop="turbidity">
-              <el-input-number
-                v-model="form.turbidity"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入浊度"
-              />
+              <el-input v-model="form.turbidity" placeholder="请输入浑浊度" />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="肉眼可见物">
             <el-form-item prop="visibleMatters">
               <el-input
                 v-model="form.visibleMatters"
-                placeholder="请输入肉眼可见物"
+                placeholder="请输入肉眼可见物描述"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="pH">
             <el-form-item prop="ph">
-              <el-input-number
-                v-model="form.ph"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入pH值"
-              />
+              <el-input v-model="form.ph" placeholder="请输入pH值" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="总硬度(mg/L)">
             <el-form-item prop="totalHardness">
-              <el-input-number
+              <el-input
                 v-model="form.totalHardness"
-                :precision="2"
-                :step="0.1"
                 placeholder="请输入总硬度"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="溶解性总固体(mg/L)">
             <el-form-item prop="totalDissolvedSolids">
-              <el-input-number
+              <el-input
                 v-model="form.totalDissolvedSolids"
-                :precision="2"
-                :step="0.1"
                 placeholder="请输入溶解性总固体"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="硫酸盐(mg/L)">
             <el-form-item prop="sulfate">
-              <el-input-number
-                v-model="form.sulfate"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入硫酸盐"
-              />
+              <el-input v-model="form.sulfate" placeholder="请输入硫酸盐含量" />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="氯化物(mg/L)">
             <el-form-item prop="chloride">
-              <el-input-number
+              <el-input
                 v-model="form.chloride"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入氯化物"
+                placeholder="请输入氯化物含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="铁(mg/L)">
             <el-form-item prop="iron">
-              <el-input-number
-                v-model="form.iron"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入铁含量"
-              />
+              <el-input v-model="form.iron" placeholder="请输入铁含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="锰(mg/L)">
             <el-form-item prop="manganese">
-              <el-input-number
-                v-model="form.manganese"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入锰含量"
-              />
+              <el-input v-model="form.manganese" placeholder="请输入锰含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="铝(mg/L)">
             <el-form-item prop="aluminum">
-              <el-input-number
-                v-model="form.aluminum"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入铝含量"
-              />
+              <el-input v-model="form.aluminum" placeholder="请输入铝含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="阴离子表面活性剂(mg/L)">
             <el-form-item prop="anionicSurfactant">
-              <el-input-number
+              <el-input
                 v-model="form.anionicSurfactant"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入阴离子表面活性剂"
+                placeholder="请输入阴离子表面活性剂含量"
               />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="耗氧量(mg/L)">
             <el-form-item prop="oxygenConsumption">
-              <el-input-number
+              <el-input
                 v-model="form.oxygenConsumption"
-                :precision="2"
-                :step="0.1"
                 placeholder="请输入耗氧量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="硫化物(mg/L)">
             <el-form-item prop="sulfide">
-              <el-input-number
-                v-model="form.sulfide"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入硫化物"
-              />
+              <el-input v-model="form.sulfide" placeholder="请输入硫化物含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="钠(mg/L)">
             <el-form-item prop="sodium">
-              <el-input-number
-                v-model="form.sodium"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入钠含量"
-              />
+              <el-input v-model="form.sodium" placeholder="请输入钠含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="亚硝酸盐氮(mg/L)">
             <el-form-item prop="nitriteNitrogen">
-              <el-input-number
+              <el-input
                 v-model="form.nitriteNitrogen"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入亚硝酸盐氮"
+                placeholder="请输入亚硝酸盐氮含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="硝酸盐氮(mg/L)">
             <el-form-item prop="nitrateNitrogen">
-              <el-input-number
+              <el-input
                 v-model="form.nitrateNitrogen"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入硝酸盐氮"
+                placeholder="请输入硝酸盐氮含量"
               />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="碘化物(mg/L)">
             <el-form-item prop="iodide">
-              <el-input-number
-                v-model="form.iodide"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入碘化物"
-              />
+              <el-input v-model="form.iodide" placeholder="请输入碘化物含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="硒(mg/L)">
             <el-form-item prop="selenium">
-              <el-input-number
-                v-model="form.selenium"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入硒含量"
-              />
+              <el-input v-model="form.selenium" placeholder="请输入硒含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="铜(mg/L)">
             <el-form-item prop="copper">
-              <el-input-number
-                v-model="form.copper"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入铜含量"
-              />
+              <el-input v-model="form.copper" placeholder="请输入铜含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="锌(mg/L)">
             <el-form-item prop="zinc">
-              <el-input-number
-                v-model="form.zinc"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入锌含量"
-              />
+              <el-input v-model="form.zinc" placeholder="请输入锌含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="挥发酚(mg/L)">
             <el-form-item prop="volatilePhenol">
-              <el-input-number
+              <el-input
                 v-model="form.volatilePhenol"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入挥发酚"
+                placeholder="请输入挥发酚含量"
               />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="氨氮(mg/L)">
             <el-form-item prop="ammoniaNitrogen">
-              <el-input-number
+              <el-input
                 v-model="form.ammoniaNitrogen"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入氨氮"
+                placeholder="请输入氨氮含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="氰化物(mg/L)">
             <el-form-item prop="cyanide">
-              <el-input-number
-                v-model="form.cyanide"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入氰化物"
-              />
+              <el-input v-model="form.cyanide" placeholder="请输入氰化物含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="氟化物(mg/L)">
             <el-form-item prop="fluoride">
-              <el-input-number
+              <el-input
                 v-model="form.fluoride"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入氟化物"
+                placeholder="请输入氟化物含量"
               />
             </el-form-item>
           </el-descriptions-item>
-          <el-descriptions-item label="汞(mg/L)">
+          <el-descriptions-item label="汞(μg/L)">
             <el-form-item prop="mercury">
-              <el-input-number
-                v-model="form.mercury"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入汞含量"
-              />
+              <el-input v-model="form.mercury" placeholder="请输入汞含量" />
             </el-form-item>
           </el-descriptions-item>
-          <el-descriptions-item label="砷(mg/L)">
+          <el-descriptions-item label="砷(μg/L)">
             <el-form-item prop="arsenic">
-              <el-input-number
-                v-model="form.arsenic"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入砷含量"
-              />
+              <el-input v-model="form.arsenic" placeholder="请输入砷含量" />
             </el-form-item>
           </el-descriptions-item>
-          <el-descriptions-item label="镉(mg/L)">
+
+          <el-descriptions-item label="镉(μg/L)">
             <el-form-item prop="cadmium">
-              <el-input-number
-                v-model="form.cadmium"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入镉含量"
-              />
+              <el-input v-model="form.cadmium" placeholder="请输入镉含量" />
             </el-form-item>
           </el-descriptions-item>
-          <el-descriptions-item label="六价铬(mg/L)">
+          <el-descriptions-item label="六价铬(μg/L)">
             <el-form-item prop="chromiumVi">
-              <el-input-number
+              <el-input
                 v-model="form.chromiumVi"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入六价铬"
+                placeholder="请输入六价铬含量"
               />
             </el-form-item>
           </el-descriptions-item>
-          <el-descriptions-item label="铅(mg/L)">
+          <el-descriptions-item label="铅(μg/L)">
             <el-form-item prop="lead">
-              <el-input-number
-                v-model="form.lead"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入铅含量"
-              />
+              <el-input v-model="form.lead" placeholder="请输入铅含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="氯仿(μg/L)">
             <el-form-item prop="chloroform">
-              <el-input-number
+              <el-input
                 v-model="form.chloroform"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入氯仿"
+                placeholder="请输入氯仿含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="四氯化碳(μg/L)">
             <el-form-item prop="carbonTetrachloride">
-              <el-input-number
+              <el-input
                 v-model="form.carbonTetrachloride"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入四氯化碳"
+                placeholder="请输入四氯化碳含量"
               />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="苯(μg/L)">
             <el-form-item prop="benzene">
-              <el-input-number
-                v-model="form.benzene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入苯含量"
-              />
+              <el-input v-model="form.benzene" placeholder="请输入苯含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="甲苯(μg/L)">
             <el-form-item prop="toluene">
-              <el-input-number
-                v-model="form.toluene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入甲苯含量"
-              />
+              <el-input v-model="form.toluene" placeholder="请输入甲苯含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="钼(mg/L)">
             <el-form-item prop="molybdenum">
-              <el-input-number
-                v-model="form.molybdenum"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入钼含量"
-              />
+              <el-input v-model="form.molybdenum" placeholder="请输入钼含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="钒(mg/L)">
             <el-form-item prop="vanadium">
-              <el-input-number
-                v-model="form.vanadium"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入钒含量"
-              />
+              <el-input v-model="form.vanadium" placeholder="请输入钒含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="钴(mg/L)">
             <el-form-item prop="cobalt">
-              <el-input-number
-                v-model="form.cobalt"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入钴含量"
-              />
+              <el-input v-model="form.cobalt" placeholder="请输入钴含量" />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="镍(mg/L)">
             <el-form-item prop="nickel">
-              <el-input-number
-                v-model="form.nickel"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入镍含量"
-              />
+              <el-input v-model="form.nickel" placeholder="请输入镍含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="二氯甲烷(μg/L)">
             <el-form-item prop="dichloromethane">
-              <el-input-number
+              <el-input
                 v-model="form.dichloromethane"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入二氯甲烷"
+                placeholder="请输入二氯甲烷含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="1,2-二氯乙烷(μg/L)">
             <el-form-item prop="dichloroethane12">
-              <el-input-number
+              <el-input
                 v-model="form.dichloroethane12"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入1,2-二氯乙烷"
+                placeholder="请输入1,2-二氯乙烷含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="1,1,1-三氯乙烷(μg/L)">
             <el-form-item prop="trichloroethane111">
-              <el-input-number
+              <el-input
                 v-model="form.trichloroethane111"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入1,1,1-三氯乙烷"
+                placeholder="请输入1,1,1-三氯乙烷含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="1,1,2-三氯乙烷(μg/L)">
             <el-form-item prop="trichloroethane112">
-              <el-input-number
+              <el-input
                 v-model="form.trichloroethane112"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入1,1,2-三氯乙烷"
+                placeholder="请输入1,1,2-三氯乙烷含量"
               />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="1,2-二氯丙烷(μg/L)">
             <el-form-item prop="dichloropropane12">
-              <el-input-number
+              <el-input
                 v-model="form.dichloropropane12"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入1,2-二氯丙烷"
+                placeholder="请输入1,2-二氯丙烷含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="氯乙烯(μg/L)">
             <el-form-item prop="vinylChloride">
-              <el-input-number
+              <el-input
                 v-model="form.vinylChloride"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入氯乙烯"
+                placeholder="请输入氯乙烯含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="1,1-二氯乙烯(μg/L)">
             <el-form-item prop="dichloroethylene11">
-              <el-input-number
+              <el-input
                 v-model="form.dichloroethylene11"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入1,1-二氯乙烯"
+                placeholder="请输入1,1-二氯乙烯含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="反式-1,2-二氯乙烯(μg/L)">
             <el-form-item prop="transDichloroethylene12">
-              <el-input-number
+              <el-input
                 v-model="form.transDichloroethylene12"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入反式-1,2-二氯乙烯"
+                placeholder="请输入反式-1,2-二氯乙烯含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="顺式-1,2-二氯乙烯(μg/L)">
             <el-form-item prop="cisDichloroethylene12">
-              <el-input-number
+              <el-input
                 v-model="form.cisDichloroethylene12"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入顺式-1,2-二氯乙烯"
+                placeholder="请输入顺式-1,2-二氯乙烯含量"
               />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="三氯乙烯(μg/L)">
             <el-form-item prop="trichloroethylene">
-              <el-input-number
+              <el-input
                 v-model="form.trichloroethylene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入三氯乙烯"
+                placeholder="请输入三氯乙烯含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="四氯乙烯(μg/L)">
             <el-form-item prop="tetrachloroethylene">
-              <el-input-number
+              <el-input
                 v-model="form.tetrachloroethylene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入四氯乙烯"
+                placeholder="请输入四氯乙烯含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="氯苯(μg/L)">
             <el-form-item prop="chlorobenzene">
-              <el-input-number
+              <el-input
                 v-model="form.chlorobenzene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入氯苯"
+                placeholder="请输入氯苯含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="1,2-二氯苯(μg/L)">
             <el-form-item prop="dichlorobenzene12">
-              <el-input-number
+              <el-input
                 v-model="form.dichlorobenzene12"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入1,2-二氯苯"
+                placeholder="请输入1,2-二氯苯含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="1,4-二氯苯(μg/L)">
             <el-form-item prop="dichlorobenzene14">
-              <el-input-number
+              <el-input
                 v-model="form.dichlorobenzene14"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入1,4-二氯苯"
+                placeholder="请输入1,4-二氯苯含量"
               />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="乙苯(μg/L)">
             <el-form-item prop="ethylbenzene">
-              <el-input-number
+              <el-input
                 v-model="form.ethylbenzene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入乙苯"
+                placeholder="请输入乙苯含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="邻二甲苯(μg/L)">
             <el-form-item prop="xyleneOrtho">
-              <el-input-number
+              <el-input
                 v-model="form.xyleneOrtho"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入邻二甲苯"
+                placeholder="请输入邻二甲苯含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="间/对-二甲苯(μg/L)">
             <el-form-item prop="xyleneMetaPara">
-              <el-input-number
+              <el-input
                 v-model="form.xyleneMetaPara"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入间/对-二甲苯"
+                placeholder="请输入间/对-二甲苯含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="苯乙烯(μg/L)">
             <el-form-item prop="styrene">
-              <el-input-number
-                v-model="form.styrene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入苯乙烯"
-              />
+              <el-input v-model="form.styrene" placeholder="请输入苯乙烯含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="硝基苯(μg/L)">
             <el-form-item prop="nitrobenzene">
-              <el-input-number
+              <el-input
                 v-model="form.nitrobenzene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入硝基苯"
+                placeholder="请输入硝基苯含量"
               />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="萘(μg/L)">
             <el-form-item prop="naphthalene">
-              <el-input-number
-                v-model="form.naphthalene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入萘"
-              />
+              <el-input v-model="form.naphthalene" placeholder="请输入萘含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="蒽(μg/L)">
             <el-form-item prop="anthracene">
-              <el-input-number
-                v-model="form.anthracene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入蒽"
-              />
+              <el-input v-model="form.anthracene" placeholder="请输入蒽含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="荧蒽(μg/L)">
             <el-form-item prop="fluoranthene">
-              <el-input-number
+              <el-input
                 v-model="form.fluoranthene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入荧蒽"
+                placeholder="请输入荧蒽含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="苯并[b]荧蒽(μg/L)">
             <el-form-item prop="benzoBFluoranthene">
-              <el-input-number
+              <el-input
                 v-model="form.benzoBFluoranthene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入苯并[b]荧蒽"
+                placeholder="请输入苯并[b]荧蒽含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="苯并[a]芘(μg/L)">
             <el-form-item prop="benzoAPyrene">
-              <el-input-number
+              <el-input
                 v-model="form.benzoAPyrene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入苯并[a]芘"
+                placeholder="请输入苯并[a]芘含量"
               />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="石油烃(C6-C9)(mg/L)">
             <el-form-item prop="petroleumHydrocarbonsC6C9">
-              <el-input-number
+              <el-input
                 v-model="form.petroleumHydrocarbonsC6C9"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入石油烃(C6-C9)"
+                placeholder="请输入石油烃(C6-C9)含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="石油烃(C10-C40)(mg/L)">
             <el-form-item prop="petroleumHydrocarbonsC10C40">
-              <el-input-number
+              <el-input
                 v-model="form.petroleumHydrocarbonsC10C40"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入石油烃(C10-C40)"
+                placeholder="请输入石油烃(C10-C40)含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="苯酚(mg/L)">
             <el-form-item prop="phenol">
-              <el-input-number
-                v-model="form.phenol"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入苯酚"
-              />
+              <el-input v-model="form.phenol" placeholder="请输入苯酚含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="2-氯酚(mg/L)">
             <el-form-item prop="chlorophenol2">
-              <el-input-number
+              <el-input
                 v-model="form.chlorophenol2"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入2-氯酚"
+                placeholder="请输入2-氯酚含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="苯胺(μg/L)">
             <el-form-item prop="aniline">
-              <el-input-number
-                v-model="form.aniline"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入苯胺"
-              />
+              <el-input v-model="form.aniline" placeholder="请输入苯胺含量" />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="苊烯(μg/L)">
             <el-form-item prop="acenaphthylene">
-              <el-input-number
+              <el-input
                 v-model="form.acenaphthylene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入苊烯"
+                placeholder="请输入苊烯含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="苊(μg/L)">
             <el-form-item prop="acenaphthene">
-              <el-input-number
+              <el-input
                 v-model="form.acenaphthene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入苊"
+                placeholder="请输入苊含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="芴(μg/L)">
             <el-form-item prop="fluorene">
-              <el-input-number
-                v-model="form.fluorene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入芴"
-              />
+              <el-input v-model="form.fluorene" placeholder="请输入芴含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="菲(μg/L)">
             <el-form-item prop="phenanthrene">
-              <el-input-number
+              <el-input
                 v-model="form.phenanthrene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入菲"
+                placeholder="请输入菲含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="芘(μg/L)">
             <el-form-item prop="pyrene">
-              <el-input-number
-                v-model="form.pyrene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入芘"
-              />
+              <el-input v-model="form.pyrene" placeholder="请输入芘含量" />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="苯并[a]蒽(μg/L)">
             <el-form-item prop="benzoAAnthracene">
-              <el-input-number
+              <el-input
                 v-model="form.benzoAAnthracene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入苯并[a]蒽"
+                placeholder="请输入苯并[a]蒽含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="䓛(μg/L)">
             <el-form-item prop="chrysene">
-              <el-input-number
-                v-model="form.chrysene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入䓛"
-              />
+              <el-input v-model="form.chrysene" placeholder="请输入䓛含量" />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="苯并[k]荧蒽(μg/L)">
             <el-form-item prop="benzoKFluoranthene">
-              <el-input-number
+              <el-input
                 v-model="form.benzoKFluoranthene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入苯并[k]荧蒽"
+                placeholder="请输入苯并[k]荧蒽含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="茚并[1,2,3-c,d]芘(μg/L)">
-            <el-form-item prop="indeno123cdPyrene">
-              <el-input-number
-                v-model="form.indeno123cdPyrene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入茚并[1,2,3-c,d]芘"
+            <el-form-item prop="indeno123CdPyrene">
+              <el-input
+                v-model="form.indeno123CdPyrene"
+                placeholder="请输入茚并[1,2,3-c,d]芘含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="二苯并[a,h]蒽(μg/L)">
             <el-form-item prop="dibenzoAhAnthracene">
-              <el-input-number
+              <el-input
                 v-model="form.dibenzoAhAnthracene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入二苯并[a,h]蒽"
+                placeholder="请输入二苯并[a,h]蒽含量"
               />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="苯并[g,h,i]苝(μg/L)">
             <el-form-item prop="benzoGhiPerylene">
-              <el-input-number
+              <el-input
                 v-model="form.benzoGhiPerylene"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入苯并[g,h,i]苝"
+                placeholder="请输入苯并[g,h,i]苝含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="氯甲烷(μg/L)">
             <el-form-item prop="chloromethane">
-              <el-input-number
+              <el-input
                 v-model="form.chloromethane"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入氯甲烷"
+                placeholder="请输入氯甲烷含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="1,1-二氯乙烷(μg/L)">
             <el-form-item prop="dichloroethane11">
-              <el-input-number
+              <el-input
                 v-model="form.dichloroethane11"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入1,1-二氯乙烷"
+                placeholder="请输入1,1-二氯乙烷含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="1,1,1,2-四氯乙烷(μg/L)">
             <el-form-item prop="tetrachloroethane1112">
-              <el-input-number
+              <el-input
                 v-model="form.tetrachloroethane1112"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入1,1,1,2-四氯乙烷"
+                placeholder="请输入1,1,1,2-四氯乙烷含量"
               />
             </el-form-item>
           </el-descriptions-item>
           <el-descriptions-item label="1,1,2,2-四氯乙烷(μg/L)">
             <el-form-item prop="tetrachloroethane1122">
-              <el-input-number
+              <el-input
                 v-model="form.tetrachloroethane1122"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入1,1,2,2-四氯乙烷"
+                placeholder="请输入1,1,2,2-四氯乙烷含量"
               />
             </el-form-item>
           </el-descriptions-item>
+
           <el-descriptions-item label="1,2,3-三氯丙烷(μg/L)">
             <el-form-item prop="trichloropropane123">
-              <el-input-number
+              <el-input
                 v-model="form.trichloropropane123"
-                :precision="2"
-                :step="0.1"
-                placeholder="请输入1,2,3-三氯丙烷"
+                placeholder="请输入1,2,3-三氯丙烷含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="分析编号">
+            <el-form-item prop="analysisNumber">
+              <el-input
+                v-model="form.analysisNumber"
+                placeholder="请输入分析编号"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="原编号">
+            <el-form-item prop="originalNumber">
+              <el-input
+                v-model="form.originalNumber"
+                placeholder="请输入原编号"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="碳酸根(mg/L)">
+            <el-form-item prop="carbonate">
+              <el-input
+                v-model="form.carbonate"
+                placeholder="请输入碳酸根含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="碳酸氢根(mg/L)">
+            <el-form-item prop="bicarbonate">
+              <el-input
+                v-model="form.bicarbonate"
+                placeholder="请输入碳酸氢根含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+
+          <el-descriptions-item label="亚铁离子(mg/L)">
+            <el-form-item prop="ferrousIon">
+              <el-input
+                v-model="form.ferrousIon"
+                placeholder="请输入亚铁离子含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="钾(mg/L)">
+            <el-form-item prop="potassium">
+              <el-input v-model="form.potassium" placeholder="请输入钾含量" />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="钙(mg/L)">
+            <el-form-item prop="calcium">
+              <el-input v-model="form.calcium" placeholder="请输入钙含量" />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="镁(mg/L)">
+            <el-form-item prop="magnesium">
+              <el-input v-model="form.magnesium" placeholder="请输入镁含量" />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="氯丁二烯(μg/L)">
+            <el-form-item prop="chloroprene">
+              <el-input
+                v-model="form.chloroprene"
+                placeholder="请输入氯丁二烯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+
+          <el-descriptions-item label="溴氯甲烷(μg/L)">
+            <el-form-item prop="bromochloromethane">
+              <el-input
+                v-model="form.bromochloromethane"
+                placeholder="请输入溴氯甲烷含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="一溴二氯甲烷(μg/L)">
+            <el-form-item prop="bromodichloromethane">
+              <el-input
+                v-model="form.bromodichloromethane"
+                placeholder="请输入一溴二氯甲烷含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="二溴甲烷(μg/L)">
+            <el-form-item prop="dibromomethane">
+              <el-input
+                v-model="form.dibromomethane"
+                placeholder="请输入二溴甲烷含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="二溴氯甲烷(μg/L)">
+            <el-form-item prop="dibromochloromethane">
+              <el-input
+                v-model="form.dibromochloromethane"
+                placeholder="请输入二溴氯甲烷含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="溴仿(μg/L)">
+            <el-form-item prop="bromoform">
+              <el-input v-model="form.bromoform" placeholder="请输入溴仿含量" />
+            </el-form-item>
+          </el-descriptions-item>
+
+          <el-descriptions-item label="异丙苯(μg/L)">
+            <el-form-item prop="cumene">
+              <el-input v-model="form.cumene" placeholder="请输入异丙苯含量" />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="正丙苯(μg/L)">
+            <el-form-item prop="nPropylbenzene">
+              <el-input
+                v-model="form.nPropylbenzene"
+                placeholder="请输入正丙苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="溴苯(μg/L)">
+            <el-form-item prop="bromobenzene">
+              <el-input
+                v-model="form.bromobenzene"
+                placeholder="请输入溴苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="1,3,5-三甲基苯(μg/L)">
+            <el-form-item prop="trimethylbenzene135">
+              <el-input
+                v-model="form.trimethylbenzene135"
+                placeholder="请输入1,3,5-三甲基苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="邻氯甲苯(μg/L)">
+            <el-form-item prop="oChlorotoluene">
+              <el-input
+                v-model="form.oChlorotoluene"
+                placeholder="请输入邻氯甲苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+
+          <el-descriptions-item label="对氯甲苯(μg/L)">
+            <el-form-item prop="pChlorotoluene">
+              <el-input
+                v-model="form.pChlorotoluene"
+                placeholder="请输入对氯甲苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="叔丁基苯(μg/L)">
+            <el-form-item prop="tertButylbenzene">
+              <el-input
+                v-model="form.tertButylbenzene"
+                placeholder="请输入叔丁基苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="1,2,4-三甲基苯(μg/L)">
+            <el-form-item prop="trimethylbenzene124">
+              <el-input
+                v-model="form.trimethylbenzene124"
+                placeholder="请输入1,2,4-三甲基苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="仲丁基苯(μg/L)">
+            <el-form-item prop="secButylbenzene">
+              <el-input
+                v-model="form.secButylbenzene"
+                placeholder="请输入仲丁基苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="4-异丙基甲苯(μg/L)">
+            <el-form-item prop="isopropyltoluene4">
+              <el-input
+                v-model="form.isopropyltoluene4"
+                placeholder="请输入4-异丙基甲苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+
+          <el-descriptions-item label="正丁基苯(μg/L)">
+            <el-form-item prop="nButylbenzene">
+              <el-input
+                v-model="form.nButylbenzene"
+                placeholder="请输入正丁基苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="环氧氯丙烷(μg/L)">
+            <el-form-item prop="epichlorohydrin">
+              <el-input
+                v-model="form.epichlorohydrin"
+                placeholder="请输入环氧氯丙烷含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="1,2-二溴-3-氯丙烷(μg/L)">
+            <el-form-item prop="dibromo3Chloropropane12">
+              <el-input
+                v-model="form.dibromo3Chloropropane12"
+                placeholder="请输入1,2-二溴-3-氯丙烷含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="1,2,4-三氯苯(μg/L)">
+            <el-form-item prop="trichlorobenzene124">
+              <el-input
+                v-model="form.trichlorobenzene124"
+                placeholder="请输入1,2,4-三氯苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="六氯丁二烯(μg/L)">
+            <el-form-item prop="hexachlorobutadiene">
+              <el-input
+                v-model="form.hexachlorobutadiene"
+                placeholder="请输入六氯丁二烯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+
+          <el-descriptions-item label="2-甲基萘(μg/L)">
+            <el-form-item prop="methylnaphthalene2">
+              <el-input
+                v-model="form.methylnaphthalene2"
+                placeholder="请输入2-甲基萘含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="1-甲基萘(μg/L)">
+            <el-form-item prop="methylnaphthalene1">
+              <el-input
+                v-model="form.methylnaphthalene1"
+                placeholder="请输入1-甲基萘含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="1,1-二氯丙烯(μg/L)">
+            <el-form-item prop="dichloropropene11">
+              <el-input
+                v-model="form.dichloropropene11"
+                placeholder="请输入1,1-二氯丙烯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="反式-1,3-二氯丙烯(μg/L)">
+            <el-form-item prop="trans13Dichloropropene">
+              <el-input
+                v-model="form.trans13Dichloropropene"
+                placeholder="请输入反式-1,3-二氯丙烯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="反-1,3-二氯丙烯(μg/L)">
+            <el-form-item prop="trans13Dichloropropene">
+              <el-input
+                v-model="form.trans13Dichloropropene"
+                placeholder="请输入反-1,3-二氯丙烯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+
+          <el-descriptions-item label="顺式-1,3-二氯丙烯(μg/L)">
+            <el-form-item prop="cis13Dichloropropene">
+              <el-input
+                v-model="form.cis13Dichloropropene"
+                placeholder="请输入顺式-1,3-二氯丙烯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="顺-1,3-二氯丙烯(μg/L)">
+            <el-form-item prop="cis13Dichloropropene">
+              <el-input
+                v-model="form.cis13Dichloropropene"
+                placeholder="请输入顺-1,3-二氯丙烯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="2,2-二氯丙烷(μg/L)">
+            <el-form-item prop="dichloropropane22">
+              <el-input
+                v-model="form.dichloropropane22"
+                placeholder="请输入2,2-二氯丙烷含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="1,2-二溴乙烷(μg/L)">
+            <el-form-item prop="dibromoethane12">
+              <el-input
+                v-model="form.dibromoethane12"
+                placeholder="请输入1,2-二溴乙烷含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="1,3-二氯丙烷(μg/L)">
+            <el-form-item prop="dichloropropane13">
+              <el-input
+                v-model="form.dichloropropane13"
+                placeholder="请输入1,3-二氯丙烷含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+
+          <el-descriptions-item label="2-氯甲苯(μg/L)">
+            <el-form-item prop="chlorotoluene2">
+              <el-input
+                v-model="form.chlorotoluene2"
+                placeholder="请输入2-氯甲苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="4-氯甲苯(μg/L)">
+            <el-form-item prop="chlorotoluene4">
+              <el-input
+                v-model="form.chlorotoluene4"
+                placeholder="请输入4-氯甲苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="1,3-二氯苯(μg/L)">
+            <el-form-item prop="dichlorobenzene13">
+              <el-input
+                v-model="form.dichlorobenzene13"
+                placeholder="请输入1,3-二氯苯含量"
+              />
+            </el-form-item>
+          </el-descriptions-item>
+          <el-descriptions-item label="1,2,3-三氯苯(μg/L)">
+            <el-form-item prop="trichlorobenzene123">
+              <el-input
+                v-model="form.trichlorobenzene123"
+                placeholder="请输入1,2,3-三氯苯含量"
               />
             </el-form-item>
           </el-descriptions-item>
@@ -1057,8 +1238,8 @@
       </el-form>
       <template #footer>
         <div class="dialog-footer">
+          <el-button @click="open = false">取 消</el-button>
           <el-button type="primary" @click="submitForm">确 定</el-button>
-          <el-button @click="cancel">取 消</el-button>
         </div>
       </template>
     </el-dialog>
@@ -1067,25 +1248,67 @@
     <el-dialog
       title="水质监测数据详情"
       v-model="viewOpen"
-      width="90vw"
+      width="98vw"
       append-to-body
     >
-      <el-descriptions :column="5" border>
+      <el-descriptions :column="6" border style="width: 100%">
+        <!-- 基础指标 -->
         <el-descriptions-item label="点位编号">{{
           form.pointId
         }}</el-descriptions-item>
         <el-descriptions-item label="采样时间">{{
           form.sampleTime
         }}</el-descriptions-item>
+
+        <!-- 补充缺失的元数据字段 -->
+        <el-descriptions-item label="分析编号">{{
+          form.analysisNumber
+        }}</el-descriptions-item>
+        <el-descriptions-item label="原编号">{{
+          form.originalNumber
+        }}</el-descriptions-item>
+
+        <!-- 补充无机离子字段 -->
+        <el-descriptions-item label="碳酸根(mg/L)">{{
+          form.carbonate
+        }}</el-descriptions-item>
+        <el-descriptions-item label="碳酸氢根(mg/L)">{{
+          form.bicarbonate
+        }}</el-descriptions-item>
+        <el-descriptions-item label="亚铁离子(mg/L)">{{
+          form.ferrousIon
+        }}</el-descriptions-item>
+        <el-descriptions-item label="钾(mg/L)">{{
+          form.potassium
+        }}</el-descriptions-item>
+        <el-descriptions-item label="钙(mg/L)">{{
+          form.calcium
+        }}</el-descriptions-item>
+        <el-descriptions-item label="镁(mg/L)">{{
+          form.magnesium
+        }}</el-descriptions-item>
+
+        <!-- 补充有机污染物字段 -->
+        <el-descriptions-item label="氯丁二烯(μg/L)">{{
+          form.chloroprene
+        }}</el-descriptions-item>
+        <el-descriptions-item label="1,1-二氯乙烷(μg/L)">{{
+          form.dichloroethane11
+        }}</el-descriptions-item>
+        <el-descriptions-item label="1,1,2,2-四氯乙烷(μg/L)">{{
+          form.tetrachloroethane1122
+        }}</el-descriptions-item>
+
         <el-descriptions-item label="色度(度)">{{
           form.color
         }}</el-descriptions-item>
         <el-descriptions-item label="臭和味">{{
           form.odorAndTaste
         }}</el-descriptions-item>
-        <el-descriptions-item label="浊度(NTU)">{{
+        <el-descriptions-item label="浑浊度(NTU)">{{
           form.turbidity
         }}</el-descriptions-item>
+
         <el-descriptions-item label="肉眼可见物">{{
           form.visibleMatters
         }}</el-descriptions-item>
@@ -1099,6 +1322,7 @@
         <el-descriptions-item label="硫酸盐(mg/L)">{{
           form.sulfate
         }}</el-descriptions-item>
+
         <el-descriptions-item label="氯化物(mg/L)">{{
           form.chloride
         }}</el-descriptions-item>
@@ -1114,6 +1338,7 @@
         <el-descriptions-item label="阴离子表面活性剂(mg/L)">{{
           form.anionicSurfactant
         }}</el-descriptions-item>
+
         <el-descriptions-item label="耗氧量(mg/L)">{{
           form.oxygenConsumption
         }}</el-descriptions-item>
@@ -1129,6 +1354,7 @@
         <el-descriptions-item label="硝酸盐氮(mg/L)">{{
           form.nitrateNitrogen
         }}</el-descriptions-item>
+
         <el-descriptions-item label="碘化物(mg/L)">{{
           form.iodide
         }}</el-descriptions-item>
@@ -1144,6 +1370,7 @@
         <el-descriptions-item label="挥发酚(mg/L)">{{
           form.volatilePhenol
         }}</el-descriptions-item>
+
         <el-descriptions-item label="氨氮(mg/L)">{{
           form.ammoniaNitrogen
         }}</el-descriptions-item>
@@ -1153,19 +1380,20 @@
         <el-descriptions-item label="氟化物(mg/L)">{{
           form.fluoride
         }}</el-descriptions-item>
-        <el-descriptions-item label="汞(mg/L)">{{
+        <el-descriptions-item label="汞(μg/L)">{{
           form.mercury
         }}</el-descriptions-item>
-        <el-descriptions-item label="砷(mg/L)">{{
+        <el-descriptions-item label="砷(μg/L)">{{
           form.arsenic
         }}</el-descriptions-item>
-        <el-descriptions-item label="镉(mg/L)">{{
+
+        <el-descriptions-item label="镉(μg/L)">{{
           form.cadmium
         }}</el-descriptions-item>
-        <el-descriptions-item label="六价铬(mg/L)">{{
+        <el-descriptions-item label="六价铬(μg/L)">{{
           form.chromiumVi
         }}</el-descriptions-item>
-        <el-descriptions-item label="铅(mg/L)">{{
+        <el-descriptions-item label="铅(μg/L)">{{
           form.lead
         }}</el-descriptions-item>
         <el-descriptions-item label="氯仿(μg/L)">{{
@@ -1174,6 +1402,7 @@
         <el-descriptions-item label="四氯化碳(μg/L)">{{
           form.carbonTetrachloride
         }}</el-descriptions-item>
+
         <el-descriptions-item label="苯(μg/L)">{{
           form.benzene
         }}</el-descriptions-item>
@@ -1189,6 +1418,7 @@
         <el-descriptions-item label="钴(mg/L)">{{
           form.cobalt
         }}</el-descriptions-item>
+
         <el-descriptions-item label="镍(mg/L)">{{
           form.nickel
         }}</el-descriptions-item>
@@ -1204,6 +1434,7 @@
         <el-descriptions-item label="1,1,2-三氯乙烷(μg/L)">{{
           form.trichloroethane112
         }}</el-descriptions-item>
+
         <el-descriptions-item label="1,2-二氯丙烷(μg/L)">{{
           form.dichloropropane12
         }}</el-descriptions-item>
@@ -1219,6 +1450,7 @@
         <el-descriptions-item label="顺式-1,2-二氯乙烯(μg/L)">{{
           form.cisDichloroethylene12
         }}</el-descriptions-item>
+
         <el-descriptions-item label="三氯乙烯(μg/L)">{{
           form.trichloroethylene
         }}</el-descriptions-item>
@@ -1234,6 +1466,7 @@
         <el-descriptions-item label="1,4-二氯苯(μg/L)">{{
           form.dichlorobenzene14
         }}</el-descriptions-item>
+
         <el-descriptions-item label="乙苯(μg/L)">{{
           form.ethylbenzene
         }}</el-descriptions-item>
@@ -1249,6 +1482,7 @@
         <el-descriptions-item label="硝基苯(μg/L)">{{
           form.nitrobenzene
         }}</el-descriptions-item>
+
         <el-descriptions-item label="萘(μg/L)">{{
           form.naphthalene
         }}</el-descriptions-item>
@@ -1264,6 +1498,7 @@
         <el-descriptions-item label="苯并[a]芘(μg/L)">{{
           form.benzoAPyrene
         }}</el-descriptions-item>
+
         <el-descriptions-item label="石油烃(C6-C9)(mg/L)">{{
           form.petroleumHydrocarbonsC6C9
         }}</el-descriptions-item>
@@ -1279,6 +1514,7 @@
         <el-descriptions-item label="苯胺(μg/L)">{{
           form.aniline
         }}</el-descriptions-item>
+
         <el-descriptions-item label="苊烯(μg/L)">{{
           form.acenaphthylene
         }}</el-descriptions-item>
@@ -1294,6 +1530,7 @@
         <el-descriptions-item label="芘(μg/L)">{{
           form.pyrene
         }}</el-descriptions-item>
+
         <el-descriptions-item label="苯并[a]蒽(μg/L)">{{
           form.benzoAAnthracene
         }}</el-descriptions-item>
@@ -1304,11 +1541,12 @@
           form.benzoKFluoranthene
         }}</el-descriptions-item>
         <el-descriptions-item label="茚并[1,2,3-c,d]芘(μg/L)">{{
-          form.indeno123cdPyrene
+          form.indeno123CdPyrene
         }}</el-descriptions-item>
         <el-descriptions-item label="二苯并[a,h]蒽(μg/L)">{{
           form.dibenzoAhAnthracene
         }}</el-descriptions-item>
+
         <el-descriptions-item label="苯并[g,h,i]苝(μg/L)">{{
           form.benzoGhiPerylene
         }}</el-descriptions-item>
@@ -1324,8 +1562,146 @@
         <el-descriptions-item label="1,1,2,2-四氯乙烷(μg/L)">{{
           form.tetrachloroethane1122
         }}</el-descriptions-item>
+
         <el-descriptions-item label="1,2,3-三氯丙烷(μg/L)">{{
           form.trichloropropane123
+        }}</el-descriptions-item>
+        <el-descriptions-item label="分析编号">{{
+          form.analysisNumber
+        }}</el-descriptions-item>
+        <el-descriptions-item label="原编号">{{
+          form.originalNumber
+        }}</el-descriptions-item>
+        <el-descriptions-item label="碳酸根(mg/L)">{{
+          form.carbonate
+        }}</el-descriptions-item>
+        <el-descriptions-item label="碳酸氢根(mg/L)">{{
+          form.bicarbonate
+        }}</el-descriptions-item>
+
+        <el-descriptions-item label="亚铁离子(mg/L)">{{
+          form.ferrousIon
+        }}</el-descriptions-item>
+        <el-descriptions-item label="钾(mg/L)">{{
+          form.potassium
+        }}</el-descriptions-item>
+        <el-descriptions-item label="钙(mg/L)">{{
+          form.calcium
+        }}</el-descriptions-item>
+        <el-descriptions-item label="镁(mg/L)">{{
+          form.magnesium
+        }}</el-descriptions-item>
+        <el-descriptions-item label="氯丁二烯(μg/L)">{{
+          form.chloroprene
+        }}</el-descriptions-item>
+
+        <el-descriptions-item label="溴氯甲烷(μg/L)">{{
+          form.bromochloromethane
+        }}</el-descriptions-item>
+        <el-descriptions-item label="一溴二氯甲烷(μg/L)">{{
+          form.bromodichloromethane
+        }}</el-descriptions-item>
+        <el-descriptions-item label="二溴甲烷(μg/L)">{{
+          form.dibromomethane
+        }}</el-descriptions-item>
+        <el-descriptions-item label="二溴氯甲烷(μg/L)">{{
+          form.dibromochloromethane
+        }}</el-descriptions-item>
+        <el-descriptions-item label="溴仿(μg/L)">{{
+          form.bromoform
+        }}</el-descriptions-item>
+
+        <el-descriptions-item label="异丙苯(μg/L)">{{
+          form.cumene
+        }}</el-descriptions-item>
+        <el-descriptions-item label="正丙苯(μg/L)">{{
+          form.nPropylbenzene
+        }}</el-descriptions-item>
+        <el-descriptions-item label="溴苯(μg/L)">{{
+          form.bromobenzene
+        }}</el-descriptions-item>
+        <el-descriptions-item label="1,3,5-三甲基苯(μg/L)">{{
+          form.trimethylbenzene135
+        }}</el-descriptions-item>
+        <el-descriptions-item label="邻氯甲苯(μg/L)">{{
+          form.oChlorotoluene
+        }}</el-descriptions-item>
+
+        <el-descriptions-item label="对氯甲苯(μg/L)">{{
+          form.pChlorotoluene
+        }}</el-descriptions-item>
+        <el-descriptions-item label="叔丁基苯(μg/L)">{{
+          form.tertButylbenzene
+        }}</el-descriptions-item>
+        <el-descriptions-item label="1,2,4-三甲基苯(μg/L)">{{
+          form.trimethylbenzene124
+        }}</el-descriptions-item>
+        <el-descriptions-item label="仲丁基苯(μg/L)">{{
+          form.secButylbenzene
+        }}</el-descriptions-item>
+        <el-descriptions-item label="4-异丙基甲苯(μg/L)">{{
+          form.isopropyltoluene4
+        }}</el-descriptions-item>
+
+        <el-descriptions-item label="正丁基苯(μg/L)">{{
+          form.nButylbenzene
+        }}</el-descriptions-item>
+        <el-descriptions-item label="环氧氯丙烷(μg/L)">{{
+          form.epichlorohydrin
+        }}</el-descriptions-item>
+        <el-descriptions-item label="1,2-二溴-3-氯丙烷(μg/L)">{{
+          form.dibromo3Chloropropane12
+        }}</el-descriptions-item>
+        <el-descriptions-item label="1,2,4-三氯苯(μg/L)">{{
+          form.trichlorobenzene124
+        }}</el-descriptions-item>
+        <el-descriptions-item label="六氯丁二烯(μg/L)">{{
+          form.hexachlorobutadiene
+        }}</el-descriptions-item>
+
+        <el-descriptions-item label="2-甲基萘(μg/L)">{{
+          form.methylnaphthalene2
+        }}</el-descriptions-item>
+        <el-descriptions-item label="1-甲基萘(μg/L)">{{
+          form.methylnaphthalene1
+        }}</el-descriptions-item>
+        <el-descriptions-item label="1,1-二氯丙烯(μg/L)">{{
+          form.dichloropropene11
+        }}</el-descriptions-item>
+        <el-descriptions-item label="反式-1,3-二氯丙烯(μg/L)">{{
+          form.trans13Dichloropropene
+        }}</el-descriptions-item>
+        <el-descriptions-item label="反-1,3-二氯丙烯(μg/L)">{{
+          form.trans13Dichloropropene
+        }}</el-descriptions-item>
+
+        <el-descriptions-item label="顺式-1,3-二氯丙烯(μg/L)">{{
+          form.cis13Dichloropropene
+        }}</el-descriptions-item>
+        <el-descriptions-item label="顺-1,3-二氯丙烯(μg/L)">{{
+          form.cis13Dichloropropene
+        }}</el-descriptions-item>
+        <el-descriptions-item label="2,2-二氯丙烷(μg/L)">{{
+          form.dichloropropane22
+        }}</el-descriptions-item>
+        <el-descriptions-item label="1,2-二溴乙烷(μg/L)">{{
+          form.dibromoethane12
+        }}</el-descriptions-item>
+        <el-descriptions-item label="1,3-二氯丙烷(μg/L)">{{
+          form.dichloropropane13
+        }}</el-descriptions-item>
+
+        <el-descriptions-item label="2-氯甲苯(μg/L)">{{
+          form.chlorotoluene2
+        }}</el-descriptions-item>
+        <el-descriptions-item label="4-氯甲苯(μg/L)">{{
+          form.chlorotoluene4
+        }}</el-descriptions-item>
+        <el-descriptions-item label="1,3-二氯苯(μg/L)">{{
+          form.dichlorobenzene13
+        }}</el-descriptions-item>
+        <el-descriptions-item label="1,2,3-三氯苯(μg/L)">{{
+          form.trichlorobenzene123
         }}</el-descriptions-item>
       </el-descriptions>
       <template #footer>

@@ -63,7 +63,7 @@
                 AND monitoring_time &lt;= #{endMonitoringTime}
             </if>
         </where>
-        ORDER BY monitoring_time DESC;
+        ORDER BY monitoring_well, synchronization_time DESC;
     </select>
 
     <select id="selectTRealtimeWaterQualityMonitoringById" parameterType="String"

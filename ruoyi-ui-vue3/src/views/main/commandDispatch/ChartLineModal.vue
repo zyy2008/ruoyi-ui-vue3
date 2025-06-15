@@ -35,133 +35,155 @@
       <el-table-column prop="sampleTime" label="采样时间" width="100" />
       <el-table-column prop="analysisNumber" label="分析编号" width="100" />
       <el-table-column prop="originalNumber" label="原编号" />
-      <el-table-column prop="carbonate" label="碳酸根(mg/L)" />
-      <el-table-column prop="bicarbonate" label="碳酸氢根(mg/L)" />
-      <el-table-column prop="ferrousIon" label="亚铁离子(mg/L)" />
-      <el-table-column prop="potassium" label="钾(mg/L)" />
-      <el-table-column prop="calcium" label="钙(mg/L)" />
-      <el-table-column prop="magnesium" label="镁(mg/L)" />
-      <el-table-column prop="chloroprene" label="氯丁二烯(μg/L)" />
-      <el-table-column prop="dichloroethane11" label="1,1-二氯乙烷(μg/L)" />
-      <el-table-column prop="tetrachloroethane1122" label="1,1,2,2-四氯乙烷(μg/L)" />
+      <el-table-column prop="carbonate" label="碳酸根(mg/L)" width="120" />
+      <el-table-column prop="bicarbonate" label="碳酸氢根(mg/L)" width="130" />
+
+      <el-table-column prop="ferrousIon" label="亚铁离子(mg/L)" width="130" />
+      <el-table-column prop="potassium" label="钾(mg/L)" width="110" />
+      <el-table-column prop="calcium" label="钙(mg/L)" width="110" />
+      <el-table-column prop="magnesium" label="镁(mg/L)" width="110" />
+      <el-table-column prop="chloroprene" label="氯丁二烯(μg/L)" width="130" />
+      <el-table-column prop="dichloroethane11" label="1,1-二氯乙烷(μg/L)" width="150" />
+
+      <el-table-column prop="tetrachloroethane1122" label="1,1,2,2-四氯乙烷(μg/L)" width="170" />
       <el-table-column prop="color" label="色度(度)" />
       <el-table-column prop="odorAndTaste" label="臭和味" />
-      <el-table-column prop="turbidity" label="浑浊度(NTU)" />
+      <el-table-column prop="turbidity" label="浑浊度(NTU)" width="110" />
       <el-table-column prop="visibleMatters" label="肉眼可见物" width="100" />
       <el-table-column prop="ph" label="pH" />
+
       <el-table-column prop="totalHardness" label="总硬度(mg/L)" />
       <el-table-column prop="totalDissolvedSolids" label="溶解性总固体(mg/L)" width="110" />
       <el-table-column prop="sulfate" label="硫酸盐(mg/L)" />
       <el-table-column prop="chloride" label="氯化物(mg/L)" />
       <el-table-column prop="iron" label="铁(mg/L)" />
       <el-table-column prop="manganese" label="锰(mg/L)" />
+
       <el-table-column prop="aluminum" label="铝(mg/L)" />
       <el-table-column prop="anionicSurfactant" label="阴离子表面活性剂(mg/L)" width="140" />
       <el-table-column prop="oxygenConsumption" label="耗氧量(mg/L)" />
       <el-table-column prop="sulfide" label="硫化物(mg/L)" />
       <el-table-column prop="sodium" label="钠(mg/L)" />
       <el-table-column prop="nitriteNitrogen" label="亚硝酸盐氮(mg/L)" width="100" />
+
       <el-table-column prop="nitrateNitrogen" label="硝酸盐氮(mg/L)" />
       <el-table-column prop="iodide" label="碘化物(mg/L)" />
       <el-table-column prop="selenium" label="硒(mg/L)" />
       <el-table-column prop="copper" label="铜(mg/L)" />
       <el-table-column prop="zinc" label="锌(mg/L)" />
       <el-table-column prop="volatilePhenol" label="挥发酚(mg/L)" />
+
       <el-table-column prop="ammoniaNitrogen" label="氨氮(mg/L)" />
       <el-table-column prop="cyanide" label="氰化物(mg/L)" />
       <el-table-column prop="fluoride" label="氟化物(mg/L)" />
       <el-table-column prop="mercury" label="汞(μg/L)" />
       <el-table-column prop="arsenic" label="砷(μg/L)" />
       <el-table-column prop="cadmium" label="镉(μg/L)" />
+
       <el-table-column prop="chromiumVi" label="六价铬(μg/L)" />
       <el-table-column prop="lead" label="铅(μg/L)" />
       <el-table-column prop="chloroform" label="氯仿(μg/L)" />
       <el-table-column prop="carbonTetrachloride" label="四氯化碳(μg/L)" />
       <el-table-column prop="benzene" label="苯(μg/L)" />
       <el-table-column prop="toluene" label="甲苯(μg/L)" />
+
       <el-table-column prop="molybdenum" label="钼(mg/L)" />
       <el-table-column prop="vanadium" label="钒(mg/L)" />
       <el-table-column prop="cobalt" label="钴(mg/L)" />
       <el-table-column prop="nickel" label="镍(mg/L)" />
       <el-table-column prop="dichloromethane" label="二氯甲烷(μg/L)" />
       <el-table-column prop="dichloroethane12" label="1,2-二氯乙烷(μg/L)" width="110" />
+
       <el-table-column prop="trichloroethane111" label="1,1,1-三氯乙烷(μg/L)" width="120" />
       <el-table-column prop="trichloroethane112" label="1,1,2-三氯乙烷(μg/L)" width="120" />
       <el-table-column prop="dichloropropane12" label="1,2-二氯丙烷(μg/L)" width="110" />
       <el-table-column prop="vinylChloride" label="氯乙烯(μg/L)" />
       <el-table-column prop="dichloroethylene11" label="1,1-二氯乙烯(μg/L)" width="110" />
       <el-table-column prop="transDichloroethylene12" label="反式-1,2-二氯乙烯(μg/L)" width="140" />
+
       <el-table-column prop="cisDichloroethylene12" label="顺式-1,2-二氯乙烯(μg/L)" width="140" />
       <el-table-column prop="trichloroethylene" label="三氯乙烯(μg/L)" />
       <el-table-column prop="tetrachloroethylene" label="四氯乙烯(μg/L)" />
       <el-table-column prop="chlorobenzene" label="氯苯(μg/L)" />
       <el-table-column prop="dichlorobenzene12" label="1,2-二氯苯(μg/L)" width="100" />
-      <el-table-column prop="dichlorobenzene14" label=",4-二氯苯(μg/L)" width="100" />
+      <el-table-column prop="dichlorobenzene14" label="1,4-二氯苯(μg/L)" width="100" />
+
       <el-table-column prop="ethylbenzene" label="乙苯(μg/L)" />
       <el-table-column prop="xyleneOrtho" label="邻二甲苯(μg/L)" />
       <el-table-column prop="xyleneMetaPara" label="间/对-二甲苯(μg/L)" width="110" />
       <el-table-column prop="styrene" label="苯乙烯(μg/L)" />
       <el-table-column prop="nitrobenzene" label="硝基苯(μg/L)" />
       <el-table-column prop="naphthalene" label="萘(μg/L)" />
+
       <el-table-column prop="anthracene" label="蒽(μg/L)" />
       <el-table-column prop="fluoranthene" label="荧蒽(μg/L)" />
       <el-table-column prop="benzoBFluoranthene" label="苯并[b]荧蒽(μg/L)" width="100" />
       <el-table-column prop="benzoAPyrene" label="苯并[a]芘(μg/L)" width="100" />
       <el-table-column prop="petroleumHydrocarbonsC6C9" label="石油烃(C6-C9)(mg/L)" width="120" />
       <el-table-column prop="petroleumHydrocarbonsC10C40" label="石油烃(C10-C40)(mg/L)" width="140" />
+
       <el-table-column prop="phenol" label="苯酚(mg/L)" />
       <el-table-column prop="chlorophenol2" label="2-氯酚(mg/L)" />
       <el-table-column prop="aniline" label="苯胺(μg/L)" />
       <el-table-column prop="acenaphthylene" label="苊烯(μg/L)" />
       <el-table-column prop="acenaphthene" label="苊(μg/L)" />
       <el-table-column prop="fluorene" label="芴(μg/L)" />
+
       <el-table-column prop="phenanthrene" label="菲(μg/L)" />
       <el-table-column prop="pyrene" label="芘(μg/L)" />
       <el-table-column prop="benzoAAnthracene" label="苯并[a]蒽(μg/L)" width="90" />
       <el-table-column prop="chrysene" label="䓛(μg/L)" />
       <el-table-column prop="benzoKFluoranthene" label="苯并[k]荧蒽(μg/L)" width="100" />
       <el-table-column prop="indeno123cdPyrene" label="茚并[1,2,3-c,d]芘(μg/L)" width="140" />
+
       <el-table-column prop="dibenzoAhAnthracene" label="二苯并[a,h]蒽(μg/L)" width="110" />
       <el-table-column prop="benzoGhiPerylene" label="苯并[g,h,i]苝(μg/L)" width="110" />
       <el-table-column prop="chloromethane" label="氯甲烷(μg/L)" />
       <el-table-column prop="dichloroethane11" label="1,1-二氯乙烷(μg/L)" width="110" />
       <el-table-column prop="tetrachloroethane1112" label="1,1,1,2-四氯乙烷(μg/L)" width="130" />
       <el-table-column prop="tetrachloroethane1122" label="1,1,2,2-四氯乙烷(μg/L)" width="130" />
+
       <el-table-column prop="trichloropropane123" label="1,2,3-三氯丙烷(μg/L)" width="130" />
       <el-table-column prop="bromochloromethane" label="溴氯甲烷(μg/L)" width="130" />
       <el-table-column prop="bromodichloromethane" label="一溴二氯甲烷(μg/L)" width="130" />
+
       <el-table-column prop="dibromomethane" label="二溴甲烷(μg/L)" width="130" />
       <el-table-column prop="dibromochloromethane" label="二溴氯甲烷(μg/L)" width="130" />
       <el-table-column prop="dibromochloromethane" label="溴仿(μg/L)" width="130" />
       <el-table-column prop="cumene" label="异丙苯(μg/L)" width="130" />
       <el-table-column prop="nPropylbenzene" label="正丙苯(μg/L)" width="130" />
       <el-table-column prop="bromobenzene" label="溴苯(μg/L)" width="130" />
+
       <el-table-column prop="trimethylbenzene135" label="1,3,5-三甲基苯(μg/L)" width="130" />
       <el-table-column prop="oChlorotoluene" label="邻氯甲苯(μg/L)" width="130" />
       <el-table-column prop="pChlorotoluene" label="对氯甲苯(μg/L)" width="130" />
       <el-table-column prop="tertButylbenzene" label="叔丁基苯(μg/L)" width="130" />
       <el-table-column prop="trimethylbenzene124" label="1,2,4-三甲基苯(μg/L)" width="130" />
       <el-table-column prop="secButylbenzene" label="仲丁基苯(μg/L)" width="130" />
+
       <el-table-column prop="isopropyltoluene4" label="4-异丙基甲苯(μg/L)" width="130" />
       <el-table-column prop="nButylbenzene" label="正丁基苯(μg/L)" width="130" />
       <el-table-column prop="epichlorohydrin" label="环氧氯丙烷(μg/L)" width="130" />
       <el-table-column prop="dibromo3Chloropropane12" label="1,2-二溴-3-氯丙烷(μg/L)" width="130" />
       <el-table-column prop="trichlorobenzene124" label="1,2,4-三氯苯(μg/L)" width="130" />
       <el-table-column prop="hexachlorobutadiene" label="六氯丁二烯(μg/L)" width="130" />
+
       <el-table-column prop="methylnaphthalene2" label="2-甲基萘(μg/L)" width="130" />
       <el-table-column prop="methylnaphthalene1" label="1-甲基萘(μg/L)" width="130" />
       <el-table-column prop="dichloropropene11" label="1,1-二氯丙烯(μg/L)" width="130" />
       <el-table-column prop="trans13Dichloropropene" label="反式-1,3-二氯丙烯(μg/L)" width="130" />
       <el-table-column prop="trans13Dichloropropene" label="反-1,3-二氯丙烯(μg/L)" width="130" />
       <el-table-column prop="cis13Dichloropropene" label="顺式-1,3-二氯丙烯(μg/L)" width="130" />
+
       <el-table-column prop="cis13Dichloropropene" label="顺-1,3-二氯丙烯(μg/L)" width="130" />
       <el-table-column prop="dichloropropane22" label="2,2-二氯丙烷(μg/L)" width="130" />
       <el-table-column prop="dibromoethane12" label="1,2-二溴乙烷(μg/L)" width="130" />
-      <el-table-column prop="dichloropropane13" label="1,3-二氯丙烷(μg/L)" width="130" />
+      <el-table-column prop="dichloropropane13" label="1,3-二氯丙烷(μg/L)" width="150" />
       <el-table-column prop="chlorotoluene2" label="2-氯甲苯(μg/L)" width="130" />
       <el-table-column prop="chlorotoluene4" label="4-氯甲苯(μg/L)" width="130" />
+
       <el-table-column prop="dichlorobenzene13" label="1,3-二氯苯(μg/L)" width="130" />
-      <el-table-column prop="trichlorobenzene123" label="1,2,3-三氯苯(μg/L)" width="130" />
+      <el-table-column prop="trichlorobenzene123" label="1,2,3-三氯苯(μg/L)" width="150" />
     </el-table>
   </el-dialog>
 </template>
@@ -394,7 +416,6 @@
   const tableData = ref([]);
 
   defineExpose({ dialogVisible, tableData });
-
 
   onMounted(() => {
     // 下拉指标切换

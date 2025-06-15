@@ -43,6 +43,7 @@
   } from "@/api/monitoring";
   import { getBatchData } from "@/api/monitoring";
   import ChartBarModal from './ChartBarModal.vue'
+  import { getSingleWellMonitoringLineChartData } from "@/api/monitoring";
   import { param } from "@mars/utils";
   const tableData = ref();
   const tableTotle = ref();
@@ -77,9 +78,9 @@
 
 
   const clickTable = (value) => {
-    getBatchDataDetail(value.id).then(res => {
-      console.log(res);
-    })
+    // getSingleWellMonitoringLineChartData({ wellCode: value.monitoringWell }).then(res => {
+    //   console.log(res);
+    // })
     selectedRow.value = value;
     emit("changeTableLine", value);
     if (map && value.longitude && value.latitude) {

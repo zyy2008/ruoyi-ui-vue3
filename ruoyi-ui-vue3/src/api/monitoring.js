@@ -68,3 +68,13 @@ export function getBatchDataDetail(id) {
     method: 'get',
   })
 }
+
+// 获取单个监测井折线图数据
+export function getSingleWellMonitoringLineChartData(query) {
+  return request({
+    url: '/admin/realtimeWaterQualityMonitoring/getSingleWellMonitoringLineChartData',
+    method: 'get',
+    params: query
+  })
+}
+

@@ -1,6 +1,6 @@
 <template>
   <el-dialog z-index="10" v-model="dialogVisible"
-    :title="chart.chartType==='monitor'?chart.chartTitle.chartInfo.monitoringWell:chart.chartTitle.wellCode+'('+chart.chartTitle.location+')' "
+    :title="chart.chartType==='monitor'?chart.chartTitle.monitoringWell:chart.chartTitle.wellCode+'('+chart.chartTitle.location+')' "
     width="100vw" :top="'200px'" destroy-on-close @open="openChartLine" @close="closeChartLine" style="height: 900px;">
     <el-date-picker v-model="timeValue" type="daterange" range-separator="至" start-placeholder="开始日期"
       style="width: 400px" end-placeholder="结束日期">
@@ -193,6 +193,7 @@
   import { Search } from '@element-plus/icons-vue'
   import { listMonitoring } from "@/api/admin/monitoring";
   import { listIndicators } from "@/api/admin/indicators";
+
   let lineChart = null;
   let lineOption = {};
   const selectValue = ref("pH");

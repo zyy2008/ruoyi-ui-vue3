@@ -25,12 +25,12 @@ import com.ruoyi.common.utils.poi.ExcelUtil;
 import com.ruoyi.common.core.page.TableDataInfo;
 
 /**
- * 指标分类Controller
+ * 指标标准表Controller
  *
  * @author ruoyi
  * @date 2025-06-02
  */
-@Api(tags = "指标分类")
+@Api(tags = "指标标准表")
 @RestController
 @RequestMapping("/admin/indicators")
 public class TIndicatorsController extends BaseController {
@@ -38,9 +38,9 @@ public class TIndicatorsController extends BaseController {
     private ITIndicatorsService tIndicatorsService;
 
     /**
-     * 查询指标分类列表
+     * 查询指标标准表列表
      */
-    @ApiOperation("查询指标分类列表")
+    @ApiOperation("查询指标标准表列表")
     //@PreAuthorize("@ss.hasPermi('admin:indicators:list')")
     @GetMapping("/list")
     public TableDataInfo list(TIndicators tIndicators) {
@@ -50,22 +50,22 @@ public class TIndicatorsController extends BaseController {
     }
 
     /**
-     * 导出指标分类列表
+     * 导出指标标准表列表
      */
-    @ApiOperation("导出指标分类列表")
+    @ApiOperation("导出指标标准表列表")
     //@PreAuthorize("@ss.hasPermi('admin:indicators:export')")
-    @Log(title = "指标分类", businessType = BusinessType.EXPORT)
+    @Log(title = "指标标准表", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
     public void export(HttpServletResponse response, TIndicators tIndicators) {
         List<TIndicators> list = tIndicatorsService.selectTIndicatorsList(tIndicators);
         ExcelUtil<TIndicators> util = new ExcelUtil<TIndicators>(TIndicators.class);
-        util.exportExcel(response, list, "指标分类数据");
+        util.exportExcel(response, list, "指标标准表数据");
     }
 
     /**
-     * 获取指标分类详细信息
+     * 获取指标标准表详细信息
      */
-    @ApiOperation("获取指标分类详细信息")
+    @ApiOperation("获取指标标准表详细信息")
     //@PreAuthorize("@ss.hasPermi('admin:indicators:query')")
     @GetMapping(value = "/{id}")
     public AjaxResult getInfo(@PathVariable("id") Long id) {
@@ -73,33 +73,33 @@ public class TIndicatorsController extends BaseController {
     }
 
     /**
-     * 新增指标分类
+     * 新增指标标准表
      */
-    @ApiOperation("新增指标分类")
+    @ApiOperation("新增指标标准表")
     //@PreAuthorize("@ss.hasPermi('admin:indicators:add')")
-    @Log(title = "指标分类", businessType = BusinessType.INSERT)
+    @Log(title = "指标标准表", businessType = BusinessType.INSERT)
     @PostMapping
     public AjaxResult add(@RequestBody TIndicators tIndicators) {
         return toAjax(tIndicatorsService.insertTIndicators(tIndicators));
     }
 
     /**
-     * 修改指标分类
+     * 修改指标标准表
      */
-    @ApiOperation("修改指标分类")
+    @ApiOperation("修改指标标准表")
     //@PreAuthorize("@ss.hasPermi('admin:indicators:edit')")
-    @Log(title = "指标分类", businessType = BusinessType.UPDATE)
+    @Log(title = "指标标准表", businessType = BusinessType.UPDATE)
     @PutMapping
     public AjaxResult edit(@RequestBody TIndicators tIndicators) {
         return toAjax(tIndicatorsService.updateTIndicators(tIndicators));
     }
 
     /**
-     * 删除指标分类
+     * 删除指标标准表
      */
-    @ApiOperation("删除指标分类")
+    @ApiOperation("删除指标标准表")
     //@PreAuthorize("@ss.hasPermi('admin:indicators:remove')")
-    @Log(title = "指标分类", businessType = BusinessType.DELETE)
+    @Log(title = "指标标准表", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
     public AjaxResult remove(@PathVariable Long[] ids) {
         return toAjax(tIndicatorsService.deleteTIndicatorsByIds(ids));

@@ -9,358 +9,530 @@ import com.ruoyi.common.core.domain.BaseEntity;
  * 监测数据管理对象 t_water_quality_monitoring
  *
  * @author ruoyi
- * @date 2025-06-01
+ * @date 2025-06-14
  */
 public class TWaterQualityMonitoring extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 字段说明：监测点位编号，唯一标识监测位置，长度不超过10位字符 */
+    @Excel(name = "点位编号")
     private String pointId;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 字段说明：样品说明，一天监测两次的情况，如上、下 */
+    @Excel(name = "样品说明")
+    private String tag;
+
+    /** 字段说明：采样时间，格式为YYYYMMDD（8位字符），如20250606 */
+    @Excel(name = "采样时间", readConverterExp = "8=位字符")
     private String sampleTime;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：度，字段说明：水的色度，表征水的颜色深浅 */
+    @Excel(name = "色度")
     private String color;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 字段说明：水的臭和味描述，记录感官检测结果（如无异味、轻微腥臭等） */
+    @Excel(name = "臭和味", readConverterExp = "如=无异味、轻微腥臭等")
     private String odorAndTaste;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：NTU，字段说明：水的浊度，反映水中悬浮物和胶体物质的含量 */
+    @Excel(name = "浑浊度") // J01-J31
     private String turbidity;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 字段说明：肉眼可见物描述，如泥沙、絮状物等 */
+    @Excel(name = "肉眼可见物")
     private String visibleMatters;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 字段说明：pH值，表征水的酸碱性，无量纲 */
+    @Excel(name = "pH")
     private String ph;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L（以CaCO3计），字段说明：水的总硬度，钙镁离子折算为碳酸钙的总量 */
+    @Excel(name = "总硬度 (以 CaCO3 计)")
     private String totalHardness;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：溶解性总固体，水中溶解的无机盐和有机物总和 */
+    @Excel(name = "溶解性总固体")
     private String totalDissolvedSolids;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：硫酸根离子浓度 */
+    @Excel(name = "硫酸盐")
     private String sulfate;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：氯离子浓度 */
+    @Excel(name = "氯化物")
     private String chloride;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：铁离子浓度，以Fe计 */
+    @Excel(name = "铁")
     private String iron;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：锰离子浓度，以Mn计 */
+    @Excel(name = "锰")
     private String manganese;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：铝离子浓度，以Al计 */
+    @Excel(name = "铝")
     private String aluminum;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：阴离子表面活性剂浓度，如LAS（直链烷基苯磺酸盐） */
+    @Excel(name = "阴离子表面活性剂", readConverterExp = "直=链烷基苯磺酸盐")
     private String anionicSurfactant;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：耗氧量（COD），水中还原性物质消耗氧气的量 */
+    @Excel(name = "耗氧量", readConverterExp = "C=OD")
     private String oxygenConsumption;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：硫化物浓度，以S²⁻计 */
+    @Excel(name = "硫化物")
     private String sulfide;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：钠离子浓度 */
+    @Excel(name = "钠")
     private String sodium;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：亚硝酸盐氮浓度，以N计 */
+    @Excel(name = "亚硝酸盐") // J01-J31
     private String nitriteNitrogen;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：硝酸盐氮浓度，以N计 */
+    @Excel(name = "硝酸盐") // J01-J31
     private String nitrateNitrogen;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：碘化物浓度，以I⁻计 */
+    @Excel(name = "碘化物")
     private String iodide;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：硒离子浓度，以Se计 */
+    @Excel(name = "硒")
     private String selenium;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：铜离子浓度，以Cu计 */
+    @Excel(name = "铜")
     private String copper;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：锌离子浓度，以Zn计 */
+    @Excel(name = "锌")
     private String zinc;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：挥发酚浓度，以苯酚计 */
+    @Excel(name = "挥发酚")
     private String volatilePhenol;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：氨氮浓度，以N计 */
+    @Excel(name = "氨氮")
     private String ammoniaNitrogen;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：氰化物浓度，以CN⁻计 */
+    @Excel(name = "氰化物")
     private String cyanide;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：氟化物浓度，以F⁻计 */
+    @Excel(name = "氟化物")
     private String fluoride;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：汞离子浓度，以Hg计 */
+    @Excel(name = "汞")
     private String mercury;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：砷离子浓度，以As计 */
+    @Excel(name = "砷")
     private String arsenic;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：镉离子浓度，以Cd计 */
+    @Excel(name = "镉")
     private String cadmium;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：六价铬浓度，以Cr⁶⁺计 */
+    @Excel(name = "六价铬")
     private String chromiumVi;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：铅离子浓度，以Pb计 */
+    @Excel(name = "铅")
     private String lead;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：氯仿（三氯甲烷）浓度，饮用水消毒副产物 */
+    @Excel(name = "氯仿", readConverterExp = "三=氯甲烷")
     private String chloroform;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：四氯化碳浓度，有机溶剂，具有毒性 */
+    @Excel(name = "四氯化碳")
     private String carbonTetrachloride;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：苯浓度，致癌性挥发性有机物 */
+    @Excel(name = "苯")
     private String benzene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：甲苯浓度，常见有机溶剂 */
+    @Excel(name = "甲苯")
     private String toluene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位: mg/L */
+    @Excel(name = "钼")
     private String molybdenum;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位: mg/L */
+    @Excel(name = "钒")
     private String vanadium;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位: mg/L */
+    @Excel(name = "钴")
     private String cobalt;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位: mg/L */
+    @Excel(name = "镍")
     private String nickel;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：二氯甲烷浓度，用于涂料和胶黏剂 */
+    @Excel(name = "二氯甲烷")
     private String dichloromethane;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：1,2-二氯乙烷浓度，工业溶剂 */
+    @Excel(name = "1,2 - 二氯乙烷")
     private String dichloroethane12;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：1,1,1-三氯乙烷浓度，曾用作风幕机清洗剂 */
+    @Excel(name = "1,1,1 - 三氯乙烷")
     private String trichloroethane111;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：1,1,2-三氯乙烷浓度，与1,1,1-三氯乙烷互为同分异构体 */
+    @Excel(name = "1,1,2 - 三氯乙烷")
     private String trichloroethane112;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：1,2-二氯丙烷浓度，用于有机合成 */
+    @Excel(name = "1,2 - 二氯丙烷")
     private String dichloropropane12;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：氯乙烯浓度，用于生产聚氯乙烯（PVC） */
+    @Excel(name = "氯乙烯", readConverterExp = "P=VC")
     private String vinylChloride;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：1,1-二氯乙烯浓度，几何异构体 */
+    @Excel(name = "1,1 - 二氯乙烯")
     private String dichloroethylene11;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：反式-1,2-二氯乙烯浓度，氯乙烯异构体 */
+    @Excel(name = "反式 - 1,2 - 二氯乙烯")
     private String transDichloroethylene12;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：顺式-1,2-二氯乙烯浓度，与反式结构互为同分异构体 */
+    @Excel(name = "顺式 - 1,2 - 二氯乙烯")
     private String cisDichloroethylene12;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：三氯乙烯浓度，金属脱脂剂，具有肝毒性 */
+    @Excel(name = "三氯乙烯")
     private String trichloroethylene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：四氯乙烯浓度，干洗剂主要成分 */
+    @Excel(name = "四氯乙烯")
     private String tetrachloroethylene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：氯苯浓度，用于生产农药和染料 */
+    @Excel(name = "氯苯")
     private String chlorobenzene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：1,2-二氯苯浓度，邻二氯苯，用于杀虫剂 */
+    @Excel(name = "1,2 - 二氯苯")
     private String dichlorobenzene12;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：1,4-二氯苯浓度，对二氯苯，防虫剂 */
+    @Excel(name = "1,4 - 二氯苯")
     private String dichlorobenzene14;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：乙苯浓度，用于生产苯乙烯 */
+    @Excel(name = "乙苯")
     private String ethylbenzene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：邻二甲苯浓度，二甲苯异构体之一 */
+    @Excel(name = "邻 - 二甲苯") // J01-J31
     private String xyleneOrtho;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：间/对-二甲苯浓度，二甲苯异构体混合物 */
+    @Excel(name = "间，对 - 二甲苯") // J01-J31
     private String xyleneMetaPara;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：苯乙烯浓度，用于生产塑料和橡胶 */
+    @Excel(name = "苯乙烯")
     private String styrene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：硝基苯浓度，工业污染物，具有毒性 */
+    @Excel(name = "硝基苯")
     private String nitrobenzene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：萘浓度，多环芳烃类化合物，常见于煤焦油 */
+    @Excel(name = "萘")
     private String naphthalene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：蒽浓度，多环芳烃类，用于生产染料 */
+    @Excel(name = "蒽")
     private String anthracene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：荧蒽浓度，多环芳烃类，环境中常见污染物 */
+    @Excel(name = "荧蒽")
     private String fluoranthene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：苯并[b]荧蒽浓度，致癌性多环芳烃 */
+    @Excel(name = "苯并 [b] 荧蒽")
     private String benzoBFluoranthene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：苯并[a]芘浓度，强致癌性多环芳烃 */
+    @Excel(name = "苯并 [a] 芘")
     private String benzoAPyrene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：石油烃（C6-C9）浓度，挥发性石油烃组分 */
+    @Excel(name = "石油烃 (C6-C9)")
     private String petroleumHydrocarbonsC6C9;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：石油烃（C10-C40）浓度，半挥发性石油烃组分 */
+    @Excel(name = "石油烃（C10-C40）")
     private String petroleumHydrocarbonsC10C40;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：苯酚浓度，具有腐蚀性和毒性 */
+    @Excel(name = "苯酚")
     private String phenol;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：mg/L，字段说明：2-氯酚浓度，苯酚的氯代衍生物 */
+    @Excel(name = "2 - 氯酚")
     private String chlorophenol2;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：苯胺浓度，用于生产染料和医药，有毒 */
+    @Excel(name = "苯胺")
     private String aniline;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：苊烯浓度，多环芳烃类，存在于煤烟中 */
+    @Excel(name = "苊烯")
     private String acenaphthylene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：苊浓度，多环芳烃类，用于生产树脂 */
+    @Excel(name = "苊")
     private String acenaphthene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：芴浓度，多环芳烃类，用于塑料工业 */
+    @Excel(name = "芴")
     private String fluorene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：菲浓度，多环芳烃类，存在于烟草烟雾中 */
+    @Excel(name = "菲")
     private String phenanthrene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：芘浓度，多环芳烃类，环境污染物 */
+    @Excel(name = "芘")
     private String pyrene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：苯并[a]蒽浓度，致癌性多环芳烃 */
+    @Excel(name = "苯并 [a] 蒽")
     private String benzoAAnthracene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：䓛浓度，多环芳烃类，具有潜在致癌性 */
+    @Excel(name = "䓛")
     private String chrysene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：苯并[k]荧蒽浓度，致癌性多环芳烃 */
+    @Excel(name = "苯并 [k] 荧蒽")
     private String benzoKFluoranthene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：茚并[1,2,3-c,d]芘浓度，强致癌性多环芳烃 */
+    @Excel(name = "茚并 [1,2,3-c,d] 芘")
     private String indeno123CdPyrene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：二苯并[a,h]蒽浓度，高毒性多环芳烃 */
+    @Excel(name = "二苯并 [a,h] 蒽")
     private String dibenzoAHAnthracene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：苯并[g,h,i]苝浓度，多环芳烃类，环境持久性污染物 */
+    @Excel(name = "苯并 [g,h,i] 苝")
     private String benzoGHIPerylene;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：氯甲烷浓度，用于生产甲基氯硅烷 */
+    @Excel(name = "氯甲烷")
     private String chloromethane;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：1,1-二氯乙烷浓度，与1,2-二氯乙烷互为同分异构体 */
+    @Excel(name = "1,1 - 二氯乙烷") // 注意空格
     private String dichloroethane11;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：1,1,1,2-四氯乙烷浓度，四氯乙烷异构体 */
+    @Excel(name = "1,1,1,2 - 四氯乙烷")
     private String tetrachloroethane1112;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：1,1,2,2-四氯乙烷浓度，与1,1,1,2-四氯乙烷互为同分异构体 */
+    @Excel(name = "1,1,2,2 - 四氯乙烷") // 注意空格
     private String tetrachloroethane1122;
 
-    /** $column.columnComment */
-    @Excel(name = "${comment}", readConverterExp = "$column.readConverterExp()")
+    /** 单位：µg/L，字段说明：1,2,3-三氯丙烷浓度，工业污染物，具有生殖毒性 */
+    @Excel(name = "1,2,3 - 三氯丙烷")
     private String trichloropropane123;
 
     /** $column.columnComment */
     private String id;
+
+    /** 字段说明：分析编号，记录样品分析的唯一标识 */
+    @Excel(name = "分析编号")
+    private String analysisNumber;
+
+    /** 字段说明：原编号，样品的原始编号 */
+    @Excel(name = "原编号")
+    private String originalNumber;
+
+    /** 单位：mg/L，字段说明：碳酸根离子浓度 */
+    @Excel(name = "碳酸根")
+    private String carbonate;
+
+    /** 单位：mg/L，字段说明：碳酸氢根离子浓度 */
+    @Excel(name = "碳酸氢根")
+    private String bicarbonate;
+
+    /** 单位：mg/L，字段说明：亚铁离子浓度 */
+    @Excel(name = "亚铁离子")
+    private String ferrousIon;
+
+    /** 单位：mg/L，字段说明：钾离子浓度 */
+    @Excel(name = "钾")
+    private String potassium;
+
+    /** 单位：mg/L，字段说明：钙离子浓度 */
+    @Excel(name = "钙")
+    private String calcium;
+
+    /** 单位：mg/L，字段说明：镁离子浓度 */
+    @Excel(name = "镁")
+    private String magnesium;
+
+    /** 单位：µg/L，字段说明：氯丁二烯（2-氯-1,3-丁二烯）浓度，常用于合成橡胶，具有挥发性 */
+    @Excel(name = "氯丁二烯", readConverterExp = "2=-氯-1,3-丁二烯")
+    private String chloroprene;
+
+    /** 单位：µg/L，字段说明：溴氯甲烷（氯溴甲烷）浓度，混合卤代烃，用作溶剂 */
+    @Excel(name = "溴氯甲烷", readConverterExp = "氯=溴甲烷")
+    private String bromochloromethane;
+
+    /** 单位：µg/L，字段说明：一溴二氯甲烷（二氯溴甲烷）浓度，饮用水中消毒副产物 */
+    @Excel(name = "一溴二氯甲烷", readConverterExp = "二=氯溴甲烷")
+    private String bromodichloromethane;
+
+    /** 单位：µg/L，字段说明：二溴甲烷浓度，用于有机合成和阻燃剂 */
+    @Excel(name = "二溴甲烷")
+    private String dibromomethane;
+
+    /** 单位：µg/L，字段说明：二溴氯甲烷浓度，三卤甲烷类消毒副产物 */
+    @Excel(name = "二溴氯甲烷")
+    private String dibromochloromethane;
+
+    /** 单位：µg/L，字段说明：溴仿（三溴甲烷）浓度，曾用作麻醉剂，饮用水污染物 */
+    @Excel(name = "溴仿", readConverterExp = "三=溴甲烷")
+    private String bromoform;
+
+    /** 单位：µg/L，字段说明：异丙苯（枯烯）浓度，用于生产苯酚和丙酮 */
+    @Excel(name = "异丙苯", readConverterExp = "枯=烯")
+    private String cumene;
+
+    /** 单位：µg/L，字段说明：正丙苯浓度，丙基苯的直链异构体，工业溶剂 */
+    @Excel(name = "正丙苯")
+    private String nPropylbenzene;
+
+    /** 单位：µg/L，字段说明：溴苯浓度，用于医药、农药中间体 */
+    @Excel(name = "溴苯")
+    private String bromobenzene;
+
+    /** 单位：µg/L，字段说明：1,3,5-三甲基苯（均三甲苯）浓度，用于制备合成树脂 */
+    @Excel(name = "1,3,5 - 三甲基苯", readConverterExp = "均=三甲苯")
+    private String trimethylbenzene135;
+
+    /** 单位：µg/L，字段说明：邻氯甲苯（2-氯甲苯）浓度，甲苯的邻位氯代物，有机合成原料 */
+    @Excel(name = "邻氯甲苯", readConverterExp = "2=-氯甲苯")
+    private String oChlorotoluene;
+
+    /** 单位：µg/L，字段说明：对氯甲苯（4-氯甲苯）浓度，用于生产医药、染料 */
+    @Excel(name = "对氯甲苯", readConverterExp = "4=-氯甲苯")
+    private String pChlorotoluene;
+
+    /** 单位：µg/L，字段说明：叔丁基苯浓度，用于有机合成和香料工业 */
+    @Excel(name = "叔丁基苯")
+    private String tertButylbenzene;
+
+    /** 单位：µg/L，字段说明：1,2,4-三甲基苯（偏三甲苯）浓度，用于制备均苯三甲酸 */
+    @Excel(name = "1,2,4 - 三甲基苯", readConverterExp = "偏=三甲苯")
+    private String trimethylbenzene124;
+
+    /** 单位：µg/L，字段说明：仲丁基苯浓度，丁基苯的支链异构体，溶剂 */
+    @Excel(name = "仲丁基苯")
+    private String secButylbenzene;
+
+    /** 单位：µg/L，字段说明：4-异丙基甲苯浓度，对异丙基甲苯，用于生产麝香香料 */
+    @Excel(name = "4 - 异丙基甲苯")
+    private String isopropyltoluene4;
+
+    /** 单位：µg/L，字段说明：正丁基苯浓度，丁基苯的直链异构体，工业溶剂 */
+    @Excel(name = "正丁基苯")
+    private String nButylbenzene;
+
+    /** 单位：µg/L，字段说明：环氧氯丙烷（3-氯-1,2-环氧丙烷）浓度，用于生产环氧树脂 */
+    @Excel(name = "环氧氯丙烷", readConverterExp = "3=-氯-1,2-环氧丙烷")
+    private String epichlorohydrin;
+
+    /** 单位：µg/L，字段说明：1,2,4-三甲基苯（偏三甲苯）浓度，用于制备均苯三甲酸 */
+    @Excel(name = "1,2,4 - 三甲基苯", readConverterExp = "偏=三甲苯")
+    private String trimethylbenzene14; // 注意此处为 trimethylbenzene124，而非 trimethylbenzene14
+
+    /** 单位：µg/L，字段说明：1,2-二溴-3-氯丙烷浓度，曾用作土壤熏蒸剂，剧毒 */
+    @Excel(name = "1,2 - 二溴 - 3 - 氯丙烷")
+    private String dibromo3Chloropropane12;
+
+    /** 单位：µg/L，字段说明：1,2,4-三氯苯浓度，用于生产农药和染料 */
+    @Excel(name = "1,2,4 - 三氯苯")
+    private String trichlorobenzene124;
+
+    /** 单位：µg/L，字段说明：六氯丁二烯浓度，全氯丁二烯，用作溶剂和热载体 */
+    @Excel(name = "六氯丁二烯")
+    private String hexachlorobutadiene;
+
+    /** 单位：µg/L，字段说明：2-甲基萘浓度，属于多环芳烃 */
+    @Excel(name = "2 - 甲基萘")
+    private String methylnaphthalene2;
+
+    /** 单位：µg/L，字段说明：1-甲基萘浓度，属于多环芳烃 */
+    @Excel(name = "1 - 甲基萘")
+    private String methylnaphthalene1;
+
+    /** 单位：µg/L，字段说明：1,1-二氯丙烯（1,1-二氯-1-丙烯）浓度，属于不饱和卤代烃 */
+    @Excel(name = "1,1 - 二氯丙烯", readConverterExp = "1=,1-二氯-1-丙烯")
+    private String dichloropropene11;
+
+    /** 单位：µg/L，字段说明：反式-1,3-二氯丙烯浓度，几何异构体，用于有机合成 */
+    @Excel(name = "反式 - 1,3 - 二氯丙烯")
+    private String trans13Dichloropropene;
+
+    /** 单位：µg/L，字段说明：顺式-1,3-二氯丙烯浓度，与反式结构互为同分异构体 */
+    @Excel(name = "顺式 - 1,3 - 二氯丙烯")
+    private String cis13Dichloropropene;
+
+    /** 单位：µg/L，字段说明：2,2-二氯丙烷（对称二氯丙烷）浓度，用于溶剂和化工原料 */
+    @Excel(name = "2,2 - 二氯丙烷", readConverterExp = "对=称二氯丙烷")
+    private String dichloropropane22;
+
+    /** 单位：µg/L，字段说明：1,2-二溴乙烷浓度，曾用作汽油抗震剂，有毒性 */
+    @Excel(name = "1,2 - 二溴乙烷")
+    private String dibromoethane12;
+
+    /** 单位：µg/L，字段说明：1,3-二氯丙烷浓度，用于生产农药和医药中间体 */
+    @Excel(name = "1,3 - 二氯丙烷")
+    private String dichloropropane13;
+
+    /** 2-氯甲苯 */
+    @Excel(name = "2 - 氯甲苯")
+    private String chlorotoluene2;
+
+    /** 4-氯甲苯 */
+    @Excel(name = "4 - 氯甲苯")
+    private String chlorotoluene4;
+
+    /** 1,3-二氯苯 */
+    @Excel(name = "1,3 - 二氯苯")
+    private String dichlorobenzene13;
+
+    /** 1,2,3-三氯苯 */
+    @Excel(name = "1,2,3 - 三氯苯")
+    private String trichlorobenzene123;
 
     public void setPointId(String pointId)
     {
@@ -370,6 +542,15 @@ public class TWaterQualityMonitoring extends BaseEntity
     public String getPointId()
     {
         return pointId;
+    }
+    public void setTag(String tag)
+    {
+        this.tag = tag;
+    }
+
+    public String getTag()
+    {
+        return tag;
     }
     public void setSampleTime(String sampleTime)
     {
@@ -1145,11 +1326,381 @@ public class TWaterQualityMonitoring extends BaseEntity
     {
         return id;
     }
+    public void setAnalysisNumber(String analysisNumber)
+    {
+        this.analysisNumber = analysisNumber;
+    }
+
+    public String getAnalysisNumber()
+    {
+        return analysisNumber;
+    }
+    public void setOriginalNumber(String originalNumber)
+    {
+        this.originalNumber = originalNumber;
+    }
+
+    public String getOriginalNumber()
+    {
+        return originalNumber;
+    }
+    public void setCarbonate(String carbonate)
+    {
+        this.carbonate = carbonate;
+    }
+
+    public String getCarbonate()
+    {
+        return carbonate;
+    }
+    public void setBicarbonate(String bicarbonate)
+    {
+        this.bicarbonate = bicarbonate;
+    }
+
+    public String getBicarbonate()
+    {
+        return bicarbonate;
+    }
+    public void setFerrousIon(String ferrousIon)
+    {
+        this.ferrousIon = ferrousIon;
+    }
+
+    public String getFerrousIon()
+    {
+        return ferrousIon;
+    }
+    public void setPotassium(String potassium)
+    {
+        this.potassium = potassium;
+    }
+
+    public String getPotassium()
+    {
+        return potassium;
+    }
+    public void setCalcium(String calcium)
+    {
+        this.calcium = calcium;
+    }
+
+    public String getCalcium()
+    {
+        return calcium;
+    }
+    public void setMagnesium(String magnesium)
+    {
+        this.magnesium = magnesium;
+    }
+
+    public String getMagnesium()
+    {
+        return magnesium;
+    }
+    public void setChloroprene(String chloroprene)
+    {
+        this.chloroprene = chloroprene;
+    }
+
+    public String getChloroprene()
+    {
+        return chloroprene;
+    }
+    public void setBromochloromethane(String bromochloromethane)
+    {
+        this.bromochloromethane = bromochloromethane;
+    }
+
+    public String getBromochloromethane()
+    {
+        return bromochloromethane;
+    }
+    public void setBromodichloromethane(String bromodichloromethane)
+    {
+        this.bromodichloromethane = bromodichloromethane;
+    }
+
+    public String getBromodichloromethane()
+    {
+        return bromodichloromethane;
+    }
+    public void setDibromomethane(String dibromomethane)
+    {
+        this.dibromomethane = dibromomethane;
+    }
+
+    public String getDibromomethane()
+    {
+        return dibromomethane;
+    }
+    public void setDibromochloromethane(String dibromochloromethane)
+    {
+        this.dibromochloromethane = dibromochloromethane;
+    }
+
+    public String getDibromochloromethane()
+    {
+        return dibromochloromethane;
+    }
+    public void setBromoform(String bromoform)
+    {
+        this.bromoform = bromoform;
+    }
+
+    public String getBromoform()
+    {
+        return bromoform;
+    }
+    public void setCumene(String cumene)
+    {
+        this.cumene = cumene;
+    }
+
+    public String getCumene()
+    {
+        return cumene;
+    }
+    public void setnPropylbenzene(String nPropylbenzene)
+    {
+        this.nPropylbenzene = nPropylbenzene;
+    }
+
+    public String getnPropylbenzene()
+    {
+        return nPropylbenzene;
+    }
+    public void setBromobenzene(String bromobenzene)
+    {
+        this.bromobenzene = bromobenzene;
+    }
+
+    public String getBromobenzene()
+    {
+        return bromobenzene;
+    }
+    public void setTrimethylbenzene135(String trimethylbenzene135)
+    {
+        this.trimethylbenzene135 = trimethylbenzene135;
+    }
+
+    public String getTrimethylbenzene135()
+    {
+        return trimethylbenzene135;
+    }
+    public void setoChlorotoluene(String oChlorotoluene)
+    {
+        this.oChlorotoluene = oChlorotoluene;
+    }
+
+    public String getoChlorotoluene()
+    {
+        return oChlorotoluene;
+    }
+    public void setpChlorotoluene(String pChlorotoluene)
+    {
+        this.pChlorotoluene = pChlorotoluene;
+    }
+
+    public String getpChlorotoluene()
+    {
+        return pChlorotoluene;
+    }
+    public void setTertButylbenzene(String tertButylbenzene)
+    {
+        this.tertButylbenzene = tertButylbenzene;
+    }
+
+    public String getTertButylbenzene()
+    {
+        return tertButylbenzene;
+    }
+    public void setTrimethylbenzene14(String trimethylbenzene14)
+    {
+        this.trimethylbenzene14 = trimethylbenzene14;
+    }
+
+    public String getTrimethylbenzene14()
+    {
+        return trimethylbenzene14;
+    }
+    public void setSecButylbenzene(String secButylbenzene)
+    {
+        this.secButylbenzene = secButylbenzene;
+    }
+
+    public String getSecButylbenzene()
+    {
+        return secButylbenzene;
+    }
+    public void setIsopropyltoluene4(String isopropyltoluene4)
+    {
+        this.isopropyltoluene4 = isopropyltoluene4;
+    }
+
+    public String getIsopropyltoluene4()
+    {
+        return isopropyltoluene4;
+    }
+    public void setnButylbenzene(String nButylbenzene)
+    {
+        this.nButylbenzene = nButylbenzene;
+    }
+
+    public String getnButylbenzene()
+    {
+        return nButylbenzene;
+    }
+    public void setEpichlorohydrin(String epichlorohydrin)
+    {
+        this.epichlorohydrin = epichlorohydrin;
+    }
+
+    public String getEpichlorohydrin()
+    {
+        return epichlorohydrin;
+    }
+    public void setDibromo3Chloropropane12(String dibromo3Chloropropane12)
+    {
+        this.dibromo3Chloropropane12 = dibromo3Chloropropane12;
+    }
+
+    public String getDibromo3Chloropropane12()
+    {
+        return dibromo3Chloropropane12;
+    }
+    public void setTrichlorobenzene124(String trichlorobenzene124)
+    {
+        this.trichlorobenzene124 = trichlorobenzene124;
+    }
+
+    public String getTrichlorobenzene124()
+    {
+        return trichlorobenzene124;
+    }
+    public void setHexachlorobutadiene(String hexachlorobutadiene)
+    {
+        this.hexachlorobutadiene = hexachlorobutadiene;
+    }
+
+    public String getHexachlorobutadiene()
+    {
+        return hexachlorobutadiene;
+    }
+    public void setMethylnaphthalene2(String methylnaphthalene2)
+    {
+        this.methylnaphthalene2 = methylnaphthalene2;
+    }
+
+    public String getMethylnaphthalene2()
+    {
+        return methylnaphthalene2;
+    }
+    public void setMethylnaphthalene1(String methylnaphthalene1)
+    {
+        this.methylnaphthalene1 = methylnaphthalene1;
+    }
+
+    public String getMethylnaphthalene1()
+    {
+        return methylnaphthalene1;
+    }
+    public void setDichloropropene11(String dichloropropene11)
+    {
+        this.dichloropropene11 = dichloropropene11;
+    }
+
+    public String getDichloropropene11()
+    {
+        return dichloropropene11;
+    }
+    public void setTrans13Dichloropropene(String trans13Dichloropropene)
+    {
+        this.trans13Dichloropropene = trans13Dichloropropene;
+    }
+
+    public String getTrans13Dichloropropene()
+    {
+        return trans13Dichloropropene;
+    }
+    public void setCis13Dichloropropene(String cis13Dichloropropene)
+    {
+        this.cis13Dichloropropene = cis13Dichloropropene;
+    }
+
+    public String getCis13Dichloropropene()
+    {
+        return cis13Dichloropropene;
+    }
+    public void setDichloropropane22(String dichloropropane22)
+    {
+        this.dichloropropane22 = dichloropropane22;
+    }
+
+    public String getDichloropropane22()
+    {
+        return dichloropropane22;
+    }
+    public void setDibromoethane12(String dibromoethane12)
+    {
+        this.dibromoethane12 = dibromoethane12;
+    }
+
+    public String getDibromoethane12()
+    {
+        return dibromoethane12;
+    }
+    public void setDichloropropane13(String dichloropropane13)
+    {
+        this.dichloropropane13 = dichloropropane13;
+    }
+
+    public String getDichloropropane13()
+    {
+        return dichloropropane13;
+    }
+    public void setChlorotoluene2(String chlorotoluene2)
+    {
+        this.chlorotoluene2 = chlorotoluene2;
+    }
+
+    public String getChlorotoluene2()
+    {
+        return chlorotoluene2;
+    }
+    public void setChlorotoluene4(String chlorotoluene4)
+    {
+        this.chlorotoluene4 = chlorotoluene4;
+    }
+
+    public String getChlorotoluene4()
+    {
+        return chlorotoluene4;
+    }
+    public void setDichlorobenzene13(String dichlorobenzene13)
+    {
+        this.dichlorobenzene13 = dichlorobenzene13;
+    }
+
+    public String getDichlorobenzene13()
+    {
+        return dichlorobenzene13;
+    }
+    public void setTrichlorobenzene123(String trichlorobenzene123)
+    {
+        this.trichlorobenzene123 = trichlorobenzene123;
+    }
+
+    public String getTrichlorobenzene123()
+    {
+        return trichlorobenzene123;
+    }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
                 .append("pointId", getPointId())
+                .append("tag", getTag())
                 .append("sampleTime", getSampleTime())
                 .append("color", getColor())
                 .append("odorAndTaste", getOdorAndTaste())
@@ -1236,6 +1787,47 @@ public class TWaterQualityMonitoring extends BaseEntity
                 .append("tetrachloroethane1122", getTetrachloroethane1122())
                 .append("trichloropropane123", getTrichloropropane123())
                 .append("id", getId())
+                .append("analysisNumber", getAnalysisNumber())
+                .append("originalNumber", getOriginalNumber())
+                .append("carbonate", getCarbonate())
+                .append("bicarbonate", getBicarbonate())
+                .append("ferrousIon", getFerrousIon())
+                .append("potassium", getPotassium())
+                .append("calcium", getCalcium())
+                .append("magnesium", getMagnesium())
+                .append("chloroprene", getChloroprene())
+                .append("bromochloromethane", getBromochloromethane())
+                .append("bromodichloromethane", getBromodichloromethane())
+                .append("dibromomethane", getDibromomethane())
+                .append("dibromochloromethane", getDibromochloromethane())
+                .append("bromoform", getBromoform())
+                .append("cumene", getCumene())
+                .append("nPropylbenzene", getnPropylbenzene())
+                .append("bromobenzene", getBromobenzene())
+                .append("trimethylbenzene135", getTrimethylbenzene135())
+                .append("oChlorotoluene", getoChlorotoluene())
+                .append("pChlorotoluene", getpChlorotoluene())
+                .append("tertButylbenzene", getTertButylbenzene())
+                .append("trimethylbenzene14", getTrimethylbenzene14())
+                .append("secButylbenzene", getSecButylbenzene())
+                .append("isopropyltoluene4", getIsopropyltoluene4())
+                .append("nButylbenzene", getnButylbenzene())
+                .append("epichlorohydrin", getEpichlorohydrin())
+                .append("dibromo3Chloropropane12", getDibromo3Chloropropane12())
+                .append("trichlorobenzene124", getTrichlorobenzene124())
+                .append("hexachlorobutadiene", getHexachlorobutadiene())
+                .append("methylnaphthalene2", getMethylnaphthalene2())
+                .append("methylnaphthalene1", getMethylnaphthalene1())
+                .append("dichloropropene11", getDichloropropene11())
+                .append("trans13Dichloropropene", getTrans13Dichloropropene())
+                .append("cis13Dichloropropene", getCis13Dichloropropene())
+                .append("dichloropropane22", getDichloropropane22())
+                .append("dibromoethane12", getDibromoethane12())
+                .append("dichloropropane13", getDichloropropane13())
+                .append("chlorotoluene2", getChlorotoluene2())
+                .append("chlorotoluene4", getChlorotoluene4())
+                .append("dichlorobenzene13", getDichlorobenzene13())
+                .append("trichlorobenzene123", getTrichlorobenzene123())
                 .toString();
     }
 }

@@ -12,13 +12,13 @@ import com.ruoyi.common.annotation.Excel;
 import com.ruoyi.common.core.domain.BaseEntity;
 
 /**
- * 地下水环境调查监测信息对象 t_groundwater_monitoring
+ * 地下水监测数据 t_groundwater_monitoring
  *
  * @author ruoyi
  * @date 2025-05-28
  */
 @Data
-@ApiModel("地下水环境调查监测信息")
+@ApiModel("地下水监测数据")
 public class TGroundwaterMonitoring extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
@@ -41,7 +41,7 @@ public class TGroundwaterMonitoring extends BaseEntity {
     @JsonFormat(pattern = "yyyy-MM-dd")
     @Excel(name = "调查时间", width = 30, dateFormat = "yyyy-MM-dd")
     @ApiModelProperty("调查时间")
-    private Date surveyDate;
+    private String surveyDate;
 
     /**
      * 是否发现超标污染物

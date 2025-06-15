@@ -11,18 +11,26 @@
       :row-class-name="tableRowClassName"
     >
       <!-- <el-table-column type="index" label="序号" width="55" /> -->
-      <el-table-column  prop="point_id" label="监测井" />
+      <el-table-column width="55" prop="point_id" label="编码" />
       <el-table-column width="70" prop="zb" label="指标" />
       <!-- <el-table-column prop="bzz" label="标准值" /> -->
-      <el-table-column width="110" prop="sample_time" label="监测时间" />
-      <el-table-column  width="70" prop="jcz" label="监测值" />
-           <el-table-column prop="cbbl" label="超标倍率">
-      <template v-slot="scope">
-        <span style="color: red;">
-          {{ scope.row.cbbl }}
-        </span>
-      </template>
-    </el-table-column>
+      <el-table-column width="90" prop="sample_time" label="监测时间" />
+      <el-table-column width="70" prop="jcz" label="监测值" />
+      <el-table-column width="80" prop="cbbl" label="超标倍率">
+        <template v-slot="scope">
+          <span style="color: red">
+            {{ scope.row.cbbl }}
+          </span>
+        </template>
+      </el-table-column>
+
+      <el-table-column width="80" prop="szle" label="水质类型">
+        <template v-slot="scope">
+          <span>
+            {{`IV`}}
+          </span>
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>

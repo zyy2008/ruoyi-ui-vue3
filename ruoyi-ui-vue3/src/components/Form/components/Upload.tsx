@@ -28,13 +28,15 @@ import { useRequest } from "vue-request";
 import useStore from "@/store/modules/user";
 import { Plus, Delete } from "@element-plus/icons-vue";
 import API from "@/services";
+import { asyncComputed } from "@vueuse/core";
 import request from "@/utils/http";
 
 const Index = observer(
   defineComponent({
     props: ["value", "onChange"],
     setup(props) {
-      const value = toRef(props, "value");
+      const value: Ref<string> = toRef(props, "value");
+      const dialogImageUrl = ref("");
       const dialogVisible = ref(false);
       const field: Ref<Field> = useField();
       const { loading, runAsync } = useRequest(
@@ -48,22 +50,29 @@ const Index = observer(
           manual: true,
         }
       );
-      const { data } = useRequest(
-        () => {
-          if (value.value) {
-            return request(`/dev-api/${value.value}`, {
-              method: "GET",
-              responseType: "blob",
-            }).then((res: Blob) => {
-              const url = URL.createObjectURL(res);
-              return url;
-            });
-          }
-        },
-        {
-          refreshDeps: [value],
-        }
-      );
+      const fileList = asyncComputed(async () => {
+        const arr = value.value.split(",");
+        const list = await Promise.all(
+          arr.map(async (item) => {
+            const [name, url] = item.split("&");
+            if (name && url) {
+              const res = await request(`/dev-api/${url}`, {
+                method: "GET",
+                responseType: "blob",
+              }).then((res: Blob) => {
+                const url = URL.createObjectURL(res);
+                return url;
+              });
+              return {
+                name,
+                url: res,
+                surl: url,
+              };
+            }
+          })
+        );
+        return list?.filter(Boolean);
+      });
       return () => {
         return (
           <>
@@ -71,14 +80,34 @@ const Index = observer(
               {...field.value.componentProps}
               v-loading={loading.value}
               element-loading-text="上传中..."
-              fileList={[]}
+              fileList={fileList.value}
+              onPreview={(uploadFile) => {
+                dialogImageUrl.value = uploadFile.url!;
+                dialogVisible.value = true;
+              }}
+              onRemove={(uploadFile: any) => {
+                const surl = uploadFile.surl;
+                const arr = value.value?.split(",");
+                const filter = arr.filter((item) => {
+                  const [name, url] = item.split("&");
+                  return url !== surl;
+                });
+                props.onChange(filter.length === 0 ? "" : filter.join(","));
+              }}
               httpRequest={async (opt) => {
                 const { file } = opt;
                 const formData = new FormData();
                 formData.append("file", file);
                 runAsync(formData).then((res) => {
                   if (res.code === 200) {
-                    props.onChange(res.data);
+                    const arr = value.value?.split(",");
+                    props.onChange(
+                      value.value
+                        ? [...(arr ?? []), `${file.name}&${res.data}`]?.join(
+                            ","
+                          )
+                        : [`${file.name}&${res.data}`]?.join(",")
+                    );
                     ElMessage.success("上传成功");
                   } else {
                     ElMessage.success("上传失败");
@@ -86,60 +115,23 @@ const Index = observer(
                 });
               }}
             >
-              {value.value ? (
-                <>
-                  <img
-                    class="el-upload-list__item-thumbnail"
-                    src={data.value}
-                    alt=""
-                  />
-                  <span
-                    class="el-upload-list__item-actions"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                    }}
-                  >
-                    <span
-                      class="el-upload-list__item-preview"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        dialogVisible.value = true;
-                      }}
-                    >
-                      <el-icon>
-                        <zoom-in />
-                      </el-icon>
-                    </span>
-                    <span
-                      class="el-upload-list__item-delete"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        props.onChange("");
-                      }}
-                    >
-                      <el-icon>
-                        <Delete />
-                      </el-icon>
-                    </span>
-                  </span>
-                </>
-              ) : (
-                <ElIcon>
-                  <Plus />
-                </ElIcon>
-              )}
+              <ElIcon>
+                <Plus />
+              </ElIcon>
             </ElUpload>
             <ElDialog
+              appendToBody
               modelValue={dialogVisible.value}
               onClose={() => {
                 dialogVisible.value = false;
               }}
             >
               <img
+                w-full
                 style={{
                   width: "100%",
                 }}
-                src={data.value}
+                src={dialogImageUrl.value}
               />
             </ElDialog>
           </>

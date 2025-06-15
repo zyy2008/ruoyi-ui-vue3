@@ -27,10 +27,15 @@
         <result property="altitude"    column="altitude"    />
         <result property="videoUrl"    column="video_url"    />
         <result property="deptId"    column="dept_id"    />
+        <result property="realTime"    column="real_time"    />
+        <result property="enterpriseName"    column="enterprise_name"    />
+        <result property="deviceNo"    column="device_no"    />
     </resultMap>
 
     <sql id="selectTMonitoringWellsVo">
-        select id, well_code, location, point_type, completion_date, water_buried_depth, well_elevation, well_depth, inner_diameter, pipe_material, multi_screen_pipe, screen_depth_range, groundwater_type, burial_condition, water_medium, ownership, suitable_for_longterm, longitude, latitude, altitude, video_url, dept_id from t_monitoring_wells
+        select w.device_no, w.id, well_code, location, point_type, completion_date, water_buried_depth, well_elevation, well_depth, inner_diameter, pipe_material, multi_screen_pipe, screen_depth_range, groundwater_type, burial_condition, water_medium, ownership, suitable_for_longterm, w.longitude, w.latitude, w.altitude, video_url, w.dept_id, real_time
+         ,e.enterprise_name as enterprise_name  from t_monitoring_wells w
+        left join t_enterprises e on w.dept_id=e.id
     </sql>
 
     <select id="selectTMonitoringWellsList" parameterType="TMonitoringWells" resultMap="TMonitoringWellsResult">
@@ -56,13 +61,15 @@
             <if test="latitude != null  and latitude != ''"> and latitude = #{latitude}</if>
             <if test="altitude != null  and altitude != ''"> and altitude = #{altitude}</if>
             <if test="videoUrl != null  and videoUrl != ''"> and video_url = #{videoUrl}</if>
-            <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="deptId != null  and deptId != ''"> and w.dept_id = #{deptId}</if>
+            <if test="realTime != null  and realTime != ''"> and real_time = #{realTime}</if>
+            <if test="deviceNo != null  and deviceNo != ''"> and device_no = #{deviceNo}</if>
         </where>
     </select>
 
     <select id="selectTMonitoringWellsById" parameterType="String" resultMap="TMonitoringWellsResult">
         <include refid="selectTMonitoringWellsVo"/>
-        where id = #{id}
+        where w.id = #{id}
     </select>
 
     <insert id="insertTMonitoringWells" parameterType="TMonitoringWells">
@@ -90,6 +97,8 @@
             <if test="altitude != null">altitude,</if>
             <if test="videoUrl != null">video_url,</if>
             <if test="deptId != null">dept_id,</if>
+            <if test="realTime != null">real_time,</if>
+            <if test="deviceNo != null">device_no,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
@@ -114,6 +123,8 @@
             <if test="altitude != null">#{altitude},</if>
             <if test="videoUrl != null">#{videoUrl},</if>
             <if test="deptId != null">#{deptId},</if>
+            <if test="realTime != null">#{realTime},</if>
+            <if test="deviceNo != null">#{deviceNo},</if>
         </trim>
     </insert>
 
@@ -141,6 +152,8 @@
             <if test="altitude != null">altitude = #{altitude},</if>
             <if test="videoUrl != null">video_url = #{videoUrl},</if>
             <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="realTime != null">real_time = #{realTime},</if>
+            <if test="deviceNo != null">device_no = #{deviceNo},</if>
         </trim>
         where id = #{id}
     </update>

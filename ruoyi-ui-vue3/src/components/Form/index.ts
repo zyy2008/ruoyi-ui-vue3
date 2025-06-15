@@ -20,6 +20,7 @@ import {
   UploadAjax,
   SelectGroup,
   AddPeople,
+  CheckboxGroupString,
 } from "./components";
 
 const schema = createSchemaField({
@@ -42,6 +43,7 @@ const schema = createSchemaField({
     UploadAjax,
     SelectGroup,
     AddPeople,
+    CheckboxGroupString,
   },
 });
 

@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build:prod": "vite build",
+    "build:prod": "set NODE_OPTIONS=--max-old-space-size=8192 && vite build",
     "build:stage": "vite build --mode staging",
     "preview": "vite preview",
     "openapi": "openapi2ts"

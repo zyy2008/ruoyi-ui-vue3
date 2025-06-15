@@ -3,7 +3,8 @@
     <div class="title">
       <div class="image">
         <img src="@/assets/static/subTitle.png" alt="" />
-        <span> {{ chart.chartInfo.wellCode+'(' +chart.chartInfo.location+')' }} </span>
+        <span> {{ chartTitle.chartInfo.monitoringWell }} </span>
+        <!-- <span> {{ chartTitle.chartInfo.monitoringWell+'(' +chartTitle.chartInfo.location+')' }} </span> -->
       </div>
       <el-radio-group v-model="xAxis" style="width: 150px;" @change="changeChart">
         <el-radio-button label="周"></el-radio-button>
@@ -23,7 +24,7 @@
         <div id="echart6"></div>
       </div>
     </div>
-    <ChartLineModal ref="chartLine" :chart="chart" :lineXAxis="lineXAxis" :lineSeries="lineSeries" :chartType="chartType" />
+    <ChartLineModal ref="chartLine" :chartTitle="chartTitle" :chartType="chartType" />
   </div>
 </template>
 <script setup>
@@ -31,134 +32,59 @@
   import * as echarts from "echarts";
   import ChartLineModal from "./ChartLineModal.vue";
   import { listMonitoring } from "@/api/admin/monitoring";
+  import { listWells } from "@/api/admin/wells";
+  import { getBatchData } from "@/api/monitoring";
   const chartLine = ref();
   const xAxis = ref("周");
-  let lineChart = null;
   let lineOption = {};
   const selectValue = ref("pH");
   let lineInfo = ref([]);
   let lineXAxis = ref([]);
   let lineSeries = ref([]);
-  const chartType=ref('monitor')
-  const chart = defineProps(["chartInfo"]);
-  onMounted(() => {
-    // seekLineData({ pageNum: 1, pageSize: 1000, pointId: "J01" }, 'ph');
-  });
+  const chartType = ref('monitor')
 
-  watch(chart, (newValue, oldValue) => {
-    selectValue.value = 'pH'
+  // const chartTitle = reactive({
+  //   wellCode: '',
+  //   location: ''
+  // })
+
+  let dataList = []
+  const chartTitle = defineProps(["chartInfo"]);
+  // 获取检测井数据
+  onMounted(() => {
     seekLineData({
       pageNum: 1,
       pageSize: 1000,
-      pointId: chart.chartInfo.wellCode,
-    }, 'ph');
+      pointId: chartTitle.chartInfo.monitoringWell,
+    });
+    nextTick(() => {
+      initEchart('echart1', 'pH');
+      initEchart('echart2', '温度');
+      initEchart('echart3', '水位');
+      initEchart('echart4', '溶解氧');
+      initEchart('echart5', '电导率');
+      initEchart('echart6', '氨氮');
+    });
   });
 
-  function seekLineData(option, type) {
+  function seekLineData(option) {
     chartLine.value.tableData = [];
-    listMonitoring(option).then((res) => {
-      lineOption.xAxis[0].data = [];
-      lineOption.series[0].data = [];
-      lineSeries.value = [];
-      lineXAxis.value = [];
-      const data = res.rows;
-      let dataList = data.sort((a, b) => {
-        return Number(a.sampleTime) - Number(b.sampleTime)
-      })
-
-      dataList.forEach((element, index) => {
-        chartLine.value.tableData.push({
-          ph: element.ph,
-          totalDissolvedSolids: element.totalDissolvedSolids,
-          ammoniaNitrogen: element.ammoniaNitrogen,
-          sampleTime: element.sampleTime
-        });
-        if (type === 'ph') {
-          if (element.ph) {
-            lineOption.series[0].data.push(element.ph);
-            lineSeries.value.push(element.ph);
-            lineOption.xAxis[0].data.push(element.sampleTime);
-            lineXAxis.value.push(element.sampleTime);
-          }
-        } else if (type === 'dissolved') {
-          if (element.totalDissolvedSolids) {
-            lineOption.series[0].data.push(element.totalDissolvedSolids);
-            lineSeries.value.push(element.totalDissolvedSolids);
-            lineOption.xAxis[0].data.push(element.sampleTime);
-            lineXAxis.value.push(element.sampleTime);
-          }
-        } else if (type === 'ammoniaNitrogen') {
-          if (element.ammoniaNitrogen) {
-            lineOption.series[0].data.push(element.ammoniaNitrogen);
-            lineSeries.value.push(element.ammoniaNitrogen);
-            lineOption.xAxis[0].data.push(element.sampleTime);
-            lineXAxis.value.push(element.sampleTime);
-          }
-        }
-      });
-      lineChart.setOption(lineOption);
-    });
+    getBatchData({}).then(res => {
+      if (res.code === 200) {
+        const data = res.data;
+        dataList = data.sort((a, b) => {
+          return new Date(a.monitoringTime).getTime() - new Date(b.monitoringTime).getTime()
+        })
+        chartLine.value.tableData = dataList
+      }
+    })
   }
 
-  // function changeSelect(label) {
-  //   if (label === '1') {
-  //     seekLineData({
-  //       pageNum: 1,
-  //       pageSize: 1000,
-  //       pointId: chart.chartInfo.wellCode,
-  //     }, 'ph');
-  //   } else if (label === '5') {
-  //     seekLineData({
-  //       pageNum: 1,
-  //       pageSize: 1000,
-  //       pointId: chart.chartInfo.wellCode,
-  //     }, 'dissolved');
-  //   } else if (label === '7') {
-  //     seekLineData({
-  //       pageNum: 1,
-  //       pageSize: 1000,
-  //       pointId: chart.chartInfo.wellCode,
-  //     }, 'ammoniaNitrogen');
-  //   } else {
-  //     lineOption.xAxis[0].data = [];
-  //     lineOption.series[0].data = [];
-  //     lineChart.setOption(lineOption);
-  //   }
-  // }
-
   function openChartLine() {
-    seekLineData({
-      pageNum: 1,
-      pageSize: 1000,
-      pointId: chart.chartInfo.wellCode,
-    }, 'ph');
     chartLine.value.dialogVisible = true;
     const elements = document.getElementsByClassName('RightCenter');
     elements[0].style.zIndex = 100
   }
-
-  window.openJCPageVue = function (data) {
-    let attr = data.attr;
-    seekLineData({ pageNum: 1, pageSize: 1000, pointId: attr.wellCode }, 'ph');
-    nextTick(() => {
-      chartLine.value.dialogVisible = true;
-    });
-  };
-
-  window.openLineChartPage = function (data) {
-    nextTick(() => {
-      chart.chartInfo.wellCode = data.graphic.label.text;
-    });
-  };
-
-  nextTick(() => {
-    initEchart('echart1', 'pH');
-    initEchart('echart2', '温度');
-    initEchart('echart3', '水位');
-    initEchart('echart4', '溶解氧');
-    initEchart('echart5', '电导率');
-    initEchart('echart6', '氨氮');
-  });
 
   function initEchart(id, title) {
     var chartDom = document.getElementById(id);
@@ -284,12 +210,6 @@
   }
   //切换周和月
   const changeChart = () => {
-    // if (xAxis.value === '月') {
-    //   lineOption.xAxis[0].data = ['10-01', '10-05', '10-10', '10-15', '10-20', '10-25', '10-30']
-    // } else {
-    //   lineOption.xAxis[0].data = ['周一', '周二', '周三', '周四', '周五', '周六', '周天']
-    // }
-    // lineChart.setOption(lineOption);
   };
 </script>
 
@@ -354,12 +274,6 @@
       display: flex;
       justify-content: space-between;
     }
-
-    /* #echart {
-      width: 100%;
-      margin-top: 5px;
-      height: calc(100% - 60px);
-    } */
   }
 
   :deep() .el-radio-button__original-radio:checked+.el-radio-button__inner {

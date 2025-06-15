@@ -51,3 +51,20 @@ export function delMonitoring(id) {
     method: 'delete'
   })
 }
+
+// 获取监测井最新数据
+export function getBatchData(query) {
+  return request({
+    url: '/admin/realtimeWaterQualityMonitoring/getBatchData',
+    method: 'get',
+    params: query
+  })
+}
+
+// 获取实时数据监测详细信息
+export function getBatchDataDetail(id) {
+  return request({
+    url: `/admin/realtimeWaterQualityMonitoring/${id}`,
+    method: 'get',
+  })
+}

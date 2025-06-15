@@ -4,7 +4,7 @@ import request from "@/utils/http";
 
 /** 修改地下水环境调查监测信息 PUT /admin/groundwaterMonitoring */
 export async function putAdminGroundwaterMonitoring(
-  body: API.qiyewuranyuan,
+  body: API.dexiashuijianceshuju,
   options?: { [key: string]: any }
 ) {
   return request<Record<string, any>>(`/dev-api/admin/groundwaterMonitoring`, {
@@ -19,7 +19,7 @@ export async function putAdminGroundwaterMonitoring(
 
 /** 新增地下水环境调查监测信息 POST /admin/groundwaterMonitoring */
 export async function postAdminGroundwaterMonitoring(
-  body: API.qiyewuranyuan,
+  body: API.dexiashuijianceshuju,
   options?: { [key: string]: any }
 ) {
   return request<Record<string, any>>(`/dev-api/admin/groundwaterMonitoring`, {

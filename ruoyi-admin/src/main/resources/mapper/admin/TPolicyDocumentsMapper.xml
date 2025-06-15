@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ruoyi.admin.mapper.TPolicyDocumentsMapper">
+    
+    <resultMap type="TPolicyDocuments" id="TPolicyDocumentsResult">
+        <result property="id"    column="id"    />
+        <result property="title"    column="title"    />
+        <result property="publishDate"    column="publish_date"    />
+        <result property="downloadUrl"    column="download_url"    />
+    </resultMap>
+
+    <sql id="selectTPolicyDocumentsVo">
+        select id, title, publish_date, download_url from t_policy_documents
+    </sql>
+
+    <select id="selectTPolicyDocumentsList" parameterType="TPolicyDocuments" resultMap="TPolicyDocumentsResult">
+        <include refid="selectTPolicyDocumentsVo"/>
+        <where>  
+            <if test="title != null  and title != ''"> and title = #{title}</if>
+            <if test="publishDate != null  and publishDate != ''"> and publish_date = #{publishDate}</if>
+            <if test="downloadUrl != null  and downloadUrl != ''"> and download_url = #{downloadUrl}</if>
+        </where>
+        order by publish_date desc
+    </select>
+    
+    <select id="selectTPolicyDocumentsById" parameterType="Long" resultMap="TPolicyDocumentsResult">
+        <include refid="selectTPolicyDocumentsVo"/>
+        where id = #{id}
+    </select>
+
+    <insert id="insertTPolicyDocuments" parameterType="TPolicyDocuments">
+        insert into t_policy_documents
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">id,</if>
+            <if test="title != null and title != ''">title,</if>
+            <if test="publishDate != null and publishDate != ''">publish_date,</if>
+            <if test="downloadUrl != null">download_url,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">#{id},</if>
+            <if test="title != null and title != ''">#{title},</if>
+            <if test="publishDate != null and publishDate != ''">#{publishDate},</if>
+            <if test="downloadUrl != null">#{downloadUrl},</if>
+         </trim>
+    </insert>
+
+    <update id="updateTPolicyDocuments" parameterType="TPolicyDocuments">
+        update t_policy_documents
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="title != null and title != ''">title = #{title},</if>
+            <if test="publishDate != null and publishDate != ''">publish_date = #{publishDate},</if>
+            <if test="downloadUrl != null">download_url = #{downloadUrl},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTPolicyDocumentsById" parameterType="Long">
+        delete from t_policy_documents where id = #{id}
+    </delete>
+
+    <delete id="deleteTPolicyDocumentsByIds" parameterType="String">
+        delete from t_policy_documents where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+</mapper>

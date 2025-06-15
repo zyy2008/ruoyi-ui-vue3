@@ -5,188 +5,366 @@
 <mapper namespace="com.ruoyi.admin.mapper.TWaterQualityMonitoringMapper">
 
     <resultMap type="TWaterQualityMonitoring" id="TWaterQualityMonitoringResult">
-        <result property="pointId"    column="point_id"    />
-        <result property="sampleTime"    column="sample_time"    />
-        <result property="color"    column="color"    />
-        <result property="odorAndTaste"    column="odor_and_taste"    />
-        <result property="turbidity"    column="turbidity"    />
-        <result property="visibleMatters"    column="visible_matters"    />
-        <result property="ph"    column="ph"    />
-        <result property="totalHardness"    column="total_hardness"    />
-        <result property="totalDissolvedSolids"    column="total_dissolved_solids"    />
-        <result property="sulfate"    column="sulfate"    />
-        <result property="chloride"    column="chloride"    />
-        <result property="iron"    column="iron"    />
-        <result property="manganese"    column="manganese"    />
-        <result property="aluminum"    column="aluminum"    />
-        <result property="anionicSurfactant"    column="anionic_surfactant"    />
-        <result property="oxygenConsumption"    column="oxygen_consumption"    />
-        <result property="sulfide"    column="sulfide"    />
-        <result property="sodium"    column="sodium"    />
-        <result property="nitriteNitrogen"    column="nitrite_nitrogen"    />
-        <result property="nitrateNitrogen"    column="nitrate_nitrogen"    />
-        <result property="iodide"    column="iodide"    />
-        <result property="selenium"    column="selenium"    />
-        <result property="copper"    column="copper"    />
-        <result property="zinc"    column="zinc"    />
-        <result property="volatilePhenol"    column="volatile_phenol"    />
-        <result property="ammoniaNitrogen"    column="ammonia_nitrogen"    />
-        <result property="cyanide"    column="cyanide"    />
-        <result property="fluoride"    column="fluoride"    />
-        <result property="mercury"    column="mercury"    />
-        <result property="arsenic"    column="arsenic"    />
-        <result property="cadmium"    column="cadmium"    />
-        <result property="chromiumVi"    column="chromium_vi"    />
-        <result property="lead"    column="lead"    />
-        <result property="chloroform"    column="chloroform"    />
-        <result property="carbonTetrachloride"    column="carbon_tetrachloride"    />
-        <result property="benzene"    column="benzene"    />
-        <result property="toluene"    column="toluene"    />
-        <result property="molybdenum"    column="molybdenum"    />
-        <result property="vanadium"    column="vanadium"    />
-        <result property="cobalt"    column="cobalt"    />
-        <result property="nickel"    column="nickel"    />
-        <result property="dichloromethane"    column="dichloromethane"    />
-        <result property="dichloroethane12"    column="dichloroethane_1_2"    />
-        <result property="trichloroethane111"    column="trichloroethane_1_1_1"    />
-        <result property="trichloroethane112"    column="trichloroethane_1_1_2"    />
-        <result property="dichloropropane12"    column="dichloropropane_1_2"    />
-        <result property="vinylChloride"    column="vinyl_chloride"    />
-        <result property="dichloroethylene11"    column="dichloroethylene_1_1"    />
-        <result property="transDichloroethylene12"    column="trans_dichloroethylene_1_2"    />
-        <result property="cisDichloroethylene12"    column="cis_dichloroethylene_1_2"    />
-        <result property="trichloroethylene"    column="trichloroethylene"    />
-        <result property="tetrachloroethylene"    column="tetrachloroethylene"    />
-        <result property="chlorobenzene"    column="chlorobenzene"    />
-        <result property="dichlorobenzene12"    column="dichlorobenzene_1_2"    />
-        <result property="dichlorobenzene14"    column="dichlorobenzene_1_4"    />
-        <result property="ethylbenzene"    column="ethylbenzene"    />
-        <result property="xyleneOrtho"    column="xylene_ortho"    />
-        <result property="xyleneMetaPara"    column="xylene_meta_para"    />
-        <result property="styrene"    column="styrene"    />
-        <result property="nitrobenzene"    column="nitrobenzene"    />
-        <result property="naphthalene"    column="naphthalene"    />
-        <result property="anthracene"    column="anthracene"    />
-        <result property="fluoranthene"    column="fluoranthene"    />
-        <result property="benzoBFluoranthene"    column="benzo_b_fluoranthene"    />
-        <result property="benzoAPyrene"    column="benzo_a_pyrene"    />
-        <result property="petroleumHydrocarbonsC6C9"    column="petroleum_hydrocarbons_c6_c9"    />
-        <result property="petroleumHydrocarbonsC10C40"    column="petroleum_hydrocarbons_c10_c40"    />
-        <result property="phenol"    column="phenol"    />
-        <result property="chlorophenol2"    column="chlorophenol_2"    />
-        <result property="aniline"    column="aniline"    />
-        <result property="acenaphthylene"    column="acenaphthylene"    />
-        <result property="acenaphthene"    column="acenaphthene"    />
-        <result property="fluorene"    column="fluorene"    />
-        <result property="phenanthrene"    column="phenanthrene"    />
-        <result property="pyrene"    column="pyrene"    />
-        <result property="benzoAAnthracene"    column="benzo_a_anthracene"    />
-        <result property="chrysene"    column="chrysene"    />
-        <result property="benzoKFluoranthene"    column="benzo_k_fluoranthene"    />
-        <result property="indeno123CdPyrene"    column="indeno_1_2_3_cd_pyrene"    />
-        <result property="dibenzoAHAnthracene"    column="dibenzo_a_h_anthracene"    />
-        <result property="benzoGHIPerylene"    column="benzo_g_h_i_perylene"    />
-        <result property="chloromethane"    column="chloromethane"    />
-        <result property="dichloroethane11"    column="dichloroethane_1_1"    />
-        <result property="tetrachloroethane1112"    column="tetrachloroethane_1_1_1_2"    />
-        <result property="tetrachloroethane1122"    column="tetrachloroethane_1_1_2_2"    />
-        <result property="trichloropropane123"    column="trichloropropane_1_2_3"    />
-        <result property="id"    column="id"    />
+        <result property="pointId" column="point_id"/>
+        <result property="tag" column="tag"/>
+        <result property="sampleTime" column="sample_time"/>
+        <result property="color" column="color"/>
+        <result property="odorAndTaste" column="odor_and_taste"/>
+        <result property="turbidity" column="turbidity"/>
+        <result property="visibleMatters" column="visible_matters"/>
+        <result property="ph" column="ph"/>
+        <result property="totalHardness" column="total_hardness"/>
+        <result property="totalDissolvedSolids" column="total_dissolved_solids"/>
+        <result property="sulfate" column="sulfate"/>
+        <result property="chloride" column="chloride"/>
+        <result property="iron" column="iron"/>
+        <result property="manganese" column="manganese"/>
+        <result property="aluminum" column="aluminum"/>
+        <result property="anionicSurfactant" column="anionic_surfactant"/>
+        <result property="oxygenConsumption" column="oxygen_consumption"/>
+        <result property="sulfide" column="sulfide"/>
+        <result property="sodium" column="sodium"/>
+        <result property="nitriteNitrogen" column="nitrite_nitrogen"/>
+        <result property="nitrateNitrogen" column="nitrate_nitrogen"/>
+        <result property="iodide" column="iodide"/>
+        <result property="selenium" column="selenium"/>
+        <result property="copper" column="copper"/>
+        <result property="zinc" column="zinc"/>
+        <result property="volatilePhenol" column="volatile_phenol"/>
+        <result property="ammoniaNitrogen" column="ammonia_nitrogen"/>
+        <result property="cyanide" column="cyanide"/>
+        <result property="fluoride" column="fluoride"/>
+        <result property="mercury" column="mercury"/>
+        <result property="arsenic" column="arsenic"/>
+        <result property="cadmium" column="cadmium"/>
+        <result property="chromiumVi" column="chromium_vi"/>
+        <result property="lead" column="lead"/>
+        <result property="chloroform" column="chloroform"/>
+        <result property="carbonTetrachloride" column="carbon_tetrachloride"/>
+        <result property="benzene" column="benzene"/>
+        <result property="toluene" column="toluene"/>
+        <result property="molybdenum" column="molybdenum"/>
+        <result property="vanadium" column="vanadium"/>
+        <result property="cobalt" column="cobalt"/>
+        <result property="nickel" column="nickel"/>
+        <result property="dichloromethane" column="dichloromethane"/>
+        <result property="dichloroethane12" column="dichloroethane_1_2"/>
+        <result property="trichloroethane111" column="trichloroethane_1_1_1"/>
+        <result property="trichloroethane112" column="trichloroethane_1_1_2"/>
+        <result property="dichloropropane12" column="dichloropropane_1_2"/>
+        <result property="vinylChloride" column="vinyl_chloride"/>
+        <result property="dichloroethylene11" column="dichloroethylene_1_1"/>
+        <result property="transDichloroethylene12" column="trans_dichloroethylene_1_2"/>
+        <result property="cisDichloroethylene12" column="cis_dichloroethylene_1_2"/>
+        <result property="trichloroethylene" column="trichloroethylene"/>
+        <result property="tetrachloroethylene" column="tetrachloroethylene"/>
+        <result property="chlorobenzene" column="chlorobenzene"/>
+        <result property="dichlorobenzene12" column="dichlorobenzene_1_2"/>
+        <result property="dichlorobenzene14" column="dichlorobenzene_1_4"/>
+        <result property="ethylbenzene" column="ethylbenzene"/>
+        <result property="xyleneOrtho" column="xylene_ortho"/>
+        <result property="xyleneMetaPara" column="xylene_meta_para"/>
+        <result property="styrene" column="styrene"/>
+        <result property="nitrobenzene" column="nitrobenzene"/>
+        <result property="naphthalene" column="naphthalene"/>
+        <result property="anthracene" column="anthracene"/>
+        <result property="fluoranthene" column="fluoranthene"/>
+        <result property="benzoBFluoranthene" column="benzo_b_fluoranthene"/>
+        <result property="benzoAPyrene" column="benzo_a_pyrene"/>
+        <result property="petroleumHydrocarbonsC6C9" column="petroleum_hydrocarbons_c6_c9"/>
+        <result property="petroleumHydrocarbonsC10C40" column="petroleum_hydrocarbons_c10_c40"/>
+        <result property="phenol" column="phenol"/>
+        <result property="chlorophenol2" column="chlorophenol_2"/>
+        <result property="aniline" column="aniline"/>
+        <result property="acenaphthylene" column="acenaphthylene"/>
+        <result property="acenaphthene" column="acenaphthene"/>
+        <result property="fluorene" column="fluorene"/>
+        <result property="phenanthrene" column="phenanthrene"/>
+        <result property="pyrene" column="pyrene"/>
+        <result property="benzoAAnthracene" column="benzo_a_anthracene"/>
+        <result property="chrysene" column="chrysene"/>
+        <result property="benzoKFluoranthene" column="benzo_k_fluoranthene"/>
+        <result property="indeno123CdPyrene" column="indeno_1_2_3_cd_pyrene"/>
+        <result property="dibenzoAHAnthracene" column="dibenzo_a_h_anthracene"/>
+        <result property="benzoGHIPerylene" column="benzo_g_h_i_perylene"/>
+        <result property="chloromethane" column="chloromethane"/>
+        <result property="dichloroethane11" column="dichloroethane_1_1"/>
+        <result property="tetrachloroethane1112" column="tetrachloroethane_1_1_1_2"/>
+        <result property="tetrachloroethane1122" column="tetrachloroethane_1_1_2_2"/>
+        <result property="trichloropropane123" column="trichloropropane_1_2_3"/>
+        <result property="id" column="id"/>
+        <result property="analysisNumber" column="analysis_number"/>
+        <result property="originalNumber" column="original_number"/>
+        <result property="carbonate" column="carbonate"/>
+        <result property="bicarbonate" column="bicarbonate"/>
+        <result property="ferrousIon" column="ferrous_ion"/>
+        <result property="potassium" column="potassium"/>
+        <result property="calcium" column="calcium"/>
+        <result property="magnesium" column="magnesium"/>
+        <result property="chloroprene" column="chloroprene"/>
+        <result property="bromochloromethane" column="bromochloromethane"/>
+        <result property="bromodichloromethane" column="bromodichloromethane"/>
+        <result property="dibromomethane" column="dibromomethane"/>
+        <result property="dibromochloromethane" column="dibromochloromethane"/>
+        <result property="bromoform" column="bromoform"/>
+        <result property="cumene" column="cumene"/>
+        <result property="nPropylbenzene" column="n_propylbenzene"/>
+        <result property="bromobenzene" column="bromobenzene"/>
+        <result property="trimethylbenzene135" column="trimethylbenzene_1_3_5"/>
+        <result property="oChlorotoluene" column="o_chlorotoluene"/>
+        <result property="pChlorotoluene" column="p_chlorotoluene"/>
+        <result property="tertButylbenzene" column="tert_butylbenzene"/>
+        <result property="trimethylbenzene14" column="trimethylbenzene_1__4"/>
+        <result property="secButylbenzene" column="sec_butylbenzene"/>
+        <result property="isopropyltoluene4" column="isopropyltoluene_4"/>
+        <result property="nButylbenzene" column="n_butylbenzene"/>
+        <result property="epichlorohydrin" column="epichlorohydrin"/>
+        <result property="dibromo3Chloropropane12" column="dibromo3_chloropropane_1_2"/>
+        <result property="trichlorobenzene124" column="trichlorobenzene_1_2_4"/>
+        <result property="hexachlorobutadiene" column="hexachlorobutadiene"/>
+        <result property="methylnaphthalene2" column="methylnaphthalene_2"/>
+        <result property="methylnaphthalene1" column="methylnaphthalene_1"/>
+        <result property="dichloropropene11" column="dichloropropene_1_1"/>
+        <result property="trans13Dichloropropene" column="trans1_3_dichloropropene"/>
+        <result property="cis13Dichloropropene" column="cis1_3_dichloropropene"/>
+        <result property="dichloropropane22" column="dichloropropane_2_2"/>
+        <result property="dibromoethane12" column="dibromoethane_1_2"/>
+        <result property="dichloropropane13" column="dichloropropane_1_3"/>
+        <result property="chlorotoluene2" column="chlorotoluene_2"/>
+        <result property="chlorotoluene4" column="chlorotoluene_4"/>
+        <result property="dichlorobenzene13" column="dichlorobenzene_1_3"/>
+        <result property="trichlorobenzene123" column="trichlorobenzene_1_2_3"/>
     </resultMap>
 
     <sql id="selectTWaterQualityMonitoringVo">
-        select point_id, sample_time, color, odor_and_taste, turbidity, visible_matters, ph, total_hardness, total_dissolved_solids, sulfate, chloride, iron, manganese, aluminum, anionic_surfactant, oxygen_consumption, sulfide, sodium, nitrite_nitrogen, nitrate_nitrogen, iodide, selenium, copper, zinc, volatile_phenol, ammonia_nitrogen, cyanide, fluoride, mercury, arsenic, cadmium, chromium_vi, lead, chloroform, carbon_tetrachloride, benzene, toluene, molybdenum, vanadium, cobalt, nickel, dichloromethane, dichloroethane_1_2, trichloroethane_1_1_1, trichloroethane_1_1_2, dichloropropane_1_2, vinyl_chloride, dichloroethylene_1_1, trans_dichloroethylene_1_2, cis_dichloroethylene_1_2, trichloroethylene, tetrachloroethylene, chlorobenzene, dichlorobenzene_1_2, dichlorobenzene_1_4, ethylbenzene, xylene_ortho, xylene_meta_para, styrene, nitrobenzene, naphthalene, anthracene, fluoranthene, benzo_b_fluoranthene, benzo_a_pyrene, petroleum_hydrocarbons_c6_c9, petroleum_hydrocarbons_c10_c40, phenol, chlorophenol_2, aniline, acenaphthylene, acenaphthene, fluorene, phenanthrene, pyrene, benzo_a_anthracene, chrysene, benzo_k_fluoranthene, indeno_1_2_3_cd_pyrene, dibenzo_a_h_anthracene, benzo_g_h_i_perylene, chloromethane, dichloroethane_1_1, tetrachloroethane_1_1_1_2, tetrachloroethane_1_1_2_2, trichloropropane_1_2_3, id from t_water_quality_monitoring
+        select point_id, tag, sample_time, color, odor_and_taste, turbidity, visible_matters, ph, total_hardness, total_dissolved_solids, sulfate, chloride, iron, manganese, aluminum, anionic_surfactant, oxygen_consumption, sulfide, sodium, nitrite_nitrogen, nitrate_nitrogen, iodide, selenium, copper, zinc, volatile_phenol, ammonia_nitrogen, cyanide, fluoride, mercury, arsenic, cadmium, chromium_vi, lead, chloroform, carbon_tetrachloride, benzene, toluene, molybdenum, vanadium, cobalt, nickel, dichloromethane, dichloroethane_1_2, trichloroethane_1_1_1, trichloroethane_1_1_2, dichloropropane_1_2, vinyl_chloride, dichloroethylene_1_1, trans_dichloroethylene_1_2, cis_dichloroethylene_1_2, trichloroethylene, tetrachloroethylene, chlorobenzene, dichlorobenzene_1_2, dichlorobenzene_1_4, ethylbenzene, xylene_ortho, xylene_meta_para, styrene, nitrobenzene, naphthalene, anthracene, fluoranthene, benzo_b_fluoranthene, benzo_a_pyrene, petroleum_hydrocarbons_c6_c9, petroleum_hydrocarbons_c10_c40, phenol, chlorophenol_2, aniline, acenaphthylene, acenaphthene, fluorene, phenanthrene, pyrene, benzo_a_anthracene, chrysene, benzo_k_fluoranthene, indeno_1_2_3_cd_pyrene, dibenzo_a_h_anthracene, benzo_g_h_i_perylene, chloromethane, dichloroethane_1_1, tetrachloroethane_1_1_1_2, tetrachloroethane_1_1_2_2, trichloropropane_1_2_3, id, analysis_number, original_number, carbonate, bicarbonate, ferrous_ion, potassium, calcium, magnesium, chloroprene, bromochloromethane, bromodichloromethane, dibromomethane, dibromochloromethane, bromoform, cumene, n_propylbenzene, bromobenzene, trimethylbenzene_1_3_5, o_chlorotoluene, p_chlorotoluene, tert_butylbenzene, trimethylbenzene_1__4, sec_butylbenzene, isopropyltoluene_4, n_butylbenzene, epichlorohydrin, dibromo3_chloropropane_1_2, trichlorobenzene_1_2_4, hexachlorobutadiene, methylnaphthalene_2, methylnaphthalene_1, dichloropropene_1_1, trans1_3_dichloropropene, cis1_3_dichloropropene, dichloropropane_2_2, dibromoethane_1_2, dichloropropane_1_3, chlorotoluene_2, chlorotoluene_4, dichlorobenzene_1_3, trichlorobenzene_1_2_3 from t_water_quality_monitoring
     </sql>
 
-    <select id="selectTWaterQualityMonitoringList" parameterType="TWaterQualityMonitoring" resultMap="TWaterQualityMonitoringResult">
+    <select id="selectTWaterQualityMonitoringList" parameterType="TWaterQualityMonitoring"
+            resultMap="TWaterQualityMonitoringResult">
         <include refid="selectTWaterQualityMonitoringVo"/>
         <where>
-            <if test="pointId != null  and pointId != ''"> and point_id = #{pointId}</if>
-            <if test="sampleTime != null  and sampleTime != ''"> and sample_time = #{sampleTime}</if>
-            <if test="color != null  and color != ''"> and color = #{color}</if>
-            <if test="odorAndTaste != null  and odorAndTaste != ''"> and odor_and_taste = #{odorAndTaste}</if>
-            <if test="turbidity != null  and turbidity != ''"> and turbidity = #{turbidity}</if>
-            <if test="visibleMatters != null  and visibleMatters != ''"> and visible_matters = #{visibleMatters}</if>
-            <if test="ph != null  and ph != ''"> and ph = #{ph}</if>
-            <if test="totalHardness != null  and totalHardness != ''"> and total_hardness = #{totalHardness}</if>
-            <if test="totalDissolvedSolids != null  and totalDissolvedSolids != ''"> and total_dissolved_solids = #{totalDissolvedSolids}</if>
-            <if test="sulfate != null  and sulfate != ''"> and sulfate = #{sulfate}</if>
-            <if test="chloride != null  and chloride != ''"> and chloride = #{chloride}</if>
-            <if test="iron != null  and iron != ''"> and iron = #{iron}</if>
-            <if test="manganese != null  and manganese != ''"> and manganese = #{manganese}</if>
-            <if test="aluminum != null  and aluminum != ''"> and aluminum = #{aluminum}</if>
-            <if test="anionicSurfactant != null  and anionicSurfactant != ''"> and anionic_surfactant = #{anionicSurfactant}</if>
-            <if test="oxygenConsumption != null  and oxygenConsumption != ''"> and oxygen_consumption = #{oxygenConsumption}</if>
-            <if test="sulfide != null  and sulfide != ''"> and sulfide = #{sulfide}</if>
-            <if test="sodium != null  and sodium != ''"> and sodium = #{sodium}</if>
-            <if test="nitriteNitrogen != null  and nitriteNitrogen != ''"> and nitrite_nitrogen = #{nitriteNitrogen}</if>
-            <if test="nitrateNitrogen != null  and nitrateNitrogen != ''"> and nitrate_nitrogen = #{nitrateNitrogen}</if>
-            <if test="iodide != null  and iodide != ''"> and iodide = #{iodide}</if>
-            <if test="selenium != null  and selenium != ''"> and selenium = #{selenium}</if>
-            <if test="copper != null  and copper != ''"> and copper = #{copper}</if>
-            <if test="zinc != null  and zinc != ''"> and zinc = #{zinc}</if>
-            <if test="volatilePhenol != null  and volatilePhenol != ''"> and volatile_phenol = #{volatilePhenol}</if>
-            <if test="ammoniaNitrogen != null  and ammoniaNitrogen != ''"> and ammonia_nitrogen = #{ammoniaNitrogen}</if>
-            <if test="cyanide != null  and cyanide != ''"> and cyanide = #{cyanide}</if>
-            <if test="fluoride != null  and fluoride != ''"> and fluoride = #{fluoride}</if>
-            <if test="mercury != null  and mercury != ''"> and mercury = #{mercury}</if>
-            <if test="arsenic != null  and arsenic != ''"> and arsenic = #{arsenic}</if>
-            <if test="cadmium != null  and cadmium != ''"> and cadmium = #{cadmium}</if>
-            <if test="chromiumVi != null  and chromiumVi != ''"> and chromium_vi = #{chromiumVi}</if>
-            <if test="lead != null  and lead != ''"> and lead = #{lead}</if>
-            <if test="chloroform != null  and chloroform != ''"> and chloroform = #{chloroform}</if>
-            <if test="carbonTetrachloride != null  and carbonTetrachloride != ''"> and carbon_tetrachloride = #{carbonTetrachloride}</if>
-            <if test="benzene != null  and benzene != ''"> and benzene = #{benzene}</if>
-            <if test="toluene != null  and toluene != ''"> and toluene = #{toluene}</if>
-            <if test="molybdenum != null  and molybdenum != ''"> and molybdenum = #{molybdenum}</if>
-            <if test="vanadium != null  and vanadium != ''"> and vanadium = #{vanadium}</if>
-            <if test="cobalt != null  and cobalt != ''"> and cobalt = #{cobalt}</if>
-            <if test="nickel != null  and nickel != ''"> and nickel = #{nickel}</if>
-            <if test="dichloromethane != null  and dichloromethane != ''"> and dichloromethane = #{dichloromethane}</if>
-            <if test="dichloroethane12 != null  and dichloroethane12 != ''"> and dichloroethane_1_2 = #{dichloroethane12}</if>
-            <if test="trichloroethane111 != null  and trichloroethane111 != ''"> and trichloroethane_1_1_1 = #{trichloroethane111}</if>
-            <if test="trichloroethane112 != null  and trichloroethane112 != ''"> and trichloroethane_1_1_2 = #{trichloroethane112}</if>
-            <if test="dichloropropane12 != null  and dichloropropane12 != ''"> and dichloropropane_1_2 = #{dichloropropane12}</if>
-            <if test="vinylChloride != null  and vinylChloride != ''"> and vinyl_chloride = #{vinylChloride}</if>
-            <if test="dichloroethylene11 != null  and dichloroethylene11 != ''"> and dichloroethylene_1_1 = #{dichloroethylene11}</if>
-            <if test="transDichloroethylene12 != null  and transDichloroethylene12 != ''"> and trans_dichloroethylene_1_2 = #{transDichloroethylene12}</if>
-            <if test="cisDichloroethylene12 != null  and cisDichloroethylene12 != ''"> and cis_dichloroethylene_1_2 = #{cisDichloroethylene12}</if>
-            <if test="trichloroethylene != null  and trichloroethylene != ''"> and trichloroethylene = #{trichloroethylene}</if>
-            <if test="tetrachloroethylene != null  and tetrachloroethylene != ''"> and tetrachloroethylene = #{tetrachloroethylene}</if>
-            <if test="chlorobenzene != null  and chlorobenzene != ''"> and chlorobenzene = #{chlorobenzene}</if>
-            <if test="dichlorobenzene12 != null  and dichlorobenzene12 != ''"> and dichlorobenzene_1_2 = #{dichlorobenzene12}</if>
-            <if test="dichlorobenzene14 != null  and dichlorobenzene14 != ''"> and dichlorobenzene_1_4 = #{dichlorobenzene14}</if>
-            <if test="ethylbenzene != null  and ethylbenzene != ''"> and ethylbenzene = #{ethylbenzene}</if>
-            <if test="xyleneOrtho != null  and xyleneOrtho != ''"> and xylene_ortho = #{xyleneOrtho}</if>
-            <if test="xyleneMetaPara != null  and xyleneMetaPara != ''"> and xylene_meta_para = #{xyleneMetaPara}</if>
-            <if test="styrene != null  and styrene != ''"> and styrene = #{styrene}</if>
-            <if test="nitrobenzene != null  and nitrobenzene != ''"> and nitrobenzene = #{nitrobenzene}</if>
-            <if test="naphthalene != null  and naphthalene != ''"> and naphthalene = #{naphthalene}</if>
-            <if test="anthracene != null  and anthracene != ''"> and anthracene = #{anthracene}</if>
-            <if test="fluoranthene != null  and fluoranthene != ''"> and fluoranthene = #{fluoranthene}</if>
-            <if test="benzoBFluoranthene != null  and benzoBFluoranthene != ''"> and benzo_b_fluoranthene = #{benzoBFluoranthene}</if>
-            <if test="benzoAPyrene != null  and benzoAPyrene != ''"> and benzo_a_pyrene = #{benzoAPyrene}</if>
-            <if test="petroleumHydrocarbonsC6C9 != null  and petroleumHydrocarbonsC6C9 != ''"> and petroleum_hydrocarbons_c6_c9 = #{petroleumHydrocarbonsC6C9}</if>
-            <if test="petroleumHydrocarbonsC10C40 != null  and petroleumHydrocarbonsC10C40 != ''"> and petroleum_hydrocarbons_c10_c40 = #{petroleumHydrocarbonsC10C40}</if>
-            <if test="phenol != null  and phenol != ''"> and phenol = #{phenol}</if>
-            <if test="chlorophenol2 != null  and chlorophenol2 != ''"> and chlorophenol_2 = #{chlorophenol2}</if>
-            <if test="aniline != null  and aniline != ''"> and aniline = #{aniline}</if>
-            <if test="acenaphthylene != null  and acenaphthylene != ''"> and acenaphthylene = #{acenaphthylene}</if>
-            <if test="acenaphthene != null  and acenaphthene != ''"> and acenaphthene = #{acenaphthene}</if>
-            <if test="fluorene != null  and fluorene != ''"> and fluorene = #{fluorene}</if>
-            <if test="phenanthrene != null  and phenanthrene != ''"> and phenanthrene = #{phenanthrene}</if>
-            <if test="pyrene != null  and pyrene != ''"> and pyrene = #{pyrene}</if>
-            <if test="benzoAAnthracene != null  and benzoAAnthracene != ''"> and benzo_a_anthracene = #{benzoAAnthracene}</if>
-            <if test="chrysene != null  and chrysene != ''"> and chrysene = #{chrysene}</if>
-            <if test="benzoKFluoranthene != null  and benzoKFluoranthene != ''"> and benzo_k_fluoranthene = #{benzoKFluoranthene}</if>
-            <if test="indeno123CdPyrene != null  and indeno123CdPyrene != ''"> and indeno_1_2_3_cd_pyrene = #{indeno123CdPyrene}</if>
-            <if test="dibenzoAHAnthracene != null  and dibenzoAHAnthracene != ''"> and dibenzo_a_h_anthracene = #{dibenzoAHAnthracene}</if>
-            <if test="benzoGHIPerylene != null  and benzoGHIPerylene != ''"> and benzo_g_h_i_perylene = #{benzoGHIPerylene}</if>
-            <if test="chloromethane != null  and chloromethane != ''"> and chloromethane = #{chloromethane}</if>
-            <if test="dichloroethane11 != null  and dichloroethane11 != ''"> and dichloroethane_1_1 = #{dichloroethane11}</if>
-            <if test="tetrachloroethane1112 != null  and tetrachloroethane1112 != ''"> and tetrachloroethane_1_1_1_2 = #{tetrachloroethane1112}</if>
-            <if test="tetrachloroethane1122 != null  and tetrachloroethane1122 != ''"> and tetrachloroethane_1_1_2_2 = #{tetrachloroethane1122}</if>
-            <if test="trichloropropane123 != null  and trichloropropane123 != ''"> and trichloropropane_1_2_3 = #{trichloropropane123}</if>
+            <if test="pointId != null  and pointId != ''">and point_id like concat('%', #{pointId}, '%')</if>
+            <if test="tag != null  and tag != ''">and tag = #{tag}</if>
+            <if test="sampleTime != null  and sampleTime != ''">and sample_time = #{sampleTime}</if>
+            <if test="color != null  and color != ''">and color = #{color}</if>
+            <if test="odorAndTaste != null  and odorAndTaste != ''">and odor_and_taste = #{odorAndTaste}</if>
+            <if test="turbidity != null  and turbidity != ''">and turbidity = #{turbidity}</if>
+            <if test="visibleMatters != null  and visibleMatters != ''">and visible_matters = #{visibleMatters}</if>
+            <if test="ph != null  and ph != ''">and ph = #{ph}</if>
+            <if test="totalHardness != null  and totalHardness != ''">and total_hardness = #{totalHardness}</if>
+            <if test="totalDissolvedSolids != null  and totalDissolvedSolids != ''">and total_dissolved_solids =
+                #{totalDissolvedSolids}
+            </if>
+            <if test="sulfate != null  and sulfate != ''">and sulfate = #{sulfate}</if>
+            <if test="chloride != null  and chloride != ''">and chloride = #{chloride}</if>
+            <if test="iron != null  and iron != ''">and iron = #{iron}</if>
+            <if test="manganese != null  and manganese != ''">and manganese = #{manganese}</if>
+            <if test="aluminum != null  and aluminum != ''">and aluminum = #{aluminum}</if>
+            <if test="anionicSurfactant != null  and anionicSurfactant != ''">and anionic_surfactant =
+                #{anionicSurfactant}
+            </if>
+            <if test="oxygenConsumption != null  and oxygenConsumption != ''">and oxygen_consumption =
+                #{oxygenConsumption}
+            </if>
+            <if test="sulfide != null  and sulfide != ''">and sulfide = #{sulfide}</if>
+            <if test="sodium != null  and sodium != ''">and sodium = #{sodium}</if>
+            <if test="nitriteNitrogen != null  and nitriteNitrogen != ''">and nitrite_nitrogen = #{nitriteNitrogen}</if>
+            <if test="nitrateNitrogen != null  and nitrateNitrogen != ''">and nitrate_nitrogen = #{nitrateNitrogen}</if>
+            <if test="iodide != null  and iodide != ''">and iodide = #{iodide}</if>
+            <if test="selenium != null  and selenium != ''">and selenium = #{selenium}</if>
+            <if test="copper != null  and copper != ''">and copper = #{copper}</if>
+            <if test="zinc != null  and zinc != ''">and zinc = #{zinc}</if>
+            <if test="volatilePhenol != null  and volatilePhenol != ''">and volatile_phenol = #{volatilePhenol}</if>
+            <if test="ammoniaNitrogen != null  and ammoniaNitrogen != ''">and ammonia_nitrogen = #{ammoniaNitrogen}</if>
+            <if test="cyanide != null  and cyanide != ''">and cyanide = #{cyanide}</if>
+            <if test="fluoride != null  and fluoride != ''">and fluoride = #{fluoride}</if>
+            <if test="mercury != null  and mercury != ''">and mercury = #{mercury}</if>
+            <if test="arsenic != null  and arsenic != ''">and arsenic = #{arsenic}</if>
+            <if test="cadmium != null  and cadmium != ''">and cadmium = #{cadmium}</if>
+            <if test="chromiumVi != null  and chromiumVi != ''">and chromium_vi = #{chromiumVi}</if>
+            <if test="lead != null  and lead != ''">and lead = #{lead}</if>
+            <if test="chloroform != null  and chloroform != ''">and chloroform = #{chloroform}</if>
+            <if test="carbonTetrachloride != null  and carbonTetrachloride != ''">and carbon_tetrachloride =
+                #{carbonTetrachloride}
+            </if>
+            <if test="benzene != null  and benzene != ''">and benzene = #{benzene}</if>
+            <if test="toluene != null  and toluene != ''">and toluene = #{toluene}</if>
+            <if test="molybdenum != null  and molybdenum != ''">and molybdenum = #{molybdenum}</if>
+            <if test="vanadium != null  and vanadium != ''">and vanadium = #{vanadium}</if>
+            <if test="cobalt != null  and cobalt != ''">and cobalt = #{cobalt}</if>
+            <if test="nickel != null  and nickel != ''">and nickel = #{nickel}</if>
+            <if test="dichloromethane != null  and dichloromethane != ''">and dichloromethane = #{dichloromethane}</if>
+            <if test="dichloroethane12 != null  and dichloroethane12 != ''">and dichloroethane_1_2 =
+                #{dichloroethane12}
+            </if>
+            <if test="trichloroethane111 != null  and trichloroethane111 != ''">and trichloroethane_1_1_1 =
+                #{trichloroethane111}
+            </if>
+            <if test="trichloroethane112 != null  and trichloroethane112 != ''">and trichloroethane_1_1_2 =
+                #{trichloroethane112}
+            </if>
+            <if test="dichloropropane12 != null  and dichloropropane12 != ''">and dichloropropane_1_2 =
+                #{dichloropropane12}
+            </if>
+            <if test="vinylChloride != null  and vinylChloride != ''">and vinyl_chloride = #{vinylChloride}</if>
+            <if test="dichloroethylene11 != null  and dichloroethylene11 != ''">and dichloroethylene_1_1 =
+                #{dichloroethylene11}
+            </if>
+            <if test="transDichloroethylene12 != null  and transDichloroethylene12 != ''">and trans_dichloroethylene_1_2
+                = #{transDichloroethylene12}
+            </if>
+            <if test="cisDichloroethylene12 != null  and cisDichloroethylene12 != ''">and cis_dichloroethylene_1_2 =
+                #{cisDichloroethylene12}
+            </if>
+            <if test="trichloroethylene != null  and trichloroethylene != ''">and trichloroethylene =
+                #{trichloroethylene}
+            </if>
+            <if test="tetrachloroethylene != null  and tetrachloroethylene != ''">and tetrachloroethylene =
+                #{tetrachloroethylene}
+            </if>
+            <if test="chlorobenzene != null  and chlorobenzene != ''">and chlorobenzene = #{chlorobenzene}</if>
+            <if test="dichlorobenzene12 != null  and dichlorobenzene12 != ''">and dichlorobenzene_1_2 =
+                #{dichlorobenzene12}
+            </if>
+            <if test="dichlorobenzene14 != null  and dichlorobenzene14 != ''">and dichlorobenzene_1_4 =
+                #{dichlorobenzene14}
+            </if>
+            <if test="ethylbenzene != null  and ethylbenzene != ''">and ethylbenzene = #{ethylbenzene}</if>
+            <if test="xyleneOrtho != null  and xyleneOrtho != ''">and xylene_ortho = #{xyleneOrtho}</if>
+            <if test="xyleneMetaPara != null  and xyleneMetaPara != ''">and xylene_meta_para = #{xyleneMetaPara}</if>
+            <if test="styrene != null  and styrene != ''">and styrene = #{styrene}</if>
+            <if test="nitrobenzene != null  and nitrobenzene != ''">and nitrobenzene = #{nitrobenzene}</if>
+            <if test="naphthalene != null  and naphthalene != ''">and naphthalene = #{naphthalene}</if>
+            <if test="anthracene != null  and anthracene != ''">and anthracene = #{anthracene}</if>
+            <if test="fluoranthene != null  and fluoranthene != ''">and fluoranthene = #{fluoranthene}</if>
+            <if test="benzoBFluoranthene != null  and benzoBFluoranthene != ''">and benzo_b_fluoranthene =
+                #{benzoBFluoranthene}
+            </if>
+            <if test="benzoAPyrene != null  and benzoAPyrene != ''">and benzo_a_pyrene = #{benzoAPyrene}</if>
+            <if test="petroleumHydrocarbonsC6C9 != null  and petroleumHydrocarbonsC6C9 != ''">and
+                petroleum_hydrocarbons_c6_c9 = #{petroleumHydrocarbonsC6C9}
+            </if>
+            <if test="petroleumHydrocarbonsC10C40 != null  and petroleumHydrocarbonsC10C40 != ''">and
+                petroleum_hydrocarbons_c10_c40 = #{petroleumHydrocarbonsC10C40}
+            </if>
+            <if test="phenol != null  and phenol != ''">and phenol = #{phenol}</if>
+            <if test="chlorophenol2 != null  and chlorophenol2 != ''">and chlorophenol_2 = #{chlorophenol2}</if>
+            <if test="aniline != null  and aniline != ''">and aniline = #{aniline}</if>
+            <if test="acenaphthylene != null  and acenaphthylene != ''">and acenaphthylene = #{acenaphthylene}</if>
+            <if test="acenaphthene != null  and acenaphthene != ''">and acenaphthene = #{acenaphthene}</if>
+            <if test="fluorene != null  and fluorene != ''">and fluorene = #{fluorene}</if>
+            <if test="phenanthrene != null  and phenanthrene != ''">and phenanthrene = #{phenanthrene}</if>
+            <if test="pyrene != null  and pyrene != ''">and pyrene = #{pyrene}</if>
+            <if test="benzoAAnthracene != null  and benzoAAnthracene != ''">and benzo_a_anthracene =
+                #{benzoAAnthracene}
+            </if>
+            <if test="chrysene != null  and chrysene != ''">and chrysene = #{chrysene}</if>
+            <if test="benzoKFluoranthene != null  and benzoKFluoranthene != ''">and benzo_k_fluoranthene =
+                #{benzoKFluoranthene}
+            </if>
+            <if test="indeno123CdPyrene != null  and indeno123CdPyrene != ''">and indeno_1_2_3_cd_pyrene =
+                #{indeno123CdPyrene}
+            </if>
+            <if test="dibenzoAHAnthracene != null  and dibenzoAHAnthracene != ''">and dibenzo_a_h_anthracene =
+                #{dibenzoAHAnthracene}
+            </if>
+            <if test="benzoGHIPerylene != null  and benzoGHIPerylene != ''">and benzo_g_h_i_perylene =
+                #{benzoGHIPerylene}
+            </if>
+            <if test="chloromethane != null  and chloromethane != ''">and chloromethane = #{chloromethane}</if>
+            <if test="dichloroethane11 != null  and dichloroethane11 != ''">and dichloroethane_1_1 =
+                #{dichloroethane11}
+            </if>
+            <if test="tetrachloroethane1112 != null  and tetrachloroethane1112 != ''">and tetrachloroethane_1_1_1_2 =
+                #{tetrachloroethane1112}
+            </if>
+            <if test="tetrachloroethane1122 != null  and tetrachloroethane1122 != ''">and tetrachloroethane_1_1_2_2 =
+                #{tetrachloroethane1122}
+            </if>
+            <if test="trichloropropane123 != null  and trichloropropane123 != ''">and trichloropropane_1_2_3 =
+                #{trichloropropane123}
+            </if>
+            <if test="analysisNumber != null  and analysisNumber != ''">and analysis_number = #{analysisNumber}</if>
+            <if test="originalNumber != null  and originalNumber != ''">and original_number = #{originalNumber}</if>
+            <if test="carbonate != null  and carbonate != ''">and carbonate = #{carbonate}</if>
+            <if test="bicarbonate != null  and bicarbonate != ''">and bicarbonate = #{bicarbonate}</if>
+            <if test="ferrousIon != null  and ferrousIon != ''">and ferrous_ion = #{ferrousIon}</if>
+            <if test="potassium != null  and potassium != ''">and potassium = #{potassium}</if>
+            <if test="calcium != null  and calcium != ''">and calcium = #{calcium}</if>
+            <if test="magnesium != null  and magnesium != ''">and magnesium = #{magnesium}</if>
+            <if test="chloroprene != null  and chloroprene != ''">and chloroprene = #{chloroprene}</if>
+            <if test="bromochloromethane != null  and bromochloromethane != ''">and bromochloromethane =
+                #{bromochloromethane}
+            </if>
+            <if test="bromodichloromethane != null  and bromodichloromethane != ''">and bromodichloromethane =
+                #{bromodichloromethane}
+            </if>
+            <if test="dibromomethane != null  and dibromomethane != ''">and dibromomethane = #{dibromomethane}</if>
+            <if test="dibromochloromethane != null  and dibromochloromethane != ''">and dibromochloromethane =
+                #{dibromochloromethane}
+            </if>
+            <if test="bromoform != null  and bromoform != ''">and bromoform = #{bromoform}</if>
+            <if test="cumene != null  and cumene != ''">and cumene = #{cumene}</if>
+            <if test="nPropylbenzene != null  and nPropylbenzene != ''">and n_propylbenzene = #{nPropylbenzene}</if>
+            <if test="bromobenzene != null  and bromobenzene != ''">and bromobenzene = #{bromobenzene}</if>
+            <if test="trimethylbenzene135 != null  and trimethylbenzene135 != ''">and trimethylbenzene_1_3_5 =
+                #{trimethylbenzene135}
+            </if>
+            <if test="oChlorotoluene != null  and oChlorotoluene != ''">and o_chlorotoluene = #{oChlorotoluene}</if>
+            <if test="pChlorotoluene != null  and pChlorotoluene != ''">and p_chlorotoluene = #{pChlorotoluene}</if>
+            <if test="tertButylbenzene != null  and tertButylbenzene != ''">and tert_butylbenzene =
+                #{tertButylbenzene}
+            </if>
+            <if test="trimethylbenzene14 != null  and trimethylbenzene14 != ''">and trimethylbenzene_1__4 =
+                #{trimethylbenzene14}
+            </if>
+            <if test="secButylbenzene != null  and secButylbenzene != ''">and sec_butylbenzene = #{secButylbenzene}</if>
+            <if test="isopropyltoluene4 != null  and isopropyltoluene4 != ''">and isopropyltoluene_4 =
+                #{isopropyltoluene4}
+            </if>
+            <if test="nButylbenzene != null  and nButylbenzene != ''">and n_butylbenzene = #{nButylbenzene}</if>
+            <if test="epichlorohydrin != null  and epichlorohydrin != ''">and epichlorohydrin = #{epichlorohydrin}</if>
+            <if test="dibromo3Chloropropane12 != null  and dibromo3Chloropropane12 != ''">and dibromo3_chloropropane_1_2
+                = #{dibromo3Chloropropane12}
+            </if>
+            <if test="trichlorobenzene124 != null  and trichlorobenzene124 != ''">and trichlorobenzene_1_2_4 =
+                #{trichlorobenzene124}
+            </if>
+            <if test="hexachlorobutadiene != null  and hexachlorobutadiene != ''">and hexachlorobutadiene =
+                #{hexachlorobutadiene}
+            </if>
+            <if test="methylnaphthalene2 != null  and methylnaphthalene2 != ''">and methylnaphthalene_2 =
+                #{methylnaphthalene2}
+            </if>
+            <if test="methylnaphthalene1 != null  and methylnaphthalene1 != ''">and methylnaphthalene_1 =
+                #{methylnaphthalene1}
+            </if>
+            <if test="dichloropropene11 != null  and dichloropropene11 != ''">and dichloropropene_1_1 =
+                #{dichloropropene11}
+            </if>
+            <if test="trans13Dichloropropene != null  and trans13Dichloropropene != ''">and trans1_3_dichloropropene =
+                #{trans13Dichloropropene}
+            </if>
+            <if test="cis13Dichloropropene != null  and cis13Dichloropropene != ''">and cis1_3_dichloropropene =
+                #{cis13Dichloropropene}
+            </if>
+            <if test="dichloropropane22 != null  and dichloropropane22 != ''">and dichloropropane_2_2 =
+                #{dichloropropane22}
+            </if>
+            <if test="dibromoethane12 != null  and dibromoethane12 != ''">and dibromoethane_1_2 = #{dibromoethane12}
+            </if>
+            <if test="dichloropropane13 != null  and dichloropropane13 != ''">and dichloropropane_1_3 =
+                #{dichloropropane13}
+            </if>
+            <if test="chlorotoluene2 != null  and chlorotoluene2 != ''">and chlorotoluene_2 = #{chlorotoluene2}</if>
+            <if test="chlorotoluene4 != null  and chlorotoluene4 != ''">and chlorotoluene_4 = #{chlorotoluene4}</if>
+            <if test="dichlorobenzene13 != null  and dichlorobenzene13 != ''">and dichlorobenzene_1_3 =
+                #{dichlorobenzene13}
+            </if>
+            <if test="trichlorobenzene123 != null  and trichlorobenzene123 != ''">and trichlorobenzene_1_2_3 =
+                #{trichlorobenzene123}
+            </if>
         </where>
     </select>
 
@@ -194,6 +372,7 @@
         <include refid="selectTWaterQualityMonitoringVo"/>
         where id = #{id}
     </select>
+
 
     <select id="selectGJJL" resultType="com.ruoyi.admin.domain.GJJLRES">
 
@@ -357,6 +536,7 @@ ORDER BY point_id, sample_time;  -- 按点位和时间排序（可选）
         insert into t_water_quality_monitoring
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="pointId != null and pointId != ''">point_id,</if>
+            <if test="tag != null">tag,</if>
             <if test="sampleTime != null and sampleTime != ''">sample_time,</if>
             <if test="color != null">color,</if>
             <if test="odorAndTaste != null">odor_and_taste,</if>
@@ -443,9 +623,51 @@ ORDER BY point_id, sample_time;  -- 按点位和时间排序（可选）
             <if test="tetrachloroethane1122 != null">tetrachloroethane_1_1_2_2,</if>
             <if test="trichloropropane123 != null">trichloropropane_1_2_3,</if>
             <if test="id != null">id,</if>
+            <if test="analysisNumber != null">analysis_number,</if>
+            <if test="originalNumber != null">original_number,</if>
+            <if test="carbonate != null">carbonate,</if>
+            <if test="bicarbonate != null">bicarbonate,</if>
+            <if test="ferrousIon != null">ferrous_ion,</if>
+            <if test="potassium != null">potassium,</if>
+            <if test="calcium != null">calcium,</if>
+            <if test="magnesium != null">magnesium,</if>
+            <if test="chloroprene != null">chloroprene,</if>
+            <if test="bromochloromethane != null">bromochloromethane,</if>
+            <if test="bromodichloromethane != null">bromodichloromethane,</if>
+            <if test="dibromomethane != null">dibromomethane,</if>
+            <if test="dibromochloromethane != null">dibromochloromethane,</if>
+            <if test="bromoform != null">bromoform,</if>
+            <if test="cumene != null">cumene,</if>
+            <if test="nPropylbenzene != null">n_propylbenzene,</if>
+            <if test="bromobenzene != null">bromobenzene,</if>
+            <if test="trimethylbenzene135 != null">trimethylbenzene_1_3_5,</if>
+            <if test="oChlorotoluene != null">o_chlorotoluene,</if>
+            <if test="pChlorotoluene != null">p_chlorotoluene,</if>
+            <if test="tertButylbenzene != null">tert_butylbenzene,</if>
+            <if test="trimethylbenzene14 != null">trimethylbenzene_1__4,</if>
+            <if test="secButylbenzene != null">sec_butylbenzene,</if>
+            <if test="isopropyltoluene4 != null">isopropyltoluene_4,</if>
+            <if test="nButylbenzene != null">n_butylbenzene,</if>
+            <if test="epichlorohydrin != null">epichlorohydrin,</if>
+            <if test="dibromo3Chloropropane12 != null">dibromo3_chloropropane_1_2,</if>
+            <if test="trichlorobenzene124 != null">trichlorobenzene_1_2_4,</if>
+            <if test="hexachlorobutadiene != null">hexachlorobutadiene,</if>
+            <if test="methylnaphthalene2 != null">methylnaphthalene_2,</if>
+            <if test="methylnaphthalene1 != null">methylnaphthalene_1,</if>
+            <if test="dichloropropene11 != null">dichloropropene_1_1,</if>
+            <if test="trans13Dichloropropene != null">trans1_3_dichloropropene,</if>
+            <if test="cis13Dichloropropene != null">cis1_3_dichloropropene,</if>
+            <if test="dichloropropane22 != null">dichloropropane_2_2,</if>
+            <if test="dibromoethane12 != null">dibromoethane_1_2,</if>
+            <if test="dichloropropane13 != null">dichloropropane_1_3,</if>
+            <if test="chlorotoluene2 != null">chlorotoluene_2,</if>
+            <if test="chlorotoluene4 != null">chlorotoluene_4,</if>
+            <if test="dichlorobenzene13 != null">dichlorobenzene_1_3,</if>
+            <if test="trichlorobenzene123 != null">trichlorobenzene_1_2_3,</if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="pointId != null and pointId != ''">#{pointId},</if>
+            <if test="tag != null">#{tag},</if>
             <if test="sampleTime != null and sampleTime != ''">#{sampleTime},</if>
             <if test="color != null">#{color},</if>
             <if test="odorAndTaste != null">#{odorAndTaste},</if>
@@ -532,6 +754,47 @@ ORDER BY point_id, sample_time;  -- 按点位和时间排序（可选）
             <if test="tetrachloroethane1122 != null">#{tetrachloroethane1122},</if>
             <if test="trichloropropane123 != null">#{trichloropropane123},</if>
             <if test="id != null">#{id},</if>
+            <if test="analysisNumber != null">#{analysisNumber},</if>
+            <if test="originalNumber != null">#{originalNumber},</if>
+            <if test="carbonate != null">#{carbonate},</if>
+            <if test="bicarbonate != null">#{bicarbonate},</if>
+            <if test="ferrousIon != null">#{ferrousIon},</if>
+            <if test="potassium != null">#{potassium},</if>
+            <if test="calcium != null">#{calcium},</if>
+            <if test="magnesium != null">#{magnesium},</if>
+            <if test="chloroprene != null">#{chloroprene},</if>
+            <if test="bromochloromethane != null">#{bromochloromethane},</if>
+            <if test="bromodichloromethane != null">#{bromodichloromethane},</if>
+            <if test="dibromomethane != null">#{dibromomethane},</if>
+            <if test="dibromochloromethane != null">#{dibromochloromethane},</if>
+            <if test="bromoform != null">#{bromoform},</if>
+            <if test="cumene != null">#{cumene},</if>
+            <if test="nPropylbenzene != null">#{nPropylbenzene},</if>
+            <if test="bromobenzene != null">#{bromobenzene},</if>
+            <if test="trimethylbenzene135 != null">#{trimethylbenzene135},</if>
+            <if test="oChlorotoluene != null">#{oChlorotoluene},</if>
+            <if test="pChlorotoluene != null">#{pChlorotoluene},</if>
+            <if test="tertButylbenzene != null">#{tertButylbenzene},</if>
+            <if test="trimethylbenzene14 != null">#{trimethylbenzene14},</if>
+            <if test="secButylbenzene != null">#{secButylbenzene},</if>
+            <if test="isopropyltoluene4 != null">#{isopropyltoluene4},</if>
+            <if test="nButylbenzene != null">#{nButylbenzene},</if>
+            <if test="epichlorohydrin != null">#{epichlorohydrin},</if>
+            <if test="dibromo3Chloropropane12 != null">#{dibromo3Chloropropane12},</if>
+            <if test="trichlorobenzene124 != null">#{trichlorobenzene124},</if>
+            <if test="hexachlorobutadiene != null">#{hexachlorobutadiene},</if>
+            <if test="methylnaphthalene2 != null">#{methylnaphthalene2},</if>
+            <if test="methylnaphthalene1 != null">#{methylnaphthalene1},</if>
+            <if test="dichloropropene11 != null">#{dichloropropene11},</if>
+            <if test="trans13Dichloropropene != null">#{trans13Dichloropropene},</if>
+            <if test="cis13Dichloropropene != null">#{cis13Dichloropropene},</if>
+            <if test="dichloropropane22 != null">#{dichloropropane22},</if>
+            <if test="dibromoethane12 != null">#{dibromoethane12},</if>
+            <if test="dichloropropane13 != null">#{dichloropropane13},</if>
+            <if test="chlorotoluene2 != null">#{chlorotoluene2},</if>
+            <if test="chlorotoluene4 != null">#{chlorotoluene4},</if>
+            <if test="dichlorobenzene13 != null">#{dichlorobenzene13},</if>
+            <if test="trichlorobenzene123 != null">#{trichlorobenzene123},</if>
         </trim>
     </insert>
 
@@ -539,6 +802,7 @@ ORDER BY point_id, sample_time;  -- 按点位和时间排序（可选）
         update t_water_quality_monitoring
         <trim prefix="SET" suffixOverrides=",">
             <if test="pointId != null and pointId != ''">point_id = #{pointId},</if>
+            <if test="tag != null">tag = #{tag},</if>
             <if test="sampleTime != null and sampleTime != ''">sample_time = #{sampleTime},</if>
             <if test="color != null">color = #{color},</if>
             <if test="odorAndTaste != null">odor_and_taste = #{odorAndTaste},</if>
@@ -603,8 +867,11 @@ ORDER BY point_id, sample_time;  -- 按点位和时间排序（可选）
             <if test="fluoranthene != null">fluoranthene = #{fluoranthene},</if>
             <if test="benzoBFluoranthene != null">benzo_b_fluoranthene = #{benzoBFluoranthene},</if>
             <if test="benzoAPyrene != null">benzo_a_pyrene = #{benzoAPyrene},</if>
-            <if test="petroleumHydrocarbonsC6C9 != null">petroleum_hydrocarbons_c6_c9 = #{petroleumHydrocarbonsC6C9},</if>
-            <if test="petroleumHydrocarbonsC10C40 != null">petroleum_hydrocarbons_c10_c40 = #{petroleumHydrocarbonsC10C40},</if>
+            <if test="petroleumHydrocarbonsC6C9 != null">petroleum_hydrocarbons_c6_c9 = #{petroleumHydrocarbonsC6C9},
+            </if>
+            <if test="petroleumHydrocarbonsC10C40 != null">petroleum_hydrocarbons_c10_c40 =
+                #{petroleumHydrocarbonsC10C40},
+            </if>
             <if test="phenol != null">phenol = #{phenol},</if>
             <if test="chlorophenol2 != null">chlorophenol_2 = #{chlorophenol2},</if>
             <if test="aniline != null">aniline = #{aniline},</if>
@@ -624,6 +891,47 @@ ORDER BY point_id, sample_time;  -- 按点位和时间排序（可选）
             <if test="tetrachloroethane1112 != null">tetrachloroethane_1_1_1_2 = #{tetrachloroethane1112},</if>
             <if test="tetrachloroethane1122 != null">tetrachloroethane_1_1_2_2 = #{tetrachloroethane1122},</if>
             <if test="trichloropropane123 != null">trichloropropane_1_2_3 = #{trichloropropane123},</if>
+            <if test="analysisNumber != null">analysis_number = #{analysisNumber},</if>
+            <if test="originalNumber != null">original_number = #{originalNumber},</if>
+            <if test="carbonate != null">carbonate = #{carbonate},</if>
+            <if test="bicarbonate != null">bicarbonate = #{bicarbonate},</if>
+            <if test="ferrousIon != null">ferrous_ion = #{ferrousIon},</if>
+            <if test="potassium != null">potassium = #{potassium},</if>
+            <if test="calcium != null">calcium = #{calcium},</if>
+            <if test="magnesium != null">magnesium = #{magnesium},</if>
+            <if test="chloroprene != null">chloroprene = #{chloroprene},</if>
+            <if test="bromochloromethane != null">bromochloromethane = #{bromochloromethane},</if>
+            <if test="bromodichloromethane != null">bromodichloromethane = #{bromodichloromethane},</if>
+            <if test="dibromomethane != null">dibromomethane = #{dibromomethane},</if>
+            <if test="dibromochloromethane != null">dibromochloromethane = #{dibromochloromethane},</if>
+            <if test="bromoform != null">bromoform = #{bromoform},</if>
+            <if test="cumene != null">cumene = #{cumene},</if>
+            <if test="nPropylbenzene != null">n_propylbenzene = #{nPropylbenzene},</if>
+            <if test="bromobenzene != null">bromobenzene = #{bromobenzene},</if>
+            <if test="trimethylbenzene135 != null">trimethylbenzene_1_3_5 = #{trimethylbenzene135},</if>
+            <if test="oChlorotoluene != null">o_chlorotoluene = #{oChlorotoluene},</if>
+            <if test="pChlorotoluene != null">p_chlorotoluene = #{pChlorotoluene},</if>
+            <if test="tertButylbenzene != null">tert_butylbenzene = #{tertButylbenzene},</if>
+            <if test="trimethylbenzene14 != null">trimethylbenzene_1__4 = #{trimethylbenzene14},</if>
+            <if test="secButylbenzene != null">sec_butylbenzene = #{secButylbenzene},</if>
+            <if test="isopropyltoluene4 != null">isopropyltoluene_4 = #{isopropyltoluene4},</if>
+            <if test="nButylbenzene != null">n_butylbenzene = #{nButylbenzene},</if>
+            <if test="epichlorohydrin != null">epichlorohydrin = #{epichlorohydrin},</if>
+            <if test="dibromo3Chloropropane12 != null">dibromo3_chloropropane_1_2 = #{dibromo3Chloropropane12},</if>
+            <if test="trichlorobenzene124 != null">trichlorobenzene_1_2_4 = #{trichlorobenzene124},</if>
+            <if test="hexachlorobutadiene != null">hexachlorobutadiene = #{hexachlorobutadiene},</if>
+            <if test="methylnaphthalene2 != null">methylnaphthalene_2 = #{methylnaphthalene2},</if>
+            <if test="methylnaphthalene1 != null">methylnaphthalene_1 = #{methylnaphthalene1},</if>
+            <if test="dichloropropene11 != null">dichloropropene_1_1 = #{dichloropropene11},</if>
+            <if test="trans13Dichloropropene != null">trans1_3_dichloropropene = #{trans13Dichloropropene},</if>
+            <if test="cis13Dichloropropene != null">cis1_3_dichloropropene = #{cis13Dichloropropene},</if>
+            <if test="dichloropropane22 != null">dichloropropane_2_2 = #{dichloropropane22},</if>
+            <if test="dibromoethane12 != null">dibromoethane_1_2 = #{dibromoethane12},</if>
+            <if test="dichloropropane13 != null">dichloropropane_1_3 = #{dichloropropane13},</if>
+            <if test="chlorotoluene2 != null">chlorotoluene_2 = #{chlorotoluene2},</if>
+            <if test="chlorotoluene4 != null">chlorotoluene_4 = #{chlorotoluene4},</if>
+            <if test="dichlorobenzene13 != null">dichlorobenzene_1_3 = #{dichlorobenzene13},</if>
+            <if test="trichlorobenzene123 != null">trichlorobenzene_1_2_3 = #{trichlorobenzene123},</if>
         </trim>
         where id = #{id}
     </update>

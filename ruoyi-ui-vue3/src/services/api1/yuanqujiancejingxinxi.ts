@@ -4,7 +4,7 @@ import request from "@/utils/http";
 
 /** 修改园区监测井信息 PUT /admin/wells */
 export async function putAdminWells(
-  body: API.yuanqujiancejingxinxi,
+  body: API.jiancejingduixiang,
   options?: { [key: string]: any }
 ) {
   return request<Record<string, any>>(`/dev-api/admin/wells`, {
@@ -19,7 +19,7 @@ export async function putAdminWells(
 
 /** 新增园区监测井信息 POST /admin/wells */
 export async function postAdminWells(
-  body: API.yuanqujiancejingxinxi,
+  body: API.jiancejingduixiang,
   options?: { [key: string]: any }
 ) {
   return request<Record<string, any>>(`/dev-api/admin/wells`, {

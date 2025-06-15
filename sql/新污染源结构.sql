@@ -214,3 +214,24 @@ COMMENT
 ON COLUMN t_land_pollution_analysis.enterprise_pollution_info_id IS '绑定的污染源';
 COMMENT
 ON COLUMN t_land_pollution_analysis.dept_id IS '归属部门';
+
+
+CREATE TABLE t_suspected_pollution_trace
+(
+    id                           SERIAL PRIMARY KEY,
+    trace_location               TEXT,
+    trace_coordinates            TEXT,
+    trace_photos                 TEXT,
+    enterprise_pollution_info_id VARCHAR(50),
+    dept_id                      VARCHAR(50)
+);
+
+-- 表注释
+COMMENT ON TABLE t_suspected_pollution_trace IS '可疑污染源或污染痕迹';
+
+-- 字段注释
+COMMENT ON COLUMN t_suspected_pollution_trace.trace_location IS '污染痕迹出现的地点';
+COMMENT ON COLUMN t_suspected_pollution_trace.trace_coordinates IS '污染痕迹出现的坐标位置';
+COMMENT ON COLUMN t_suspected_pollution_trace.trace_photos IS '污染痕迹照片';
+COMMENT ON COLUMN t_suspected_pollution_trace.enterprise_pollution_info_id IS '绑定的污染源';
+COMMENT ON COLUMN t_suspected_pollution_trace.dept_id IS '归属部门';

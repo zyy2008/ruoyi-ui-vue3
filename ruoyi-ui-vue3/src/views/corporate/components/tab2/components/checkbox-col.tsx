@@ -19,31 +19,9 @@ import { FormGrid } from "@formily/element-plus";
 import { ElButton, ElMessage, ElCheckbox, ElCheckboxGroup } from "element-plus";
 import { key } from "@mars/widgets/common/store/widget";
 
-const datas = [
-  [
-    "地面无任何处理",
-    "铺设防渗材料",
-    "有表面发盖",
-    "四周有国堰或围墙",
-    "有雨水收集池或导排管道",
-  ],
-  [
-    "地面硬化且完整",
-    "防渗材料完整无破损",
-    "表面覆盖完整",
-    "国娱或围墙完整",
-    "雨水收集池或导排管道有漆漏",
-  ],
-  [
-    "硬化地面有裂経",
-    "防渗材料有破损",
-    "表面镋盖有破损",
-    "围堰或国墙不完整，可随意进入",
-  ],
-];
 export default observer(
   defineComponent({
-    props: ["value", "onChange"],
+    props: ["value", "onChange", "datas"],
     setup(props) {
       const value = toRef(props, "value");
       const modelValue = computed(() => {
@@ -60,7 +38,7 @@ export default observer(
           }}
         >
           <FormGrid>
-            {datas.map((item, colIndex) => {
+            {(props?.datas ?? []).map((item, colIndex) => {
               return (
                 <FormGrid.GridColumn
                   key={colIndex}
@@ -72,6 +50,7 @@ export default observer(
                   {item.map((item, rowindex) => (
                     <ElCheckbox
                       key={rowindex}
+                      label={item}
                       value={`${colIndex}-${rowindex}`}
                     />
                   ))}

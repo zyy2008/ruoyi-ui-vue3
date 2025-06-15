@@ -8,7 +8,7 @@
     <div class="video">
       <JianKong
         v-for="item in cameraList"
-        :key="item.id"
+        :key="item.videoUrl"
         :JKParams="item"
         class="video-player"
       />
@@ -35,7 +35,7 @@ onMounted(async () => {
     ElMessage.error("获取Token失败，请检查网络或联系管理员");
     return;
   }
-  const { rows, total, code } = await listWells({
+  let { rows, total, code } = await listWells({
     pageNum: 1,
     pageSize: 100,
   });
@@ -44,19 +44,17 @@ onMounted(async () => {
     ElMessage.error("获取监控列表失败，请检查网络或联系管理员");
     return;
   }
-  rows.forEach((item) => {
+  rows.forEach((item, index) => {
     if (!item.videoUrl) return;
     cameraList.value.push({
       accessToken: AccessToken.value,
       deviceSerial: item.videoUrl,
       hd: false,
-      width: 500,
-      height: 300,
-      channelNo: 1,
+      width: 400,
+      height: 260,
+      channelNo: index,
     });
   });
-
-  console.log("🚀 ~ rows.forEach ~ cameraList:", cameraList);
 });
 </script>
 
@@ -83,9 +81,8 @@ onMounted(async () => {
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 10px;
     .video-player {
-      width: 300px;
-      height: 200px;
       border: 1px solid #ccc;
       box-sizing: border-box;
     }

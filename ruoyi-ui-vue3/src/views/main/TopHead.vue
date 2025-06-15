@@ -404,7 +404,7 @@
 
   .RightVideo {
     width: 1420px;
-    height: 200px;
+   
     position: absolute;
     top: 600px;
     right: 20px;

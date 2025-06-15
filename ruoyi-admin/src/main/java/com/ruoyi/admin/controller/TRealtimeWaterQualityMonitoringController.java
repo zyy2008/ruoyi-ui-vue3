@@ -3,10 +3,10 @@ package com.ruoyi.admin.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
-import com.ruoyi.admin.domain.vo.BatchWellVo;
+import com.ruoyi.admin.domain.bo.BatchWellBo;
+import com.ruoyi.admin.domain.bo.SingleMonitoringWellLineChartDataBo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -56,8 +56,18 @@ public class TRealtimeWaterQualityMonitoringController extends BaseController {
     @ApiOperation("获取监测井最新数据")
     //@PreAuthorize("@ss.hasPermi('admin:realtimeWaterQualityMonitoring:list')")
     @GetMapping("/getBatchData")
-    public AjaxResult getBatchData(BatchWellVo batchWellVo) {
+    public AjaxResult getBatchData(BatchWellBo batchWellVo) {
         return AjaxResult.success(tRealtimeWaterQualityMonitoringService.getBatchData(batchWellVo));
+    }
+
+    /**
+     * 获取单个监测井折线图数据
+     */
+    @ApiOperation("获取单个监测井折线图数据")
+    //@PreAuthorize("@ss.hasPermi('admin:realtimeWaterQualityMonitoring:list')")
+    @GetMapping("/getSingleWellMonitoringLineChartData")
+    public AjaxResult getSingleWellMonitoringLineChartData(SingleMonitoringWellLineChartDataBo vo) {
+        return AjaxResult.success(tRealtimeWaterQualityMonitoringService.getSingleWellMonitoringLineChartData(vo));
     }
 
     /**

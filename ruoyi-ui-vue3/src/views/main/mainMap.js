@@ -50,12 +50,12 @@ function addEnterpriseLayer(list) {
 
     graphic.on(mars3d.EventType.popupOpen, function (event) {
 
-      
+
       const container = event.container // popup对应的DOM
       const btnDetails = container.querySelector("#btnDetails")
       if (btnDetails) {
         btnDetails.addEventListener("click", (e) => {
-                console.log(132121313);
+          console.log(132121313);
           openQYPage(event)
           graphic.closePopup();
         })
@@ -72,7 +72,6 @@ export async function loadWells() {
   const res = await allWells()
   let rows = res.rows || [];
   let wellList = rows.filter(item => !!item.longitude && !!item.latitude);
-  console.log(wellList)
 
   addWellLayer(wellList);
 }

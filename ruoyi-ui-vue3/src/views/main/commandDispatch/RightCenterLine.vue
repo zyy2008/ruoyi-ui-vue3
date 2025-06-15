@@ -3,7 +3,8 @@
     <div class="title">
       <div class="image">
         <img src="@/assets/static/subTitle.png" alt="" />
-        <span> {{ chart.chartInfo.wellCode+'(' +chart.chartInfo.location+')' }} </span>
+        <span> {{ chart.chartInfo.monitoringWell }} </span>
+        <!-- <span> {{ chart.chartInfo.monitoringWell+'(' +chart.chartInfo.location+')' }} </span> -->
       </div>
       <el-radio-group v-model="xAxis" style="width: 150px;" @change="changeChart">
         <el-radio-button label="周"></el-radio-button>
@@ -23,7 +24,7 @@
         <div id="echart6"></div>
       </div>
     </div>
-    <ChartLineModal ref="chartLine" :chart="chart" :lineXAxis="lineXAxis" :lineSeries="lineSeries" :chartType="chartType" />
+    <ChartLineModal ref="chartLine" :chartTitle="chartTitle" :chartType="chartType" />
   </div>
 </template>
 <script setup>
@@ -31,82 +32,121 @@
   import * as echarts from "echarts";
   import ChartLineModal from "./ChartLineModal.vue";
   import { listMonitoring } from "@/api/admin/monitoring";
+  import { listWells } from "@/api/admin/wells";
+  import { getBatchData } from "@/api/monitoring";
   const chartLine = ref();
   const xAxis = ref("周");
-  let lineChart = null;
   let lineOption = {};
   const selectValue = ref("pH");
   let lineInfo = ref([]);
   let lineXAxis = ref([]);
   let lineSeries = ref([]);
-  const chartType=ref('monitor')
+  const chartType = ref('monitor')
+  const chartTitle = reactive({
+    wellCode: '',
+    location: ''
+  })
+  let dataList = []
   const chart = defineProps(["chartInfo"]);
+  // 获取检测井数据
+  onMounted(() => {
+    // listWells({ pageNum: 1, pageSize: 10, }).then((response) => {
+    //   if (response.code === 200) {
+    //     const data = response.rows
+    //     chartTitle.wellCode = data[0].wellCode
+    //     chartTitle.location = data[0].location
+    //   }
+    // });
+    nextTick(() => {
+      initEchart('echart1', 'pH');
+      initEchart('echart2', '温度');
+      initEchart('echart3', '水位');
+      initEchart('echart4', '溶解氧');
+      initEchart('echart5', '电导率');
+      initEchart('echart6', '氨氮');
+    });
+  });
 
   function seekLineData(option, type) {
     chartLine.value.tableData = [];
-    listMonitoring(option).then((res) => {
-      lineOption.xAxis[0].data = [];
-      lineOption.series[0].data = [];
-      lineSeries.value = [];
-      lineXAxis.value = [];
-      const data = res.rows;
-      let dataList = data.sort((a, b) => {
-        return Number(a.sampleTime) - Number(b.sampleTime)
-      })
+    getBatchData({}).then(res => {
+      if (res.code === 200) {
+        const data = res.data;
+        dataList = data.sort((a, b) => {
+          return new Date(a.monitoringTime).getTime() - new Date(b.monitoringTime).getTime()
+        })
+        console.log(dataList);
 
-      dataList.forEach((element, index) => {
-        chartLine.value.tableData.push({
-          ph: element.ph,
-          totalDissolvedSolids: element.totalDissolvedSolids,
-          ammoniaNitrogen: element.ammoniaNitrogen,
-          sampleTime: element.sampleTime
-        });
-        if (type === 'ph') {
-          if (element.ph) {
-            lineOption.series[0].data.push(element.ph);
-            lineSeries.value.push(element.ph);
-            lineOption.xAxis[0].data.push(element.sampleTime);
-            lineXAxis.value.push(element.sampleTime);
-          }
-        } else if (type === 'dissolved') {
-          if (element.totalDissolvedSolids) {
-            lineOption.series[0].data.push(element.totalDissolvedSolids);
-            lineSeries.value.push(element.totalDissolvedSolids);
-            lineOption.xAxis[0].data.push(element.sampleTime);
-            lineXAxis.value.push(element.sampleTime);
-          }
-        } else if (type === 'ammoniaNitrogen') {
-          if (element.ammoniaNitrogen) {
-            lineOption.series[0].data.push(element.ammoniaNitrogen);
-            lineSeries.value.push(element.ammoniaNitrogen);
-            lineOption.xAxis[0].data.push(element.sampleTime);
-            lineXAxis.value.push(element.sampleTime);
-          }
-        }
-      });
-      // lineChart.setOption(lineOption);
-    });
+        chartLine.value.tableData = dataList
+      }
+    })
+
+    // lineOption.xAxis[0].data = [];
+    // lineOption.series[0].data = [];
+    // dataList.forEach((element, index) => {
+    //   lineOption.series[0].data.push(element[type]);
+    //   lineOption.xAxis[0].data.push(element.sampleTime);
+    // });
+    // lineChart.setOption(lineOption);
+
+    // listMonitoring(option).then((res) => {
+    //   // lineOption.xAxis[0].data = [];
+    //   // lineOption.series[0].data = [];
+    //   // lineSeries.value = [];
+    //   // lineXAxis.value = [];
+    //   const data = res.rows;
+    //   let dataList = data.sort((a, b) => {
+    //     return Number(a.sampleTime) - Number(b.sampleTime)
+    //   })
+    //   chartLine.value.tableData = dataList
+
+    //   console.log(chartLine.value.tableData);
+
+    //   // dataList.forEach((element, index) => {
+    //   //   chartLine.value.tableData.push({
+    //   //     ph: element.ph,
+    //   //     totalDissolvedSolids: element.totalDissolvedSolids,
+    //   //     ammoniaNitrogen: element.ammoniaNitrogen,
+    //   //     sampleTime: element.sampleTime
+    //   //   });
+    //   //   if (type === 'ph') {
+    //   //     if (element.ph) {
+    //   //       lineOption.series[0].data.push(element.ph);
+    //   //       lineSeries.value.push(element.ph);
+    //   //       lineOption.xAxis[0].data.push(element.sampleTime);
+    //   //       lineXAxis.value.push(element.sampleTime);
+    //   //     }
+    //   //   } else if (type === 'dissolved') {
+    //   //     if (element.totalDissolvedSolids) {
+    //   //       lineOption.series[0].data.push(element.totalDissolvedSolids);
+    //   //       lineSeries.value.push(element.totalDissolvedSolids);
+    //   //       lineOption.xAxis[0].data.push(element.sampleTime);
+    //   //       lineXAxis.value.push(element.sampleTime);
+    //   //     }
+    //   //   } else if (type === 'ammoniaNitrogen') {
+    //   //     if (element.ammoniaNitrogen) {
+    //   //       lineOption.series[0].data.push(element.ammoniaNitrogen);
+    //   //       lineSeries.value.push(element.ammoniaNitrogen);
+    //   //       lineOption.xAxis[0].data.push(element.sampleTime);
+    //   //       lineXAxis.value.push(element.sampleTime);
+    //   //     }
+    //   //   }
+    //   // });
+    //   // lineChart.setOption(lineOption);
+    // });
   }
+
 
   function openChartLine() {
     seekLineData({
       pageNum: 1,
       pageSize: 1000,
-      pointId: chart.chartInfo.wellCode,
+      pointId: chart.chartInfo.monitoringWell,
     }, 'ph');
     chartLine.value.dialogVisible = true;
     const elements = document.getElementsByClassName('RightCenter');
     elements[0].style.zIndex = 100
   }
-
-  nextTick(() => {
-    initEchart('echart1', 'pH');
-    initEchart('echart2', '温度');
-    initEchart('echart3', '水位');
-    initEchart('echart4', '溶解氧');
-    initEchart('echart5', '电导率');
-    initEchart('echart6', '氨氮');
-  });
 
   function initEchart(id, title) {
     var chartDom = document.getElementById(id);
@@ -296,12 +336,6 @@
       display: flex;
       justify-content: space-between;
     }
-
-    /* #echart {
-      width: 100%;
-      margin-top: 5px;
-      height: calc(100% - 60px);
-    } */
   }
 
   :deep() .el-radio-button__original-radio:checked+.el-radio-button__inner {

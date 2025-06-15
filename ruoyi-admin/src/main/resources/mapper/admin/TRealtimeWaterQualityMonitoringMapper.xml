@@ -85,7 +85,6 @@
         ORDER BY monitoring_well, synchronization_time DESC
         ) rwqn ON rwqn.monitoring_well = mw.well_code
         where mw.real_time='是'
-        <where>
             <if test="wellCode != null and wellCode != ''">
                 AND rwqn.monitoring_well = #{wellCode}
             </if>
@@ -95,7 +94,6 @@
             <if test="endMonitoringTime != null and endMonitoringTime != ''">
                 AND monitoring_time &lt;= #{endMonitoringTime}
             </if>
-        </where>
         ORDER BY monitoring_well, synchronization_time DESC
         ;
     </select>

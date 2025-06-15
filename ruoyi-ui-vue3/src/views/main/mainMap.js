@@ -116,6 +116,7 @@ function addEnterpriseLayer_isNotKey(list) {
     graphic.on(mars3d.EventType.popupOpen, function (event) {
 
 
+
       const container = event.container // popup对应的DOM
       const btnDetails = container.querySelector("#btnDetails")
       if (btnDetails) {

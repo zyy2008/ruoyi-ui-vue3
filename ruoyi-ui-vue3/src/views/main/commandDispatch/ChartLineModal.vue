@@ -1,5 +1,6 @@
 <template>
-  <el-dialog z-index="10" v-model="dialogVisible" :title="chart.chartTitle.wellCode+'('+chart.chartTitle.location+')'"
+  <el-dialog z-index="10" v-model="dialogVisible"
+    :title="chart.chartType==='monitor'?chart.chartTitle.chartInfo.monitoringWell:chart.chartTitle.wellCode+'('+chart.chartTitle.location+')' "
     width="100vw" :top="'200px'" destroy-on-close @open="openChartLine" @close="closeChartLine" style="height: 900px;">
     <el-date-picker v-model="timeValue" type="daterange" range-separator="至" start-placeholder="开始日期"
       style="width: 400px" end-placeholder="结束日期">
@@ -131,31 +132,31 @@
   const chart = defineProps(["chartTitle", 'chartType']);
   const options1 = [
     {
-      value: "1",
+      value: "phValue",
       label: "pH",
     },
     {
-      value: "2",
+      value: "temperature",
       label: "温度",
     },
     {
-      value: "3",
+      value: "waterLevel",
       label: "水位",
     },
+    // {
+    //   value: "4",
+    //   label: "电位",
+    // },
     {
-      value: "4",
-      label: "电位",
+      value: "dissolvedOxygen",
+      label: "溶解性氧气", // 建议更具体的描述
     },
     {
-      value: "5",
-      label: "溶解性总固体", // 建议更具体的描述
-    },
-    {
-      value: "6",
+      value: "conductivity",
       label: "电导率",
     },
     {
-      value: "7",
+      value: "ammoniaNitrogen",
       label: "氨氮",
     }
   ]
@@ -355,17 +356,18 @@
 
   // 切换指标
   function changeSelect(label) {
-    console.log(chart.chartType === 'monitor');
+    console.log(label);
+
     console.log(tableData.value);
 
     let data = [];
     let time = tableData.value.map((ele) => chart.chartType === 'monitor' ? ele.monitoringTime : ele.sampleTime);
-
     tableData.value.forEach((ele) => {
       data.push(ele[label]);
     });
     console.log(data);
-    // seekLineData(data, time);
+
+    seekLineData(data, time);
   }
 
   // 关闭弹窗

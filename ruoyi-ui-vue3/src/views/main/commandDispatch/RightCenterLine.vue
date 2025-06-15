@@ -3,8 +3,8 @@
     <div class="title">
       <div class="image">
         <img src="@/assets/static/subTitle.png" alt="" />
-        <span> {{ chart.chartInfo.monitoringWell }} </span>
-        <!-- <span> {{ chart.chartInfo.monitoringWell+'(' +chart.chartInfo.location+')' }} </span> -->
+        <span> {{ chartTitle.chartInfo.monitoringWell }} </span>
+        <!-- <span> {{ chartTitle.chartInfo.monitoringWell+'(' +chartTitle.chartInfo.location+')' }} </span> -->
       </div>
       <el-radio-group v-model="xAxis" style="width: 150px;" @change="changeChart">
         <el-radio-button label="周"></el-radio-button>
@@ -42,21 +42,21 @@
   let lineXAxis = ref([]);
   let lineSeries = ref([]);
   const chartType = ref('monitor')
-  const chartTitle = reactive({
-    wellCode: '',
-    location: ''
-  })
+
+  // const chartTitle = reactive({
+  //   wellCode: '',
+  //   location: ''
+  // })
+
   let dataList = []
-  const chart = defineProps(["chartInfo"]);
+  const chartTitle = defineProps(["chartInfo"]);
   // 获取检测井数据
   onMounted(() => {
-    // listWells({ pageNum: 1, pageSize: 10, }).then((response) => {
-    //   if (response.code === 200) {
-    //     const data = response.rows
-    //     chartTitle.wellCode = data[0].wellCode
-    //     chartTitle.location = data[0].location
-    //   }
-    // });
+    seekLineData({
+      pageNum: 1,
+      pageSize: 1000,
+      pointId: chartTitle.chartInfo.monitoringWell,
+    });
     nextTick(() => {
       initEchart('echart1', 'pH');
       initEchart('echart2', '温度');
@@ -67,7 +67,7 @@
     });
   });
 
-  function seekLineData(option, type) {
+  function seekLineData(option) {
     chartLine.value.tableData = [];
     getBatchData({}).then(res => {
       if (res.code === 200) {
@@ -75,74 +75,12 @@
         dataList = data.sort((a, b) => {
           return new Date(a.monitoringTime).getTime() - new Date(b.monitoringTime).getTime()
         })
-        console.log(dataList);
-
         chartLine.value.tableData = dataList
       }
     })
-
-    // lineOption.xAxis[0].data = [];
-    // lineOption.series[0].data = [];
-    // dataList.forEach((element, index) => {
-    //   lineOption.series[0].data.push(element[type]);
-    //   lineOption.xAxis[0].data.push(element.sampleTime);
-    // });
-    // lineChart.setOption(lineOption);
-
-    // listMonitoring(option).then((res) => {
-    //   // lineOption.xAxis[0].data = [];
-    //   // lineOption.series[0].data = [];
-    //   // lineSeries.value = [];
-    //   // lineXAxis.value = [];
-    //   const data = res.rows;
-    //   let dataList = data.sort((a, b) => {
-    //     return Number(a.sampleTime) - Number(b.sampleTime)
-    //   })
-    //   chartLine.value.tableData = dataList
-
-    //   console.log(chartLine.value.tableData);
-
-    //   // dataList.forEach((element, index) => {
-    //   //   chartLine.value.tableData.push({
-    //   //     ph: element.ph,
-    //   //     totalDissolvedSolids: element.totalDissolvedSolids,
-    //   //     ammoniaNitrogen: element.ammoniaNitrogen,
-    //   //     sampleTime: element.sampleTime
-    //   //   });
-    //   //   if (type === 'ph') {
-    //   //     if (element.ph) {
-    //   //       lineOption.series[0].data.push(element.ph);
-    //   //       lineSeries.value.push(element.ph);
-    //   //       lineOption.xAxis[0].data.push(element.sampleTime);
-    //   //       lineXAxis.value.push(element.sampleTime);
-    //   //     }
-    //   //   } else if (type === 'dissolved') {
-    //   //     if (element.totalDissolvedSolids) {
-    //   //       lineOption.series[0].data.push(element.totalDissolvedSolids);
-    //   //       lineSeries.value.push(element.totalDissolvedSolids);
-    //   //       lineOption.xAxis[0].data.push(element.sampleTime);
-    //   //       lineXAxis.value.push(element.sampleTime);
-    //   //     }
-    //   //   } else if (type === 'ammoniaNitrogen') {
-    //   //     if (element.ammoniaNitrogen) {
-    //   //       lineOption.series[0].data.push(element.ammoniaNitrogen);
-    //   //       lineSeries.value.push(element.ammoniaNitrogen);
-    //   //       lineOption.xAxis[0].data.push(element.sampleTime);
-    //   //       lineXAxis.value.push(element.sampleTime);
-    //   //     }
-    //   //   }
-    //   // });
-    //   // lineChart.setOption(lineOption);
-    // });
   }
 
-
   function openChartLine() {
-    seekLineData({
-      pageNum: 1,
-      pageSize: 1000,
-      pointId: chart.chartInfo.monitoringWell,
-    }, 'ph');
     chartLine.value.dialogVisible = true;
     const elements = document.getElementsByClassName('RightCenter');
     elements[0].style.zIndex = 100

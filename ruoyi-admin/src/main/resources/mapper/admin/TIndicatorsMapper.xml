@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ruoyi.admin.mapper.TIndicatorsMapper">
-    
+
     <resultMap type="TIndicators" id="TIndicatorsResult">
         <result property="id"    column="id"    />
         <result property="type"    column="type"    />
@@ -11,23 +11,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="isNationalStandard"    column="is_national_standard"    />
         <result property="isEnabled"    column="is_enabled"    />
         <result property="deptId"    column="dept_id"    />
+        <result property="attribute"    column="attribute"    />
     </resultMap>
 
     <sql id="selectTIndicatorsVo">
-        select id, type, value, is_national_standard, is_enabled, dept_id from t_indicators
+        select id, type, value, is_national_standard, is_enabled, dept_id, attribute from t_indicators
     </sql>
 
     <select id="selectTIndicatorsList" parameterType="TIndicators" resultMap="TIndicatorsResult">
         <include refid="selectTIndicatorsVo"/>
-        <where>  
+        <where>
             <if test="type != null  and type != ''"> and type = #{type}</if>
             <if test="value != null "> and value = #{value}</if>
             <if test="isNationalStandard != null  and isNationalStandard != ''"> and is_national_standard = #{isNationalStandard}</if>
             <if test="isEnabled != null  and isEnabled != ''"> and is_enabled = #{isEnabled}</if>
             <if test="deptId != null  and deptId != ''"> and dept_id = #{deptId}</if>
+            <if test="attribute != null  and attribute != ''"> and attribute = #{attribute}</if>
         </where>
     </select>
-    
+
     <select id="selectTIndicatorsById" parameterType="Long" resultMap="TIndicatorsResult">
         <include refid="selectTIndicatorsVo"/>
         where id = #{id}
@@ -42,7 +44,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isNationalStandard != null">is_national_standard,</if>
             <if test="isEnabled != null">is_enabled,</if>
             <if test="deptId != null">dept_id,</if>
-         </trim>
+            <if test="attribute != null">attribute,</if>
+        </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">#{id},</if>
             <if test="type != null">#{type},</if>
@@ -50,7 +53,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isNationalStandard != null">#{isNationalStandard},</if>
             <if test="isEnabled != null">#{isEnabled},</if>
             <if test="deptId != null">#{deptId},</if>
-         </trim>
+            <if test="attribute != null">#{attribute},</if>
+        </trim>
     </insert>
 
     <update id="updateTIndicators" parameterType="TIndicators">
@@ -61,6 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="isNationalStandard != null">is_national_standard = #{isNationalStandard},</if>
             <if test="isEnabled != null">is_enabled = #{isEnabled},</if>
             <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="attribute != null">attribute = #{attribute},</if>
         </trim>
         where id = #{id}
     </update>
@@ -70,7 +75,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </delete>
 
     <delete id="deleteTIndicatorsByIds" parameterType="String">
-        delete from t_indicators where id in 
+        delete from t_indicators where id in
         <foreach item="id" collection="array" open="(" separator="," close=")">
             #{id}
         </foreach>

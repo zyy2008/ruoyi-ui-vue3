@@ -69,11 +69,9 @@
     xAxisData = []
     seriesData = []
     selectValue.value = 'pH'
-    getBatchData({ pageNum: 1, pageSize: 18 }).then(res => {
+    getBatchData({}).then(res => {
       if (res.code === 200) {
         barList = res.data
-        console.log(barList, 999999);
-
         barList.forEach((ele, index) => {
           if (index < 18) {
             xAxisData.push(ele.monitoringWell)

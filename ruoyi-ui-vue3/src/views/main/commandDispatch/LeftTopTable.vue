@@ -12,7 +12,7 @@
       <el-table-column prop="phValue" label="PH" width="60" />
       <el-table-column prop="temperature" label="温度" width="60" />
       <el-table-column prop="waterLevel" label="水位" width="60" />
-      <el-table-column prop="dissolvedOxygen" label="溶解氧" width="110" />
+      <el-table-column prop="dissolvedOxygen" label="溶解氧" width="70" />
       <el-table-column prop="conductivity" label="电导率" width="70" />
       <el-table-column prop="ammoniaNitrogen" label="氨氮" width="60" />
     </el-table>
@@ -75,34 +75,11 @@
     })
   });
 
-  // const createBaseList = (option) => {
-  //   let data = {};
-  //   listWells(option).then((response) => {
-  //     data = response.rows;
-  //     tableTotle.value = response.total;
-  //     listMonitoring(option).then((res) => {
-  //       for (let i in data) {
-  //         res.rows.forEach((ele) => {
-  //           if (ele.pointId === data[i].wellCode) {
-  //             data[i]["ph"] = ele.ph;
-  //           }
-  //         });
-  //       }
-  //       tableData.value = data;
-  //       if (data.length > 0) {
-  //         selectedRow.value = data[0];
-  //         emit("changeTableLine", data[0]);
-  //       }
-  //     });
-  //   });
-  // };
-
 
   const clickTable = (value) => {
-    // getBatchDataDetail(value.id).then(res => {
-    //   console.log(res);
-    // })
-
+    getBatchDataDetail(value.id).then(res => {
+      console.log(res);
+    })
     selectedRow.value = value;
     emit("changeTableLine", value);
     if (map && value.longitude && value.latitude) {

@@ -33,6 +33,7 @@
   import ChartLineModal from "./ChartLineModal.vue";
   import { listMonitoring } from "@/api/admin/monitoring";
   import { listWells } from "@/api/admin/wells";
+  import { getBatchData } from "@/api/monitoring";
   const chartLine = ref();
   const xAxis = ref("周");
   let lineOption = {};
@@ -45,6 +46,7 @@
     wellCode: '',
     location: ''
   })
+  let dataList = []
   const chart = defineProps(["chartInfo"]);
   // 获取检测井数据
   onMounted(() => {
@@ -67,49 +69,73 @@
 
   function seekLineData(option, type) {
     chartLine.value.tableData = [];
-    listMonitoring(option).then((res) => {
-      lineOption.xAxis[0].data = [];
-      lineOption.series[0].data = [];
-      lineSeries.value = [];
-      lineXAxis.value = [];
-      const data = res.rows;
-      let dataList = data.sort((a, b) => {
-        return Number(a.sampleTime) - Number(b.sampleTime)
-      })
+    getBatchData({}).then(res => {
+      if (res.code === 200) {
+        const data = res.data;
+        dataList = data.sort((a, b) => {
+          return new Date(a.monitoringTime).getTime() - new Date(b.monitoringTime).getTime()
+        })
+        console.log(dataList);
 
-      dataList.forEach((element, index) => {
-        chartLine.value.tableData.push({
-          ph: element.ph,
-          totalDissolvedSolids: element.totalDissolvedSolids,
-          ammoniaNitrogen: element.ammoniaNitrogen,
-          sampleTime: element.sampleTime
-        });
-        if (type === 'ph') {
-          if (element.ph) {
-            lineOption.series[0].data.push(element.ph);
-            lineSeries.value.push(element.ph);
-            lineOption.xAxis[0].data.push(element.sampleTime);
-            lineXAxis.value.push(element.sampleTime);
-          }
-        } else if (type === 'dissolved') {
-          if (element.totalDissolvedSolids) {
-            lineOption.series[0].data.push(element.totalDissolvedSolids);
-            lineSeries.value.push(element.totalDissolvedSolids);
-            lineOption.xAxis[0].data.push(element.sampleTime);
-            lineXAxis.value.push(element.sampleTime);
-          }
-        } else if (type === 'ammoniaNitrogen') {
-          if (element.ammoniaNitrogen) {
-            lineOption.series[0].data.push(element.ammoniaNitrogen);
-            lineSeries.value.push(element.ammoniaNitrogen);
-            lineOption.xAxis[0].data.push(element.sampleTime);
-            lineXAxis.value.push(element.sampleTime);
-          }
-        }
-      });
-      // lineChart.setOption(lineOption);
-    });
+        chartLine.value.tableData = dataList
+      }
+    })
+
+    // lineOption.xAxis[0].data = [];
+    // lineOption.series[0].data = [];
+    // dataList.forEach((element, index) => {
+    //   lineOption.series[0].data.push(element[type]);
+    //   lineOption.xAxis[0].data.push(element.sampleTime);
+    // });
+    // lineChart.setOption(lineOption);
+
+    // listMonitoring(option).then((res) => {
+    //   // lineOption.xAxis[0].data = [];
+    //   // lineOption.series[0].data = [];
+    //   // lineSeries.value = [];
+    //   // lineXAxis.value = [];
+    //   const data = res.rows;
+    //   let dataList = data.sort((a, b) => {
+    //     return Number(a.sampleTime) - Number(b.sampleTime)
+    //   })
+    //   chartLine.value.tableData = dataList
+
+    //   console.log(chartLine.value.tableData);
+
+    //   // dataList.forEach((element, index) => {
+    //   //   chartLine.value.tableData.push({
+    //   //     ph: element.ph,
+    //   //     totalDissolvedSolids: element.totalDissolvedSolids,
+    //   //     ammoniaNitrogen: element.ammoniaNitrogen,
+    //   //     sampleTime: element.sampleTime
+    //   //   });
+    //   //   if (type === 'ph') {
+    //   //     if (element.ph) {
+    //   //       lineOption.series[0].data.push(element.ph);
+    //   //       lineSeries.value.push(element.ph);
+    //   //       lineOption.xAxis[0].data.push(element.sampleTime);
+    //   //       lineXAxis.value.push(element.sampleTime);
+    //   //     }
+    //   //   } else if (type === 'dissolved') {
+    //   //     if (element.totalDissolvedSolids) {
+    //   //       lineOption.series[0].data.push(element.totalDissolvedSolids);
+    //   //       lineSeries.value.push(element.totalDissolvedSolids);
+    //   //       lineOption.xAxis[0].data.push(element.sampleTime);
+    //   //       lineXAxis.value.push(element.sampleTime);
+    //   //     }
+    //   //   } else if (type === 'ammoniaNitrogen') {
+    //   //     if (element.ammoniaNitrogen) {
+    //   //       lineOption.series[0].data.push(element.ammoniaNitrogen);
+    //   //       lineSeries.value.push(element.ammoniaNitrogen);
+    //   //       lineOption.xAxis[0].data.push(element.sampleTime);
+    //   //       lineXAxis.value.push(element.sampleTime);
+    //   //     }
+    //   //   }
+    //   // });
+    //   // lineChart.setOption(lineOption);
+    // });
   }
+
 
   function openChartLine() {
     seekLineData({

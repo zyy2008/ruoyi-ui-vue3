@@ -17,7 +17,7 @@
       <el-table-column prop="temperature" label="温度" />
       <el-table-column prop="waterLevel" label="水位" />
       <!-- <el-table-column prop="name1" label="电位" /> -->
-      <el-table-column prop="dissolvedOxygen" label="溶解性总固体" />
+      <el-table-column prop="dissolvedOxygen" label="溶解氧" />
       <el-table-column prop="conductivity" label="电导率" />
       <el-table-column prop="ammoniaNitrogen" label="氨氮" />
     </el-table>
@@ -355,12 +355,17 @@
 
   // 切换指标
   function changeSelect(label) {
+    console.log(chart.chartType === 'monitor');
+    console.log(tableData.value);
+
     let data = [];
-    let time = tableData.value.map((ele) => ele.sampleTime);
+    let time = tableData.value.map((ele) => chart.chartType === 'monitor' ? ele.monitoringTime : ele.sampleTime);
+
     tableData.value.forEach((ele) => {
       data.push(ele[label]);
     });
-    seekLineData(data, time);
+    console.log(data);
+    // seekLineData(data, time);
   }
 
   // 关闭弹窗
@@ -492,7 +497,7 @@
       ],
     };
     lineOption && lineChart.setOption(lineOption);
-    changeSelect('ph')
+    changeSelect('phValue')
   }
 </script>
 

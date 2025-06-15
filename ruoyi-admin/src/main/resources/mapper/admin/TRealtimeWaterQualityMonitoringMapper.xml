@@ -53,8 +53,17 @@
     </select>
 
     <select id="getBatchData" parameterType="BatchWellVo" resultMap="TRealtimeWaterQualityMonitoringResult">
+        SELECT rwqn.ph_value, rwqn.temperature,rwqn.water_level,rwqn.dissolved_oxygen,rwqn.conductivity,
+        rwqn.ammonia_nitrogen,
+        rwqn.monitoring_time,rwqn.synchronization_time,rwqn.redox_potential,mw.well_code as monitoring_well
+        FROM public.t_monitoring_wells mw
+        LEFT JOIN (
         SELECT DISTINCT ON (monitoring_well) *
         FROM public.t_realtime_water_quality_monitoring
+        WHERE synchronization_time IS NOT NULL
+        ORDER BY monitoring_well, synchronization_time DESC
+        ) rwqn ON rwqn.monitoring_well = mw.well_code
+        where mw.real_time='是'
         <where>
             <if test="startMonitoringTime != null and startMonitoringTime != ''">
                 AND monitoring_time &gt;= #{startMonitoringTime}

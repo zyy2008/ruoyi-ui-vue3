@@ -1595,6 +1595,8 @@
           form.chloroprene
         }}</el-descriptions-item>
 
+
+        
         <el-descriptions-item label="溴氯甲烷(μg/L)">{{
           form.bromochloromethane
         }}</el-descriptions-item>

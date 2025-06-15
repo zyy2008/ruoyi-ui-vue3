@@ -10,8 +10,8 @@ import lombok.Data;
 @Data
 @ApiModel("获取监测井最新数据")
 public class BatchWellVo {
-    @ApiModelProperty("部门")
-    private String deptId;
+//    @ApiModelProperty("部门")
+//    private String deptId;
     @ApiModelProperty("数据监测开始时间")
     private String startMonitoringTime;
     @ApiModelProperty("数据监测结束时间")

@@ -2,6 +2,7 @@ package com.ruoyi.admin.controller;
 
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import com.ruoyi.admin.domain.bo.BatchWellBo;
 import com.ruoyi.admin.domain.bo.SingleMonitoringWellLineChartDataBo;
@@ -66,7 +67,7 @@ public class TRealtimeWaterQualityMonitoringController extends BaseController {
     @ApiOperation("获取单个监测井折线图数据")
     //@PreAuthorize("@ss.hasPermi('admin:realtimeWaterQualityMonitoring:list')")
     @GetMapping("/getSingleWellMonitoringLineChartData")
-    public AjaxResult getSingleWellMonitoringLineChartData(SingleMonitoringWellLineChartDataBo vo) {
+    public AjaxResult getSingleWellMonitoringLineChartData(@Valid SingleMonitoringWellLineChartDataBo vo) {
         return AjaxResult.success(tRealtimeWaterQualityMonitoringService.getSingleWellMonitoringLineChartData(vo));
     }
 

@@ -77,12 +77,12 @@
     </div>
   </div>
 
-  <LeftTopTable class="leftTable" v-show="zxjcShow" @changeTableLine="changeTableLine" />
+  <LeftTopTable class="leftTable" v-show="zxjcShow" />
   <RightTopLine class="RightLine" v-show="zhddShow" />
   <RightBottomVideo class="RightVideo" v-show="zxjcShow" />
   <RightBottomTable class="RightTable" v-show="zhddShow || bjybShow" />
   <RightTopTable class="RightLine" v-show="bjybShow" />
-  <RightCenterLine class="RightCenter" v-show="zxjcShow" :chartInfo="chartInfo" />
+  <RightCenterLine class="RightCenter" v-show="zxjcShow" />
   <el-dialog modal-class="visible_SelectPoint map-dialog" draggable :title="'坐标查询'" v-model="visible_SelectPoint"
     width="350px" :modal="false" :close-on-click-modal="false" :destroy-on-close="true">
     <SelectPoint />
@@ -128,9 +128,9 @@
   const zxjcShow = ref(false);
   const bjybShow = ref(false);
 
-  const chartInfo = ref({
-    wellCode: "J01",
-  });
+  // const chartInfo = ref({
+  //   wellCode: "J01",
+  // });
 
   const activeText = ref("zhdd");
   const emits = defineEmits(["setLayout"]);
@@ -210,11 +210,11 @@
     }
   }
 
-  function changeTableLine(value) {
-    console.log(chartInfo.value);
+  // function changeTableLine(value) {
+  //   console.log(chartInfo.value);
 
-    chartInfo.value = value;
-  }
+  //   chartInfo.value = value;
+  // }
 
   function goSystem() {
     router.push({ path: "/index" });
@@ -404,7 +404,7 @@
 
   .RightVideo {
     width: 1420px;
-    height: 200px;
+   
     position: absolute;
     top: 600px;
     right: 20px;

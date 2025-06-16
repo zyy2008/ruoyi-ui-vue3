@@ -44,6 +44,8 @@
   import { getBatchData } from "@/api/monitoring";
   import ChartBarModal from './ChartBarModal.vue'
   import { param } from "@mars/utils";
+  import emitter from '@/mitt/mitt';
+
   const tableData = ref();
   const tableTotle = ref();
   const selectedRow = ref(null);
@@ -62,30 +64,25 @@
       },
     });
   };
-  const emit = defineEmits(["changeTableLine"]);
   onMounted(() => {
     getBatchData({}).then(res => {
       if (res.code === 200) {
         tableData.value = res.data
         if (res.data.length > 0) {
           selectedRow.value = res.data[0];
-          emit("changeTableLine", res.data[0]);
+          emitter.emit("changeTableLine", res.data[0])
         }
       }
     })
   });
 
-
-  const clickTable = (value) => {
-    getBatchDataDetail(value.id).then(res => {
-      console.log(res);
-    })
-    selectedRow.value = value;
-    emit("changeTableLine", value);
-    if (map && value.longitude && value.latitude) {
+  const clickTable = (ment) => {
+    selectedRow.value = ment;
+    emitter.emit("changeTableLine", ment)
+    if (map && ment.longitude && ment.latitude) {
       map.setCameraView({
-        lng: Number(value.longitude),
-        lat: Number(value.latitude),
+        lng: Number(ment.longitude),
+        lat: Number(ment.latitude),
         alt: 1200
       })
     }

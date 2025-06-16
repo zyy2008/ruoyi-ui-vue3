@@ -6,12 +6,12 @@
     </div>
 
     <div class="video">
-      <!-- <JianKong
+      <JianKong
         v-for="item in cameraList"
-        :key="item.id"
+        :key="item.videoUrl"
         :JKParams="item"
         class="video-player"
-      /> -->
+      />
     </div>
   </div>
 </template>
@@ -22,39 +22,37 @@ import { getTokens } from "@/api/YingShiYunApi";
 import { listWells } from "@/api/admin/wells";
 import { ElMessage } from "element-plus";
 
-const cameraList = reactive([]);
+const cameraList = ref([]);
 const AccessToken = ref("");
 const tokenParams = {
   appKey: "9d96d9e9439248b3af163466f192ff07",
   appSecret: "0bafddff864cf320fcdebb2e75ac829b",
 };
 onMounted(async () => {
-  const res = await getTokens(tokenParams);
+  AccessToken.value = await getTokens(tokenParams);
 
-  if (!res) {
+  if (!AccessToken.value) {
     ElMessage.error("获取Token失败，请检查网络或联系管理员");
     return;
   }
-  AccessToken.value = res;
-});
-onMounted(async () => {
-  const { rows, total, code } = await listWells({
+  let { rows, total, code } = await listWells({
     pageNum: 1,
-    pageSize: 1000,
+    pageSize: 100,
   });
 
   if (code !== 200) {
     ElMessage.error("获取监控列表失败，请检查网络或联系管理员");
     return;
   }
-  rows.forEach((item) => {
+  rows.forEach((item, index) => {
     if (!item.videoUrl) return;
-    cameraList.push({
+    cameraList.value.push({
+      accessToken: AccessToken.value,
       deviceSerial: item.videoUrl,
       hd: false,
-      width: 500,
-      height: 300,
-      channelNo: 1,
+      width: 400,
+      height: 260,
+      channelNo: index,
     });
   });
 });
@@ -71,7 +69,6 @@ onMounted(async () => {
     height: 42px;
     line-height: 42px;
     display: flex;
-
     span {
       font-size: 18px;
       display: inline-block;
@@ -82,11 +79,10 @@ onMounted(async () => {
     width: 100%;
     height: calc(100% - 60px);
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     .video-player {
-      width: 300px;
-      height: 200px;
       border: 1px solid #ccc;
       box-sizing: border-box;
     }

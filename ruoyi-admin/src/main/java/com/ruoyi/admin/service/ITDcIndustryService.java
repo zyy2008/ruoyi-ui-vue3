@@ -2,6 +2,7 @@ package com.ruoyi.admin.service;
 
 import java.util.List;
 import com.ruoyi.admin.domain.TDcIndustry;
+import com.ruoyi.admin.domain.vo.TDcIndustryTree;
 
 /**
  * 行业分类Service接口
@@ -26,6 +27,7 @@ public interface ITDcIndustryService
      * @return 行业分类集合
      */
     public List<TDcIndustry> selectTDcIndustryList(TDcIndustry tDcIndustry);
+    public List<TDcIndustryTree> treeList(TDcIndustry tDcIndustry);
 
     /**
      * 新增行业分类

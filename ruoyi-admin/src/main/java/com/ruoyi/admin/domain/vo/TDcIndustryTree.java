@@ -1,22 +1,18 @@
-package com.ruoyi.admin.domain;
+package com.ruoyi.admin.domain.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-import com.ruoyi.common.annotation.Excel;
-import com.ruoyi.common.core.domain.BaseEntity;
+
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * 行业分类对象 t_dc_industry
- *
- * @author ruoyi
- * @date 2025-06-03
+ * 行业分类
  */
+@ApiModel("行业分类树形结构")
 @Data
-@ApiModel("行业分类")
-public class TDcIndustry extends BaseEntity {
+public class TDcIndustryTree implements Serializable {
     private static final long serialVersionUID = 1L;
 
     /**
@@ -38,9 +34,14 @@ public class TDcIndustry extends BaseEntity {
     private String code;
 
     /**
-     * 绑定的大类
+     * 绑定的大类（上级行业编码）
      */
-    @ApiModelProperty("绑定的大类")
+    @ApiModelProperty("绑定的大类（上级行业编码）")
     private String pCode;
 
+    /**
+     * 子节点列表
+     */
+    @ApiModelProperty("子行业列表")
+    private List<TDcIndustryTree> children;
 }

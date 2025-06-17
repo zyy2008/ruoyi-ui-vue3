@@ -44,7 +44,7 @@ onMounted(async () => {
   //   ElMessage.error("获取监控列表失败，请检查网络或联系管理员");
   //   return;
   // }
-  rows = [{ videoUrl: "FT2988815" }];
+  let rows = [{ videoUrl: "FT2988779" }];
   rows.forEach((item, index) => {
     if (!item.videoUrl) return;
     cameraList.value.push({
@@ -53,9 +53,12 @@ onMounted(async () => {
       hd: false,
       width: 400,
       height: 170,
-      channelNo: index,
+      channelNo: 1,
+      appKey: tokenParams.appKey,
     });
   });
+
+  
 });
 </script>
 

@@ -51,7 +51,6 @@
       <el-table-column prop="turbidity" label="浑浊度(NTU)" width="110" />
       <el-table-column prop="visibleMatters" label="肉眼可见物" width="100" />
       <el-table-column prop="ph" label="pH" />
-
       <el-table-column prop="totalHardness" label="总硬度(mg/L)" />
       <el-table-column prop="totalDissolvedSolids" label="溶解性总固体(mg/L)" width="110" />
       <el-table-column prop="sulfate" label="硫酸盐(mg/L)" />
@@ -415,8 +414,9 @@
   // ];
   const indicatorsOption = ref([])
   const tableData = ref([]);
+  const tableInfo = ref([]);
 
-  defineExpose({ dialogVisible, tableData });
+  defineExpose({ dialogVisible, tableData, tableInfo });
 
   onMounted(() => {
     // 下拉指标切换
@@ -444,7 +444,6 @@
 
   // 切换指标
   function changeSelect(label) {
-
     let data = [];
     let time = tableData.value.map((ele) => chart.chartType === 'monitor' ? ele.monitoringTime : ele.sampleTime);
     tableData.value.forEach((ele) => {
@@ -583,7 +582,7 @@
       ],
     };
     lineOption && lineChart.setOption(lineOption);
-    changeSelect('phValue')
+    changeSelect(chart.chartType === 'monitor' ? 'phValue' : 'ph')
   }
 </script>
 

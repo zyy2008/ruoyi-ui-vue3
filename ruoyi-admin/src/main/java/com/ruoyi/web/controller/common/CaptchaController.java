@@ -71,6 +71,7 @@ public class CaptchaController {
             image = captchaProducer.createImage(capStr);
         }
         System.out.println("验证码：" + code);
+        System.out.println("uuid：" + uuid);
 
         redisCache.setCacheObject(verifyKey, code, Constants.CAPTCHA_EXPIRATION, TimeUnit.MINUTES);
         // 转换流信息写出

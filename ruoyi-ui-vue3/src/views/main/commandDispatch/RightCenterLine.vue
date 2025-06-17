@@ -3,7 +3,8 @@
     <div class="title">
       <div class="image">
         <img src="@/assets/static/subTitle.png" alt="" />
-        <span> {{ chart.chartInfo.wellCode+'(' +chart.chartInfo.location+')' }} </span>
+        <span> {{ chartTitle.monitoringWell }} </span>
+        <!-- <span> {{ chartTitle.chartInfo.monitoringWell+'(' +chartTitle.chartInfo.location+')' }} </span> -->
       </div>
       <el-radio-group v-model="xAxis" style="width: 150px;" @change="changeChart">
         <el-radio-button label="周"></el-radio-button>
@@ -23,7 +24,7 @@
         <div id="echart6"></div>
       </div>
     </div>
-    <ChartLineModal ref="chartLine" :chart="chart" :lineXAxis="lineXAxis" :lineSeries="lineSeries" :chartType="chartType" />
+    <ChartLineModal ref="chartLine" :chartTitle="chartTitle" :chartType="chartType" />
   </div>
 </template>
 <script setup>
@@ -31,84 +32,88 @@
   import * as echarts from "echarts";
   import ChartLineModal from "./ChartLineModal.vue";
   import { listMonitoring } from "@/api/admin/monitoring";
+  import { listWells } from "@/api/admin/wells";
+  import { getBatchData, getSingleWellMonitoringLineChartData } from "@/api/monitoring";
+  import emitter from '@/mitt/mitt';
+  import dayjs from 'dayjs';
   const chartLine = ref();
   const xAxis = ref("周");
-  let lineChart = null;
   let lineOption = {};
   const selectValue = ref("pH");
   let lineInfo = ref([]);
   let lineXAxis = ref([]);
   let lineSeries = ref([]);
-  const chartType=ref('monitor')
-  const chart = defineProps(["chartInfo"]);
+  const chartType = ref('monitor')
 
-  function seekLineData(option, type) {
-    chartLine.value.tableData = [];
-    listMonitoring(option).then((res) => {
-      lineOption.xAxis[0].data = [];
-      lineOption.series[0].data = [];
-      lineSeries.value = [];
-      lineXAxis.value = [];
-      const data = res.rows;
-      let dataList = data.sort((a, b) => {
-        return Number(a.sampleTime) - Number(b.sampleTime)
-      })
+  const chartTitle = reactive({
+    wellCode: '',
+    location: ''
+  })
 
-      dataList.forEach((element, index) => {
-        chartLine.value.tableData.push({
-          ph: element.ph,
-          totalDissolvedSolids: element.totalDissolvedSolids,
-          ammoniaNitrogen: element.ammoniaNitrogen,
-          sampleTime: element.sampleTime
-        });
-        if (type === 'ph') {
-          if (element.ph) {
-            lineOption.series[0].data.push(element.ph);
-            lineSeries.value.push(element.ph);
-            lineOption.xAxis[0].data.push(element.sampleTime);
-            lineXAxis.value.push(element.sampleTime);
-          }
-        } else if (type === 'dissolved') {
-          if (element.totalDissolvedSolids) {
-            lineOption.series[0].data.push(element.totalDissolvedSolids);
-            lineSeries.value.push(element.totalDissolvedSolids);
-            lineOption.xAxis[0].data.push(element.sampleTime);
-            lineXAxis.value.push(element.sampleTime);
-          }
-        } else if (type === 'ammoniaNitrogen') {
-          if (element.ammoniaNitrogen) {
-            lineOption.series[0].data.push(element.ammoniaNitrogen);
-            lineSeries.value.push(element.ammoniaNitrogen);
-            lineOption.xAxis[0].data.push(element.sampleTime);
-            lineXAxis.value.push(element.sampleTime);
-          }
-        }
-      });
-      // lineChart.setOption(lineOption);
-    });
-  }
-
-  function openChartLine() {
+  let dataList = []
+  emitter.on('changeTableLine', changeTableLine);
+  // const chartTitle = defineProps(["chartInfo"]);
+  // 获取检测井数据
+  onMounted(() => {
     seekLineData({
       pageNum: 1,
       pageSize: 1000,
-      pointId: chart.chartInfo.wellCode,
-    }, 'ph');
+      pointId: chartTitle.monitoringWell,
+    });
+    nextTick(() => {
+
+    });
+  });
+
+  function seekLineData(option) {
+    chartLine.value.tableData = [];
+    getBatchData({}).then(res => {
+      if (res.code === 200) {
+        const data = res.data;
+        dataList = data.sort((a, b) => {
+          return new Date(a.monitoringTime).getTime() - new Date(b.monitoringTime).getTime()
+        })
+        chartLine.value.tableData = dataList
+      }
+    })
+  }
+
+  function openChartLine() {
     chartLine.value.dialogVisible = true;
     const elements = document.getElementsByClassName('RightCenter');
     elements[0].style.zIndex = 100
   }
 
-  nextTick(() => {
-    initEchart('echart1', 'pH');
-    initEchart('echart2', '温度');
-    initEchart('echart3', '水位');
-    initEchart('echart4', '溶解氧');
-    initEchart('echart5', '电导率');
-    initEchart('echart6', '氨氮');
-  });
+  function changeTableLine(ment) {
+    chartTitle.monitoringWell = ment.monitoringWell
+    if (!ment.monitoringTime) return
+    let days = xAxis.value === '周' ? 7 : 30
+    const endDay = dayjs(ment.monitoringTime).add(days, 'day').format('YYYY-MM-DD HH:mm:ss');
+    getSingleWellMonitoringLineChartData({ wellCode: ment.monitoringWell, startMonitoringTime: ment.monitoringTime, endMonitoringTime: endDay }).then(res => {
+      if (res.code === 200) {
+        const data = res.data
+        let xAxisData = []
+        let seriesData = { phValue: [], temperature: [], waterLevel: [], dissolvedOxygen: [], conductivity: [], ammoniaNitrogen: [] }
+        data.forEach(ele => {
+          xAxisData.push(ele.monitoringTime)
+          seriesData['phValue'].push(ele.phValue)
+          seriesData['temperature'].push(ele.temperature)
+          seriesData['waterLevel'].push(ele.waterLevel)
+          seriesData['dissolvedOxygen'].push(ele.dissolvedOxygen)
+          seriesData['conductivity'].push(ele.conductivity)
+          seriesData['ammoniaNitrogen'].push(ele.ammoniaNitrogen)
+        })
+        initEchart('echart1', 'pH', xAxisData, seriesData['phValue']);
+        initEchart('echart2', '温度', xAxisData, seriesData['temperature']);
+        initEchart('echart3', '水位', xAxisData, seriesData['waterLevel']);
+        initEchart('echart4', '溶解氧', xAxisData, seriesData['dissolvedOxygen']);
+        initEchart('echart5', '电导率', xAxisData, seriesData['conductivity']);
+        initEchart('echart6', '氨氮', xAxisData, seriesData['ammoniaNitrogen']);
+      }
+    })
+  }
 
-  function initEchart(id, title) {
+  function initEchart(id, title, xAxisData, seriesData) {
     var chartDom = document.getElementById(id);
     const lineChart = echarts.init(chartDom);
     var fontColor = "#30eee9";
@@ -132,22 +137,10 @@
         show: true,
         trigger: "item",
       },
-      legend: {
-        show: false,
-        x: "center",
-        y: "0",
-        icon: "stack",
-        itemWidth: 10,
-        itemHeight: 10,
-        textStyle: {
-          color: "#1bb4f6",
-        },
-        data: ["pH", "温度", "水位", "氧化还原电位", "溶解性总固体", "电导率", "氨氮"],
-      },
       xAxis: [
         {
           type: "category",
-          boundaryGap: false,
+          boundaryGap: true,
           axisLabel: {
             color: fontColor,
           },
@@ -158,7 +151,7 @@
             },
           },
           axisTick: {
-            show: false,
+            show: true,
           },
           splitLine: {
             show: true,
@@ -166,7 +159,7 @@
               color: "#195384",
             },
           },
-          data: ["周一", "周二", "周三", "周四", "周五", "周六", "周天"],
+          data: xAxisData,
         },
       ],
       yAxis: [
@@ -224,7 +217,7 @@
               },
             },
           },
-          data: [220, 182, 191, 234, 290, 330, 310, 201, 154, 190, 330, 410],
+          data: seriesData,
         },
       ],
     };
@@ -296,12 +289,6 @@
       display: flex;
       justify-content: space-between;
     }
-
-    /* #echart {
-      width: 100%;
-      margin-top: 5px;
-      height: calc(100% - 60px);
-    } */
   }
 
   :deep() .el-radio-button__original-radio:checked+.el-radio-button__inner {

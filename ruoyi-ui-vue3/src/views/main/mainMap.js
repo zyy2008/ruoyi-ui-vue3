@@ -116,6 +116,7 @@ function addEnterpriseLayer_isNotKey(list) {
     graphic.on(mars3d.EventType.popupOpen, function (event) {
 
 
+
       const container = event.container // popup对应的DOM
       const btnDetails = container.querySelector("#btnDetails")
       if (btnDetails) {
@@ -142,6 +143,10 @@ export async function loadWells() {
   let wellList_NotrealTime = wellList.filter(item => item.realTime !== "否");
   addWellLayer_NotrealTime(wellList_NotrealTime);
   addWellLayer_realTime(wellList_realTime);
+}
+
+window.QY_formatFun = function (value) {
+  return value || "公共区域"
 }
 
 function addWellLayer_NotrealTime(list) {
@@ -178,7 +183,11 @@ function addWellLayer_NotrealTime(list) {
       attr: { ...item },
       popup: [
         { field: "wellCode", name: "监测井编码" },
-        { field: "enterpriseName", name: "所属企业" },
+        // { field: "enterpriseName", name: "所属企业" },
+        {
+          type: "html",
+          html: "<label>所属企业</label><div style='cursor: pointer;color: #ff0000;' id='btnDetailsQy'>" + (item.enterpriseName || "公共区域") + "</div>"
+        },
         { field: "location", name: "监测井位置" },
         { field: "completionDate", name: "成井时间" },
         { field: "pipeMaterial", name: "井管材质" },
@@ -197,10 +206,10 @@ function addWellLayer_NotrealTime(list) {
           type: "html",
           html: "<label>监测数据</label><div style='cursor: pointer;color: #ff0000;' id='btnDetails'>点击查看</div>"
         },
-        {
-          type: "html",
-          html: "<label>企业详情</label><div style='cursor: pointer;color: #ff0000;' id='btnDetailsQy'>点击查看</div>"
-        }
+        // {
+        //   type: "html",
+        //   html: "<label>企业详情</label><div style='cursor: pointer;color: #ff0000;' id='btnDetailsQy'>点击查看</div>"
+        // }
       ],
     })
     graphicLayer.addGraphic(graphic)
@@ -268,7 +277,11 @@ function addWellLayer_realTime(list) {
       attr: { ...item },
       popup: [
         { field: "wellCode", name: "监测井编码" },
-        { field: "enterpriseName", name: "所属企业" },
+        // { field: "enterpriseName", name: "所属企业" },
+        {
+          type: "html",
+          html: "<label>所属企业</label><div style='cursor: pointer;color: #ff0000;' id='btnDetailsQy'>" + (item.enterpriseName || "公共区域") + "</div>"
+        },
         { field: "location", name: "监测井位置" },
         { field: "completionDate", name: "成井时间" },
         { field: "pipeMaterial", name: "井管材质" },
@@ -287,10 +300,10 @@ function addWellLayer_realTime(list) {
           type: "html",
           html: "<label>监测数据</label><div style='cursor: pointer;color: #ff0000;' id='btnDetails'>点击查看</div>"
         },
-        {
-          type: "html",
-          html: "<label>企业详情</label><div style='cursor: pointer;color: #ff0000;' id='btnDetailsQy'>点击查看</div>"
-        }
+        // {
+        //   type: "html",
+        //   html: "<label>企业详情</label><div style='cursor: pointer;color: #ff0000;' id='btnDetailsQy'>点击查看</div>"
+        // }
       ],
     })
     graphicLayer.addGraphic(graphic)

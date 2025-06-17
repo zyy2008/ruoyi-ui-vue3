@@ -4,15 +4,17 @@ import com.ruoyi.common.core.domain.AjaxResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -68,4 +70,38 @@ public class FileController {
         }
         return AjaxResult.error();
     }
+
+    @ApiOperation("下载文件")
+    @GetMapping("/download")
+    public void download(@RequestParam("path") String path, HttpServletResponse response) {
+        // 1. 构造文件完整路径
+        File file = new File(savePath + path.replace("files", ""));
+
+        if (!file.exists() || !file.isFile()) {
+            response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            return;
+        }
+
+        // 2. 设置响应头
+        response.setContentType("application/octet-stream");
+        response.setCharacterEncoding("UTF-8");
+        // 设置下载文件名
+        String fileName = file.getName();
+        try {
+            response.setHeader("Content-Disposition", "attachment; filename=" + URLEncoder.encode(fileName, "UTF-8"));
+            // 3. 流式写出文件内容
+            try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file));
+                 ServletOutputStream os = response.getOutputStream()) {
+                byte[] buffer = new byte[1024];
+                int len;
+                while ((len = bis.read(buffer)) != -1) {
+                    os.write(buffer, 0, len);
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }

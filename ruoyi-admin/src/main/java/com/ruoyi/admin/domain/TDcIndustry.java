@@ -28,21 +28,18 @@ public class TDcIndustry extends BaseEntity {
     /**
      * 行业名称
      */
-    @Excel(name = "行业名称")
     @ApiModelProperty("行业名称")
     private String industryCategory;
 
     /**
      * 行业编码
      */
-    @Excel(name = "行业编码")
     @ApiModelProperty("行业编码")
     private String code;
 
     /**
      * 绑定的大类
      */
-    @Excel(name = "绑定的大类")
     @ApiModelProperty("绑定的大类")
     private String pCode;
 

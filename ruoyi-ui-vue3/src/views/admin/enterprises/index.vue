@@ -28,7 +28,9 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
+        <el-button type="primary" icon="Search" @click="handleQuery"
+          >搜索</el-button
+        >
         <el-button icon="Refresh" @click="resetQuery">重置</el-button>
       </el-form-item>
     </el-form>
@@ -89,7 +91,13 @@
     >
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="企业名称" align="center" prop="enterpriseName" />
-      <el-table-column label="行业类别" align="center" prop="industryCategory" />
+      <el-table-column
+        label="行业类别"
+        align="center"
+        prop="industryCategory"
+      />
+      <el-table-column label="监管类型" align="center" prop="regulatoryType" />
+
       <el-table-column label="生产年限" align="center" prop="productionYears" />
       <el-table-column label="存续状态" align="center" prop="status" />
       <el-table-column label="报送情况" align="center" prop="reportingStatus" />
@@ -104,7 +112,11 @@
         class-name="small-padding fixed-width"
       >
         <template #default="scope">
-          <el-button link type="primary" icon="View" @click="handleDetail(scope.row)"
+          <el-button
+            link
+            type="primary"
+            icon="View"
+            @click="handleDetail(scope.row)"
             >详情</el-button
           >
           <el-button
@@ -137,15 +149,35 @@
 
     <!-- 添加或修改企业管理对话框 -->
     <el-dialog :title="title" v-model="open" width="500px" append-to-body>
-      <el-form ref="enterprisesRef" :model="form" :rules="rules" label-width="100px">
+      <el-form
+        ref="enterprisesRef"
+        :model="form"
+        :rules="rules"
+        label-width="100px"
+      >
         <el-form-item label="企业名称" prop="enterpriseName">
-          <el-input v-model="form.enterpriseName" placeholder="请输入企业名称" />
+          <el-input
+            v-model="form.enterpriseName"
+            placeholder="请输入企业名称"
+          />
         </el-form-item>
         <el-form-item label="行业类别" prop="industryCategory">
-          <el-input v-model="form.industryCategory" placeholder="请输入行业类别" />
+          <el-input
+            v-model="form.industryCategory"
+            placeholder="请输入行业类别"
+          />
+        </el-form-item>
+        <el-form-item label="监管类型" prop="regulatoryType">
+          <el-input
+            v-model="form.regulatoryType"
+            placeholder="请输入监管类型"
+          />
         </el-form-item>
         <el-form-item label="生产年限" prop="productionYears">
-          <el-input v-model="form.productionYears" placeholder="请输入生产年限" />
+          <el-input
+            v-model="form.productionYears"
+            placeholder="请输入生产年限"
+          />
         </el-form-item>
         <el-form-item label="存续状态" prop="status">
           <el-select v-model="form.status" placeholder="请选择存续状态">
@@ -155,7 +187,10 @@
           </el-select>
         </el-form-item>
         <el-form-item label="报送情况" prop="reportingStatus">
-          <el-select v-model="form.reportingStatus" placeholder="请选择报送情况">
+          <el-select
+            v-model="form.reportingStatus"
+            placeholder="请选择报送情况"
+          >
             <el-option label="已报送" value="已报送" />
             <el-option label="未报送" value="未报送" />
           </el-select>
@@ -184,7 +219,12 @@
       </template>
     </el-dialog>
 
-    <el-dialog v-model="dialogVisible" title="企业信息" width="100vw" destroy-on-close>
+    <el-dialog
+      v-model="dialogVisible"
+      title="企业信息"
+      width="100vw"
+      destroy-on-close
+    >
       <TabsCard :deptId="deptId" />
       <!-- <el-tabs
         v-model="activeName"

@@ -10,10 +10,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="pollutantName"    column="pollutant_name"    />
         <result property="maxConcentrationMgl"    column="max_concentration_mgl"    />
         <result property="deptId"    column="dept_id"    />
+        <result property="monitoringType"    column="monitoring_type"    />
     </resultMap>
 
     <sql id="selectTGroundwaterPollutantVo">
-        select id, monitoring_id, pollutant_name, max_concentration_mgl, dept_id from t_groundwater_pollutant
+        select id, monitoring_id, pollutant_name, max_concentration_mgl, dept_id,monitoring_type from t_groundwater_pollutant
     </sql>
 
     <select id="selectTGroundwaterPollutantList" parameterType="TGroundwaterPollutant" resultMap="TGroundwaterPollutantResult">
@@ -22,6 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="pollutantName != null  and pollutantName != ''"> and pollutant_name like concat('%', #{pollutantName}, '%')</if>
             <if test="maxConcentrationMgl != null  and maxConcentrationMgl != ''"> and max_concentration_mgl = #{maxConcentrationMgl}</if>
             <if test="deptId != null "> and dept_id = #{deptId}</if>
+            <if test="monitoringType != null "> and monitoring_type = #{monitoringType}</if>
         </where>
     </select>
     
@@ -37,12 +39,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="pollutantName != null and pollutantName != ''">pollutant_name,</if>
             <if test="maxConcentrationMgl != null">max_concentration_mgl,</if>
             <if test="deptId != null">dept_id,</if>
+            <if test="monitoringType != null">monitoring_type,</if>
          </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="monitoringId != null">#{monitoringId},</if>
             <if test="pollutantName != null and pollutantName != ''">#{pollutantName},</if>
             <if test="maxConcentrationMgl != null">#{maxConcentrationMgl},</if>
             <if test="deptId != null">#{deptId},</if>
+            <if test="monitoringType != null">#{monitoringType},</if>
          </trim>
     </insert>
 
@@ -53,6 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="pollutantName != null and pollutantName != ''">pollutant_name = #{pollutantName},</if>
             <if test="maxConcentrationMgl != null">max_concentration_mgl = #{maxConcentrationMgl},</if>
             <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="monitoringType != null">monitoring_type = #{monitoringType},</if>
         </trim>
         where id = #{id}
     </update>

@@ -8,14 +8,13 @@
     <el-table :data="tableData" style="width: 100%" max-height="650" :row-class-name="tableRowClassName"
       @row-click="clickTable">
       <el-table-column type="index" label="序号" width="60" />
-      <el-table-column prop="wellCode" label="名称" width="60" />
-      <el-table-column prop="ph" label="PH" width="60" />
-      <el-table-column prop="WD" label="温度" width="60" />
-      <el-table-column prop="waterBuriedDepth" label="水位" width="60" />
-      <!-- <el-table-column prop="DW" label="电位" /> -->
-      <el-table-column prop="RJY" label="溶解氧" width="110" />
-      <el-table-column prop="DDL" label="电导率" width="70" />
-      <el-table-column prop="AD" label="氨氮" width="60" />
+      <el-table-column prop="monitoringWell" label="名称" width="60" />
+      <el-table-column prop="phValue" label="PH" width="60" />
+      <el-table-column prop="temperature" label="温度" width="60" />
+      <el-table-column prop="waterLevel" label="水位" width="60" />
+      <el-table-column prop="dissolvedOxygen" label="溶解氧" width="70" />
+      <el-table-column prop="conductivity" label="电导率" width="70" />
+      <el-table-column prop="ammoniaNitrogen" label="氨氮" width="60" />
     </el-table>
     <ChartBarModal ref="chartBar" />
   </div>
@@ -30,7 +29,7 @@
     DataMethod,
     ApiData,
   } from "@/api/platform/index";
-  import { listWells } from "@/api/admin/wells";
+
   import {
     listMonitoring,
     getMonitoring,
@@ -38,8 +37,15 @@
     addMonitoring,
     updateMonitoring,
   } from "@/api/admin/monitoring";
+
+  import {
+    getBatchDataDetail
+  } from "@/api/monitoring";
+  import { getBatchData } from "@/api/monitoring";
   import ChartBarModal from './ChartBarModal.vue'
   import { param } from "@mars/utils";
+  import emitter from '@/mitt/mitt';
+
   const tableData = ref();
   const tableTotle = ref();
   const selectedRow = ref(null);
@@ -58,41 +64,25 @@
       },
     });
   };
-
   onMounted(() => {
-    createBaseList({ pageNum: 1, pageSize: 1000 ,realTime:"是"});
+    getBatchData({}).then(res => {
+      if (res.code === 200) {
+        tableData.value = res.data
+        if (res.data.length > 0) {
+          selectedRow.value = res.data[0];
+          emitter.emit("changeTableLine", res.data[0])
+        }
+      }
+    })
   });
 
-  const createBaseList = (option) => {
-    let data = {};
-    listWells(option).then((response) => {
-      data = response.rows;
-      tableTotle.value = response.total;
-      listMonitoring(option).then((res) => {
-        for (let i in data) {
-          res.rows.forEach((ele) => {
-            if (ele.pointId === data[i].wellCode) {
-              data[i]["ph"] = ele.ph;
-            }
-          });
-        }
-        tableData.value = data;
-        if (data.length > 0) {
-          selectedRow.value = data[0];
-          emit("changeTableLine", data[0]);
-        }
-      });
-    });
-  };
-  const emit = defineEmits(["changeTableLine"]);
-
-  const clickTable = (value) => {
-    selectedRow.value = value;
-    emit("changeTableLine", value);
-    if (map && value.longitude && value.latitude) {
+  const clickTable = (ment) => {
+    selectedRow.value = ment;
+    emitter.emit("changeTableLine", ment)
+    if (map && ment.longitude && ment.latitude) {
       map.setCameraView({
-        lng: Number(value.longitude),
-        lat: Number(value.latitude),
+        lng: Number(ment.longitude),
+        lat: Number(ment.latitude),
         alt: 1200
       })
     }

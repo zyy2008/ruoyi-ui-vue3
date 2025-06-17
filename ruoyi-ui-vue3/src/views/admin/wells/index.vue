@@ -5,12 +5,31 @@
       ref="queryRef"
       :inline="true"
       v-show="showSearch"
-      label-width="68px"
+      label-width="100px"
     >
-      <el-form-item label="编码" prop="wellCode">
+      <el-form-item label="监测井编码" prop="wellCode">
         <el-input
           v-model="queryParams.wellCode"
-          placeholder="请输入编码"
+          placeholder="请输入监测井编码"
+          clearable
+          @keyup.enter="handleQuery"
+        />
+      </el-form-item>
+      <el-form-item label="在线监测井" prop="realTime">
+        <el-select
+          v-model="queryParams.realTime"
+          placeholder="请选择"
+          clearable
+          style="width: 200px"
+        >
+          <el-option label="是" value="是" />
+          <el-option label="否" value="否" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="设备编码" prop="deviceNo">
+        <el-input
+          v-model="queryParams.deviceNo"
+          placeholder="请输入设备编码"
           clearable
           @keyup.enter="handleQuery"
         />
@@ -95,7 +114,9 @@
       @selection-change="handleSelectionChange"
     >
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="编码" align="center" prop="wellCode" />
+      <el-table-column label="监测井编码" align="center" prop="wellCode" />
+      <el-table-column label="在线监测井" align="center" prop="realTime" />
+
       <el-table-column
         width="240"
         label="所属企业"
@@ -108,6 +129,8 @@
           }}</el-button>
         </template>
       </el-table-column>
+
+      <el-table-column label="设备编码" align="center" prop="deviceNo" />
       <el-table-column label="位置" align="center" prop="location" />
       <el-table-column label="类型" align="center" prop="pointType" />
       <el-table-column
@@ -174,6 +197,17 @@
               <el-input v-model="form.wellCode" placeholder="请输入内容" />
             </el-form-item>
           </el-col>
+
+          <el-col :span="12">
+            <el-form-item label="在线监测井" prop="realTime">
+              <el-input v-model="form.realTime" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="设备编码" prop="deviceNo">
+              <el-input v-model="form.deviceNo" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
           <el-col :span="12">
             <el-form-item label="所属企业" prop="deptId">
               <el-select
@@ -181,7 +215,7 @@
                 placeholder="请选择所属企业"
                 clearable
                 filterable
-                style="width:100%"
+                style="width: 100%"
               >
                 <el-option
                   :key="index"
@@ -198,6 +232,11 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
+            <el-form-item label="类型" prop="pointType">
+              <el-input v-model="form.pointType" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
             <el-form-item label="成井时间" prop="completionDate">
               <el-input
                 v-model="form.completionDate"
@@ -206,14 +245,53 @@
             </el-form-item>
           </el-col>
           <el-col :span="12">
+            <el-form-item label="水位埋深" prop="waterBuriedDepth">
+              <el-input
+                v-model="form.waterBuriedDepth"
+                placeholder="请输入内容"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="井口高程" prop="wellElevation">
+              <el-input v-model="form.wellElevation" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="成井深度" prop="wellDepth">
+              <el-input v-model="form.wellDepth" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="井口内径" prop="innerDiameter">
+              <el-input v-model="form.innerDiameter" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
             <el-form-item label="井管材质" prop="pipeMaterial">
               <el-input v-model="form.pipeMaterial" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="结构" prop="multiScreenPipe">
+              <el-input
+                v-model="form.multiScreenPipe"
+                placeholder="请输入内容"
+              />
             </el-form-item>
           </el-col>
           <el-col :span="12">
             <el-form-item label="埋深范围" prop="screenDepthRange">
               <el-input
                 v-model="form.screenDepthRange"
+                placeholder="请输入内容"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="地下水类型" prop="groundwaterType">
+              <el-input
+                v-model="form.groundwaterType"
                 placeholder="请输入内容"
               />
             </el-form-item>
@@ -234,6 +312,24 @@
           <el-col :span="12">
             <el-form-item label="权属单位" prop="ownership">
               <el-input v-model="form.ownership" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="是否符合标准" prop="suitableForLongterm">
+              <el-input
+                v-model="form.suitableForLongterm"
+                placeholder="请输入内容"
+              />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="经度" prop="longitude">
+              <el-input v-model="form.longitude" placeholder="请输入内容" />
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="纬度" prop="latitude">
+              <el-input v-model="form.latitude" placeholder="请输入内容" />
             </el-form-item>
           </el-col>
           <el-col :span="12">
@@ -259,16 +355,25 @@
       append-to-body
     >
       <el-descriptions :column="2" border>
-        <el-descriptions-item label="编码">{{
+        <el-descriptions-item label="监测井编码">{{
           detailForm.wellCode
         }}</el-descriptions-item>
-        <el-descriptions-item label="位置">{{
+        <el-descriptions-item label="在线监测井">{{
+          detailForm.realTime
+        }}</el-descriptions-item>
+        <el-descriptions-item label="设备编码">{{
+          detailForm.deviceNo
+        }}</el-descriptions-item>
+        <el-descriptions-item label="所属企业">{{
+          detailForm.enterpriseName
+        }}</el-descriptions-item>
+        <el-descriptions-item label="监测井位置">{{
           detailForm.location
         }}</el-descriptions-item>
         <el-descriptions-item label="类型">{{
           detailForm.pointType
         }}</el-descriptions-item>
-        <el-descriptions-item label="时间">{{
+        <el-descriptions-item label="成井时间">{{
           detailForm.completionDate
         }}</el-descriptions-item>
         <el-descriptions-item label="水位埋深">{{
@@ -283,7 +388,7 @@
         <el-descriptions-item label="井口内径">{{
           detailForm.innerDiameter
         }}</el-descriptions-item>
-        <el-descriptions-item label="材质">{{
+        <el-descriptions-item label="井管材质">{{
           detailForm.pipeMaterial
         }}</el-descriptions-item>
         <el-descriptions-item label="结构">{{
@@ -313,11 +418,8 @@
         <el-descriptions-item label="纬度">{{
           detailForm.latitude
         }}</el-descriptions-item>
-        <el-descriptions-item label="视频">{{
+        <el-descriptions-item label="视频资料地址">{{
           detailForm.videoUrl
-        }}</el-descriptions-item>
-        <el-descriptions-item label="所属企业">{{
-          detailForm.deptId
         }}</el-descriptions-item>
       </el-descriptions>
       <template #footer>

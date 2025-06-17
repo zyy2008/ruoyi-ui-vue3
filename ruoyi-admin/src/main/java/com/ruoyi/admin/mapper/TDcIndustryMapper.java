@@ -2,6 +2,7 @@ package com.ruoyi.admin.mapper;
 
 import java.util.List;
 import com.ruoyi.admin.domain.TDcIndustry;
+import com.ruoyi.admin.domain.vo.TDcIndustryTree;
 
 /**
  * 行业分类Mapper接口
@@ -26,6 +27,7 @@ public interface TDcIndustryMapper
      * @return 行业分类集合
      */
     public List<TDcIndustry> selectTDcIndustryList(TDcIndustry tDcIndustry);
+    public List<TDcIndustryTree> treeList(TDcIndustry tDcIndustry);
 
     /**
      * 新增行业分类

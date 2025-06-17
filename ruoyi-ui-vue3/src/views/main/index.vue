@@ -108,6 +108,8 @@ import { loadCadLayer } from "@/views/main/CadLayer.ts";
 const deptId = ref(null);
 const activeName = ref("first");
 
+//import { makeApiRequest } from  "@/utils/APIHELP"
+
 const handleClick = (tab, event) => {
   console.log(tab, event);
 };

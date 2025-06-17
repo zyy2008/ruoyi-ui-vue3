@@ -31,14 +31,13 @@ import com.ruoyi.common.core.page.TableDataInfo;
  */
 @RestController
 @RequestMapping("/admin/monitoring")
-public class TWaterQualityMonitoringController extends BaseController
-{
+public class TWaterQualityMonitoringController extends BaseController {
     @Autowired
     private ITWaterQualityMonitoringService tWaterQualityMonitoringService;
 
     @GetMapping("/selectGJJL")
-    public AjaxResult selectGJJL(){
-        List<GJJLRES> res= tWaterQualityMonitoringService.selectGJJL();
+    public AjaxResult selectGJJL() {
+        List<GJJLRES> res = tWaterQualityMonitoringService.selectGJJL();
         return success(res);
     }
 
@@ -47,8 +46,7 @@ public class TWaterQualityMonitoringController extends BaseController
      */
     //@PreAuthorize("@ss.hasPermi('admin:monitoring:list')")
     @GetMapping("/list")
-    public TableDataInfo list(TWaterQualityMonitoring tWaterQualityMonitoring)
-    {
+    public TableDataInfo list(TWaterQualityMonitoring tWaterQualityMonitoring) {
         startPage();
         List<TWaterQualityMonitoring> list = tWaterQualityMonitoringService.selectTWaterQualityMonitoringList(tWaterQualityMonitoring);
         return getDataTable(list);
@@ -60,8 +58,7 @@ public class TWaterQualityMonitoringController extends BaseController
     //@PreAuthorize("@ss.hasPermi('admin:monitoring:export')")
     @Log(title = "监测数据管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, TWaterQualityMonitoring tWaterQualityMonitoring)
-    {
+    public void export(HttpServletResponse response, TWaterQualityMonitoring tWaterQualityMonitoring) {
         List<TWaterQualityMonitoring> list = tWaterQualityMonitoringService.selectTWaterQualityMonitoringList(tWaterQualityMonitoring);
         ExcelUtil<TWaterQualityMonitoring> util = new ExcelUtil<TWaterQualityMonitoring>(TWaterQualityMonitoring.class);
         util.exportExcel(response, list, "监测数据管理数据");
@@ -72,8 +69,7 @@ public class TWaterQualityMonitoringController extends BaseController
      */
     //@PreAuthorize("@ss.hasPermi('admin:monitoring:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") String id)
-    {
+    public AjaxResult getInfo(@PathVariable("id") String id) {
         return success(tWaterQualityMonitoringService.selectTWaterQualityMonitoringById(id));
     }
 
@@ -83,8 +79,7 @@ public class TWaterQualityMonitoringController extends BaseController
     //@PreAuthorize("@ss.hasPermi('admin:monitoring:add')")
     @Log(title = "监测数据管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody TWaterQualityMonitoring tWaterQualityMonitoring)
-    {
+    public AjaxResult add(@RequestBody TWaterQualityMonitoring tWaterQualityMonitoring) {
         return toAjax(tWaterQualityMonitoringService.insertTWaterQualityMonitoring(tWaterQualityMonitoring));
     }
 
@@ -94,8 +89,7 @@ public class TWaterQualityMonitoringController extends BaseController
     //@PreAuthorize("@ss.hasPermi('admin:monitoring:edit')")
     @Log(title = "监测数据管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody TWaterQualityMonitoring tWaterQualityMonitoring)
-    {
+    public AjaxResult edit(@RequestBody TWaterQualityMonitoring tWaterQualityMonitoring) {
         return toAjax(tWaterQualityMonitoringService.updateTWaterQualityMonitoring(tWaterQualityMonitoring));
     }
 
@@ -105,8 +99,7 @@ public class TWaterQualityMonitoringController extends BaseController
     //@PreAuthorize("@ss.hasPermi('admin:monitoring:remove')")
     @Log(title = "监测数据管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable String[] ids)
-    {
+    public AjaxResult remove(@PathVariable String[] ids) {
         return toAjax(tWaterQualityMonitoringService.deleteTWaterQualityMonitoringByIds(ids));
     }
 }

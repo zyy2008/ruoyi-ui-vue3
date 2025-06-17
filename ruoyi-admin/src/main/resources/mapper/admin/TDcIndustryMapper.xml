@@ -10,6 +10,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="code"    column="code"    />
         <result property="pCode"    column="p_code"    />
     </resultMap>
+    <resultMap type="TDcIndustryTree" id="TDcIndustryTreeResult">
+        <result property="id" column="id"/>
+        <result property="industryCategory" column="industry_category"/>
+        <result property="code" column="code"/>
+        <result property="pCode" column="p_code"/>
+    </resultMap>
+
 
     <sql id="selectTDcIndustryVo">
         select id, industry_category, code, p_code from t_dc_industry
@@ -17,13 +24,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectTDcIndustryList" parameterType="TDcIndustry" resultMap="TDcIndustryResult">
         <include refid="selectTDcIndustryVo"/>
-        <where>  
+        <where>
             <if test="industryCategory != null  and industryCategory != ''"> and industry_category = #{industryCategory}</if>
             <if test="code != null  and code != ''"> and code = #{code}</if>
             <if test="pCode != null  and pCode != ''"> and p_code = #{pCode}</if>
         </where>
     </select>
-    
+    <select id="treeList" parameterType="TDcIndustry" resultMap="TDcIndustryTreeResult">
+        <include refid="selectTDcIndustryVo"/>
+        <where>
+            <if test="industryCategory != null and industryCategory != ''">
+                and industry_category = #{industryCategory}
+            </if>
+            <if test="code != null and code != ''">
+                and code = #{code}
+            </if>
+            <if test="pCode != null and pCode != ''">
+                and p_code = #{pCode}
+            </if>
+        </where>
+    </select>
+
+
     <select id="selectTDcIndustryById" parameterType="Long" resultMap="TDcIndustryResult">
         <include refid="selectTDcIndustryVo"/>
         where id = #{id}

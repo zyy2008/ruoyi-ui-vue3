@@ -111,6 +111,12 @@
             <artifactId>jts-core</artifactId>
             <version>1.19.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.8.24</version> <!-- 可换为最新版本 -->
+        </dependency>
     </dependencies>
 
     <!-- 指定 Maven 仓库 -->

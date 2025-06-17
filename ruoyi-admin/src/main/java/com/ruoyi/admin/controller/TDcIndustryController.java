@@ -3,6 +3,7 @@ package com.ruoyi.admin.controller;
 import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ruoyi.admin.domain.vo.TDcIndustryTree;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -47,6 +48,15 @@ public class TDcIndustryController extends BaseController {
         startPage();
         List<TDcIndustry> list = tDcIndustryService.selectTDcIndustryList(tDcIndustry);
         return getDataTable(list);
+    }
+    /**
+     * 查询行业分类树形结构
+     */
+    //@PreAuthorize("@ss.hasPermi('admin:industry:list')")
+    @GetMapping("/treeList")
+    @ApiOperation("查询行业分类树形结构")
+    public AjaxResult treeList(TDcIndustry tDcIndustry) {
+        return AjaxResult.success(tDcIndustryService.treeList(tDcIndustry));
     }
 
     /**

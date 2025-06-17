@@ -15,100 +15,156 @@ import com.ruoyi.common.core.domain.BaseEntity;
  */
 @Data
 @ApiModel("监测井对象")
-public class TMonitoringWells extends BaseEntity
-{
+public class TMonitoringWells extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
-    /** 主键，自增ID */
+    /**
+     * 主键，自增ID
+     */
     private String id;
 
-    /** 监测井编码 */
+    /**
+     * 监测井编码
+     */
     @Excel(name = "监测井编码")
     private String wellCode;
 
-    /** 监测井所在位置 */
+    /**
+     * 监测井所在位置
+     */
     @Excel(name = "监测井所在位置")
     private String location;
 
-    /** 监测点类型，如内部监测点、对照监测点 */
+    /**
+     * 监测点类型，如内部监测点、对照监测点
+     */
     @Excel(name = "监测点类型，如内部监测点、对照监测点")
     private String pointType;
 
-    /** 成井时间 */
+    /**
+     * 成井时间
+     */
     @Excel(name = "成井时间")
     private String completionDate;
 
-    /** 水位埋深，单位：米 */
+    /**
+     * 水位埋深，单位：米
+     */
     @Excel(name = "水位埋深，单位：米")
     private String waterBuriedDepth;
 
-    /** 井口高程，单位：米 */
+    /**
+     * 井口高程，单位：米
+     */
     @Excel(name = "井口高程，单位：米")
     private String wellElevation;
 
-    /** 成井深度，单位：米 */
+    /**
+     * 成井深度，单位：米
+     */
     @Excel(name = "成井深度，单位：米")
     private String wellDepth;
 
-    /** 井口内径，单位：毫米 */
+    /**
+     * 井口内径，单位：毫米
+     */
     @Excel(name = "井口内径，单位：毫米")
     private String innerDiameter;
 
-    /** 井管材质，如PVC、不锈钢 */
+    /**
+     * 井管材质，如PVC、不锈钢
+     */
     @Excel(name = "井管材质，如PVC、不锈钢")
     private String pipeMaterial;
 
-    /** 是否为多段筛管结构 */
+    /**
+     * 是否为多段筛管结构
+     */
     @Excel(name = "是否为多段筛管结构")
     private String multiScreenPipe;
 
-    /** 筛管上部与下部的埋深范围，单位：米 */
+    /**
+     * 筛管上部与下部的埋深范围，单位：米
+     */
     @Excel(name = "筛管上部与下部的埋深范围，单位：米")
     private String screenDepthRange;
 
-    /** 地下水类型，如潜水、承压水 */
+    /**
+     * 地下水类型，如潜水、承压水
+     */
     @Excel(name = "地下水类型，如潜水、承压水")
     private String groundwaterType;
 
-    /** 埋藏条件，如孔隙水、裂隙水 */
+    /**
+     * 埋藏条件，如孔隙水、裂隙水
+     */
     @Excel(name = "埋藏条件，如孔隙水、裂隙水")
     private String burialCondition;
 
-    /** 含水介质 */
+    /**
+     * 含水介质
+     */
     @Excel(name = "含水介质")
     private String waterMedium;
 
-    /** 监测井的权属单位 */
+    /**
+     * 监测井的权属单位
+     */
     @Excel(name = "监测井的权属单位")
     private String ownership;
 
-    /** 是否符合长期监测井的标准 */
+    /**
+     * 是否符合长期监测井的标准
+     */
     @Excel(name = "是否符合长期监测井的标准")
     private String suitableForLongterm;
 
-    /** 经度，WGS84坐标系 */
+    /**
+     * 经度，WGS84坐标系
+     */
     @Excel(name = "经度，WGS84坐标系")
     private String longitude;
 
-    /** 纬度，WGS84坐标系 */
+    /**
+     * 纬度，WGS84坐标系
+     */
     @Excel(name = "纬度，WGS84坐标系")
     private String latitude;
 
-    /** 高程，单位：米 */
+    /**
+     * 高程，单位：米
+     */
     @Excel(name = "高程，单位：米")
     private String altitude;
 
-    /** 视频资料地址（例如外观或施工过程） */
+    /**
+     * 视频资料地址（例如外观或施工过程）
+     */
     @Excel(name = "视频资料地址", readConverterExp = "例=如外观或施工过程")
     private String videoUrl;
 
-    /** 所属企业 */
+    /**
+     * 所属企业
+     */
     @Excel(name = "所属企业")
     private String deptId;
 
-    /** 是否实时监测 */
+    /**
+     * 是否实时监测
+     */
     @Excel(name = "是否实时监测")
     private String realTime;
+
+    @Excel(name = "设备编号")
+    private String deviceNo;
+
+    public String getDeviceNo() {
+        return deviceNo;
+    }
+
+    public void setDeviceNo(String deviceNo) {
+        this.deviceNo = deviceNo;
+    }
 
     private String enterpriseName;
 
@@ -124,217 +180,193 @@ public class TMonitoringWells extends BaseEntity
         this.enterpriseName = enterpriseName;
     }
 
-    public void setId(String id)
-    {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public String getId()
-    {
+    public String getId() {
         return id;
     }
-    public void setWellCode(String wellCode)
-    {
+
+    public void setWellCode(String wellCode) {
         this.wellCode = wellCode;
     }
 
-    public String getWellCode()
-    {
+    public String getWellCode() {
         return wellCode;
     }
-    public void setLocation(String location)
-    {
+
+    public void setLocation(String location) {
         this.location = location;
     }
 
-    public String getLocation()
-    {
+    public String getLocation() {
         return location;
     }
-    public void setPointType(String pointType)
-    {
+
+    public void setPointType(String pointType) {
         this.pointType = pointType;
     }
 
-    public String getPointType()
-    {
+    public String getPointType() {
         return pointType;
     }
-    public void setCompletionDate(String completionDate)
-    {
+
+    public void setCompletionDate(String completionDate) {
         this.completionDate = completionDate;
     }
 
-    public String getCompletionDate()
-    {
+    public String getCompletionDate() {
         return completionDate;
     }
-    public void setWaterBuriedDepth(String waterBuriedDepth)
-    {
+
+    public void setWaterBuriedDepth(String waterBuriedDepth) {
         this.waterBuriedDepth = waterBuriedDepth;
     }
 
-    public String getWaterBuriedDepth()
-    {
+    public String getWaterBuriedDepth() {
         return waterBuriedDepth;
     }
-    public void setWellElevation(String wellElevation)
-    {
+
+    public void setWellElevation(String wellElevation) {
         this.wellElevation = wellElevation;
     }
 
-    public String getWellElevation()
-    {
+    public String getWellElevation() {
         return wellElevation;
     }
-    public void setWellDepth(String wellDepth)
-    {
+
+    public void setWellDepth(String wellDepth) {
         this.wellDepth = wellDepth;
     }
 
-    public String getWellDepth()
-    {
+    public String getWellDepth() {
         return wellDepth;
     }
-    public void setInnerDiameter(String innerDiameter)
-    {
+
+    public void setInnerDiameter(String innerDiameter) {
         this.innerDiameter = innerDiameter;
     }
 
-    public String getInnerDiameter()
-    {
+    public String getInnerDiameter() {
         return innerDiameter;
     }
-    public void setPipeMaterial(String pipeMaterial)
-    {
+
+    public void setPipeMaterial(String pipeMaterial) {
         this.pipeMaterial = pipeMaterial;
     }
 
-    public String getPipeMaterial()
-    {
+    public String getPipeMaterial() {
         return pipeMaterial;
     }
-    public void setMultiScreenPipe(String multiScreenPipe)
-    {
+
+    public void setMultiScreenPipe(String multiScreenPipe) {
         this.multiScreenPipe = multiScreenPipe;
     }
 
-    public String getMultiScreenPipe()
-    {
+    public String getMultiScreenPipe() {
         return multiScreenPipe;
     }
-    public void setScreenDepthRange(String screenDepthRange)
-    {
+
+    public void setScreenDepthRange(String screenDepthRange) {
         this.screenDepthRange = screenDepthRange;
     }
 
-    public String getScreenDepthRange()
-    {
+    public String getScreenDepthRange() {
         return screenDepthRange;
     }
-    public void setGroundwaterType(String groundwaterType)
-    {
+
+    public void setGroundwaterType(String groundwaterType) {
         this.groundwaterType = groundwaterType;
     }
 
-    public String getGroundwaterType()
-    {
+    public String getGroundwaterType() {
         return groundwaterType;
     }
-    public void setBurialCondition(String burialCondition)
-    {
+
+    public void setBurialCondition(String burialCondition) {
         this.burialCondition = burialCondition;
     }
 
-    public String getBurialCondition()
-    {
+    public String getBurialCondition() {
         return burialCondition;
     }
-    public void setWaterMedium(String waterMedium)
-    {
+
+    public void setWaterMedium(String waterMedium) {
         this.waterMedium = waterMedium;
     }
 
-    public String getWaterMedium()
-    {
+    public String getWaterMedium() {
         return waterMedium;
     }
-    public void setOwnership(String ownership)
-    {
+
+    public void setOwnership(String ownership) {
         this.ownership = ownership;
     }
 
-    public String getOwnership()
-    {
+    public String getOwnership() {
         return ownership;
     }
-    public void setSuitableForLongterm(String suitableForLongterm)
-    {
+
+    public void setSuitableForLongterm(String suitableForLongterm) {
         this.suitableForLongterm = suitableForLongterm;
     }
 
-    public String getSuitableForLongterm()
-    {
+    public String getSuitableForLongterm() {
         return suitableForLongterm;
     }
-    public void setLongitude(String longitude)
-    {
+
+    public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
 
-    public String getLongitude()
-    {
+    public String getLongitude() {
         return longitude;
     }
-    public void setLatitude(String latitude)
-    {
+
+    public void setLatitude(String latitude) {
         this.latitude = latitude;
     }
 
-    public String getLatitude()
-    {
+    public String getLatitude() {
         return latitude;
     }
-    public void setAltitude(String altitude)
-    {
+
+    public void setAltitude(String altitude) {
         this.altitude = altitude;
     }
 
-    public String getAltitude()
-    {
+    public String getAltitude() {
         return altitude;
     }
-    public void setVideoUrl(String videoUrl)
-    {
+
+    public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
     }
 
-    public String getVideoUrl()
-    {
+    public String getVideoUrl() {
         return videoUrl;
     }
-    public void setDeptId(String deptId)
-    {
+
+    public void setDeptId(String deptId) {
         this.deptId = deptId;
     }
 
-    public String getDeptId()
-    {
+    public String getDeptId() {
         return deptId;
     }
-    public void setRealTime(String realTime)
-    {
+
+    public void setRealTime(String realTime) {
         this.realTime = realTime;
     }
 
-    public String getRealTime()
-    {
+    public String getRealTime() {
         return realTime;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
+        return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
                 .append("id", getId())
                 .append("wellCode", getWellCode())
                 .append("location", getLocation())

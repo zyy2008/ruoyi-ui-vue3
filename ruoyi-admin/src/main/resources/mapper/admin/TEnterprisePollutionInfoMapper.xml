@@ -26,7 +26,8 @@
         <result property="totalGasEmission"    column="total_gas_emission"    />
         <result property="mainPollutantsInEmissions"    column="main_pollutants_in_emissions"    />
         <result property="isThereAnOnlineMonitoringDeviceForEmissions"    column="is_there_an_online_monitoring_device_for_emissions"    />
-        <result property="operationStatusOfOnlineMonitoringDevice"    column="operation_status_of_online_monitoring_device"    />
+        <result property="operationStatusOfOnlineMonitoringDeviceForEmissions"    column="operation_status_of_online_monitoring_device_emissions"    />
+        <result property="operationStatusOfOnlineMonitoringDeviceForWastewater"    column="operation_status_of_online_monitoring_device_wastewater"    />
         <result property="isThereAnEmissionTreatmentFacility"    column="is_there_an_emission_treatment_facility"    />
         <result property="operationStatusOfEmissionTreatmentFacility"    column="operation_status_of_emission_treatment_facility"    />
         <result property="isThereWastewaterDischarge"    column="is_there_wastewater_discharge"    />
@@ -99,7 +100,8 @@
             <if test="totalGasEmission != null  and totalGasEmission != ''"> and total_gas_emission = #{totalGasEmission}</if>
             <if test="mainPollutantsInEmissions != null  and mainPollutantsInEmissions != ''"> and main_pollutants_in_emissions = #{mainPollutantsInEmissions}</if>
             <if test="isThereAnOnlineMonitoringDeviceForEmissions != null  and isThereAnOnlineMonitoringDeviceForEmissions != ''"> and is_there_an_online_monitoring_device_for_emissions = #{isThereAnOnlineMonitoringDeviceForEmissions}</if>
-            <if test="operationStatusOfOnlineMonitoringDevice != null  and operationStatusOfOnlineMonitoringDevice != ''"> and operation_status_of_online_monitoring_device = #{operationStatusOfOnlineMonitoringDevice}</if>
+            <if test="operationStatusOfOnlineMonitoringDeviceForEmissions != null  and operationStatusOfOnlineMonitoringDeviceForEmissions != ''"> and operation_status_of_online_monitoring_device_emissions = #{operationStatusOfOnlineMonitoringDeviceForEmissions}</if>
+            <if test="operationStatusOfOnlineMonitoringDeviceForWastewater != null  and operationStatusOfOnlineMonitoringDeviceForWastewater != ''"> and operation_status_of_online_monitoring_device_wastewater = #{operationStatusOfOnlineMonitoringDeviceForWastewater}</if>
             <if test="isThereAnEmissionTreatmentFacility != null  and isThereAnEmissionTreatmentFacility != ''"> and is_there_an_emission_treatment_facility = #{isThereAnEmissionTreatmentFacility}</if>
             <if test="operationStatusOfEmissionTreatmentFacility != null  and operationStatusOfEmissionTreatmentFacility != ''"> and operation_status_of_emission_treatment_facility = #{operationStatusOfEmissionTreatmentFacility}</if>
             <if test="isThereWastewaterDischarge != null  and isThereWastewaterDischarge != ''"> and is_there_wastewater_discharge = #{isThereWastewaterDischarge}</if>
@@ -179,7 +181,8 @@
             <if test="totalGasEmission != null">total_gas_emission,</if>
             <if test="mainPollutantsInEmissions != null">main_pollutants_in_emissions,</if>
             <if test="isThereAnOnlineMonitoringDeviceForEmissions != null">is_there_an_online_monitoring_device_for_emissions,</if>
-            <if test="operationStatusOfOnlineMonitoringDevice != null">operation_status_of_online_monitoring_device,</if>
+            <if test="operationStatusOfOnlineMonitoringDeviceForEmissions != null">operation_status_of_online_monitoring_device_emissions,</if>
+            <if test="operationStatusOfOnlineMonitoringDeviceForWastewater != null">operation_status_of_online_monitoring_device_wastewater,</if>
             <if test="isThereAnEmissionTreatmentFacility != null">is_there_an_emission_treatment_facility,</if>
             <if test="operationStatusOfEmissionTreatmentFacility != null">operation_status_of_emission_treatment_facility,</if>
             <if test="isThereWastewaterDischarge != null">is_there_wastewater_discharge,</if>
@@ -232,7 +235,8 @@
             <if test="totalGasEmission != null">#{totalGasEmission},</if>
             <if test="mainPollutantsInEmissions != null">#{mainPollutantsInEmissions},</if>
             <if test="isThereAnOnlineMonitoringDeviceForEmissions != null">#{isThereAnOnlineMonitoringDeviceForEmissions},</if>
-            <if test="operationStatusOfOnlineMonitoringDevice != null">#{operationStatusOfOnlineMonitoringDevice},</if>
+            <if test="operationStatusOfOnlineMonitoringDeviceForEmissions != null">#{operationStatusOfOnlineMonitoringDeviceForEmissions},</if>
+            <if test="operationStatusOfOnlineMonitoringDeviceForWastewater != null">#{operationStatusOfOnlineMonitoringDeviceForWastewater},</if>
             <if test="isThereAnEmissionTreatmentFacility != null">#{isThereAnEmissionTreatmentFacility},</if>
             <if test="operationStatusOfEmissionTreatmentFacility != null">#{operationStatusOfEmissionTreatmentFacility},</if>
             <if test="isThereWastewaterDischarge != null">#{isThereWastewaterDischarge},</if>
@@ -289,7 +293,8 @@
             <if test="totalGasEmission != null">total_gas_emission = #{totalGasEmission},</if>
             <if test="mainPollutantsInEmissions != null">main_pollutants_in_emissions = #{mainPollutantsInEmissions},</if>
             <if test="isThereAnOnlineMonitoringDeviceForEmissions != null">is_there_an_online_monitoring_device_for_emissions = #{isThereAnOnlineMonitoringDeviceForEmissions},</if>
-            <if test="operationStatusOfOnlineMonitoringDevice != null">operation_status_of_online_monitoring_device = #{operationStatusOfOnlineMonitoringDevice},</if>
+            <if test="operationStatusOfOnlineMonitoringDeviceForEmissions != null">operation_status_of_online_monitoring_device_emissions = #{operationStatusOfOnlineMonitoringDeviceForEmissions},</if>
+            <if test="operationStatusOfOnlineMonitoringDeviceForWastewater != null">operation_status_of_online_monitoring_device_wastewater = #{operationStatusOfOnlineMonitoringDeviceForWastewater},</if>
             <if test="isThereAnEmissionTreatmentFacility != null">is_there_an_emission_treatment_facility = #{isThereAnEmissionTreatmentFacility},</if>
             <if test="operationStatusOfEmissionTreatmentFacility != null">operation_status_of_emission_treatment_facility = #{operationStatusOfEmissionTreatmentFacility},</if>
             <if test="isThereWastewaterDischarge != null">is_there_wastewater_discharge = #{isThereWastewaterDischarge},</if>

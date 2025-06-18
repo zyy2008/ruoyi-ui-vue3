@@ -93,3 +93,20 @@ export async function getAdminIndustryList(
     ...(options || {}),
   });
 }
+
+/** 查询行业分类树形结构 GET /admin/industry/treeList */
+export async function getAdminIndustryTreeList(
+  // 叠加生成的Param类型 (非body参数swagger默认没有生成对象)
+  params: API.getAdminIndustryTreeListParams,
+  options?: { [key: string]: any }
+) {
+  return request<Record<string, any>>(`/dev-api/admin/industry/treeList`, {
+    method: "GET",
+    params: {
+      ...params,
+      params: undefined,
+      ...params["params"],
+    },
+    ...(options || {}),
+  });
+}

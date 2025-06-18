@@ -120,17 +120,29 @@ const props: ISchemaFieldProps = {
             type: "string",
             title: "行业类别",
             "x-decorator": "FormItem",
-            "x-component": "Select",
-            "x-component-props": {},
+            "x-component": "TreeSelect",
+            "x-component-props": {
+              props: {
+                label: "industryCategory",
+                value: "code",
+              },
+              filterable: true,
+            },
             "x-reactions": (field: Field) => {
               field.loading = true;
-              API.getAdminIndustryList({})
+              field.componentProps = {
+                ...field.componentProps,
+                onNodeClick: (val) => {
+                  setTimeout(() => {
+                    if (val?.code == field.value) {
+                      field.form.setValuesIn("industryCode", val.code);
+                    }
+                  }, 0);
+                },
+              };
+              API.getAdminIndustryTreeList({})
                 .then((res) => {
-                  field.dataSource =
-                    res?.rows?.map((item) => ({
-                      label: item.industryCategory,
-                      value: item.code,
-                    })) ?? [];
+                  field.dataSource = res.data ?? [];
                 })
                 .finally(() => {
                   field.loading = false;
@@ -142,6 +154,7 @@ const props: ISchemaFieldProps = {
             title: "行业代码",
             "x-decorator": "FormItem",
             "x-component": "Input",
+            "x-disabled": true,
           },
           registrationType: {
             type: "string",

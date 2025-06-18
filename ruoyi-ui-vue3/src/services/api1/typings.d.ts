@@ -155,6 +155,11 @@ declare namespace API {
     ids: string;
   };
 
+  type deleteAdminPolicyDocumentsIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
   type deleteAdminPollutionIdsParams = {
     /** ids */
     ids: string;
@@ -166,6 +171,11 @@ declare namespace API {
   };
 
   type deleteAdminRawMaterialsIdsParams = {
+    /** ids */
+    ids: string;
+  };
+
+  type deleteAdminRealtimeWaterQualityMonitoringIdsParams = {
     /** ids */
     ids: string;
   };
@@ -579,24 +589,19 @@ declare namespace API {
   };
 
   type getAdminIndicatorsListParams = {
+    attribute?: string;
     createBy?: string;
     createTime?: string;
-    /** 归属部门 */
     deptId?: string;
-    /** 主键ID */
     id?: number;
-    /** 是否启用 */
     isEnabled?: string;
-    /** 是否国标 */
     isNationalStandard?: string;
     params?: Record<string, any>;
     remark?: string;
     searchValue?: string;
-    /** 类型 */
     type?: string;
     updateBy?: string;
     updateTime?: string;
-    /** 值 */
     value?: number;
   };
 
@@ -606,6 +611,23 @@ declare namespace API {
   };
 
   type getAdminIndustryListParams = {
+    PCode?: string;
+    /** 行业编码 */
+    code?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 主键ID */
+    id?: number;
+    /** 行业名称 */
+    industryCategory?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    searchValue?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type getAdminIndustryTreeListParams = {
     PCode?: string;
     /** 行业编码 */
     code?: string;
@@ -725,6 +747,28 @@ declare namespace API {
     pipelineType?: string;
     remark?: string;
     searchValue?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type getAdminPolicyDocumentsIdParams = {
+    /** id */
+    id: number;
+  };
+
+  type getAdminPolicyDocumentsListParams = {
+    createBy?: string;
+    createTime?: string;
+    /** 下载连接，指向政策文件的下载地址 */
+    downloadUrl?: string;
+    id?: number;
+    params?: Record<string, any>;
+    /** 发布时间，政策发布的具体日期 */
+    publishDate?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 标题，政策文件的名称 */
+    title?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -914,6 +958,59 @@ declare namespace API {
     updateTime?: string;
     /** 使用年代 */
     usageYear?: string;
+  };
+
+  type getAdminRealtimeWaterQualityMonitoringGetBatchDataParams = {
+    /** 数据监测结束时间 */
+    endMonitoringTime?: string;
+    /** 数据监测开始时间 */
+    startMonitoringTime?: string;
+  };
+
+  type getAdminRealtimeWaterQualityMonitoringGetSingleWellMonitoringLineChartDataParams =
+    {
+      /** 数据监测结束时间 */
+      endMonitoringTime: string;
+      /** 数据监测开始时间 */
+      startMonitoringTime: string;
+      /** 监测井编码 */
+      wellCode: string;
+    };
+
+  type getAdminRealtimeWaterQualityMonitoringIdParams = {
+    /** id */
+    id: string;
+  };
+
+  type getAdminRealtimeWaterQualityMonitoringListParams = {
+    /** 氨氮含量，单位：mg/L */
+    ammoniaNitrogen?: string;
+    /** 电导率，单位：μS/cm */
+    conductivity?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 溶解氧含量，单位：mg/L */
+    dissolvedOxygen?: string;
+    id?: string;
+    /** 数据监测时间 */
+    monitoringTime?: string;
+    /** 监测井编号或名称 */
+    monitoringWell?: string;
+    params?: Record<string, any>;
+    /** 酸碱度，pH值 */
+    phValue?: string;
+    /** 氧化还原电位，单位：mV */
+    redoxPotential?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 数据同步到系统的时间 */
+    synchronizationTime?: string;
+    /** 温度，单位：摄氏度 */
+    temperature?: string;
+    updateBy?: string;
+    updateTime?: string;
+    /** 液位，单位：米 */
+    waterLevel?: string;
   };
 
   type getAdminReceptorIdParams = {
@@ -1223,6 +1320,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     deptId?: string;
+    deviceNo?: string;
     enterpriseName?: string;
     groundwaterType?: string;
     id?: string;
@@ -1262,6 +1360,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     deptId?: string;
+    deviceNo?: string;
     enterpriseName?: string;
     groundwaterType?: string;
     id?: string;
@@ -1326,6 +1425,11 @@ declare namespace API {
     workshopName?: string;
   };
 
+  type getFileDownloadParams = {
+    /** path */
+    path: string;
+  };
+
   type guandaoxielou = {
     createBy?: string;
     createTime?: string;
@@ -1377,6 +1481,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     deptId?: string;
+    deviceNo?: string;
     enterpriseName?: string;
     groundwaterType?: string;
     id?: string;
@@ -1621,24 +1726,19 @@ declare namespace API {
   };
 
   type postAdminIndicatorsExportParams = {
+    attribute?: string;
     createBy?: string;
     createTime?: string;
-    /** 归属部门 */
     deptId?: string;
-    /** 主键ID */
     id?: number;
-    /** 是否启用 */
     isEnabled?: string;
-    /** 是否国标 */
     isNationalStandard?: string;
     params?: Record<string, any>;
     remark?: string;
     searchValue?: string;
-    /** 类型 */
     type?: string;
     updateBy?: string;
     updateTime?: string;
-    /** 值 */
     value?: number;
   };
 
@@ -1742,6 +1842,23 @@ declare namespace API {
     pipelineType?: string;
     remark?: string;
     searchValue?: string;
+    updateBy?: string;
+    updateTime?: string;
+  };
+
+  type postAdminPolicyDocumentsExportParams = {
+    createBy?: string;
+    createTime?: string;
+    /** 下载连接，指向政策文件的下载地址 */
+    downloadUrl?: string;
+    id?: number;
+    params?: Record<string, any>;
+    /** 发布时间，政策发布的具体日期 */
+    publishDate?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 标题，政策文件的名称 */
+    title?: string;
     updateBy?: string;
     updateTime?: string;
   };
@@ -1916,6 +2033,37 @@ declare namespace API {
     updateTime?: string;
     /** 使用年代 */
     usageYear?: string;
+  };
+
+  type postAdminRealtimeWaterQualityMonitoringExportParams = {
+    /** 氨氮含量，单位：mg/L */
+    ammoniaNitrogen?: string;
+    /** 电导率，单位：μS/cm */
+    conductivity?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 溶解氧含量，单位：mg/L */
+    dissolvedOxygen?: string;
+    id?: string;
+    /** 数据监测时间 */
+    monitoringTime?: string;
+    /** 监测井编号或名称 */
+    monitoringWell?: string;
+    params?: Record<string, any>;
+    /** 酸碱度，pH值 */
+    phValue?: string;
+    /** 氧化还原电位，单位：mV */
+    redoxPotential?: string;
+    remark?: string;
+    searchValue?: string;
+    /** 数据同步到系统的时间 */
+    synchronizationTime?: string;
+    /** 温度，单位：摄氏度 */
+    temperature?: string;
+    updateBy?: string;
+    updateTime?: string;
+    /** 液位，单位：米 */
+    waterLevel?: string;
   };
 
   type postAdminReceptorExportParams = {
@@ -2175,6 +2323,7 @@ declare namespace API {
     createBy?: string;
     createTime?: string;
     deptId?: string;
+    deviceNo?: string;
     enterpriseName?: string;
     groundwaterType?: string;
     id?: string;
@@ -2455,11 +2604,57 @@ declare namespace API {
     workshopName?: string;
   };
 
+  type shishishujujiance = {
+    /** 氨氮含量，单位：mg/L */
+    ammoniaNitrogen?: string;
+    /** 电导率，单位：μS/cm */
+    conductivity?: string;
+    createBy?: string;
+    createTime?: string;
+    /** 溶解氧含量，单位：mg/L */
+    dissolvedOxygen?: string;
+    id?: string;
+    /** 数据监测时间 */
+    monitoringTime?: string;
+    /** 监测井编号或名称 */
+    monitoringWell?: string;
+    params?: Record<string, any>;
+    /** 酸碱度，pH值 */
+    phValue?: string;
+    /** 氧化还原电位，单位：mV */
+    redoxPotential?: string;
+    remark?: string;
+    /** 数据同步到系统的时间 */
+    synchronizationTime?: string;
+    /** 温度，单位：摄氏度 */
+    temperature?: string;
+    updateBy?: string;
+    updateTime?: string;
+    /** 液位，单位：米 */
+    waterLevel?: string;
+  };
+
   type TableDataInfo = {
     code?: number;
     msg?: string;
     rows?: Record<string, any>[];
     total?: number;
+  };
+
+  type TIndicators = {
+    attribute?: string;
+    createBy?: string;
+    createTime?: string;
+    deptId?: string;
+    id?: number;
+    isEnabled?: string;
+    isNationalStandard?: string;
+    params?: Record<string, any>;
+    remark?: string;
+    type?: string;
+    updateBy?: string;
+    updateTime?: string;
+    value?: number;
   };
 
   type turanghuanjingdiaochajiancexinxi = {
@@ -2635,25 +2830,20 @@ declare namespace API {
     updateTime?: string;
   };
 
-  type zhibiaobiaozhunbiao = {
+  type zhengcewenjian = {
     createBy?: string;
     createTime?: string;
-    /** 归属部门 */
-    deptId?: string;
-    /** 主键ID */
+    /** 下载连接，指向政策文件的下载地址 */
+    downloadUrl?: string;
     id?: number;
-    /** 是否启用 */
-    isEnabled?: string;
-    /** 是否国标 */
-    isNationalStandard?: string;
     params?: Record<string, any>;
+    /** 发布时间，政策发布的具体日期 */
+    publishDate?: string;
     remark?: string;
-    /** 类型 */
-    type?: string;
+    /** 标题，政策文件的名称 */
+    title?: string;
     updateBy?: string;
     updateTime?: string;
-    /** 值 */
-    value?: number;
   };
 
   type zhuyaochanpinxinxi = {

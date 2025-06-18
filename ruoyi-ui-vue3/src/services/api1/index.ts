@@ -16,8 +16,10 @@ import * as dekuailishiyongtuxinxi from "./dekuailishiyongtuxinxi";
 import * as zhuyaochanpinxinxi from "./zhuyaochanpinxinxi";
 import * as yuanqujiancejingxinxi from "./yuanqujiancejingxinxi";
 import * as guandaoxielou from "./guandaoxielou";
+import * as zhengcewenjian from "./zhengcewenjian";
 import * as huanjingwuranshigufashengqingkuang from "./huanjingwuranshigufashengqingkuang";
 import * as yuanfucailiaoxinxi from "./yuanfucailiaoxinxi";
+import * as shishishujujiance from "./shishishujujiance";
 import * as dekuaijizhoubianminganshoutixinxi from "./dekuaijizhoubianminganshoutixinxi";
 import * as wushuichulichanggutifeiwuchanshengliangjiwuranfangzhicuoshi from "./wushuichulichanggutifeiwuchanshengliangjiwuranfangzhicuoshi";
 import * as turanghuanjingdiaochajiancexinxi from "./turanghuanjingdiaochajiancexinxi";
@@ -44,8 +46,10 @@ export default {
   zhuyaochanpinxinxi,
   yuanqujiancejingxinxi,
   guandaoxielou,
+  zhengcewenjian,
   huanjingwuranshigufashengqingkuang,
   yuanfucailiaoxinxi,
+  shishishujujiance,
   dekuaijizhoubianminganshoutixinxi,
   wushuichulichanggutifeiwuchanshengliangjiwuranfangzhicuoshi,
   turanghuanjingdiaochajiancexinxi,

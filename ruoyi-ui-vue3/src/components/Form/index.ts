@@ -21,6 +21,7 @@ import {
   SelectGroup,
   AddPeople,
   CheckboxGroupString,
+  TreeSelect,
 } from "./components";
 
 const schema = createSchemaField({
@@ -44,6 +45,7 @@ const schema = createSchemaField({
     SelectGroup,
     AddPeople,
     CheckboxGroupString,
+    TreeSelect,
   },
 });
 

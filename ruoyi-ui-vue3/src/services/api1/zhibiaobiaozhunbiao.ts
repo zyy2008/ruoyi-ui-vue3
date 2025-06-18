@@ -4,7 +4,7 @@ import request from "@/utils/http";
 
 /** 修改指标标准表 PUT /admin/indicators */
 export async function putAdminIndicators(
-  body: API.zhibiaobiaozhunbiao,
+  body: API.TIndicators,
   options?: { [key: string]: any }
 ) {
   return request<Record<string, any>>(`/dev-api/admin/indicators`, {
@@ -19,7 +19,7 @@ export async function putAdminIndicators(
 
 /** 新增指标标准表 POST /admin/indicators */
 export async function postAdminIndicators(
-  body: API.zhibiaobiaozhunbiao,
+  body: API.TIndicators,
   options?: { [key: string]: any }
 ) {
   return request<Record<string, any>>(`/dev-api/admin/indicators`, {

@@ -17,7 +17,7 @@ const a = {
 const props = defineProps(["JKParams"]);
 
 // 监听播放器缓冲状态变化
-onMounted(async () => {
+onMounted(() => {
   console.log(
     "🚀 ~ props:",
     `ezopen://open.ys7.com/${props.JKParams.deviceSerial}/${
@@ -29,22 +29,30 @@ onMounted(async () => {
     console.log("🚀 ~ onMounted ~ id:", id);
     videoContainer.value.id = id;
   }
-  const player = new EZUIKitPlayer({
-    id: videoContainer.value.id, // 视频容器ID
-    url: `ezopen://open.ys7.com/${props.JKParams.deviceSerial}/1${
-      props.JKParams?.hd ? ".hd" : ""
-    }.live`, // 直播地址
 
-    accessToken: props.JKParams.AccessToken, // 访问令牌2
-    width: props.JKParams.width, // 视频宽度
-    height: props.JKParams.height, // 视频高度
-    AppKey: props.JKParams.AppKey, // 应用标识
-    onPlayerReady: () => {
-      console.log("🚀 ~ onPlayerReady ~ player:", player);
-      player.play(); // 播放直播
-    },
-  });
-  console.log("🚀 ~ onMounted ~ player:", player);
+  // const a = {
+  //   AppKey: "9d96d9e9439248b3af163466f192ff07",
+  //   AccessToken:
+  //     "at.4tsba0wf74tcctwk1w4pwsrm21thtbhe-13m1lghjag-1h6dy4z-gc3uqs9ix",
+  //   Url: "ezopen://open.ys7.com/FT2988779/1.hd.live",
+  // };
+  setTimeout(() => {
+    const param = {
+      id: videoContainer.value.id, // 视频容器ID
+      url: `ezopen://open.ys7.com/${props.JKParams.deviceSerial}/1${
+        props.JKParams?.hd ? ".hd" : ""
+      }.live`, // 直播地址
+
+      accessToken: props.JKParams.AccessToken, // 访问令牌2
+      width: props.JKParams.width, // 视频宽度
+      height: props.JKParams.height, // 视频高度
+      AppKey: props.JKParams.AppKey, // 应用标识
+    };
+
+    const player = new EZUIKitPlayer(param);
+
+    console.log("🚀 ~ setTimeout ~ param:", param)
+  }, 500);
 });
 </script>
 

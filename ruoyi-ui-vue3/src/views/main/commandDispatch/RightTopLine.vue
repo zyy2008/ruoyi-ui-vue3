@@ -258,13 +258,13 @@
         return Number(a.sampleTime) - Number(b.sampleTime)
       })
       chartLine.value.tableData = dataList
+      // chartLine.value.tableInfo = dataList.reverse()
       seekLineData(type)
     });
   }
 
   // 调用接口
   function seekLineData(type) {
-    // chartLine.value.tableData = [];
     lineOption.xAxis[0].data = [];
     lineOption.series[0].data = [];
     dataList.forEach((element, index) => {
@@ -273,7 +273,6 @@
     });
     lineChart.setOption(lineOption);
   }
-
 
   // 打开更多弹窗
   function openChartLine() {

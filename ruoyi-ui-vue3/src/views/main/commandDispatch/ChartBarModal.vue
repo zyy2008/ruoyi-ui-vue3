@@ -71,7 +71,9 @@
     selectValue.value = 'pH'
     getBatchData({}).then(res => {
       if (res.code === 200) {
-        barList = res.data
+        barList = res.data.sort((a, b) => {
+          return parseInt(a.monitoringWell.substring(1)) - parseInt(b.monitoringWell.substring(1))
+        })
         barList.forEach((ele, index) => {
           if (index < 18) {
             xAxisData.push(ele.monitoringWell)

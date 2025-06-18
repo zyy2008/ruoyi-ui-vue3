@@ -52,7 +52,6 @@
 
   let dataList = []
   emitter.on('changeTableLine', changeTableLine);
-  // const chartTitle = defineProps(["chartInfo"]);
   // 获取检测井数据
   onMounted(() => {
     seekLineData({
@@ -92,10 +91,13 @@
     getSingleWellMonitoringLineChartData({ wellCode: ment.monitoringWell, startMonitoringTime: ment.monitoringTime, endMonitoringTime: endDay }).then(res => {
       if (res.code === 200) {
         const data = res.data
+        const dataList = data.sort((a, b) => {
+          return new Date(a.monitoringTime).getTime() - new Date(b.monitoringTime).getTime()
+        })
         let xAxisData = []
         let seriesData = { phValue: [], temperature: [], waterLevel: [], dissolvedOxygen: [], conductivity: [], ammoniaNitrogen: [] }
-        data.forEach(ele => {
-          xAxisData.push(ele.monitoringTime)
+        dataList.forEach(ele => {
+          xAxisData.push(ele.monitoringTime.slice(5, 16))
           seriesData['phValue'].push(ele.phValue)
           seriesData['temperature'].push(ele.temperature)
           seriesData['waterLevel'].push(ele.waterLevel)
@@ -103,6 +105,7 @@
           seriesData['conductivity'].push(ele.conductivity)
           seriesData['ammoniaNitrogen'].push(ele.ammoniaNitrogen)
         })
+
         initEchart('echart1', 'pH', xAxisData, seriesData['phValue']);
         initEchart('echart2', '温度', xAxisData, seriesData['temperature']);
         initEchart('echart3', '水位', xAxisData, seriesData['waterLevel']);

@@ -137,7 +137,25 @@
     </resultMap>
 
     <sql id="selectTWaterQualityMonitoringVo">
-        select point_id, tag, sample_time, color, odor_and_taste, turbidity, visible_matters, ph, total_hardness, total_dissolved_solids, sulfate, chloride, iron, manganese, aluminum, anionic_surfactant, oxygen_consumption, sulfide, sodium, nitrite_nitrogen, nitrate_nitrogen, iodide, selenium, copper, zinc, volatile_phenol, ammonia_nitrogen, cyanide, fluoride, mercury, arsenic, cadmium, chromium_vi, lead, chloroform, carbon_tetrachloride, benzene, toluene, molybdenum, vanadium, cobalt, nickel, dichloromethane, dichloroethane_1_2, trichloroethane_1_1_1, trichloroethane_1_1_2, dichloropropane_1_2, vinyl_chloride, dichloroethylene_1_1, trans_dichloroethylene_1_2, cis_dichloroethylene_1_2, trichloroethylene, tetrachloroethylene, chlorobenzene, dichlorobenzene_1_2, dichlorobenzene_1_4, ethylbenzene, xylene_ortho, xylene_meta_para, styrene, nitrobenzene, naphthalene, anthracene, fluoranthene, benzo_b_fluoranthene, benzo_a_pyrene, petroleum_hydrocarbons_c6_c9, petroleum_hydrocarbons_c10_c40, phenol, chlorophenol_2, aniline, acenaphthylene, acenaphthene, fluorene, phenanthrene, pyrene, benzo_a_anthracene, chrysene, benzo_k_fluoranthene, indeno_1_2_3_cd_pyrene, dibenzo_a_h_anthracene, benzo_g_h_i_perylene, chloromethane, dichloroethane_1_1, tetrachloroethane_1_1_1_2, tetrachloroethane_1_1_2_2, trichloropropane_1_2_3, id, analysis_number, original_number, carbonate, bicarbonate, ferrous_ion, potassium, calcium, magnesium, chloroprene, bromochloromethane, bromodichloromethane, dibromomethane, dibromochloromethane, bromoform, cumene, n_propylbenzene, bromobenzene, trimethylbenzene_1_3_5, o_chlorotoluene, p_chlorotoluene, tert_butylbenzene, trimethylbenzene_1__4, sec_butylbenzene, isopropyltoluene_4, n_butylbenzene, epichlorohydrin, dibromo3_chloropropane_1_2, trichlorobenzene_1_2_4, hexachlorobutadiene, methylnaphthalene_2, methylnaphthalene_1, dichloropropene_1_1, trans1_3_dichloropropene, cis1_3_dichloropropene, dichloropropane_2_2, dibromoethane_1_2, dichloropropane_1_3, chlorotoluene_2, chlorotoluene_4, dichlorobenzene_1_3, trichlorobenzene_1_2_3 from t_water_quality_monitoring
+        select point_id, tag, sample_time, color, odor_and_taste, turbidity, visible_matters, ph, total_hardness,
+               total_dissolved_solids, sulfate, chloride, iron, manganese, aluminum, anionic_surfactant, oxygen_consumption,
+               sulfide, sodium, nitrite_nitrogen, nitrate_nitrogen, iodide, selenium, copper, zinc, volatile_phenol,
+               ammonia_nitrogen, cyanide, fluoride, mercury, arsenic, cadmium, chromium_vi, lead, chloroform, carbon_tetrachloride,
+               benzene, toluene, molybdenum, vanadium, cobalt, nickel, dichloromethane, dichloroethane_1_2, trichloroethane_1_1_1,
+               trichloroethane_1_1_2, dichloropropane_1_2, vinyl_chloride, dichloroethylene_1_1, trans_dichloroethylene_1_2,
+               cis_dichloroethylene_1_2, trichloroethylene, tetrachloroethylene, chlorobenzene, dichlorobenzene_1_2, dichlorobenzene_1_4,
+               ethylbenzene, xylene_ortho, xylene_meta_para, styrene, nitrobenzene, naphthalene, anthracene, fluoranthene,
+               benzo_b_fluoranthene, benzo_a_pyrene, petroleum_hydrocarbons_c6_c9, petroleum_hydrocarbons_c10_c40, phenol,
+               chlorophenol_2, aniline, acenaphthylene, acenaphthene, fluorene, phenanthrene, pyrene, benzo_a_anthracene, chrysene,
+               benzo_k_fluoranthene, indeno_1_2_3_cd_pyrene, dibenzo_a_h_anthracene, benzo_g_h_i_perylene, chloromethane,
+               dichloroethane_1_1, tetrachloroethane_1_1_1_2, tetrachloroethane_1_1_2_2, trichloropropane_1_2_3, id, analysis_number,
+               original_number, carbonate, bicarbonate, ferrous_ion, potassium, calcium, magnesium, chloroprene, bromochloromethane,
+               bromodichloromethane, dibromomethane, dibromochloromethane, bromoform, cumene, n_propylbenzene, bromobenzene,
+               trimethylbenzene_1_3_5, o_chlorotoluene, p_chlorotoluene, tert_butylbenzene, trimethylbenzene_1__4, sec_butylbenzene,
+               isopropyltoluene_4, n_butylbenzene, epichlorohydrin, dibromo3_chloropropane_1_2, trichlorobenzene_1_2_4, hexachlorobutadiene,
+               methylnaphthalene_2, methylnaphthalene_1, dichloropropene_1_1, trans1_3_dichloropropene, cis1_3_dichloropropene,
+               dichloropropane_2_2, dibromoethane_1_2, dichloropropane_1_3, chlorotoluene_2, chlorotoluene_4, dichlorobenzene_1_3,
+               trichlorobenzene_1_2_3 from t_water_quality_monitoring
     </sql>
 
     <select id="selectTWaterQualityMonitoringList" parameterType="TWaterQualityMonitoring"
@@ -366,6 +384,22 @@
                 #{trichlorobenzene123}
             </if>
         </where>
+    </select>
+    <select id="selectTWaterQualityMonitoringAmList" parameterType="WaterQualityMonitoringAmLineChartDataBo"
+            resultMap="TWaterQualityMonitoringResult">
+        <include refid="selectTWaterQualityMonitoringVo"/>
+        <where>
+            tag is null or tag='上' and ( 1=1
+            <if test="pointId != null  and pointId != ''">and point_id like concat('%', #{pointId}, '%')</if>
+            <if test="startMonitoringTime != null and startMonitoringTime != ''">
+                AND sample_time &gt;= #{startMonitoringTime}
+            </if>
+            <if test="endMonitoringTime != null and endMonitoringTime != ''">
+                AND sample_time &lt;= #{endMonitoringTime}
+            </if>
+            )
+        </where>
+        order by sample_time desc
     </select>
 
     <select id="selectTWaterQualityMonitoringById" parameterType="String" resultMap="TWaterQualityMonitoringResult">

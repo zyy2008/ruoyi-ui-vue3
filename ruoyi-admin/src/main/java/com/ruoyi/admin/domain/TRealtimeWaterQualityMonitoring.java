@@ -83,4 +83,10 @@ public class TRealtimeWaterQualityMonitoring extends BaseEntity {
     @ApiModelProperty("监测井编号或名称")
     private String monitoringWell;
 
+    /**
+     * 监测井位置
+     */
+    @ApiModelProperty("监测井位置")
+    private String location;
+
 }

@@ -3,6 +3,7 @@ package com.ruoyi.admin.service.impl;
 import java.util.List;
 
 import com.ruoyi.admin.domain.GJJLRES;
+import com.ruoyi.admin.domain.bo.WaterQualityMonitoringAmLineChartDataBo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ruoyi.admin.mapper.TWaterQualityMonitoringMapper;
@@ -16,16 +17,16 @@ import com.ruoyi.admin.service.ITWaterQualityMonitoringService;
  * @date 2025-06-01
  */
 @Service
-public class TWaterQualityMonitoringServiceImpl implements ITWaterQualityMonitoringService
-{
+public class TWaterQualityMonitoringServiceImpl implements ITWaterQualityMonitoringService {
     @Autowired
     private TWaterQualityMonitoringMapper tWaterQualityMonitoringMapper;
 
 
     @Override
-    public List<GJJLRES> selectGJJL(){
+    public List<GJJLRES> selectGJJL() {
         return tWaterQualityMonitoringMapper.selectGJJL();
     }
+
     /**
      * 查询监测数据管理
      *
@@ -33,8 +34,7 @@ public class TWaterQualityMonitoringServiceImpl implements ITWaterQualityMonitor
      * @return 监测数据管理
      */
     @Override
-    public TWaterQualityMonitoring selectTWaterQualityMonitoringById(String id)
-    {
+    public TWaterQualityMonitoring selectTWaterQualityMonitoringById(String id) {
         return tWaterQualityMonitoringMapper.selectTWaterQualityMonitoringById(id);
     }
 
@@ -45,9 +45,12 @@ public class TWaterQualityMonitoringServiceImpl implements ITWaterQualityMonitor
      * @return 监测数据管理
      */
     @Override
-    public List<TWaterQualityMonitoring> selectTWaterQualityMonitoringList(TWaterQualityMonitoring tWaterQualityMonitoring)
-    {
+    public List<TWaterQualityMonitoring> selectTWaterQualityMonitoringList(TWaterQualityMonitoring tWaterQualityMonitoring) {
         return tWaterQualityMonitoringMapper.selectTWaterQualityMonitoringList(tWaterQualityMonitoring);
+    }
+    @Override
+    public List<TWaterQualityMonitoring> selectTWaterQualityMonitoringAmList(WaterQualityMonitoringAmLineChartDataBo tWaterQualityMonitoring) {
+        return tWaterQualityMonitoringMapper.selectTWaterQualityMonitoringAmList(tWaterQualityMonitoring);
     }
 
     /**
@@ -57,8 +60,7 @@ public class TWaterQualityMonitoringServiceImpl implements ITWaterQualityMonitor
      * @return 结果
      */
     @Override
-    public int insertTWaterQualityMonitoring(TWaterQualityMonitoring tWaterQualityMonitoring)
-    {
+    public int insertTWaterQualityMonitoring(TWaterQualityMonitoring tWaterQualityMonitoring) {
         return tWaterQualityMonitoringMapper.insertTWaterQualityMonitoring(tWaterQualityMonitoring);
     }
 
@@ -69,8 +71,7 @@ public class TWaterQualityMonitoringServiceImpl implements ITWaterQualityMonitor
      * @return 结果
      */
     @Override
-    public int updateTWaterQualityMonitoring(TWaterQualityMonitoring tWaterQualityMonitoring)
-    {
+    public int updateTWaterQualityMonitoring(TWaterQualityMonitoring tWaterQualityMonitoring) {
         return tWaterQualityMonitoringMapper.updateTWaterQualityMonitoring(tWaterQualityMonitoring);
     }
 
@@ -81,8 +82,7 @@ public class TWaterQualityMonitoringServiceImpl implements ITWaterQualityMonitor
      * @return 结果
      */
     @Override
-    public int deleteTWaterQualityMonitoringByIds(String[] ids)
-    {
+    public int deleteTWaterQualityMonitoringByIds(String[] ids) {
         return tWaterQualityMonitoringMapper.deleteTWaterQualityMonitoringByIds(ids);
     }
 
@@ -93,8 +93,7 @@ public class TWaterQualityMonitoringServiceImpl implements ITWaterQualityMonitor
      * @return 结果
      */
     @Override
-    public int deleteTWaterQualityMonitoringById(String id)
-    {
+    public int deleteTWaterQualityMonitoringById(String id) {
         return tWaterQualityMonitoringMapper.deleteTWaterQualityMonitoringById(id);
     }
 }

@@ -234,7 +234,7 @@ const props: ISchemaFieldProps = {
                   },
                   cleanAuditTime: {
                     type: "string",
-                    title: "洁洁生产审校时间",
+                    title: "清洁生产审校时间",
                     "x-decorator": "FormItem",
                     "x-component": "DatePicker",
                     "x-component-props": {

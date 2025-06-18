@@ -389,15 +389,14 @@
             resultMap="TWaterQualityMonitoringResult">
         <include refid="selectTWaterQualityMonitoringVo"/>
         <where>
-            tag is null or tag='上' and ( 1=1
-            <if test="pointId != null  and pointId != ''">and point_id like concat('%', #{pointId}, '%')</if>
+            (tag is null or tag='上' )
+            <if test="pointId != null  and pointId != ''">and point_id = #{pointId}</if>
             <if test="startMonitoringTime != null and startMonitoringTime != ''">
                 AND sample_time &gt;= #{startMonitoringTime}
             </if>
             <if test="endMonitoringTime != null and endMonitoringTime != ''">
                 AND sample_time &lt;= #{endMonitoringTime}
             </if>
-            )
         </where>
         order by sample_time desc
     </select>

@@ -353,12 +353,28 @@ const props: ISchemaFieldProps = {
               },
             ],
           },
-          // historyStartYear: {
-          //   type: "number",
-          //   title: "利用历史起始年份",
-          //   "x-decorator": "FormItem",
-          //   "x-component": "Input",
-          // },
+          regulatoryType: {
+            type: "string",
+            title: "监管类型",
+            "x-decorator": "FormItem",
+            "x-component": "Input",
+          },
+          isKeyEnterprise: {
+            type: "string",
+            title: "是否重点",
+            enum: [
+              {
+                label: "是",
+                value: "是",
+              },
+              {
+                label: "否",
+                value: "否",
+              },
+            ],
+            "x-decorator": "FormItem",
+            "x-component": "Radio.Group",
+          },
           // history: {
           //   type: "array",
           //   title: "地块利用历史年份",

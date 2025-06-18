@@ -59,9 +59,6 @@
       pageSize: 1000,
       pointId: chartTitle.monitoringWell,
     });
-    nextTick(() => {
-
-    });
   });
 
   function seekLineData(option) {
@@ -72,6 +69,11 @@
         dataList = data.sort((a, b) => {
           return new Date(a.monitoringTime).getTime() - new Date(b.monitoringTime).getTime()
         })
+        dataList.forEach(ele => {
+          ele.monitoringTime = ele.monitoringTime ? ele.monitoringTime.slice(5, 16) : ele.monitoringTime
+        })
+   
+
         chartLine.value.tableData = dataList
       }
     })
@@ -86,9 +88,9 @@
   function changeTableLine(ment) {
     chartTitle.monitoringWell = ment.monitoringWell
     if (!ment.monitoringTime) return
-    let days = xAxis.value === '周' ? 7 : 30
+    let days = xAxis.value === '周' ? -7 : -30
     const endDay = dayjs(ment.monitoringTime).add(days, 'day').format('YYYY-MM-DD HH:mm:ss');
-    getSingleWellMonitoringLineChartData({ wellCode: ment.monitoringWell, startMonitoringTime: ment.monitoringTime, endMonitoringTime: endDay }).then(res => {
+    getSingleWellMonitoringLineChartData({ wellCode: ment.monitoringWell, startMonitoringTime: endDay, endMonitoringTime: ment.monitoringTime }).then(res => {
       if (res.code === 200) {
         const data = res.data
         const dataList = data.sort((a, b) => {

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ruoyi.admin.domain.GJJLRES;
 import com.ruoyi.admin.domain.TWaterQualityMonitoring;
+import com.ruoyi.admin.domain.bo.WaterQualityMonitoringAmLineChartDataBo;
 
 /**
  * 监测数据管理Service接口
@@ -29,6 +30,7 @@ public interface ITWaterQualityMonitoringService
      * @return 监测数据管理集合
      */
     public List<TWaterQualityMonitoring> selectTWaterQualityMonitoringList(TWaterQualityMonitoring tWaterQualityMonitoring);
+    public List<TWaterQualityMonitoring> selectTWaterQualityMonitoringAmList(WaterQualityMonitoringAmLineChartDataBo tWaterQualityMonitoring);
 
     /**
      * 新增监测数据管理

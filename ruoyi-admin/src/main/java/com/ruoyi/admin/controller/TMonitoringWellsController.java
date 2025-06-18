@@ -42,6 +42,7 @@ public class TMonitoringWellsController extends BaseController {
     //@PreAuthorize("@ss.hasPermi('admin:wells:list')")
     @GetMapping("/all")
     public TableDataInfo all(TMonitoringWells tMonitoringWells) {
+        startOrderBy();
         List<TMonitoringWells> list = tMonitoringWellsService.selectTMonitoringWellsList(tMonitoringWells);
         return getDataTable(list);
     }
@@ -54,6 +55,7 @@ public class TMonitoringWellsController extends BaseController {
     @GetMapping("/list")
     public TableDataInfo list(TMonitoringWells tMonitoringWells) {
         startPage();
+        startOrderBy();
         List<TMonitoringWells> list = tMonitoringWellsService.selectTMonitoringWellsList(tMonitoringWells);
         return getDataTable(list);
     }

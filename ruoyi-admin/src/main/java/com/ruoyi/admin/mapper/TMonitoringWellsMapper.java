@@ -1,6 +1,7 @@
 package com.ruoyi.admin.mapper;
 
 import java.util.List;
+
 import com.ruoyi.admin.domain.TMonitoringWells;
 
 /**
@@ -9,8 +10,7 @@ import com.ruoyi.admin.domain.TMonitoringWells;
  * @author ruoyi
  * @date 2025-06-09
  */
-public interface TMonitoringWellsMapper
-{
+public interface TMonitoringWellsMapper {
     /**
      * 查询园区初调监测井信息，记录每个监测井的基础属性与附加信息
      *

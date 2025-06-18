@@ -14,6 +14,7 @@
     <div id="echartLine"></div>
     <el-table :data="tableData" style="width: 100%" max-height="350" v-show="chart.chartType==='monitor'">
       <el-table-column type="index" label="序号" width="55" />
+      <el-table-column prop="monitoringTime" label="时间" />
       <el-table-column prop="phValue" label="pH" />
       <el-table-column prop="temperature" label="温度" />
       <el-table-column prop="waterLevel" label="水位" />
@@ -21,6 +22,7 @@
       <el-table-column prop="dissolvedOxygen" label="溶解氧" />
       <el-table-column prop="conductivity" label="电导率" />
       <el-table-column prop="ammoniaNitrogen" label="氨氮" />
+      <el-table-column prop="location" label="地址" width="300" />
     </el-table>
     <el-table :data="tableData" style="width: 100%" max-height="350" v-show="chart.chartType!='monitor'">
       <!-- <el-table-column type="index" label="序号" width="55" /> -->

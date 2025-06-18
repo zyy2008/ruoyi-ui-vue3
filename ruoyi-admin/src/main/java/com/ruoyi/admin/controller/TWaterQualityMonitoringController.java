@@ -4,6 +4,9 @@ import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ruoyi.admin.domain.GJJLRES;
+import com.ruoyi.admin.domain.bo.WaterQualityMonitoringAmLineChartDataBo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +32,7 @@ import com.ruoyi.common.core.page.TableDataInfo;
  * @author ruoyi
  * @date 2025-06-01
  */
+@Api(tags = "监测数据管理")
 @RestController
 @RequestMapping("/admin/monitoring")
 public class TWaterQualityMonitoringController extends BaseController {
@@ -49,6 +53,17 @@ public class TWaterQualityMonitoringController extends BaseController {
     public TableDataInfo list(TWaterQualityMonitoring tWaterQualityMonitoring) {
         startPage();
         List<TWaterQualityMonitoring> list = tWaterQualityMonitoringService.selectTWaterQualityMonitoringList(tWaterQualityMonitoring);
+        return getDataTable(list);
+    }
+
+    /**
+     * 只查询上午的监测数据列表
+     */
+    @ApiOperation("只查询上午的监测数据列表")
+    @GetMapping("/amList")
+    public TableDataInfo amList(WaterQualityMonitoringAmLineChartDataBo tWaterQualityMonitoring) {
+        startPage();
+        List<TWaterQualityMonitoring> list = tWaterQualityMonitoringService.selectTWaterQualityMonitoringAmList(tWaterQualityMonitoring);
         return getDataTable(list);
     }
 

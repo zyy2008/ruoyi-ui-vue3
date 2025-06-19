@@ -72,27 +72,19 @@
     <div class="bottomIn">
       <div class="bottomInOt" @click="clickSystem('zhdd')">
         <img src="@/assets/static/1.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'zhdd' }">
-          指挥调度
-        </div>
+        <div class="text" :class="{ 'text-active': activeText === 'zhdd' }">指挥调度</div>
       </div>
       <div class="bottomInOt" @click="clickSystem('zxjc')">
         <img src="@/assets/static/2.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'zxjc' }">
-          在线监测
-        </div>
+        <div class="text" :class="{ 'text-active': activeText === 'zxjc' }">在线监测</div>
       </div>
       <div class="bottomInOt" @click="clickSystem('qyxx')">
         <img src="@/assets/static/3.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'qyxx' }">
-          企业信息
-        </div>
+        <div class="text" :class="{ 'text-active': activeText === 'qyxx' }">企业信息</div>
       </div>
       <div class="bottomInOt" @click="clickSystem('bjyb')">
         <img src="@/assets/static/4.png" />
-        <div class="text" :class="{ 'text-active': activeText === 'bjyb' }">
-          报警预报
-        </div>
+        <div class="text" :class="{ 'text-active': activeText === 'bjyb' }">报警预报</div>
       </div>
     </div>
   </div>
@@ -177,7 +169,6 @@ const videoStore = useVideoStore();
 watch(
   videoStore.videoState,
   (newValue) => {
-    debugger;
     if (newValue === true) {
       zhddShow.value = false;
       qyxxShow.value = false;

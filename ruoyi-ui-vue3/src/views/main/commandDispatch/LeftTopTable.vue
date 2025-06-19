@@ -14,7 +14,7 @@
     >
       <el-table-column type="index" label="序号" width="60" />
       <el-table-column prop="monitoringWell" label="名称" width="60" />
-      <el-table-column prop="monitoringTime" label="时间" width="160" />
+      <el-table-column prop="monitoringTime" label="时间" width="100" />
       <el-table-column prop="phValue" label="PH" width="60" />
       <el-table-column prop="temperature" label="温度" width="60" />
       <el-table-column prop="waterLevel" label="水位" width="60" />
@@ -80,6 +80,7 @@ onMounted(() => {
       });
 
       data.forEach((ele) => {
+        ele["dataTime"] = ele.monitoringTime;
         ele.monitoringTime = ele.monitoringTime
           ? ele.monitoringTime.slice(5, 16)
           : ele.monitoringTime;

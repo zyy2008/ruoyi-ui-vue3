@@ -52,9 +52,10 @@ export function exportMonitoring(query) {
   });
 }
 
+// 监测数据管理
 export function listMonitoringAmlist(query) {
   return request({
-    url: "/admin/monitoring/amlist",
+    url: "/admin/monitoring/amList",
     method: "get",
     params: query,
   });

@@ -91,15 +91,13 @@ function openChartLine() {
 function changeTableLine(ment) {
   chartTitle.monitoringWell = ment.monitoringWell;
   chartTitle.location = ment.location;
-  if (!ment.monitoringTime) return;
+  if (!ment.dataTime) return;
   let days = xAxis.value === "周" ? -7 : -30;
-  const endDay = dayjs(ment.monitoringTime)
-    .add(days, "day")
-    .format("YYYY-MM-DD HH:mm:ss");
+  const endDay = dayjs(ment.dataTime).add(days, "day").format("YYYY-MM-DD HH:mm:ss");
   getSingleWellMonitoringLineChartData({
     wellCode: ment.monitoringWell,
     startMonitoringTime: endDay,
-    endMonitoringTime: ment.monitoringTime,
+    endMonitoringTime: ment.dataTime,
   }).then((res) => {
     if (res.code === 200) {
       const data = res.data;

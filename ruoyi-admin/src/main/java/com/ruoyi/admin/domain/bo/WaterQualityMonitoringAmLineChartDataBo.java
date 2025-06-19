@@ -15,11 +15,9 @@ public class WaterQualityMonitoringAmLineChartDataBo {
     @NotBlank(message = "监测井编码不能为空")
     @ApiModelProperty(value = "监测井编码", required = true)
     private String pointId;
-    @NotBlank(message = "数据监测开始时间不能为空")
-    @ApiModelProperty(value = "数据监测开始时间", required = true)
+    @ApiModelProperty(value = "数据监测开始时间")
     private String startMonitoringTime;
-    @NotBlank(message = "数据监测结束时间不能为空")
-    @ApiModelProperty(value = "数据监测结束时间", required = true)
+    @ApiModelProperty(value = "数据监测结束时间")
     private String endMonitoringTime;
 
 }
